@@ -25,6 +25,7 @@ Route::get('/', function () {
 
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
+Route::get('/product/{product}/{id}', 'CartController@index');
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('category', 'CategoryController', ['only' => ['index', 'show']]);
