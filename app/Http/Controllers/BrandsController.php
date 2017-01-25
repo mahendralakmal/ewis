@@ -9,10 +9,9 @@ use App\Category;
 
 class BrandsController extends Controller
 {
-        public function index()
+    public function index()
     {
         $brands = Brand::all();
-//        return $brands;
         return view('brands', compact('brands'));
     }
 }

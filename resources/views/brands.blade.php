@@ -30,7 +30,7 @@
                     <div class="col-md-3">
                         <div class="thumbnail">
                             <div class="caption text-center row">
-                                <a href="{{ url('brand', [$brand->title,$brand->id]) }}">
+                                <a href="{{ url('category', [$brand->title,$brand->id]) }}">
                                     <img src="{{ asset('img/Brands/' . $brand->image) }}" alt="brand" class="img-responsive">
                                     <p>{{ $brand->description }}</p>
                                 </a>
