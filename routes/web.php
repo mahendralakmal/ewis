@@ -21,10 +21,7 @@ Route::get('/admin', function()
     return view('/admin/home');
 });
 
-Route::get('/admin/brands', function()
-{
-    return view('/admin/brands');
-});
+Route::get('/admin/brands', 'BrandsController@admin-index');
 Route::get('/admin/categories', function()
 {
     return view('/admin/category');
