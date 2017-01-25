@@ -8098,7 +8098,8 @@ body, label, .checkbox label {
 
 footer {
   background-color: #1f648b;
-  text-align: center; }
+  text-align: center;
+  padding: 20px; }
   footer p {
     color: #fff; }
 
