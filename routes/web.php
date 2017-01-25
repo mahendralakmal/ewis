@@ -22,14 +22,10 @@ Route::get('/admin', function()
 });
 
 Route::get('/admin/brands', 'BrandsController@admin_index');
-Route::get('/admin/categories', function()
-{
-    return view('/admin/category');
-});
-Route::get('/admin/products', function()
-{
-    return view('/admin/products');
-});
+Route::get('/admin/categories', 'CategoryController@admin_index');
+Route::get('/admin/products', 'ProductController@admin_index');
+
+
 Route::get('/admin/manage-users', function()
 {
     return view('/admin/manage-users');
