@@ -23,7 +23,8 @@ Route::get('/', function () {
     return redirect('brands');
 });
 
-Route::get('/category/{brand}/{id}', 'CategoryController@index');
+Route::get('/brands/{brand}/{id}', 'CategoryController@index');
+Route::get('/category/{category}/{id}', 'ProductController@index');
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('category', 'CategoryController', ['only' => ['index', 'show']]);
