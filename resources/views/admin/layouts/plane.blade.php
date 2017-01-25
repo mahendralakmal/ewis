@@ -12,13 +12,12 @@
 	<meta content="" name="description"/>
 	<meta content="" name="author"/>
 
+	<link rel="stylesheet" href="{{ elixir('css/admin_app.css') }}" />
+	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
 </head>
 <body>
 	@yield('body')
-	<footer>
-		<p>Design &amp; Developed by Pro IT Solutions.</p>
-	</footer>
 	<script src="{{ asset("assets/scripts/frontend.js") }}" type="text/javascript"></script>
 </body>
 </html>

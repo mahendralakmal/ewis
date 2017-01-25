@@ -18,66 +18,26 @@ Route::get('/', function () {
 
 Route::get('/admin', function()
 {
-    return View::make('/admin/home');
+    return view('/admin/home');
 });
 
-Route::get('/admin/charts', function()
+Route::get('/admin/brands', function()
 {
-    return View::make('/admin/mcharts');
+    return view('/admin/brands');
 });
-
-Route::get('/admin/tables', function()
+Route::get('/admin/categories', function()
 {
-    return View::make('/admin/table');
+    return view('/admin/category');
 });
-
-Route::get('/admin/forms', function()
+Route::get('/admin/products', function()
 {
-    return View::make('/admin/form');
+    return view('/admin/products');
 });
-
-Route::get('/admin/grid', function()
+Route::get('/admin/manage-users', function()
 {
-    return View::make('/admin/grid');
+    return view('/admin/manage-users');
 });
-
-Route::get('/admin/buttons', function()
+Route::get('/admin/manage-clients', function()
 {
-    return View::make('/admin/buttons');
-});
-
-
-Route::get('/admin/icons', function()
-{
-    return View::make('/admin/icons');
-});
-
-Route::get('/admin/panels', function()
-{
-    return View::make('/admin/panel');
-});
-
-Route::get('/admin/typography', function()
-{
-    return View::make('/admin/typography');
-});
-
-Route::get('/admin/notifications', function()
-{
-    return View::make('/admin/notifications');
-});
-
-Route::get('/admin/blank', function()
-{
-    return View::make('/admin/blank');
-});
-
-Route::get('/admin/login', function()
-{
-    return View::make('/admin/login');
-});
-
-Route::get('/admin/documentation', function()
-{
-    return View::make('/admin/documentation');
+    return view('/admin/manage-clients');
 });
