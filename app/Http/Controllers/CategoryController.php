@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Category;
 
 class CategoryController extends Controller
 {
-        public function index()
+    public function index($brand, Brand $id)
     {
-        $category = Category::all();
-        return view('category', compact(category));
+        $categories = $id->category;
+        return view('category', compact('categories'));
     }
 }
