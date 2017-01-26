@@ -31,7 +31,8 @@
     <div class="col-md-6">
         <h4>Add new Brand</h4><hr>
         <div class="col-md-12">
-            <form action="">
+            <form class="form-horizontal" role="form" method="POST" action="/admin/brands/store">
+                {{ csrf_field() }}
                 <div class="form-group row">
                     <div class="col-md-4"><label>Title</label></div>
                     <div class="col-md-8">

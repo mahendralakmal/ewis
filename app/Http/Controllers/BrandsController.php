@@ -11,4 +11,11 @@ class BrandsController extends Controller
         $brands = Brand::all();
         return view('/admin/brands', compact('brands'));
     }
+
+    public function store(Request $request)
+    {
+//        return $request->all();
+        Brand::create($request->all());
+        return back();
+    }
 }

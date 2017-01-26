@@ -16,21 +16,22 @@ Route::get('/', function () {
 });
 
 
-Route::get('/admin', function()
-{
-    return view('/admin/home');
-});
-
-Route::get('/admin/brands', 'BrandsController@admin_index');
-Route::get('/admin/categories', 'CategoryController@admin_index');
-Route::get('/admin/products', 'ProductController@admin_index');
 
 
-Route::get('/admin/manage-users', function()
-{
-    return view('/admin/manage-users');
-});
-Route::get('/admin/manage-clients', function()
-{
-    return view('/admin/manage-clients');
+Route::group(['prefix' => '/admin'], function () {
+    Route::get('/', function () { return view('/admin/home'); });
+    Route::group(['prefix' => '/brands'], function () {
+        Route::get('/', 'BrandsController@admin_index');
+        Route::post('/store', 'BrandsController@store');
+    });
+    Route::get('/categories', 'CategoryController@admin_index');
+    Route::get('/products', 'ProductController@admin_index');
+
+    Route::get('/manage-users', function () {
+        return view('/admin/manage-users');
+    });
+    Route::get('/manage-clients', function () {
+        return view('/manage-clients');
+    });
+
 });
