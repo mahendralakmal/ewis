@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Categories')
+@section('page_heading','Products')
 @section('section')
     <div class="col-md-6">
         <div class="panel panel-default">
@@ -14,6 +14,7 @@
                         <td><h5>Brand</h5></td>
                         <td><h5>Category</h5></td>
                         <td><h5>Description</h5></td>
+                        <td><h5>Price</h5></td>
                         <td></td>
                     </tr>
                     </thead>
@@ -24,6 +25,7 @@
                             <td>{{$product->category->brand->title}}</td>
                             <td>{{$product->category->title}}</td>
                             <td>{{$product->description}}</td>
+                            <td class="text-right">{{$product->default_price}}</td>
                             <td><a href="#" class="btn btn-primary btn-outline">Edit</a> <a href="#"
                                                                                             class="btn btn-danger btn-outline">Delete</a>
                             </td>
@@ -66,6 +68,12 @@
                     <div class="col-md-4"><label>Image</label></div>
                     <div class="col-md-8">
                         <input type="file" name="image" id="image" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4"><label>Price</label></div>
+                    <div class="col-md-8">
+                        <input type="number" name="default_price" id="default_price" class="form-control">
                     </div>
                 </div>
                 <button class="btn btn-primary" name="submit" id="submit">Add</button>
