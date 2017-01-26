@@ -27,7 +27,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>COMMERCIA BANK</td>
+                        <td>COMMERCIAL BANK</td>
                         <td>Commercial Bank of Ceylon PLC, Commercial House, No 21 , Sir Razik Fareed Mawatha, P.O. Box 856 Colombo 01, Sri Lanka.</td>
                         <td>
                             <a href="#" class="btn btn-success btn-outline">Activate</a>
@@ -38,7 +38,7 @@
                     </tr>
                     <tr>
                         <td>SEYLAN BANK</td>
-                        <td>902425545V</td>
+                        <td>Seylan Towers, No 90 , Galle Road, Colombo 03, Sri Lanka.</td>
                         <td>
                             <a href="#" class="btn btn-success btn-outline">Activate</a>
                             <a href="/admin/manage-clients/update-profile" class="btn btn-primary btn-outline">Update Profile</a>

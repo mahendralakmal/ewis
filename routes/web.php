@@ -91,6 +91,9 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/agent-assign', function () {
             return view('/admin/clients/agent-assign');
         });
+        Route::get('/check-assignments', function () {
+            return view('/admin/clients/check-assignments');
+        });
     });
 
 });

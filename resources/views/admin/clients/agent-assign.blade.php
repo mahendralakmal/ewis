@@ -22,7 +22,7 @@
                         <td>Mahendra Lakmal</td>
                         <td>CTO</td>
                         <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
+                            <a href="/admin/manage-clients/check-assignments" class="btn btn-primary btn-outline">Check Assigned Clients</a>
                             <a href="#" class="btn btn-success btn-outline">Assigne</a>
                             <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
                         </td>

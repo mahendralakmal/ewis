@@ -1,71 +1,41 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Agent A Assign ')
 @section('section')
+    <div class="col-md-6">
+        <div class="form-group row">
+            <div class="col-md-5">Username</div>
+            <div class="col-md-7"><label>Lakmal</label></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-5">Full Name</div>
+            <div class="col-md-7"><label>Mahendra Lakmal</label></div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-5">Designation</div>
+            <div class="col-md-7"><label>CTO</label></div>
+        </div>
+    </div>
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Agents</h3>
+                <h3 class="panel-title">Agent Assign Clents</h3>
             </div>
             <div class="panel-body">
                 <table class="table">
                     <thead>
                     <tr>
-                        <td><h5>Username</h5></td>
-                        <td><h5>Name</h5></td>
-                        <td><h5>Designation</h5></td>
-                        <td class="col-md-5"></td>
+                        <td><h5>Client</h5></td>
+                        <td><h5>Address</h5></td>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>Lakmal</td>
-                        <td>Mahendra Lakmal</td>
-                        <td>CTO</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
+                        <td>COMMERCIAL BANK</td>
+                        <td>Commercial Bank of Ceylon PLC, Commercial House, No 21 , Sir Razik Fareed Mawatha, P.O. Box 856 Colombo 01, Sri Lanka.</td>
                     </tr>
                     <tr>
-                        <td>Amara</td>
-                        <td>Amara Kariyawasam</td>
-                        <td>Admin</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Peter</td>
-                        <td>Peter Parker</td>
-                        <td>Marketting Manager</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Malfoy</td>
-                        <td>Draco Malfoy</td>
-                        <td>Marketting Manager</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Rone</td>
-                        <td>Rone Wesley</td>
-                        <td>Marketting Manager</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
+                        <td>SEYLAN BANK</td>
+                        <td>Seylan Towers, No 90 , Galle Road, Colombo 03, Sri Lanka.</td>
                     </tr>
                     </tbody>
                 </table>
