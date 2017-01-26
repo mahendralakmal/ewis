@@ -24,11 +24,11 @@ Route::get('/user/1', function () {
 });
 
 Route::get('/user/2', function () {
-    return view('seylan/user');
+    return view('commercial/user');
 });
 
 Route::get('/user/3', function () {
-    return view('commercial/user');
+    return view('seylan/user');
 });
 
 //Route::get('/user', 'UserController@index');

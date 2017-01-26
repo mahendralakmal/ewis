@@ -5,7 +5,7 @@
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
-                    <img alt="Sampath Bank" src="{{ elixir('img/commercial.jpg') }}" width="209" hight="67" class="img-responsive"/>
+                    <img alt="Commercial Bank" src="{{ elixir('img/commercial.jpg') }}" width="209" hight="67" class="img-responsive"/>
                 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
@@ -14,15 +14,14 @@
                         <div class="inner">
                             <h5>Commercial Bank</h5>
                             <ul>
-                                <li><span class="glyphicon glyphicon-map-marker"></span> Sampath Bank PLC, No 110 , Sir James
-                                    Peiris
-                                    Mawatha, Colombo 02, Sri Lanka.
+                                <li><span class="glyphicon glyphicon-map-marker"></span> Commercial Bank of Ceylon PLC, Commercial House, No 21 , Sir Razik
+                                    Fareed
+                                    Mawatha, P.O. Box 856 Colombo 01, Sri Lanka.
                                 </li>
                                 <li><span class="glyphicon glyphicon-phone"></span><a href="#" title="Phone">+94 11 2
-                                        30 30
-                                        50</a>
+                                        48 60 00</a>
                                 </li>
-                                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">info@sampath
+                                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">info@combank
                                         .lk</a>
                                 </li>
 
