@@ -75,11 +75,11 @@
                                     <a href="{{ url ('/admin/users/create-users') }}">Add New User</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/users/manage-user-privileges' ) }}">User Privileges</a>
-                                </li>
-                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/admin/users/manage-users' ) }}">User Approvals</a>
                                 </li>
+                                {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
+                                    {{--<a href="{{ url ('/admin/users/manage-user-privileges' ) }}">User Privileges</a>--}}
+                                {{--</li>--}}
                             </ul>
                         </li>
                         <li >

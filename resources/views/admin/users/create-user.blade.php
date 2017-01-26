@@ -28,7 +28,7 @@
                     <tr>
                         <td>Amara</td>
                         <td>Amara Kariyawasam</td>
-                        <td>Admi</td>
+                        <td>Admin</td>
                         <td>822420543V</td>
                         <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
                     </tr>
@@ -91,6 +91,7 @@
                         <option value="2">CTO</option>
                         <option value="3">Marketting Manager</option>
                         <option value="4">Sales Executive</option>
+                        <option value="4">Client</option>
                     </select>
                 </div>
             </div>
