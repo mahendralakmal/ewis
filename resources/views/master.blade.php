@@ -68,7 +68,7 @@
     <div class="container">
 
         <div class="container">
-            <p class="text-muted">By <a href="http://proitsolutions.lk">ProIT Solutions</a></p>
+            <p class="text-muted">Design & Developed by  <a href="http://proitsolutions.lk">ProIT Solutions</a></p>
         </div>
     </div>
 </footer>

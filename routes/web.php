@@ -19,10 +19,19 @@
 //Route::get('/category/{title}/{id}', 'ProductController@index');
 
 
-Route::get('/', function () {
-    return redirect('user');
+Route::get('/user/1', function () {
+    return view('sampath/user');
 });
-Route::get('/user', 'UserController@index');
+
+Route::get('/user/2', function () {
+    return view('seylan/user');
+});
+
+Route::get('/user/3', function () {
+    return view('commercial/user');
+});
+
+//Route::get('/user', 'UserController@index');
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
 //Route::get('/product/{product}/{id}', 'CartController@index');
