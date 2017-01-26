@@ -5,7 +5,7 @@
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
-                    <img alt="Sampath Bank" src="img/sampath.jpg" width="209" hight="67" class="img-responsive"/>
+                    <img alt="Sampath Bank" src="img/commercial.jpg" width="209" hight="67" class="img-responsive"/>
                 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
