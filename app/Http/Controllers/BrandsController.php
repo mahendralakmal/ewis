@@ -18,4 +18,10 @@ class BrandsController extends Controller
         Brand::create($request->all());
         return back();
     }
+
+    public function index()
+    {
+        $brands = Brand::all();
+        return view('brands', compact('brands'));
+    }
 }

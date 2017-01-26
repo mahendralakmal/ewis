@@ -11,12 +11,45 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+//
+//
+//Route::get('/category/{title}/{id}', 'ProductController@index');
+
+
+Route::get('/user/1', function () {
+    return view('sampath/user');
 });
 
+Route::get('/user/2', function () {
+    return view('commercial/user');
+});
+
+Route::get('/user/3', function () {
+    return view('seylan/user');
+});
+
+//Route::get('/user', 'UserController@index');
+Route::get('/brands/{brand}/{id}', 'CategoryController@index');
+Route::get('/category/{category}/{id}', 'ProductController@index');
+//Route::get('/product/{product}/{id}', 'CartController@index');
+
+Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
+Route::resource('category', 'CategoryController', ['only' => ['index', 'show']]);
+Route::resource('brands', 'BrandsController', ['only' => ['index','show']]);
+Route::resource('cart', 'CartController');
+Route::delete('emptyCart', 'CartController@emptyCart');
+Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
+
+Route::resource('wishlist', 'WishlistController');
+Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
+Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
 
 
+
+//=====================================================================================================================
 
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/', function () { return view('/admin/home'); });

@@ -8103,4 +8103,8 @@ footer {
   footer p {
     color: #fff; }
 
+.navbar-default {
+  background-color: #f7f7f7;
+  border-color: #d3e0e9; }
+
 /*# sourceMappingURL=admin_app.css.map */

@@ -17,12 +17,17 @@ body, label, .checkbox label {
 	font-weight: 300;
 }
 
-footer{
+footer {
 	background-color: #1f648b;
 	text-align: center;
 	padding: 20px;
 
-	p{
+	p {
 		color: #fff;
 	}
+}
+
+.navbar-default {
+	background-color: #f7f7f7;
+	border-color: #d3e0e9;
 }

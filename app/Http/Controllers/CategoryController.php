@@ -20,4 +20,9 @@ class CategoryController extends Controller
         Category::create($request->all());
         return back();
     }
+    public function index($brand, Brand $id)
+    {
+        $categories = $id->category;
+        return view('category', compact('categories'));
+    }
 }
