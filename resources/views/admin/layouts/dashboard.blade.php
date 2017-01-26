@@ -53,47 +53,44 @@
                             {{--<!-- /input-group -->--}}
                         {{--</li>--}}
                         <li {{ (Request::is('*dashbord') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('/admin') }}"><i class="fa fa-home fa-fw"></i> Home</a>
+                            <a href="{{ url ('/admin') }}"><!-- <i class="fa fa-home fa-fw"></i> --> Home</a>
                         </li>
                         <li {{ (Request::is('*dashbord') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('/admin/brands') }}"><i class="fa fa-trademark fa-fw"></i> Brands</a>
+                            <a href="{{ url ('/admin/brands') }}"><!-- <i class="fa fa-trademark fa-fw"></i> --> Brands</a>
                         </li>
                         <li {{ (Request::is('*charts') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('/admin/categories') }}"><i class="fa fa-bar-chart-o fa-fw"></i> Categories</a>
+                            <a href="{{ url ('/admin/categories') }}"><!-- <i class="fa fa-bar-chart-o fa-fw"></i> --> Categories</a>
                             <!-- /.nav-second-level -->
                         </li>
                         <li {{ (Request::is('*tables') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('/admin/products') }}"><i class="fa fa-table fa-fw"></i> Products</a>
+                            <a href="{{ url ('/admin/products') }}"><!-- <i class="fa fa-table fa-fw"></i> --> Products</a>
                         </li>
-                        <li {{ (Request::is('*forms') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('/admin/manage-users') }}"><i class="fa fa-edit fa-fw"></i> Manage Users</a>
-                        </li>
-                        <li {{ (Request::is('*forms') ? 'class="active"' : '') }}>
-                            <a href="{{ url ('/admin/manage-users') }}"><i class="fa fa-edit fa-fw"></i> Manage Clients</a>
-                        </li>
-                        <!-- <li >
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Manage Clients<span class="fa arrow"></span></a>
+                        {{--<li {{ (Request::is('*forms') ? 'class="active"' : '') }}>--}}
+                            {{--<a href="{{ url ('/admin/manage-users') }}"><!-- <i class="fa fa-edit fa-fw"></i> --> Manage Users</a>--}}
+                        {{--</li>--}}
+                        <li >
+                            <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Manage Users<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/panels') }}">Panels and Collapsibles</a>
+                                    <a href="{{ url ('/admin/manage-users') }}">Set User Profile</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/buttons' ) }}">Buttons</a>
-                                </li>
-                                <li {{ (Request::is('*notifications') ? 'class="active"' : '') }}>
-                                    <a href="{{ url('/admin/notifications') }}">Alerts</a>
-                                </li>
-                                <li {{ (Request::is('*typography') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/typography') }}">Typography</a>
-                                </li>
-                                <li {{ (Request::is('*icons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/icons') }}"> Icons</a>
-                                </li>
-                                <li {{ (Request::is('*grid') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/grid') }}">Grid</a>
+                                    <a href="{{ url ('/admin/manage-users' ) }}">Set User List</a>
                                 </li>
                             </ul>
                         </li>
+                        <li >
+                            <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Manage Clients<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/admin/manage-clients') }}">Set Client Profile</a>
+                                </li>
+                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/admin/manage-clients' ) }}">Set Product List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!--
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
