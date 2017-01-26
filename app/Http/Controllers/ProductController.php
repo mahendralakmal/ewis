@@ -15,4 +15,11 @@ class ProductController extends Controller
         $products = Product::all();
         return view('/admin/products', compact('categories', 'products'));
     }
+
+    public function store(Request $request)
+    {
+//        return $request->all();
+        Product::create($request->all());
+        return back();
+    }
 }

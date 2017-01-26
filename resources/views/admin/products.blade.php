@@ -26,7 +26,7 @@
                             <td>{{$product->category->title}}</td>
                             <td>{{$product->description}}</td>
                             <td class="text-right">{{$product->default_price}}</td>
-                            <td><a href="#" class="btn btn-primary btn-outline">Edit</a> <a href="#"
+                            <td class="col-md-3"><a href="#" class="btn btn-primary btn-outline">Edit</a> <a href="#"
                                                                                             class="btn btn-danger btn-outline">Delete</a>
                             </td>
                         </tr>
@@ -40,11 +40,12 @@
         <h4>Add new Product</h4>
         <hr>
         <div class="col-md-12">
-            <form action="">
+            <form class="form-horizontal" role="form" method="POST" action="/admin/products/store">
+                {{ csrf_field() }}
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Title</label></div>
+                    <div class="col-md-4"><label>Part No</label></div>
                     <div class="col-md-8">
-                        <input type="text" name="title" id="title" class="form-control">
+                        <input type="text" name="part_no" id="part_no" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">

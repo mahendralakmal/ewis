@@ -30,7 +30,11 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/store', 'CategoryController@store');
     });
 
-    Route::get('/products', 'ProductController@admin_index');
+    Route::group(['prefix' => '/products'], function () {
+        Route::get('/', 'ProductController@admin_index');
+        Route::post('/store', 'ProductController@store');
+    });
+
 
     Route::get('/manage-users', function () {
         return view('/admin/manage-users');
