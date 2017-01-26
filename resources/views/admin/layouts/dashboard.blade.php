@@ -89,7 +89,7 @@
                                     <a href="{{ url ('/admin/manage-clients') }}">Client Profile</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/manage-clients' ) }}">Product List</a>
+                                    <a href="{{ url ('/admin/manage-product-list' ) }}">Product List</a>
                                 </li>
                                 {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
                                     {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
