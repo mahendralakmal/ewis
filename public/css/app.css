@@ -5888,4 +5888,9 @@ footer {
   footer p {
     padding: 20px 15px 15px 15px; }
 
+.navbar-brand img {
+  display: block;
+  width: 130px;
+  margin-top: -15px; }
+
 /*# sourceMappingURL=app.css.map */
