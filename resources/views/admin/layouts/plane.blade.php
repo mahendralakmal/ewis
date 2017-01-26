@@ -15,6 +15,10 @@
 	<link rel="shortcut icon" href="{{ elixir('img/favicon.ico') }}">
 	<link rel="stylesheet" href="{{ elixir('css/admin_app.css') }}" />
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
+	<link rel="stylesheet" href="{{ asset("assets/css/sb-admin-2.css") }}" />
+	<link rel="stylesheet" href="{{ asset("assets/css/metisMenu.css") }}" />
+	<link rel="stylesheet" href="{{ asset("assets/css/timeline.css") }}" />
+	<link rel="stylesheet" href="{{ asset("assets/css/font-awesome.css") }}" />
 </head>
 <body>
 	@yield('body')
