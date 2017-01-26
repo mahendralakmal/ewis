@@ -20,9 +20,9 @@
 
 
 Route::get('/', function () {
-    return redirect('brands');
+    return redirect('user');
 });
-
+Route::get('/user', 'UserController@index');
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
 //Route::get('/product/{product}/{id}', 'CartController@index');
