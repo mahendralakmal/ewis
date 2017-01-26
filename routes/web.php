@@ -96,4 +96,6 @@ Route::group(['prefix' => '/admin'], function () {
         });
     });
 
+    Route::get('/manage-product-list', 'ProductController@assign_products_to_client');
+
 });

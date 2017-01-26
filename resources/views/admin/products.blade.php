@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Products')
 @section('section')
-    <div class="col-md-6">
+    <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Product Categories</h3>
@@ -14,7 +14,7 @@
                         <td><h5>Brand</h5></td>
                         <td><h5>Category</h5></td>
                         <td><h5>Description</h5></td>
-                        <td><h5>Price</h5></td>
+                        <td class="text-right"><h5>Price</h5></td>
                         <td></td>
                     </tr>
                     </thead>
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
         <h4>Add new Product</h4>
         <hr>
         <div class="col-md-12">

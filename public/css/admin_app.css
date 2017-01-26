@@ -8103,6 +8103,11 @@ footer {
   footer p {
     color: #fff; }
 
+.navbar-brand img {
+  display: block;
+  width: 130px;
+  margin-top: -10px; }
+
 .navbar-default {
   background-color: #f7f7f7;
   border-color: #d3e0e9; }

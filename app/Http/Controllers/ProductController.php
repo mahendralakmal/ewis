@@ -9,6 +9,14 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function assign_products_to_client()
+    {
+        $brands = Brand::orderBy('title')->get();
+        $categories = Category::orderBy('title')->get();
+        $products = Product::orderBy('part_no')->get();
+        return view('/admin/clients/manage-product-list', compact('brands','categories','products'));
+    }
+
     public function admin_index(){
         $categories = Category::all();
 //        $categories = Category::orderBy('title')->get();
@@ -29,13 +37,6 @@ class ProductController extends Controller
         return view('shop', compact('products'));
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  string  $slug
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();
