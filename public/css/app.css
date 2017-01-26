@@ -5812,9 +5812,9 @@ button.close {
     .orange-background .profile-head .description .inner {
       opacity: 1; }
 
-.blue-background {
+.red-background {
   background-color: #b40006; }
-  .blue-background .gradiant-background {
+  .red-background .gradiant-background {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b40006+0,ffffff+100&1+0,0+100 */
     /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #b40006 0%, rgba(255, 255, 255, 0) 100%);
@@ -5822,41 +5822,6 @@ button.close {
     background: linear-gradient(to bottom, #b40006 0%, rgba(255, 255, 255, 0) 100%);
     /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b40006', endColorstr='#00ffffff',GradientType=0 );
-    /* IE6-9 */ }
-  .blue-background .white-background {
-    background-color: #ffffff;
-    padding-top: 30px;
-    min-height: 528px; }
-  .blue-background .profile-head img {
-    padding: 10px 20px 10px 20px;
-    background-color: #ffffff;
-    border-radius: 4px; }
-  .blue-background .profile-head h5 {
-    font-weight: bold; }
-  .blue-background .profile-head .description {
-    border-radius: 4px;
-    padding: 15px;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0.3+0,0.3+100 */
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4dffffff', endColorstr='#4dffffff', GradientType=0);
-    /* IE6-9 */ }
-    .blue-background .profile-head .description .inner {
-      opacity: 1; }
-
-.red-background {
-  background-color: #1071b4; }
-  .red-background .gradiant-background {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1071b4+0,ffffff+100&1+0,0+100 */
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #1071b4 0%, rgba(255, 255, 255, 0) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #1071b4 0%, rgba(255, 255, 255, 0) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1071b4', endColorstr='#00ffffff',GradientType=0 );
     /* IE6-9 */ }
   .red-background .white-background {
     background-color: #ffffff;
@@ -5880,6 +5845,41 @@ button.close {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4dffffff', endColorstr='#4dffffff', GradientType=0);
     /* IE6-9 */ }
     .red-background .profile-head .description .inner {
+      opacity: 1; }
+
+.blue-background {
+  background-color: #1071b4; }
+  .blue-background .gradiant-background {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1071b4+0,ffffff+100&1+0,0+100 */
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #1071b4 0%, rgba(255, 255, 255, 0) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #1071b4 0%, rgba(255, 255, 255, 0) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1071b4', endColorstr='#00ffffff',GradientType=0 );
+    /* IE6-9 */ }
+  .blue-background .white-background {
+    background-color: #ffffff;
+    padding-top: 30px;
+    min-height: 528px; }
+  .blue-background .profile-head img {
+    padding: 10px 20px 10px 20px;
+    background-color: #ffffff;
+    border-radius: 4px; }
+  .blue-background .profile-head h5 {
+    font-weight: bold; }
+  .blue-background .profile-head .description {
+    border-radius: 4px;
+    padding: 15px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0.3+0,0.3+100 */
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4dffffff', endColorstr='#4dffffff', GradientType=0);
+    /* IE6-9 */ }
+    .blue-background .profile-head .description .inner {
       opacity: 1; }
 
 footer {
