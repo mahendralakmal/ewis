@@ -33,10 +33,17 @@
                         <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
                     </tr>
                     <tr>
-                        <td>Peter</td>
-                        <td>Peter Parker</td>
+                        <td>Malfoy</td>
+                        <td>Draco Malfoy</td>
                         <td>Marketting Manager</td>
                         <td>902425545V</td>
+                        <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
+                    </tr>
+                    <tr>
+                        <td>Rone</td>
+                        <td>Rone Wesley</td>
+                        <td>Marketting Manager</td>
+                        <td>902325649V</td>
                         <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
                     </tr>
                     </tbody>

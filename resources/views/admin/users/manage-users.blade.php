@@ -23,21 +23,35 @@
                         <td>Mahendra Lakmal</td>
                         <td>CTO</td>
                         <td>852220583V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline">Unapprove</a> </td>
+                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
                     </tr>
                     <tr>
                         <td>Amara</td>
                         <td>Amara Kariyawasam</td>
                         <td>Admin</td>
                         <td>822420543V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline">Unapprove</a> </td>
+                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
                     </tr>
                     <tr>
                         <td>Peter</td>
                         <td>Peter Parker</td>
                         <td>Marketting Manager</td>
                         <td>902425545V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline">Unapprove</a> </td>
+                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
+                    </tr>
+                    <tr>
+                        <td>Malfoy</td>
+                        <td>Draco Malfoy</td>
+                        <td>Marketting Manager</td>
+                        <td>902425545V</td>
+                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
+                    </tr>
+                    <tr>
+                        <td>Rone</td>
+                        <td>Rone Wesley</td>
+                        <td>Marketting Manager</td>
+                        <td>902325649V</td>
+                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
                     </tr>
                     </tbody>
                 </table>

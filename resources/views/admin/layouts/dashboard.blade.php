@@ -91,9 +91,9 @@
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/admin/manage-clients' ) }}">Product List</a>
                                 </li>
-                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>
-                                </li>
+                                {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
+                                    {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
+                                {{--</li>--}}
                             </ul>
                         </li>
                         <!--

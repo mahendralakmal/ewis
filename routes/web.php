@@ -80,8 +80,13 @@ Route::group(['prefix' => '/admin'], function () {
         });
     });
 
-    Route::get('/manage-clients', function () {
-        return view('/admin/manage-client');
+    Route::group(['prefix' => '/manage-clients'], function () {
+        Route::get('/', function () {
+            return view('/admin/clients/manage-client');
+        });
+    Route::get('/update-profile', function () {
+            return view('/admin/clients/client-profile');
+        });
     });
 
 });
