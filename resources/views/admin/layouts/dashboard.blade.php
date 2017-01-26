@@ -72,10 +72,13 @@
                             <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Manage Users<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/manage-users') }}">Set User Profile</a>
+                                    <a href="{{ url ('/admin/users/create-users') }}">Add New User</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/manage-users' ) }}">Set User List</a>
+                                    <a href="{{ url ('/admin/users/manage-user-privileges' ) }}">User Privileges</a>
+                                </li>
+                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/admin/users/manage-users' ) }}">User Approvals</a>
                                 </li>
                             </ul>
                         </li>
@@ -83,10 +86,13 @@
                             <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Manage Clients<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/manage-clients') }}">Set Client Profile</a>
+                                    <a href="{{ url ('/admin/manage-clients') }}">Client Profile</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/manage-clients' ) }}">Set Product List</a>
+                                    <a href="{{ url ('/admin/manage-clients' ) }}">Product List</a>
+                                </li>
+                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>
                                 </li>
                             </ul>
                         </li>

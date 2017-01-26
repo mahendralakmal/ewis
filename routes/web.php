@@ -35,12 +35,20 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/store', 'ProductController@store');
     });
 
-
-    Route::get('/manage-users', function () {
-        return view('/admin/manage-users');
+    Route::group(['prefix' => '/users'], function () {
+        Route::get('/create-users', function () {
+            return view('/admin/users/create-user');
+        });
+        Route::get('/manage-user-privileges', function () {
+            return view('/admin/users/manage-user-privileges');
+        });
+        Route::get('/manage-users', function () {
+            return view('/admin/users/manage-users');
+        });
     });
+
     Route::get('/manage-clients', function () {
-        return view('/manage-clients');
+        return view('/admin/manage-client');
     });
 
 });

@@ -15,7 +15,6 @@
 	<link rel="shortcut icon" href="{{ elixir('img/favicon.ico') }}">
 	<link rel="stylesheet" href="{{ elixir('css/admin_app.css') }}" />
 	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
-	<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}" />
 </head>
 <body>
 	@yield('body')
