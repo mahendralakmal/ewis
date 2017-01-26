@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>@yield('title', 'Ewis Computers And Solutions')</title>
+    <title>@yield('title', 'Ewis Periperals')</title>
     <meta name="description" content="Laravel Shopping Cart Example">
 
     <!-- Mobile Specific Meta -->
@@ -33,7 +33,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="{{ url('/') }}">Ewis Computers And Solutions</a>
+              <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">

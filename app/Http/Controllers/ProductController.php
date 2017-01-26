@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
+use App\Category;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -14,10 +16,10 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($category, Category $id)
     {
-        $products = Product::all();
-        return view('shop')->with('products', $products);
+        $products = $id->product;
+        return view('shop', compact('products'));
     }
 
 

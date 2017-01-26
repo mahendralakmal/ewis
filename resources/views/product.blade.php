@@ -3,8 +3,8 @@
 @section('content')
 
     <div class="container">
-        <p><a href="{{ url('/shop') }}">Shop</a> / {{ $product->name }}</p>
-        <h1>{{ $product->name }}</h1>
+        <p><a href="{{ url('/shop') }}">Shop</a> / {{ $product->part_no }}</p>
+        <h1>{{ $product->part_no }}</h1>
 
         <hr>
 
@@ -47,8 +47,8 @@
                 <div class="col-md-3">
                     <div class="thumbnail">
                         <div class="caption text-center">
-                            <a href="{{ url('shop', [$product->slug]) }}"><img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive"></a>
-                            <a href="{{ url('shop', [$product->slug]) }}"><h3>{{ $product->name }}</h3>
+                            <a href="{{ url('shop', [$product->part_no]) }}"><img src="{{ asset('img/Products/' . $product->image) }}" alt="product" class="img-responsive"></a>
+                            <a href="{{ url('shop', [$product->part_no]) }}"><h3>{{ $product->description }}</h3>
                             <p>{{ $product->price }}</p>
                             </a>
                         </div> <!-- end caption -->
