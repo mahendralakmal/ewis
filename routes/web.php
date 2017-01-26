@@ -24,7 +24,12 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/', 'BrandsController@admin_index');
         Route::post('/store', 'BrandsController@store');
     });
-    Route::get('/categories', 'CategoryController@admin_index');
+
+    Route::group(['prefix' => '/categories'], function () {
+        Route::get('/', 'CategoryController@admin_index');
+        Route::post('/store', 'CategoryController@store');
+    });
+
     Route::get('/products', 'ProductController@admin_index');
 
     Route::get('/manage-users', function () {

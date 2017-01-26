@@ -13,4 +13,11 @@ class CategoryController extends Controller
         $categories = Category::all();
         return view('/admin/category', compact('categories', 'brands'));
     }
+
+    public function store(Request $request)
+    {
+//        return $request->all();
+        Category::create($request->all());
+        return back();
+    }
 }

@@ -36,7 +36,8 @@
         <h4>Add new Category</h4>
         <hr>
         <div class="col-md-12">
-            <form action="">
+            <form class="form-horizontal" role="form" method="POST" action="/admin/categories/store">
+                {{ csrf_field() }}
                 <div class="form-group row">
                     <div class="col-md-4"><label>Title</label></div>
                     <div class="col-md-8">
@@ -46,7 +47,7 @@
                 <div class="form-group row">
                     <div class="col-md-4"><label>Brand</label></div>
                     <div class="col-md-8">
-                        <select name="brnad_id" id="brand_id" class="form-control">
+                        <select name="brand_id" id="brand_id" class="form-control">
                             <option>Select Brand</option>
                             @foreach($brands as $brand)
                                 <option value="{{$brand->id}}">{{$brand->title}}</option>
