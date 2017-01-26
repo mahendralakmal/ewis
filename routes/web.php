@@ -38,7 +38,7 @@ Route::get('/category/{category}/{id}', 'ProductController@index');
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('category', 'CategoryController', ['only' => ['index', 'show']]);
-Route::resource('brands', 'BrandsController', ['only' => ['index','show']]);
+Route::resource('brands', 'BrandsController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
 Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
@@ -48,11 +48,12 @@ Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
 Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
 
 
-
 //=====================================================================================================================
 
 Route::group(['prefix' => '/admin'], function () {
-    Route::get('/', function () { return view('/admin/home'); });
+    Route::get('/', function () {
+        return view('/admin/home');
+    });
     Route::group(['prefix' => '/brands'], function () {
         Route::get('/', 'BrandsController@admin_index');
         Route::post('/store', 'BrandsController@store');
@@ -84,8 +85,11 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/', function () {
             return view('/admin/clients/manage-client');
         });
-    Route::get('/update-profile', function () {
+        Route::get('/update-profile', function () {
             return view('/admin/clients/client-profile');
+        });
+        Route::get('/agent-assign', function () {
+            return view('/admin/clients/agent-assign');
         });
     });
 
