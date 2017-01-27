@@ -32,6 +32,11 @@ Route::get('/user/3', function () {
 });
 
 //Route::get('/user', 'UserController@index');
+Route::get('/sampath/brands', 'BrandsController@sampath_brands');
+Route::get('/sampath/brands/{brand}/{id}', 'CategoryController@sampath_category');
+Route::get('/sampath/category/{category}/{id}', 'ProductController@sampath_products');
+
+
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
 //Route::get('/product/{product}/{id}', 'CartController@index');

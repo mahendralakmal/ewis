@@ -37,6 +37,12 @@ class ProductController extends Controller
         return view('shop', compact('products'));
     }
 
+    public function sampath_products($category, Category $id)
+    {
+        $products = $id->product;
+        return view('sampath/product', compact('products'));
+    }
+
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->firstOrFail();

@@ -25,4 +25,10 @@ class CategoryController extends Controller
         $categories = $id->category;
         return view('category', compact('categories'));
     }
+
+    public function sampath_category($brand, Brand $id)
+    {
+        $categories = $id->category;
+        return view('sampath/category', compact('categories'));
+    }
 }
