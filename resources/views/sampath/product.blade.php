@@ -61,7 +61,7 @@
                                                         <img src="{{ asset('img/Products/' . $product->image) }}" alt="product"
                                                              class="img-responsive">
                                                         <p>{{ $product->description }}</p>
-                                                        <p> Rs.{{ $product->default_price }}.00</p>
+                                                        <p> Rs.{{ $product->default_price }}</p>
                                                     </a>
                                                 </div> <!-- end caption -->
                                             </div> <!-- end thumbnail -->
