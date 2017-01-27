@@ -45,8 +45,8 @@ class ProductController extends Controller
 
     public function show($slug)
     {
-        $product = Product::where('slug', $slug)->firstOrFail();
-        $interested = Product::where('slug', '!=', $slug)->get()->random(4);
+        $product = Product::where('part_no', $slug)->firstOrFail();
+        $interested = Product::where('part_no', '!=', $slug)->get()->random(1);
 
         return view('product')->with(['product' => $product, 'interested' => $interested]);
     }

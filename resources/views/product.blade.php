@@ -10,11 +10,11 @@
 
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive">
+                <img src="{{ asset('img/Products/' . $product->image) }}" alt="product" class="img-responsive">
             </div>
 
             <div class="col-md-8">
-                <h3>${{ $product->price }}</h3>
+                <h3>Rs.{{ $product->default_price }}</h3>
                 <form action="{{ url('/cart') }}" method="POST" class="side-by-side">
                     {!! csrf_field() !!}
                     <input type="hidden" name="id" value="{{ $product->id }}">
