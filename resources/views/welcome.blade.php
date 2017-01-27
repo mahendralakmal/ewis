@@ -7,9 +7,15 @@
 
     <title>Laravel</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
+
+    <!-- Stylesheets -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}"/>
     <!-- Styles -->
     <style>
         html, body {
@@ -65,30 +71,32 @@
     </style>
 </head>
 <body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @if (Auth::check())
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ url('/login') }}">Login</a>
-                <a href="{{ url('/register') }}">Register</a>
-            @endif
-        </div>
-    @endif
-
-    <div class="content">
-        <div class="title m-b-md">
-            Laravel
-        </div>
-
-        <div class="links">
-            <a href="https://laravel.com/docs">Documentation</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
-        </div>
+<div class="container welcome">
+    <div class="col-md-5 col-md-offset-4">
+        <form method="get" action="user/1">
+            <div class="user-login">
+                <div class="">
+                    <div class="col-md-5"><h4>User Login</h4></div>
+                    <div class="col-md-7"><img src="{{ elixir('img/ewis-logo.png') }}"></div>
+                </div>
+                <div>&nbsp;
+                    <hr>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-5"><label>Username</label></div>
+                    <div class="col-md-7"><input type="text" name="username" id="username" class="form-control"></div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-5"><label>Password</label></div>
+                    <div class="col-md-7"><input type="password" name="password" id="password" class="form-control">
+                    </div>
+                </div>
+                <div>&nbsp;
+                    <hr>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>
