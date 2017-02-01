@@ -12,18 +12,17 @@
                 <div class="col-md-5 col-sm-5 col-xs-12 profile-head">
                     <div class="description">
                         <div class="inner">
-                            <h5>Sampath Bank</h5>
+                            <h3>Saman Perera</h3>
+                            <h5>Sales Agent</h5>
                             <ul>
-                                <li><span class="glyphicon glyphicon-map-marker"></span> Sampath Bank PLC, No 110 , Sir James
-                                    Peiris
-                                    Mawatha, Colombo 02, Sri Lanka.
+                                <li><span class="glyphicon glyphicon-user"></span> Ewis Peripherals </li>
+                                <li><span class="glyphicon glyphicon-map-marker"></span> No.123, Blah Street, Blah blah, Colombo45, Sri Lanka
                                 </li>
                                 <li><span class="glyphicon glyphicon-phone"></span><a href="#" title="Phone">+94 11 2
                                         30 30
                                         50</a>
                                 </li>
-                                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">info@sampath
-                                        .lk</a>
+                                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">saman.perera@ewis.lk</a>
                                 </li>
 
                             </ul>
@@ -53,7 +52,7 @@
                         <div class="container col-md-12">
                             <div class="row">
                                 @foreach ($brands as $brand)
-                                    <div class="col-md-3">
+                                    <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
                                         <div class="thumbnail">
                                             <div class="caption text-center row">
                                                 <a href="{{ url('sampath/brands', [$brand->title,$brand->id]) }}">

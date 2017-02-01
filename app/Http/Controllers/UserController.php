@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        return view('sampath/user');
+        return view('sampath/brands');
     }
     //
 }
