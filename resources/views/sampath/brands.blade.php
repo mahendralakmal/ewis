@@ -57,7 +57,6 @@
                                             <div class="caption text-center row">
                                                 <a href="{{ url('sampath/brands', [$brand->title,$brand->id]) }}">
                                                     <img src="{{ asset('img/Brands/' . $brand->image) }}" alt="brand" class="img-responsive">
-                                                    <p>{{ $brand->description }}</p>
                                                 </a>
                                             </div>
                                         </div>

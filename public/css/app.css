@@ -1525,8 +1525,8 @@ pre {
     clear: both; }
 
 .row {
-  margin-left: -5px;
-  margin-right: -5px; }
+  margin-left: -15px;
+  margin-right: -15px; }
   .row:before, .row:after {
     content: " ";
     display: table; }
@@ -5768,8 +5768,7 @@ button.close {
 .thumbnail {
   margin-bottom: 30px; }
   .thumbnail > img, .thumbnail a > img {
-    width: 235px;
-    height: 145px; }
+    padding: 10px; }
 
 .navbar {
   margin-bottom: 0px !important; }

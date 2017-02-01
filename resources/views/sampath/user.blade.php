@@ -40,7 +40,7 @@
                 <ul class="nav nav-tabs nav-menu" role="tablist">
                     <li class="active">
                         <a href="#agent" role="tab" data-toggle="tab">
-                            <i class="fa fa-user-secret"></i> Agent Details
+                            <i class="fa fa-user-secret"></i> Edit Details
                         </a>
                     </li>
 
@@ -63,7 +63,7 @@
 
 
                                     <div class="col-md-6">
-
+                                        <form>
                                         <div class="table-responsive responsiv-table">
                                             <table class="table bio-table">
                                                 <tbody>
@@ -84,6 +84,7 @@
                                                 </tbody>
                                             </table>
                                         </div><!--table-responsive close-->
+                                        </form>
                                     </div><!--col-md-6 close-->
 
                                     <div class="col-md-6">
@@ -107,8 +108,11 @@
                                                 </tbody>
                                             </table>
                                         </div><!--table-responsive close-->
-                                    </div><!--col-md-6 close-->
 
+                                    </div><!--col-md-6 close-->
+                                    <div class="col-md-10">
+                                        <button class="btn btn-primary btn-outline" onclick="location.href = '{{ url('user/edit') }}'">Edit User Profile</button>
+                                    </div>
                                 </div><!--row close-->
                             </div><!--container close-->
                         </div><!--tab-pane close-->

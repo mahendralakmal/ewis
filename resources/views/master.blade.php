@@ -49,7 +49,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">User <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href={{ url('sampath/brands') }}>Product List</a></li>
+                                <li><a href={{ url('user/1') }}>User Profile</a></li>
                                 <li><a href="#">Puchase History</a></li>
                                 <li><a href="#">Logout</a></li>
                                 <li role="separator" class="divider"></li>
