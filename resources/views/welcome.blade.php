@@ -73,7 +73,7 @@
 <body>
 <div class="container welcome">
     <div class="col-md-5 col-md-offset-4">
-        <form method="get" action="user/1">
+        <form method="get" action="sampath/brands">
             <div class="user-login">
                 <div class="">
                     <div class="col-md-5"><h4>User Login</h4></div>
