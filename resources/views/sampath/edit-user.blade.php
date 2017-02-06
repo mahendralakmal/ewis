@@ -59,7 +59,7 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <h4 class="pro-title"></h4><!--col-md-12 close-->
-
+                                        {{ $profile->address }}
                                     <form method="POST" action="" class="form-horizontal">
                                         <div class="form-group">
                                             <div class="col-md-3">
@@ -87,14 +87,6 @@
                                         </div>
                                         <hr>
 
-                                        {{--<div class="form-group">--}}
-                                            {{--<div class="col-md-3">--}}
-                                                {{--<label></label>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="col-md-7">--}}
-                                                {{--<input type="text" class="form-control" name="name" id="name">--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
                                         <div class="form-group">
                                             <div class="col-md-3">
                                                 <label>Address</label>
@@ -122,6 +114,7 @@
                                     </form>
                                     </div><!--col-md-6 close-->
                             </div><!--container close-->
+                        </div>
                         </div><!--tab-pane close-->
                     </div>
                 </div>

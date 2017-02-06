@@ -24,9 +24,8 @@ Route::get('/user/1', function () {
     return view('sampath/user');
 });
 
-Route::get('/user/edit', function () {
-    return view('sampath/edit-user');
-});
+Route::get('user/edit', 'UserProfileController@index');
+
 
 Route::get('/user/2', function () {
     return view('commercial/user');
