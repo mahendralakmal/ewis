@@ -59,14 +59,14 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <h4 class="pro-title"></h4><!--col-md-12 close-->
-                                        {{ $profile->address }}
+                                        {{--{{ $profile->address }}--}}
                                     <form method="POST" action="" class="form-horizontal">
                                         <div class="form-group">
                                             <div class="col-md-3">
                                                 <label>Contact Person</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" name="username" id="username">
+                                                <input type="text" value="{{$profile->full_name}}" class="form-control" name="username" id="username">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -82,7 +82,7 @@
                                                 <label>Company Name</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="password" class="form-control" name="cpassword" id="cpassword">
+                                                <input type="text" value="{{$profile->company}}" class="form-control" name="cpassword" id="cpassword">
                                             </div>
                                         </div>
                                         <hr>
@@ -92,7 +92,7 @@
                                                 <label>Address</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" name="name" id="name">
+                                                <input type="text" value="{{$profile->address}}" class="form-control" name="name" id="name">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -100,7 +100,7 @@
                                                 <label>Contact Number</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" name="nic" id="nic" maxlength="12">
+                                                <input type="text" class="form-control" value="{{$profile->phone}}" name="nic" id="nic" maxlength="12">
                                             </div>
                                         </div>
                                         <div class="form-group">
