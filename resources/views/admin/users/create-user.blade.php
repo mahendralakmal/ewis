@@ -7,58 +7,48 @@
                 <h3 class="panel-title">Users</h3>
             </div>
             <div class="panel-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <td><h5>Username</h5></td>
-                        <td><h5>Name</h5></td>
-                        <td><h5>Designation</h5></td>
-                        <td><h5>NIC</h5></td>
-                        <td class="col-md-3"></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Lakmal</td>
-                        <td>Mahendra Lakmal</td>
-                        <td>CTO</td>
-                        <td>852220583V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
-                    </tr>
-                    <tr>
-                        <td>Amara</td>
-                        <td>Amara Kariyawasam</td>
-                        <td>Admin</td>
-                        <td>822420543V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
-                    </tr>
-                    <tr>
-                        <td>Malfoy</td>
-                        <td>Draco Malfoy</td>
-                        <td>Marketting Manager</td>
-                        <td>902425545V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
-                    </tr>
-                    <tr>
-                        <td>Rone</td>
-                        <td>Rone Wesley</td>
-                        <td>Marketting Manager</td>
-                        <td>902325649V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
-                    </tr>
-                    </tbody>
-                </table>
+                @if(!$users->count() == 0)
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td><h5>Email</h5></td>
+                            <td><h5>Name</h5></td>
+                            <td><h5>Designation</h5></td>
+                            <td><h5>NIC</h5></td>
+                            <td class="col-md-3"></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{--@if(!empty($user))--}}
+                        @foreach($users as $user)
+                            <tr>
+                                <td>{{$user->email}}</td>
+                                <td>{{$user->name}}</td>
+                                <td>{{$user->designation->designation}}</td>
+                                <td>{{$user->nic_pass}}</td>
+                                <td><a href="/admin/users/create-users/{{ $user->id }}"
+                                       class="btn btn-primary btn-outline">Edit</a> <a href="#"
+                                                                                       class="btn btn-danger btn-outline">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>No users found.</p>
+                @endif
             </div>
         </div>
     </div>
     <div class="col-md-5">
-        <form method="POST" action="" class="form-horizontal">
+        <form class="form-horizontal" role="form" method="POST" action="/admin/users/store">
+            {{ csrf_field() }}
             <div class="form-group">
                 <div class="col-md-5">
-                    <label>User Name</label>
+                    <label>Email</label>
                 </div>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" name="username" id="username">
+                    <input type="email" class="form-control" name="email" id="email">
                 </div>
             </div>
             <div class="form-group">
@@ -92,22 +82,20 @@
                     <label>Designation</label>
                 </div>
                 <div class="col-md-7">
-                    <select type="text" class="form-control" name="designation" id="designation">
+                    <select type="text" class="form-control" name="designation_id" id="designation_id">
                         <option>Select Designation</option>
-                        <option value="1">Admi</option>
-                        <option value="2">CTO</option>
-                        <option value="3">Marketting Manager</option>
-                        <option value="4">Sales Executive</option>
-                        <option value="4">Client</option>
+                        @foreach($designations as $designation)
+                            <option value="{{ $designation->id }}">{{ $designation->designation }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-5">
-                    <label>NIC</label>
+                    <label>NIC/ Passport No</label>
                 </div>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" name="nic" id="nic" maxlength="12">
+                    <input type="text" class="form-control" name="nic_pass" id="nic_pass" maxlength="12">
                 </div>
             </div>
             <div class="form-group">

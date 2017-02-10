@@ -5887,6 +5887,9 @@ footer {
   footer img {
     width: 100px; }
 
+.navbar-default {
+  background-color: #ffffff; }
+
 .navbar-brand img {
   display: block;
   width: 130px;

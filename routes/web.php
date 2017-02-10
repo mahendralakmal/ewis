@@ -79,15 +79,18 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::group(['prefix' => '/users'], function () {
-        Route::get('/create-users', function () {
-            return view('/admin/users/create-user');
-        });
+        Route::get('/create-users', 'UserController@create');
+        Route::get('/create-users/{id}', 'UserController@edit');
+        Route::get('/manage-user-designations', 'DesignationController@index');
+
         Route::get('/manage-user-privileges', function () {
             return view('/admin/users/manage-user-privileges');
         });
         Route::get('/manage-users', function () {
             return view('/admin/users/manage-users');
         });
+        Route::post('/store', 'UserController@store');
+        Route::post('/designation/store', 'DesignationController@store');
     });
 
     Route::group(['prefix' => '/manage-clients'], function () {

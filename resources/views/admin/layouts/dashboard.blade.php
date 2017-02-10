@@ -77,9 +77,9 @@
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/admin/users/manage-users' ) }}">User Approvals</a>
                                 </li>
-                                {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
-                                    {{--<a href="{{ url ('/admin/users/manage-user-privileges' ) }}">User Privileges</a>--}}
-                                {{--</li>--}}
+                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/admin/users/manage-user-designations' ) }}">Designations</a>
+                                </li>
                             </ul>
                         </li>
                         <li >
