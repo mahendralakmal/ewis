@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container-fluid orange-background">
-        <div class="container white-background gradiant-background">
+        <div class="container white-background gradiant-background-white">
+        {{--<div class="container white-background gradiant-background">--}}
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
                     <img alt="Sampath Bank" src="{{ elixir('img/sampath.jpg') }}" width="209" hight="67" class="img-responsive"/>
