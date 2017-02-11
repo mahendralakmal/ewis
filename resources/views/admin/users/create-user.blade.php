@@ -21,18 +21,24 @@
                         <tbody>
                         {{--@if(!empty($user))--}}
                         @foreach($users as $user)
-                            <tr>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->name}}</td>
-                                <td>{{$user->designation->designation}}</td>
-                                <td>{{$user->nic_pass}}</td>
-                                <td>
-                                    {{--<button class="btn btn-primary btn-outline" data-toggle="model" data-target="#userEditModel"> Edit </button>--}}
-                                    <a href="/admin/users/create-users/{{ $user->id }}"
-                                       class="btn btn-primary btn-outline">Edit</a>
-                                    <a href="#" class="btn btn-danger btn-outline">Delete</a>
-                                </td>
-                            </tr>
+                            @if(!$user->deleted == 1)
+                                <tr>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->designation->designation}}</td>
+                                    <td>{{$user->nic_pass}}</td>
+                                    <td>
+                                        {{--<button class="btn btn-primary btn-outline" data-toggle="model" data-target="#userEditModel"> Edit </button>--}}
+                                        <a href="/admin/users/create-users/{{ $user->id }}"
+                                           class="btn btn-primary btn-outline">Edit</a>
+                                        <form method="POST" action="/admin/users/delete" role="form">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" id="hidId" name="hidId" value="{{ $user->id }}">
+                                            <button class="btn btn-danger btn-outline" type="submit">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>

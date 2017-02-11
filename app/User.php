@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $fillable=['email','password','name','designation_id','nic_pass'];
+    protected $fillable=['email','password','name','designation_id','nic_pass','deleted','approved'];
 
     public function designation(){
         return $this->belongsTo(Designation::class);

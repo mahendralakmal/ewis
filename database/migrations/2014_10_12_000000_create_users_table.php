@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('nic_pass')->unique;
             $table->integer('designation_id');
-            $table->boolean('approval');
+            $table->boolean('approval')->default(0);
+            $table->boolean('deleted')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

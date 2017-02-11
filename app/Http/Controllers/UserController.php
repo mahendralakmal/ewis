@@ -29,8 +29,22 @@ class UserController extends Controller
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));
     }
 
+    public function delete(Request $request)
+    {
+        $user = User::find($request->hidId);
+        $user->update([
+            'deleted'=>1
+        ]);
+        return redirect('/admin/users/create-users');
+    }
+
+    public function approved(User $id)
+    {
+        $id->update(['approval'=>1]);
+        return redirect('/admin/users/create-users');
+    }
+
     public function update(Request $request){
-//        return $request->all();
         $user = User::find($request->id);
         $user->update([
             'password'=>Hash::make($request->password),
