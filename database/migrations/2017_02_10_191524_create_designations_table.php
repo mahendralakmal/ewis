@@ -16,6 +16,7 @@ class CreateDesignationsTable extends Migration
         Schema::create('designations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('designation')->unique();
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }

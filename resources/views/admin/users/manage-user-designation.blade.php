@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Add New Users')
+@section('page_heading','Add New User Designation')
 @section('section')
     <div class="col-md-7">
         <div class="panel panel-default">
@@ -17,12 +17,14 @@
                         </thead>
                         <tbody>
                         @foreach($designations as $designation)
+                            @if(!$designation->deleted == 1)
                             <tr>
                                 <td>{{$designation->designation}}</td>
-                                <td><a href="#" class="btn btn-primary btn-outline">Edit</a> <a href="#"
-                                                                                                class="btn btn-danger btn-outline">Delete</a>
+                                <td><a href="/admin/users/manage-user-designations/{{ $designation->id }}" class="btn btn-primary btn-outline">Edit</a>
+                                    {{--<a href="#" class="btn btn-danger btn-outline">Delete</a>--}}
                                 </td>
                             </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>
@@ -33,14 +35,17 @@
         </div>
     </div>
     <div class="col-md-5">
-        <form class="form-horizontal" role="form" method="POST" action="/admin/users/designation/store">
+        <form class="form-horizontal" role="form" method="POST" @if($id === "") action="/admin/users/designation/store" @else action="/admin/users/designation/update" @endif>
             {{ csrf_field() }}
+            @if(!$id == "")
+                <input type="hidden" id="id" name="id" value="{{$id->id}}">
+            @endif
             <div class="form-group">
                 <div class="col-md-5">
                     <label>Designation</label>
                 </div>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" name="designation" id="designation">
+                    <input type="text" class="form-control" name="designation" id="designation" @if(!$id == "") value="{{$id->designation}}" @endif>
                 </div>
             </div>
 
@@ -49,7 +54,8 @@
                     {{--<label>Confirm Passworde</label>--}}
                 </div>
                 <div class="col-md-7">
-                    <button class="btn btn-primary btn-outline" type="submit">Add</button>
+                    <button class="btn btn-primary btn-outline" type="submit">@if($id === "")Add @else
+                            Update @endif</button>
                 </div>
             </div>
         </form>

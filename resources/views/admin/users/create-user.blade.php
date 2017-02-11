@@ -14,7 +14,7 @@
                             <td><h5>Email</h5></td>
                             <td><h5>Name</h5></td>
                             <td><h5>Designation</h5></td>
-                            <td><h5>NIC</h5></td>
+                            <td><h5>NIC/ Passport</h5></td>
                             <td class="col-md-3"></td>
                         </tr>
                         </thead>
