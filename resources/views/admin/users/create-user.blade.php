@@ -7,9 +7,6 @@
                 <h3 class="panel-title">Users</h3>
             </div>
             <div class="panel-body">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Launch demo modal
-                </button>
                 @if(!$users->count() == 0)
                     <table class="table">
                         <thead>
