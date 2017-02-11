@@ -16,6 +16,7 @@ class UserController extends Controller
 
     public function create()
     {
+        $id = "";
         $users = User::all();
         $designations = Designation::all();
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));
@@ -23,10 +24,21 @@ class UserController extends Controller
 
     public function edit(User $id)
     {
-//        return $id;
         $users = User::all();
         $designations = Designation::all();
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));
+    }
+
+    public function update(Request $request){
+//        return $request->all();
+        $user = User::find($request->id);
+        $user->update([
+            'password'=>Hash::make($request->password),
+            'name'=>$request->name,
+            'designation_id'=>$request->designation_id,
+            'nic_pass'=>$request->nic_pass
+        ]);
+        return redirect('/admin/users/create-users');
     }
 
     public function store(Request $request)

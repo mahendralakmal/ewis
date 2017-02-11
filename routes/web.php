@@ -90,6 +90,7 @@ Route::group(['prefix' => '/admin'], function () {
             return view('/admin/users/manage-users');
         });
         Route::post('/store', 'UserController@store');
+        Route::post('/update', 'UserController@update');
         Route::post('/designation/store', 'DesignationController@store');
     });
 

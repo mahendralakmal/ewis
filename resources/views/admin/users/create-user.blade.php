@@ -7,6 +7,9 @@
                 <h3 class="panel-title">Users</h3>
             </div>
             <div class="panel-body">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Launch demo modal
+                </button>
                 @if(!$users->count() == 0)
                     <table class="table">
                         <thead>
@@ -26,9 +29,11 @@
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->designation->designation}}</td>
                                 <td>{{$user->nic_pass}}</td>
-                                <td><a href="/admin/users/create-users/{{ $user->id }}"
-                                       class="btn btn-primary btn-outline">Edit</a> <a href="#"
-                                                                                       class="btn btn-danger btn-outline">Delete</a>
+                                <td>
+                                    {{--<button class="btn btn-primary btn-outline" data-toggle="model" data-target="#userEditModel"> Edit </button>--}}
+                                    <a href="/admin/users/create-users/{{ $user->id }}"
+                                       class="btn btn-primary btn-outline">Edit</a>
+                                    <a href="#" class="btn btn-danger btn-outline">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -41,14 +46,21 @@
         </div>
     </div>
     <div class="col-md-5">
-        <form class="form-horizontal" role="form" method="POST" action="/admin/users/store">
+        <form id="userCreate" class="form-horizontal" role="form" method="POST"
+              @if($id === "")action="/admin/users/store"
+              @else action="/admin/users/update" @endif>
             {{ csrf_field() }}
             <div class="form-group">
                 <div class="col-md-5">
                     <label>Email</label>
                 </div>
                 <div class="col-md-7">
-                    <input type="email" class="form-control" name="email" id="email">
+                    @if(!$id == "")
+                        <input type="hidden" id="id" name="id" value="{{$id->id}}">
+                    @endif
+
+                    <input type="email" class="form-control" name="email" id="email"
+                           @if(!$id == "") value="{{$id->email}}" disabled @endif>
                 </div>
             </div>
             <div class="form-group">
@@ -74,7 +86,8 @@
                     <label>Name</label>
                 </div>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" name="name" id="name">
+                    <input type="text" class="form-control" name="name" id="name"
+                           @if(!$id == "") value="{{$id->name}}" @endif>
                 </div>
             </div>
             <div class="form-group">
@@ -84,9 +97,16 @@
                 <div class="col-md-7">
                     <select type="text" class="form-control" name="designation_id" id="designation_id">
                         <option>Select Designation</option>
-                        @foreach($designations as $designation)
-                            <option value="{{ $designation->id }}">{{ $designation->designation }}</option>
-                        @endforeach
+                        @if(!$id == "")
+                            @foreach($designations as $designation)
+                                <option value="{{ $designation->id }}"
+                                        @if($designation->id ==$id->designation_id) selected @endif>{{ $designation->designation }}</option>
+                            @endforeach
+                        @else
+                            @foreach($designations as $designation)
+                                <option value="{{ $designation->id }}">{{ $designation->designation }}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
             </div>
@@ -95,7 +115,8 @@
                     <label>NIC/ Passport No</label>
                 </div>
                 <div class="col-md-7">
-                    <input type="text" class="form-control" name="nic_pass" id="nic_pass" maxlength="12">
+                    <input type="text" class="form-control" name="nic_pass" id="nic_pass" maxlength="12"
+                           @if(!$id == "") value="{{$id->nic_pass}}" @endif>
                 </div>
             </div>
             <div class="form-group">
@@ -103,7 +124,8 @@
                     {{--<label>Confirm Passworde</label>--}}
                 </div>
                 <div class="col-md-7">
-                    <button class="btn btn-primary btn-outline" type="submit">Add</button>
+                    <button class="btn btn-primary btn-outline" type="submit">@if($id === "")Add @else
+                            Update @endif</button>
                 </div>
             </div>
         </form>
