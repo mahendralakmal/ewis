@@ -11,8 +11,7 @@ class ClientController extends Controller
     public function index()
     {
         $users = User::all();
-        $clients = Client::all();
-        return view('/admin/clients/manage-client', compact('users', 'clients'));
+        return view('/admin/clients/manage-client', compact('users'));
     }
 
     public function update_profile(User $id){
