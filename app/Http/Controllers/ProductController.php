@@ -8,7 +8,7 @@ use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 
-use Session;
+use Illuminate\Contracts\Session\Session;
 
 class ProductController extends Controller
 {
@@ -57,11 +57,11 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
-//    public function show($slug)
-//    {
-//        $product = Product::where('part_no', $slug)->firstOrFail();
-//        $interested = Product::where('part_no', '!=', $slug)->get()->random(1);
-//
-//        return view('product')->with(['product' => $product, 'interested' => $interested]);
-//    }
+    public function show($slug)
+    {
+        $product = Product::where('part_no', $slug)->firstOrFail();
+        $interested = Product::where('part_no', '!=', $slug)->get()->random(1);
+
+        return view('product')->with(['product' => $product, 'interested' => $interested]);
+    }
 }

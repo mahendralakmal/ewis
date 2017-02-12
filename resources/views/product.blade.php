@@ -15,20 +15,12 @@
 
             <div class="col-md-8">
                 <h3>Rs.{{ $product->default_price }}</h3>
-                <form action="{{ url('/cart') }}" method="POST" class="side-by-side">
+                <form action="{{ route('product.AddToBucket', ['id' => $product->id]) }}" method="POST" class="side-by-side">
                     {!! csrf_field() !!}
                     <input type="hidden" name="id" value="{{ $product->id }}">
                     <input type="hidden" name="name" value="{{ $product->name }}">
                     <input type="hidden" name="price" value="{{ $product->price }}">
-                    <input type="submit" class="btn btn-success btn-lg" value="Add to Cart">
-                </form>
-
-                <form action="{{ url('/wishlist') }}" method="POST" class="side-by-side">
-                    {!! csrf_field() !!}
-                    <input type="hidden" name="id" value="{{ $product->id }}">
-                    <input type="hidden" name="name" value="{{ $product->name }}">
-                    <input type="hidden" name="price" value="{{ $product->price }}">
-                    <input type="submit" class="btn btn-primary btn-lg" value="Add to Wishlist">
+                    <input type="submit" class="btn btn-success btn-lg" value="Add to Bucket">
                 </form>
 
 
