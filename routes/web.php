@@ -94,9 +94,11 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/manage-user-privileges', function () {
             return view('/admin/users/manage-user-privileges');
         });
-        Route::get('/manage-users', function () {
-            return view('/admin/users/manage-users');
-        });
+        Route::get('/manage-users', 'UserController@mange_user');
+        Route::get('/manage-users/approved/{id}', 'UserController@approved');
+        Route::get('/manage-users/unapproved/{id}', 'UserController@unapproved');
+//            return view('/admin/users/manage-users');
+//        });
         Route::post('/store', 'UserController@store');
         Route::post('/update', 'UserController@update');
         Route::post('/delete', 'UserController@delete');
@@ -105,12 +107,15 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::group(['prefix' => '/manage-clients'], function () {
-        Route::get('/', function () {
-            return view('/admin/clients/manage-client');
-        });
-        Route::get('/update-profile', function () {
-            return view('/admin/clients/client-profile');
-        });
+        Route::get('/', 'ClientController@index');
+        Route::get('/update-profile/{id}', 'ClientController@update_profile');
+        Route::post('/store', 'ClientController@store');
+//        {
+//            return view('/admin/clients/manage-client');
+//        });
+//        Route::get('/update-profile', function () {
+//            return view('/admin/clients/client-profile');
+//        });
         Route::get('/agent-assign', function () {
             return view('/admin/clients/agent-assign');
         });

@@ -7,54 +7,40 @@
                 <h3 class="panel-title">Users</h3>
             </div>
             <div class="panel-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <td><h5>Username</h5></td>
-                        <td><h5>Name</h5></td>
-                        <td><h5>Designation</h5></td>
-                        <td><h5>NIC</h5></td>
-                        <td class="col-md-3"></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Lakmal</td>
-                        <td>Mahendra Lakmal</td>
-                        <td>CTO</td>
-                        <td>852220583V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
-                    </tr>
-                    <tr>
-                        <td>Amara</td>
-                        <td>Amara Kariyawasam</td>
-                        <td>Admin</td>
-                        <td>822420543V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
-                    </tr>
-                    <tr>
-                        <td>Peter</td>
-                        <td>Peter Parker</td>
-                        <td>Marketting Manager</td>
-                        <td>902425545V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
-                    </tr>
-                    <tr>
-                        <td>Malfoy</td>
-                        <td>Draco Malfoy</td>
-                        <td>Marketting Manager</td>
-                        <td>902425545V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
-                    </tr>
-                    <tr>
-                        <td>Rone</td>
-                        <td>Rone Wesley</td>
-                        <td>Marketting Manager</td>
-                        <td>902325649V</td>
-                        <td><a href="#" class="btn btn-primary btn-outline">Approve</a>  <a href="#" class="btn btn-danger btn-outline" disabled>Unapprove</a> </td>
-                    </tr>
-                    </tbody>
-                </table>
+                @if(!$users->count() == 0)
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <td><h5>Email</h5></td>
+                            <td><h5>Name</h5></td>
+                            <td><h5>Designation</h5></td>
+                            <td><h5>NIC/ Passport</h5></td>
+                            <td class="col-md-3"></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
+                            @if(!$user->deleted == 1)
+                                <tr>
+                                    <td>@if($user->approval == 1)
+
+                                            <i class="fa fa-check green fa-fw"></i>
+                                        @endif</td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->name}}</td>
+                                    <td>{{$user->designation->designation}}</td>
+                                    <td>{{$user->nic_pass}}</td>
+                                    <td><a href="/admin/users/manage-users/approved/{{ $user->id }}" class="btn btn-primary btn-outline">Approve</a>
+                                        <a href="/admin/users/manage-users/unapproved/{{ $user->id }}" class="btn btn-danger btn-outline" @if(!$user->approval == 1) disabled @endif>Unapprove</a> </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>No users found.</p>
+                @endif
             </div>
         </div>
     </div>

@@ -17,6 +17,7 @@ class CreateDesignationsTable extends Migration
             $table->increments('id');
             $table->string('designation')->unique();
             $table->boolean('deleted')->default(0);
+            $table->string('user_id')->default(null);
             $table->timestamps();
         });
     }
