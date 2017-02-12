@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use \Cart as Cart;
+use Bucket;
 use Validator;
 
 class CartController extends Controller
@@ -18,7 +18,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('cart');
+        return view('bucket');
     }
 
     /**
@@ -29,16 +29,16 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
-            return $cartItem->id === $request->id;
+        $duplicates = Bucket::search(function ($bucketItem, $rowId) use ($request) {
+            return $bucketItem->id === $request->id;
         });
 
         if (!$duplicates->isEmpty()) {
-            return redirect('cart')->withSuccessMessage('Item is already in your cart!');
+            return redirect('bucket')->withSuccessMessage('Item is already in your Bucket!');
         }
 
-        Cart::add($request->id, $request->name, 1, $request->price)->associate('App\Product');
-        return redirect('cart')->withSuccessMessage('Item was added to your cart!');
+        Bucket::add($request->id, $request->name, 1, $request->price)->associate('App\Product');
+        return redirect('bucket')->withSuccessMessage('Item was added to your Bucket!');
     }
 
     /**
@@ -56,7 +56,7 @@ class CartController extends Controller
         ]);
 
          if ($validator->fails()) {
-            session()->flash('error_message', 'Quantity must be between 1 and 5.');
+            session()->flash('error_message', 'Quantity must be between 1 or more.');
             return response()->json(['success' => false]);
          }
 
@@ -75,8 +75,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        Cart::remove($id);
-        return redirect('cart')->withSuccessMessage('Item has been removed!');
+        Bucket::remove($id);
+        return redirect('bucket')->withSuccessMessage('Item has been removed!');
     }
 
     /**
@@ -86,34 +86,8 @@ class CartController extends Controller
      */
     public function emptyCart()
     {
-        Cart::destroy();
-        return redirect('cart')->withSuccessMessage('Your cart has been cleared!');
+        Bucket::destroy();
+        return redirect('bucket')->withSuccessMessage('Your bucket has been cleared!');
     }
 
-    /**
-     * Switch item from shopping cart to wishlist.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function switchToWishlist($id)
-    {
-        $item = Cart::get($id);
-
-        Cart::remove($id);
-
-        $duplicates = Cart::instance('wishlist')->search(function ($cartItem, $rowId) use ($id) {
-            return $cartItem->id === $id;
-        });
-
-        if (!$duplicates->isEmpty()) {
-            return redirect('cart')->withSuccessMessage('Item is already in your Wishlist!');
-        }
-
-        Cart::instance('wishlist')->add($item->id, $item->name, 1, $item->price)
-                                  ->associate('App\Product');
-
-        return redirect('cart')->withSuccessMessage('Item has been moved to your Wishlist!');
-
-    }
 }

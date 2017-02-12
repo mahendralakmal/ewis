@@ -37,6 +37,8 @@ Route::get('/user/3', function () {
     return view('seylan/user');
 });
 
+Route::get('add-to-bucket/{id}', 'ProductController@getAddToBucket');
+
 Route::get('/', 'UserController@getsignin');
 Route::post('/signin', 'UserController@postsignin');
 //Route::get('/user', 'UserController@index');

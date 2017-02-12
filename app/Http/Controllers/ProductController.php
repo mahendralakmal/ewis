@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Bucket;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
+
+use Session;
 
 class ProductController extends Controller
 {
@@ -43,11 +46,22 @@ class ProductController extends Controller
         return view('sampath/product', compact('products'));
     }
 
-    public function show($slug)
-    {
-        $product = Product::where('part_no', $slug)->firstOrFail();
-        $interested = Product::where('part_no', '!=', $slug)->get()->random(1);
+    public function getAddToBucket(Request $request, $id){
+        $product = Product::find($id);
+        $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
+        $bucket = new Bucket($oldBucket);
+        $bucket->add($product, $product->id);
 
-        return view('product')->with(['product' => $product, 'interested' => $interested]);
+        $request->session()->put('bucket', $bucket);
+        dd($request->session()->get('bucket'));
+        return redirect()->route('product.index');
     }
+
+//    public function show($slug)
+//    {
+//        $product = Product::where('part_no', $slug)->firstOrFail();
+//        $interested = Product::where('part_no', '!=', $slug)->get()->random(1);
+//
+//        return view('product')->with(['product' => $product, 'interested' => $interested]);
+//    }
 }
