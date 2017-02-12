@@ -105,12 +105,15 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::group(['prefix' => '/manage-clients'], function () {
-        Route::get('/', function () {
-            return view('/admin/clients/manage-client');
-        });
-        Route::get('/update-profile', function () {
-            return view('/admin/clients/client-profile');
-        });
+        Route::get('/', 'ClientController@index');
+        Route::get('/update-profile/{id}', 'ClientController@update_profile');
+        Route::post('/store', 'ClientController@store');
+//        {
+//            return view('/admin/clients/manage-client');
+//        });
+//        Route::get('/update-profile', function () {
+//            return view('/admin/clients/client-profile');
+//        });
         Route::get('/agent-assign', function () {
             return view('/admin/clients/agent-assign');
         });

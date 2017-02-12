@@ -18,6 +18,7 @@ class CreateBrandsTable extends Migration
             $table->string('title')->unique();
             $table->string('description');
             $table->text('image')->nullable();
+            $table->string('user_id')->default(null);
             $table->timestamps();
         });
     }

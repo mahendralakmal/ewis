@@ -60,7 +60,12 @@ class UserController extends Controller
         $user->designation_id = $request->designation_id;
         $user->nic_pass = $request->nic_pass;
         $user->save();
-        return back();
+
+        if(User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client'){
+            return redirect('/admin/manage-clients/update-profile/'.$user->id);
+        } else {
+            return back();
+        }
     }
 
     public function mange_user()
