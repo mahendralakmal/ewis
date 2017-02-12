@@ -14,7 +14,6 @@ class UserController extends Controller
         return view('sampath/brands');
     }
 
-
     public function create()
     {
         $id = "";
