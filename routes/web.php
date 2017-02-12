@@ -28,8 +28,13 @@ Route::get('/user/3', function () {
     return view('seylan/user');
 });
 
+
 Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
+
+Route::get('add-to-bucket/{id}', 'ProductController@getAddToBucket');
+
+
 //Route::get('/user', 'UserController@index');
 Route::get('/sampath/brands', 'BrandsController@sampath_brands');
 Route::get('/sampath/brands/{brand}/{id}', 'CategoryController@sampath_category');

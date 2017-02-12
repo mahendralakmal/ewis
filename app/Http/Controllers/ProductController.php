@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Bucket;
 use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
+
+use Illuminate\Contracts\Session\Session;
 
 class ProductController extends Controller
 {
@@ -41,6 +44,17 @@ class ProductController extends Controller
     {
         $products = $id->product;
         return view('sampath/product', compact('products'));
+    }
+
+    public function getAddToBucket(Request $request, $id){
+        $product = Product::find($id);
+        $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
+        $bucket = new Bucket($oldBucket);
+        $bucket->add($product, $product->id);
+
+        $request->session()->put('bucket', $bucket);
+        dd($request->session()->get('bucket'));
+        return redirect()->route('product.index');
     }
 
     public function show($slug)
