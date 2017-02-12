@@ -33,24 +33,19 @@ class UserController extends Controller
     {
         $user = User::find($request->hidId);
         $user->update([
-            'deleted'=>1
+            'deleted' => 1
         ]);
         return redirect('/admin/users/create-users');
     }
 
-    public function approved(User $id)
+    public function update(Request $request)
     {
-        $id->update(['approval'=>1]);
-        return redirect('/admin/users/create-users');
-    }
-
-    public function update(Request $request){
         $user = User::find($request->id);
         $user->update([
-            'password'=>Hash::make($request->password),
-            'name'=>$request->name,
-            'designation_id'=>$request->designation_id,
-            'nic_pass'=>$request->nic_pass
+            'password' => Hash::make($request->password),
+            'name' => $request->name,
+            'designation_id' => $request->designation_id,
+            'nic_pass' => $request->nic_pass
         ]);
         return redirect('/admin/users/create-users');
     }
@@ -66,5 +61,25 @@ class UserController extends Controller
         $user->nic_pass = $request->nic_pass;
         $user->save();
         return back();
+    }
+
+    public function mange_user()
+    {
+        $id = "";
+        $users = User::all();
+        $designations = Designation::all();
+        return view('/admin/users/manage-users', compact('users', 'designations', 'id'));
+    }
+
+    public function approved(User $id)
+    {
+        $id->update(['approval' => 1]);
+        return redirect('/admin/users/manage-users');
+    }
+
+    public function unapproved(User $id)
+    {
+        $id->update(['approval' => 0]);
+        return redirect('/admin/users/manage-users');
     }
 }

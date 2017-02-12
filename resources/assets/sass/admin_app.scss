@@ -4,7 +4,7 @@
 @import "variables";
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-@import "node_modules/font-awesome/scss/font-awesome";
+//@import "node_modules/font-awesome/scss";
 
 @btn-font-weight : 300;
 @font-family-sans-serif : "Roboto", Helvetica, Arial, sans-serif;
@@ -13,8 +13,18 @@ body, label, .checkbox label {
   font-weight: 300;
 }
 
+$red: #ee001d;
+$green: #008000;
+$mobile: "(max-width: 768px)";
+
 .error{
-  color: #ee001d;
+  color: $red;
+}
+
+
+
+.fa-check{
+  color: $green !important;
 }
 
 footer {

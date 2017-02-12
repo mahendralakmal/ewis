@@ -14,27 +14,21 @@
                             <td><h5>Email</h5></td>
                             <td><h5>Name</h5></td>
                             <td><h5>Designation</h5></td>
-                            <td><h5>NIC/ Passport</h5></td>
                             <td class="col-md-3"></td>
                         </tr>
                         </thead>
                         <tbody>
-                        {{--@if(!empty($user))--}}
                         @foreach($users as $user)
                             @if(!$user->deleted == 1)
                                 <tr>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->designation->designation}}</td>
-                                    <td>{{$user->nic_pass}}</td>
                                     <td>
-                                        {{--<button class="btn btn-primary btn-outline" data-toggle="model" data-target="#userEditModel"> Edit </button>--}}
                                         <a href="/admin/users/create-users/{{ $user->id }}"
-                                           class="btn btn-primary btn-outline">Edit</a>
-                                        <form method="POST" action="/admin/users/delete" role="form">
+                                           class="btn btn-primary btn-outline">Edit</a><form method="POST" action="/admin/users/delete" role="form"><button class="btn btn-danger btn-outline" type="submit">Delete</button>
                                             {{ csrf_field() }}
                                             <input type="hidden" id="hidId" name="hidId" value="{{ $user->id }}">
-                                            <button class="btn btn-danger btn-outline" type="submit">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
