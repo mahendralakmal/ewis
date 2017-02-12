@@ -22,6 +22,40 @@
 </head>
 <body>
 	@yield('body')
+	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+	<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+	<script>
+		$( "#userCreate" ).validate({
+			rules: {
+				email: {
+					required: true,
+					email: true
+				},
+				password: {
+					required:true,
+					minlength:6,
+					maxlength:12
+				},
+				cpassword: {
+					equalTo: "#password"
+				},
+				name: "required",
+				designation: {
+					required: true,
+				},
+				nic_pass: {
+					required:true,
+					maxlength:12,
+					minlength:7
+				},
+			}
+		});
+	</script>
+
 	<script src="http://demo.startlaravel.com/sb-admin-laravel/assets/scripts/frontend.js" type="text/javascript"></script>
+
+	<script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
+
 </body>
 </html>

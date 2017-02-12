@@ -8096,6 +8096,9 @@ button.close {
 body, label, .checkbox label {
   font-weight: 300; }
 
+.error {
+  color: #ee001d; }
+
 footer {
   background-color: #585858;
   text-align: center;

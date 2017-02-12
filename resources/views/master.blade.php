@@ -66,10 +66,14 @@
 @yield('content')
 <footer>
     <div class="container">
-        <br>
+        <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p><img src="/img/brands/lexmark.png"> <img src="/img/brands/casio.png"> <img src="/img/brands/ricoh.png"> <img src="/img/brands/kodak.png"> <img src="/img/brands/konica.png"> <img src="/img/brands/solar.png"> <img src="/img/brands/turbn.png"> <img src="/img/brands/fujifilm.png"> <img src="/img/brands/riello.png"> </p>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
             <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p><img src="/img/brands/lexmark.png" width="100px"> <img src="/img/brands/casio.png" width="100px"> <img src="/img/brands/ricoh.png" width="100px"> <img src="/img/brands/kodak.png" width="100px"> <img src="/img/brands/konica.png" width="100px"> <img src="/img/brands/solar.png" width="100px"> <img src="/img/brands/turbn.png" width="100px"> <img src="/img/brands/fujifilm.png" width="100px"> <img src="/img/brands/riello.png" width="100px"> </p>
-            <p class="text-muted">Design & Developed by  <a href="http://proitsolutions.lk">ProIT Solutions</a></p>
+                <p class="text-muted">Design & Developed by  <a href="http://proitsolutions.lk">ProIT Solutions</a></p>
             </div>
     </div>
 </footer>

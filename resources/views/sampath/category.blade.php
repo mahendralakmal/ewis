@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="container-fluid orange-background">
+    <div class="container-fluid profile-background">
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
@@ -9,35 +9,30 @@
                 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
-                <div class="col-md-5 col-sm-5 col-xs-12 profile-head">
+                <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
                     <div class="description">
                         <div class="inner">
-                            <h5>Sampath Bank</h5>
+                            <h3>Saman Perera</h3>
+                            <h5>Sales Agent</h5>
                             <ul>
-                                <li><span class="glyphicon glyphicon-map-marker"></span> Sampath Bank PLC, No 110 , Sir James
-                                    Peiris
-                                    Mawatha, Colombo 02, Sri Lanka.
+                                <li><span class="glyphicon glyphicon-user"></span> Ewis Peripherals </li>
+                                <li><span class="glyphicon glyphicon-map-marker"></span> No.123, Blah Street, Blah blah, Colombo45, Sri Lanka
                                 </li>
                                 <li><span class="glyphicon glyphicon-phone"></span><a href="#" title="Phone">+94 11 2
                                         30 30
                                         50</a>
                                 </li>
-                                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">info@sampath
-                                        .lk</a>
+                                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">saman.perera@ewis.lk</a>
                                 </li>
 
                             </ul>
                         </div>
                     </div>
-
-
-                </div><!--col-md-8 col-sm-8 col-xs-12 close-->
-
-
+                </div>
             </div>
 
             <!-- Nav tabs -->
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-sx-12 col-lg-12">
                 <ul class="nav nav-tabs nav-menu" role="tablist">
                     <li class="active">
                         <a href="#agent" role="tab" data-toggle="tab">
@@ -50,10 +45,10 @@
                 <!-- Tab panes -->
                 <div class="tab-content white-background">
                     <div class="tab-pane fade active in" id="agent">
-                        <div class="container col-md-12">
+                        <div class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">
                             <div class="row">
                                 @foreach ($categories as $category)
-                                    <div class="col-md-3">
+                                    <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                         <div class="thumbnail">
                                             <div class="caption text-center row">
                                                 <a href="{{ url('sampath/category', [$category->title,$category->id]) }}">

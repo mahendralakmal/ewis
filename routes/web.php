@@ -83,15 +83,23 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::group(['prefix' => '/users'], function () {
-        Route::get('/create-users', function () {
-            return view('/admin/users/create-user');
-        });
+        Route::get('/create-users', 'UserController@create');
+        Route::get('/create-users/{id}', 'UserController@edit');
+//        Route::get('/delete-users/{id}', 'UserController@delete');
+        Route::get('/manage-user-designations', 'DesignationController@index');
+        Route::get('/manage-user-designations/{id}', 'DesignationController@edit');
+
         Route::get('/manage-user-privileges', function () {
             return view('/admin/users/manage-user-privileges');
         });
         Route::get('/manage-users', function () {
             return view('/admin/users/manage-users');
         });
+        Route::post('/store', 'UserController@store');
+        Route::post('/update', 'UserController@update');
+        Route::post('/delete', 'UserController@delete');
+        Route::post('/designation/store', 'DesignationController@store');
+        Route::post('/designation/update', 'DesignationController@update');
     });
 
     Route::group(['prefix' => '/manage-clients'], function () {

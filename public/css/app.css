@@ -5776,40 +5776,39 @@ button.close {
 .jumbotron {
   background-color: #fbfbfb !important; }
 
-.orange-background {
-  background-color: #FFA312; }
-  .orange-background .gradiant-background {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffa312+0,000000+100&0.65+0,0+63 */
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(255, 163, 18, 0.65) 0%, rgba(94, 60, 7, 0) 63%, transparent 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(255, 163, 18, 0.65) 0%, rgba(94, 60, 7, 0) 63%, transparent 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#a6ffa312', endColorstr='#00000000', GradientType=0);
-    /* IE6-9 */ }
-  .orange-background .white-background {
-    background-color: #ffffff;
+.profile-background {
+  background-color: #e97d00; }
+  .profile-background .gradiant-background {
+    background: rgba(255, 255, 255, 0);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(35%, white), color-stop(100%, white));
+    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 35%, white 100%);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 35%, white 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 ); }
+    @media (max-width: 768px) {
+      .profile-background .gradiant-background {
+        background: rgba(255, 255, 255, 0);
+        background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(17%, white), color-stop(100%, white));
+        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 17%, white 100%);
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 17%, white 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 ); } }
+  .profile-background .white-background {
     padding-top: 30px;
+    margin-top: 5px;
+    margin-bottom: 1px;
     min-height: 528px; }
-  .orange-background .profile-head img {
+  .profile-background .profile-head img {
     padding: 10px 20px 10px 20px;
     background-color: #ffffff;
     border-radius: 4px; }
-  .orange-background .profile-head h5 {
+  .profile-background .profile-head h5 {
     font-weight: bold; }
-  .orange-background .profile-head .description {
+  .profile-background .profile-head .description {
+    background-color: #ffffff;
     border-radius: 4px;
-    padding: 15px;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0.3+0,0.3+100 */
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.3) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4dffffff', endColorstr='#4dffffff', GradientType=0);
-    /* IE6-9 */ }
-    .orange-background .profile-head .description .inner {
-      opacity: 1; }
+    padding: 15px; }
+    @media (max-width: 768px) {
+      .profile-background .profile-head .description {
+        margin: 20px 0px; } }
 
 .red-background {
   background-color: #b40006; }
@@ -5882,10 +5881,14 @@ button.close {
       opacity: 1; }
 
 footer {
-  background-color: #f5f5f5;
   text-align: center; }
   footer p {
-    padding: 20px 15px 15px 15px; }
+    padding: 0px 15px; }
+  footer img {
+    width: 100px; }
+
+.navbar-default {
+  background-color: #ffffff; }
 
 .navbar-brand img {
   display: block;

@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="container-fluid orange-background">
+    <div class="container-fluid profile-background">
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
@@ -9,7 +9,7 @@
                 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
-                <div class="col-md-5 col-sm-5 col-xs-12 profile-head">
+                <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
                     <div class="description">
                         <div class="inner">
                             <h3>Saman Perera</h3>
@@ -28,15 +28,11 @@
                             </ul>
                         </div>
                     </div>
-
-
-                </div><!--col-md-8 col-sm-8 col-xs-12 close-->
-
-
+                </div>
             </div>
 
             <!-- Nav tabs -->
-            <div class="col-md-12">
+            <div class="col-md-12 col-sm-12 col-sx-12 col-lg-12">
                 <ul class="nav nav-tabs nav-menu" role="tablist">
                     <li class="active">
                         <a href="#agent" role="tab" data-toggle="tab">
@@ -49,10 +45,10 @@
                 <!-- Tab panes -->
                 <div class="tab-content white-background">
                     <div class="tab-pane fade active in" id="agent">
-                        <div class="container col-md-12">
+                        <div class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">
                             <div class="row">
                                 @foreach ($brands as $brand)
-                                    <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2">
+                                    <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                         <div class="thumbnail">
                                             <div class="caption text-center row">
                                                 <a href="{{ url('sampath/brands', [$brand->title,$brand->id]) }}">

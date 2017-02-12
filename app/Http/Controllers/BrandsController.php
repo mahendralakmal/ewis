@@ -14,7 +14,6 @@ class BrandsController extends Controller
 
     public function store(Request $request)
     {
-//        return $request->all();
         Brand::create($request->all());
         return back();
     }
