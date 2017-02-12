@@ -73,7 +73,15 @@
 <body>
 <div class="container welcome">
     <div class="col-md-5 col-md-offset-4">
-        <form method="get" action="sampath/brands">
+        @if(count ($errors) > 0)
+            <div class="alert alert-danger">
+                @foreach($errors->all() as $error)
+                <p> {{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+        <form method="post" action="/signin">
+            {{ csrf_field() }}
             <div class="user-login">
                 <div class="">
                     <div class="col-md-5"><h4>User Login</h4></div>
@@ -84,7 +92,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-5"><label>Username</label></div>
-                    <div class="col-md-7"><input type="text" name="username" id="username" class="form-control"></div>
+                    <div class="col-md-7"><input type="text" name="email" id="email" class="form-control"></div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-5"><label>Password</label></div>
