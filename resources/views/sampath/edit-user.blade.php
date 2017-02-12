@@ -66,7 +66,7 @@
                                                 <label>Contact Person</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" value="{{$profile->full_name}}" class="form-control" name="username" id="username">
+                                                <input type="text" value="{{$profile->full_name}}" class="form-control" name="name" id="name">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -74,7 +74,7 @@
                                                 <label>Designation</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="password" class="form-control" name="password" id="password">
+                                                <input type="text" class="form-control" name="designation" id="designation">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -82,7 +82,7 @@
                                                 <label>Company Name</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" value="{{$profile->company}}" class="form-control" name="cpassword" id="cpassword">
+                                                <input type="text" value="{{$profile->company}}" class="form-control" name="company" id="company">
                                             </div>
                                         </div>
                                         <hr>
@@ -92,7 +92,7 @@
                                                 <label>Address</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" value="{{$profile->address}}" class="form-control" name="name" id="name">
+                                                <input type="text" value="{{$profile->address}}" class="form-control" name="address" id="address">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -100,7 +100,7 @@
                                                 <label>Contact Number</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" value="{{$profile->phone}}" name="nic" id="nic" maxlength="12">
+                                                <input type="text" class="form-control" value="{{$profile->phone}}" name="phone" id="phone" maxlength="12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -108,7 +108,8 @@
                                                 {{--<label>Confirm Passworde</label>--}}
                                             </div>
                                             <div class="col-md-7">
-                                                <button class="btn btn-primary btn-outline" type="submit">Edit</button>
+                                                <button class="btn btn-primary btn-outline" type="submit">Submit</button>
+                                                <button class="btn btn-primary btn-outline" type="clear">Clear</button>
                                             </div>
                                         </div>
                                     </form>
