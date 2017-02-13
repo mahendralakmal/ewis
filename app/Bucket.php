@@ -19,17 +19,17 @@ class Bucket
         }
     }
 
-    public function add($item, $id){
-        $storedItem = ['qty' => 0, 'price' => $item->price, 'item' => $item];
+    public function add($item, $part_no){
+        $storedItem = ['qty' => 0, 'price' => $item->default_price, 'item' => $item];
         if ($this->items) {
-            if(array_key_exists($id, $this->items)){
-                $storedItem = $this->items[$id];
+            if(array_key_exists($part_no, $this->items)){
+                $storedItem = $this->items[$part_no];
             }
         }
         $storedItem['qty']++;
-        $storedItem['price'] = $item->price * $storedItem['qty'];
-        $this->items[$id] = $storedItem;
+        $storedItem['price'] = $item->default_price * $storedItem['qty'];
+        $this->items[$part_no] = $storedItem;
         $this->totalQty++;
-        $this->totalPrice += $item->price;
+        $this->totalPrice += $item->default_price;
     }
 }

@@ -29,6 +29,11 @@ Route::get('user/edit', 'UserProfileController@index');
 //});
 
 
+Route::get('add-to-bucket/{id}', [
+    'uses' => 'ProductController@getAddToBucket',
+    'as' => 'product.AddToBucket'
+]);
+
 Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
 
@@ -52,11 +57,11 @@ Route::resource('category', 'CategoryController', ['only' => ['index', 'show']])
 Route::resource('brands', 'BrandsController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
-Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
+//Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
 
-Route::resource('wishlist', 'WishlistController');
-Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
-Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
+//Route::resource('wishlist', 'WishlistController');
+//Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
+//Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
 
 
 //=====================================================================================================================
