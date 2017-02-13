@@ -8,7 +8,7 @@ use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 
-use Illuminate\Contracts\Session\Session;
+use Session;
 
 class ProductController extends Controller
 {
