@@ -16,36 +16,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>SAMPATH BANK</td>
-                        <td>Sampath Bank PLC, No 110 , Sir James Peiris Mawatha, Colombo 02, Sri Lanka.</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-outline" disabled>Activate</a>
-                            <a href="/admin/manage-clients/update-profile" class="btn btn-primary btn-outline">Update Profile</a>
-                            <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">Assign Agent</a>
-                            <a href="#" class="btn btn-danger btn-outline">Deactivate</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>COMMERCIAL BANK</td>
-                        <td>Commercial Bank of Ceylon PLC, Commercial House, No 21 , Sir Razik Fareed Mawatha, P.O. Box 856 Colombo 01, Sri Lanka.</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-outline">Activate</a>
-                            <a href="/admin/manage-clients/update-profile" class="btn btn-primary btn-outline">Update Profile</a>
-                            <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">Assign Agent</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Deactivate</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>SEYLAN BANK</td>
-                        <td>Seylan Towers, No 90 , Galle Road, Colombo 03, Sri Lanka.</td>
-                        <td>
-                            <a href="#" class="btn btn-success btn-outline">Activate</a>
-                            <a href="/admin/manage-clients/update-profile" class="btn btn-primary btn-outline">Update Profile</a>
-                            <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">Assign Agent</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Deactivate</a>
-                        </td>
-                    </tr>
+                    @foreach($users as $user)
+                        @if(!$user->client == null)
+                            <tr>
+                                <td>{{ $user->client->name }}</td>
+                                <td>{{ $user->client->address }}</td>
+                                <td>
+                                    <a href="#" class="btn btn-success btn-outline">Activate</a>
+                                    <a href="/admin/manage-clients/update-profile/{{ $user->id }}" class="btn btn-primary btn-outline">Update
+                                        Profile</a>
+                                    <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">Assign
+                                        Agent</a>
+                                    <a href="#" class="btn btn-danger btn-outline" disabled>Deactivate</a>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
                     </tbody>
                 </table>
             </div>

@@ -11,4 +11,8 @@ class User extends Model
     public function designation(){
         return $this->belongsTo(Designation::class);
     }
+
+    public function client(){
+        return $this->hasOne(Client::class);
+    }
 }

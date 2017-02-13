@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\Designation;
 use App\User;
 use Illuminate\Http\Request;
@@ -86,5 +87,21 @@ class UserController extends Controller
     {
         $id->update(['approval' => 0]);
         return redirect('/admin/users/manage-users');
+    }
+
+    public function welcome(){
+        $error = '';
+        return view('welcome', compact('error'));
+    }
+
+    public function signin(Request $request){
+        $user = User::where('email', $request->email)->first();
+        if(Hash::check($request->password, $user->password)){
+            $client = $user->client;
+            return $client;
+        } else {
+            $error = 'Please check the email and password...!';
+            return view('welcome', compact('error'));
+        }
     }
 }

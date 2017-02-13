@@ -12,63 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
 
-    <!-- Stylesheets -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}"/>
     <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 100;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
 </head>
 <body>
 <div class="container welcome">
@@ -80,7 +26,7 @@
                 @endforeach
             </div>
         @endif
-        <form method="post" action="/signin">
+        <form method="post" action="/signin" role="form" class="form-horizontal">
             {{ csrf_field() }}
             <div class="user-login">
                 <div class="">
@@ -91,14 +37,19 @@
                     <hr>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-5"><label>Username</label></div>
-                    <div class="col-md-7"><input type="text" name="email" id="email" class="form-control"></div>
+                    <div class="col-md-4"><label>Username</label></div>
+                    <div class="col-md-8"><input type="text" name="email" id="email" class="form-control"></div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-5"><label>Password</label></div>
-                    <div class="col-md-7"><input type="password" name="password" id="password" class="form-control">
+                    <div class="col-md-4"><label>Password</label></div>
+                    <div class="col-md-8"><input type="password" name="password" id="password" class="form-control">
                     </div>
                 </div>
+                @if(!$error == '')
+                <div class="alert alert-danger">
+                    <label>{{ $error }}</label>
+                </div>
+                @endif
                 <div>&nbsp;
                     <hr>
                 </div>

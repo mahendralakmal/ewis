@@ -11,15 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-//
-//
-//Route::get('/category/{title}/{id}', 'ProductController@index');
-
 
 
 Route::get('/user/1', function () {
@@ -37,13 +28,16 @@ Route::get('/user/3', function () {
     return view('seylan/user');
 });
 
+
 Route::get('add-to-bucket/{id}', [
     'uses' => 'ProductController@getAddToBucket',
     'as' => 'product.AddToBucket'
 ]);
 
-Route::get('/', 'UserController@getsignin');
-Route::post('/signin', 'UserController@postsignin');
+Route::get('/', 'UserController@welcome');
+Route::post('/signin', 'UserController@signin');
+
+
 //Route::get('/user', 'UserController@index');
 Route::get('/sampath/brands', 'BrandsController@sampath_brands');
 Route::get('/sampath/brands/{brand}/{id}', 'CategoryController@sampath_category');
@@ -113,12 +107,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/', 'ClientController@index');
         Route::get('/update-profile/{id}', 'ClientController@update_profile');
         Route::post('/store', 'ClientController@store');
-//        {
-//            return view('/admin/clients/manage-client');
-//        });
-//        Route::get('/update-profile', function () {
-//            return view('/admin/clients/client-profile');
-//        });
+
         Route::get('/agent-assign', function () {
             return view('/admin/clients/agent-assign');
         });
