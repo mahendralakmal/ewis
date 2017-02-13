@@ -98,7 +98,7 @@ class UserController extends Controller
         $user = User::where('email', $request->email)->first();
         if(Hash::check($request->password, $user->password)){
             $client = $user->client;
-            return $client;
+            return redirect('/client-profile/'.$client->id);
         } else {
             $error = 'Please check the email and password...!';
             return view('welcome', compact('error'));

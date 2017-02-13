@@ -13,24 +13,26 @@
 
 
 
-Route::get('/user/1', function () {
-    return view('sampath/user');
-});
+//Route::get('/user/1', function () {
+//    return view('sampath/user');
+//});
 
 Route::get('user/edit', 'UserProfileController@index');
 
 
-Route::get('/user/2', function () {
-    return view('commercial/user');
-});
-
-Route::get('/user/3', function () {
-    return view('seylan/user');
-});
+//Route::get('/user/2', function () {
+//    return view('commercial/user');
+//});
+//
+//Route::get('/user/3', function () {
+//    return view('seylan/user');
+//});
 
 
 Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
+
+Route::get('/client-profile/{id}', 'ClientController@show');
 
 Route::get('add-to-bucket/{id}', 'ProductController@getAddToBucket');
 
@@ -104,6 +106,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/', 'ClientController@index');
         Route::get('/update-profile/{id}', 'ClientController@update_profile');
         Route::post('/store', 'ClientController@store');
+        Route::post('/update', 'ClientController@update');
 
         Route::get('/agent-assign', function () {
             return view('/admin/clients/agent-assign');

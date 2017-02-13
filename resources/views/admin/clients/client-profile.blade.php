@@ -9,6 +9,7 @@
                 <input type="hidden" id="user_id" name="user_id" value="{{ $id->id }}">
             @else
                 <input type="hidden" id="id" name="id" value="{{ $id->client->id }}">
+                <input type="hidden" id="user_id" name="user_id" value="{{ $id->id }}">
             @endif
             <div class="form-group row">
                 <div class="col-md-4"><label>Name</label></div>
