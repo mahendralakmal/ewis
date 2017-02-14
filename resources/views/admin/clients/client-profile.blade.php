@@ -2,7 +2,7 @@
 @section('page_heading','Client Profile ')
 @section('section')
     <div class="col-md-7">
-        <form method="post" @if($id->client == null)action="/admin/manage-clients/store" @else action="/admin/manage-clients/update" @endif role="form" class="form-horizontal">
+        <form method="post" enctype="multipart/form-data" @if($id->client == null)action="/admin/manage-clients/store" @else action="/admin/manage-clients/update" @endif role="form" class="form-horizontal">
             {{ csrf_field() }}
             <h4>Basic Details</h4><hr>
             @if($id->client == null)
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group row">
                 <div class="col-md-4"><label>Logo</label></div>
-                <div class="col-md-8"><input type="file" id="logo" name="logo" class="form-control" @if(!$id->client == null) value="{{ $id->client->logo }}" @endif></div>
+                <div class="col-md-8"><input type="file" id="logo" name="logo"></div>
             </div>
             <div class="form-group row">
                 <div class="col-md-4"><label>Profile Colour</label></div>
