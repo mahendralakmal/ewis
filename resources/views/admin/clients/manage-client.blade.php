@@ -12,7 +12,7 @@
                     <tr>
                         <td><h5>Client</h5></td>
                         <td><h5>Address</h5></td>
-                        <td class="col-md-6"></td>
+                        <td class="col-md-4"></td>
                     </tr>
                     </thead>
                     <tbody>
@@ -22,12 +22,12 @@
                                 <td>{{ $user->client->name }}</td>
                                 <td>{{ $user->client->address }}</td>
                                 <td>
-                                    <a href="#" class="btn btn-success btn-outline">Activate</a>
+                                    {{--<a href="#" class="btn btn-success btn-outline">Activate</a>--}}
                                     <a href="/admin/manage-clients/update-profile/{{ $user->id }}" class="btn btn-primary btn-outline">Update
                                         Profile</a>
                                     <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">Assign
                                         Agent</a>
-                                    <a href="#" class="btn btn-danger btn-outline" disabled>Deactivate</a>
+                                    {{--<a href="#" class="btn btn-danger btn-outline" disabled>Deactivate</a>--}}
                                 </td>
                             </tr>
                         @endif
