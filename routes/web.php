@@ -34,6 +34,11 @@ Route::get('add-to-bucket/{id}', [
     'as' => 'product.AddToBucket'
 ]);
 
+Route::get('/bucket', [
+    'uses' => 'BucketController@getBucket',
+    'as' => 'product.bucket'
+]);
+
 Route::get('/', 'UserController@welcome');
 //Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
@@ -57,8 +62,7 @@ Route::get('/category/{category}/{id}', 'ProductController@index');
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('category', 'CategoryController', ['only' => ['index', 'show']]);
 Route::resource('brands', 'BrandsController', ['only' => ['index', 'show']]);
-Route::resource('cart', 'CartController');
-Route::delete('emptyCart', 'CartController@emptyCart');
+Route::delete('emptyBucket', 'BucketController@emptyBucket');
 //Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
 
 //Route::resource('wishlist', 'WishlistController');
@@ -68,7 +72,7 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 
 //=====================================================================================================================
 
-Route::group(['prefix' => '/admin'], function () {
+Route::group(['prefix' => ' /admin'], function () {
     Route::get('/', function () {
         return view('/admin/home');
     });
