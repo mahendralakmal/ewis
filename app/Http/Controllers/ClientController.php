@@ -23,7 +23,6 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-//        return $request->all();
         Client::create($request->all());
         return back();
     }
