@@ -53,8 +53,7 @@ class ProductController extends Controller
         $bucket->add($product, $product->id);
 
         $request->session()->put('bucket', $bucket);
-        dd($request->session()->get('bucket'));
-        return redirect()->route('product.index');
+        return redirect('sampath/brands');
     }
 
     public function show($slug)
