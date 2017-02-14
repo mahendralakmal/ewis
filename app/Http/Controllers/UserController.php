@@ -7,6 +7,7 @@ use App\Designation;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -62,8 +63,8 @@ class UserController extends Controller
         $user->nic_pass = $request->nic_pass;
         $user->save();
 
-        if(User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client'){
-            return redirect('/admin/manage-clients/update-profile/'.$user->id);
+        if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
+            return redirect('/admin/manage-clients/update-profile/' . $user->id);
         } else {
             return back();
         }
@@ -89,16 +90,25 @@ class UserController extends Controller
         return redirect('/admin/users/manage-users');
     }
 
-    public function welcome(){
-        $error = '';
-        return view('welcome', compact('error'));
+    public function welcome()
+    {
+        if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
+            return redirect('/client-profile/' . User::find(Session::get('User'))->client->id);
+        } else {
+            $error = '';
+            return view('welcome', compact('error'));
+        }
     }
 
-    public function signin(Request $request){
+    public function signin(Request $request)
+    {
+        Session::put('LoggedIn', false);
+//        $request->session()->put('LoggedIn', false);
         $user = User::where('email', $request->email)->first();
-        if(Hash::check($request->password, $user->password)){
+        if (Hash::check($request->password, $user->password)) {
             $client = $user->client;
-            return $client;
+            Session::put(['LoggedIn', true],['User', $user->id],['BaseColor', $user->client->color]);
+            return redirect('/client-profile/' . $client->id);
         } else {
             $error = 'Please check the email and password...!';
             return view('welcome', compact('error'));

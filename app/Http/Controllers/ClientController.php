@@ -14,14 +14,32 @@ class ClientController extends Controller
         return view('/admin/clients/manage-client', compact('users'));
     }
 
-    public function update_profile(User $id){
+    public function update_profile(User $id)
+    {
 
         return view('/admin/clients/client-profile', compact('id'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 //        return $request->all();
         Client::create($request->all());
         return back();
+    }
+
+    public function update(Request $request)
+    {
+        $users = User::all();
+        $client = User::find($request->user_id)->client;
+        $client->update(['address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
+            'logo' => $request->logo, 'color' => $request->color, 'cp_name' => $request->cp_name,
+            'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,
+            'cp_telephone' => $request->cp_telephone, 'cp_email' => $request->cp_email]);
+        return view('/admin/clients/manage-client', compact('users'));
+    }
+
+    public function show(Client $id)
+    {
+        return view('user.user', compact('id'));
     }
 }

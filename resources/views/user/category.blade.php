@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="container-fluid profile-background">
+    <div class="container-fluid profile-background" style="background-color: {{ \Illuminate\Support\Facades\Session::get('BaseColor') }}">
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
@@ -36,7 +36,7 @@
                 <ul class="nav nav-tabs nav-menu" role="tablist">
                     <li class="active">
                         <a href="#agent" role="tab" data-toggle="tab">
-                            <i class="fa fa-male"></i>Brands
+                            <i class="fa fa-male"></i>Categories
                         </a>
                     </li>
 
@@ -47,12 +47,13 @@
                     <div class="tab-pane fade active in" id="agent">
                         <div class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">
                             <div class="row">
-                                @foreach ($brands as $brand)
+                                @foreach ($categories as $category)
                                     <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                         <div class="thumbnail">
                                             <div class="caption text-center row">
-                                                <a href="{{ url('sampath/brands', [$brand->title,$brand->id]) }}">
-                                                    <img src="{{ asset('img/Brands/' . $brand->image) }}" alt="brand" class="img-responsive">
+                                                <a href="{{ url('sampath/category', [$category->title,$category->id]) }}">
+                                                    <img src="{{ asset('img/Categories/' . $category->image) }}" alt="category" class="img-responsive">
+                                                    <p>{{ $category->description }}</p>
                                                 </a>
                                             </div>
                                         </div>

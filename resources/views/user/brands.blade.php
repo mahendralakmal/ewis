@@ -1,12 +1,12 @@
 @extends('master')
 
 @section('content')
-    <div class="container-fluid profile-background">
+    <div class="container-fluid profile-background" style="background-color: {{ \Illuminate\Support\Facades\Session::get('BaseColor') }}">
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
                     <img alt="Sampath Bank" src="{{ elixir('img/sampath.jpg') }}" width="209" hight="67" class="img-responsive"/>
-                </div>
+                </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
                 <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
@@ -36,7 +36,7 @@
                 <ul class="nav nav-tabs nav-menu" role="tablist">
                     <li class="active">
                         <a href="#agent" role="tab" data-toggle="tab">
-                            <i class="fa fa-male"></i>Products
+                            <i class="fa fa-male"></i>Brands
                         </a>
                     </li>
 
@@ -47,33 +47,17 @@
                     <div class="tab-pane fade active in" id="agent">
                         <div class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">
                             <div class="row">
-                                @if($products->count()!= 0)
-                                    @foreach ($products as $product)
-                                        <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
-                                            <div class="thumbnail">
-                                                <div class="caption text-center">
-                                                    <a href="{{ url('shop', [$product->part_no]) }}">
-                                                        <img src="{{ asset('img/Products/' . $product->image) }}" alt="product"
-                                                             class="img-responsive">
-                                                        <p>{{ $product->description }}</p>
-                                                        <p> Rs.{{ $product->default_price }}</p>
-                                                    </a>
-                                                </div> <!-- end caption -->
-                                            </div> <!-- end thumbnail -->
-                                        </div> <!-- end col-md-3 -->
-                                    @endforeach
-                                @else
-                                    <div class="jumbotron text-center clearfix">
-                                        <h2>No item found</h2>
-                                        <!-- <h2>Ewis Computers</h2> -->
-                                        <!-- <p>An Laravel App that demos the basic functionality of the e-commerce shopping cart.</p> -->
-                                        {{--<p> <img src="/img/3.jpg" width="1000" height="400"> </p>--}}
-                                        <p>
-                                            <a href="{{ URL::previous() }}" class="btn btn-primary btn-lg" target="_blank">Category</a>
-                                            <a href="{{ url('brands') }}" class="btn btn-success btn-lg" target="_blank">Brand</a>
-                                        </p>
-                                    </div> <!-- end jumbotron -->
-                                @endif
+                                @foreach ($brands as $brand)
+                                    <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
+                                        <div class="thumbnail">
+                                            <div class="caption text-center row">
+                                                <a href="{{ url('sampath/brands', [$brand->title,$brand->id]) }}">
+                                                    <img src="{{ asset('img/Brands/' . $brand->image) }}" alt="brand" class="img-responsive">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
