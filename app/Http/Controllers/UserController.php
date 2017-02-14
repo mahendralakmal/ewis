@@ -49,7 +49,12 @@ class UserController extends Controller
             'designation_id' => $request->designation_id,
             'nic_pass' => $request->nic_pass
         ]);
-        return redirect('/admin/users/create-users');
+
+        if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
+            return redirect('/admin/manage-clients/update-profile/' . $user->id);
+        } else {
+            return back();
+        }
     }
 
     public function store(Request $request)
@@ -103,15 +108,25 @@ class UserController extends Controller
     public function signin(Request $request)
     {
         Session::put('LoggedIn', false);
-//        $request->session()->put('LoggedIn', false);
-        $user = User::where('email', $request->email)->first();
-        if (Hash::check($request->password, $user->password)) {
+        $user = User::where([['email', $request->email], ['approval', 1]])->first();
+        if (!$user == null && Hash::check($request->password, $user->password)) {
             $client = $user->client;
-            Session::put(['LoggedIn', true],['User', $user->id],['BaseColor', $user->client->color]);
+            Session::put('LoggedIn', true);
+            Session::put('User', $user->id);
+            Session::put('BaseColor', $user->client->color);
             return redirect('/client-profile/' . $client->id);
         } else {
             $error = 'Please check the email and password...!';
             return view('welcome', compact('error'));
         }
+    }
+
+    public function signout()
+    {
+        Session::forget('LoggedIn');
+        Session::forget('User');
+        Session::forget('BaseColor');
+        Session::flush();
+        return redirect('/');
     }
 }
