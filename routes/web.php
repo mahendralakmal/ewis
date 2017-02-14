@@ -36,6 +36,7 @@ Route::get('add-to-bucket/{id}', [
 
 Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
+Route::get('/signout', 'UserController@signout');
 
 Route::get('/client-profile/{id}', 'ClientController@show');
 
