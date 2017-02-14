@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-    <div class="container-fluid profile-background">
+    <div class="container-fluid profile-background" style="background-color: {{ \Illuminate\Support\Facades\Session::get('BaseColor') }}">
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md-5 col-sm-5 col-xs-12">
