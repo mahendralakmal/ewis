@@ -45,7 +45,7 @@ Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
 //Route::get('/product/{product}/{id}', 'CartController@index');
 
-Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
+Route::resource('user/shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('category', 'CategoryController', ['only' => ['index', 'show']]);
 Route::resource('brands', 'BrandsController', ['only' => ['index', 'show']]);
 Route::delete('emptyBucket', 'BucketController@emptyBucket');
