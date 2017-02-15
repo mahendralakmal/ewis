@@ -2,7 +2,7 @@
 @section('page_heading','Client Profile ')
 @section('section')
     <div class="col-md-7">
-        <form method="post" enctype="multipart/form-data" @if($id->client == null)action="/admin/manage-clients/store" @else action="/admin/manage-clients/update" @endif role="form" class="form-horizontal">
+        <form method="post" id="clientProfile" enctype="multipart/form-data" @if($id->client == null)action="/admin/manage-clients/store" @else action="/admin/manage-clients/update" @endif role="form" class="form-horizontal">
             {{ csrf_field() }}
             <h4>Basic Details</h4><hr>
             @if($id->client == null)

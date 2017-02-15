@@ -25,7 +25,44 @@
 	<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 	<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+
 	<script>
+		$( "#clientProfile" ).validate({
+			rules: {
+				name: "required",
+				email: {
+					required: true,
+					email: true
+				},
+				address: {
+					required: true
+				},
+				telephone: {
+					required: true
+				},
+				logo: {
+					required: true
+				},
+				color: {
+					required: true
+				},
+				cp_name: {
+					required: true
+				},
+				cp_designation: {
+					required: true
+				},
+				cp_branch: {
+					required: true
+				},
+				cp_telephone: {
+					required: true
+				},
+				cp_email: {
+					required: true
+				}
+			}
+		})
 		$( "#userCreate" ).validate({
 			rules: {
 				email: {
