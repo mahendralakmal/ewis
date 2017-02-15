@@ -50,5 +50,6 @@
                     <h2>No Items in the Bucket! </h2>
                 </div>
             </div>
+            @endif
     </div>
 @endsection

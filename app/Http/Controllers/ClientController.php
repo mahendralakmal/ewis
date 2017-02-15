@@ -43,4 +43,8 @@ class ClientController extends Controller
     {
         return view('user.user', compact('id'));
     }
+
+    public function editClientProfile(Client $id){
+        return view('user/edit-user', compact('$id'));
+    }
 }
