@@ -104,6 +104,9 @@ Route::group(['prefix' => ' /admin'], function () {
     Route::group(['prefix' => '/manage-clients'], function () {
         Route::get('/', 'ClientController@index');
         Route::get('/update-profile/{id}', 'ClientController@update_profile');
+        Route::get('/approval', 'ClientController@approval');
+        Route::get('/approved/{id}', 'ClientController@approved');
+        Route::get('/unapproved/{id}', 'ClientController@unapproved');
         Route::post('/store', 'ClientController@store');
         Route::post('/update', 'ClientController@update');
 //        {

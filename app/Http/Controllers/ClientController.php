@@ -45,6 +45,23 @@ class ClientController extends Controller
     }
 
     public function editClientProfile(Client $id){
-        return view('user/edit-user', compact('$id'));
+        return view('user/edit-user', compact('id'));
+    }
+
+    public function approval(){
+        $users = User::where('designation_id',4)->get();
+        return view('admin/clients/approval-client', compact('users'));
+    }
+
+    public function approved(User $id)
+    {
+        $id->update(['approval' => 1]);
+        return redirect('/admin/manage-clients/approval');
+    }
+
+    public function unapproved(User $id)
+    {
+        $id->update(['approval' => 0]);
+        return redirect('/admin/manage-clients/approval');
     }
 }

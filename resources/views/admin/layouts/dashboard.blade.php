@@ -86,6 +86,9 @@
                             <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Manage Clients<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/admin/manage-clients/approval') }}">Client Approval</a>
+                                </li>
+                                <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/admin/manage-clients') }}">Client Profile</a>
                                 </li>
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
