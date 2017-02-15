@@ -78,7 +78,7 @@ class UserController extends Controller
     public function mange_user()
     {
         $id = "";
-        $users = User::where('designation_id','!=',4)->get();
+        $users = User::where('designation_id', '!=', 4)->get();
         $designations = Designation::all();
         return view('/admin/users/manage-users', compact('users', 'designations', 'id'));
     }
@@ -98,7 +98,7 @@ class UserController extends Controller
     public function welcome()
     {
         if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
-            return redirect('/client-profile/' . User::find(Session::get('User'))->client->id.'/brands');
+            return redirect('/client-profile/' . User::find(Session::get('User'))->client->id . '/brands');
 //            return redirect('/client-profile/' . $client->id .'/brands');
         } else {
             $error = '';
@@ -111,11 +111,19 @@ class UserController extends Controller
         Session::put('LoggedIn', false);
         $user = User::where([['email', $request->email], ['approval', 1]])->first();
         if (!$user == null && Hash::check($request->password, $user->password)) {
-            $client = $user->client;
-            Session::put('LoggedIn', true);
-            Session::put('User', $user->id);
-            Session::put('BaseColor', $user->client->color);
-            return redirect('/client-profile/' . $client->id .'/brands');
+            if ($user->designation->designation == 'Client' || $user->designation->designation == 'Client') {
+                $client = $user->client;
+                Session::put('LoggedIn', true);
+                Session::put('User', $user->id);
+                Session::put('BaseColor', $user->client->color);
+                return redirect('/client-profile/' . $client->id . '/brands');
+            } else {
+                Session::put('LoggedIn', true);
+                Session::put('User', $user->id);
+                Session::put('Type', $user->designation->designation);
+                Session::put('ip', $request->ip());
+                return redirect('/admin');
+            }
         } else {
             $error = 'Please check the email and password...!';
             return view('welcome', compact('error'));
