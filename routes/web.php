@@ -70,7 +70,10 @@ Route::group(['prefix' => ' /admin'], function () {
 
     Route::group(['prefix' => '/categories'], function () {
         Route::get('/', 'CategoryController@admin_index');
+        Route::get('/{id}', 'CategoryController@edit');
         Route::post('/store', 'CategoryController@store');
+        Route::post('/update', 'CategoryController@update');
+        Route::get('/{id}/remove', 'CategoryController@delete');
     });
 
     Route::group(['prefix' => '/products'], function () {

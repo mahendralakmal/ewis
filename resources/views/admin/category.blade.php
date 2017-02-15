@@ -22,8 +22,11 @@
                             <td>{{$category->title}}</td>
                             <td>{{$category->brand->title}}</td>
                             <td>{{$category->description}}</td>
-                            <td><a href="#" class="btn btn-primary btn-outline">Edit</a> <a href="#"
-                                                                                            class="btn btn-danger btn-outline">Delete</a>
+                            <td>
+                                <a href="/admin/categories/{{$category->id}}"
+                                   class="btn btn-primary btn-outline">Edit</a>
+                                <a href="/admin/categories/{{$category->id}}/remove"
+                                   class="btn btn-danger btn-outline">Delete</a>
                             </td>
                         </tr>
                     @endforeach
@@ -36,12 +39,18 @@
         <h4>Add new Category</h4>
         <hr>
         <div class="col-md-12">
-            <form class="form-horizontal" role="form" method="POST" action="/admin/categories/store">
+            <form class="form-horizontal" id="categories" enctype="multipart/form-data" role="form" method="POST"
+                  @if($id == null) action="/admin/categories/store" @else action="/admin/categories/update" @endif>
                 {{ csrf_field() }}
+                @if(!$id == null)
+                    <input type="hidden" id="id" name="id" value="{{ $id->id }}">
+                @endif
+                <input type="hidden" id="user_id" name="user_id"
+                       value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                 <div class="form-group row">
                     <div class="col-md-4"><label>Title</label></div>
                     <div class="col-md-8">
-                        <input type="text" name="title" id="title" class="form-control">
+                        <input type="text" name="title" id="title" class="form-control" @if(!$id == null) value="{{ $id->title }}" @endif>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -50,7 +59,7 @@
                         <select name="brand_id" id="brand_id" class="form-control">
                             <option>Select Brand</option>
                             @foreach($brands as $brand)
-                                <option value="{{$brand->id}}">{{$brand->title}}</option>
+                                <option value="{{$brand->id}}" @if(!$id == null)@if($brand->id==$id->brand_id) selected @endif @endif>{{$brand->title}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -58,16 +67,16 @@
                 <div class="form-group row">
                     <div class="col-md-4"><label>Description</label></div>
                     <div class="col-md-8">
-                        <textarea name="description" id="description" class="form-control"></textarea>
+                        <textarea name="description" id="description" class="form-control"> @if(!$id == null) {{ $id->description }} @endif</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Image</label></div>
                     <div class="col-md-8">
-                        <input type="file" name="image" id="image" class="form-control">
+                        <input type="file" name="image" id="image">
                     </div>
                 </div>
-                <button class="btn btn-primary" name="submit" id="submit">Add</button>
+                <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else Add @endif</button>
             </form>
         </div>
     </div>

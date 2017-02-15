@@ -38,7 +38,7 @@ class BrandsController extends Controller
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;
         $brand->update(['title' => $request->title, 'description' => $request->description, 'image' => $image, 'user_id' => $request->user_id]);
 
-        return back();
+        return redirect('/admin/brands');
     }
 
     public function delete(Brand $id)
