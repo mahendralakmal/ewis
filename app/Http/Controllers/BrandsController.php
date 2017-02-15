@@ -24,9 +24,9 @@ class BrandsController extends Controller
         return view('brands', compact('brands'));
     }
 
-    public function sampath_brands()
+    public function brands()
     {
         $brands = Brand::all();
-        return view('sampath/brands', compact('brands'));
+        return view('user/brands', compact('brands'));
     }
 }

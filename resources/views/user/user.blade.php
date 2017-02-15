@@ -7,7 +7,7 @@
             <div class=" col-md-12 profile-head">
                 <div class="col-md-5 col-sm-5 col-xs-12">
                     {{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->logo }}
-                    <img alt="Sampath Bank" src="{{ elixir('img/sampath.jpg') }}" width="209" hight="67" class="img-responsive"/>
+                    {{--<img alt="Sampath Bank" src="{{ \Illuminate\Support\Facades\Storage::get(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->logo) }}" width="209" hight="67" class="img-responsive"/>--}}
                 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
@@ -113,7 +113,7 @@
 
                                     </div><!--col-md-6 close-->
                                     <div class="col-md-10">
-                                        <button class="btn btn-primary btn-outline" onclick="location.href = '{{ url('user/edit') }}'">Edit User Profile</button>
+                                        <button class="btn btn-primary btn-outline" onclick="location.href = '{{ url('user/edit/'. App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id ) }}'">Edit User Profile</button>
                                     </div>
                                 </div><!--row close-->
                             </div><!--container close-->

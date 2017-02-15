@@ -98,7 +98,8 @@ class UserController extends Controller
     public function welcome()
     {
         if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
-            return redirect('/client-profile/' . User::find(Session::get('User'))->client->id);
+            return redirect('/client-profile/' . User::find(Session::get('User'))->client->id.'/brands');
+//            return redirect('/client-profile/' . $client->id .'/brands');
         } else {
             $error = '';
             return view('welcome', compact('error'));
@@ -114,7 +115,7 @@ class UserController extends Controller
             Session::put('LoggedIn', true);
             Session::put('User', $user->id);
             Session::put('BaseColor', $user->client->color);
-            return redirect('/client-profile/' . $client->id);
+            return redirect('/client-profile/' . $client->id .'/brands');
         } else {
             $error = 'Please check the email and password...!';
             return view('welcome', compact('error'));

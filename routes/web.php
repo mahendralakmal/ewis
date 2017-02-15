@@ -17,16 +17,7 @@
 //    return view('sampath/user');
 //});
 
-Route::get('user/edit', 'UserProfileController@index');
-
-
-//Route::get('/user/2', function () {
-//    return view('commercial/user');
-//});
-//
-//Route::get('/user/3', function () {
-//    return view('seylan/user');
-//});
+Route::get('user/edit/{id}', 'ClientController@editClientProfile');
 
 
 Route::get('add-to-bucket/{id}', [
@@ -40,19 +31,16 @@ Route::get('/bucket', [
 ]);
 
 Route::get('/', 'UserController@welcome');
-//Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
 Route::get('/signout', 'UserController@signout');
 
 Route::get('/client-profile/{id}', 'ClientController@show');
 
-Route::get('add-to-bucket/{id}', 'ProductController@getAddToBucket');
-
 
 //Route::get('/user', 'UserController@index');
-Route::get('/sampath/brands', 'BrandsController@sampath_brands');
-Route::get('/sampath/brands/{brand}/{id}', 'CategoryController@sampath_category');
-Route::get('/sampath/category/{category}/{id}', 'ProductController@sampath_products');
+Route::get('/client-profile/{id}/brands', 'BrandsController@brands');
+Route::get('/brands/{brand}/{id}', 'CategoryController@category');
+Route::get('/category/{category}/{id}', 'ProductController@products');
 
 
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
