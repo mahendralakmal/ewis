@@ -35,10 +35,10 @@ class ProductController extends Controller
         return back();
     }
 
-    public function index($category, Category $category_id)
+    public function index($id, $part_no)
     {
-        $products = $category_id->product;
-        return view('shop', compact('products'));
+        $items = Product::where('part_no',$part_no)->first();
+        return view('user/item', compact('items'));
     }
 
     public function products($id, $brand, $category, Category $category_id)
@@ -62,7 +62,6 @@ class ProductController extends Controller
     {
         $product = Product::where('part_no', $slug)->firstOrFail();
         $interested = Product::where('part_no', '!=', $slug)->get()->random(1);
-
         return view('product')->with(['product' => $product, 'interested' => $interested]);
     }
 }

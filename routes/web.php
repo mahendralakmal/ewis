@@ -39,13 +39,13 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
+    Route::resource('/{id}/{part_no}', 'ProductController', ['only' => ['index', 'show']]);
 });
 
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
 //Route::get('/product/{product}/{id}', 'CartController@index');
 
-Route::resource('user/shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('category', 'CategoryController', ['only' => ['index', 'show']]);
 Route::resource('brands', 'BrandsController', ['only' => ['index', 'show']]);
 Route::delete('emptyBucket', 'BucketController@emptyBucket');
