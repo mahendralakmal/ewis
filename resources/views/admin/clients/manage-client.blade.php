@@ -10,6 +10,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <td></td>
                         <td><h5>Client</h5></td>
                         <td><h5>Address</h5></td>
                         <td class="col-md-4"></td>
@@ -19,6 +20,9 @@
                     @foreach($users as $user)
                         @if(!$user->client == null)
                             <tr>
+                                <td>@if(!$user->client->agent_id == null)
+                                        <i class="fa fa-check green fa-fw"></i>
+                                    @endif</td>
                                 <td>{{ $user->client->name }}</td>
                                 <td>{{ $user->client->address }}</td>
                                 <td>

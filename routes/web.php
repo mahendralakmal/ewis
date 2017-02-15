@@ -112,7 +112,8 @@ Route::group(['prefix' => ' /admin'], function () {
         });
 
         Route::get('/agent-assign/{id}', 'AgentController@index');
-        Route::get('/assign/{agent}/{id}', 'AgentController@assign');
+        Route::get('/assign/{user}/{agent}/{id}', 'AgentController@assign');
+        Route::get('/remove/{user}/{agent}/{id}', 'AgentController@remove');
     });
 
     Route::get('/manage-product-list', 'ProductController@assign_products_to_client');

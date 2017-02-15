@@ -13,12 +13,13 @@ class AgentController extends Controller
         return view('/admin/clients/agent-assign', compact('ajents', 'id'));
     }
 
-    public function assign(User $agent, Client $id){
-//        return "hi";
-//        dd($id);
-        $id->update('agent_id', $agent->id);
-//        return redirect('/admin/manage-clients');
+    public function assign(User $user, User $agent, Client $id){
+        $id->update(['agent_id' => $agent->id]);
+        return redirect('/admin/manage-clients/agent-assign/'.$user->id);
     }
 
-
+    public function remove(User $user, User $agent, Client $id){
+        $id->update(['agent_id' => null]);
+        return redirect('/admin/manage-clients/agent-assign/'.$user->id);
+    }
 }
