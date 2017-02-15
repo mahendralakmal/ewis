@@ -107,16 +107,12 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/unapproved/{id}', 'ClientController@unapproved');
         Route::post('/store', 'ClientController@store');
         Route::post('/update', 'ClientController@update');
-//        {
-//            return view('/admin/clients/agent-assign');
-//        });
         Route::get('/check-assignments', function () {
             return view('/admin/clients/check-assignments');
         });
-    });
 
-    Route::group(['prefix' => '/manage-clients'], function () {
-        Route::get('/agent-assign', 'AjentController@index');
+        Route::get('/agent-assign/{id}', 'AgentController@index');
+        Route::get('/assign/{agent}/{id}', 'AgentController@assign');
     });
 
     Route::get('/manage-product-list', 'ProductController@assign_products_to_client');

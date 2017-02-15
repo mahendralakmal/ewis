@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Agent A Assign ')
+@section('page_heading','Assign A Agent')
 @section('section')
     <div class="col-md-10">
         <div class="panel panel-default">
@@ -23,9 +23,9 @@
                             <td>{{ $ajent->name }}</td>
                             <td>{{ $ajent->designation->designation }}</td>
                             <td>
-                                <a href="/admin/manage-clients/check-assignments" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                                <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                                <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
+                                <a href="{{ url('/admin/manage-clients/check-assignments') }}" class="btn btn-primary btn-outline">Check Assigned Clients</a>
+                                <a href="{{ url('/admin/manage-clients/assign/'.$ajent->id.'/'.$id->client->id) }}" class="btn btn-success btn-outline">Assigne</a>
+                                <a href="{{ url('/admin/manage-clients/remove/'.$ajent->id.'/'.$id->client->id) }}" class="btn btn-danger btn-outline" disabled>Remove</a>
                             </td>
                         </tr>
                     @endforeach

@@ -25,7 +25,7 @@
                                     {{--<a href="#" class="btn btn-success btn-outline">Activate</a>--}}
                                     <a href="/admin/manage-clients/update-profile/{{ $user->id }}" class="btn btn-primary btn-outline">Update
                                         Profile</a>
-                                    <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">Assign
+                                    <a href="/admin/manage-clients/agent-assign/{{ $user->id }}" class="btn btn-primary btn-outline">Assign
                                         Agent</a>
                                     {{--<a href="#" class="btn btn-danger btn-outline" disabled>Deactivate</a>--}}
                                 </td>

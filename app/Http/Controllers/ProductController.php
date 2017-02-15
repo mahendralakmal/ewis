@@ -38,7 +38,7 @@ class ProductController extends Controller
     public function index($category, Category $category_id)
     {
         $products = $category_id->product;
-        return view('shop', compact('products'));
+        return view('user.shop', compact('products'));
     }
 
     public function products($id, $brand, $category, Category $category_id)
