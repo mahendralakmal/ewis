@@ -36,15 +36,15 @@
                                                 <tbody>
                                                 <tr>
                                                     <td>Agent Name</td>
-                                                    <td>: Saman Perera</td>
+                                                    <td>: {{ $id->cp_name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Position</td>
-                                                    <td>: Sales Manager</td>
+                                                    <td>: {{ $id->cp_designation }}</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Address</td>
-                                                    <td>: 123, Blah Street, Blah blah, Colombo45, Sri Lanka</td>
+                                                    <td>Branch</td>
+                                                    <td>: {{ $id->cp_branch }}</td>
                                                 </tr>
 
 
@@ -61,11 +61,11 @@
                                             <tbody>
                                             <tr>
                                                 <td>Emai Id</td>
-                                                <td>: saman@gmail.com</td>
+                                                <td>: {{ $id->cp_email }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Phone</td>
-                                                <td>: (+94)112 456 789</td>
+                                                <td>: {{ $id->cp_telephone }}</td>
                                             </tr>
                                             <tr>
                                                 <td>Mobile</td>
@@ -79,7 +79,7 @@
                                 </div><!--col-md-6 close-->
                                 <div class="col-md-10">
                                     <button class="btn btn-primary btn-outline"
-                                            onclick="location.href = '{{ url('user/edit/'. App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id ) }}'">
+                                            onclick="location.href = '{{ url( 'client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id. '/edit/' ) }}'">
                                         Edit User Profile
                                     </button>
                                 </div>

@@ -39,8 +39,8 @@ class ClientController extends Controller
         return view('/admin/clients/manage-client', compact('users'));
     }
 
-    public function show(Client $id)
-    {
+    public function show(Client $id){
+//        return $id;
         return view('user.user', compact('id'));
     }
 

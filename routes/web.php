@@ -17,9 +17,6 @@
 //    return view('sampath/user');
 //});
 
-Route::get('user/edit/{id}', 'ClientController@editClientProfile');
-
-
 Route::get('add-to-bucket/{id}', [
     'uses' => 'ProductController@getAddToBucket',
     'as' => 'product.AddToBucket'
@@ -36,6 +33,7 @@ Route::get('/signout', 'UserController@signout');
 
 Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
+    Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
