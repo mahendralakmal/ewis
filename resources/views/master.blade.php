@@ -16,7 +16,6 @@
     <link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}"/>
 
-
 @yield('extra-css')
 
 <!-- Favicon and Apple Icons -->
@@ -61,8 +60,8 @@
         </div>
     </nav>
 </header>
+@yield('theme')
 
-@yield('content')
 <footer>
     <div class="container">
         <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
