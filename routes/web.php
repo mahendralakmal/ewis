@@ -39,7 +39,7 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
-    Route::resource('/{id}/{part_no}', 'ProductController', ['only' => ['index', 'show']]);
+    Route::get('/{id}/{part_no}', 'ProductController@index');
 });
 
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');

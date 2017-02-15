@@ -13,7 +13,7 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{ url('img/'.$items->image) }}" alt="product">
+                        <img src="{{ url('/img/'.$items->image) }}" alt="product">
                     </div>
 
                     <div class="col-md-8">
