@@ -18,15 +18,11 @@ class BrandsController extends Controller
         return back();
     }
 
-    public function index()
-    {
-        $brands = Brand::all();
-        return view('brands', compact('brands'));
-    }
-
     public function brands()
     {
         $brands = Brand::all();
         return view('user/brands', compact('brands'));
     }
+
+
 }

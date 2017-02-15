@@ -20,15 +20,15 @@ class CategoryController extends Controller
         Category::create($request->all());
         return back();
     }
-    public function index($brand, Brand $id)
+    public function index($id, $brand, Brand $brand_id)
     {
-        $categories = $id->category;
-        return view('category', compact('categories'));
+        $categories = $brand_id->category;
+        return view('user/category', compact('categories'));
     }
 
-    public function sampath_category($brand, Brand $id)
+    public function category($id, $brand, Brand $brand_id)
     {
-        $categories = $id->category;
-        return view('sampath/category', compact('categories'));
+        $categories = $brand_id->category;
+        return view('user/category', compact('categories'));
     }
 }

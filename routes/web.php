@@ -39,7 +39,7 @@ Route::get('/client-profile/{id}', 'ClientController@show');
 
 //Route::get('/user', 'UserController@index');
 Route::get('/client-profile/{id}/brands', 'BrandsController@brands');
-Route::get('/brands/{brand}/{id}', 'CategoryController@category');
+Route::get('/client-profile/{id}/{brand}/{brand_id}', 'CategoryController@category');
 Route::get('/category/{category}/{id}', 'ProductController@products');
 
 
