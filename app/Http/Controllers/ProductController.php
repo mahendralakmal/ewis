@@ -17,10 +17,11 @@ class ProductController extends Controller
         $brands = Brand::orderBy('title')->get();
         $categories = Category::orderBy('title')->get();
         $products = Product::orderBy('part_no')->get();
-        return view('/admin/clients/manage-product-list', compact('brands','categories','products'));
+        return view('/admin/clients/manage-product-list', compact('brands', 'categories', 'products'));
     }
 
-    public function admin_index(){
+    public function admin_index()
+    {
         $categories = Category::all();
 //        $categories = Category::orderBy('title')->get();
         $products = Product::all();
@@ -34,26 +35,27 @@ class ProductController extends Controller
         return back();
     }
 
-    public function index($category, Category $id)
+    public function index($category, Category $category_id)
     {
-        $products = $id->product;
+        $products = $category_id->product;
         return view('shop', compact('products'));
     }
 
-    public function sampath_products($category, Category $id)
+    public function products($id, $brand, $category, Category $category_id)
     {
-        $products = $id->product;
-        return view('sampath/product', compact('products'));
+        $products = $category_id->product;
+        return view('user/product', compact('products'));
     }
 
-    public function getAddToBucket(Request $request, $id){
+    public function getAddToBucket(Request $request, $id)
+    {
         $product = Product::find($id);
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
         $bucket->add($product, $product->id);
 
         $request->session()->put('bucket', $bucket);
-        return redirect('sampath/brands');
+        return redirect('user/brands');
     }
 
     public function show($slug)

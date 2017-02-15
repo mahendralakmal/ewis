@@ -34,14 +34,12 @@ Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
 Route::get('/signout', 'UserController@signout');
 
-Route::get('/client-profile/{id}', 'ClientController@show');
-
-
-//Route::get('/user', 'UserController@index');
-Route::get('/client-profile/{id}/brands', 'BrandsController@brands');
-Route::get('/client-profile/{id}/{brand}/{brand_id}', 'CategoryController@category');
-Route::get('/category/{category}/{id}', 'ProductController@products');
-
+Route::group(['prefix' => ' /client-profile'], function () {
+    Route::get('/{id}', 'ClientController@show');
+    Route::get('/{id}/brands', 'BrandsController@brands');
+    Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
+    Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
+});
 
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');

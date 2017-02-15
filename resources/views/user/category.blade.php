@@ -51,7 +51,7 @@
                                     <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                         <div class="thumbnail">
                                             <div class="caption text-center row">
-                                                <a href="{{ url('sampath/category', [$category->title,$category->id]) }}">
+                                                <a href="{{ url('client-profile/'.App\User::find(Session::get('User'))->client->id).'/'.$category->brand->title.'/'.$category->title.'/'.$category->id }}">
                                                     <img src="{{ asset('img/Categories/' . $category->image) }}" alt="category" class="img-responsive">
                                                     <p>{{ $category->description }}</p>
                                                 </a>
