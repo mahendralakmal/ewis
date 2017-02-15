@@ -31,7 +31,7 @@ class ClientController extends Controller
     {
         $users = User::all();
         $client = User::find($request->user_id)->client;
-        $logo = $request->hasFile('logo')? 'storage/app/'.Storage::disk('local')->put('/clientImg', $request->file('logo')):null;
+        $logo = $request->hasFile('logo')? 'storage/'.Storage::disk('local')->put('/images', $request->file('logo')):null;
         $client->update(['address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
             'logo' => $logo, 'color' => $request->color, 'cp_name' => $request->cp_name,
             'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,

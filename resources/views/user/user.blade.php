@@ -6,8 +6,9 @@
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md-5 col-sm-5 col-xs-12">
-                    {{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->logo }}
-                    <img alt="Sampath Bank" src="{{ elixir('img/sampath.jpg') }}" width="209" hight="67" class="img-responsive"/>
+                    {{--@if(\Illuminate\Support\Facades\Session::has())--}}
+                    <img alt="{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->name }}" src="{{ elixir( App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->logo) }}" width="209" hight="67" class="img-responsive"/>
+                    {{--@endif--}}
                 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
