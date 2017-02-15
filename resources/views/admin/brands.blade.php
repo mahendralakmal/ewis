@@ -20,7 +20,11 @@
                         <tr>
                             <td>{{$brand->title}}</td>
                             <td>{{$brand->description}}</td>
-                            <td><a href="#" class="btn btn-primary btn-outline">Edit</a>  <a href="#" class="btn btn-danger btn-outline">Delete</a> </td>
+                            <td>
+                                <a href="/admin/brands/{{$brand->id}}" class="btn btn-primary btn-outline">Edit</a>
+                                <a href="/admin/brands/{{$brand->id}}/remove"
+                                   class="btn btn-danger btn-outline">Delete</a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -29,29 +33,36 @@
         </div>
     </div>
     <div class="col-md-6">
-        <h4>Add new Brand</h4><hr>
+        <h4>Add new Brand</h4>
+        <hr>
         <div class="col-md-12">
-            <form class="form-horizontal" role="form" method="POST" action="/admin/brands/store">
+            <form class="form-horizontal" id="brands" enctype="multipart/form-data" role="form" method="POST"
+                  enctype="multipart/form-data" @if($id == null)action="/admin/brands/store"
+                  @else action="/admin/brands/update" @endif>
                 {{ csrf_field() }}
+                @if(!$id == null)
+                    <input type="hidden" id="id" name="id" value="{{ $id->id }}">
+                @endif
+                <input type="hidden" id="user_id" name="user_id" value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                 <div class="form-group row">
                     <div class="col-md-4"><label>Title</label></div>
                     <div class="col-md-8">
-                        <input type="text" name="title" id="title" class="form-control">
+                        <input type="text" name="title" id="title" class="form-control" @if(!$id == null) value="{{ $id->title }}" @endif>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Description</label></div>
                     <div class="col-md-8">
-                        <textarea name="description" id="description" class="form-control"></textarea>
+                        <textarea name="description" id="description" class="form-control">@if(!$id == null) {{ $id->description }} @endif</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Image</label></div>
                     <div class="col-md-8">
-                        <input type="file" name="image" id="image" class="form-control">
+                        <input type="file" id="image" name="image">
                     </div>
                 </div>
-                <button class="btn btn-primary" name="submit" id="submit">Add</button>
+                <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else Add @endif</button>
             </form>
         </div>
     </div>
