@@ -1,24 +1,25 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Agent A Assign ')
+@section('page_heading','Check Assignments ')
 @section('section')
+    {{--{{ $id }}--}}
     <div class="col-md-6">
         <div class="form-group row">
             <div class="col-md-5">Username</div>
-            <div class="col-md-7"><label>Lakmal</label></div>
+            <div class="col-md-7"><label>{{ $id->email }}</label></div>
         </div>
         <div class="form-group row">
             <div class="col-md-5">Full Name</div>
-            <div class="col-md-7"><label>Mahendra Lakmal</label></div>
+            <div class="col-md-7"><label>{{ $id->name }}</label></div>
         </div>
         <div class="form-group row">
             <div class="col-md-5">Designation</div>
-            <div class="col-md-7"><label>CTO</label></div>
+            <div class="col-md-7"><label>{{ $id->designation->designation }}</label></div>
         </div>
     </div>
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Agent Assign Clents</h3>
+                <h3 class="panel-title">Assign Clents</h3>
             </div>
             <div class="panel-body">
                 <table class="table">
@@ -29,14 +30,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>COMMERCIAL BANK</td>
-                        <td>Commercial Bank of Ceylon PLC, Commercial House, No 21 , Sir Razik Fareed Mawatha, P.O. Box 856 Colombo 01, Sri Lanka.</td>
-                    </tr>
-                    <tr>
-                        <td>SEYLAN BANK</td>
-                        <td>Seylan Towers, No 90 , Galle Road, Colombo 03, Sri Lanka.</td>
-                    </tr>
+                    @foreach($clients as $client)
+                        <tr>
+                            <td>{{ $client->name }}</td>
+                            <td>{{ $client->address }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

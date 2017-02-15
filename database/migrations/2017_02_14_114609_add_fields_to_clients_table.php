@@ -14,7 +14,7 @@ class AddFieldsToClientsTable extends Migration
     public function up()
     {
         Schema::table('clients', function($table){
-            $table->string('agent_id')->nullable(true);
+            $table->integer('agent_id')->nullable(true);
         });
     }
 
