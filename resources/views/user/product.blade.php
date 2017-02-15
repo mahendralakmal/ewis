@@ -1,5 +1,4 @@
 @extends('theme')
-
 @section('content')
     <!-- Nav tabs -->
             <div class="col-md-12 col-sm-12 col-sx-12 col-lg-12">
@@ -22,7 +21,7 @@
                                         <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                             <div class="thumbnail">
                                                 <div class="caption text-center">
-                                                    <a href="{{ url('user/shop', [$product->part_no]) }}">
+                                                    <a href="{{ url('client-profile/'.App\User::find(Session::get('User'))->client->id, [$product->part_no]) }}">
                                                         <img src="{{ asset('img/Products/' . $product->image) }}" alt="product"
                                                              class="img-responsive">
                                                         <p>{{ $product->description }}</p>

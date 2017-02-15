@@ -49,6 +49,7 @@
                                aria-haspopup="true" aria-expanded="false">{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->name }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href={{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id) }}>User Profile</a></li>
+                                <li><a href={{ url('/') }}>User Dashboard</a></li>
                                 <li><a href="{{ url('#') }}">Puchase History</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ url('/signout') }}">Logout</a></li>
@@ -61,6 +62,8 @@
     </nav>
 </header>
 @yield('theme')
+@yield('shop')
+{{--@yield('content')--}}
 
 <footer>
     <div class="container">

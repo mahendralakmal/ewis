@@ -3,7 +3,6 @@
 @section('content')
 
     <div class="container">
-        <p><a href="{{ url('/shop') }}">Shop</a> / {{ $product->part_no }}</p>
         <h1>{{ $product->part_no }}</h1>
 
         <hr>
