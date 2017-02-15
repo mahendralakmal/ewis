@@ -169,6 +169,8 @@
                 <p>Design &amp; Developed by Pro IT Solutions.</p>
             </footer>
         </div>
+    @elde
+        {{ redirect('/') }}
     @endif
 @stop
 
