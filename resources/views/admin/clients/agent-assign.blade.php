@@ -17,56 +17,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Lakmal</td>
-                        <td>Mahendra Lakmal</td>
-                        <td>CTO</td>
-                        <td>
-                            <a href="/admin/manage-clients/check-assignments" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Amara</td>
-                        <td>Amara Kariyawasam</td>
-                        <td>Admin</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Peter</td>
-                        <td>Peter Parker</td>
-                        <td>Marketting Manager</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Malfoy</td>
-                        <td>Draco Malfoy</td>
-                        <td>Marketting Manager</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Rone</td>
-                        <td>Rone Wesley</td>
-                        <td>Marketting Manager</td>
-                        <td>
-                            <a href="#" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                            <a href="#" class="btn btn-success btn-outline">Assigne</a>
-                            <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
-                        </td>
-                    </tr>
+                    @foreach($ajents as $ajent)
+                        <tr>
+                            <td>{{ $ajent->email }}</td>
+                            <td>{{ $ajent->name }}</td>
+                            <td>{{ $ajent->designation->designation }}</td>
+                            <td>
+                                <a href="/admin/manage-clients/check-assignments" class="btn btn-primary btn-outline">Check Assigned Clients</a>
+                                <a href="#" class="btn btn-success btn-outline">Assigne</a>
+                                <a href="#" class="btn btn-danger btn-outline" disabled>Remove</a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
