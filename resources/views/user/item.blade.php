@@ -12,8 +12,9 @@
                 </ul>
 
                 <div class="row">
+                    <div class="container-fluid">
                     <div class="col-md-4">
-                        <img src="{{ url('/img/'.$items->image) }}" alt="product">
+                        <img src="{{ asset ('/img/Products/' .$items->image) }}" alt="product">
                     </div>
 
                     <div class="col-md-8">
@@ -29,7 +30,8 @@
 
 
                         {{ $items->description }}
-                    </div> <!-- end col-md-8 -->
+                    </div>
+                    </div><!-- end col-md-8 -->
                 </div> <!-- end row -->
 
 
