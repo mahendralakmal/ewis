@@ -29,7 +29,7 @@
                             <td>{{ $ajent->name }}</td>
                             <td>{{ $ajent->designation->designation }}</td>
                             <td>
-                                <a href="{{ url('/admin/manage-clients/check-assignments') }}" class="btn btn-primary btn-outline">Check Assigned Clients</a>
+                                <a href="{{ url('/admin/manage-clients/check-assignments/'.$ajent->id) }}" class="btn btn-primary btn-outline">Check Assigned Clients</a>
                                 <a href="{{ url('/admin/manage-clients/assign/'.$id->id.'/'.$ajent->id.'/'.$id->client->id) }}" class="btn btn-success btn-outline" @if($id->client->agent_id === $ajent->id) disabled @else @endif>Assigne</a>
                                 <a href="{{ url('/admin/manage-clients/remove/'.$id->id.'/'.$ajent->id.'/'.$id->client->id) }}" class="btn btn-danger btn-outline" @if($id->client->agent_id === $ajent->id) @else disabled @endif>Remove</a>
                             </td>

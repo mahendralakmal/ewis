@@ -107,9 +107,10 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/unapproved/{id}', 'ClientController@unapproved');
         Route::post('/store', 'ClientController@store');
         Route::post('/update', 'ClientController@update');
-        Route::get('/check-assignments', function () {
-            return view('/admin/clients/check-assignments');
-        });
+        Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
+//        {
+//            return view('/admin/clients/check-assignments');
+//        });
 
         Route::get('/agent-assign/{id}', 'AgentController@index');
         Route::get('/assign/{user}/{agent}/{id}', 'AgentController@assign');
