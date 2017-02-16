@@ -22,6 +22,7 @@
                         <form action="{{ route('product.AddToBucket', ['id' => $items->part_no]) }}" method="GET" class="side-by-side">
                             {!! csrf_field() !!}
                             <input type="hidden" name="id" value="{{ $items->part_no }}">
+                            <input type="number" name="qty" id="qty" value="{{ $items->qty }}">
                             <input type="hidden" name="name" value="{{ $items->description }}">
                             <input type="hidden" name="price" value="{{ $items->default_price }}">
                             <input type="submit" class="btn btn-success btn-lg" value="Add to Bucket">

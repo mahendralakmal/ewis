@@ -8,7 +8,7 @@ class Bucket
     public $totalQty;
     public $totalPrice;
 
-    public function _construct($oldBucket){
+    public function __construct($oldBucket){
         if ($oldBucket) {
             $this->items = $oldBucket->items;
             $this->totalQty = $oldBucket->totalQty;
@@ -20,7 +20,7 @@ class Bucket
     }
 
     public function add($item, $id){
-        $storedItem = ['qty'=>0, 'price' => $item->default_price, 'item' => $item];
+        $storedItem = ['qty'=> 0, 'price' => $item->default_price, 'item' => $item];
         if ($this->items) {
             if(array_key_exists($id, $this->items)){
                 $storedItem = $this->items[$id];

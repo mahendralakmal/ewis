@@ -26,7 +26,7 @@ class BucketController extends Controller
         }
             $oldBucket = Session::get('bucket');
             $bucket = new Bucket($oldBucket);
-            return view('bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty] );
+            return view('bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice] );
 
     }
 
