@@ -110,6 +110,7 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/approved/{id}', 'ClientController@approved');
         Route::get('/unapproved/{id}', 'ClientController@unapproved');
         Route::post('/store', 'ClientController@store');
+        Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
 //        {

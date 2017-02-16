@@ -25,15 +25,16 @@
                                 <br clear="all"/>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h4 class="pro-title"></h4><!--col-md-12 close-->
-                                        {{--{{ $profile->address }}--}}
-                                    <form method="POST" action="" class="form-horizontal">
+                                        <h4 class="pro-title"></h4>
+                                    <form method="POST" id="cp_update" enctype="multipart/form-data" @if($id->client == null)action="/admin/manage-clients/cp_update"@endif class="form-horizontal">
+                                        {{ csrf_field() }}
                                         <div class="form-group">
+                                            <input type="hidden" value="{{$id->user_id}}" name="user_id" id="user_id">
                                             <div class="col-md-3">
                                                 <label>Contact Person</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" value="{{$id->cp_name}}" class="form-control" name="name" id="name">
+                                                <input type="text"  value="{{$id->cp_name}}" class="form-control" name="cp_name" id="cp_name">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -41,7 +42,7 @@
                                                 <label>Designation</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" value="{{$id->cp_designation}}" class="form-control" name="designation" id="designation">
+                                                <input type="text" value="{{$id->cp_designation}}" class="form-control" name="cp_designation" id="cp_designation">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -49,7 +50,7 @@
                                                 <label>Branch Name</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" value="{{$id->cp_branch}}" class="form-control" name="branch" id="branch">
+                                                <input type="text" value="{{$id->cp_branch}}" class="form-control" name="cp_branch" id="cp_branch">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -57,7 +58,7 @@
                                                 <label>Contact Number</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" value="{{$id->cp_telephone}}" name="phone" id="phone" maxlength="12">
+                                                <input type="text" class="form-control" value="{{$id->cp_telephone}}" name="cp_telephone" id="cp_telephone" maxlength="12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -65,7 +66,7 @@
                                                 <label>Contact Email</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" value="{{$id->cp_email}}" name="phone" id="phone" maxlength="12">
+                                                <input type="text" class="form-control" value="{{$id->cp_email}}" name="cp_email" id="cp_email" maxlength="12">
                                             </div>
                                         </div>
                                         <div class="form-group">
