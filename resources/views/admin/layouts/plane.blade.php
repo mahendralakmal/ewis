@@ -27,6 +27,21 @@
 	<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 	<script>
+
+		$("#categories").validate({
+			rules:{
+				title: "required",
+				brand_id: "required",
+				image: "required"
+			}
+		});
+
+		$("#brands").validate({
+			rules:{
+				title: "required",
+				image: "required"
+			}
+		});
 		$( "#clientProfile" ).validate({
 			rules: {
 				name: "required",
@@ -62,7 +77,7 @@
 					required: true
 				}
 			}
-		})
+		});
 		$( "#userCreate" ).validate({
 			rules: {
 				email: {
