@@ -12,7 +12,7 @@
                 <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
                     <div class="description">
                         <div class="inner">
-                            <h3>Saman Perera</h3>
+                                <h3>{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->name }}</h3>
                             <h5>Sales Agent</h5>
                             <ul>
                                 <li><span class="glyphicon glyphicon-user"></span> Ewis Peripherals </li>

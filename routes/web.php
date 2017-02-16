@@ -22,17 +22,16 @@ Route::get('add-to-bucket/{id}', [
     'as' => 'product.AddToBucket'
 ]);
 
-Route::get('/bucket', [
-    'uses' => 'BucketController@getBucket',
-    'as' => 'product.bucket'
-]);
-
 Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
 Route::get('/signout', 'UserController@signout');
 
 Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
+//    Route::get('/{id}/bucket', [
+//        'uses' => 'BucketController@getBucket',
+//        'as' => 'product.bucket'
+//    ]);
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');

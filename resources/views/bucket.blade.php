@@ -1,4 +1,4 @@
-@extends('master')
+@extends('theme')
 
 @section('title')
     Ewis Peripherals Bucket
@@ -7,7 +7,6 @@
 @section('content')
 
     <div class="container">
-        <p><a href="{{ url('shop') }}">Home</a> / Bucket</p>
         <h1>Your Bucket</h1>
 
         @if (Session::has('bucket'))

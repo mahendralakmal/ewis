@@ -19,7 +19,7 @@
 
                     <div class="col-md-8">
                         <h3>Rs. {{ $items->default_price }}</h3>
-                        <form action="{{ url('/bucket') }}" method="POST" class="side-by-side">
+                        <form action="{{ route('product.AddToBucket', ['id' => $items->part_no]) }}" method="GET" class="side-by-side">
                             {!! csrf_field() !!}
                             <input type="hidden" name="id" value="{{ $items->part_no }}">
                             <input type="hidden" name="name" value="{{ $items->description }}">
