@@ -70,8 +70,8 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-7">
-                                                <button class="btn btn-primary btn-outline" type="submit">Submit</button>
-                                                <button class="btn btn-primary btn-outline" type="clear">Clear</button>
+                                                <button class="btn btn-primary btn-outline" type="submit" value="save-form">Submit</button>
+                                                <button class="btn btn-primary btn-outline" type="reset" value="clear-form">Clear</button>
                                             </div>
                                         </div>
                                     </form>
