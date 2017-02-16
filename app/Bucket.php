@@ -5,8 +5,8 @@ namespace App;
 class Bucket
 {
     public $items;
-    public $totalQty = 0;
-    public $totalPrice = 0;
+    public $totalQty;
+    public $totalPrice;
 
     public function _construct($oldBucket){
         if ($oldBucket) {
@@ -19,16 +19,16 @@ class Bucket
         }
     }
 
-    public function add($item, $part_no){
-        $storedItem = ['qty' => 0, 'price' => $item->default_price, 'item' => $item];
+    public function add($item, $id){
+        $storedItem = ['qty'=>0, 'price' => $item->default_price, 'item' => $item];
         if ($this->items) {
-            if(array_key_exists($part_no, $this->items)){
-                $storedItem = $this->items[$part_no];
+            if(array_key_exists($id, $this->items)){
+                $storedItem = $this->items[$id];
             }
         }
         $storedItem['qty']++;
         $storedItem['price'] = $item->default_price * $storedItem['qty'];
-        $this->items[$part_no] = $storedItem;
+        $this->items[$id] = $storedItem;
         $this->totalQty++;
         $this->totalPrice += $item->default_price;
     }

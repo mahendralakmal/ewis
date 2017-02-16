@@ -8,12 +8,12 @@
 
     <div class="container">
         <h1>Your Bucket</h1>
-
         @if (Session::has('bucket'))
             <div class="row">
                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
                     <ul class="list-group">
-                        @foreach($products as $product)
+
+                        @foreach(Session::get('bucket')->items as $product)
                             <li class="list-group-item">
                                 <span class="badge">{{ $product['qty'] }} </span>
                                 <strong>{{ $product['item'] ['title'] }}</strong>
@@ -29,12 +29,9 @@
                     </ul>
                 </div>
             </div>
-
-
-
             <div class="row">
                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                    <strong>Total : {{ $totalPrice }}</strong>
+                    <strong>Total : {{ Session::get('bucket')->totalPrice }}</strong>
                 </div>
             </div>
             <div class="row">

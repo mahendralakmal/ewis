@@ -18,7 +18,7 @@
 //});
 
 Route::get('add-to-bucket/{id}', [
-    'uses' => 'ProductController@getAddToBucket',
+    'uses' => 'BucketController@getAddToBucket',
     'as' => 'product.AddToBucket'
 ]);
 
@@ -28,10 +28,10 @@ Route::get('/signout', 'UserController@signout');
 
 Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
-//    Route::get('/{id}/bucket', [
-//        'uses' => 'BucketController@getBucket',
-//        'as' => 'product.bucket'
-//    ]);
+    Route::get('/{id}/bucket', [
+        'uses' => 'BucketController@getBucket',
+        'as' => 'product.bucket'
+    ]);
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
