@@ -78,7 +78,10 @@ Route::group(['prefix' => ' /admin'], function () {
 
     Route::group(['prefix' => '/products'], function () {
         Route::get('/', 'ProductController@admin_index');
+        Route::get('/{id}', 'ProductController@edit');
         Route::post('/store', 'ProductController@store');
+        Route::post('/update', 'ProductController@update');
+        Route::get('/{id}/remove', 'ProductController@delete');
     });
 
     Route::group(['prefix' => '/users'], function () {
