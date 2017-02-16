@@ -8,10 +8,34 @@ use App\Category;
 use App\Product;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class ProductController extends Controller
 {
+    public function delete(Product $id)
+    {
+        $id->update(['status' => 0]);
+        return back();
+    }
+
+    public function update(Request $request)
+    {
+        $product = Product::find($request->id);
+        $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
+        $product->update(['part_no' => $request->part_no, 'category_id' => $request->category_id, 'description' => $request->description,
+            'image' => $image, 'user_id' => $request->user_id, 'default_price'=> $request->default_price]);
+
+        return redirect('/admin/products');
+    }
+
+    public function edit(Product $id)
+    {
+        $products = Product::where('status', 1)->get();
+        $categories = Category::where('status', 1)->get();
+        return view('/admin/products', compact('categories', 'products', 'id'));
+    }
+
     public function assign_products_to_client()
     {
         $brands = Brand::orderBy('title')->get();
@@ -22,22 +46,31 @@ class ProductController extends Controller
 
     public function admin_index()
     {
-        $categories = Category::all();
-//        $categories = Category::orderBy('title')->get();
-        $products = Product::all();
-        return view('/admin/products', compact('categories', 'products'));
+        $id = "";
+        $categories = Category::where('status', 1)->get();
+        $products = Product::where('status', 1)->get();
+        return view('/admin/products', compact('categories', 'products', 'id'));
     }
 
     public function store(Request $request)
     {
-//        return $request->all();
-        Product::create($request->all());
+        $product = new Product();
+
+        $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
+        $product->part_no = $request->part_no;
+        $product->category_id = $request->category_id;
+        $product->description = $request->description;
+        $product->image = $image;
+        $product->user_id = $request->user_id;
+        $product->default_price = $request->default_price;
+        $product->save();
+
         return back();
     }
 
     public function index($id, $part_no)
     {
-        $items = Product::where('part_no',$part_no)->first();
+        $items = Product::where('part_no', $part_no)->first();
         return view('user/item', compact('items'));
     }
 
