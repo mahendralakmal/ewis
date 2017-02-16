@@ -48,7 +48,6 @@ Route::resource('category', 'CategoryController', ['only' => ['index', 'show']])
 Route::resource('brands', 'BrandsController', ['only' => ['index', 'show']]);
 Route::delete('emptyBucket', 'BucketController@emptyBucket');
 //Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
-
 //Route::resource('wishlist', 'WishlistController');
 //Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
 //Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
