@@ -31,8 +31,11 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->designation->designation}}</td>
                                     <td>{{$user->nic_pass}}</td>
-                                    <td><a href="/admin/users/manage-users/approved/{{ $user->id }}" class="btn btn-primary btn-outline">Approve</a>
+                                    <td>
+                                        @if($user->designation_id !== 1)
+                                        <a href="/admin/users/manage-users/approved/{{ $user->id }}" class="btn btn-primary btn-outline">Approve</a>
                                         <a href="/admin/users/manage-users/unapproved/{{ $user->id }}" class="btn btn-danger btn-outline" @if(!$user->approval == 1) disabled @endif>Unapprove</a> </td>
+                                        @endif
                                 </tr>
                             @endif
                         @endforeach

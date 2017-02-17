@@ -18,7 +18,8 @@ use Session;
 class ProductController extends Controller
 {
     public function store_client_products(Request $request){
-        Client_Assign_Product::created($request->all());
+//        return $request->all();
+        Client_Assign_Product::create($request->all());
         return back();
     }
 

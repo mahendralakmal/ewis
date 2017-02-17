@@ -36,6 +36,7 @@
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>
+                    <li><a href="{{ url('/signout') }}">Sign out</a> </li>
                     <!-- /.dropdown -->
                 </ul>
                 <!-- /.navbar-top-links -->
@@ -98,9 +99,9 @@
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                         <a href="{{ url ('/admin/manage-clients') }}">Client Profile</a>
                                     </li>
-                                    <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                        <a href="{{ url ('/admin/manage-product-list' ) }}">Product List</a>
-                                    </li>
+                                    {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
+                                        {{--<a href="{{ url ('/admin/manage-product-list' ) }}">Product List</a>--}}
+                                    {{--</li>--}}
                                     {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
                                     {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
                                     {{--</li>--}}

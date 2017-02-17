@@ -82,7 +82,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Price</label></div>
+                    <div class="col-md-4"><label>Cost</label></div>
                     <div class="col-md-8">
                         <input type="number" name="default_price" id="default_price" class="form-control" @if(!$id == null) value="{{ $id->default_price }}" @endif>
                     </div>
