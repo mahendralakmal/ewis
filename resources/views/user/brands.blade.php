@@ -22,7 +22,7 @@
                                         <div class="thumbnail">
                                             <div class="caption text-center row">
                                                 <a href="{{ url('client-profile/'.App\User::find(Session::get('User'))->client->id).'/'.$brand->title.'/'.$brand->id}}">
-                                                    <img src="{{ asset('img/Brands/' . $brand->image) }}" alt="brand" class="img-responsive">
+                                                    <img src="{{ asset('/' . $brand->image) }}" alt="brand" class="img-responsive">
                                                 </a>
                                             </div>
                                         </div>

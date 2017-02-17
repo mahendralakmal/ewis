@@ -22,7 +22,7 @@
                                             <div class="thumbnail">
                                                 <div class="caption text-center">
                                                     <a href="{{ url('client-profile/'.App\User::find(Session::get('User'))->client->id, [$product->part_no]) }}">
-                                                        <img src="{{ asset('img/Products/' . $product->image) }}" alt="product"
+                                                        <img src="{{ asset('/' . $product->image) }}" alt="product"
                                                              class="img-responsive">
                                                         <p>{{ $product->description }}</p>
                                                         <p> Rs.{{ $product->default_price }}</p>
