@@ -25,7 +25,7 @@
                                 <br clear="all"/>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <h4 class="pro-title"></h4>
+                                        <h4 class="pro-title">Edit Profile</h4>
                                     <form method="POST" id="cp_update" enctype="multipart/form-data" @if($id->client == null)action="/admin/manage-clients/cp_update"@endif class="form-horizontal">
                                         {{ csrf_field() }}
                                         <div class="form-group">

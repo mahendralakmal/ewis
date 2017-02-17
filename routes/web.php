@@ -32,9 +32,17 @@ Route::group(['prefix' => ' /client-profile'], function () {
         'uses' => 'BucketController@getBucket',
         'as' => 'product.bucket'
     ]);
+    Route::post('/{id}/checkout', [
+        'uses' => 'BucketController@postCheckout',
+        'as' => 'product.checkout'
+    ]);
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
+    Route::get('/{id}/checkout', [
+        'uses' => 'BucketController@Checkout',
+        'as' => 'product.checkout'
+    ]);
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
     Route::get('/{id}/{part_no}', 'ProductController@index');
 });

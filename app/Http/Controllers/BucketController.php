@@ -30,4 +30,15 @@ class BucketController extends Controller
 
     }
 
+    public function Checkout() {
+        if (!Session::has('bucket')) {
+            return view('bucket');
+        }
+            $oldBucket = Session::get('bucket');
+            $bucket = new Bucket($oldBucket);
+            $total_price = $bucket->totalPrice;
+            $total_qty = $bucket->totalQty;
+            return view('checkout', ['total_price' => $total_price, 'total_qty' => $total_qty ]);
+    }
+
 }
