@@ -5,14 +5,37 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Bucket;
 use App\Category;
+use App\Client;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Session;
 
 class ProductController extends Controller
 {
+    public function load_products_deta(Product $id){
+        return Response::json($id->default_price);
+    }
+
+    public function load_products(Category $id){
+        $products = $id->product;
+        return Response::json($products);
+    }
+
+    public function load_categories(Brand $id){
+        $categoris = $id->category;
+        return Response::json($categoris);
+    }
+
+    public function assign_products_to_client(User $id)
+    {
+        $brands = Brand::orderBy('title')->get();
+        return view('/admin/clients/manage-product-list', compact('brands', 'id'));
+    }
+
     public function delete(Product $id)
     {
         $id->update(['status' => 0]);
@@ -34,14 +57,6 @@ class ProductController extends Controller
         $products = Product::where('status', 1)->get();
         $categories = Category::where('status', 1)->get();
         return view('/admin/products', compact('categories', 'products', 'id'));
-    }
-
-    public function assign_products_to_client()
-    {
-        $brands = Brand::orderBy('title')->get();
-        $categories = Category::orderBy('title')->get();
-        $products = Product::orderBy('part_no')->get();
-        return view('/admin/clients/manage-product-list', compact('brands', 'categories', 'products'));
     }
 
     public function admin_index()

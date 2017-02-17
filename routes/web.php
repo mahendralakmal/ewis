@@ -55,7 +55,6 @@ Route::resource('category', 'CategoryController', ['only' => ['index', 'show']])
 Route::resource('brands', 'BrandsController', ['only' => ['index', 'show']]);
 Route::delete('emptyBucket', 'BucketController@emptyBucket');
 //Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
-
 //Route::resource('wishlist', 'WishlistController');
 //Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
 //Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
@@ -132,6 +131,11 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/remove/{user}/{agent}/{id}', 'AgentController@remove');
     });
 
-    Route::get('/manage-product-list', 'ProductController@assign_products_to_client');
+    Route::group(['prefix' => '/manage-product-list'], function () {
+        Route::get('/{id}', 'ProductController@assign_products_to_client');
+        Route::get('/category/{id}', 'ProductController@load_categories');
+        Route::get('/product/{id}', 'ProductController@load_products');
+        Route::get('/product/details/{id}', 'ProductController@load_products_deta');
+    });
 
 });
