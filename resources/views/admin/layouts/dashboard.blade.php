@@ -106,6 +106,42 @@
                                     {{--</li>--}}
                                 </ul>
                             </li>
+                            <li>
+                                <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Manage Purchase Orders<span
+                                            class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                        <a href="{{ url ('#') }}">Pending</a>
+                                    </li>
+                                    <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                        <a href="{{ url ('#') }}">Partial Completed</a>
+                                    </li>
+                                    <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                        <a href="{{ url ('#' ) }}">Completed</a>
+                                    </li>
+                                    {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
+                                    {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
+                                    {{--</li>--}}
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Reports<span
+                                            class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    {{--<li {{ (Request::is('*panels') ? 'class="active"' : '') }}>--}}
+                                        {{--<a href="{{ url ('/admin/manage-clients/approval') }}">Client Approval</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li {{ (Request::is('*panels') ? 'class="active"' : '') }}>--}}
+                                        {{--<a href="{{ url ('/admin/manage-clients') }}">Client Profile</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
+                                        {{--<a href="{{ url ('/admin/manage-product-list' ) }}">Product List</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
+                                    {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
+                                    {{--</li>--}}
+                                </ul>
+                            </li>
                         <!--
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>

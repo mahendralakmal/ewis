@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Manage Clients')
 @section('section')
-    <div class="col-md-10">
+    <div class="col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Clients</h3>
@@ -31,6 +31,8 @@
                                         Profile</a>
                                     <a href="/admin/manage-clients/agent-assign/{{ $user->id }}" class="btn btn-primary btn-outline">Assign
                                         Agent</a>
+                                    <a href="/admin/manage-product-list/{{ $user->id }}" class="btn btn-primary btn-outline">Assign
+                                        Products</a>
                                     {{--<a href="#" class="btn btn-danger btn-outline" disabled>Deactivate</a>--}}
                                 </td>
                             </tr>

@@ -1,18 +1,21 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Manage Clients')
 @section('section')
-    <div class="col-md-6">
-        <div class="form-group row">
-            <div class="col-md-5">Client</div>
-            <div class="col-md-7">
-                <select class="form-control" name="client" id="client">
-                    <option>Select Client</option>
-                    <option value="1">COMMERCIAL BANK</option>
-                    <option value="2">SEYLAN BANK</option>
-                </select>
-            </div>
-        </div>
-    </div>
+    {{--<div class="col-md-6">--}}
+        {{--<div class="form-group row">--}}
+            {{--<div class="col-md-5">Client</div>--}}
+            {{--<div class="col-md-7">--}}
+                {{--<select class="form-control" name="client" id="client">--}}
+                    {{--<option>Select Client</option>--}}
+                    {{--@foreach($clients as $client)--}}
+                        {{--<option value="{{$client->id}}">{{$client->name}}</option>--}}
+                    {{--@endforeach--}}
+                    {{--<option value="1">COMMERCIAL BANK</option>--}}
+                    {{--<option value="2">SEYLAN BANK</option>--}}
+                {{--</select>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -49,18 +52,18 @@
         <h4>Assign Products</h4>
         <hr>
         <div class="col-md-12">
-            <form class="form-horizontal" role="form" method="POST" action="/admin/categories/store">
+            <form class="form-horizontal" id="asignProduct" role="form" method="POST" action="/admin/categories/store">
                 {{ csrf_field() }}
                 <div class="form-group row">
+                    <input type="hidden" id="client_id" name="client_id" value="{{ $id->id }}">
+                    <input type="hidden" id="user_id" name="user_id"
+                           value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                     <div class="col-md-4"><label>Brand</label></div>
                     <div class="col-md-8">
                         <select name="brand_id" id="brand_id" class="form-control">
                             <option>Select Brand</option>
                             @foreach($brands as $brand)
                             <option value="{{$brand->id}}"
-                                @if($brand->title == "Lexmark")
-                                    selected
-                                @endif
                             >{{$brand->title}}</option>
                             @endforeach
                         </select>
@@ -70,14 +73,6 @@
                     <div class="col-md-4"><label>Category</label></div>
                     <div class="col-md-8">
                         <select name="category_id" id="category_id" class="form-control">
-                            <option>Select Category</option>
-                            @foreach($categories as $category)
-                            <option value="{{$category->id}}"
-                                    @if($category->title == "Printers")
-                                    selected
-                                    @endif
-                            >{{$category->title}}</option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -86,20 +81,13 @@
                     <div class="col-md-8">
                         <select name="product_id" id="product_id" class="form-control">
                             <option>Select Product</option>
-                            @foreach($products as $product)
-                            <option value="{{$product->id}}"
-                                    @if($product->part_no == "sx002")
-                                    selected
-                                    @endif
-                            >{{$product->part_no}}</option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Special Price</label></div>
+                    <div class="col-md-4"><label>list Price</label></div>
                     <div class="col-md-8">
-                        <input type="number" id="special_price" name="special_price" class="form-control" value="15000.00">
+                        <input type="number" id="list_price" name="list_price" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
