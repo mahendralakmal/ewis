@@ -52,7 +52,7 @@
         <h4>Assign Products</h4>
         <hr>
         <div class="col-md-12">
-            <form class="form-horizontal" id="asignProduct" role="form" method="POST" action="/admin/categories/store">
+            <form class="form-horizontal" id="asignProduct" role="form" method="POST" action="/admin/manage-product-list/product/details/{{ $id->id }}/store">
                 {{ csrf_field() }}
                 <div class="form-group row">
                     <input type="hidden" id="client_id" name="client_id" value="{{ $id->id }}">
