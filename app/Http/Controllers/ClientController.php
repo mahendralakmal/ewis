@@ -27,6 +27,16 @@ class ClientController extends Controller
         return back();
     }
 
+    public function cp_update(Request $request)
+    {
+        $client = User::find($request->user_id)->client;
+        $client->update(['cp_name' => $request->cp_name,
+            'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,
+            'cp_telephone' => $request->cp_telephone, 'cp_email' => $request->cp_email, 'user_id' => $request->user_id]);
+
+        return redirect('client-profile/'.User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id);
+    }
+
     public function update(Request $request)
     {
         $users = User::all();

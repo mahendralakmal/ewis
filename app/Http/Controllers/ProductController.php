@@ -95,16 +95,6 @@ class ProductController extends Controller
         return view('user/product', compact('products'));
     }
 
-    public function getAddToBucket(Request $request, $id)
-    {
-        $product = Product::find($id);
-        $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
-        $bucket = new Bucket($oldBucket);
-        $bucket->add($product, $product->id);
-
-        $request->session()->put('bucket', $bucket);
-        return redirect('user/brands');
-    }
 
     public function show($slug)
     {

@@ -18,13 +18,8 @@
 //});
 
 Route::get('add-to-bucket/{id}', [
-    'uses' => 'ProductController@getAddToBucket',
+    'uses' => 'BucketController@getAddToBucket',
     'as' => 'product.AddToBucket'
-]);
-
-Route::get('/bucket', [
-    'uses' => 'BucketController@getBucket',
-    'as' => 'product.bucket'
 ]);
 
 Route::get('/', 'UserController@welcome');
@@ -33,6 +28,10 @@ Route::get('/signout', 'UserController@signout');
 
 Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
+    Route::get('/{id}/bucket', [
+        'uses' => 'BucketController@getBucket',
+        'as' => 'product.bucket'
+    ]);
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
@@ -112,6 +111,7 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/approved/{id}', 'ClientController@approved');
         Route::get('/unapproved/{id}', 'ClientController@unapproved');
         Route::post('/store', 'ClientController@store');
+        Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
 //        {
