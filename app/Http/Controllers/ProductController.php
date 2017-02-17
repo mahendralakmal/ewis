@@ -6,6 +6,7 @@ use App\Brand;
 use App\Bucket;
 use App\Category;
 use App\Client;
+use App\Client_Assign_Product;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
@@ -16,6 +17,11 @@ use Session;
 
 class ProductController extends Controller
 {
+    public function store_client_products(Request $request){
+        Client_Assign_Product::created($request->all());
+        return back();
+    }
+
     public function load_products_deta(Product $id){
         return Response::json($id->default_price);
     }
