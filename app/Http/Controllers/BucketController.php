@@ -16,8 +16,8 @@ class BucketController extends Controller
         $bucket = new Bucket($oldBucket);
         $bucket->add($product, $product->part_no);
         $request->session()->put('bucket', $bucket);
-//        dd($request->session()->get('bucket'));
-        return redirect('/');
+        dd($request->session()->get('bucket'));
+//        return back();
     }
 
     public function getBucket() {
