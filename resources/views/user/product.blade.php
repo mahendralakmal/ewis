@@ -39,9 +39,9 @@
                                                     <tr><td><a href="{{ url('client-profile/'.App\User::find(Session::get('User'))->client->id, [$product->part_no]) }}"> {{$product->part_no}}</a></td>
                                                     <td><img src="{{ asset('/' . $product->image) }}" alt="product"
                                                              class="img-responsive" height="25" width="30"> </td>
-                                                        <td><p>{{ $product->description }}</p></td>
+                                                        <td><a href="{{ url('client-profile/'.App\User::find(Session::get('User'))->client->id, [$product->part_no]) }}">{{ $product->name }}</a></td>
                                                         <td><p> Rs.{{ $product->default_price }}</p></td>
-                                                        <td><input type="number" value="1" name="qty" id="qty" class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></td>
+                                                        <td><input type="number" value="1" name="Qty" id="Qty" class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></td>
                                                         <td><input class="btn btn-success btn-sm" type="submit" value="Add To Bucket"></td>
                                                     </tr>
                                             </form>

@@ -2,8 +2,13 @@
 
 namespace App;
 
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Input;
+
 class Bucket
 {
+    protected $fillable=['Qty'];
     public $items;
     public $totalQty;
     public $totalPrice;
@@ -19,14 +24,13 @@ class Bucket
         }
     }
 
-    public function add($item, $id){
-        $storedItem = ['qty'=> 0, 'price' => $item->default_price, 'item' => $item];
+    public function add( $item, $id){
+        $storedItem = ['qty'=> $this->fillable=['Qty'], 'price' => $item->default_price, 'item' => $item];
         if ($this->items) {
             if(array_key_exists($id, $this->items)){
                 $storedItem = $this->items[$id];
             }
         }
-        $storedItem['qty']++;
         $storedItem['price'] = $item->default_price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
         $this->totalQty++;

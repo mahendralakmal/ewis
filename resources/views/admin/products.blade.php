@@ -11,6 +11,7 @@
                     <thead>
                     <tr>
                         <td><h5>Part No</h5></td>
+                        <td><h5>Name</h5></td>
                         <td><h5>Brand</h5></td>
                         <td><h5>Category</h5></td>
                         <td><h5>Description</h5></td>
@@ -22,6 +23,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td>{{$product->part_no}}</td>
+                            <td>{{$product->name}}</td>
                             <td>{{$product->category->brand->title}}</td>
                             <td>{{$product->category->title}}</td>
                             <td>{{$product->description}}</td>
@@ -56,6 +58,12 @@
                     <div class="col-md-4"><label>Part No</label></div>
                     <div class="col-md-8">
                         <input type="text" name="part_no" id="part_no" class="form-control" @if(!$id == null) value="{{ $id->part_no }}" @endif>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4"><label>Name</label></div>
+                    <div class="col-md-8">
+                        <input type="text" name="name" id="name" class="form-control" @if(!$id == null) value="{{ $id->name }}" @endif>
                     </div>
                 </div>
                 <div class="form-group row">

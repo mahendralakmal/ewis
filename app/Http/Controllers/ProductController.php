@@ -53,7 +53,7 @@ class ProductController extends Controller
     {
         $product = Product::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
-        $product->update(['part_no' => $request->part_no, 'category_id' => $request->category_id, 'description' => $request->description,
+        $product->update(['part_no' => $request->part_no, 'name' => $request->name,'category_id' => $request->category_id, 'description' => $request->description,
             'image' => $image, 'user_id' => $request->user_id, 'default_price'=> $request->default_price]);
 
         return redirect('/admin/products');
@@ -80,6 +80,7 @@ class ProductController extends Controller
 
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
         $product->part_no = $request->part_no;
+        $product->name = $request->name;
         $product->category_id = $request->category_id;
         $product->description = $request->description;
         $product->image = $image;
