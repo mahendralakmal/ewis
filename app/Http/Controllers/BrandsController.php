@@ -19,10 +19,10 @@ class BrandsController extends Controller
     {
         $brand = new Brand();
         $brand->title = $request->title;
+        $brand->user_id = $request->user_id;
         $brand->description = $request->description;
         $brand->image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;
         $brand->save();
-
         return back();
     }
 
