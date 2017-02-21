@@ -44,6 +44,7 @@ class CategoryController extends Controller
     {
         $cate = new Category();
         $cate->title = $request->title;
+        $cate->user_id = $request->user_id;
         $cate->brand_id = $request->brand_id;
         $cate->description = $request->description;
         $cate->image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/categories', $request->file('image')) : null;
