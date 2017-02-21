@@ -17,10 +17,7 @@
 //    return view('sampath/user');
 //});
 
-Route::get('add-to-bucket/{id}', [
-    'uses' => 'BucketController@getAddToBucket',
-    'as' => 'product.AddToBucket'
-]);
+Route::get('add-to-bucket/{id}','BucketController@getAddToBucket');
 
 Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
@@ -28,14 +25,9 @@ Route::get('/signout', 'UserController@signout');
 
 Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
-    Route::get('/{id}/bucket', [
-        'uses' => 'BucketController@getBucket',
-        'as' => 'product.bucket'
-    ]);
-    Route::post('/{id}/checkout', [
-        'uses' => 'BucketController@postCheckout',
-        'as' => 'product.checkout'
-    ]);
+    Route::get('/{id}/bucket', 'BucketController@getBucket');
+
+    Route::post('/{id}/checkout', 'BucketController@postCheckout');
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
@@ -45,19 +37,16 @@ Route::group(['prefix' => ' /client-profile'], function () {
     ]);
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
     Route::get('/{id}/{part_no}', 'ProductController@index');
+
+    Route::post('/add-to-bucket', 'BucketController@getAddToBucket');
 });
 
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
-//Route::get('/product/{product}/{id}', 'CartController@index');
 
 Route::resource('category', 'CategoryController', ['only' => ['index', 'show']]);
 Route::resource('brands', 'BrandsController', ['only' => ['index', 'show']]);
 Route::delete('emptyBucket', 'BucketController@emptyBucket');
-//Route::post('switchToWishlist/{id}', 'CartController@switchToWishlist');
-//Route::resource('wishlist', 'WishlistController');
-//Route::delete('emptyWishlist', 'WishlistController@emptyWishlist');
-//Route::post('switchToCart/{id}', 'WishlistController@switchToCart');
 
 
 //=====================================================================================================================

@@ -9,15 +9,14 @@ use App\Product;
 
 class BucketController extends Controller
 {
-    public function getAddToBucket(Request $request, $part_no)
+    public function getAddToBucket(Request $request)
     {
-        $product = Product::where('part_no',$request->id)->first();
+        $product = Product::where('part_no',$request->part_no)->first();
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
-        $bucket->add($product, $product->part_no);
+        $bucket->add($product, $product->part_no, $request->Qty);
         $request->session()->put('bucket', $bucket);
-        dd($request->session()->get('bucket'));
-//        return back();
+        return back();
     }
 
     public function getBucket() {

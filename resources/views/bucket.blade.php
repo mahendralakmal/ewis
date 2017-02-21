@@ -22,20 +22,20 @@
                         @if (Session::has('bucket'))
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                                    <table class="table-bordered">
+                                    <table class="table-bordered col-sm-10 col-lg-10 col-md-10">
                                         <tr>
-                                            <td>Product Number</td>
-                                            <td>Product Name</td>
-                                            <td>Item Price</td>
-                                            <td>Quantity</td>
-                                            <td>Edit Bucket</td>
+                                            <td><strong>Product Number</strong></td>
+                                            <td><strong>Product Name</strong></td>
+                                            <td><strong>Quantity</strong></td>
+                                            <td><strong>Price</strong></td>
+                                            <td><strong>Edit Bucket</strong></td>
                                         </tr>
                                         @foreach($products as $product)
                                             <tr>
-                                            <td><strong>{{ $product['item'] ['part_no'] }}</strong></td>
-                                            <td><strong>{{ $product['item'] ['name'] }}</strong></td>
-                                            <td><strong>{{ $product['price'] }}</strong></td>
-                                            <td><p>{{ $product['qty'] }} </p></td>
+                                            <td><center>{{ $product['item'] ['part_no'] }}</center></td>
+                                            <td><center>{{ $product['item'] ['name'] }}</center></td>
+                                                <td><center>{{ $product['qty'] }}</center></td>
+                                            <td><center>{{ $product['price'] }}</center></td>
                                                 <td><div class="btn-group">
                                                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span> </button>
                                                     <ul class="dropdown-menu">
