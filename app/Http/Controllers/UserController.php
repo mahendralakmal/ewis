@@ -11,6 +11,54 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    public function signup()
+    {
+
+        if (!(Session::get('LoggedIn')) && (User::all()->count() == 0)) {
+            return view('signup');
+        } else {
+            return redirect('/');
+        }
+    }
+
+    public function signup_store(Request $request){
+        $user = new User();
+
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->name = $request->name;
+        $user->designation_id = $request->designation_id;
+        $user->nic_pass = $request->nic_pass;
+        $user->user_id = $request->nic_pass;
+        $user->approval = $request->approval;
+        $user->save();
+
+        Session::put('LoggedIn', true);
+        Session::put('User', $request->user_id);
+        Session::put('Type', $user->designation->designation);
+        Session::put('ip', $request->ip());
+
+        return redirect('/admin');
+    }
+
+    public function store(Request $request)
+    {
+        $user = new User();
+
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->name = $request->name;
+        $user->designation_id = $request->designation_id;
+        $user->nic_pass = $request->nic_pass;
+        $user->save();
+
+        if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
+            return redirect('/admin/manage-clients/update-profile/' . $user->id);
+        } else {
+            return back();
+        }
+    }
+
     public function index()
     {
         return view('sampath/brands');
@@ -57,24 +105,6 @@ class UserController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        $user = new User();
-
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->name = $request->name;
-        $user->designation_id = $request->designation_id;
-        $user->nic_pass = $request->nic_pass;
-        $user->save();
-
-        if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
-            return redirect('/admin/manage-clients/update-profile/' . $user->id);
-        } else {
-            return back();
-        }
-    }
-
     public function mange_user()
     {
         $id = "";
@@ -99,10 +129,13 @@ class UserController extends Controller
     {
         if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
             return redirect('/client-profile/' . User::find(Session::get('User'))->client->id . '/brands');
-//            return redirect('/client-profile/' . $client->id .'/brands');
         } else {
-            $error = '';
-            return view('welcome', compact('error'));
+            if(!(User::all()->count()) == 0) {
+                $error = '';
+                return view('welcome', compact('error'));
+            } else {
+                return redirect('/signup');
+            }
         }
     }
 
