@@ -40,4 +40,8 @@ class BucketController extends Controller
             return view('checkout', ['total_price' => $total_price, 'total_qty' => $total_qty ]);
     }
 
+    public function postCheckout() {
+
+    }
+
 }
