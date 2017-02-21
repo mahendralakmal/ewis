@@ -22,21 +22,28 @@
                         @if (Session::has('bucket'))
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                                    <ul class="list-group">
+                                    <table class="table-bordered">
+                                        <tr>
+                                            <td>Product Number</td>
+                                            <td>Product Name</td>
+                                            <td>Item Price</td>
+                                            <td>Quantity</td>
+                                            <td>Edit Bucket</td>
+                                        </tr>
                                         @foreach($products as $product)
-                                            <li class="list-group-item">
-                                                <span class="badge">{{ $product['qty'] }} </span>
-                                                <strong>{{ $product['item'] ['part_no'] }}</strong>
-                                                <span class="lable lable-succsess">{{ $product['price'] }}</span>
-                                                <div class="btn-group">
+                                            <tr>
+                                            <td><strong>{{ $product['item'] ['part_no'] }}</strong></td>
+                                            <td><strong>{{ $product['item'] ['name'] }}</strong></td>
+                                            <td><strong>{{ $product['price'] }}</strong></td>
+                                            <td><p>{{ $product['qty'] }} </p></td>
+                                                <td><div class="btn-group">
                                                     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span> </button>
                                                     <ul class="dropdown-menu">
                                                         <li><a href="#">Reduce </a></li>
                                                     </ul>
-                                                </div>
-                                            </li>
+                                                </div></td></tr>
                                         @endforeach
-                                    </ul>
+                                    </table>
                                 </div>
                             </div>
                             <div class="row">
