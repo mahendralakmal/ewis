@@ -26,7 +26,8 @@
                                     <td>{{$user->designation->designation}}</td>
                                     <td>
                                         <a href="/admin/users/create-users/{{ $user->id }}"
-                                           class="btn btn-primary btn-outline">Edit</a><form method="POST" action="/admin/users/delete" role="form">
+                                           class="btn btn-primary btn-outline">Edit</a>
+                                        <form method="POST" action="/admin/users/delete" role="form">
                                             @if($user->designation_id !== 1)
                                                 <button class="btn btn-danger btn-outline" type="submit">Delete</button>
 
@@ -60,6 +61,9 @@
                         <input type="hidden" id="id" name="id" value="{{$id->id}}">
                     @endif
 
+
+                        <input type="hidden" id="user_id" name="user_id"
+                               value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                     <input type="email" class="form-control" name="email" id="email"
                            @if(!$id == "") value="{{$id->email}}" disabled @endif>
                 </div>
