@@ -15,4 +15,8 @@ class User extends Model
     public function client(){
         return $this->hasOne(Client::class);
     }
+
+    public function P_Orders(){
+        return $this->hasMany('App\P_Order');
+    }
 }
