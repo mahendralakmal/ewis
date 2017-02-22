@@ -24,7 +24,7 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         Client::create($request->all());
-        return back();
+        return redirect('/admin/users/create-users');
     }
 
     public function cp_update(Request $request)

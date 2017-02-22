@@ -20,8 +20,8 @@
                             @if(!$designation->deleted == 1)
                             <tr>
                                 <td>{{$designation->designation}}</td>
-                                <td><a href="/admin/users/manage-user-designations/{{ $designation->id }}" class="btn btn-primary btn-outline">Edit</a>
-                                    {{--<a href="#" class="btn btn-danger btn-outline">Delete</a>--}}
+                                <td>
+                                    <a href="/admin/users/manage-user-designations/{{ $designation->id }}" class="btn btn-primary btn-outline">Edit</a>
                                 </td>
                             </tr>
                             @endif
@@ -46,6 +46,7 @@
                 </div>
                 <div class="col-md-7">
                     <input type="text" class="form-control" name="designation" id="designation" @if(!$id == "") value="{{$id->designation}}" @endif>
+                    <input type="hidden" id="user_id" name="user_id" value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                 </div>
             </div>
 

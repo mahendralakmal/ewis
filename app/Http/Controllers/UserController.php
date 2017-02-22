@@ -29,7 +29,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->designation_id = $request->designation_id;
         $user->nic_pass = $request->nic_pass;
-        $user->user_id = $request->nic_pass;
+        $user->user_id = $request->user_id;
         $user->approval = $request->approval;
         $user->save();
 
@@ -50,6 +50,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->designation_id = $request->designation_id;
         $user->nic_pass = $request->nic_pass;
+        $user->user_id = $request->user_id;
         $user->save();
 
         if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
