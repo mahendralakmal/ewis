@@ -5,13 +5,15 @@
         <div class="container white-background gradiant-background">
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
-{{--                    <img alt="{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->name }}" src="{{ elixir( App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->logo) }}" width="209" hight="67" class="img-responsive"/>--}}
+                    <img alt="{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name }}" src="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->logo}}" width="209" hight="67" class="img-responsive"/>
                 </div><!--col-md-4 col-sm-4 col-xs-12 close-->
 
 
                 <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
                     <div class="description">
                         <div class="inner">
+
+                            <h3>Ewis Agent</h3>
                                 {{--<h3>{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->agent_id }}</h3>--}}
                             <h5>Sales Agent</h5>
                             <ul>
