@@ -19,4 +19,8 @@ class User extends Model
     public function client(){
         return $this->belongsTo(Client::class);
     }
+
+    public function P_Orders(){
+        return $this->hasMany('App\P_Order');
+    }
 }

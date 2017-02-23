@@ -11,4 +11,6 @@ class Client extends Model
     public function clientuser(){
         return $this->hasMany(Clientuser::class);
     }
+
+
 }
