@@ -20,7 +20,7 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}/checkout', 'BucketController@Checkout');
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
     Route::get('/{id}/{part_no}', 'ProductController@index');
-
+    Route::get('{id}/bucket/history', 'BucketController@getHistory');
     Route::post('/add-to-bucket', 'BucketController@getAddToBucket');
 });
 

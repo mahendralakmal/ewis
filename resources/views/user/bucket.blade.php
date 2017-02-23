@@ -37,10 +37,7 @@
                                                 <td><center>{{ $product['qty'] }}</center></td>
                                             <td><center>{{ $product['price'] }}</center></td>
                                                 <td><div class="btn-group">
-                                                    <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span> </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="#">Reduce </a></li>
-                                                    </ul>
+                                                    <button type="button" href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id.'/remove_item') }}" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Remove Item<span class="caret"></span> </button>
                                                 </div></td></tr>
                                         @endforeach
                                     </table>

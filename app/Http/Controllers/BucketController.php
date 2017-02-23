@@ -24,48 +24,53 @@ class BucketController extends Controller
 
     public function getBucket() {
         if (!Session::has('bucket')) {
-            return view('bucket');
+            return view('user/bucket');
         }
             $oldBucket = Session::get('bucket');
             $bucket = new Bucket($oldBucket);
-            return view('bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice] );
+            return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice] );
 
     }
 
     public function Checkout() {
         if (!Session::has('bucket')) {
-            return view('bucket');
+            return view('user/bucket');
         }
             $oldBucket = Session::get('bucket');
             $bucket = new Bucket($oldBucket);
             $total_price = $bucket->totalPrice;
             $total_qty = $bucket->totalQty;
-            return view('checkout', ['total_price' => $total_price, 'total_qty' => $total_qty ]);
+            return view('user/checkout', ['total_price' => $total_price, 'total_qty' => $total_qty ]);
     }
 
     public function postCheckout(Request $request) {
         if (!Session::has('bucket')) {
-            return view('bucket');
+            return view('user/bucket');
         }
         $bucket = Session::get('bucket');
         $order = new P_Order();
+
+//        dd(User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id);
+
         $order->client_id = User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id;
         $order->bucket = serialize($bucket);
         $order->del_branch = $request->input('del_branch');
         $order->del_cp = $request->input('del_cp');
         $order->del_tp = $request->input('del_tp');
+        $order->cp_notes = $request->input('cp_notes');
+        $order->del_notes = $request->input('del_notes');
 
         $order->save();
 
         Session::forget('bucket');
-        return view('user/brands');
+        return redirect('/');
 
+    }
 
-//        $items = $bucket->items;
-//        dd($items);
-
-
-
+    public function getHistory(){
+        $order = unserialize();
+        $client = User::find(\Illuminate\Support\Facades\Session::get('User'))->client-id;
+    return view('user/history');
     }
 
 }
