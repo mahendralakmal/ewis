@@ -95,9 +95,6 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
-//        Route::get('/clients-user/{id}', function(){
-//            return 'Hi';
-//        });
 
         Route::get('/client_user/{user}', 'AgentController@client_user');
         Route::post('/agent-assign/store', 'AgentController@store');

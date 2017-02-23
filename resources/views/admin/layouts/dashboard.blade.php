@@ -94,13 +94,13 @@
                                             class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                        <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Create Client</a>
+                                        <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Client Profile</a>
                                     </li>
                                     {{--<li {{ (Request::is('*panels') ? 'class="active"' : '') }}>--}}
                                         {{--<a href="{{ url ('/admin/manage-clients/approval') }}">Client Approval</a>--}}
                                     {{--</li>--}}
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                        <a href="{{ url ('/admin/manage-clients') }}">Client Profile</a>
+                                        <a href="{{ url ('/admin/manage-clients') }}">Client Users</a>
                                     </li>
                                     {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
                                     {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
