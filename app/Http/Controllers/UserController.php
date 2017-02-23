@@ -54,7 +54,7 @@ class UserController extends Controller
         $user->save();
 
         if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
-            return redirect('/admin/manage-clients/update-profile/' . $user->id);
+            return redirect('/admin/manage-clients/client_user/' . $user->id);
         } else {
             return back();
         }
@@ -100,7 +100,7 @@ class UserController extends Controller
         ]);
 
         if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
-            return redirect('/admin/manage-clients/update-profile/' . $user->id);
+            return redirect('/admin/manage-clients/client_user/' . $user->id);
         } else {
             return back();
         }
@@ -129,7 +129,7 @@ class UserController extends Controller
     public function welcome()
     {
         if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
-            return redirect('/client-profile/' . User::find(Session::get('User'))->client->id . '/brands');
+//            return redirect('/client-profile/' . User::find(Session::get('User'))->client->id . '/brands');
         } else {
             if(!(User::all()->count()) == 0) {
                 $error = '';

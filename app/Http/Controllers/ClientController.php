@@ -15,9 +15,15 @@ class ClientController extends Controller
         return view('/admin/clients/manage-client', compact('users'));
     }
 
+    public function create_profile()
+    {
+        $id = null;
+        $clients = Client::orderBy('name')->get();
+        return view('/admin/clients/client-profile', compact('id', 'clients'));
+    }
+
     public function update_profile(User $id)
     {
-
         return view('/admin/clients/client-profile', compact('id'));
     }
 
@@ -34,14 +40,15 @@ class ClientController extends Controller
             'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,
             'cp_telephone' => $request->cp_telephone, 'cp_email' => $request->cp_email, 'user_id' => $request->user_id]);
 
-        return redirect('client-profile/'.User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id);
+        return redirect('client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id);
     }
 
     public function update(Request $request)
     {
+        return $request->all();
         $users = User::all();
         $client = User::find($request->user_id)->client;
-        $logo = $request->hasFile('logo')? 'storage/'.Storage::disk('local')->put('/images', $request->file('logo')):null;
+        $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
         $client->update(['address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
             'logo' => $logo, 'color' => $request->color, 'cp_name' => $request->cp_name,
             'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,
@@ -49,27 +56,29 @@ class ClientController extends Controller
         return view('/admin/clients/manage-client', compact('users'));
     }
 
-    public function show(Client $id){
-//        return $id;
+    public function show(Client $id)
+    {
         return view('user.user', compact('id'));
     }
 
-    public function editClientProfile(Client $id){
+    public function editClientProfile(Client $id)
+    {
         return view('user/edit-user', compact('id'));
     }
 
-    public function approval(){
-        $users = User::where('designation_id',4)->get();
+    public function approval()
+    {
+        $users = User::where('designation_id', 4)->get();
         return view('admin/clients/approval-client', compact('users'));
     }
 
-    public function approved(User $id)
+    public function approved(Client $id)
     {
         $id->update(['approval' => 1]);
         return redirect('/admin/manage-clients/approval');
     }
 
-    public function unapproved(User $id)
+    public function unapproved(Client $id)
     {
         $id->update(['approval' => 0]);
         return redirect('/admin/manage-clients/approval');

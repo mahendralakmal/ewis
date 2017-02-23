@@ -12,8 +12,12 @@ class User extends Model
         return $this->belongsTo(Designation::class);
     }
 
+    public function clientuser(){
+        return $this->hasMany(Clientuser::class);
+    }
+
     public function client(){
-        return $this->hasOne(Client::class);
+        return $this->belongsTo(Client::class);
     }
 
     public function P_Orders(){
