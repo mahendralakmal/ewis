@@ -1,7 +1,7 @@
 @extends('admin.layouts.plane')
 
 @section('body')
-    @if(\Illuminate\Support\Facades\Session::get('Type') == 'Super Admin')
+    {{--@if(\Illuminate\Support\Facades\Session::get('Type') == 'Super Admin')--}}
         <div id="wrapper">
 
             <!-- Navigation -->
@@ -93,15 +93,15 @@
                                 <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Manage Clients<span
                                             class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
+                                    <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                        <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Create Client</a>
+                                    </li>
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                         <a href="{{ url ('/admin/manage-clients/approval') }}">Client Approval</a>
                                     </li>
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                         <a href="{{ url ('/admin/manage-clients') }}">Client Profile</a>
                                     </li>
-                                    {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
-                                        {{--<a href="{{ url ('/admin/manage-product-list' ) }}">Product List</a>--}}
-                                    {{--</li>--}}
                                     {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
                                     {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
                                     {{--</li>--}}
@@ -206,8 +206,8 @@
                 <p>Design &amp; Developed by Pro IT Solutions.</p>
             </footer>
         </div>
-    @elde
-        {{ redirect('/') }}
-    @endif
+    {{--@elde--}}
+        {{--{{ redirect('/') }}--}}
+    {{--@endif--}}
 @stop
 

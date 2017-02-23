@@ -86,6 +86,7 @@ Route::group(['prefix' => ' /admin'], function () {
 
     Route::group(['prefix' => '/manage-clients'], function () {
         Route::get('/', 'ClientController@index');
+        Route::get('/create-profile/', 'ClientController@create_profile');
         Route::get('/update-profile/{id}', 'ClientController@update_profile');
         Route::get('/approval', 'ClientController@approval');
         Route::get('/approved/{id}', 'ClientController@approved');
@@ -94,8 +95,9 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
-//        {
-//            return view('/admin/clients/check-assignments');
+        Route::get('/client_user/{id}', 'AgentController@client_user');
+//        Route::get('/clients-user/{id}', function(){
+//            return 'Hi';
 //        });
 
         Route::get('/agent-assign/{id}', 'AgentController@index');

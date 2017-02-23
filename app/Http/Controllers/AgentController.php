@@ -31,4 +31,9 @@ class AgentController extends Controller
         $id->update(['agent_id' => null]);
         return redirect('/admin/manage-clients/agent-assign/' . $user->id);
     }
+
+    public function client_user(User $id){
+        $clients = Client::all();
+        return view('/admin/clients/client-users', compact('id', 'clients'));
+    }
 }
