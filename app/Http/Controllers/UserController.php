@@ -149,8 +149,9 @@ class UserController extends Controller
                 $client = $user->client;
                 Session::put('LoggedIn', true);
                 Session::put('User', $user->id);
-                Session::put('BaseColor', $user->client->color);
-                return redirect('/client-profile/' . $client->id . '/brands');
+
+                Session::put('BaseColor', $user->clientuser->first()->client->color);
+                return redirect('/client-profile/' . $user->clientuser->first()->client->id . '/brands');
             } else {
                 Session::put('LoggedIn', true);
                 Session::put('User', $user->id);

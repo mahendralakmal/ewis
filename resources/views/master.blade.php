@@ -43,12 +43,12 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">About</a></li>
-                        <li><a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id.'/bucket') }}">Bucket <span class="badge">{{ \Illuminate\Support\Facades\Session::has('bucket') ? \Illuminate\Support\Facades\Session::get('bucket')->totalQty : '' }}</span> </a></li>
+{{--                        <li><a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id.'/bucket') }}">Bucket <span class="badge">{{ \Illuminate\Support\Facades\Session::has('bucket') ? \Illuminate\Support\Facades\Session::get('bucket')->totalQty : '' }}</span> </a></li>--}}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->name }}<span class="caret"></span></a>
+{{--                               aria-haspopup="true" aria-expanded="false">{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->name }}<span class="caret"></span></a>--}}
                             <ul class="dropdown-menu">
-                                <li><a href={{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id) }}>User Profile</a></li>
+{{--                                <li><a href={{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id) }}>User Profile</a></li>--}}
                                 <li><a href={{ url('/') }}>User Dashboard</a></li>
                                 <li><a href="{{ url('#') }}">Puchase History</a></li>
                                 <li role="separator" class="divider"></li>
