@@ -45,7 +45,9 @@
                 {{ csrf_field() }}
                 <input type="hidden" id="user_id" name="user_id"
                        value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
-
+                @if(!$id == null)
+                    <input type="hidden" id="id" name="id" value="{{$id->id}}">
+                @endif
                 <div class="form-group row">
                     <div class="col-md-4"><label>Name</label></div>
                     <div class="col-md-8"><input type="text" id="name" name="name" class="form-control"

@@ -23,9 +23,10 @@ class ClientController extends Controller
         return view('/admin/clients/client-profile', compact('id', 'clients'));
     }
 
-    public function update_profile(User $id)
+    public function update_profile(Client $id)
     {
-        return view('/admin/clients/client-profile', compact('id'));
+        $clients = Client::orderBy('name')->get();
+        return view('/admin/clients/client-profile', compact('id', 'clients'));
     }
 
     public function store(Request $request)
@@ -46,14 +47,12 @@ class ClientController extends Controller
 
     public function update(Request $request)
     {
-        return $request->all();
+//        return $request->all();
         $users = User::all();
-        $client = User::find($request->user_id)->client;
+        $client = Client::find($request->id);
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
         $client->update(['address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
-            'logo' => $logo, 'color' => $request->color, 'cp_name' => $request->cp_name,
-            'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,
-            'cp_telephone' => $request->cp_telephone, 'cp_email' => $request->cp_email]);
+            'logo' => $logo, 'color' => $request->color]);
         return view('/admin/clients/manage-client', compact('users'));
     }
 
