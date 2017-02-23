@@ -22,6 +22,8 @@ class CreateClientProfileTable extends Migration
             $table->string('email');
             $table->string('logo');
             $table->string('color');
+            $table->boolean('approval')->default(0);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

@@ -95,11 +95,13 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
-        Route::get('/client_user/{id}', 'AgentController@client_user');
 //        Route::get('/clients-user/{id}', function(){
 //            return 'Hi';
 //        });
 
+        Route::get('/client_user/{user}', 'AgentController@client_user');
+        Route::post('/agent-assign/store', 'AgentController@store');
+        Route::post('/agent-assign/update', 'AgentController@update');
         Route::get('/agent-assign/{id}', 'AgentController@index');
         Route::get('/assign/{user}/{agent}/{id}', 'AgentController@assign');
         Route::get('/remove/{user}/{agent}/{id}', 'AgentController@remove');

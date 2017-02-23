@@ -17,9 +17,9 @@ class ClientController extends Controller
 
     public function create_profile()
     {
-//        return 'hi';
         $id = null;
-        return view('/admin/clients/client-profile', compact('id'));
+        $clients = Client::orderBy('name')->get();
+        return view('/admin/clients/client-profile', compact('id', 'clients'));
     }
 
     public function update_profile(User $id)
@@ -45,6 +45,7 @@ class ClientController extends Controller
 
     public function update(Request $request)
     {
+        return $request->all();
         $users = User::all();
         $client = User::find($request->user_id)->client;
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
@@ -57,7 +58,6 @@ class ClientController extends Controller
 
     public function show(Client $id)
     {
-//        return $id;
         return view('user.user', compact('id'));
     }
 
@@ -72,13 +72,13 @@ class ClientController extends Controller
         return view('admin/clients/approval-client', compact('users'));
     }
 
-    public function approved(User $id)
+    public function approved(Client $id)
     {
         $id->update(['approval' => 1]);
         return redirect('/admin/manage-clients/approval');
     }
 
-    public function unapproved(User $id)
+    public function unapproved(Client $id)
     {
         $id->update(['approval' => 0]);
         return redirect('/admin/manage-clients/approval');
