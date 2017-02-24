@@ -11,7 +11,6 @@ class AgentController extends Controller
 {
     public function store(Request $request)
     {
-//        return $request->all();
         $cuser = new Clientuser();
 
         $cuser->created_user = $request->created_user;

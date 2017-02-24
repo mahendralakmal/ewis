@@ -24,6 +24,7 @@ class CreateClientProfileTable extends Migration
             $table->string('color');
             $table->boolean('approval')->default(0);
             $table->boolean('status')->default(0);
+            $table->integer('agent_id')->unsigned()->index()->nullable(true);
             $table->timestamps();
         });
     }

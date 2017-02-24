@@ -31,7 +31,18 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-        Client::create($request->all());
+//        Client::create($request->all());
+        $client = new Client();
+        $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
+        $client->user_id = $request->user_id;
+        $client->name = $request->name;
+        $client->address = $request->address;
+        $client->telephone = $request->telephone;
+        $client->email = $request->email;
+        $client->logo = $logo;
+        $client->color = $request->color;
+        $client->save();
+
         return redirect('/admin/users/create-users');
     }
 
@@ -51,7 +62,7 @@ class ClientController extends Controller
         $users = User::all();
         $client = Client::find($request->id);
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
-        $client->update(['address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
+        $client->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
             'logo' => $logo, 'color' => $request->color]);
         return view('/admin/clients/manage-client', compact('users'));
     }

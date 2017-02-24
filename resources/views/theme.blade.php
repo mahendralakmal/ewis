@@ -6,7 +6,7 @@
             <div class=" col-md-12 profile-head">
                 <div class="col-md- col-sm-4 col-xs-12">
                     <img alt="{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name }}" src="{{ elixir(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->logo)}}" width="209" hight="67" class="img-responsive"/>
-                </div><!--col-md-4 col-sm-4 col-xs-12 close-->
+                </div>
 
 
                 <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
@@ -20,9 +20,7 @@
                                 <li><span class="glyphicon glyphicon-user"></span> Ewis Peripherals </li>
                                 <li><span class="glyphicon glyphicon-map-marker"></span> No.123, Blah Street, Blah blah, Colombo45, Sri Lanka
                                 </li>
-                                <li><span class="glyphicon glyphicon-phone"></span><a href="#" title="Phone">+94 11 2
-                                        30 30
-                                        50</a>
+                                <li><span class="glyphicon glyphicon-phone"></span><a href="#" title="Phone">+94 11 230 3050</a>
                                 </li>
                                 <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">saman.perera@ewis.lk</a>
                                 </li>
