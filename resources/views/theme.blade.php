@@ -12,9 +12,7 @@
                 <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
                     <div class="description">
                         <div class="inner">
-
-                            <h3>Ewis Agent</h3>
-                                {{--<h3>{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->agent_id }}</h3>--}}
+                                <h3>{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->name }}</h3>
                             <h5>Sales Agent</h5>
                             <ul>
                                 <li><span class="glyphicon glyphicon-user"></span> Ewis Peripherals </li>
