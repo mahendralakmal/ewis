@@ -27,7 +27,6 @@ class AgentController extends Controller
 
     public function update(Request $request)
     {
-//        return $request->all();
         $cuser = Clientuser::find($request->id);
 
         $cuser->update([
@@ -43,16 +42,17 @@ class AgentController extends Controller
         return redirect('/admin/users/create-users');
     }
 
+    public function index(User $id)
+    {
+        $users = User::all();
+//        $ajents = User::where([['designation_id', '!=', 4], ['approval', 1]])->get();
+        return view('/admin/clients/agent-assign', compact('users', 'id'));
+    }
+
     public function check_assignment(User $id)
     {
         $clients = Client::where('agent_id', $id->id)->get();
         return view('/admin/clients/check-assignments', compact('id', 'clients'));
-    }
-
-    public function index(User $id)
-    {
-        $ajents = User::where([['designation_id', '!=', 4], ['approval', 1]])->get();
-        return view('/admin/clients/agent-assign', compact('ajents', 'id'));
     }
 
     public function assign(User $user, User $agent, Client $id)

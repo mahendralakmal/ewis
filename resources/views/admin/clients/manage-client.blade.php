@@ -37,7 +37,7 @@
                                     <td>{{ $cuser->cp_email }}</td>
                                     <td>
                                         <a href="#" class="btn btn-success btn-outline">Activate</a>
-                                        <a href="/admin/manage-clients/update-profile/{{ $user->id }}"
+                                        <a href="/admin/manage-clients/client_user/{{ $user->id }}"
                                            class="btn btn-primary btn-outline">Update
                                             Profile</a>
                                         <a href="/admin/manage-clients/agent-assign/{{ $user->id }}"

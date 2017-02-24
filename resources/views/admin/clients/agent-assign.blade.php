@@ -18,22 +18,37 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($ajents as $ajent)
-                        <tr>
-                            <td>
-                                @if($id->client->agent_id === $ajent->id)
-                                    <i class="fa fa-check green fa-fw"></i>
-                                @endif
-                            </td>
-                            <td>{{ $ajent->email }}</td>
-                            <td>{{ $ajent->name }}</td>
-                            <td>{{ $ajent->designation->designation }}</td>
-                            <td>
-                                <a href="{{ url('/admin/manage-clients/check-assignments/'.$ajent->id) }}" class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                                <a href="{{ url('/admin/manage-clients/assign/'.$id->id.'/'.$ajent->id.'/'.$id->client->id) }}" class="btn btn-success btn-outline" @if($id->client->agent_id === $ajent->id) disabled @else @endif>Assigne</a>
-                                <a href="{{ url('/admin/manage-clients/remove/'.$id->id.'/'.$ajent->id.'/'.$id->client->id) }}" class="btn btn-danger btn-outline" @if($id->client->agent_id === $ajent->id) @else disabled @endif>Remove</a>
-                            </td>
-                        </tr>
+                    @foreach($users as $user)
+                        @if(strtolower($user->designation->designation) != "client")
+                            <tr>
+                                <td>
+                                    @if($user->id === $id->clientuser->first()->client->agent_id)
+                                        <i class="fa fa-check green fa-fw"></i>
+                                    @endif
+                                </td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->designation->designation }}</td>
+                                <td>
+                                    <a href="{{ url('/admin/manage-clients/check-assignments/'.$user->id) }}"
+                                       class="btn btn-primary btn-outline">Check Assigned Clients</a>
+                                    <a href="@if($user->id === $id->clientuser->first()->client->agent_id)
+                                    {{ url('/admin/manage-clients/remove/'.$id->id.'/'.$user->id.'/'.$id->clientuser->first()->client->id) }}
+                                    @else
+                                    {{ url('/admin/manage-clients/assign/'.$id->id.'/'.$user->id.'/'.$id->clientuser->first()->client->id) }}
+                                    @endif
+                                            " class="btn @if($user->id === $id->clientuser->first()->client->agent_id)
+                                            btn-danger
+                                            @else
+                                            btn-success
+                                            @endif
+                                            btn-outline">
+                                        @if($user->id === $id->clientuser->first()->client->agent_id) Remove @else
+                                            Assigne @endif
+                                    </a>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>
