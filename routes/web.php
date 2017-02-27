@@ -1,7 +1,7 @@
 <?php
 
 
-Route::get('add-to-bucket/{id}','BucketController@getAddToBucket');
+Route::get('add-to-bucket/{id}', 'BucketController@getAddToBucket');
 
 Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
