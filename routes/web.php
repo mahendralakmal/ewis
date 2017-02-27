@@ -9,7 +9,7 @@ Route::get('/signout', 'UserController@signout');
 Route::get('/signup', 'UserController@signup');
 Route::post('/signup/go', 'UserController@signup_store');
 
-Route::group(['prefix' => ' /client-profile'], function () {
+Route::group(['prefix' => ' /{client}'], function () {
     Route::get('/{id}', 'ClientController@show');
     Route::get('/{id}/bucket', 'BucketController@getBucket');
 
