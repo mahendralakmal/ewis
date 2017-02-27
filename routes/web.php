@@ -1,7 +1,7 @@
 <?php
 
 
-Route::get('add-to-bucket/{id}','BucketController@getAddToBucket');
+Route::get('add-to-bucket/{id}', 'BucketController@getAddToBucket');
 
 Route::get('/', 'UserController@welcome');
 Route::post('/signin', 'UserController@signin');
@@ -10,7 +10,7 @@ Route::get('/signup', 'UserController@signup');
 Route::post('/signup/go', 'UserController@signup_store');
 
 //Route::group(['prefix' => ' /{client}'], function () {
-    Route::group(['prefix' => ' /client-profile'], function () {
+Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
     Route::get('/{id}/bucket', 'BucketController@getBucket');
 
