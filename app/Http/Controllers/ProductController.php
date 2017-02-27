@@ -85,6 +85,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->image = $image;
         $product->user_id = $request->user_id;
+        $product->status = 1;
         $product->default_price = $request->default_price;
         $product->save();
 
@@ -102,7 +103,6 @@ class ProductController extends Controller
         $products = $category_id->product;
         return view('user/product', compact('products'));
     }
-
 
     public function show($slug)
     {

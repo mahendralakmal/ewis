@@ -1,7 +1,8 @@
 @extends('admin.layouts.plane')
 
 @section('body')
-    {{--@if(\Illuminate\Support\Facades\Session::get('Type') == 'Super Admin')--}}
+    {{\Illuminate\Support\Facades\Session::get('LoggedIn')}}
+    @if((\Illuminate\Support\Facades\Session::get('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('Type') === 'Super User'))
         <div id="wrapper">
 
             <!-- Navigation -->
@@ -206,7 +207,7 @@
                 <p>Design &amp; Developed by Pro IT Solutions.</p>
             </footer>
         </div>
-    {{--@elde--}}
-        {{--{{ redirect('/') }}--}}
-    {{--@endif--}}
+    @elde
+        {{ redirect('/') }}
+    @endif
 @stop
