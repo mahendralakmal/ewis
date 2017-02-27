@@ -52,7 +52,7 @@
                     <input type="hidden" id="id" name="id" value="{{ $id->id }}">
                 @endif
 
-                <input type="hidden" id="user_id" name="user_id" value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
+{{--                <input type="hidden" id="user_id" name="user_id" value="{{ \Illuminate\Support\Facades\Session::get('User') }}">--}}
                 <div class="form-group row">
                     <div class="col-md-4"><label>Part No</label></div>
                     <div class="col-md-8">

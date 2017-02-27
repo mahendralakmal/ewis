@@ -68,6 +68,7 @@ class ProductController extends Controller
 
     public function admin_index()
     {
+//        return "hi";
         $id = "";
         $categories = Category::where('status', 1)->get();
         $products = Product::where('status', 1)->get();
