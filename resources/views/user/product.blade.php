@@ -40,12 +40,12 @@
                                         <tr>
                                             <td>
                                                 <input type="hidden" id="part_no" name="part_no" value="{{ $product->part_no }}">
-                                                <a href="{{ url('client-profile/'.App\User::find(Session::get('User'))->client->id, [$product->part_no]) }}"> {{$product->part_no}}</a>
+                                                <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id, [$product->part_no]) }}"> {{$product->part_no}}</a>
                                             </td>
                                             <td><img src="{{ asset('/' . $product->image) }}" alt="product"
                                                      class="img-responsive" height="25" width="30"></td>
                                             <td>
-                                                <a href="{{ url('client-profile/'.App\User::find(Session::get('User'))->client->id, [$product->part_no]) }}">{{ $product->name }}</a>
+                                                <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id, [$product->part_no]) }}">{{ $product->name }}</a>
                                             </td>
                                             <td><p> Rs.{{ $product->default_price }}</p></td>
                                             <td><input type="number" value="1"  name="Qty" id="Qty"

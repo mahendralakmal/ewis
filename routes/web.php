@@ -10,7 +10,7 @@ Route::get('/signup', 'UserController@signup');
 Route::post('/signup/go', 'UserController@signup_store');
 
 
-    Route::group(['prefix' => ' /client-profile'], function () {
+Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
     Route::get('/{id}/bucket', 'BucketController@getBucket');
 
@@ -18,7 +18,6 @@ Route::post('/signup/go', 'UserController@signup_store');
     Route::post('/{id}/postCheckout', 'BucketController@postCheckout');
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
-    Route::post('/{id}/cp_update', 'ClientController@cp_update');
     Route::get('/{id}/checkout', 'BucketController@Checkout');
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
     Route::get('/{id}/{part_no}', 'ProductController@index');

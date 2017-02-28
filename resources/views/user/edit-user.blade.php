@@ -26,10 +26,11 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <h4 class="pro-title">Edit Profile</h4>
-                                    <form method="POST" id="cp_update" enctype="multipart/form-data" @if($id->client == null)action="/admin/manage-clients/cp_update"@endif class="form-horizontal">
+                                    <form method="POST" id="cp_update" enctype="multipart/form-data" action="/admin/manage-clients/cp_update" class="form-horizontal">
                                         {{ csrf_field() }}
                                         <div class="form-group">
                                             <input type="hidden" value="{{$id->user_id}}" name="user_id" id="user_id">
+                                            <input type="hidden" value="{{$id->client_id}}" name="client_id" id="client_id">
                                             <div class="col-md-3">
                                                 <label>Contact Person</label>
                                             </div>

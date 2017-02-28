@@ -36,7 +36,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ elixir('img/ewis-logo.png') }}">{{ config('app.name', 'Laravel') }}</a>
+                    <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ elixir('img/ewis-logo.png') }}">{{ config('app.name', 'Ewis Peripherals') }}</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -45,13 +45,13 @@
                         <li><a href="#">About</a></li>
 
                         {{--{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id}}--}}
-                        <li><a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/bucket') }}">Bucket <span class="badge">{{ \Illuminate\Support\Facades\Session::has('bucket') ? \Illuminate\Support\Facades\Session::get('bucket')->totalQty : '' }}</span> </a></li>
+                        <li><a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/bucket') }}>Bucket <span class="badge">{{ \Illuminate\Support\Facades\Session::has('bucket') ? \Illuminate\Support\Facades\Session::get('bucket')->totalQty : '' }}</span> </a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href={{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id) }}>User Profile</a></li>
-                                <li><a href={{ url('/') }}>User Dashboard</a></li>
+                                <li><a href={{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/brands') }}>User Dashboard</a></li>
                                 <li><a href="{{ url('#') }}">Puchase History</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ url('/signout') }}">Logout</a></li>

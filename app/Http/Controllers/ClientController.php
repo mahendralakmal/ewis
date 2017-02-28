@@ -7,6 +7,7 @@ use App\Client;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
@@ -49,12 +50,14 @@ class ClientController extends Controller
 
     public function cp_update(Request $request)
     {
-        $client = User::find($request->clientuser)->first()->client->agent_id;
+//        return $request->all();
+        $client = Clientuser::find($request->client_id);
         $client->update(['cp_name' => $request->cp_name,
             'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,
             'cp_telephone' => $request->cp_telephone, 'cp_email' => $request->cp_email, 'user_id' => $request->user_id]);
 
-        return redirect('client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->clientprofile->id);
+//        return \Illuminate\Support\Facades\Session::get('User');
+        return redirect('/client-profile/' . User::find(Session::get('User'))->clientuser->first()->client->agent_id);
     }
 
     public function update(Request $request)
