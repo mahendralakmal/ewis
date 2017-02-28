@@ -45,7 +45,7 @@
                         <li><a href="#">About</a></li>
 
                         {{--{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id}}--}}
-                        <li><a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/bucket') }}>Bucket <span class="badge">{{ \Illuminate\Support\Facades\Session::has('bucket') ? \Illuminate\Support\Facades\Session::get('bucket')->totalQty : '' }}</span> </a></li>
+                        <li><a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/bucket') }}" >Bucket <span class="badge">{{ \Illuminate\Support\Facades\Session::has('bucket') ? \Illuminate\Support\Facades\Session::get('bucket')->totalQty : '' }}</span> </a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name }}<span class="caret"></span></a>

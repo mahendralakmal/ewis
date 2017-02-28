@@ -36,9 +36,9 @@
                                             <td><center>{{ $product['item'] ['name'] }}</center></td>
                                                 <td><center>{{ $product['qty'] }}</center></td>
                                             <td><center>{{ $product['price'] }}</center></td>
-                                                <td><div class="btn-group">
-                                                    <button type="button" href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id.'/remove_item') }}" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown">Remove Item<span class="caret"></span> </button>
-                                                </div></td></tr>
+                                                <td>
+                                                    <button type="button" href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/remove_item') }}" class="btn btn-primary btn-xs">Remove Item </button>
+                                                </td></tr>
                                         @endforeach
                                     </table>
                                 </div>
@@ -50,7 +50,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                                    <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id.'/checkout') }}" type="button" class="btn btn-success"> Checkout </a>
+                                    <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/checkout') }}" type="button" class="btn btn-success"> Checkout </a>
                                 </div>
                             </div>
 

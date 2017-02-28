@@ -57,7 +57,7 @@ class ClientController extends Controller
             'cp_telephone' => $request->cp_telephone, 'cp_email' => $request->cp_email, 'user_id' => $request->user_id]);
 
 //        return \Illuminate\Support\Facades\Session::get('User');
-        return redirect('/client-profile/' . User::find(Session::get('User'))->clientuser->first()->client->agent_id);
+        return redirect('/client-profile/' . User::find(Session::get('User'))->clientuser->first()->client->id);
     }
 
     public function update(Request $request)
