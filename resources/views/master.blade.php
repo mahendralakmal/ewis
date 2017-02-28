@@ -52,7 +52,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href={{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id) }}>User Profile</a></li>
                                 <li><a href={{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/brands') }}>User Dashboard</a></li>
-                                <li><a href="{{ url('#') }}">Puchase History</a></li>
+                                <li><a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/bucket/history') }}">Puchase History</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ url('/signout') }}">Logout</a></li>
                             </ul>
