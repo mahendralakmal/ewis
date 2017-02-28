@@ -17,4 +17,5 @@ class Clientuser extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
 }

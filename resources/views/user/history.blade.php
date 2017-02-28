@@ -15,6 +15,13 @@
                 <div class="tab-content white-background">
                     <div class="tab-pane fade active in" id="agent">
                         <div class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">
+                            <ul class="list-group-item"></ul>
+                            @foreach($orders as $order)
+                                @foreach($order->bucket->items as $item)
+                                    <span class="badge">{{ $item['price'] }}</span>
+                                @endforeach
+                                </li>
+                                @endforeach
 
                         </div>
                     </div>
