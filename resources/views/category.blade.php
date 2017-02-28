@@ -27,7 +27,7 @@
 	        		<div class="thumbnail">
 	        			<div class="caption text-center row">
 		        				<a href="{{ url('category', [$category->title,$category->id]) }}">
-		        					<img src="{{ asset('img/Categories/' . $category->image) }}" alt="category" class="img-responsive">	
+		        					<img src="{{ asset('/' . $category->image) }}" alt="category" class="img-responsive">
 		                            <p>{{ $category->description }}</p>
 		                        </a>
 	        			</div>

@@ -129,7 +129,7 @@ class UserController extends Controller
     public function welcome()
     {
         if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
-//            return redirect('/client-profile/' . User::find(Session::get('User'))->client->id . '/brands');
+           return redirect('/client-profile/' . User::find(Session::get('User'))->clientuser->first()->client->agentid . '/brands');
         } else {
             if(!(User::all()->count()) == 0) {
                 $error = '';

@@ -60,7 +60,7 @@
                                         <table class="table bio-table">
                                             <tbody>
                                             <tr>
-                                                <td>Emai Id</td>
+                                                <td>Email Id</td>
                                                 <td>: {{ $id->cp_email }}</td>
                                             </tr>
                                             <tr>
@@ -79,7 +79,7 @@
                                 </div><!--col-md-6 close-->
                                 <div class="col-md-10">
                                     <button class="btn btn-primary btn-outline"
-                                            onclick="location.href = '{{ url( 'client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id. '/edit/' ) }}'">
+                                            onclick="location.href = '{{ url( 'client-profile/'.App\User::find(Session::get('User'))->clientuser->first()->client->agent_id.'/edit/' ) }}'">
                                         Edit User Profile
                                     </button>
                                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Clientuser;
 use App\Client;
 use App\User;
 use Illuminate\Http\Request;
@@ -48,12 +49,12 @@ class ClientController extends Controller
 
     public function cp_update(Request $request)
     {
-        $client = User::find($request->user_id)->client;
+        $client = User::find($request->clientuser)->first()->client->agent_id;
         $client->update(['cp_name' => $request->cp_name,
             'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,
             'cp_telephone' => $request->cp_telephone, 'cp_email' => $request->cp_email, 'user_id' => $request->user_id]);
 
-        return redirect('client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id);
+        return redirect('client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->clientprofile->id);
     }
 
     public function update(Request $request)
@@ -67,12 +68,12 @@ class ClientController extends Controller
         return view('/admin/clients/manage-client', compact('users'));
     }
 
-    public function show(Client $id)
+    public function show(Clientuser $id)
     {
         return view('user.user', compact('id'));
     }
 
-    public function editClientProfile(Client $id)
+    public function editClientProfile(Clientuser $id)
     {
         return view('user/edit-user', compact('id'));
     }

@@ -21,7 +21,7 @@
                                     <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                         <div class="thumbnail">
                                             <div class="caption text-center row">
-                                                <a href="{{ url(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name.'/'.App\User::find(Session::get('User'))->clientuser->first()->client->agentid).'/'.$brand->title.'/'.$brand->id}}">
+                                                <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id).'/'.$brand->title.'/'.$brand->id}}">
                                                     <img src="{{ asset('/' . $brand->image) }}" alt="brand" class="img-responsive">
                                                 </a>
                                             </div>
