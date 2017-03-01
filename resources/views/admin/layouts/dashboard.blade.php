@@ -1,7 +1,7 @@
 @extends('admin.layouts.plane')
 
 @section('body')
-    @if((\Illuminate\Support\Facades\Session::get('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('Type') === 'Super User'))
+    @if((\Illuminate\Support\Facades\Session::get('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('Type') === 'Super Admin'))
         <div id="wrapper">
 
             <!-- Navigation -->

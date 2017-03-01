@@ -18,7 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('part_no')->unique();
             $table->string('name',45);
             $table->string('description');
-            $table->string('name');
             $table->integer('category_id')->unsigned()->index();
             $table->text('image')->nullable();
             $table->decimal('default_price',11,2);

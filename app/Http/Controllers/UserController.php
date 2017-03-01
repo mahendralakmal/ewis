@@ -22,6 +22,11 @@ class UserController extends Controller
     }
 
     public function signup_store(Request $request){
+        $designation = new Designation();
+        $designation->designation = "Super Admin";
+        $designation->user_id = 1;
+        $designation->save();
+
         $user = new User();
 
         $user->email = $request->email;
