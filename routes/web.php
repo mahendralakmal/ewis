@@ -18,10 +18,12 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::post('/{id}/postCheckout', 'BucketController@postCheckout');
     Route::get('/{id}/postCheckout', 'BucketController@postCheckout');
+
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
-    Route::get('/{id}/checkout', 'BucketController@Checkout');
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
+
+    Route::get('/{id}/checkout', 'BucketController@Checkout');
     Route::get('/{id}/{part_no}', 'ProductController@index');
     Route::post('/add-to-bucket', 'BucketController@getAddToBucket');
 });
