@@ -9,6 +9,7 @@ use App\Bucket;
 use App\Product;
 use App\P_Order;
 use App\User;
+use Illuminate\Support\Collection;
 
 class BucketController extends Controller
 {
@@ -64,17 +65,17 @@ class BucketController extends Controller
 
         Session::forget('bucket');
         return redirect('/');
-
     }
 
     public function getHistory(){
-        $orders = P_Order::where(client_id(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id))->orders;
+        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id)->all();
         $orders->transform(function ($order, $key){
-            $order->bucket = unserialize($order->bucket);
-            return $order;
+           $order->bucket = unserialize($order->bucket);
+           return $order;
         });
 
-    return view('user/history');
+
+        return view('user/history', ['orders' => $orders]);
     }
 
 }
