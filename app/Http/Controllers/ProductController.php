@@ -6,20 +6,21 @@ use App\Brand;
 use App\Bucket;
 use App\Category;
 use App\Client;
-use App\Client_Products;
+use App\Client_Product;
 use App\Product;
 use App\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
-use Session;
+//use Session;
 
 class ProductController extends Controller
 {
     public function store_client_products(Request $request){
 //        return $request->all();
-        Client_Products::create($request->all());
+        Client_Product::create($request->all());
         return back();
     }
 
@@ -37,10 +38,11 @@ class ProductController extends Controller
         return Response::json($categoris);
     }
 
-    public function assign_products_to_client(User $id)
+    public function assign_products_to_client(User $id, Request $request)
     {
+        $products = Client_Product::where([['user_id',$request->session()->get('User')],['client_id', $id->id]])->get();
         $brands = Brand::orderBy('title')->get();
-        return view('/admin/clients/manage-product-list', compact('brands', 'id'));
+        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products'));
     }
 
     public function delete(Product $id)
