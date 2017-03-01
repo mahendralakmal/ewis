@@ -1,21 +1,6 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Manage Clients')
 @section('section')
-    {{--<div class="col-md-6">--}}
-        {{--<div class="form-group row">--}}
-            {{--<div class="col-md-5">Client</div>--}}
-            {{--<div class="col-md-7">--}}
-                {{--<select class="form-control" name="client" id="client">--}}
-                    {{--<option>Select Client</option>--}}
-                    {{--@foreach($clients as $client)--}}
-                        {{--<option value="{{$client->id}}">{{$client->name}}</option>--}}
-                    {{--@endforeach--}}
-                    {{--<option value="1">COMMERCIAL BANK</option>--}}
-                    {{--<option value="2">SEYLAN BANK</option>--}}
-                {{--</select>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
     <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -73,6 +58,7 @@
                     <div class="col-md-4"><label>Category</label></div>
                     <div class="col-md-8">
                         <select name="category_id" id="category_id" class="form-control">
+                            <option>Select Category</option>
                         </select>
                     </div>
                 </div>

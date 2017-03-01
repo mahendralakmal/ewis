@@ -61,18 +61,20 @@ class ProductController extends Controller
 
     public function edit(Product $id)
     {
+        $brands = Brand::all();
         $products = Product::where('status', 1)->get();
         $categories = Category::where('status', 1)->get();
-        return view('/admin/products', compact('categories', 'products', 'id'));
+        return view('/admin/products', compact('categories', 'products', 'id', 'brands'));
     }
 
     public function admin_index()
     {
 //        return "hi";
         $id = "";
+        $brands = Brand::all();
         $categories = Category::where('status', 1)->get();
         $products = Product::where('status', 1)->get();
-        return view('/admin/products', compact('categories', 'products', 'id'));
+        return view('/admin/products', compact('categories', 'products', 'id', 'brands'));
     }
 
     public function store(Request $request)
