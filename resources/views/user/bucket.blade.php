@@ -37,7 +37,8 @@
                                                 <td><center>{{ $product['qty'] }}</center></td>
                                             <td><center>{{ $product['price'] }}</center></td>
                                                 <td>
-                                                    <button type="button" href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/remove_item') }}" class="btn btn-primary btn-xs">Remove Item </button>
+                                                    {{--href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/remove_item') }}"--}}
+                                                    <button type="button" onclick="" class="btn btn-primary btn-xs">Remove Item </button>
                                                 </td></tr>
                                         @endforeach
                                     </table>
