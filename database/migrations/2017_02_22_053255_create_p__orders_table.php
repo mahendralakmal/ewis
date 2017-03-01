@@ -21,8 +21,8 @@ class CreatePOrdersTable extends Migration
             $table->text('del_cp');
             $table->text('del_branch');
             $table->integer('del_tp');
-            $table->text('del_notes');
-            $table->text('cp_notes');
+            $table->text('del_notes')->nullable(true);;
+            $table->text('cp_notes')->nullable(true);;
         });
     }
 

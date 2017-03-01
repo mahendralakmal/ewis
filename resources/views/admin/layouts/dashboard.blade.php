@@ -1,7 +1,7 @@
 @extends('admin.layouts.plane')
 
 @section('body')
-    @if((\Illuminate\Support\Facades\Session::get('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('Type') === 'Super User'))
+    @if((\Illuminate\Support\Facades\Session::get('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('Type') === 'Super Admin'))
         <div id="wrapper">
 
             <!-- Navigation -->
@@ -112,14 +112,14 @@
                                             class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                        <a href="{{ url ('#') }}">Pending</a>
+                                        <a href="{{ url ('#') }}">View Purchase Orders</a>
                                     </li>
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                        <a href="{{ url ('#') }}">Partial Completed</a>
+                                        <a href="{{ url ('#') }}">Change Status</a>
                                     </li>
-                                    <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                        <a href="{{ url ('#' ) }}">Completed</a>
-                                    </li>
+                                    {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
+                                        {{--<a href="{{ url ('#' ) }}">Completed</a>--}}
+                                    {{--</li>--}}
                                     {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
                                     {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
                                     {{--</li>--}}
