@@ -24,7 +24,8 @@
                             <h3 class="pro-title">Complete Order</h3>
                             </div>
                                 <ul class="list-group">
-                                <form action="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/postCheckout') }}" method="POST" id="postCheckout" name="postCheckout" enctype="multipart/form-data" class="form-horizontal">
+
+                                <form  method="POST" action="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/postCheckout') }}" id="postCheckout" name="postCheckout" enctype="multipart/form-data" class="form-horizontal">
                                     {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-6">
@@ -114,28 +115,34 @@
                                     </div>
                                 </div>
                                 </div>
+
                                                 <h5>Your Total Items: {{ $total_qty }} </h5>
                                                 <hr>
                                                 <h5>Your Total Payment: Rs. {{ $total_price }} </h5>
                                                 <hr>
                                                 <br>
+                                    <div class="col-md-6 col-lg-6 col-sm-6">
+                                    <label id="success"></label>
+                                    </div>
                                                 <div class="form-group">
                                                     <div class="col-md-7">
-                                                        <button class="btn btn-primary btn-outline" type="submit" value="save-form">Submit</button>
+                                                        <button class="btn btn-primary btn-outline" onclick="Success()" type="submit" value="save-form" id="save-form">Submit</button>
                                                         <button class="btn btn-primary btn-outline" type="reset" value="clear-form">Clear</button>
                                                     </div>
                                                 </div>
                                 </form>
                                 </ul>
-
+                            <script>
+                                function Success() {
+                                    document.getElementById("success").innerHTML = "<div class='alert alert-success'>Your Purchase Order submited Successfully</div>";
+                                }
+                            </script>
                             </div>
                     </div>
                 </div>
         </div>
-    </div>
-    </div>
 
-
+    </div>
                             @else
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
@@ -143,5 +150,5 @@
                                 </div>
                             </div>
                             @endif
-                    </div>
+</div>
 @endsection

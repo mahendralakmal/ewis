@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\PerchaseOrder;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Product;
 use App\P_Order;
 use App\User;
 use Illuminate\Support\Collection;
+
 
 class BucketController extends Controller
 {
@@ -62,6 +64,11 @@ class BucketController extends Controller
         $order->del_notes = $request->input('del_notes');
 
         $order->save();
+
+        //$user = User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id;
+        //$user->notify(new PerchaseOrder($order));
+//        $client = User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->email;
+
 
         Session::forget('bucket');
         return redirect('/');
