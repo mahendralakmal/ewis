@@ -123,7 +123,6 @@
                         <input type="file" name="image" id="image">
                     </div>
                 </div>
-                >
                 <div class="form-group row">
                     <div class="col-md-4"><label>Cost</label></div>
                     <div class="col-md-8">
