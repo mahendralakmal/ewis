@@ -6,7 +6,7 @@ use App\Brand;
 use App\Bucket;
 use App\Category;
 use App\Client;
-use App\Client_Assign_Product;
+use App\Client_Products;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ class ProductController extends Controller
 {
     public function store_client_products(Request $request){
 //        return $request->all();
-        Client_Assign_Product::create($request->all());
+        Client_Products::create($request->all());
         return back();
     }
 

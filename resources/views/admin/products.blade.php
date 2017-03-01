@@ -14,7 +14,7 @@
                         <td><h5>Name</h5></td>
                         <td><h5>Brand</h5></td>
                         <td><h5>Category</h5></td>
-                        <td><h5>Description</h5></td>
+                        {{--<td><h5>Description</h5></td>--}}
                         <td class="text-right"><h5>Price</h5></td>
                         <td></td>
                     </tr>
@@ -26,7 +26,7 @@
                             <td>{{$product->name}}</td>
                             <td>{{$product->category->brand->title}}</td>
                             <td>{{$product->category->title}}</td>
-                            <td>{{$product->description}}</td>
+                            {{--<td>{{$product->description}}</td>--}}
                             <td class="text-right">{{$product->default_price}}</td>
                             <td class="col-md-3">
                                 <a href="/admin/products/{{$product->id}}"
