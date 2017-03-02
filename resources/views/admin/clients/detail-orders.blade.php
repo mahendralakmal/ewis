@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Manage Users')
+@section('page_heading','Purchase Order Details')
 @section('section')
     <div class="col-md-12">
         <div class="panel panel-default">
@@ -27,7 +27,7 @@
                             <td>{{ $item['item'] ['name'] }}</td>
                             <td>{{ $item['qty'] }}</td>
                             <td>{{ $item['price'] }}</td>
-                            <td> {{ $order->bucket->totalPrice }}</td>
+
                             {{--<td>{{$order->id}}</td>--}}
                             {{--<td>{{$order->created_at}}</td>--}}
                             {{--<td>{{\App\Client::find($porder->client_id)->name}}</td>--}}
@@ -38,10 +38,11 @@
                                 {{--@endif--}}
                             {{--</td>--}}
                             {{--<td><a href="{{ url('/admin/manage-clients/po-details') }}" class="btn btn-success">View Order</a></td>--}}
-                        </tr>
+
 
                     @endforeach
-
+                            <td> {{ $order->bucket->totalPrice }}</td>
+                        </tr>
                 </table>
             </div>
         </div>
