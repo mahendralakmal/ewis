@@ -9,6 +9,7 @@ Route::get('/signout', 'UserController@signout');
 Route::get('/signup', 'UserController@signup');
 Route::post('/signup/go', 'UserController@signup_store');
 
+Route::get('/remove_item/{item_id}', 'BucketController@remove_item');
 
 Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
@@ -26,6 +27,7 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}/checkout', 'BucketController@Checkout');
     Route::get('/{id}/{part_no}', 'ProductController@index');
     Route::post('/add-to-bucket', 'BucketController@getAddToBucket');
+
 });
 
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
@@ -98,6 +100,8 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
+        Route::get('/view-purchase-orders', 'BucketController@getPurchaseOrder');
+        Route::get('/po-details/{id}','BucketController@getPODetails');
 
         Route::get('/client_user/{user}', 'AgentController@client_user');
         Route::get('/client_user/{user}/activate', 'AgentController@client_user_activate');

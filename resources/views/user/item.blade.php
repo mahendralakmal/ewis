@@ -18,17 +18,11 @@
                     </div>
 
                     <div class="col-md-8">
-                        <h3>Rs. {{ $items->default_price }}</h3>
-                        <form action="/client-profile/add-to-bucket" method="GET" class="side-by-side">
-                            {!! csrf_field() !!}
-                            <input type="hidden" name="id" value="{{ $items->part_no }}">
-                            <input type="number" name="Qty" id="Qty" value="1">
-                            <input type="hidden" name="name" value="{{ $items->name }}">
-                            <input type="hidden" name="price" value="{{ $items->default_price }}">
-                            <input type="submit" class="btn btn-success btn-lg" value="Add to Bucket">
-                        </form>
-
-
+<br>
+                        <br>
+                        <h4>Item No:- {{ $items->part_no }}</h4>
+                        <h4>Item Name:- {{ $items->name }}</h4>
+                        <h4>Item Price:- {{ $items->default_price }}</h4>
 
                         {{ $items->description }}
                     </div>

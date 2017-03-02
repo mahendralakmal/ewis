@@ -12,7 +12,7 @@
                 <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
                     <div class="description">
                         <div class="inner">
-                                <h3>{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->cd_name }}</h3>
+                                <h3>{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->name }}</h3>
                             <h5>Sales Agent</h5>
                             <ul>
                                 <li><span class="glyphicon glyphicon-user"></span> Ewis Peripherals </li>
@@ -20,7 +20,7 @@
                                 </li>
                                 <li><span class="glyphicon glyphicon-phone"></span><a href="#" title="Phone">+94 11 230 3050</a>
                                 </li>
-                                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">saman.perera@ewis.lk</a>
+                                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="Email">{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->email }}</a>
                                 </li>
 
                             </ul>

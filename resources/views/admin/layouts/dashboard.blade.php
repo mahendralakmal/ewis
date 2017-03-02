@@ -29,7 +29,7 @@
                             <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
                             </li>
                             {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
-                            </li>
+                            {{--</li>--}}
                             <li class="divider"></li>
                             <li><a href="{{ url ('login') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                             </li>
@@ -115,7 +115,7 @@
                                             class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                        <a href="{{ url ('#') }}">View Purchase Orders</a>
+                                        <a href="{{ url ('/admin/manage-clients/view-purchase-orders') }}">View Purchase Orders</a>
                                     </li>
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                         <a href="{{ url ('#') }}">Change Status</a>
