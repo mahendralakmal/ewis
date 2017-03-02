@@ -81,6 +81,9 @@
                                     <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                         <a href="{{ url ('/admin/users/create-users') }}">Add New User</a>
                                     </li>
+                                    {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
+                                        {{--<a href="{{ url ('/admin/users/manage-users/privileges' ) }}">User Privileges</a>--}}
+                                    {{--</li>--}}
                                     <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                         <a href="{{ url ('/admin/users/manage-users' ) }}">User Approvals</a>
                                     </li>
@@ -202,7 +205,7 @@
 
                 </div>
             </div>
-            <footer>
+            <footer id="footer">
                 <p>Design &amp; Developed by Pro IT Solutions.</p>
             </footer>
         </div>

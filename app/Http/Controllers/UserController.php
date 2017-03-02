@@ -5,12 +5,21 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Designation;
 use App\User;
+use App\UserPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    public function StorePrivileges(Request $request){
+        UserPermission::create($request->all());
+        return back();
+    }
+
+    public function showPrivileges(User $user){
+        return view('/admin/users/manage-user-privileges', compact('user'));
+    }
     public function signup()
     {
 
