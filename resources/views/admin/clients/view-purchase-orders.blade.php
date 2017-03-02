@@ -32,7 +32,7 @@
                                 @elseif($porder->status === "c") Completed
                                 @endif
                             </td>
-                            <td><button href="{{ url ('/admin/manage-clients/po-details') }}" class="btn btn-success">View Order</button></td>
+                            <td><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>
                         </tr>
 
                     @endforeach

@@ -112,14 +112,14 @@ class BucketController extends Controller
         return view('admin/clients/view-purchase-orders', compact('porder'));
     }
 
-    public function getPODetails()
+    public function getPODetails($id)
     {
-        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->all();
-        $orders->transform(function ($order, $key) {
+        $order = P_Order::find($id);
+//        $order->transform(function ($order, $key) {
             $order->bucket = unserialize($order->bucket);
-            return $order;
-        });
-        return view('user/history', ['orders' => $orders]);
+//            return $order;
+//        });
+        return view('admin/clients/detail-orders', compact('order'));
     }
 
 }
