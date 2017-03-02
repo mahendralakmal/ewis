@@ -32,7 +32,10 @@
                                     <td>{{$user->designation->designation}}</td>
                                     <td>{{$user->nic_pass}}</td>
                                     <td>
-                                        @if($user->designation_id === 1)
+                                        {{--{{ $user->designation->designation }}--}}
+                                        <a href="/admin/users/manage-users/{{ $user->id }}/privileges"
+                                           class="btn btn-primary btn-outline">Privileges</a>
+                                        @if($user->designation->designation != "Client" && $user->designation_id != 1)
                                             <a @if(!$user->approval == 1) href="/admin/users/manage-users/approved/{{ $user->id }}"
                                                @else
                                                href="/admin/users/manage-users/unapproved/{{ $user->id }}"
@@ -41,7 +44,6 @@
                                                     Approve @else Unapprove @endif</a>
 
                                         @endif
-                                        <a href="/admin/users/manage-users/{{ $user->id }}/privileges" class="btn btn-primary btn-outline">Privileges</a>
                                     </td>
 
                                 </tr>

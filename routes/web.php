@@ -74,7 +74,8 @@ Route::group(['prefix' => ' /admin'], function () {
 
         Route::get('/manage-users', 'UserController@mange_user');
         Route::get('/manage-users/{user}/privileges', 'UserController@showPrivileges');
-        Route::post('/manage-users/{user}/privileges/store', 'UserController@StorePrivileges');
+        Route::post('/manage-users/privileges/store', 'UserController@StorePrivileges');
+        Route::post('/manage-users/privileges/update', 'UserController@UpdatePrivileges');
 
         Route::get('/manage-users/approved/{id}', 'UserController@approved');
         Route::get('/manage-users/unapproved/{id}', 'UserController@unapproved');
