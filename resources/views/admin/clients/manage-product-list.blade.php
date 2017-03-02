@@ -1,6 +1,7 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Manage Clients')
+@section('page_heading','Assign Products to Clients')
 @section('section')
+    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->asign_product)
     <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -25,8 +26,6 @@
                             <td>{{ App\Product::find($product->product_id)->part_no }}</td>
                             <td>{{ $product->special_price }}</td>
                             <td>
-                                <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">View
-                                    Details</a>
                                 <a href="#" class="btn btn-danger btn-outline">Remove</a>
                             </td>
                         </tr>
@@ -90,4 +89,9 @@
             </form>
         </div>
     </div>
+    @else
+        <div class="col-md-offset-3">
+            <h2>You are Not Authorize for access this page</h2>
+        </div>
+    @endif
 @stop

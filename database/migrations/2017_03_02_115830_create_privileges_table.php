@@ -26,6 +26,9 @@ class CreatePrivilegesTable extends Migration
             $table->boolean('client_users')->default(false);
             $table->boolean('view_po')->default(false);
             $table->boolean('change_po_status')->default(false);
+            $table->boolean('privilege')->default(false);
+            $table->boolean('assign_agent')->default(false);
+            $table->boolean('asign_product')->default(false);
             $table->integer('created_user_id');
             $table->timestamps();
         });

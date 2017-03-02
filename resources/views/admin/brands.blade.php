@@ -1,6 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Brands')
 @section('section')
+    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->brand)
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -66,4 +67,9 @@
             </form>
         </div>
     </div>
+    @else
+        <div class="col-md-offset-3">
+            <h2>You are Not Authorize for access this page</h2>
+        </div>
+    @endif
 @stop

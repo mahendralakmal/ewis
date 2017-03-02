@@ -1,6 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Add Users Privileges')
 @section('section')
+    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->privilege)
     <div class="col-md-12">
         {{--{{ $user->privilege }}<br>--}}
         <label>User : {{ $user->name }} </label><br>
@@ -94,4 +95,9 @@
             </form>
         </div>
     </div>
+    @else
+        <div class="col-md-offset-3">
+            <h2>You are Not Authorize for access this page</h2>
+        </div>
+    @endif
 @stop
