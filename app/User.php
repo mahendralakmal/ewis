@@ -8,8 +8,8 @@ class User extends Model
 {
     protected $fillable=['email','password','name','designation_id','nic_pass','deleted','approval','user_id'];
 
-    public function userpermission(){
-        return $this->hasOne(UserPermission::class);
+    public function privilege(){
+        return $this->hasOne(Privilege::class);
     }
 
     public function designation(){

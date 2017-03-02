@@ -49,9 +49,9 @@ class UserController extends Controller
         $user->user_id = $request->user_id;
         $user->approval = $request->approval;
         $user->save();
-        $user->userpermission()->create(['brand' => true, 'category' => true, 'product' => true, 'add-user' => true,
-            'user-approve' => true, 'designation' => true, 'client-prof' => true, 'client-users' => true,
-            'view-po' => true, 'change-po-status' => true, 'created_user_id' => $request->user_id]);
+        $user->privilege()->create(['brand' => true, 'category' => true, 'product' => true, 'add_user' => true,
+            'user_approve' => true, 'designation' => true, 'client_prof' => true, 'client_users' => true,
+            'view_po' => true, 'change_po_status' => true, 'created_user_id' => $request->user_id]);
 
         Session::put('LoggedIn', true);
         Session::put('User', $request->user_id);
