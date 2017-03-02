@@ -15,4 +15,8 @@ class Client extends Model
     public function client_products(){
         return $this->hasMany(Client_Products::class);
     }
+
+    public function P_Orders(){
+        return $this->hasMany('App\P_Order');
+    }
 }

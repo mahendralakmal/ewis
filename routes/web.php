@@ -99,6 +99,7 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
+        Route::get('/view-purchase-orders', 'BucketController@getPurchaseOrder');
 
         Route::get('/client_user/{user}', 'AgentController@client_user');
         Route::get('/client_user/{user}/activate', 'AgentController@client_user_activate');

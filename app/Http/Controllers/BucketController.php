@@ -81,6 +81,9 @@ class BucketController extends Controller
         $order->del_tp = $request->input('del_tp');
         $order->cp_notes = $request->input('cp_notes');
         $order->del_notes = $request->input('del_notes');
+        $order->status = "P";
+        $order->agent_id =  User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id;
+
 
         $order->save();
 
@@ -100,9 +103,21 @@ class BucketController extends Controller
             $order->bucket = unserialize($order->bucket);
             return $order;
         });
-
-
         return view('user/history', ['orders' => $orders]);
+    }
+
+    public function getPurchaseOrder()
+    {
+        $porder = P_Order::all();
+        return view('admin/clients/view-purchase-orders', compact('porder'));
+//        return $porder;
+//        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->all();
+//        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User')->id))->all();
+//        $porder->transform(function ($order, $key) {
+//            $order->bucket = unserialize($order->bucket);
+//            return $order;
+//        });
+//        return view('admin/clients/view-purchase-orders', compact('porder'));
     }
 
 }
