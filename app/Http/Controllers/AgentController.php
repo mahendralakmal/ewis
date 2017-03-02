@@ -78,4 +78,14 @@ class AgentController extends Controller
         $clients = Client::where('approval', 1)->get();
         return view('/admin/clients/client-users', compact('user', 'clients', 'id'));
     }
+
+    public function client_user_activate(User $user){
+        $user->update(['approval'=>1]);
+        return back();
+    }
+
+    public function client_user_deactivate(User $user){
+        $user->update(['approval'=>0]);
+        return back();
+    }
 }

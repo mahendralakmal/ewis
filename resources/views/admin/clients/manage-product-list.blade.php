@@ -12,22 +12,25 @@
                     <tr>
                         <td><h5>Brand</h5></td>
                         <td><h5>Category</h5></td>
-                        <td><h5>Product</h5></td>
+                        <td><h5>Part No</h5></td>
                         <td><h5>Price</h5></td>
                         <td class="col-md-5"></td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Lexmark</td>
-                        <td>Printers</td>
-                        <td>sx001</td>
-                        <td class="text-right">25000.00</td>
-                        <td>
-                            <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">View Details</a>
-                            <a href="#" class="btn btn-danger btn-outline">Remove</a>
-                        </td>
-                    </tr>
+                    @foreach($products as $product)
+                        <tr>
+                            <td>{{ App\Product::find($product->product_id)->category->brand->title }}</td>
+                            <td>{{ App\Product::find($product->product_id)->category->title }}</td>
+                            <td>{{ App\Product::find($product->product_id)->part_no }}</td>
+                            <td>{{ $product->special_price }}</td>
+                            <td>
+                                <a href="/admin/manage-clients/agent-assign" class="btn btn-primary btn-outline">View
+                                    Details</a>
+                                <a href="#" class="btn btn-danger btn-outline">Remove</a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -37,7 +40,8 @@
         <h4>Assign Products</h4>
         <hr>
         <div class="col-md-12">
-            <form class="form-horizontal" id="asignProduct" role="form" method="POST" action="/admin/manage-product-list/product/details/{{ $id->id }}/store">
+            <form class="form-horizontal" id="asignProduct" role="form" method="POST"
+                  action="/admin/manage-product-list/product/details/{{ $id->id }}/store">
                 {{ csrf_field() }}
                 <div class="form-group row">
                     <input type="hidden" id="client_id" name="client_id" value="{{ $id->id }}">
@@ -48,8 +52,8 @@
                         <select name="brand_id" id="brand_id" class="form-control">
                             <option>Select Brand</option>
                             @foreach($brands as $brand)
-                            <option value="{{$brand->id}}"
-                            >{{$brand->title}}</option>
+                                <option value="{{$brand->id}}"
+                                >{{$brand->title}}</option>
                             @endforeach
                         </select>
                     </div>

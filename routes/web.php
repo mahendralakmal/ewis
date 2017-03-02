@@ -19,10 +19,12 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::post('/{id}/postCheckout', 'BucketController@postCheckout');
     Route::get('/{id}/postCheckout', 'BucketController@postCheckout');
+
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
-    Route::get('/{id}/checkout', 'BucketController@Checkout');
     Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
+
+    Route::get('/{id}/checkout', 'BucketController@Checkout');
     Route::get('/{id}/{part_no}', 'ProductController@index');
     Route::post('/add-to-bucket', 'BucketController@getAddToBucket');
 
@@ -101,6 +103,8 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
 
         Route::get('/client_user/{user}', 'AgentController@client_user');
+        Route::get('/client_user/{user}/activate', 'AgentController@client_user_activate');
+        Route::get('/client_user/{user}/deactivate', 'AgentController@client_user_deactivate');
         Route::post('/agent-assign/store', 'AgentController@store');
         Route::post('/agent-assign/update', 'AgentController@update');
         Route::get('/agent-assign/{id}', 'AgentController@index');
