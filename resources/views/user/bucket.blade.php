@@ -14,8 +14,8 @@
             </li>
 
         </ul>
-    <div class="tab-content white-background">
-        <div class="tab-pane fade active in" id="agent">
+        <div class="tab-content white-background">
+            <div class="tab-pane fade active in" id="agent">
                 <div class="col-sm-11" style="float:left;">
                     <br clear="all"/>
                     <div class="container">
@@ -32,14 +32,25 @@
                                         </tr>
                                         @foreach($products as $product)
                                             <tr>
-                                            <td><center>{{ $product['item'] ['part_no'] }}</center></td>
-                                            <td><center>{{ $product['item'] ['name'] }}</center></td>
-                                                <td><center>{{ $product['qty'] }}</center></td>
-                                            <td><center>{{ $product['price'] }}</center></td>
                                                 <td>
-                                                    {{--href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/remove_item') }}"--}}
-                                                    <button type="button" onclick="" class="btn btn-primary btn-xs">Remove Item </button>
-                                                </td></tr>
+                                                    <center>{{ $product['item'] ['part_no'] }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $product['item'] ['name'] }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $product['qty'] }}</center>
+                                                </td>
+                                                <td>
+                                                    <center>{{ $product['price'] }}</center>
+                                                </td>
+                                                {{--<input type="hidden" id="item_id" name="item_id" value="{{ $product['item']['id'] }}">--}}
+                                                <td>
+                                                    <a type="button"
+                                                       href="{{ url('remove_item/'.$product['item']['id']) }}"
+                                                       class="btn btn-error btn-sm">Remove Item </a>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </table>
                                 </div>
@@ -51,17 +62,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                                    <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/checkout') }}" type="button" class="btn btn-success"> Checkout </a>
+                                    <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/checkout') }}"
+                                       type="button" class="btn btn-success"> Checkout </a>
                                 </div>
                             </div>
 
-                            @else
+                        @else
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
                                     <h2>No Items in the Bucket! </h2>
                                 </div>
                             </div>
-                            @endif
+                        @endif
                     </div>
                 </div>
             </div>

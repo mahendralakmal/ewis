@@ -17,7 +17,7 @@ class BucketController extends Controller
 {
     public function getAddToBucket(Request $request)
     {
-        $product = Product::where('part_no',$request->part_no)->first();
+        $product = Product::where('part_no', $request->part_no)->first();
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
         $bucket->add($product, $product->part_no, $request->Qty);
@@ -25,28 +25,47 @@ class BucketController extends Controller
         return back();
     }
 
-    public function getBucket() {
+    public function getBucket()
+    {
         if (!Session::has('bucket')) {
             return view('user/bucket');
         }
-            $oldBucket = Session::get('bucket');
-            $bucket = new Bucket($oldBucket);
-            return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice] );
+        $oldBucket = Session::get('bucket');
+        $bucket = new Bucket($oldBucket);
+        return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice]);
 
     }
 
-    public function Checkout() {
+    public function remove_item(Request $request, $item_id)
+    {
+        $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
+        $bucket = new Bucket($oldBucket);
+        $products = $bucket->items;
+        foreach ($products as $product) {
+//            echo "id: ".$product['item'] ['id'];
+            if ($product['item'] ['id'] == $item_id) {
+//                return $item_id;
+                $bucket->remove($product);
+//                $request->session()->forget($product);
+            };
+        }
+//    return ($product);
+    }
+
+    public function Checkout()
+    {
         if (!Session::has('bucket')) {
             return view('user/bucket');
         }
-            $oldBucket = Session::get('bucket');
-            $bucket = new Bucket($oldBucket);
-            $total_price = $bucket->totalPrice;
-            $total_qty = $bucket->totalQty;
-            return view('user/checkout', ['total_price' => $total_price, 'total_qty' => $total_qty ]);
+        $oldBucket = Session::get('bucket');
+        $bucket = new Bucket($oldBucket);
+        $total_price = $bucket->totalPrice;
+        $total_qty = $bucket->totalQty;
+        return view('user/checkout', ['total_price' => $total_price, 'total_qty' => $total_qty]);
     }
 
-    public function postCheckout(Request $request) {
+    public function postCheckout(Request $request)
+    {
         if (!Session::has('bucket')) {
             return view('user/bucket');
         }
@@ -74,11 +93,12 @@ class BucketController extends Controller
         return redirect('/');
     }
 
-    public function getHistory(){
+    public function getHistory()
+    {
         $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id)->all();
-        $orders->transform(function ($order, $key){
-           $order->bucket = unserialize($order->bucket);
-           return $order;
+        $orders->transform(function ($order, $key) {
+            $order->bucket = unserialize($order->bucket);
+            return $order;
         });
 
 

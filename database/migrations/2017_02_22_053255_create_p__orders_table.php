@@ -23,6 +23,7 @@ class CreatePOrdersTable extends Migration
             $table->integer('del_tp');
             $table->text('del_notes')->nullable(true);;
             $table->text('cp_notes')->nullable(true);;
+            $table->text('status');
         });
     }
 
