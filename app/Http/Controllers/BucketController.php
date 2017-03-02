@@ -110,14 +110,16 @@ class BucketController extends Controller
     {
         $porder = P_Order::all();
         return view('admin/clients/view-purchase-orders', compact('porder'));
-//        return $porder;
-//        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->all();
-//        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User')->id))->all();
-//        $porder->transform(function ($order, $key) {
-//            $order->bucket = unserialize($order->bucket);
-//            return $order;
-//        });
-//        return view('admin/clients/view-purchase-orders', compact('porder'));
+    }
+
+    public function getPODetails()
+    {
+        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->all();
+        $orders->transform(function ($order, $key) {
+            $order->bucket = unserialize($order->bucket);
+            return $order;
+        });
+        return view('user/history', ['orders' => $orders]);
     }
 
 }

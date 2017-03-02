@@ -22,7 +22,6 @@
                     </thead>
                     <tbody>
                     @foreach($porder as $porder)
-                        {{--@foreach($porder->bucket->items as $item)--}}
                         <tr>
                             <td>{{$porder->id}}</td>
                             <td>{{$porder->created_at}}</td>
@@ -33,29 +32,12 @@
                                 @elseif($porder->status === "c") Completed
                                 @endif
                             </td>
-                            <td></td>
+                            <td><button href="{{ url ('/admin/manage-clients/po-details') }}" class="btn btn-success">View Order</button></td>
                         </tr>
-                    {{--@endforeach--}}
-                    @endforeach
-                    {{--@foreach($order->bucket->items as $item)--}}
-                    {{--<tr>--}}
-                    {{--<td>{{$order->client_id}}</td>--}}
-                    {{--<td>{{$order->bucket->name}}</td>--}}
-                    {{--<td>{{$order->bucket->totalQty}}</td>--}}
-                    {{--<td>{{$order->bucket->totalPrice}}</td>--}}
-                    {{--<td>{{$user->nic_pass}}</td>--}}
-                    {{--<td>--}}
-                    {{--<a href="/admin/users/manage-users/{{ $user->id }}/privileges" class="btn btn-primary btn-outline">Privileges</a>--}}
-                    {{--</td>--}}
 
-                    {{--</tr>--}}
-                    {{--@endforeach--}}
-                    {{--@endforeach--}}
-                    {{--</tbody>--}}
+                    @endforeach
+
                 </table>
-                {{--@else--}}
-                {{--<p>No users found.</p>--}}
-                {{--@endif--}}
             </div>
         </div>
     </div>
