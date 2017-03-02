@@ -1,6 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Manage Clients')
 @section('section')
+    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_users)
     <div class="col-md-12 col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -60,4 +61,9 @@
             </div>
         </div>
     </div>
+    @else
+        <div class="col-md-offset-3">
+            <h2>You are Not Authorize for access this page</h2>
+        </div>
+    @endif
 @stop

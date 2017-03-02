@@ -4,40 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Designation;
+use App\Privilege;
 use App\User;
-use App\UserPermission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    public function StorePrivileges(Request $request){
-        UserPermission::create($request->all());
-        return back();
-    }
-
-    public function showPrivileges(User $user){
-        return view('/admin/users/manage-user-privileges', compact('user'));
-    }
-    public function signup()
+    public function StorePrivileges(Request $request)
     {
-
-        if (!(Session::get('LoggedIn')) && (User::all()->count() == 0)) {
-            return view('signup');
-        } else {
-            return redirect('/');
-        }
+        $user = User::find($request->user_id);
+//        return $user->privilage;
+        $user->privilege()->create([
+            'brand' => ($request->brand == "on")? true: false, 'category' => ($request->category == "on")? true: false,
+            'product' => ($request->product == "on")? true: false, 'add_user' => ($request->add_user == "on")? true: false,
+            'user_approve' => ($request->user_approve == "on")? true: false, 'designation' => ($request->designation == "on")? true: false,
+            'client_prof' => ($request->client_prof == "on")? true: false, 'client_users' => ($request->client_users == "on")? true: false,
+            'view_po' => ($request->view_po == "on")? true: false, 'change_po_status' => ($request->change_po_status == "on")? true: false,
+            'created_user_id' => $request->user_id
+        ]);
+        return redirect('/admin/users/manage-users');
+    }
+    public function UpdatePrivileges(Request $request)
+    {
+        $privilege = (User::find($request->user_id))->privilege;
+        $privilege->update(['brand' => ($request->brand == "on")? true: false, 'category' => ($request->category == "on")? true: false,
+            'product' => ($request->product == "on")? true: false, 'add_user' => ($request->add_user == "on")? true: false,
+            'user_approve' => ($request->user_approve == "on")? true: false, 'designation' => ($request->designation == "on")? true: false,
+            'client_prof' => ($request->client_prof == "on")? true: false, 'client_users' => ($request->client_users == "on")? true: false,
+            'view_po' => ($request->view_po == "on")? true: false, 'change_po_status' => ($request->change_po_status == "on")? true: false,
+            'created_user_id' => $request->user_id]);
+        return redirect('/admin/users/manage-users');
     }
 
-    public function signup_store(Request $request){
+    public function signup_store(Request $request)
+    {
         $designation = new Designation();
         $designation->designation = "Super Admin";
         $designation->user_id = 1;
         $designation->save();
 
         $user = new User();
-
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->name = $request->name;
@@ -46,6 +54,9 @@ class UserController extends Controller
         $user->user_id = $request->user_id;
         $user->approval = $request->approval;
         $user->save();
+        $user->privilege()->create(['brand' => true, 'category' => true, 'product' => true, 'add_user' => true,
+            'user_approve' => true, 'designation' => true, 'client_prof' => true, 'client_users' => true,
+            'view_po' => true, 'change_po_status' => true, 'created_user_id' => $request->user_id]);
 
         Session::put('LoggedIn', true);
         Session::put('User', $request->user_id);
@@ -53,6 +64,21 @@ class UserController extends Controller
         Session::put('ip', $request->ip());
 
         return redirect('/admin');
+    }
+
+    public function showPrivileges(User $user)
+    {
+        return view('/admin/users/manage-user-privileges', compact('user'));
+    }
+
+    public function signup()
+    {
+
+        if (!(Session::get('LoggedIn')) && (User::all()->count() == 0)) {
+            return view('signup');
+        } else {
+            return redirect('/');
+        }
     }
 
     public function store(Request $request)
@@ -143,9 +169,9 @@ class UserController extends Controller
     public function welcome()
     {
         if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
-           return redirect('/client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id. '/brands');
+            return redirect('/client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id . '/brands');
         } else {
-            if(!(User::all()->count()) == 0) {
+            if (!(User::all()->count()) == 0) {
                 $error = '';
                 return view('welcome', compact('error'));
             } else {

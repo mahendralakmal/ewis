@@ -1,6 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Manage Users')
 @section('section')
+    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->user_approve)
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -32,7 +33,10 @@
                                     <td>{{$user->designation->designation}}</td>
                                     <td>{{$user->nic_pass}}</td>
                                     <td>
-                                        @if($user->designation_id === 1)
+                                        {{--{{ $user->designation->designation }}--}}
+                                        <a href="/admin/users/manage-users/{{ $user->id }}/privileges"
+                                           class="btn btn-primary btn-outline">Privileges</a>
+                                        @if($user->designation->designation != "Client" && $user->designation_id != 1)
                                             <a @if(!$user->approval == 1) href="/admin/users/manage-users/approved/{{ $user->id }}"
                                                @else
                                                href="/admin/users/manage-users/unapproved/{{ $user->id }}"
@@ -41,7 +45,6 @@
                                                     Approve @else Unapprove @endif</a>
 
                                         @endif
-                                        <a href="/admin/users/manage-users/{{ $user->id }}/privileges" class="btn btn-primary btn-outline">Privileges</a>
                                     </td>
 
                                 </tr>
@@ -55,4 +58,9 @@
             </div>
         </div>
     </div>
+    @else
+        <div class="col-md-offset-3">
+            <h2>You are Not Authorize for access this page</h2>
+        </div>
+    @endif
 @stop
