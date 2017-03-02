@@ -15,7 +15,7 @@
                         <td><h5>Part Name</h5></td>
                         <td><h5>Quantity</h5></td>
                         <td><h5>Price</h5></td>
-                        <td><h5>Total</h5></td>
+                        {{--<td></td>--}}
                         {{--<td><h5>NIC/ Passport</h5></td>--}}
                         <td class="col-md-3"></td>
                     </tr>
@@ -27,21 +27,13 @@
                             <td>{{ $item['item'] ['name'] }}</td>
                             <td>{{ $item['qty'] }}</td>
                             <td>{{ $item['price'] }}</td>
-
-                            {{--<td>{{$order->id}}</td>--}}
-                            {{--<td>{{$order->created_at}}</td>--}}
-                            {{--<td>{{\App\Client::find($porder->client_id)->name}}</td>--}}
-                            {{--<td>{{$porder->del_branch}}</td>--}}
-                            {{--<td>@if($porder->status === "P") Pending--}}
-                                {{--@elseif($porder->status === "cp") Partial Completed--}}
-                                {{--@elseif($porder->status === "c") Completed--}}
-                                {{--@endif--}}
-                            {{--</td>--}}
-                            {{--<td><a href="{{ url('/admin/manage-clients/po-details') }}" class="btn btn-success">View Order</a></td>--}}
-
-
                     @endforeach
-                            <td> {{ $order->bucket->totalPrice }}</td>
+                        </tr>
+                        <tr>
+                            <td><h5>Total</h5></td>
+                            <td></td>
+                            <td></td>
+                            <td style="border-bottom: double #333"><h5>{{ $order->bucket->totalPrice }}</h5></td>
                         </tr>
                 </table>
             </div>
