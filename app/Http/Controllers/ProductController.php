@@ -18,8 +18,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function remove_client_products(Client_Product $id){
+//        return $id;
+        $id->update(['remove'=>1]);
+        return back();
+    }
     public function update_client_products(Request $request){
-//        return $request->all();
         $cprod = Client_Product::find($request->id);
 
         $cprod->update([
