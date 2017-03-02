@@ -19,6 +19,7 @@ class CreateClientsProductTable extends Migration
             $table->integer('client_id');
             $table->integer('product_id');
             $table->decimal('special_price',11,2);
+            $table->boolean('remove')->default(0);
             $table->timestamps();
         });
     }
