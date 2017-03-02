@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Manage Users')
 @section('section')
-    <div class="col-md-9">
+    <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Users</h3>
@@ -32,10 +32,18 @@
                                     <td>{{$user->designation->designation}}</td>
                                     <td>{{$user->nic_pass}}</td>
                                     <td>
-                                        @if($user->designation_id !== 1)
-                                        <a href="/admin/users/manage-users/approved/{{ $user->id }}" class="btn btn-primary btn-outline">Approve</a>
-                                        <a href="/admin/users/manage-users/unapproved/{{ $user->id }}" class="btn btn-danger btn-outline" @if(!$user->approval == 1) disabled @endif>Unapprove</a> </td>
+                                        @if($user->designation_id === 1)
+                                            <a @if(!$user->approval == 1) href="/admin/users/manage-users/approved/{{ $user->id }}"
+                                               @else
+                                               href="/admin/users/manage-users/unapproved/{{ $user->id }}"
+                                               @endif
+                                               class="btn @if(!$user->approval == 1) btn-primary @else btn-danger @endif btn-outline">@if(!$user->approval == 1)
+                                                    Approve @else Unapprove @endif</a>
+
                                         @endif
+                                        <a href="/admin/users/manage-users/{{ $user->id }}/privileges" class="btn btn-primary btn-outline">Privileges</a>
+                                    </td>
+
                                 </tr>
                             @endif
                         @endforeach
