@@ -18,8 +18,29 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function store_client_products(Request $request){
+    public function update_client_products(Request $request){
 //        return $request->all();
+        $cprod = Client_Product::find($request->id);
+
+        $cprod->update([
+            'brand_id'=>$request->brand_id,
+            'category_id'=>$request->category_id,
+            'product_id'=>$request->product_id,
+            'special_price'=>$request->special_price
+        ]);
+        return back();
+    }
+
+    public function edit_client_products(Client_Product $id, Request $request){
+        $cp_id = $id;
+        $cp_products = Product::all();
+        $categories = Category::all();
+        $products = Client_Product::where([['user_id',$request->session()->get('User')],['client_id', $id->client_id]])->get();
+        $brands = Brand::orderBy('title')->get();
+        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products', 'cp_id', 'categories','cp_products'));
+    }
+
+    public function store_client_products(Request $request){
         Client_Product::create($request->all());
         return back();
     }
@@ -40,9 +61,12 @@ class ProductController extends Controller
 
     public function assign_products_to_client(User $id, Request $request)
     {
+        $cp_id = '';
+        $cp_products = '';
+        $categories = Category::all();
         $products = Client_Product::where([['user_id',$request->session()->get('User')],['client_id', $id->id]])->get();
         $brands = Brand::orderBy('title')->get();
-        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products'));
+        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products','cp_id', 'categories','cp_products'));
     }
 
     public function delete(Product $id)

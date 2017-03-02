@@ -115,6 +115,8 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/product/{id}', 'ProductController@load_products');
         Route::get('/product/details/{id}', 'ProductController@load_products_deta');
         Route::post('/product/details/{id}/store', 'ProductController@store_client_products');
+        Route::get('/product/details/edit/{id}', 'ProductController@edit_client_products');
+        Route::post('/product/details/update', 'ProductController@update_client_products');
     });
 
 });
