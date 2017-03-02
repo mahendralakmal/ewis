@@ -18,15 +18,11 @@
                     </div>
 
                     <div class="col-md-8">
-                        <h3>Rs. {{ $items->default_price }}</h3>
-                        <form method="GET" class="side-by-side">
-                            {!! csrf_field() !!}
-                            <input type="hidden" name="id" value="{{ $items->part_no }}">
-                            <input type="hidden" name="name" value="{{ $items->name }}">
-                            <input type="hidden" name="price" value="{{ $items->default_price }}">
-                        </form>
-
-
+<br>
+                        <br>
+                        <h4>Item No:- {{ $items->part_no }}</h4>
+                        <h4>Item Name:- {{ $items->name }}</h4>
+                        <h4>Item Price:- {{ $items->default_price }}</h4>
 
                         {{ $items->description }}
                     </div>

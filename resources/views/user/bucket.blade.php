@@ -21,7 +21,7 @@
                     <div class="container">
                         @if (Session::has('bucket'))
                             <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+                                <div class="col-md-11 col-sm-11 col-sx-11 col-lg-11">
                                     <table class="table-bordered col-sm-10 col-lg-10 col-md-10">
                                         <tr>
                                             <td><strong>Product Number</strong></td>
@@ -55,18 +55,18 @@
                                     </table>
                                 </div>
                             </div>
+                            <div class="col-lg-8 col-sm-8 col-xs-8 col-md-8 col-md-offset-7 col-lg-offset-7">
                             <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
                                     <strong>Total : {{ $totalPrice }}</strong>
-                                </div>
+
                             </div>
                             <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+                                {{--<div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">--}}
                                     <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/checkout') }}"
                                        type="button" class="btn btn-success"> Checkout </a>
-                                </div>
-                            </div>
 
+                            </div>
+                            </div>
                         @else
                             <div class="row">
                                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
