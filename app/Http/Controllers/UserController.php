@@ -12,14 +12,17 @@ use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    public function StorePrivileges(Request $request){
+    public function StorePrivileges(Request $request)
+    {
         UserPermission::create($request->all());
         return back();
     }
 
-    public function showPrivileges(User $user){
+    public function showPrivileges(User $user)
+    {
         return view('/admin/users/manage-user-privileges', compact('user'));
     }
+
     public function signup()
     {
 
@@ -30,14 +33,14 @@ class UserController extends Controller
         }
     }
 
-    public function signup_store(Request $request){
+    public function signup_store(Request $request)
+    {
         $designation = new Designation();
         $designation->designation = "Super Admin";
         $designation->user_id = 1;
         $designation->save();
 
         $user = new User();
-
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->name = $request->name;
@@ -46,6 +49,9 @@ class UserController extends Controller
         $user->user_id = $request->user_id;
         $user->approval = $request->approval;
         $user->save();
+        $user->userpermission()->create(['brand' => true, 'category' => true, 'product' => true, 'add-user' => true,
+            'user-approve' => true, 'designation' => true, 'client-prof' => true, 'client-users' => true,
+            'view-po' => true, 'change-po-status' => true, 'created_user_id' => $request->user_id]);
 
         Session::put('LoggedIn', true);
         Session::put('User', $request->user_id);
@@ -143,9 +149,9 @@ class UserController extends Controller
     public function welcome()
     {
         if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
-           return redirect('/client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id. '/brands');
+            return redirect('/client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id . '/brands');
         } else {
-            if(!(User::all()->count()) == 0) {
+            if (!(User::all()->count()) == 0) {
                 $error = '';
                 return view('welcome', compact('error'));
             } else {
