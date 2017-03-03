@@ -6,7 +6,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Users</h3>
             </div>
-            {{--{{ $porder[0]['bucket'] }}--}}
+
             <div class="panel-body">
                 <table class="table">
                     <thead>

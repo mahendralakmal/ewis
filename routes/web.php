@@ -19,6 +19,7 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::post('/{id}/postCheckout', 'BucketController@postCheckout');
     Route::get('/{id}/postCheckout', 'BucketController@postCheckout');
+    Route::post('/sendemail','BucketController@Sendemail');
 
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
@@ -29,6 +30,8 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::post('/add-to-bucket', 'BucketController@getAddToBucket');
 
 });
+
+Route::get('/sendmail', 'MailController@sendmail');
 
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
