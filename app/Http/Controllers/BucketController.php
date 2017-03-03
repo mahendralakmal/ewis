@@ -15,6 +15,13 @@ use Illuminate\Support\Collection;
 
 class BucketController extends Controller
 {
+
+    public function change_status($id, $status){
+        $po = P_Order::find($id);
+        $po->update(['status'=>$status]);
+        return back();
+    }
+
     public function getAddToBucket(Request $request)
     {
         $product = Product::where('part_no', $request->part_no)->first();
