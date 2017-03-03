@@ -84,7 +84,8 @@ class ClientController extends Controller
     public function approval()
     {
         $users = User::where('designation_id', 4)->get();
-        return view('admin/clients/approval-client', compact('users'));
+        return redirect('/admin/users/create-users');
+//        return view('admin/clients/approval-client', compact('users'));
     }
 
     public function approved(Client $id)

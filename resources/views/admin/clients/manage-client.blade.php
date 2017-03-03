@@ -47,10 +47,17 @@
                                         <a href="/admin/manage-clients/agent-assign/{{ $user->id }}"
                                            class="btn btn-primary btn-outline">Assign
                                             Agent</a>
+                                        <br>
+                                        <br>
+                                        <a href="/admin/manage-product-list/{{ $user->id }}/brands"
+                                           class="btn btn-primary btn-outline">Add
+                                            Brands</a>
+                                        <a href="/admin/manage-product-list/{{ $user->id }}/categories"
+                                           class="btn btn-primary btn-outline">Add
+                                            Categories</a>
                                         <a href="/admin/manage-product-list/{{ $user->id }}"
                                            class="btn btn-primary btn-outline">Add
                                             Products</a>
-                                        {{--<a href="#" class="btn btn-danger btn-outline" disabled>Deactivate</a>--}}
                                     </td>
                                 </tr>
                             @endforeach
