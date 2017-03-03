@@ -45,7 +45,7 @@
             <hr>
             <div class="col-md-12">
                 <form class="form-horizontal" id="asignProduct" role="form" method="POST"
-                        {{--action="@if($cp_id==null) /admin/manage-product-list/product/details/{{ $id->id }}/store @else /admin/manage-product-list/product/details/update @endif"--}}
+                        action="@if($cp_id==null) /admin/manage-product-list/product/details/{{ $id->id }}/store @else /admin/manage-product-list/product/details/update @endif"
                 >
                     {{ csrf_field() }}
                     <div class="form-group row">
@@ -53,7 +53,7 @@
                         @if($cp_id!=null)
                             <input type="hidden" id="id" name="id" value="{{ $cp_id->id }}">
                         @endif
-                        <input type="hidden" id="client_id" name="client_id" value="{{ $id->id }}">
+                        <input type="hidden" id="client_id" name="client_id" value="{{ \App\User::find($id->id)->clientuser->first()->client->id }}">
                         <input type="hidden" id="user_id" name="user_id"
                                value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
 

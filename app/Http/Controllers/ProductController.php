@@ -45,6 +45,7 @@ class ProductController extends Controller
     }
 
     public function store_client_products(Request $request){
+//        return $request->all();
         Client_Product::create($request->all());
         return back();
     }

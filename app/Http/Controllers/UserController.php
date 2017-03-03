@@ -184,7 +184,7 @@ class UserController extends Controller
         Session::put('LoggedIn', false);
         $user = User::where([['email', $request->email], ['approval', 1]])->first();
         if (!$user == null && Hash::check($request->password, $user->password)) {
-            if ($user->designation->designation == 'Client' || $user->designation->designation == 'Client') {
+            if (strtolower($user->designation->designation) == 'client') {
                 $client = $user->client;
                 Session::put('LoggedIn', true);
                 Session::put('User', $user->id);
@@ -210,6 +210,7 @@ class UserController extends Controller
         Session::forget('User');
         Session::forget('BaseColor');
         Session::flush();
+        Session::put('LoggedIn', false);
         return redirect('/');
     }
 }
