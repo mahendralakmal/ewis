@@ -21,12 +21,12 @@ class BrandsController extends Controller
         return back();
     }
 
-    public function edit_client_products(CBrand $id, Request $request){
-        $cp_id = $id;
-        $cbrands = CBrand::where([['user_id',$request->session()->get('User')],['client_id', $id->client_id]])->get();
-        $brands = Brand::orderBy('title')->get();
-        return view('/admin/clients/manage-brand-list', compact('brands', 'id', 'cbrands','cp_id'));
-    }
+//    public function edit_client_products(CBrand $id, Request $request){
+//        $cp_id = $id;
+//        $cbrands = CBrand::where([['user_id',$request->session()->get('User')],['client_id', $id->client_id]])->get();
+//        $brands = Brand::orderBy('title')->get();
+//        return view('/admin/clients/manage-brand-list', compact('brands', 'id', 'cbrands','cp_id'));
+//    }
 
     public function store_client_brands(Request $request){
         CBrand::create($request->all());
@@ -81,15 +81,9 @@ class BrandsController extends Controller
 
     public function brands()
     {
-//        return Session::get('User');
         $cuser = Clientuser::where('user_id', Session::get('User'))->first();
-//        return $cuser->client_id;
-//        $cp_product = Client_Product::where('client_id', $cuser->client->id)->get();
-//        return $cp_product;
-
-        $brands = CBrand::where('client_id', $cuser->client_id)->get();
-//        return $brands;
-        return view('user/brands', compact('brands','cp_product'));
+        $brands = CBrand::where([['client_id', $cuser->client_id],['remove', 0]])->get();
+        return view('user/brands', compact('brands'));
     }
 
 
