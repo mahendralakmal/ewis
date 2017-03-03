@@ -1,11 +1,11 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Assign Products to Clients')
+@section('page_heading','Assign Brands to Clients')
 @section('section')
     @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->asign_product)
         <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Products</h3>
+                    <h3 class="panel-title">Brands</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table">
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="col-md-5">
-            <h4>Assign Products</h4>
+            <h4>Assign Brands</h4>
             <hr>
             <div class="col-md-12">
                 <form class="form-horizontal" id="asignProduct" role="form" method="POST"

@@ -16,6 +16,10 @@ class Client extends Model
         return $this->hasMany(CBrand::class);
     }
 
+    public function ccategories(){
+        return $this->hasMany(CCategory::class);
+    }
+
     public function client_products(){
         return $this->hasMany(Client_Products::class);
     }

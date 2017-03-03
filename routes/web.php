@@ -135,6 +135,14 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/brand/details/edit/{id}', 'BrandsController@edit_client_brands');
         Route::post('/brand/details/update', 'BrandsController@update_client_brands');
         Route::get('/brand/details/remove/{id}', 'BrandsController@remove_client_brands');
+
+        Route::get('/{id}/categories', 'CategoryController@assign_category_to_client');
+        Route::post('/category/details/{id}/store', 'CategoryController@store_client_category');
+        Route::post('/category/details/update', 'CategoryController@update_client_category');
+        Route::get('/category/details/remove/{id}', 'CategoryController@remove_client_category');
+        Route::get('/category/details/edit/{id}', 'CategoryController@edit_client_category');
+        Route::post('/category/details/update', 'CategoryController@update_client_category');
+        Route::get('/category/details/remove/{id}', 'CategoryController@remove_client_category');
     });
 
 });
