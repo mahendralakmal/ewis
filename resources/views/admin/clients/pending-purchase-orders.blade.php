@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','View Purchase Orders')
+@section('page_heading','Pending Purchase Orders')
 @section('section')
     <div class="col-md-12">
         <div class="panel panel-default">
