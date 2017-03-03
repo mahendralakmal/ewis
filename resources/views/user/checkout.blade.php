@@ -126,7 +126,7 @@
                                     </div>
                                                 <div class="form-group">
                                                     <div class="col-md-7">
-                                                        <button class="btn btn-primary btn-outline" onclick="Success()" type="submit" value="save-form" id="save-form">Submit</button>
+                                                        <button class="btn btn-primary btn-outline" onclick="Success();" type="submit" value="save-form" id="save-form">Submit</button>
                                                         <button class="btn btn-primary btn-outline" type="reset" value="clear-form">Clear</button>
                                                     </div>
                                                 </div>
