@@ -19,7 +19,8 @@
                 <!-- /.navbar-header -->
 
                 <ul class="nav navbar-top-links navbar-right">
-
+                    <li><a href="{{ url('#') }}">Pending<span class="badge">{{App\P_Order::where('status', 'P' )->count()}}</span></a> </li>
+                    <li><a href="{{ url('#') }}">Partial Completed<span class="badge">{{App\P_Order::where('status', 'cp' )->count()}}</span></a> </li>
                     <!-- /.dropdown -->
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -132,12 +133,12 @@
                                 <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Reports<span
                                             class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    {{--<li {{ (Request::is('*panels') ? 'class="active"' : '') }}>--}}
-                                        {{--<a href="{{ url ('/admin/manage-clients/approval') }}">Client Approval</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li {{ (Request::is('*panels') ? 'class="active"' : '') }}>--}}
-                                        {{--<a href="{{ url ('/admin/manage-clients') }}">Client Profile</a>--}}
-                                    {{--</li>--}}
+                                    <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                        <a href="{{ url ('#') }}">Pending</a>
+                                    </li>
+                                    <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                        <a href="{{ url ('#') }}"></a>
+                                    </li>
                                     {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
                                         {{--<a href="{{ url ('/admin/manage-product-list' ) }}">Product List</a>--}}
                                     {{--</li>--}}
