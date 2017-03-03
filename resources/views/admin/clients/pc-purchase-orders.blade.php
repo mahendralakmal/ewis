@@ -1,12 +1,12 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','View Purchase Orders')
+@section('page_heading','Partial Complete Orders')
 @section('section')
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Users</h3>
             </div>
-            {{--{{ $porder[0]['bucket'] }}--}}
+
             <div class="panel-body">
                 <table class="table">
                     <thead>

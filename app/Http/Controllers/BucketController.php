@@ -112,6 +112,18 @@ class BucketController extends Controller
         return view('admin/clients/view-purchase-orders', compact('porder'));
     }
 
+    public function pendingPurchaseOrder()
+    {
+        $porder = P_Order::where('status', 'P' )->get();
+        return view('admin/clients/pending-purchase-orders', compact('porder'));
+    }
+
+    public function pcPurchaseOrder()
+    {
+        $porder = P_Order::where('status', 'PC' )->get();
+        return view('admin/clients/pc-purchase-orders', compact('porder'));
+    }
+
     public function getPODetails($id)
     {
         $order = P_Order::find($id);
