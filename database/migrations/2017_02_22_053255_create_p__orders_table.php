@@ -24,6 +24,7 @@ class CreatePOrdersTable extends Migration
             $table->text('del_notes')->nullable(true);;
             $table->text('cp_notes')->nullable(true);;
             $table->text('status');
+            $table->integer('agent_id');
         });
     }
 

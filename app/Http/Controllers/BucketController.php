@@ -22,6 +22,7 @@ class BucketController extends Controller
         $bucket = new Bucket($oldBucket);
         $bucket->add($product, $product->part_no, $request->Qty);
         $request->session()->put('bucket', $bucket);
+//        return route('client-profile/SendMail',[]);
         return back();
     }
 
