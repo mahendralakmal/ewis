@@ -24,22 +24,22 @@
                 <li><a href="{{ url('/admin/manage-clients/pc-purchase-orders') }}">Partial Completed<span
                                 class="badge">{{App\P_Order::where('status', 'PC' )->count()}}</span></a></li>
                 <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                        </li>
+                {{--<li class="dropdown">--}}
+                    {{--<a class="dropdown-toggle" data-toggle="dropdown" href="#">--}}
+                        {{--<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>--}}
+                    {{--</a>--}}
+                    {{--<ul class="dropdown-menu dropdown-user">--}}
+                        {{--<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>--}}
+                        {{--</li>--}}
                         {{--<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>--}}
                         {{--</li>--}}
-                        <li class="divider"></li>
-                        <li><a href="{{ url ('login') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <li><a href="{{ url('/signout') }}">Sign out</a></li>
+                        {{--<li class="divider"></li>--}}
+                        {{--<li><a href="{{ url ('/signout') }}"><i class="fa fa-sign-out fa-fw"></i> Signout</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                    {{--<!-- /.dropdown-user -->--}}
+                {{--</li>--}}
+                <li><a href="{{ url('/signout') }}">Signout</a></li>
                 <!-- /.dropdown -->
             </ul>
             <!-- /.navbar-top-links -->
