@@ -1,7 +1,8 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Client Profile ')
 @section('section')
-    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_prof)
+    @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_prof))
     <div class="col-md-7">
         <form method="post" id="clientProfile" enctype="multipart/form-data"
               @if($id == null)action="/admin/manage-clients/agent-assign/store"

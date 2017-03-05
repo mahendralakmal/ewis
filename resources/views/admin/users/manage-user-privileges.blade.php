@@ -1,7 +1,8 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Add Users Privileges')
 @section('section')
-    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->privilege)
+    @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->privilege))
     <div class="col-md-12">
         {{--{{ $user->privilege }}<br>--}}
         <label>User : {{ $user->name }} </label><br>

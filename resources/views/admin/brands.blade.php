@@ -1,7 +1,8 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Brands')
 @section('section')
-    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->brand)
+    @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->brand))
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
