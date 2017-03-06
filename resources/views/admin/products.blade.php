@@ -2,6 +2,7 @@
 @section('page_heading','Products')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product))
     <div class="col-md-7">
         <div class="panel panel-default">
@@ -125,8 +126,9 @@
                         <input type="file" name="image" id="image">
                     </div>
                 </div>
+
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Cost</label></div>
+                    <div class="col-md-4"><label>List Price</label></div>
                     <div class="col-md-8">
                         <input type="number" name="default_price" id="default_price" class="form-control"
                                @if(!$id == null) value="{{ $id->default_price }}" @endif>
@@ -139,7 +141,7 @@
     </div>
     @else
         <div class="col-md-offset-3">
-            <h2>You are Not Authorize for access this page</h2>
+            <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
 @stop

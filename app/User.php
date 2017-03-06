@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $fillable=['email','password','name','designation_id','nic_pass','deleted','approval','user_id'];
+    protected $fillable=['email','password','name','designation_id','nic_pass','deleted','approval','user_id','section_head_id'];
 
     public function privilege(){
         return $this->hasOne(Privilege::class);

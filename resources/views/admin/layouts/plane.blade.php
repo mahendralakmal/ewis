@@ -29,11 +29,23 @@
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
+    $('#designation_id').on('change', function () {
+        var selectedVal = $("#designation_id option:selected").text();
+        if ((selectedVal.toLowerCase() != 'client') && (selectedVal != 'Super Admin')) {
+            $('#section_head_id').remove();
+            $('.shead').show();
+        }else {
+            $('.shead').hide();
+            $('#section_head_id').remove();
+            $('<input>').attr({type:'hidden', id:'section_head_id',name:'section_head_id', value:''}).appendTo('#userCreate')
+        }
+    });
+
     $("#postatus").on('change', function () {
         var poid = $('#id').val();
         $.ajax({
-            type:'get',
-            url:'/admin/manage-clients/po-details/change_status/'+ poid +'/' +this.value,
+            type: 'get',
+            url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
             success: function (response) {
             }
         });

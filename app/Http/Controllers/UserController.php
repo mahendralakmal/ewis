@@ -19,23 +19,24 @@ class UserController extends Controller
     {
         $user = User::find($request->user_id);
         $user->privilege()->create([
-            'brand' => ($request->brand == "on")? true: false, 'category' => ($request->category == "on")? true: false,
-            'product' => ($request->product == "on")? true: false, 'add_user' => ($request->add_user == "on")? true: false,
-            'user_approve' => ($request->user_approve == "on")? true: false, 'designation' => ($request->designation == "on")? true: false,
-            'client_prof' => ($request->client_prof == "on")? true: false, 'client_users' => ($request->client_users == "on")? true: false,
-            'view_po' => ($request->view_po == "on")? true: false, 'change_po_status' => ($request->change_po_status == "on")? true: false,
+            'brand' => ($request->brand == "on") ? true : false, 'category' => ($request->category == "on") ? true : false,
+            'product' => ($request->product == "on") ? true : false, 'add_user' => ($request->add_user == "on") ? true : false,
+            'user_approve' => ($request->user_approve == "on") ? true : false, 'designation' => ($request->designation == "on") ? true : false,
+            'client_prof' => ($request->client_prof == "on") ? true : false, 'client_users' => ($request->client_users == "on") ? true : false,
+            'view_po' => ($request->view_po == "on") ? true : false, 'change_po_status' => ($request->change_po_status == "on") ? true : false,
             'created_user_id' => $request->user_id
         ]);
         return redirect('/admin/users/manage-users');
     }
+
     public function UpdatePrivileges(Request $request)
     {
 //        $privilege = (User::find($request->user_id))->privilege;
-        $privilege->update(['brand' => ($request->brand == "on")? true: false, 'category' => ($request->category == "on")? true: false,
-            'product' => ($request->product == "on")? true: false, 'add_user' => ($request->add_user == "on")? true: false,
-            'user_approve' => ($request->user_approve == "on")? true: false, 'designation' => ($request->designation == "on")? true: false,
-            'client_prof' => ($request->client_prof == "on")? true: false, 'client_users' => ($request->client_users == "on")? true: false,
-            'view_po' => ($request->view_po == "on")? true: false, 'change_po_status' => ($request->change_po_status == "on")? true: false,
+        $privilege->update(['brand' => ($request->brand == "on") ? true : false, 'category' => ($request->category == "on") ? true : false,
+            'product' => ($request->product == "on") ? true : false, 'add_user' => ($request->add_user == "on") ? true : false,
+            'user_approve' => ($request->user_approve == "on") ? true : false, 'designation' => ($request->designation == "on") ? true : false,
+            'client_prof' => ($request->client_prof == "on") ? true : false, 'client_users' => ($request->client_users == "on") ? true : false,
+            'view_po' => ($request->view_po == "on") ? true : false, 'change_po_status' => ($request->change_po_status == "on") ? true : false,
             'created_user_id' => $request->user_id]);
         return redirect('/admin/users/manage-users');
     }
@@ -55,10 +56,12 @@ class UserController extends Controller
         $user->nic_pass = $request->nic_pass;
         $user->user_id = $request->user_id;
         $user->approval = $request->approval;
+        $user->section_head_id = null;
         $user->save();
         $user->privilege()->create(['brand' => true, 'category' => true, 'product' => true, 'add_user' => true,
             'user_approve' => true, 'designation' => true, 'client_prof' => true, 'client_users' => true,
-            'view_po' => true, 'change_po_status' => true, 'created_user_id' => $request->user_id]);
+            'view_po' => true, 'change_po_status' => true, 'created_user_id' => $request->user_id,
+            'privilege' => true, 'assign_agent' => true, 'asign_product' => true]);
 
         Session::put('LoggedIn', true);
         Session::put('User', $request->user_id);
@@ -93,6 +96,7 @@ class UserController extends Controller
         $user->designation_id = $request->designation_id;
         $user->nic_pass = $request->nic_pass;
         $user->user_id = $request->user_id;
+        $user->section_head_id = $request->section_head_id;
         $user->save();
 
         if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
@@ -110,6 +114,7 @@ class UserController extends Controller
     public function create()
     {
         $id = "";
+//        $seHeads = User::where()
         $users = User::all();
         $designations = Designation::all();
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));

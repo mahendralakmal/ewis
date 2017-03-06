@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->boolean('approval')->default(0);
             $table->boolean('deleted')->default(0);
             $table->rememberToken();
+            $table->integer('section_head_id')->nullable(true);
             $table->string('user_id')->default(null);
             $table->timestamps();
         });
