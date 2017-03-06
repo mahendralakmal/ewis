@@ -8,7 +8,10 @@ use App\Privilege;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+
+use App\mail\PoSentSuccessfully;
 
 class UserController extends Controller
 {
@@ -188,14 +191,15 @@ class UserController extends Controller
                 $client = $user->client;
                 Session::put('LoggedIn', true);
                 Session::put('User', $user->id);
-
                 Session::put('BaseColor', $user->clientuser->first()->client->color);
+
                 return redirect('/client-profile/' . $user->clientuser->first()->client->id . '/brands');
             } else {
                 Session::put('LoggedIn', true);
                 Session::put('User', $user->id);
                 Session::put('Type', $user->designation->designation);
                 Session::put('ip', $request->ip());
+//                Mail::to($user)->send(new PoSentSuccessfully);
                 return redirect('/admin');
             }
         } else {

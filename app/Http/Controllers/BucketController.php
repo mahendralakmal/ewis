@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PoSentSuccessfully;
 use App\Notifications\PerchaseOrder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Session;
 use Illuminate\Http\Request;
 use App\Bucket;
@@ -80,9 +82,8 @@ class BucketController extends Controller
         $bucket = Session::get('bucket');
         $order = new P_Order();
 
-//        dd(User::find(\Illuminate\Support\Facades\Session::get('User'))->client->id);
-
-        $order->client_id = User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id;
+        $user = User::find(\Illuminate\Support\Facades\Session::get('User'));
+        $order->client_id = $user->clientuser->first()->client->id;
         $order->bucket = serialize($bucket);
         $order->del_branch = $request->input('del_branch');
         $order->del_cp = $request->input('del_cp');
@@ -90,14 +91,15 @@ class BucketController extends Controller
         $order->cp_notes = $request->input('cp_notes');
         $order->del_notes = $request->input('del_notes');
         $order->status = "P";
-        $order->agent_id =  User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id;
+        $order->agent_id =  $user->clientuser->first()->client->agent_id;
 
 
         $order->save();
 
-        //$user = User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id;
-        //$user->notify(new PerchaseOrder($order));
-//        $client = User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->email;
+
+        //We send the notification
+
+        Mail::to($user)->send(new PoSentSuccessfully($user, $order));
 
 
         Session::forget('bucket');
