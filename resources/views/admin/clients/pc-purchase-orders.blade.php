@@ -1,6 +1,9 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Partial Complete Orders')
 @section('section')
+    @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->view_po))
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -41,4 +44,9 @@
             </div>
         </div>
     </div>
+    @else
+        <div class="col-md-offset-3">
+            <h2 class="error">You are Not Authorize for access this page</h2>
+        </div>
+    @endif
 @stop
