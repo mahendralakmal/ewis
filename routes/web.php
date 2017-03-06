@@ -19,7 +19,7 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::post('/{id}/postCheckout', 'BucketController@postCheckout');
     Route::get('/{id}/postCheckout', 'BucketController@postCheckout');
-    Route::post('/SendMail','MailController@SendMail');
+    Route::post('/SendMail', 'MailController@SendMail');
 
     Route::get('/{id}/brands', 'BrandsController@brands');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
@@ -106,7 +106,8 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/view-purchase-orders', 'BucketController@getPurchaseOrder');
         Route::get('/pending-purchase-orders', 'BucketController@pendingPurchaseOrder');
         Route::get('/pc-purchase-orders', 'BucketController@pcPurchaseOrder');
-        Route::get('/po-details/{id}','BucketController@getPODetails');
+        Route::get('/po-details/{id}', 'BucketController@getPODetails');
+        Route::get('/po-details/change_status/{id}/{status}', 'BucketController@change_status');
 
         Route::get('/client_user/{user}', 'AgentController@client_user');
         Route::get('/client_user/{user}/activate', 'AgentController@client_user_activate');
@@ -144,5 +145,4 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::post('/category/details/update', 'CategoryController@update_client_category');
         Route::get('/category/details/remove/{id}', 'CategoryController@remove_client_category');
     });
-
 });

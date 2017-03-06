@@ -5771,6 +5771,10 @@ button.close {
 body, label, .checkbox label {
   font-weight: 300; }
 
+.badge {
+  background-color: #ff001f !important;
+  margin-left: 5px; }
+
 .error {
   color: #ee001d; }
 

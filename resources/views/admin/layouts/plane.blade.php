@@ -29,6 +29,16 @@
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
+    $("#postatus").on('change', function () {
+        var poid = $('#id').val();
+        $.ajax({
+            type:'get',
+            url:'/admin/manage-clients/po-details/change_status/'+ poid +'/' +this.value,
+            success: function (response) {
+            }
+        });
+    });
+
     $("#product_id").on('change', function () {
         $.ajax(
                 {

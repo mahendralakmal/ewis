@@ -1,7 +1,8 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Manage Users')
 @section('section')
-    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->user_approve)
+    @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->user_approve))
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -33,11 +34,12 @@
                                     <td>{{$user->designation->designation}}</td>
                                     <td>{{$user->nic_pass}}</td>
                                     <td>
-                                        {{--{{ $user->designation->designation }}--}}
+{{--                                        {{ $user->designation->designation }}--}}
+                                        {{--{{ $user->designation_id }}--}}
                                         <a href="/admin/users/manage-users/{{ $user->id }}/privileges"
                                            class="btn btn-primary btn-outline">Privileges</a>
-                                        @if($user->designation->designation != "Client" && $user->designation_id != 1)
-                                            <a @if(!$user->approval == 1) href="/admin/users/manage-users/approved/{{ $user->id }}"
+                                        @if(strtolower($user->designation->designation) != "super admin")
+                                            <a @if($user->approval != 1) href="/admin/users/manage-users/approved/{{ $user->id }}"
                                                @else
                                                href="/admin/users/manage-users/unapproved/{{ $user->id }}"
                                                @endif

@@ -1,7 +1,8 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Add New Users')
 @section('section')
-    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->add_user)
+    @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->add_user))
     <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">
