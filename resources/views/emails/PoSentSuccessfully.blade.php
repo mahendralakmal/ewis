@@ -8,6 +8,6 @@
 <h1>Welcome...! user : {{ $user->email }}</h1>
 
 <p>Your purchase order will be take to process in shortly</p>
-<p>Po Number : {{ $po->id }}</p>
+<p>Purchase Order Number : {{ $po->id }}</p>
 </body>
 </html>

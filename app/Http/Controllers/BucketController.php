@@ -97,8 +97,7 @@ class BucketController extends Controller
         $order->save();
 
 
-        //We send the notification
-
+        //send the notification to client
         Mail::to($user)->send(new PoSentSuccessfully($user, $order));
 
 

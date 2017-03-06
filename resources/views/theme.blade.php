@@ -4,7 +4,7 @@
     <div class="container-fluid profile-background"
          style="background-color: {{ \Illuminate\Support\Facades\Session::get('BaseColor') }}">
         <div class="container white-background gradiant-background">
-            @if(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id != null)
+            @if((\Illuminate\Support\Facades\Session::has('User')) && (App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id != null))
                 <div class=" col-md-12 profile-head">
                     <div class="col-md- col-sm-4 col-xs-12">
                         <img alt="{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name }}"
