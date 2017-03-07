@@ -2,6 +2,7 @@
 @section('page_heading','Assign A Agent')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->assign_agent))
     <div class="col-md-10">
         <div class="panel panel-default">
@@ -59,7 +60,7 @@
     </div>
     @else
         <div class="col-md-offset-3">
-            <h2>You are Not Authorize for access this page</h2>
+            <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
 @stop

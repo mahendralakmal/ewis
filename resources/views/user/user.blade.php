@@ -79,7 +79,8 @@
                                 </div><!--col-md-6 close-->
                                 <div class="col-md-10">
                                     <button class="btn btn-primary btn-outline"
-                                            onclick="location.href = '{{ url( 'client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/edit/' ) }}'">
+{{--                                            onclick="location.href = '{{ url( 'client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/edit/' ) }}'"--}}
+                                    >
                                         Edit User Profile
                                     </button>
                                 </div>

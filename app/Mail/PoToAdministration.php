@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PoSentSuccessfully extends Mailable
+class PoToAdministration extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -36,6 +36,6 @@ class PoSentSuccessfully extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.PoSentSuccessfully');
+        return $this->view('emails.PoToAdministration');
     }
 }

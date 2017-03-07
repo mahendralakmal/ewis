@@ -13,6 +13,7 @@
         </ul>
 
         <!-- Tab panes -->
+        {{--{{ $brands }}--}}
         <div class="tab-content white-background">
             <div class="tab-pane fade active in" id="agent">
                 <div class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">

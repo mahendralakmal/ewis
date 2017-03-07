@@ -2,6 +2,7 @@
 @section('page_heading','Client Profile ')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_prof))
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-8">
@@ -89,7 +90,7 @@
     </div>
     @else
         <div class="col-md-offset-3">
-            <h2>You are Not Authorize for access this page</h2>
+            <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
 @stop

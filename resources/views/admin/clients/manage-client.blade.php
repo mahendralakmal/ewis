@@ -3,6 +3,7 @@
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && strtolower((\Illuminate\Support\Facades\Session::get('Type')) !== 'client')
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_users))
     <div class="col-md-12 col-sm-12">
         <div class="panel panel-default">
@@ -72,7 +73,7 @@
     </div>
     @else
         <div class="col-md-offset-3">
-            <h2>You are Not Authorize for access this page</h2>
+            <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
 @stop

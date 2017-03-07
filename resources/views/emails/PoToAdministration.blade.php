@@ -62,6 +62,7 @@
             </table>
         </td>
     </tr>
+
     <tr>
         <td colspan="2"><hr><img src="http://ewis.app/img/footer.png" width="100%"></td>
     </tr>

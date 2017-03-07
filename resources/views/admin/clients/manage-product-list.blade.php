@@ -2,6 +2,7 @@
 @section('page_heading','Assign Products to Clients')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->asign_product))
         <div class="col-md-7">
             <div class="panel panel-default">
@@ -20,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $product)
+                        @foreach($cp_products as $product)
                             @if($product->remove == 0)
                                 <tr>
                                     <td>{{ App\Product::find($product->product_id)->category->brand->title }}</td>
@@ -128,7 +129,7 @@
         </div>
     @else
         <div class="col-md-offset-3">
-            <h2>You are Not Authorize for access this page</h2>
+            <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
 @stop

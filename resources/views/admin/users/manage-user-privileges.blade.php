@@ -2,6 +2,7 @@
 @section('page_heading','Add Users Privileges')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
+    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->privilege))
     <div class="col-md-12">
         {{--{{ $user->privilege }}<br>--}}
@@ -22,7 +23,9 @@
                 <input type="hidden" id="created_user_id" name="created_user_id"
                        value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                 {{ csrf_field() }}
-                <div class="panel-body row">
+                <div class="panel-body row" id="privilegepnl">
+
+                    <div class="col-md-12"><h5>General</h5></div>
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="brand" name="brand"
                                                             @if(!$user->privilege == null && $user->privilege->brand == true) checked @endif>
@@ -39,7 +42,12 @@
                                                             @if(!$user->privilege == null && $user->privilege->product == true) checked @endif>
                                 Products</label></div>
                     </div>
-                    <div class="col-md-12"><h5>Manage Users</h5></div>
+                    <div class="col-md-4">
+                        <div class="checkbox"><label><input type="checkbox" id="product_cost" name="product_cost"
+                                                            @if(!$user->privilege == null && $user->privilege->product == true) checked @endif>
+                                View Product Cost</label></div>
+                    </div>
+                    <div class="col-md-12"><hr><h5>Manage Users</h5></div>
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="add_user" name="add_user"
                                                             @if(!$user->privilege == null && $user->privilege->add_user == true) checked @endif>
@@ -57,7 +65,12 @@
                                                             @if(!$user->privilege == null && $user->privilege->designation == true) checked @endif>
                                 Designations</label></div>
                     </div>
-                    <div class="col-md-12"><h5>Manage Clients</h5></div>
+                    <div class="col-md-4">
+                        <div class="checkbox"><label><input type="checkbox" id="privilege" name="privilege"
+                                                            @if(!$user->privilege == null && $user->privilege->designation == true) checked @endif>
+                                Privileges</label></div>
+                    </div>
+                    <div class="col-md-12"><hr><h5>Manage Clients</h5></div>
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="client_prof" name="client_prof"
                                                             @if(!$user->privilege == null && $user->privilege->client_prof == true) checked @endif>
@@ -69,7 +82,17 @@
                                                             @if(!$user->privilege == null && $user->privilege->client_users == true) checked @endif>
                                 Client Users</label></div>
                     </div>
-                    <div class="col-md-12"><h5>Manage Purchase Orders</h5></div>
+                    <div class="col-md-4">
+                        <div class="checkbox"><label><input type="checkbox" id="assign_agent" name="assign_agent"
+                                                            @if(!$user->privilege == null && $user->privilege->client_users == true) checked @endif>
+                                Assign Agent</label></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="checkbox"><label><input type="checkbox" id="asign_product" name="asign_product"
+                                                            @if(!$user->privilege == null && $user->privilege->client_users == true) checked @endif>
+                                Assign Product</label></div>
+                    </div>
+                    <div class="col-md-12"><hr><h5>Manage Purchase Orders</h5></div>
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="view_po" name="view_po"
                                                             @if(!$user->privilege == null && $user->privilege->view_po == true) checked @endif>
@@ -82,7 +105,8 @@
                                                             @if(!$user->privilege == null && $user->privilege->change_po_status == true) checked @endif>
                                 Change Status</label></div>
                     </div>
-                    {{--<div class="col-md-12"><h5>Reports</h5></div>--}}
+                    <div class="col-md-12"><hr><h5>Reports</h5></div>
+
                     <div class="col-md-4">&nbsp;</div>
                     <div class="col-md-4">&nbsp;</div>
                     <div class="col-md-12">
@@ -98,7 +122,7 @@
     </div>
     @else
         <div class="col-md-offset-3">
-            <h2>You are Not Authorize for access this page</h2>
+            <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
 @stop
