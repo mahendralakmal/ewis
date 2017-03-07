@@ -118,9 +118,10 @@
 
                                                 <h5>Your Total Items: {{ $total_qty }} </h5>
                                                 <hr>
-                                                <h5>Your Total Payment: Rs. {{ $total_price }} </h5>
+                                                <h5 id="value">Your Total Payment: Rs. {{ number_format($total_price,2) }} </h5>
                                                 <hr>
                                                 <br>
+
                                     <div class="col-md-6 col-lg-6 col-sm-6">
                                     <label id="success"></label>
                                     </div>
@@ -152,3 +153,10 @@
                             @endif
 </div>
 @endsection
+<script>
+    var h1content = document.getElementById("value").Text();
+    alert(h1content);
+    function numberWithCommas(value) {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+</script>

@@ -119,7 +119,7 @@
                         <div class="col-md-4"><label>Special Price</label></div>
                         <div class="col-md-8">
                             <input type="number" id="special_price" name="special_price" class="form-control"
-                                   @if($cp_id != null) value="{{$cp_id->special_price}}" @endif>
+                                   @if($cp_id != null) value="{{ number_format($cp_id->special_price,2)}}" @endif>
                         </div>
                     </div>
                     <button class="btn btn-primary" name="submit" id="submit">Add</button>
