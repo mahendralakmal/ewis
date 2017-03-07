@@ -38,7 +38,11 @@
             <strong>Delivery Address</strong>
             <p>{{ $order->del_branch }}</p>
             <strong>Special Notes for the delivery</strong>
-            <p>{{ $order->del_notes }}</p>
+            <p>{{ $order->del_notes }}</p><br>
+
+            <strong>Contact Ewis Marketting Agent</strong>
+            <p>{{$agent->name}}</p>
+            <p>{{$agent->email}}</p>
         </td>
     </tr>
     <tr>

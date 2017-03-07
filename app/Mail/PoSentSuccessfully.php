@@ -16,7 +16,6 @@ class PoSentSuccessfully extends Mailable
 
     public $user;
     public $order;
-//    public $porders;
     public $client;
     /**
      * Create a new message instance.
@@ -28,7 +27,6 @@ class PoSentSuccessfully extends Mailable
         $this->user = $user;
         $this->order = $order;
         $this->client = Client::find($order->client_id);
-//        $this->porders = $order->bucket;
     }
 
     /**
