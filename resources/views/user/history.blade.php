@@ -31,9 +31,12 @@
                                                     <td><h5>{{ $item['item'] ['part_no'] }}</h5></td>
                                                     <td><h5>{{ $item['item'] ['name'] }}</h5></td>
                                                     <td><h5>{{ $item['qty'] }}</h5></td>
-                                                    <td><h5>{{ $item['price'] }}</h5></td>
+                                                    <td><h5>{{ number_format($item['price'],2) }}</h5></td>
                                                     <td></td>
-
+                                                    {{--<script>  function numberWithCommas(x) {--}}
+                                                            {{--return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");--}}
+                                                        {{--}--}}
+                                                    {{--</script>--}}
                                                 </tr>
                                                 @endforeach
 
@@ -42,7 +45,7 @@
                                                 <td> </td>
                                                 <td> </td>
                                                 <td> </td>
-                                                <td><h5> {{ $order->bucket->totalPrice }}</h5></td>
+                                                <td><h5> {{ number_format($order->bucket->totalPrice,2) }}</h5></td>
                                             </tr>
                                         </table>
                                     </div>
