@@ -31,13 +31,16 @@ class UserController extends Controller
 
     public function UpdatePrivileges(Request $request)
     {
-//        $privilege = (User::find($request->user_id))->privilege;
+        $privilege = (User::find($request->user_id))->privilege;
         $privilege->update(['brand' => ($request->brand == "on") ? true : false, 'category' => ($request->category == "on") ? true : false,
             'product' => ($request->product == "on") ? true : false, 'add_user' => ($request->add_user == "on") ? true : false,
             'user_approve' => ($request->user_approve == "on") ? true : false, 'designation' => ($request->designation == "on") ? true : false,
             'client_prof' => ($request->client_prof == "on") ? true : false, 'client_users' => ($request->client_users == "on") ? true : false,
             'view_po' => ($request->view_po == "on") ? true : false, 'change_po_status' => ($request->change_po_status == "on") ? true : false,
-            'created_user_id' => $request->user_id]);
+            'created_user_id' => $request->user_id, 'privilege' => ($request->privilege == "on") ? true : false,
+            'assign_agent' => ($request->assign_agent == "on") ? true : false,
+            'asign_product' => ($request->asign_product == "on") ? true : false,
+            'product_cost'=>($request->product_cost == "on") ? true : false]);
         return redirect('/admin/users/manage-users');
     }
 
@@ -61,7 +64,7 @@ class UserController extends Controller
         $user->privilege()->create(['brand' => true, 'category' => true, 'product' => true, 'add_user' => true,
             'user_approve' => true, 'designation' => true, 'client_prof' => true, 'client_users' => true,
             'view_po' => true, 'change_po_status' => true, 'created_user_id' => $request->user_id,
-            'privilege' => true, 'assign_agent' => true, 'asign_product' => true]);
+            'privilege' => true, 'assign_agent' => true, 'asign_product' => true, 'product_cost'=>true]);
 
         Session::put('LoggedIn', true);
         Session::put('User', $request->user_id);
@@ -190,22 +193,29 @@ class UserController extends Controller
     public function signin(Request $request)
     {
         Session::put('LoggedIn', false);
-        $user = User::where([['email', $request->email], ['approval', 1]])->first();
+//        , ['approval', 1]
+        $user = User::where([['email', $request->email]])->first();
         if (!$user == null && Hash::check($request->password, $user->password)) {
-            if (strtolower($user->designation->designation) == 'client') {
-                $client = $user->client;
-                Session::put('LoggedIn', true);
-                Session::put('User', $user->id);
-                Session::put('BaseColor', $user->clientuser->first()->client->color);
+            if ($user->approval) {
+                if (strtolower($user->designation->designation) == 'client') {
+//                    $client = $user->client;
+                    Session::put('LoggedIn', true);
+                    Session::put('User', $user->id);
+                    Session::put('Type', $user->designation->designation);
+                    Session::put('BaseColor', $user->clientuser->first()->client->color);
 
-                return redirect('/client-profile/' . $user->clientuser->first()->client->id . '/brands');
-            } else {
-                Session::put('LoggedIn', true);
-                Session::put('User', $user->id);
-                Session::put('Type', $user->designation->designation);
-                Session::put('ip', $request->ip());
+                    return redirect('/client-profile/' . $user->clientuser->first()->client->id . '/brands');
+                } else {
+                    Session::put('LoggedIn', true);
+                    Session::put('User', $user->id);
+                    Session::put('Type', $user->designation->designation);
+                    Session::put('ip', $request->ip());
 //                Mail::to($user)->send(new PoSentSuccessfully);
-                return redirect('/admin');
+                    return redirect('/admin');
+                }
+            } else {
+                $error = 'You are not authorised yet...!';
+                return view('welcome', compact('error'));
             }
         } else {
             $error = 'Please check the email and password...!';

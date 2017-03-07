@@ -45,7 +45,6 @@ class AgentController extends Controller
     public function index(User $id)
     {
         $users = User::all();
-//        $ajents = User::where([['designation_id', '!=', 4], ['approval', 1]])->get();
         return view('/admin/clients/agent-assign', compact('users', 'id'));
     }
 

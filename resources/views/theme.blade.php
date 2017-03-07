@@ -12,7 +12,7 @@
                              width="209" hight="67" class="img-responsive"/>
                     </div>
 
-                    <div class="col-md-5 col-sm-8 col-xs-12 profile-head">
+                    <div class="col-md-5 col-sm-8 col-xs-12 profile-head pull-right">
                         <div class="description">
                             <div class="inner">
                                 <h3>{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->name }}</h3>

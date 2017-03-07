@@ -32,7 +32,7 @@
     $('#designation_id').on('change', function () {
         var selectedVal = $("#designation_id option:selected").text();
         if ((selectedVal.toLowerCase() != 'client') && (selectedVal != 'Super Admin')) {
-            $('#section_head_id').remove();
+//            $('#section_head_id').remove();
             $('.shead').show();
         }else {
             $('.shead').hide();

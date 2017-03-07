@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\PoSentSuccessfully;
+use App\Mail\PoToAdministration;
 use App\Notifications\PerchaseOrder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -96,9 +97,16 @@ class BucketController extends Controller
 
         $order->save();
 
+        $agent = User::find($user->clientuser->first()->client->agent_id);
+
+//        $order->transform(function ($order, $key){
+        $order->bucket = unserialize($order->bucket);
+//            return $order;
+//        });
 
         //send the notification to client
         Mail::to($user)->send(new PoSentSuccessfully($user, $order));
+//        Mail::to($agent)->send(new PoToAdministration($user, $order, $agent));
 
 
         Session::forget('bucket');
@@ -136,10 +144,7 @@ class BucketController extends Controller
     public function getPODetails($id)
     {
         $order = P_Order::find($id);
-//        $order->transform(function ($order, $key) {
             $order->bucket = unserialize($order->bucket);
-//            return $order;
-//        });
         return view('admin/clients/detail-orders', compact('order'));
     }
 

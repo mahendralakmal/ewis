@@ -103,7 +103,7 @@
                     <div class="col-md-5">
                         <label>Designation</label>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-6">
                         <select type="text" class="form-control" name="designation_id" id="designation_id">
                             <option>Select Designation</option>
                             @if(!$id == "")
@@ -117,6 +117,9 @@
                                 @endforeach
                             @endif
                         </select>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="/admin/users/manage-user-designations"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div style="display: none" class="form-group shead" >

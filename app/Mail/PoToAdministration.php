@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use App\Client;
 use App\P_Order;
 use App\User;
 use Illuminate\Bus\Queueable;
@@ -10,25 +9,21 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PoSentSuccessfully extends Mailable
+class PoToAdministration extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
-    public $order;
-//    public $porders;
-    public $client;
+    public $po;
+    public $agent;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, P_Order $order)
+    public function __construct(User $user, P_Order $po, User $agent)
     {
-        $this->user = $user;
-        $this->order = $order;
-        $this->client = Client::find($order->client_id);
-//        $this->porders = $order->bucket;
+        //
     }
 
     /**
@@ -38,6 +33,6 @@ class PoSentSuccessfully extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.PoSentSuccessfully');
+        return $this->view('emails.PoToAdministration');
     }
 }

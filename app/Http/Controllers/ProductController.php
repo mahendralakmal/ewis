@@ -19,7 +19,6 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     public function remove_client_products(Client_Product $id){
-//        return $id;
         $id->update(['remove'=>1]);
         return back();
     }
@@ -67,7 +66,7 @@ class ProductController extends Controller
     public function assign_products_to_client(User $id, Request $request)
     {
         $cp_id = '';
-        $cp_products = '';
+        $cp_products = Client_Product::where('user_id', $id->clientuser[0]['client_id'])->get();
         $categories = Category::all();
         $products = Client_Product::where([['user_id',$request->session()->get('User')],['client_id', $id->id]])->get();
         $brands = Brand::orderBy('title')->get();

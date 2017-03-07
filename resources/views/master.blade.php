@@ -22,7 +22,7 @@
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 </head>
 <body>
-@if((\Illuminate\Support\Facades\Session::has('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('LoggedIn')) && (strtolower(\Illuminate\Support\Facades\Session::has('type') == 'client'))) {
+@if((\Illuminate\Support\Facades\Session::has('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('LoggedIn')) && (strtolower(\Illuminate\Support\Facades\Session::get('Type')) == 'client')) {
 <header>
     <nav class="navbar navbar-default">
         <div class="container">
@@ -46,16 +46,13 @@
                         <li><a href="#">About</a></li>
 
                         <li>
-                            <a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/bucket') :"<script type='text/javascript'>
-            window.location = '/';</script>" }}">Bucket
-                                <span class="badge">{{ \Illuminate\Support\Facades\Session::has('bucket') ? \Illuminate\Support\Facades\Session::get('bucket')->totalQty : "<script type='text/javascript'>
-            window.location = '/';</script>" }}</span>
+                            <a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/bucket') :"" }}">Bucket
+                                <span class="badge">{{ \Illuminate\Support\Facades\Session::has('bucket') ? \Illuminate\Support\Facades\Session::get('bucket')->totalQty : "" }}</span>
                             </a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true"
-                               aria-expanded="false">{{ (\Illuminate\Support\Facades\Session::has('User')) ? App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name:"<script type='text/javascript'>
-            window.location = '/';</script>" }}
+                               aria-expanded="false">{{ (\Illuminate\Support\Facades\Session::has('User')) ? App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name:"" }}
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>

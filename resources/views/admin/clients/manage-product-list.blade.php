@@ -21,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $product)
+                        @foreach($cp_products as $product)
                             @if($product->remove == 0)
                                 <tr>
                                     <td>{{ App\Product::find($product->product_id)->category->brand->title }}</td>

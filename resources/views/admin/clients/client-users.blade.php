@@ -55,8 +55,11 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Email</label></div>
-                    <div class="col-md-8"><input type="email" id="cp_email" name="cp_email" class="form-control"
-                                                 @if(!$id ==null) value="{{ $id->cp_email }}" @endif></div>
+                    <div class="col-md-8">
+                        <label class="form-control">{{ $user->email }}</label>
+                        <input type="hidden" id="cp_email" name="cp_email"
+                               @if(!$id ==null) value="{{ $id->cp_email }}" @else value="{{ $user->email }}" @endif>
+                        </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-outline">Submit</button>
             </form>
