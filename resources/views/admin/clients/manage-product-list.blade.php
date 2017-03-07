@@ -47,7 +47,7 @@
             <hr>
             <div class="col-md-12">
                 <form class="form-horizontal" id="asignProduct" role="form" method="POST"
-                        action="@if($cp_id==null) /admin/manage-product-list/product/details/{{ $id->id }}/store @else /admin/manage-product-list/product/details/update @endif"
+                      action="@if($cp_id==null) /admin/manage-product-list/product/details/{{ $id->id }}/store @else /admin/manage-product-list/product/details/update @endif"
                 >
                     {{ csrf_field() }}
                     <div class="form-group row">
@@ -55,7 +55,8 @@
                         @if($cp_id!=null)
                             <input type="hidden" id="id" name="id" value="{{ $cp_id->id }}">
                         @endif
-                        <input type="hidden" id="client_id" name="client_id" value="{{ \App\User::find($id->id)->clientuser->first()->client->id }}">
+                        <input type="hidden" id="client_id" name="client_id"
+                               value="{{ \App\User::find($id->id)->clientuser->first()->client->id }}">
                         <input type="hidden" id="user_id" name="user_id"
                                value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
 
@@ -75,18 +76,18 @@
                         <div class="col-md-4"><label>Category</label></div>
                         <div class="col-md-8">
                             @if($cp_id == null)
-                            <select name="category_id" id="category_id" class="form-control">
-                                <option>Select Category</option>
-                            </select>
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option>Select Category</option>
+                                </select>
                             @else
-                            <select name="category_id" id="category_id" class="form-control">
-                            <option>Select Category</option>
-                            @foreach($categories as $category)
-                            <option value="{{$category->id}}"
-                                                                            @if($category->id == \App\Product::find($cp_id->product_id)->category->id) selected @endif
-                                                                    >{{$category->title}}</option>
-                            @endforeach
-                            </select>
+                                <select name="category_id" id="category_id" class="form-control">
+                                    <option>Select Category</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}"
+                                                @if($category->id == \App\Product::find($cp_id->product_id)->category->id) selected @endif
+                                        >{{$category->title}}</option>
+                                    @endforeach
+                                </select>
                             @endif
                         </div>
                     </div>
@@ -94,28 +95,32 @@
                         <div class="col-md-4"><label>Product</label></div>
                         <div class="col-md-8">
                             @if($cp_id == null)
-                            <select name="product_id" id="product_id" class="form-control">
-                                <option>Select Product</option>
-                            </select>
+                                <select name="product_id" id="product_id" class="form-control">
+                                    <option>Select Product</option>
+                                </select>
                             @else
-                            <select name="product_id" id="product_id" class="form-control">
-                            <option>Select Product</option>
-                            @foreach($cp_products as $product)
-                            <option value="{{$product->id}}"
-                                                                            @if($product->id == \App\Product::find($cp_id->product_id)->category->id) selected @endif
-                            >{{$product->part_no}}</option>
-                            @endforeach
-                            </select>
+                                <select name="product_id" id="product_id" class="form-control">
+                                    <option>Select Product</option>
+                                    @foreach($cp_products as $product)
+                                        <option value="{{$product->id}}"
+                                                @if($product->id == \App\Product::find($cp_id->product_id)->category->id) selected @endif
+                                        >{{$product->part_no}}</option>
+                                    @endforeach
+                                </select>
                             @endif
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-md-4"><label>list Price</label></div>
-                        <div class="col-md-8">
-                            <input type="number" id="list_price" name="list_price" class="form-control"
-                                   @if($cp_id != null) value="{{\App\Product::find($cp_id->product_id)->default_price}}" @endif>
+                    @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product_cost)
+                        <div class="form-group row">
+                            <div class="col-md-4"><label>list Price</label></div>
+                            <div class="col-md-8">
+                                <input type="number" id="list_price" name="list_price" class="form-control"
+                                       @if($cp_id != null) value="{{\App\Product::find($cp_id->product_id)->default_price}}" @endif>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <input type="hidden" id="list_price" name="list_price" value="@if($cp_id != null){{\App\Product::find($cp_id->product_id)->default_price}}@endif">
+                    @endif
                     <div class="form-group row">
                         <div class="col-md-4"><label>Special Price</label></div>
                         <div class="col-md-8">
