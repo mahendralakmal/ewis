@@ -29,6 +29,33 @@
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
+    $("#client").on('change', function () {
+        $.ajax(
+            {
+                type: 'get',
+                url: '/admin/manage-clients/completed-purchase-orders/'+ this.value,
+                success:function (response) {
+                    console.log(response);
+                    var model = $('.tbody-completed');
+                    model.empty();
+                    $.each(response, function (index, elem) {
+//                        model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>")
+                        model.append("<tr>");
+                        model.append("<td>"+elem.id+"</td>");
+                        model.append("<td>"+elem.created_at+"</td>");
+                        model.append("<td>"+elem.del_branch+"</td>");
+                        model.append("<td>"+elem.del_cp+"</td>");
+                        model.append("</tr>");
+                    });
+                }
+//                    function (response) {
+//                    var model = $('#list_price');
+//                    model.val(response);
+//                }
+            }
+        );
+    });
+
     $('#designation_id').on('change', function () {
         var selectedVal = $("#designation_id option:selected").text();
         if ((selectedVal.toLowerCase() != 'client') && (selectedVal != 'Super Admin')) {

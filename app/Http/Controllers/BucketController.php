@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\Mail\PoSentSuccessfully;
 use App\Mail\PoToAdministration;
 use App\Mail\PoToSectionHeads;
@@ -153,9 +154,16 @@ class BucketController extends Controller
 
     public function CompletedPurchaseOrder()
     {
-        $porder = P_Order::where('status', 'C' )->get();
-        return view('admin/clients/pc-purchase-orders', compact('porder'));
+        $client = Client::all();
+        return view('admin/clients/completed-purchase-orders', compact('client'));
     }
+
+    public function getPurchaseOrdersByClient($client){
+        $order = P_Order::where('client_id',$client);
+        $porder = $order->where('status', 'C' )->get();
+        return $porder;
+    }
+
     public function getPODetails($id)
     {
         $order = P_Order::find($id);
