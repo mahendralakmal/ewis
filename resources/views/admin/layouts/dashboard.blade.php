@@ -125,7 +125,10 @@
                                 <a href="{{ url ('/admin/manage-clients/pending-purchase-orders') }}">Pending Purchase Orders</a>
                                 </li>
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                <a href="{{ url ('/admin/manage-clients/pc-purchase-orders' ) }}">Partial Completed Purchase Orders</a>
+                                <a href="{{ url ('/admin/manage-clients/pc-purchase-orders' ) }}">Partial Complete Purchase Orders</a>
+                                </li>
+                                <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/admin/manage-clients/completed-purchase-orders' ) }}">Completed Purchase Orders</a>
                                 </li>
                                 {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
                                 {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}

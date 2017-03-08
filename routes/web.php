@@ -105,6 +105,7 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
         Route::get('/view-purchase-orders', 'BucketController@getPurchaseOrder');
         Route::get('/pending-purchase-orders', 'BucketController@pendingPurchaseOrder');
+        Route::get('/completed-purchase-orders','BucketController@CompletedPurchaseOrder');
         Route::get('/pc-purchase-orders', 'BucketController@pcPurchaseOrder');
         Route::get('/po-details/{id}', 'BucketController@getPODetails');
         Route::get('/po-details/change_status/{id}/{status}', 'BucketController@change_status');
