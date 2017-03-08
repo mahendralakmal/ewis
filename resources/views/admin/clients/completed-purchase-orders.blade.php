@@ -12,26 +12,25 @@
                     <h3 class="panel-title">Client POs</h3>
                 </div>
                 <div class="row">
-                <div class="col-md-3 col-sm-3 col-lg-3 col-md-offset-4">
-                    <label for="status"><h5></h5></label>
-                    <select class="form-control" name="status" id="status" data-parsley-required="true">
-                        <option>Select Status</option>
-{{--                        @foreach ($status as $status)--}}
-{{--                            <option value="{{ $client->id }}">{{ $client->name }}</option>--}}
-                        {{--@endforeach--}}
-                    </select>
+                    <div class="col-md-2 col-sm-3 col-lg-2 form-group">
+                        <label for="status"><h5></h5></label>
+                        <select id="postatus" name="postatus" class="form-control">
+                            <option value="P">Pending</option>
+                            <option value="PC">Partial Completed</option>
+                            <option value="C">Completed</option>
+                        </select>
 
-                </div>
-                <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-8">
-                    <label for="client"><h5></h5></label>
-                    <select class="form-control" name="client" id="client" data-parsley-required="true">
-                        <option>Select Client</option>
-                        @foreach ($client as $client)
-                            <option value="{{ $client->id }}">{{ $client->name }}</option>
-                        @endforeach
-                    </select>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-4 form-group">
+                        <label for="client"><h5></h5></label>
+                        <select class="form-control" name="client" id="client" data-parsley-required="true">
+                            <option>Select Client</option>
+                            @foreach ($client as $client)
+                                <option value="{{ $client->id }}">{{ $client->name }}</option>
+                            @endforeach
+                        </select>
 
-                </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <br>
@@ -44,29 +43,11 @@
                             <td><h5>Client User</h5></td>
                             <td><h5>Branch</h5></td>
                             <td><h5>Contact Number</h5></td>
-                            {{--<td><h5>NIC/ Passport</h5></td>--}}
                             <td class="col-md-3"></td>
                         </tr>
                         </thead>
                         <tbody class="tbody-completed">
                         </tbody>
-                        {{--@foreach($porder as $porder)--}}
-                            {{--<tr>--}}
-                                {{--<td>{{$porder->id}}</td>--}}
-                                {{--<td>{{$porder->created_at}}</td>--}}
-                                {{--<td>{{\App\Client::find($porder->client_id)->name}}</td>--}}
-                                {{--<td>{{$porder->del_branch}}</td>--}}
-                                {{--<td>@if($porder->status === "P") Pending--}}
-                                    {{--@elseif($porder->status === "PC") Partial Completed--}}
-                                    {{--@elseif($porder->status === "C") Completed--}}
-                                    {{--@endif--}}
-                                {{--</td>--}}
-                                {{--<td><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"--}}
-                                       {{--class="btn btn-success">View Order</a></td>--}}
-                            {{--</tr>--}}
-
-                        {{--@endforeach--}}
-
                     </table>
 
                 </div>

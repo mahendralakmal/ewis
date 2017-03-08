@@ -30,60 +30,78 @@
 
 <script>
     $("#client").on('change', function () {
+        var status = $('#postatus').val();
         $.ajax(
-            {
-                type: 'get',
-                url: '/admin/manage-clients/completed-purchase-orders/'+ this.value,
-                success:function (response) {
-                    console.log(response);
-                    var model = $('.tbody-completed');
-                    model.empty();
-                    $.each(response, function (index, elem) {
-//                        model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>")
-                        model.append("<tr>");
-                        model.append("<td>"+elem.id+"</td>");
-                        model.append("<td>"+elem.created_at+"</td>");
-                        model.append("<td>"+elem.updated_at+"</td>");
-                        model.append("<td>"+elem.del_cp+"</td>");
-                        model.append("<td>"+elem.del_branch+"</td>");
-                        model.append("<td>"+elem.del_tp+"</td>");
-                        model.append("</tr>");
-                    });
+                {
+                    type: 'get',
+                    url: '/admin/manage-clients/completed-purchase-orders/' + this.value + '/' + status,
+                    success: function (response) {
+                        console.log(response);
+                        var model = $('.tbody-completed');
+                        model.empty();
+                        $.each(response, function (index, elem) {
+                            model.append("<tr>");
+                            model.append("<td>" + elem.id + "</td>");
+                            model.append("<td>" + elem.created_at + "</td>");
+                            model.append("<td>" + elem.updated_at + "</td>");
+                            model.append("<td>" + elem.del_cp + "</td>");
+                            model.append("<td>" + elem.del_branch + "</td>");
+                            model.append("<td>" + elem.del_tp + "</td>");
+                            model.append("</tr>");
+                        });
+                    }
                 }
-//                    function (response) {
-//                    var model = $('#list_price');
-//                    model.val(response);
-//                }
-            }
+        );
+    });
+
+    $("#postatus").on('change', function () {
+        var client = $('#client').val();
+//        alert(client);
+        $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/manage-clients/completed-purchase-orders/' + client + '/' + this.value,
+                    success: function (response) {
+                        console.log(response);
+                        var model = $('.tbody-completed');
+                        model.empty();
+                        $.each(response, function (index, elem) {
+                            model.append("<tr>");
+                            model.append("<td>" + elem.id + "</td>");
+                            model.append("<td>" + elem.created_at + "</td>");
+                            model.append("<td>" + elem.updated_at + "</td>");
+                            model.append("<td>" + elem.del_cp + "</td>");
+                            model.append("<td>" + elem.del_branch + "</td>");
+                            model.append("<td>" + elem.del_tp + "</td>");
+                            model.append("</tr>");
+                        });
+                    }
+                }
         );
     });
 
     $("#P_client").on('change', function () {
         $.ajax(
-            {
-                type: 'get',
-                url: '/admin/manage-clients/pc-purchase-orders/'+ this.value,
-                success:function (response) {
-                    console.log(response);
-                    var model = $('.tbody-completed');
-                    model.empty();
-                    $.each(response, function (index, elem) {
+                {
+                    type: 'get',
+                    url: '/admin/manage-clients/pc-purchase-orders/' + this.value,
+                    success: function (response) {
+                        console.log(response);
+                        var model = $('.tbody-completed');
+                        model.empty();
+                        $.each(response, function (index, elem) {
 //                        model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>")
-                        model.append("<tr>");
-                        model.append("<td>"+elem.id+"</td>");
-                        model.append("<td>"+elem.created_at+"</td>");
-                        model.append("<td>"+elem.del_cp+"</td>");
-                        model.append("<td>"+elem.del_branch+"</td>");
-                        model.append("<td>"+elem.del_tp+"</td>");
-                        model.append("<td>"+elem.status+"</td>");
-                        model.append("</tr>");
-                    });
+                            model.append("<tr>");
+                            model.append("<td>" + elem.id + "</td>");
+                            model.append("<td>" + elem.created_at + "</td>");
+                            model.append("<td>" + elem.del_cp + "</td>");
+                            model.append("<td>" + elem.del_branch + "</td>");
+                            model.append("<td>" + elem.del_tp + "</td>");
+                            model.append("<td>" + elem.status + "</td>");
+                            model.append("</tr>");
+                        });
+                    }
                 }
-//                    function (response) {
-//                    var model = $('#list_price');
-//                    model.val(response);
-//                }
-            }
         );
     });
 
@@ -92,19 +110,28 @@
         if ((selectedVal.toLowerCase() != 'client') && (selectedVal != 'Super Admin')) {
 //            $('#section_head_id').remove();
             $('.shead').show();
-        }else {
+        } else {
             $('.shead').hide();
             $('#section_head_id').remove();
-            $('<input>').attr({type:'hidden', id:'section_head_id',name:'section_head_id', value:''}).appendTo('#userCreate')
+            $('<input>').attr({
+                type: 'hidden',
+                id: 'section_head_id',
+                name: 'section_head_id',
+                value: ''
+            }).appendTo('#userCreate')
         }
     });
 
-    $("#postatus").on('change', function () {
-        var poid = $('#id').val();
+    $(".postatus").on('change', function () {
+        var poid = this.id;
+//        alert(this.id);
+//        alert(this.value);
         $.ajax({
             type: 'get',
             url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
             success: function (response) {
+//                $('.msg').show();
+//                $('.msg').addClass(' alert-success');
             }
         });
     });
