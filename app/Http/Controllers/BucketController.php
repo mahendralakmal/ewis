@@ -159,15 +159,15 @@ class BucketController extends Controller
     }
 
     public function getPurchaseOrdersByClient($client){
-        $order = P_Order::where('client_id',$client);
-        $porder = $order->where('status', 'C' )->get();
+        $porder = P_Order::where('client_id',$client)->get();
+//        $porder = $order->where('status', 'C' )->get();
         return $porder;
     }
 
-//    public function getPurchaseOrdersByStatus($status){
-//        $porder = P_Order::where('status',$status);
-//        return $porder;
-//    }
+    public function getPurchaseOrdersByStatus($status){
+        $order = P_Order::where('status',$status);
+        return $order;
+    }
 
     public function getPODetails($id)
     {

@@ -137,7 +137,7 @@
                                         class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/manage-clients/completed-purchase-orders' ) }}">Completed Purchase Orders</a>
+                                    <a href="{{ url ('/admin/manage-clients/completed-purchase-orders' ) }}">Purchase Orders by Clients</a>
                                 </li>
                                 {{--<li {{ (Request::is('*panels') ? 'class="active"' : '') }}>--}}
                                     {{--<a href="{{ url ('#') }}">Pending</a>--}}

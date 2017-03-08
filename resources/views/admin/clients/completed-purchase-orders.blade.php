@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Complete Orders')
+@section('page_heading','Orders by Client')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -9,11 +9,21 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Completed POs</h3>
+                    <h3 class="panel-title">Client POs</h3>
                 </div>
+                <div class="row">
+                <div class="col-md-3 col-sm-3 col-lg-3 col-md-offset-4">
+                    <label for="status"><h5></h5></label>
+                    <select class="form-control" name="status" id="status" data-parsley-required="true">
+                        <option>Select Status</option>
+{{--                        @foreach ($status as $status)--}}
+{{--                            <option value="{{ $client->id }}">{{ $client->name }}</option>--}}
+                        {{--@endforeach--}}
+                    </select>
 
+                </div>
                 <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-8">
-                    <label for="lastname"><h5></h5></label>
+                    <label for="client"><h5></h5></label>
                     <select class="form-control" name="client" id="client" data-parsley-required="true">
                         <option>Select Client</option>
                         @foreach ($client as $client)
