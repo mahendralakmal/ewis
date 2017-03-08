@@ -43,8 +43,10 @@
                         model.append("<tr>");
                         model.append("<td>"+elem.id+"</td>");
                         model.append("<td>"+elem.created_at+"</td>");
-                        model.append("<td>"+elem.del_branch+"</td>");
+                        model.append("<td>"+elem.updated_at+"</td>");
                         model.append("<td>"+elem.del_cp+"</td>");
+                        model.append("<td>"+elem.del_branch+"</td>");
+                        model.append("<td>"+elem.del_tp+"</td>");
                         model.append("</tr>");
                     });
                 }

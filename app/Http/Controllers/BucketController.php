@@ -164,6 +164,11 @@ class BucketController extends Controller
         return $porder;
     }
 
+//    public function getPurchaseOrdersByStatus($status){
+//        $porder = P_Order::where('status',$status);
+//        return $porder;
+//    }
+
     public function getPODetails($id)
     {
         $order = P_Order::find($id);

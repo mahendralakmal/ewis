@@ -127,9 +127,6 @@
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                 <a href="{{ url ('/admin/manage-clients/pc-purchase-orders' ) }}">Partial Complete Purchase Orders</a>
                                 </li>
-                                <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/manage-clients/completed-purchase-orders' ) }}">Completed Purchase Orders</a>
-                                </li>
                                 {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
                                 {{--<a href="{{ url ('/admin/manage-clients' ) }}">Manage Agents</a>--}}
                                 {{--</li>--}}
@@ -140,8 +137,11 @@
                                         class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('#') }}">Pending</a>
+                                    <a href="{{ url ('/admin/manage-clients/completed-purchase-orders' ) }}">Completed Purchase Orders</a>
                                 </li>
+                                {{--<li {{ (Request::is('*panels') ? 'class="active"' : '') }}>--}}
+                                    {{--<a href="{{ url ('#') }}">Pending</a>--}}
+                                {{--</li>--}}
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('#') }}"></a>
                                 </li>

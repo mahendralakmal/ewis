@@ -11,14 +11,17 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Completed POs</h3>
                 </div>
+
                 <div class="col-md-4 col-sm-4 col-lg-4 col-md-offset-8">
-                    <label for="lastname"><h5>Client</h5></label>
+                    <label for="lastname"><h5></h5></label>
                     <select class="form-control" name="client" id="client" data-parsley-required="true">
                         <option>Select Client</option>
                         @foreach ($client as $client)
                             <option value="{{ $client->id }}">{{ $client->name }}</option>
                         @endforeach
                     </select>
+
+                </div>
                 </div>
                 <div class="panel-body">
                     <br>
@@ -27,9 +30,10 @@
                         <tr>
                             <td><h5>Po. No.</h5></td>
                             <td><h5>Created Date & Time</h5></td>
-                            <td><h5>Client</h5></td>
+                            <td><h5>Completed Date & Time</h5></td>
+                            <td><h5>Client User</h5></td>
                             <td><h5>Branch</h5></td>
-                            <td><h5>Status</h5></td>
+                            <td><h5>Contact Number</h5></td>
                             {{--<td><h5>NIC/ Passport</h5></td>--}}
                             <td class="col-md-3"></td>
                         </tr>
