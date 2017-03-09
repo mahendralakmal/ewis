@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->text('image')->nullable();
             $table->decimal('default_price',11,2)->nullable(true);
             $table->boolean('status')->default(0);
+            $table->boolean('vat_apply')->default(0);
+            $table->float('vat')->nullable(true);
             $table->string('user_id')->default(null);
             $table->timestamps();
         });
