@@ -151,8 +151,8 @@
                     type: 'get',
                     url: '/admin/manage-product-list/product/details/' + this.value,
                     success: function (response) {
-                        var model = $('#list_price');
-                        model.val(response);
+                        $('#list_price').val(response.default_price);
+                        $('#vat').val(response.vat);
                     }
                 }
         );

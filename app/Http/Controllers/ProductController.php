@@ -50,7 +50,7 @@ class ProductController extends Controller
     }
 
     public function load_products_deta(Product $id){
-        return Response::json($id->default_price);
+        return Response::json($id);
     }
 
     public function load_products(Category $id){
