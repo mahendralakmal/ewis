@@ -51,6 +51,11 @@ class UserController extends Controller
         $designation->user_id = 1;
         $designation->save();
 
+        $designation = new Designation();
+        $designation->designation = "Client";
+        $designation->user_id = 1;
+        $designation->save();
+
         $user = new User();
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -193,24 +198,20 @@ class UserController extends Controller
     public function signin(Request $request)
     {
         Session::put('LoggedIn', false);
-//        , ['approval', 1]
         $user = User::where([['email', $request->email]])->first();
         if (!$user == null && Hash::check($request->password, $user->password)) {
             if ($user->approval) {
                 if (strtolower($user->designation->designation) == 'client') {
-//                    $client = $user->client;
                     Session::put('LoggedIn', true);
                     Session::put('User', $user->id);
                     Session::put('Type', $user->designation->designation);
                     Session::put('BaseColor', $user->clientuser->first()->client->color);
-
                     return redirect('/client-profile/' . $user->clientuser->first()->client->id . '/brands');
                 } else {
                     Session::put('LoggedIn', true);
                     Session::put('User', $user->id);
                     Session::put('Type', $user->designation->designation);
                     Session::put('ip', $request->ip());
-//                Mail::to($user)->send(new PoSentSuccessfully);
                     return redirect('/admin');
                 }
             } else {
