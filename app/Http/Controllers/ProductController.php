@@ -50,7 +50,7 @@ class ProductController extends Controller
     }
 
     public function load_products_deta(Product $id){
-        return Response::json($id->default_price);
+        return Response::json($id);
     }
 
     public function load_products(Category $id){
@@ -120,6 +120,8 @@ class ProductController extends Controller
         $product->user_id = $request->user_id;
         $product->status = 1;
         $product->default_price = $request->default_price;
+        $product->vat_apply = ($request->vat_apply == 'on')? true:false;
+        $product->vat = $request->vat;
         $product->save();
 
         return back();

@@ -29,6 +29,14 @@
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
+
+    $("#vat_apply").on('change', function () {
+        if($(this).val() == "on"){
+            $("#vat").val('15');
+        } else {
+            $("#vat").val('');
+        }
+    });
     $("#client").on('change', function () {
         var status = $('#postatus').val();
         $.ajax(
@@ -68,6 +76,7 @@
                         $.each(response, function (index, elem) {
                             model.append("<tr>");
                             model.append("<td>" + elem.id + "</td>");
+
                             model.append("<td>" + elem.created_at + "</td>");
                             model.append("<td>" + elem.updated_at + "</td>");
                             model.append("<td>" + elem.del_cp + "</td>");
@@ -142,8 +151,8 @@
                     type: 'get',
                     url: '/admin/manage-product-list/product/details/' + this.value,
                     success: function (response) {
-                        var model = $('#list_price');
-                        model.val(response);
+                        $('#list_price').val(response.default_price);
+                        $('#vat').val(response.vat);
                     }
                 }
         );

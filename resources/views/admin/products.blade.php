@@ -134,6 +134,23 @@
                                @if(!$id == null) value="{{ $id->default_price }}" @endif>
                     </div>
                 </div>
+
+                <div class="form-group row">
+                    <div class="col-md-4"><label>Vat apply</label></div>
+                    <div class="col-md-8">
+                        <label><input type="checkbox" id="vat_apply" name="vat_apply"
+                                      @if(!$id == null && $id->vat_apply == true ) checked @endif>
+                            Brands</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4"><label>Vat</label></div>
+                    <div class="col-md-7">
+                        <input type="number" name="vat" id="vat" class="form-control"
+                               @if(!$id == null) value="{{ $id->vat }}" @endif>
+                    </div>
+                    <div class="col-md-1">%</div>
+                </div>
                 <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
                         Add @endif</button>
             </form>
