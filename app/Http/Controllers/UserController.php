@@ -69,7 +69,8 @@ class UserController extends Controller
         $user->privilege()->create(['brand' => true, 'category' => true, 'product' => true, 'add_user' => true,
             'user_approve' => true, 'designation' => true, 'client_prof' => true, 'client_users' => true,
             'view_po' => true, 'change_po_status' => true, 'created_user_id' => $request->user_id,
-            'privilege' => true, 'assign_agent' => true, 'asign_product' => true, 'product_cost'=>true]);
+            'privilege' => true, 'assign_agent' => true, 'asign_brand' => true, 'asign_category' => true,
+            'asign_product' => true, 'product_cost'=>true]);
 
         Session::put('LoggedIn', true);
         Session::put('User', $request->user_id);
