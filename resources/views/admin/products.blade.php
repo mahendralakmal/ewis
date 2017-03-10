@@ -139,8 +139,7 @@
                     <div class="col-md-4"><label>Vat apply</label></div>
                     <div class="col-md-8">
                         <label><input type="checkbox" id="vat_apply" name="vat_apply"
-                                      @if(!$id == null && $id->vat_apply == true ) checked @endif>
-                            Brands</label>
+                                      @if(!$id == null && $id->vat_apply == true ) checked @endif></label>
                     </div>
                 </div>
                 <div class="form-group row">
