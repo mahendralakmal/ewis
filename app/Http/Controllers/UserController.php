@@ -164,7 +164,8 @@ class UserController extends Controller
     public function mange_user()
     {
         $id = "";
-        $users = User::where('designation_id', '!=', 4)->get();
+        $designation = Designation::where('designation', 'Client')->first();
+        $users = User::where('designation_id', '!=', $designation->id)->get();
         $designations = Designation::all();
         return view('/admin/users/manage-users', compact('users', 'designations', 'id'));
     }

@@ -84,12 +84,22 @@
                     </div>
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="assign_agent" name="assign_agent"
-                                                            @if(!$user->privilege == null && $user->privilege->client_users == true) checked @endif>
+                                                            @if(!$user->privilege == null && $user->privilege->assign_agent == true) checked @endif>
                                 Assign Agent</label></div>
                     </div>
                     <div class="col-md-4">
+                        <div class="checkbox"><label><input type="checkbox" id="asign_brand" name="asign_brand"
+                                                            @if(!$user->privilege == null && $user->privilege->asign_brand == true) checked @endif>
+                                Assign Product</label></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="checkbox"><label><input type="checkbox" id="asign_category" name="asign_category"
+                                                            @if(!$user->privilege == null && $user->privilege->asign_category == true) checked @endif>
+                                Assign Product</label></div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="asign_product" name="asign_product"
-                                                            @if(!$user->privilege == null && $user->privilege->client_users == true) checked @endif>
+                                                            @if(!$user->privilege == null && $user->privilege->asign_product == true) checked @endif>
                                 Assign Product</label></div>
                     </div>
                     <div class="col-md-12"><hr><h5>Manage Purchase Orders</h5></div>

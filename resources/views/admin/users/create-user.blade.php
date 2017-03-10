@@ -128,7 +128,7 @@
                         <select name="section_head_id" id="section_head_id" class="form-control">
                             <option>Select Section Head</option>
                             @foreach($users as $user)
-                                @if(strtolower($user->designation->designation) != 'client')
+                                @if((strtolower($user->designation->designation) != 'client') && ($user->deleted == 0)))
                                     <option value="{{ $user->id }}"> {{ $user->name }}
                                         | {{ $user->designation->designation }}</option>
                                 @endif
