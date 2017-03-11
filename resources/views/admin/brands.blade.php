@@ -4,71 +4,92 @@
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->brand))
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Brand Categories</h3>
-            </div>
-            <div class="panel-body">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <td><h5>title</h5></td>
-                        <td><h5>Description</h5></td>
-                        <td></td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($brands as $brand)
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Brand Categories</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{{$brand->title}}</td>
-                            <td>{{$brand->description}}</td>
-                            <td>
-                                <a href="/admin/brands/{{$brand->id}}" class="btn btn-primary btn-outline">Edit</a>
-                                <a href="/admin/brands/{{$brand->id}}/remove"
-                                   class="btn btn-danger btn-outline">Delete</a>
-                            </td>
+                            <td><h5>title</h5></td>
+                            <td><h5>Description</h5></td>
+                            <td></td>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($brands as $brand)
+                            <tr>
+                                <td>{{$brand->title}}</td>
+                                <td>{{$brand->description}}</td>
+                                <td>
+                                    <a href="/admin/brands/{{$brand->id}}" class="btn btn-primary btn-outline">Edit</a>
+                                    <a href="/admin/brands/{{$brand->id}}/remove"
+                                       class="btn btn-danger btn-outline">Delete</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <h4>Add new Brand</h4>
-        <hr>
-        <div class="col-md-12">
-            <form class="form-horizontal" id="brands" enctype="multipart/form-data" role="form" method="POST"
-                  enctype="multipart/form-data" @if($id == null)action="/admin/brands/store"
-                  @else action="/admin/brands/update" @endif>
-                {{ csrf_field() }}
-                @if(!$id == null)
-                    <input type="hidden" id="id" name="id" value="{{ $id->id }}">
+        <div class="col-md-6">
+            <h4>Add new Brand</h4>
+            <hr>
+            <div class="col-md-12">
+                @if (count($errors))
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
-                <input type="hidden" id="user_id" name="user_id" value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
-                <div class="form-group row">
-                    <div class="col-md-4"><label>Title</label></div>
-                    <div class="col-md-8">
-                        <input type="text" name="title" id="title" class="form-control" @if(!$id == null) value="{{ $id->title }}" @endif>
+                @if(\Illuminate\Support\Facades\Session::has('success'))
+                    <div class="alert alert-success">
+                        <ul>
+                            <li> {{ \Illuminate\Support\Facades\Session::get('success') }} </li>
+                        </ul>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-4"><label>Description</label></div>
-                    <div class="col-md-8">
-                        <textarea name="description" id="description" class="form-control">@if(!$id == null) {{ $id->description }} @endif</textarea>
+                @endif
+
+                <form class="form-horizontal" id="brands" enctype="multipart/form-data" role="form" method="POST"
+                      enctype="multipart/form-data" @if($id == null)action="/admin/brands/store"
+                      @else action="/admin/brands/update" @endif>
+                    {{ csrf_field() }}
+                    @if(!$id == null)
+                        <input type="hidden" id="id" name="id" value="{{ $id->id }}">
+                    @endif
+                    <input type="hidden" id="user_id" name="user_id"
+                           value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
+                    <div class="form-group row">
+                        <div class="col-md-4"><label>Title</label></div>
+                        <div class="col-md-8">
+                            <input type="text" name="title" id="title" class="form-control"
+                                   @if(!$id == null) value="{{ $id->title }}" @endif>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-4"><label>Image</label></div>
-                    <div class="col-md-8">
-                        <input type="file" id="image" name="image">
+                    <div class="form-group row">
+                        <div class="col-md-4"><label>Description</label></div>
+                        <div class="col-md-8">
+                            <textarea name="description" id="description"
+                                      class="form-control">@if(!$id == null) {{ $id->description }} @endif</textarea>
+                        </div>
                     </div>
-                </div>
-                <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else Add @endif</button>
-            </form>
+                    <div class="form-group row">
+                        <div class="col-md-4"><label>Image</label></div>
+                        <div class="col-md-8">
+                            <input type="file" id="image" name="image">
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
+                            Add @endif</button>
+                </form>
+            </div>
         </div>
-    </div>
     @else
         <div class="col-md-offset-3">
             <h2 class="error">You are Not Authorize for access this page</h2>

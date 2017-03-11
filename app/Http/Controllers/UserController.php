@@ -31,7 +31,7 @@ class UserController extends Controller
 
     public function UpdatePrivileges(Request $request)
     {
-//        $privilege = (User::find($request->user_id))->privilege;
+        $privilege = (User::find($request->user_id))->privilege;
         $privilege->update(['brand' => ($request->brand == "on") ? true : false, 'category' => ($request->category == "on") ? true : false,
             'product' => ($request->product == "on") ? true : false, 'add_user' => ($request->add_user == "on") ? true : false,
             'user_approve' => ($request->user_approve == "on") ? true : false, 'designation' => ($request->designation == "on") ? true : false,
@@ -40,7 +40,7 @@ class UserController extends Controller
             'created_user_id' => $request->user_id, 'privilege' => ($request->privilege == "on") ? true : false,
             'assign_agent' => ($request->assign_agent == "on") ? true : false,
             'asign_product' => ($request->asign_product == "on") ? true : false,
-            'product_cost'=>($request->product_cost == "on") ? true : false]);
+            'product_cost' => ($request->product_cost == "on") ? true : false]);
         return redirect('/admin/users/manage-users');
     }
 
@@ -70,7 +70,7 @@ class UserController extends Controller
             'user_approve' => true, 'designation' => true, 'client_prof' => true, 'client_users' => true,
             'view_po' => true, 'change_po_status' => true, 'created_user_id' => $request->user_id,
             'privilege' => true, 'assign_agent' => true, 'asign_brand' => true, 'asign_category' => true,
-            'asign_product' => true, 'product_cost'=>true]);
+            'asign_product' => true, 'product_cost' => true]);
 
         Session::put('LoggedIn', true);
         Session::put('User', $request->user_id);
@@ -97,6 +97,10 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate(request(), [
+            'email' => 'required|unique:users|max:100',
+        ]);
+
         $user = new User();
 
         $user->email = $request->email;
@@ -107,6 +111,7 @@ class UserController extends Controller
         $user->user_id = $request->user_id;
         $user->section_head_id = $request->section_head_id;
         $user->save();
+        Session::flash('success', 'User successfully inserted...!');
 
         if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
             return redirect('/admin/manage-clients/client_user/' . $user->id);
@@ -147,6 +152,9 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        $this->validate(request(), [
+            'email' => 'required|unique:users|max:100',
+        ]);
         $user = User::find($request->id);
         $user->update([
             'password' => Hash::make($request->password),
@@ -154,8 +162,9 @@ class UserController extends Controller
             'designation_id' => $request->designation_id,
             'nic_pass' => $request->nic_pass
         ]);
+        Session::flash('success', 'User successfully updated...!');
 
-        if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
+        if (strtolower(User::find($user->id)->designation->designation) === 'client') {
             return redirect('/admin/manage-clients/client_user/' . $user->id);
         } else {
             return back();
@@ -231,6 +240,7 @@ class UserController extends Controller
         Session::forget('LoggedIn');
         Session::forget('User');
         Session::forget('BaseColor');
+        Session::forget('success');
         Session::flush();
         Session::put('LoggedIn', false);
         return redirect('/');

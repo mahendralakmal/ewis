@@ -21,13 +21,6 @@ class BrandsController extends Controller
         return back();
     }
 
-//    public function edit_client_products(CBrand $id, Request $request){
-//        $cp_id = $id;
-//        $cbrands = CBrand::where([['user_id',$request->session()->get('User')],['client_id', $id->client_id]])->get();
-//        $brands = Brand::orderBy('title')->get();
-//        return view('/admin/clients/manage-brand-list', compact('brands', 'id', 'cbrands','cp_id'));
-//    }
-
     public function store_client_brands(Request $request){
         CBrand::create($request->all());
         return back();
@@ -49,12 +42,17 @@ class BrandsController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate(request(), [
+            'title' => 'required|unique:brands|max:100',
+        ]);
+
         $brand = new Brand();
         $brand->title = $request->title;
         $brand->user_id = $request->user_id;
         $brand->description = $request->description;
         $brand->image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;
         $brand->save();
+        Session::flash('success', 'Brand successfully inserted...!');
         return back();
     }
 
@@ -66,9 +64,13 @@ class BrandsController extends Controller
 
     public function update(Request $request)
     {
+        $this->validate(request(), [
+            'title' => 'required|unique:brands|max:100',
+        ]);
         $brand = Brand::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;
         $brand->update(['title' => $request->title, 'description' => $request->description, 'image' => $image, 'user_id' => $request->user_id]);
+        Session::flash('success', 'Brand successfully updated...!');
 
         return redirect('/admin/brands');
     }
