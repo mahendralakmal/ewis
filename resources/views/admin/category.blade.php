@@ -42,6 +42,8 @@
         <h4>Add new Category</h4>
         <hr>
         <div class="col-md-12">
+            @include('admin.messages.success');
+            @include('admin.messages.error');
             <form class="form-horizontal" id="categories" enctype="multipart/form-data" role="form" method="POST"
                   @if($id == null) action="/admin/categories/store" @else action="/admin/categories/update" @endif>
                 {{ csrf_field() }}

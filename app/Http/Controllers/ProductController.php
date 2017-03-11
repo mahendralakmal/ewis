@@ -44,7 +44,6 @@ class ProductController extends Controller
     }
 
     public function store_client_products(Request $request){
-//        return $request->all();
         Client_Product::create($request->all());
         return back();
     }
@@ -81,11 +80,15 @@ class ProductController extends Controller
 
     public function update(Request $request)
     {
+        $this->validate(request(), [
+            'part_no' => 'required|unique:products|max:100',
+        ]);
         $product = Product::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
         $product->update(['part_no' => $request->part_no, 'name' => $request->name,'category_id' => $request->category_id, 'description' => $request->description,
             'image' => $image, 'user_id' => $request->user_id, 'default_price'=> $request->default_price]);
 
+        Session::flash('success', 'Product successfully updated...!');
         return redirect('/admin/products');
     }
 
@@ -109,6 +112,9 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate(request(), [
+            'part_no' => 'required|unique:products|max:100',
+        ]);
         $product = new Product();
 
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
@@ -123,6 +129,7 @@ class ProductController extends Controller
         $product->vat_apply = ($request->vat_apply == 'on')? true:false;
         $product->vat = $request->vat;
         $product->save();
+        Session::flash('success', 'Product successfully inserted...!');
 
         return back();
     }

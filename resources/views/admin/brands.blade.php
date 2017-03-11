@@ -39,22 +39,8 @@
             <h4>Add new Brand</h4>
             <hr>
             <div class="col-md-12">
-                @if (count($errors))
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                @if(\Illuminate\Support\Facades\Session::has('success'))
-                    <div class="alert alert-success">
-                        <ul>
-                            <li> {{ \Illuminate\Support\Facades\Session::get('success') }} </li>
-                        </ul>
-                    </div>
-                @endif
+                @include('admin.messages.success');
+                @include('admin.messages.error');
 
                 <form class="form-horizontal" id="brands" enctype="multipart/form-data" role="form" method="POST"
                       enctype="multipart/form-data" @if($id == null)action="/admin/brands/store"

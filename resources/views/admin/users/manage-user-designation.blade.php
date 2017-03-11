@@ -38,6 +38,8 @@
         </div>
     </div>
     <div class="col-md-5">
+        @include('admin.messages.success')
+        @include('admin.messages.error')
         <form class="form-horizontal" role="form" method="POST" @if($id === "") action="/admin/users/designation/store" @else action="/admin/users/designation/update" @endif>
             {{ csrf_field() }}
             @if(!$id == "")

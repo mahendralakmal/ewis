@@ -52,22 +52,8 @@
             </div>
         </div>
         <div class="col-md-5">
-            @if (count($errors))
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @if(\Illuminate\Support\Facades\Session::has('success'))
-                <div class="alert alert-success">
-                    <ul>
-                        <li> {{ \Illuminate\Support\Facades\Session::get('success') }} </li>
-                    </ul>
-                </div>
-            @endif
+            @include('admin.messages.success');
+            @include('admin.messages.error');
             <form id="userCreate" class="form-horizontal" role="form" method="POST"
                   @if($id === "")action="/admin/users/store"
                   @else action="/admin/users/update" @endif>
