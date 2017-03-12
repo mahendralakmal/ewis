@@ -39,8 +39,8 @@
             <h4>Add new Brand</h4>
             <hr>
             <div class="col-md-12">
-                @include('admin.messages.success');
-                @include('admin.messages.error');
+                @include('admin.messages.success')
+                @include('admin.messages.error')
 
                 <form class="form-horizontal" id="brands" enctype="multipart/form-data" role="form" method="POST"
                       enctype="multipart/form-data" @if($id == null)action="/admin/brands/store"

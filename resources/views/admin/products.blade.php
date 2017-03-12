@@ -48,8 +48,8 @@
         <h4>Add new Product</h4>
         <hr>
         <div class="col-md-12">
-            @include('admin.messages.success');
-            @include('admin.messages.error');
+            @include('admin.messages.success')
+            @include('admin.messages.error')
             <form class="form-horizontal" id="products" enctype="multipart/form-data" role="form" method="POST"
                   @if($id == null) action="/admin/products/store"
                   @else action="/admin/products/update" @endif>
