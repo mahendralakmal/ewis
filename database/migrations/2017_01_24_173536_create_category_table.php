@@ -17,7 +17,7 @@ class CreateCategoryTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->integer('brand_id')->unsigned()->index();
-            $table->string('description');
+            $table->string('description')->nullable();;
             $table->text('image')->nullable(true);
             $table->string('user_id')->default(null);
             $table->boolean('status')->default(1);
