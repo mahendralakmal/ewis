@@ -24,7 +24,7 @@
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 </head>
 <body>
-@if((\Illuminate\Support\Facades\Session::has('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('LoggedIn')) && (strtolower(\Illuminate\Support\Facades\Session::get('Type')) == 'client')) {
+@if((\Illuminate\Support\Facades\Session::has('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('LoggedIn')) && (strtolower(\Illuminate\Support\Facades\Session::get('Type')) == 'client'))
 <header>
     <nav class="navbar navbar-default">
         <div class="container">

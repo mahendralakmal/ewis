@@ -65,7 +65,7 @@ class BrandsController extends Controller
     public function update(Request $request)
     {
         $this->validate(request(), [
-            'title' => 'required|unique:brands|max:100',
+            'title' => 'required|max:100',
         ]);
         $brand = Brand::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;

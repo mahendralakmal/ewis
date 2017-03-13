@@ -81,7 +81,7 @@ class ProductController extends Controller
     public function update(Request $request)
     {
         $this->validate(request(), [
-            'part_no' => 'required|unique:products|max:100',
+            'part_no' => 'required|max:100',
         ]);
         $product = Product::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
@@ -115,6 +115,7 @@ class ProductController extends Controller
         $this->validate(request(), [
             'part_no' => 'required|unique:products|max:100',
         ]);
+
         $product = new Product();
 
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
