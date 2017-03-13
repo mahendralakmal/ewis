@@ -70,6 +70,7 @@ class BrandsController extends Controller
         $brand = Brand::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;
         $brand->update(['title' => $request->title, 'description' => $request->description, 'image' => $image, 'user_id' => $request->user_id]);
+
         Session::flash('success', 'Brand successfully updated...!');
 
         return redirect('/admin/brands');
