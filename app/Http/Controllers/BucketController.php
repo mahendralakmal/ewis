@@ -122,6 +122,7 @@ class BucketController extends Controller
 //        });
 //        return view('user/history', ['orders' => $orders]);
 //    }
+
     public function getHistory()
     {
         $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id)->all();
