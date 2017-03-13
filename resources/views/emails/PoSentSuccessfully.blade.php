@@ -8,7 +8,7 @@
 <table width="100%" border="0">
     <tr>
         <td>
-            <img src="http://ewis.app/img/ewis-logo.png" style="width: 150px;"><br>
+            <img src="{{ url('/img/ewis-logo.png') }}" style="width: 150px;"><br>
             <p>Head Office<br>
                 No 142, Yathama Building,<br>
                 Galle Road,<br>
@@ -63,7 +63,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2"><hr><img src="http://ewis.app/img/footer.png" width="100%"></td>
+        <td colspan="2"><hr><img src="{{ url('/img/footer.png') }}" width="100%"></td>
     </tr>
 </table>
 </body>
