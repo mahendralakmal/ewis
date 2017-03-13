@@ -70,8 +70,12 @@
 
                         <input type="hidden" id="user_id" name="user_id"
                                value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
-                        <input type="email" class="form-control" name="email" id="email"
-                               @if(!$id == "") value="{{$id->email}}" disabled @endif>
+                        @if(!$id == "")
+                            <label class="form-control">{{$id->email}}</label>
+                            <input type="hidden" name="email" id="email" value="{{$id->email}}">
+                        @else
+                            <input type="email" class="form-control" name="email" id="email">
+                        @endif
                     </div>
                 </div>
                 <div class="form-group">
@@ -124,15 +128,15 @@
                         <a href="/admin/users/manage-user-designations"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
-                <div style="display: none" class="form-group shead" >
+                <div style="display: none" class="form-group shead">
                     <div class="col-md-5"><label>Section Head</label></div>
                     <div class="col-md-7">
                         <select name="section_head_id" id="section_head_id" class="form-control">
                             <option>Select Section Head</option>
                             @foreach($users as $user)
                                 @if((strtolower($user->designation->designation) != 'client') && ($user->deleted == 0)))
-                                    <option value="{{ $user->id }}"> {{ $user->name }}
-                                        | {{ $user->designation->designation }}</option>
+                                <option value="{{ $user->id }}"> {{ $user->name }}
+                                    | {{ $user->designation->designation }}</option>
                                 @endif
                             @endforeach
                         </select>
