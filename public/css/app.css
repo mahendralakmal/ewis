@@ -5891,6 +5891,7 @@ footer {
   footer p {
     padding: 0px 15px; }
   footer img {
+    margin: 0 10px;
     width: 100px; }
 
 .navbar-default {

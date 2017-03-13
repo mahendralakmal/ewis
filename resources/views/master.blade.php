@@ -82,12 +82,10 @@
 
 <footer>
     <div class="container">
-        <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p><img src="/img/brands/lexmark.png"> <img src="/img/brands/casio.png"> <img src="/img/brands/ricoh.png">
+        <img src="/img/brands/lexmark.png"> <img src="/img/brands/casio.png"> <img src="/img/brands/ricoh.png">
                 <img src="/img/brands/kodak.png"> <img src="/img/brands/konica.png"> <img src="/img/brands/solar.png">
                 <img src="/img/brands/turbn.png"> <img src="/img/brands/fujifilm.png"> <img
-                        src="/img/brands/riello.png"></p>
-        </div>
+                        src="/img/brands/riello.png">
     </div>
     <hr>
     <div class="container">
