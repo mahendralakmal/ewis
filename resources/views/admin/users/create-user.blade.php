@@ -52,8 +52,8 @@
             </div>
         </div>
         <div class="col-md-5">
-            @include('admin.messages.success');
-            @include('admin.messages.error');
+            @include('admin.messages.success')
+            @include('admin.messages.error')
             <form id="userCreate" class="form-horizontal" role="form" method="POST"
                   @if($id === "")action="/admin/users/store"
                   @else action="/admin/users/update" @endif>
