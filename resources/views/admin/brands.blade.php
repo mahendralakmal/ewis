@@ -78,7 +78,7 @@
         </div>
     @else
         <div class="col-md-offset-3">
-            <h2 class="error">You are Not Authorize for access this page</h2>
+            <h2 class="error">You are Not Authorized to access this page</h2>
         </div>
     @endif
 @stop
