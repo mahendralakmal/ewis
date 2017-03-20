@@ -21,6 +21,7 @@ class CreateCategoryTable extends Migration
             $table->text('image')->nullable(true);
             $table->string('user_id')->default(null);
             $table->boolean('status')->default(1);
+            $table->text('category_key')->unique();
             $table->timestamps();
         });
     }

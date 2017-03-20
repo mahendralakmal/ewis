@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $fillable=['title','brand_id','description','image', 'status', 'user_id'];
+    protected $fillable=['title','brand_id','description','image', 'status', 'user_id','category_key'];
 
     public function product(){
         return $this->hasMany(Product::class);

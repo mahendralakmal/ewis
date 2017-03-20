@@ -52,7 +52,7 @@ class BrandsController extends Controller
         $brand->description = $request->description;
         $brand->image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;
         $brand->save();
-        Session::flash('success', 'Brand successfully inserted...!');
+        Session::flash('success', 'Brand successfully added...!');
         return back();
     }
 

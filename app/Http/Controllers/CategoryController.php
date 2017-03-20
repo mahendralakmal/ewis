@@ -71,14 +71,18 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate(request(), [
+            'category_key' => 'required|unique:categories',
+        ]);
         $cate = new Category();
         $cate->title = $request->title;
         $cate->user_id = $request->user_id;
         $cate->brand_id = $request->brand_id;
         $cate->description = $request->description;
+        $cate->category_key = $request->title."_".$request->brand_id;
         $cate->image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/categories', $request->file('image')) : null;
         $cate->save();
-        Session::flash('success', 'Category successfully inserted...!');
+        Session::flash('success', 'Category successfully added...!');
         return back();
     }
 
