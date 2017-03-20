@@ -35,6 +35,10 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                {{--@foreach($categories as $category)--}}
+{{----}}
+                {{--@endforeach--}}
             </div>
         </div>
     </div>
