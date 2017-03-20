@@ -13,7 +13,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <td><h5>Title</h5></td>
+                        <td><h5>Category</h5></td>
                         <td><h5>Brand</h5></td>
                         <td><h5>Description</h5></td>
                         <td></td>
@@ -53,7 +53,7 @@
                 <input type="hidden" id="user_id" name="user_id"
                        value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Title *</label></div>
+                    <div class="col-md-4"><label>Category *</label></div>
                     <div class="col-md-8">
                         <input type="text" name="title" id="title" class="form-control" @if(!$id == null) value="{{ $id->title }}" @endif>
                     </div>
