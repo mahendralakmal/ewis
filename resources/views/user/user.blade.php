@@ -19,8 +19,8 @@
                     <div class="container">
                         <div class="col-sm-11" style="float:left;">
                             <br clear="all"/>
-                            <img alt="agent" src="https://diasp.eu/assets/user/default.png" width="100"
-                                 class="img-responsive"/><!--hve-pro close-->
+                            {{--<img alt="agent" src="https://diasp.eu/assets/user/default.png" width="100"--}}
+                                 {{--class="img-responsive"/><!--hve-pro close-->--}}
                             <!--col-sm-12 close-->
                             <br clear="all"/>
                             <div class="row">
