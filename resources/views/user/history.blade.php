@@ -19,19 +19,19 @@
 
 
                     {{--{{$months->created_at}}--}}
-                                <div class="row">
-                                    <div class="col-md-5">Select Month</div>
-                                    <div class="col-md-7">
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker'>
-                                                <input type='text' class="form-control" />
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar">
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-md-5">Select Month</div>--}}
+                                    {{--<div class="col-md-7">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<div class='input-group date' id='datetimepicker'>--}}
+                                                {{--<input type='text' class="form-control" />--}}
+                                                {{--<span class="input-group-addon">--}}
+                                                    {{--<span class="glyphicon glyphicon-calendar">--}}
+                                                    {{--</span>--}}
+                                                {{--</span>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                     <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 col-md-offset-1 col-lg-offset-1">
                                         <table class="table-bordered col-sm-10 col-lg-10 col-md-10">
                                             <tr>
@@ -56,7 +56,7 @@
                                                         @elseif($porder->status === "C") Completed
                                                         @endif
                                                     </td>
-                                                    <td class="col-md-3"><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>
+                                                    <td class="col-md-3"><a href="{{ url('/client-profile/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>
                                                 </tr>
                                                 {{--<tr>--}}
                                                     {{--<td><h5>{{ $item['item'] ['part_no'] }}</h5></td>--}}
@@ -77,7 +77,6 @@
                                             </tr>
                                         </table>
                                     </div>
-                                </div>
 {{--@endforeach--}}
                         </ul>
                         </div>

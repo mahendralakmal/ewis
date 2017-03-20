@@ -15,6 +15,7 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
     Route::get('/{id}/bucket', 'BucketController@getBucket');
     Route::get('/{id}/bucket/history', 'BucketController@getHistory');
+    Route::get('/po-details/{id}', 'BucketController@historyPODetails');
 
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::post('/{id}/postCheckout', 'BucketController@postCheckout');

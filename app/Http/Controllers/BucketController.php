@@ -180,4 +180,11 @@ class BucketController extends Controller
         return view('admin/clients/detail-orders', compact('order'));
     }
 
+    public function historyPODetails($id)
+    {
+        $order = P_Order::find($id);
+        $order->bucket = unserialize($order->bucket);
+        return view('user/detail-orders', compact('order'));
+    }
+
 }
