@@ -114,7 +114,7 @@
                                         @endif
                                     @endforeach
                                 </select>
-                            @endifs
+                                @endifs
                         </div>
                     </div>
                     <div class="form-group row">

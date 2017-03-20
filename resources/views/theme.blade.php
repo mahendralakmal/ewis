@@ -18,7 +18,7 @@
                                 <h3>{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->name }}</h3>
                                 <h5>Sales Agent</h5>
                                 <ul>
-                                    <li><span class="glyphicon glyphicon-user"></span> Ewis Peripherals</li>
+                                    <li><span class="glyphicon glyphicon-user"></span> EWIS Peripherals </li>
                                     <li><span class="glyphicon glyphicon-map-marker"></span> No.123, Blah Street, Blah
                                         blah,
                                         Colombo45, Sri Lanka
