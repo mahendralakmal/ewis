@@ -13,7 +13,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <td><h5>title</h5></td>
+                        <td><h5>Title</h5></td>
                         <td><h5>Brand</h5></td>
                         <td><h5>Description</h5></td>
                         <td></td>
