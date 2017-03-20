@@ -72,7 +72,7 @@
                 <div class="form-group row">
                     <div class="col-md-4"><label>Description *</label></div>
                     <div class="col-md-8">
-                        <textarea name="description" id="description" class="form-control"> @if(!$id == null) {{ $id->description }} @endif</textarea>
+                        <textarea name="description" id="description" class="form-control">@if(!$id == null) {{ $id->description }} @endif</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
