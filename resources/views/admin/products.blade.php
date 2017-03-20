@@ -135,8 +135,13 @@
                     <div class="form-group row">
                         <div class="col-md-4"><label>List Price *</label></div>
                         <div class="col-md-8">
-                            <input type="number" name="default_price" id="default_price" class="form-control"
-                                   @if(!$id == null) value="{{ $id->default_price }}" @endif>
+                            @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->designation->id == 1)
+                                <input type="number" name="default_price"  id="default_price" class="form-control"
+                                       @if(!$id == null) value="{{ $id->default_price }}" @endif>
+                            @elseif((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product_cost))
+                                <input type="number" name="default_price"  id="default_price" class="form-control" disabled
+                                       @if(!$id == null) value="{{ $id->default_price }}" @endif>
+                            @endif
                         </div>
                     </div>
 
@@ -150,8 +155,13 @@
                     <div class="form-group row">
                         <div class="col-md-4"><label>Vat</label></div>
                         <div class="col-md-7">
-                            <input type="number" name="vat" id="vat" class="form-control"
-                                   @if(!$id == null) value="{{ $id->vat }}" @endif>
+                            @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->designation->id == 1)
+                                <input type="number" name="vat" id="vat" class="form-control"
+                                       @if(!$id == null) value="{{ $id->vat }}" @endif>
+                            @elseif((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product_cost))
+                                <input type="number" name="vat" id="vat" class="form-control" disabled
+                                       @if(!$id == null) value="{{ $id->vat }}" @endif>
+                            @endif
                         </div>
                         <div class="col-md-1">%</div>
                     </div>
