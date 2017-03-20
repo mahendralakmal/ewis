@@ -4,6 +4,7 @@
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product))
+
         <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -114,7 +115,7 @@
                                         @endif
                                     @endforeach
                                 </select>
-                                @endifs
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
