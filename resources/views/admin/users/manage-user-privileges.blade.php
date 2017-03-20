@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Add Users Privileges')
+@section('page_heading','Set User Privileges')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -85,22 +85,22 @@
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="assign_agent" name="assign_agent"
                                                             @if(!$user->privilege == null && $user->privilege->assign_agent == true) checked @endif>
-                                Assign Agent</label></div>
+                                Assign Sales Executive</label></div>
                     </div>
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="asign_brand" name="asign_brand"
                                                             @if(!$user->privilege == null && $user->privilege->asign_brand == true) checked @endif>
-                                Assign Product</label></div>
+                                Assign Brands to Client</label></div>
                     </div>
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="asign_category" name="asign_category"
                                                             @if(!$user->privilege == null && $user->privilege->asign_category == true) checked @endif>
-                                Assign Product</label></div>
+                                Assign Categories to Client</label></div>
                     </div>
                     <div class="col-md-4">
                         <div class="checkbox"><label><input type="checkbox" id="asign_product" name="asign_product"
                                                             @if(!$user->privilege == null && $user->privilege->asign_product == true) checked @endif>
-                                Assign Product</label></div>
+                                Assign Product to Client</label></div>
                     </div>
                     <div class="col-md-12"><hr><h5>Manage Purchase Orders</h5></div>
                     <div class="col-md-4">

@@ -81,17 +81,14 @@
                             <a href="#"><!-- <i class="fa fa-wrench fa-fw"></i> --> Manage Users<span
                                         class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
+                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('/admin/users/manage-user-designations' ) }}">Designations</a>
+                                </li>
                                 <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/admin/users/create-users') }}">Add New User</a>
                                 </li>
-                                {{--<li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>--}}
-                                {{--<a href="{{ url ('/admin/users/manage-users/privileges' ) }}">User Privileges</a>--}}
-                                {{--</li>--}}
                                 <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/admin/users/manage-users' ) }}">User Approvals</a>
-                                </li>
-                                <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                    <a href="{{ url ('/admin/users/manage-user-designations' ) }}">Designations</a>
                                 </li>
                             </ul>
                         </li>

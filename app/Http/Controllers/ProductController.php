@@ -131,7 +131,7 @@ class ProductController extends Controller
         $product->vat = $request->vat;
         $product->save();
 
-        Session::flash('success', 'Product successfully inserted...!');
+        Session::flash('success', 'Product successfully added...!');
 
         return back();
     }

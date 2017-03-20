@@ -152,6 +152,7 @@
                     url: '/admin/manage-product-list/product/details/' + this.value,
                     success: function (response) {
                         $('#list_price').val(response.default_price);
+                        $('#list_price').prop('readonly', true);
                         $('#vat').val(response.vat);
                     }
                 }

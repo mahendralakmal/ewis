@@ -47,7 +47,7 @@
                                             @endif
                                             btn-outline">
                                         @if($user->id === $id->clientuser->first()->client->agent_id) Remove @else
-                                            Assigne @endif
+                                            Assign @endif
                                     </a>
                                 </td>
                             </tr>

@@ -19,7 +19,7 @@
                 <h4>Contact Persons Details</h4>
                 <hr>
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Name</label></div>
+                    <div class="col-md-4"><label>Client</label></div>
                     <div class="col-md-8">
                         <select name="client_id" id="client_id" class="form-control">
                             <option> Select Clinet</option>
