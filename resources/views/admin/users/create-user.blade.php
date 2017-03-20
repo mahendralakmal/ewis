@@ -129,10 +129,10 @@
                     </div>
                 </div>
                 <div style="display: none" class="form-group shead">
-                    <div class="col-md-5"><label>Section Head</label></div>
+                    <div class="col-md-5"><label>Sector Head</label></div>
                     <div class="col-md-7">
                         <select name="section_head_id" id="section_head_id" class="form-control">
-                            <option>Select Section Head</option>
+                            <option>Select Sector Head</option>
                             @foreach($users as $user)
                                 @if((strtolower($user->designation->designation) != 'client') && ($user->deleted == 0)))
                                 <option value="{{ $user->id }}"> {{ $user->name }}
