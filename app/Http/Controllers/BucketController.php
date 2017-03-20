@@ -113,27 +113,27 @@ class BucketController extends Controller
         return redirect('/');
     }
 
-//    public function getHistory()
-//    {
-//        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id)->all();
-//        $orders->transform(function ($order, $key) {
-//            $order->bucket = unserialize($order->bucket);
-//            return $order;
-//        });
-//        return view('user/history', ['orders' => $orders]);
-//    }
-
     public function getHistory()
     {
         $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id)->all();
+        $orders->transform(function ($order, $key) {
+            $order->bucket = unserialize($order->bucket);
+            return $order;
+        });
+        return view('user/history', ['orders' => $orders]);
+    }
+
+//    public function getHistory()
+//    {
+//        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id)->all();
 //        $orders = new \ArrayObject();
 //        for($i = 0; $i<12; $i++) {
 //            $orders->append(P_Order::whereMonth(['created_at', $i+1]));
 //            $orders->append(P_Order::whereMonth([['client_id', User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id], ['created_at', $i+1]]));
 
 //        dd($orders);
-        return view('user/history', compact('orders'));
-    }
+//        return view('user/history', compact('orders'));
+//    }
 
     public function getPurchaseOrder()
     {
