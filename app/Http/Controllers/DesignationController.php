@@ -27,7 +27,7 @@ class DesignationController extends Controller
             'designation' => 'required|unique:designations|max:100',
         ]);
         Designation::create($request->all());
-        Session::flash('success', 'Product successfully inserted...!');
+        Session::flash('success', 'Designation successfully added...!');
         return back();
     }
 
@@ -38,7 +38,7 @@ class DesignationController extends Controller
         ]);
         $desig = Designation::find($request->id);
         $desig->update([ 'designation'=>$request->designation ]);
-        Session::flash('success', 'Product successfully updated...!');
+        Session::flash('success', 'Designation successfully updated...!');
         return redirect('/admin/users/manage-user-designations');
     }
 }
