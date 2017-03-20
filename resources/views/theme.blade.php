@@ -21,7 +21,7 @@
                                     <li><span class="glyphicon glyphicon-user"></span> EWIS Peripherals (Pvt) Ltd</li>
                                     <li><span class="glyphicon glyphicon-map-marker"></span> No.142, Yathama Building,
                                         Galle Road,
-                                        Colombo 03, Sri Lanka
+                                        Colombo 03, &nbsp;&nbsp;&nbsp;Sri Lanka.
                                     </li>
                                     <li><span class="glyphicon glyphicon-phone"></span><a href="#" title="Phone">+94 11 749 6000</a>
                                     </li>
