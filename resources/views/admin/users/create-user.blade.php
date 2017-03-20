@@ -80,7 +80,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-5">
-                        <label>Passworde</label>
+                        <label>Password</label>
                     </div>
                     <div class="col-md-7">
                         <input type="password" class="form-control" name="password" id="password">
@@ -88,7 +88,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-5">
-                        <label>Confirm Passworde</label>
+                        <label>Confirm Password</label>
                     </div>
                     <div class="col-md-7">
                         <input type="password" class="form-control" name="cpassword" id="cpassword">
