@@ -65,7 +65,7 @@ class CategoryController extends Controller
     {
         $id = '';
         $brands = Brand::orderBy('title')->get();
-        $categories = Category::where('status', 1)->get();
+        $categories = Category::where('status', 1)->orderBy('brand_id')->get();
         return view('/admin/category', compact('categories', 'brands', 'id'));
     }
 
