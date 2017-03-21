@@ -14,7 +14,7 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <td><h5>Po. No.</h5></td>
+                        <td><h5>P.O No.</h5></td>
                         <td><h5>Created Date & Time</h5></td>
                         <td><h5>Client</h5></td>
                         <td><h5>Branch</h5></td>
