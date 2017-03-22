@@ -37,6 +37,8 @@
                                         <select id="{{$porder->id}}" name="postatus" class="form-control postatus">
                                             <option value="P" @if($porder->status === "P") selected @endif>Pending
                                             </option>
+                                            <option value="OP" @if($porder->status === "OP") selected @endif>On Process
+                                            </option>
                                             <option value="PC" @if($porder->status === "PC") selected @endif>Partial
                                                 Completed
                                             </option>

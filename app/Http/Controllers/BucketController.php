@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Mail\PoOnProcess;
 use App\Mail\PoSentSuccessfully;
 use App\Mail\PoToAdministration;
 use App\Mail\PoToSectionHeads;
@@ -25,6 +26,11 @@ class BucketController extends Controller
     public function change_status($id, $status){
         $po = P_Order::find($id);
         $po->update(['status'=>$status]);
+        $user = User::where('name', $po->del_cp)->first();
+
+        $agent = User::find($po->agent_id)->first();
+        Mail::to($user)->send(new PoOnProcess($user, $po));
+        Mail::to($agent)->send(new PoOnProcess($user, $po));
 
         return back();
     }

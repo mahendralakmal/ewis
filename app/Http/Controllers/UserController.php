@@ -31,7 +31,7 @@ class UserController extends Controller
 
     public function UpdatePrivileges(Request $request)
     {
-//        $privilege = (User::find($request->user_id))->privilege;
+        $privilege = (User::find($request->user_id))->privilege;
         $privilege->update(['brand' => ($request->brand == "on") ? true : false, 'category' => ($request->category == "on") ? true : false,
             'product' => ($request->product == "on") ? true : false, 'add_user' => ($request->add_user == "on") ? true : false,
             'user_approve' => ($request->user_approve == "on") ? true : false, 'designation' => ($request->designation == "on") ? true : false,
