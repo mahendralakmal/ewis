@@ -6,6 +6,7 @@ use App\Client;
 use App\Mail\PoSentSuccessfully;
 use App\Mail\PoToAdministration;
 use App\Mail\PoToSectionHeads;
+use App\Mail\PoToProcument;
 use App\Notifications\PerchaseOrder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -24,6 +25,7 @@ class BucketController extends Controller
     public function change_status($id, $status){
         $po = P_Order::find($id);
         $po->update(['status'=>$status]);
+
         return back();
     }
 
@@ -107,6 +109,7 @@ class BucketController extends Controller
         Mail::to($user)->send(new PoSentSuccessfully($user, $order));
         Mail::to($agent)->send(new PoToAdministration($user, $order));
         Mail::to($sHead)->send(new PoToSectionHeads($user, $order, $agent));
+        Mail::to('dinoosh.niki@gmail.com')->send(new PoToProcument($user, $order, $agent));
 
 
         Session::forget('bucket');
