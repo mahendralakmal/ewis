@@ -67,7 +67,8 @@
                                 <!-- <p>An Laravel App that demos the basic functionality of the e-commerce shopping cart.</p> -->
                                 {{--<p> <img src="/img/3.jpg" width="1000" height="400"> </p>--}}
                                 <p>
-                                    <a href="{{ URL::previous() }}" class="btn btn-primary btn-lg" target="_blank">Category</a>
+                                    {{--<a href="{{ URL::previous() }}" class="btn btn-primary btn-lg" target="_blank">Category</a>--}}
+                                    <a href="javascript:history.back()" class="btn btn-primary btn-lg" target="_blank">Category</a>
                                     <a href="{{ url('brands') }}" class="btn btn-success btn-lg"
                                        target="_blank">Brand</a>
                                 </p>

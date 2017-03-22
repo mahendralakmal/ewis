@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Mail\PoCompleted;
 use App\Mail\PoOnProcess;
+use App\Mail\PoPartialComplete;
 use App\Mail\PoSentSuccessfully;
 use App\Mail\PoToAdministration;
 use App\Mail\PoToSectionHeads;
@@ -29,9 +31,18 @@ class BucketController extends Controller
         $user = User::where('name', $po->del_cp)->first();
 
         $agent = User::find($po->agent_id)->first();
-        Mail::to($user)->send(new PoOnProcess($user, $po));
-        Mail::to($agent)->send(new PoOnProcess($user, $po));
-
+        if($status==="OP"){
+            Mail::to($user)->send(new PoOnProcess($user, $po));
+            //Mail::to($agent)->send(new PoOnProcess($user, $po));
+        }
+        elseif ($status==="PC") {
+            Mail::to($user)->send(new PoPartialComplete($user, $po));
+            //Mail::to($agent)->send(new PoPartialComplete($user, $po));
+        }
+        elseif ($status==="C") {
+            Mail::to($user)->send(new PoCompleted($user, $po));
+            //Mail::to($agent)->send(new PoCompleted($user, $po));
+        }
         return back();
     }
 
