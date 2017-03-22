@@ -139,8 +139,8 @@
             type: 'get',
             url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
             success: function (response) {
-//                $('.msg').show();
-//                $('.msg').addClass(' alert-success');
+                $('.msg').show();
+                $('.msg').addClass(' alert-success');
             }
         });
     });

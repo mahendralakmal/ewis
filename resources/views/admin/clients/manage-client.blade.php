@@ -16,7 +16,7 @@
                     <tr>
                         <td></td>
                         <td><h5>Client</h5></td>
-                        <td><h5>Agent</h5></td>
+                        <td><h5>User</h5></td>
                         <td><h5>Designation</h5></td>
                         <td><h5>Branch</h5></td>
                         <td><h5>Contact No</h5></td>

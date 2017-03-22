@@ -62,21 +62,21 @@
                     <input type="hidden" id="user_id" name="user_id"
                            value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Part No *</label></div>
+                        <div class="col-md-4"><label>Part No <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             <input type="text" name="part_no" id="part_no" class="form-control"
                                    @if(!$id == null) value="{{ $id->part_no }}" @endif>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Name *</label></div>
+                        <div class="col-md-4"><label>Name <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             <input type="text" name="name" id="name" class="form-control"
                                    @if(!$id == null) value="{{ $id->name }}" @endif>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Brand *</label></div>
+                        <div class="col-md-4"><label>Brand <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             @if($id == null)
                                 <select name="brand_id" id="brand_id" class="form-control">
@@ -99,7 +99,7 @@
 
 
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Category *</label></div>
+                        <div class="col-md-4"><label>Category <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             @if($id == null)
                                 <select name="category_id" id="category_id" class="form-control">
@@ -119,7 +119,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Description *</label></div>
+                        <div class="col-md-4"><label>Description <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                         <textarea name="description" id="description"
                                   class="form-control">@if(!$id == null) {{ $id->description }} @endif</textarea>
@@ -133,7 +133,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-4"><label>List Price *</label></div>
+                        <div class="col-md-4"><label>List Price <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->designation->id == 1)
                                 <input type="number" name="default_price"  id="default_price" class="form-control"

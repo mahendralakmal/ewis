@@ -57,13 +57,13 @@
                 <input type="hidden" id="user_id" name="user_id"
                        value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Category *</label></div>
+                    <div class="col-md-4"><label>Category <span style="color: red">*</span></label></div>
                     <div class="col-md-8">
                         <input type="text" name="title" id="title" class="form-control" @if(!$id == null) value="{{ $id->title }}" @endif>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Brand *</label></div>
+                    <div class="col-md-4"><label>Brand <span style="color: red">*</span></label></div>
                     <div class="col-md-8">
                         <select name="brand_id" id="brand_id" class="form-control">
                             <option>Select Brand</option>
@@ -74,13 +74,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Description *</label></div>
+                    <div class="col-md-4"><label>Description <span style="color: red">*</span></label></div>
                     <div class="col-md-8">
                         <textarea name="description" id="description" class="form-control">@if(!$id == null) {{ $id->description }} @endif</textarea>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Image *</label></div>
+                    <div class="col-md-4"><label>Image <span style="color: red">*</span></label></div>
                     <div class="col-md-8">
                         <input type="file" name="image" id="image">
                     </div>

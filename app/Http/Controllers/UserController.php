@@ -44,6 +44,7 @@ class UserController extends Controller
         return redirect('/admin/users/manage-users');
     }
 
+    //below method is only for Super User Signup
     public function signup_store(Request $request)
     {
         $designation = new Designation();
@@ -76,7 +77,6 @@ class UserController extends Controller
         Session::put('User', $request->user_id);
         Session::put('Type', $user->designation->designation);
         Session::put('ip', $request->ip());
-
         return redirect('/admin');
     }
 
@@ -111,10 +111,11 @@ class UserController extends Controller
         $user->user_id = $request->user_id;
         $user->section_head_id = $request->section_head_id;
         $user->save();
-        Session::flash('success', 'User successfully inserted...!');
+        Session::flash('success', 'User successfully added...!');
 
-        if (User::find($user->id)->designation->designation === 'client' || User::find($user->id)->designation->designation === 'Client') {
+        if (strtolower(User::find($user->id)->designation->designation) === 'client') {
             return redirect('/admin/manage-clients/client_user/' . $user->id);
+//            return redirect('/admin/manage-clients/create-profile/');
         } else {
             return back();
         }
