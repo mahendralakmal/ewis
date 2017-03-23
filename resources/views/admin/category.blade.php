@@ -69,6 +69,7 @@
                             <option>Select Brand</option>
                             @foreach($brands as $brand)
                                 <option value="{{$brand->id}}" @if(!$id == null)@if($brand->id==$id->brand_id) selected @endif @endif>{{$brand->title}}</option>
+
                             @endforeach
                         </select>
                     </div>

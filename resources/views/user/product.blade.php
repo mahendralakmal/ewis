@@ -69,8 +69,7 @@
                                 <p>
                                     {{--<a href="{{ URL::previous() }}" class="btn btn-primary btn-lg" target="_blank">Category</a>--}}
                                     <a href="javascript:history.back()" class="btn btn-primary btn-lg" target="_blank">Category</a>
-                                    <a href="{{ url('brands') }}" class="btn btn-success btn-lg"
-                                       target="_blank">Brand</a>
+                                    <a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/brands'):'' }}" class="btn btn-success btn-lg">Brand</a>
                                 </p>
                             </div> <!-- end jumbotron -->
                         @endif
