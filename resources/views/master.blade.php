@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/css/bootstrap-datetimepicker.min.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("assets/font-awesome/css/font-awesome.min.css") }}"/>
     {{--<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css"/>--}}
 
 @yield('extra-css')

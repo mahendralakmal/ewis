@@ -5,8 +5,7 @@
             <div class="col-md-12 col-sm-12 col-sx-12 col-lg-12">
                 <ul class="nav nav-tabs nav-menu" role="tablist">
                     <li class="active">
-                        <a href="#agent" role="tab" data-toggle="tab">
-                            <i class="fa fa-male"></i>Purchase History</a>
+                        <a href="#agent" role="tab" data-toggle="tab"> Purchase History </a>
                     </li>
 
                 </ul>

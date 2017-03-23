@@ -5809,12 +5809,12 @@ button.close {
   font-weight: bold; }
 
 .profile-background .profile-head .description {
-  background-color: #ffffff;
-  border-radius: 4px;
   padding: 15px; }
   @media (max-width: 768px) {
     .profile-background .profile-head .description {
       margin: 20px 0px; } }
+  .profile-background .profile-head .description ul li {
+    list-style-type: none; }
 
 .red-background {
   background-color: #b40006; }
