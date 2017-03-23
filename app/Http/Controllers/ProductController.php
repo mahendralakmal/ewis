@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Bucket;
 use App\Category;
+use App\CCategory;
 use App\Client;
 use App\Client_Product;
 use App\Product;
@@ -66,7 +67,7 @@ class ProductController extends Controller
     {
         $cp_id = '';
         $cp_products = Client_Product::where('user_id', $id->clientuser[0]['client_id'])->get();
-        $categories = Category::all();
+        $categories = CCategory::where('user_id', $id->clientuser[0]['client_id'])->get();
         $products = Client_Product::where([['user_id',$request->session()->get('User')],['client_id', $id->id]])->get();
         $brands = Brand::orderBy('title')->get();
         return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products','cp_id', 'categories','cp_products'));

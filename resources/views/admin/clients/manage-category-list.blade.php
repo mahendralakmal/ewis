@@ -60,10 +60,12 @@
                                     <option>Select Brand</option>
                                     @foreach($brands as $brand)
                                         @foreach($cbrands as $cbrand)
+                                            @if($cbrand->remove !=1)
                                             @if($brand->id == $cbrand->brand_id)
                                                 <option value="{{$brand->id}}"
                                                         {{--                                                @if($cp_id!=null && $category->id == $cbrand[0]['brand_id']) selected @endif--}}
                                                 >{{$brand->title}}</option>
+                                            @endif
                                             @endif
                                         @endforeach
                                     @endforeach
