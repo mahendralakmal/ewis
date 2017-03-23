@@ -22,6 +22,7 @@
                                         <tr>
                                             <td><h5>Category</h5></td>
                                             <td><h5>Description</h5></td>
+                                            <td></td>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -30,6 +31,12 @@
                                             <tr>
                                                 <td>{{$cate->title}}</td>
                                                 <td>{{$cate->description}}</td>
+                                                <td>
+                                                    <a href="/admin/categories/{{$cate->id}}"
+                                                       class="btn btn-primary btn-outline">Edit</a>
+                                                    <a href="/admin/categories/{{$cate->id}}/remove"
+                                                       class="btn btn-danger btn-outline">Delete</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>

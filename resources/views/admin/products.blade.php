@@ -11,37 +11,51 @@
                     <h3 class="panel-title">Product Categories</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <td><h5>Part No</h5></td>
-                            <td><h5>Name</h5></td>
-                            <td><h5>Brand</h5></td>
-                            <td><h5>Category</h5></td>
-                            {{--<td><h5>Description</h5></td>--}}
-                            <td class="text-right"><h5>Price</h5></td>
-                            <td></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($products as $product)
-                            <tr>
-                                <td>{{$product->part_no}}</td>
-                                <td>{{$product->name}}</td>
-                                <td>{{$product->category->brand->title}}</td>
-                                <td>{{$product->category->title}}</td>
-                                {{--<td>{{$product->description}}</td>--}}
-                                <td class="text-right">{{$product->default_price}}</td>
-                                <td class="col-md-3">
-                                    <a href="/admin/products/{{$product->id}}"
-                                       class="btn btn-primary btn-outline">Edit</a>
-                                    <a href="/admin/products/{{$product->id}}/remove"
-                                       class="btn btn-danger btn-outline">Delete</a>
-                                </td>
-                            </tr>
+                    <ul class="list-group">
+                        @foreach($brands as $brand)
+                            <li class="list-group-item">
+                                <a href="#{{ $brand->id }}" class="list-group-item active"
+                                   data-toggle="collapse"><strong>{{ $brand->title }}</strong>
+                                    <span class="badge">{{$brand->category->count()}}</span></a>
+                                <div id="{{$brand->id}}" class="collapse">
+                                    @foreach($brand->category as $cate)
+                                        <a href="#c{{ $cate->id }}" class="list-group-sub-item active"
+                                           data-toggle="collapse"><strong>{{ $cate->title }}</strong>
+                                            <span class="badge">{{$cate->product->count()}}</span></a>
+                                        <div id="c{{$brand->id}}" class="collapse">
+                                            {{--{{$cate->product}}--}}
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <td><h5>Part No</h5></td>
+                                                    <td><h5>Name</h5></td>
+                                                    <td><h5>price</h5></td>
+                                                    <td></td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($cate->product as $prod)
+
+                                                    <tr>
+                                                        <td>{{$prod->part_no}}</td>
+                                                        <td>{{$prod->name}}</td>
+                                                        <td class="text-right">{{$prod->default_price}}</td>
+                                                        <td>
+                                                            <a href="/admin/products/{{$prod->id}}"
+                                                               class="btn btn-primary btn-outline">Edit</a>
+                                                            <a href="/admin/products/{{$prod->id}}/remove"
+                                                               class="btn btn-danger btn-outline">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </li>
                         @endforeach
-                        </tbody>
-                    </table>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -136,10 +150,11 @@
                         <div class="col-md-4"><label>List Price <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->designation->id == 1)
-                                <input type="number" name="default_price"  id="default_price" class="form-control"
+                                <input type="number" name="default_price" id="default_price" class="form-control"
                                        @if(!$id == null) value="{{ $id->default_price }}" @endif>
                             @elseif((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product_cost))
-                                <input type="number" name="default_price"  id="default_price" class="form-control" disabled
+                                <input type="number" name="default_price" id="default_price" class="form-control"
+                                       disabled
                                        @if(!$id == null) value="{{ $id->default_price }}" @endif>
                             @endif
                         </div>
