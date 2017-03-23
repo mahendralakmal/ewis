@@ -84,24 +84,26 @@
                                 @endforeach
                             </select> 
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-4"><label>Description <span style="color: red">*</span></label></div>
-                            <div class="col-md-8">
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-4"><label>Description <span style="color: red">*</span></label></div>
+                        <div class="col-md-8">
                             <textarea name="description" id="description"
                                       class="form-control">@if(!$id == null) {{ $id->description }} @endif</textarea>
-                            </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-md-4"><label>Image <span style="color: red">*</span></label></div>
-                            <div class="col-md-8">
-                                <input type="file" name="image" id="image">
-                            </div>
-                        </div>
-                        <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
-                                Add @endif</button>
                     </div>
-                </form>
+                    <div class="form-group row">
+                        <div class="col-md-4"><label>Image <span style="color: red">*</span></label></div>
+                        <div class="col-md-8">
+                            <input type="file" name="image" id="image">
+                        </div>
+                    </div>
+                    <input type="hidden" id="category_key" name="category_key">
+                    <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
+                            Add @endif</button>
             </div>
+            </form>
+        </div>
         </div>
     @else
         <div class="col-md-offset-3">

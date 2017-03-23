@@ -29,6 +29,17 @@
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
+    $('#title').on('change', function () {
+        categoryKeyFix();
+    })
+    $('#brand_id').on('change', function () {
+        categoryKeyFix();
+    })
+
+    function categoryKeyFix() {
+        if(!$('#title').val()=='' && !$('#brand_id').val()=='')
+            $('#category_key').val($('#title').val()+"_"+$('#brand_id').val());
+    }
 
     $("#vat_apply").on('change', function () {
         if($(this).val() == "on"){
