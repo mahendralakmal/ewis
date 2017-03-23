@@ -126,7 +126,7 @@ class BucketController extends Controller
         Mail::to($user)->send(new PoSentSuccessfully($user, $order));
         Mail::to($agent)->send(new PoToAdministration($user, $order));
         Mail::to($sHead)->send(new PoToSectionHeads($user, $order, $agent));
-        Mail::to('dinoosh.niki@gmail.com')->send(new PoToProcument($user, $order, $agent));
+        Mail::to('bimalka@ewisl.net')->send(new PoToProcument($user, $order, $agent));
 
 
         Session::forget('bucket');
