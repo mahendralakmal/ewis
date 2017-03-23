@@ -20,15 +20,18 @@
                         </thead>
                         <tbody>
                         @foreach($brands as $brand)
-                            <tr>
-                                <td>{{$brand->title}}</td>
-                                <td>{{$brand->description}}</td>
-                                <td>
-                                    <a href="/admin/brands/{{$brand->id}}" class="btn btn-primary btn-outline">Edit</a>
-                                    <a href="/admin/brands/{{$brand->id}}/remove"
-                                       class="btn btn-danger btn-outline">Delete</a>
-                                </td>
-                            </tr>
+                            @if($brand->status)
+                                <tr>
+                                    <td>{{$brand->title}}</td>
+                                    <td>{{$brand->description}}</td>
+                                    <td>
+                                        <a href="/admin/brands/{{$brand->id}}"
+                                           class="btn btn-primary btn-outline">Edit</a>
+                                        <a href="/admin/brands/{{$brand->id}}/remove"
+                                           class="btn btn-danger btn-outline">Delete</a>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                         </tbody>
                     </table>

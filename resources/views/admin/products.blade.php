@@ -13,47 +13,52 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         @foreach($brands as $brand)
-                            <li class="list-group-item">
-                                <a href="#{{ $brand->id }}" class="list-group-item active"
-                                   data-toggle="collapse"><strong>{{ $brand->title }}</strong>
-                                    <span class="badge">{{$brand->category->count()}}</span></a>
-                                <div id="{{$brand->id}}" class="collapse">
-                                    @foreach($brand->category as $cate)
-                                        <a href="#c{{ $cate->id }}" class="list-group-sub-item active"
-                                           data-toggle="collapse"><strong>{{ $cate->title }}</strong>
-                                            <span class="badge">{{$cate->product->count()}}</span></a>
-                                        <div id="c{{$brand->id}}" class="collapse">
-                                            {{--{{$cate->product}}--}}
-                                            <table class="table">
-                                                <thead>
-                                                <tr>
-                                                    <td><h5>Part No</h5></td>
-                                                    <td><h5>Name</h5></td>
-                                                    <td><h5>price</h5></td>
-                                                    <td></td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($cate->product as $prod)
-
-                                                    <tr>
-                                                        <td>{{$prod->part_no}}</td>
-                                                        <td>{{$prod->name}}</td>
-                                                        <td class="text-right">{{$prod->default_price}}</td>
-                                                        <td>
-                                                            <a href="/admin/products/{{$prod->id}}"
-                                                               class="btn btn-primary btn-outline">Edit</a>
-                                                            <a href="/admin/products/{{$prod->id}}/remove"
-                                                               class="btn btn-danger btn-outline">Delete</a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </li>
+                            @if($brand->status)
+                                <li class="list-group-item">
+                                    <a href="#{{ $brand->id }}" class="list-group-item active"
+                                       data-toggle="collapse"><strong>{{ $brand->title }}</strong>
+                                        <span class="badge">{{$brand->category->count()}}</span></a>
+                                    <div id="{{$brand->id}}" class="collapse">
+                                        @foreach($brand->category as $cate)
+                                            @if($cate->status)
+                                                <a href="#c{{ $cate->id }}" class="list-group-sub-item active"
+                                                   data-toggle="collapse"><strong>{{ $cate->title }}</strong>
+                                                    <span class="badge">{{$cate->product->count()}}</span></a>
+                                                <div id="c{{$cate->id}}" class="collapse">
+                                                    {{--{{$cate->product}}--}}
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <td><h5>Part No</h5></td>
+                                                            <td><h5>Name</h5></td>
+                                                            <td><h5>price</h5></td>
+                                                            <td></td>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        @foreach($cate->product as $prod)
+                                                            @if($prod->status)
+                                                                <tr>
+                                                                    <td>{{$prod->part_no}}</td>
+                                                                    <td>{{$prod->name}}</td>
+                                                                    <td class="text-right">{{$prod->default_price}}</td>
+                                                                    <td>
+                                                                        <a href="/admin/products/{{$prod->id}}"
+                                                                           class="btn btn-primary btn-outline">Edit</a>
+                                                                        <a href="/admin/products/{{$prod->id}}/remove"
+                                                                           class="btn btn-danger btn-outline">Delete</a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>

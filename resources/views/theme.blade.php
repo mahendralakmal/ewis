@@ -12,21 +12,20 @@
                              width="209" hight="67" class="img-responsive"/>
                     </div>
 
-                    <div class="col-md-5 col-sm-8 col-xs-12 profile-head pull-right">
+                    <div class="col-md-6 col-sm-8 col-xs-12 profile-head pull-right">
                         <div class="description">
                             <div class="inner">
-                                <h3>{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->name }}</h3>
-
+                                <h3><span class="fa fa-user-circle-o"></span>&nbsp;&nbsp;{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->name }}</h3>
                                 <ul>
-                                    <li><span class="glyphicon glyphicon-user"></span> EWIS Peripherals (Pvt) Ltd</li>
-                                    <li><span class="glyphicon glyphicon-map-marker"></span> No.142, Yathama Building,
+                                    <li><span class="fa fa-university"></span> EWIS Peripherals (Pvt) Ltd</li>
+                                    <li><span class="fa fa-map-marker"></span>&nbsp;&nbsp;&nbsp;No.142, Yathama Building,
                                         Galle Road,
-                                        Colombo 03, &nbsp;&nbsp;&nbsp;Sri Lanka.
+                                        Colombo 03,
+                                        Sri Lanka.
                                     </li>
-                                    <li><span class="glyphicon glyphicon-phone"></span><a href="#" title="Phone">+94 11 749 6000</a>
+                                    <li><span class="fa fa-phone-square"></span>&nbsp;&nbsp;<a href="#" title="Phone">+94 11 749 6000</a>
                                     </li>
-                                    <li><span class="glyphicon glyphicon-envelope"></span><a href="#"
-                                                                                             title="Email">{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->email }}</a>
+                                    <li><span class="fa fa-envelope"></span><a href="#" title="Email">&nbsp;&nbsp;{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->email }}</a>
                                     </li>
 
                                 </ul>
