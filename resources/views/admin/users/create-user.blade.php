@@ -132,7 +132,7 @@
                     <div class="col-md-5"><label>Sector Head</label></div>
                     <div class="col-md-7">
                         <select name="section_head_id" id="section_head_id" class="form-control">
-                            <option>Select Sector Head</option>
+                            <option>Select Sectional Head</option>
                             @foreach($users as $user)
                                 @if((strtolower($user->designation->designation) != 'client') && ($user->deleted == 0)))
                                 <option value="{{ $user->id }}"> {{ $user->name }}
