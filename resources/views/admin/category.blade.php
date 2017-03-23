@@ -12,39 +12,41 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         @foreach($brands as $brand)
-                            <li class="list-group-item">
-                                <a href="#{{ $brand->id }}" class="list-group-item active"
-                                   data-toggle="collapse"><strong>{{ $brand->title }}</strong>
-                                    <span class="badge">{{$brand->category->count()}}</span></a>
-                                <div id="{{$brand->id}}" class="collapse">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <td><h5>Category</h5></td>
-                                            <td><h5>Description</h5></td>
-                                            <td></td>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($brand->category as $cate)
-
+                            @if($brand->status)
+                                <li class="list-group-item">
+                                    <a href="#{{ $brand->id }}" class="list-group-item active"
+                                       data-toggle="collapse"><strong>{{ $brand->title }}</strong>
+                                        <span class="badge">{{$brand->category->count()}}</span></a>
+                                    <div id="{{$brand->id}}" class="collapse">
+                                        <table class="table">
+                                            <thead>
                                             <tr>
-                                                <td>{{$cate->title}}</td>
-                                                <td>{{$cate->description}}</td>
-                                                <td>
-                                                    <a href="/admin/categories/{{$cate->id}}"
-                                                       class="btn btn-primary btn-outline">Edit</a>
-                                                    <a href="/admin/categories/{{$cate->id}}/remove"
-                                                       class="btn btn-danger btn-outline">Delete</a>
-                                                </td>
+                                                <td><h5>Category</h5></td>
+                                                <td><h5>Description</h5></td>
+                                                <td></td>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </li>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($brand->category as $cate)
+                                                @if($cate->status)
+                                                    <tr>
+                                                        <td>{{$cate->title}}</td>
+                                                        <td>{{$cate->description}}</td>
+                                                        <td>
+                                                            <a href="/admin/categories/{{$cate->id}}"
+                                                               class="btn btn-primary btn-outline">Edit</a>
+                                                            <a href="/admin/categories/{{$cate->id}}/remove"
+                                                               class="btn btn-danger btn-outline">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                            @endif
                         @endforeach
-
                     </ul>
                 </div>
             </div>
@@ -97,6 +99,7 @@
                         </div>
                         <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
                                 Add @endif</button>
+                    </div>
                 </form>
             </div>
         </div>
