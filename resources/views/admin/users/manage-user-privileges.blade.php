@@ -116,7 +116,11 @@
                                 Change Status</label></div>
                     </div>
                     <div class="col-md-12"><hr><h5>Reports</h5></div>
-
+                    <div class="col-md-4">
+                        <div class="checkbox"><label><input type="checkbox" id="view_reports" name="view_reports"
+                                                            @if(!$user->privilege == null && $user->privilege->view_reports == true) checked @endif>
+                                View Reports</label></div>
+                    </div>
                     <div class="col-md-4">&nbsp;</div>
                     <div class="col-md-4">&nbsp;</div>
                     <div class="col-md-12">
