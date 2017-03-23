@@ -114,12 +114,16 @@
                             <option>Select Designation</option>
                             @if(!$id == "")
                                 @foreach($designations as $designation)
-                                    <option value="{{ $designation->id }}"
-                                            @if($designation->id ==$id->designation_id) selected @endif>{{ $designation->designation }}</option>
+                                    @if($designation->id != 1)
+                                        <option value="{{ $designation->id }}"
+                                                @if($designation->id ==$id->designation_id) selected @endif>{{ $designation->designation }}</option>
+                                    @endif
                                 @endforeach
                             @else
                                 @foreach($designations as $designation)
-                                    <option value="{{ $designation->id }}">{{ $designation->designation }}</option>
+                                    @if($designation->id != 1)
+                                        <option value="{{ $designation->id }}">{{ $designation->designation }}</option>
+                                    @endif
                                 @endforeach
                             @endif
                         </select>
