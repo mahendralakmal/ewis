@@ -10,7 +10,6 @@
                     <h3 class="panel-title">Products</h3>
                 </div>
                 <div class="panel-body">
-                    {{$cp_products}}
                     <table class="table">
                         <thead>
                         <tr>
