@@ -47,7 +47,13 @@ class CategoryController extends Controller
     {
         $cate = Category::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/categories', $request->file('image')) : null;
-        $cate->update(['title' => $request->title, 'brand_id' => $request->brand_id, 'description' => $request->description, 'image' => $image, 'user_id' => $request->user_id]);
+        $cate->update([
+            'title' => $request->title,
+            'brand_id' => $request->brand_id,
+            'description' => $request->description,
+            'image' => $image,
+            'user_id' => $request->user_id
+        ]);
 
         Session::flash('success', 'Category successfully updated...!');
         return redirect('/admin/categories');
@@ -78,7 +84,7 @@ class CategoryController extends Controller
         $cate->user_id = $request->user_id;
         $cate->brand_id = $request->brand_id;
         $cate->description = $request->description;
-        $cate->category_key = $request->title."_".$request->brand_id;
+        $cate->category_key = $request->category_key;
         $cate->image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/categories', $request->file('image')) : null;
         $cate->save();
         Session::flash('success', 'Category successfully added...!');
