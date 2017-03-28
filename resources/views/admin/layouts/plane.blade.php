@@ -165,6 +165,7 @@
                         $('#list_price').val(response.default_price);
                         $('#list_price').prop('readonly', true);
                         $('#vat').val(response.vat);
+                        $('#description').text(response.description);
                     }
                 }
         );
@@ -180,8 +181,9 @@
                         model.empty();
                         model.append("<option selected>Select Products</option>")
                         $.each(response, function (index, elem) {
-                            model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>")
+                            model.append("<option value='" + elem.id + "'>" + elem.name + "</option>")
                         });
+
                     }
                 }
         );

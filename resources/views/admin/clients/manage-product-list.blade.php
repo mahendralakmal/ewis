@@ -16,6 +16,8 @@
                             <td><h5>Brand</h5></td>
                             <td><h5>Category</h5></td>
                             <td><h5>Part No</h5></td>
+                            <td><h5>Name</h5></td>
+                            <td><h5>Description</h5></td>
                             <td><h5>Price</h5></td>
                             <td class="col-md-5"></td>
                         </tr>
@@ -27,6 +29,8 @@
                                     <td>{{ App\Product::find($product->product_id)->category->brand->title }}</td>
                                     <td>{{ App\Product::find($product->product_id)->category->title }}</td>
                                     <td>{{ App\Product::find($product->product_id)->part_no }}</td>
+                                    <td>{{ App\Product::find($product->product_id)->name }}</td>
+                                    <td>{{ App\Product::find($product->product_id)->description }}</td>
                                     <td>{{ $product->special_price }}</td>
                                     <td>
                                         <a href="/admin/manage-product-list/product/details/edit/{{ $product->id }}"
@@ -114,7 +118,14 @@
                                     @endforeach
                                 </select>
                             @endif
+
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12"><label style="color: lightslategrey" id="description"></label></div>
+                        {{--<div class="col-md-8">--}}
+                            {{--<input type="text" value="description" id="description" name="description" class="form-control">--}}
+                        {{--</div>--}}
                     </div>
                     @if(\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product_cost)
                         <div class="form-group row">
