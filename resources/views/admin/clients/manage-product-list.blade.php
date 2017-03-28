@@ -65,9 +65,15 @@
                             <select name="brand_id" id="brand_id" class="form-control">
                                 <option>Select Brand</option>
                                 @foreach($brands as $brand)
+                                    @foreach($cbrands as $cbrand)
+                                        @if($cbrand->remove !=1)
+                                            @if($brand->id == $cbrand->brand_id)
                                     <option value="{{$brand->id}}"
                                             @if($cp_id!=null && $brand->id == \App\Product::find($cp_id->product_id)->category->brand->id) selected @endif
                                     >{{$brand->title}}</option>
+                                        @endif
+                                        @endif
+                                            @endforeach
                                 @endforeach
                             </select>
                         </div>
