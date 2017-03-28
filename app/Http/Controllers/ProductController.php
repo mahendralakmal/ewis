@@ -67,7 +67,7 @@ class ProductController extends Controller
     public function assign_products_to_client(User $id, Request $request)
     {
         $cp_id = '';
-        $cp_products = Client_Product::where('user_id', $id->clientuser[0]['client_id'])->get();
+        $cp_products = Client_Product::where('client_id', $id->clientuser[0]['client_id'])->get();
         $categories = CCategory::where('user_id', $id->clientuser[0]['client_id'])->get();
         $products = Client_Product::where([['user_id',$request->session()->get('User')],['client_id', $id->id]])->get();
         $brands = Brand::orderBy('title')->get();
