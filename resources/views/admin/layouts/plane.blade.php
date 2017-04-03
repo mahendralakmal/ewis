@@ -29,6 +29,7 @@
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
+
     $('#title').on('change', function () {
         categoryKeyFix();
     })
