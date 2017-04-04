@@ -179,11 +179,13 @@ class BucketController extends Controller
         return view('admin/clients/completed-purchase-orders', compact('client'));
     }
 
-    public function getPurchaseOrdersByClient($client, $status){
-        if($status == '') {
+    public function getPurchaseOrdersByClient($client, $status=null, $start=null, $end=null){
+        if($status != null && $start != null && $end != null) {
+            $porder = P_Order::where([['client_id', $client], ['status', $status],[]])->get();
+        } else if ($status != null && $start == null && $end == null){
+            $porder = P_Order::where([['client_id', $client], ['status', $status]])->get();
+        }else {
             $porder = P_Order::where('client_id', $client)->get();
-        } else {
-            $porder = P_Order::where([['client_id', $client],['status',$status]])->get();
         }
         return $porder;
     }

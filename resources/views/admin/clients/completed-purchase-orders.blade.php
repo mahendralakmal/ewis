@@ -11,29 +11,38 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Client POs</h3>
                 </div>
-                <div class="row">
-                    <div class="col-md-2 col-sm-3 col-lg-2 form-group">
-                        <label for="status"><h5></h5></label>
-                        <select id="postatus" name="postatus" class="form-control">
-                            <option value="P">Pending</option>
-                            <option value="PC">Partial Completed</option>
-                            <option value="C">Completed</option>
-                        </select>
-
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-lg-4 form-group">
-                        <label for="client"><h5></h5></label>
-                        <select class="form-control" name="client" id="client" data-parsley-required="true">
-                            <option>Select Client</option>
-                            @foreach ($client as $client)
-                                <option value="{{ $client->id }}">{{ $client->name }}</option>
-                            @endforeach
-                        </select>
-
-                    </div>
-                </div>
                 <div class="panel-body">
-                    <br>
+
+                    <div class="row">
+                        <div class="col-md-2 col-sm-3 col-lg-2">
+                            {{--<label for="status"><h5></h5></label>--}}
+                            <div class="form-group">
+                                <select id="postatus" name="postatus" class="form-control">
+                                    <option value="P">Pending</option>
+                                    <option value="PC">Partial Completed</option>
+                                    <option value="C">Completed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-3 col-lg-2">
+                            <div class="form-group">
+                                {{--<label for="client"><h5></h5></label>--}}
+                                <select class="form-control" name="client" id="client" data-parsley-required="true">
+                                    <option>Select Client</option>
+                                    @foreach ($client as $client)
+                                        <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-4 col-lg-3" id="sandbox-container">
+                            <div class="input-daterange input-group" id="datepicker">
+                                <input type="text" class=" form-control" name="start" />
+                                <span class="input-group-addon">to</span>
+                                <input type="text" class=" form-control" name="end" />
+                            </div>
+                        </div>
+                    </div>
                     <table class="table">
                         <thead>
                         <tr>

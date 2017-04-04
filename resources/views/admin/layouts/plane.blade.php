@@ -21,14 +21,19 @@
     <link rel="stylesheet" href="{{ asset("assets/css/metisMenu.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/css/timeline.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/css/font-awesome.css") }}"/>
+    <link rel="stylesheet" href="{{ asset("assets/css/bootstrap-datepicker.min.css") }}"/>
 </head>
 <body>
 @yield('body')
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="{{ elixir('js/bootstrap-datepicker.min.js') }}"></script>
+
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
+    $('#sandbox-container .input-daterange').datepicker({
+    });
 
     $('#title').on('change', function () {
         categoryKeyFix();
