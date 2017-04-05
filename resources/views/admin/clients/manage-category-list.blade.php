@@ -56,18 +56,13 @@
                             <div class="col-md-8">
 
 
-                                <select name="brand_id" id="brand_id" class="form-control">
+                                <select name="c_brand_id" id="brand_id" class="form-control">
                                     <option>Select Brand</option>
-                                    @foreach($brands as $brand)
-                                        @foreach($cbrands as $cbrand)
-                                            @if($cbrand->remove !=1)
-                                            @if($brand->id == $cbrand->brand_id)
-                                                <option value="{{$brand->id}}"
-                                                        {{--                                                @if($cp_id!=null && $category->id == $cbrand[0]['brand_id']) selected @endif--}}
-                                                >{{$brand->title}}</option>
-                                            @endif
-                                            @endif
-                                        @endforeach
+                                    @foreach($cbrands as $cbrand)
+                                        @if($cbrand->remove !=1)
+                                            <option value="{{$cbrand->id}}"
+                                            >{{$cbrand->brand->title}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>

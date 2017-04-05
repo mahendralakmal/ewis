@@ -17,7 +17,7 @@ class CreateClientsProductTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('brand_id');
-            $table->integer('category_id');
+            $table->integer('c_category_id');
             $table->integer('client_id');
             $table->integer('product_id');
             $table->decimal('special_price',11,2);

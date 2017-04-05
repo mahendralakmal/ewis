@@ -32,8 +32,7 @@
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 
 <script>
-    $('#sandbox-container .input-daterange').datepicker({
-    });
+    $('#sandbox-container .input-daterange').datepicker({});
 
     $('#title').on('change', function () {
         categoryKeyFix();
@@ -43,17 +42,18 @@
     })
 
     function categoryKeyFix() {
-        if(!$('#title').val()=='' && !$('#brand_id').val()=='')
-            $('#category_key').val($('#title').val()+"_"+$('#brand_id').val());
+        if (!$('#title').val() == '' && !$('#brand_id').val() == '')
+            $('#category_key').val($('#title').val() + "_" + $('#brand_id').val());
     }
 
     $("#vat_apply").on('change', function () {
-        if($(this).val() == "on"){
+        if ($(this).val() == "on") {
             $("#vat").val('15');
         } else {
             $("#vat").val('');
         }
     });
+
     $("#client").on('change', function () {
         var status = $('#postatus').val();
         $.ajax(
@@ -81,7 +81,6 @@
 
     $("#postatus").on('change', function () {
         var client = $('#client').val();
-//        alert(client);
         $.ajax(
                 {
                     type: 'get',
@@ -134,7 +133,6 @@
     $('#designation_id').on('change', function () {
         var selectedVal = $("#designation_id option:selected").text();
         if ((selectedVal.toLowerCase() != 'client') && (selectedVal != 'Super Admin')) {
-//            $('#section_head_id').remove();
             $('.shead').show();
         } else {
             $('.shead').hide();
@@ -150,14 +148,10 @@
 
     $(".postatus").on('change', function () {
         var poid = this.id;
-//        alert(this.id);
-//        alert(this.value);
         $.ajax({
             type: 'get',
             url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
             success: function (response) {
-//                $('.msg').show();
-//                $('.msg').addClass(' alert-success');
             }
         });
     });
@@ -171,11 +165,33 @@
                         $('#list_price').val(response.default_price);
                         $('#list_price').prop('readonly', true);
                         $('#vat').val(response.vat);
-                        $('#description').text(response.description);
+                        var model = $('#description');
+                        model.empty();
+                        model.append("<div class='col-md-4'><label>Description</label></div>");
+                        model.append("<div class='col-md-8'><label class='lightslategrey'>" + response.description + "</label></div>");
+//                        model.text(response.description);
                     }
                 }
         );
     });
+
+    $("#c_category_id").on('change', function () {
+        $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/manage-product-list/cproduct/' + this.value,
+                    success: function (response) {
+                        var model = $('#product_id');
+                        model.empty();
+                        model.append("<option selected>Select Category</option>")
+                        $.each(response, function (index, elem) {
+                            model.append("<option value='" + elem.id + "'>" + elem.name + "</option>");
+                        });
+                    }
+                }
+        );
+    });
+
 
     $("#category_id").on('change', function () {
         $.ajax(
@@ -195,6 +211,29 @@
         );
     });
 
+    $("#c_brand_id").on('change', function () {
+        $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/manage-product-list/ccategory/' + this.value,
+                    success: function (response) {
+                        var model = $('#c_category_id');
+                        model.empty();
+                        model.append("<option selected>Select Category</option>")
+                        $.each(response, function (index, elem) {
+                            $.ajax({
+                                type: 'get',
+                                url: '/admin/manage-product-list/ccategory/category/' + elem.id,
+                                success: function (res) {
+                                    model.append("<option value='" + elem.id + "'>" + res + "</option>")
+                                }
+                            });
+                        });
+                    }
+                }
+        );
+    });
+
     $("#brand_id").on('change', function () {
         $.ajax(
                 {
@@ -205,7 +244,9 @@
                         model.empty();
                         model.append("<option selected>Select Category</option>")
                         $.each(response, function (index, elem) {
-                            model.append("<option value='" + elem.id + "'>" + elem.title + "</option>")
+                            if (elem.status == 1) {
+                                model.append("<option value='" + elem.id + "'>" + elem.title + "</option>")
+                            }
                         });
                     }
                 }

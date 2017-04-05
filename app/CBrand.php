@@ -12,4 +12,12 @@ class CBrand extends Model
     {
         return $this->belongsTo(Client::class);
     }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
+    }
+
+    public  function c_category(){
+        return $this->hasMany(CCategory::class);
+    }
 }

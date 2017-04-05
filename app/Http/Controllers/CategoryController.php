@@ -22,7 +22,6 @@ class CategoryController extends Controller
 
     public function store_client_category(Request $request)
     {
-//        return $request->all();
         CCategory::create($request->all());
         return back();
     }
@@ -100,7 +99,7 @@ class CategoryController extends Controller
     public function category($id, $brand, Brand $brand_id)
     {
         $cuser = Clientuser::where('user_id', Session::get('User'))->first();
-        $categories = CCategory::where([['client_id', $cuser->client_id], ['remove', 0],['brand_id',$brand_id->id]])->get();
+        $categories = CCategory::where([['client_id', $cuser->client_id], ['remove', 0],['c_brand_id',$brand_id->id]])->get();
         return view('user/category', compact('categories'));
     }
 }

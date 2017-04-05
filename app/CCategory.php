@@ -6,10 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class CCategory extends Model
 {
-    protected $fillable = ['user_id', 'category_id', 'brand_id', 'client_id', 'remove'];
+    protected $fillable = ['user_id', 'category_id', 'c_brand_id', 'client_id', 'remove'];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function cbrand()
+    {
+        return $this->belongsTo(CBrand::class);
+    }
+
+    public function cproduct(){
+        return $this->hasMany(Client_Product::class);
     }
 }

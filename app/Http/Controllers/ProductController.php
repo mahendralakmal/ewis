@@ -54,9 +54,29 @@ class ProductController extends Controller
         return Response::json($id);
     }
 
+//    public function load_cproducts_details(Client_Product $id){
+//        $product = $id->product;
+//        return Response::json($product);
+//    }
+
+    public function load_cproducts(CCategory $id){
+        $products = $id->category->product;
+        return Response::json($products);
+    }
+
     public function load_products(Category $id){
         $products = $id->product;
         return Response::json($products);
+    }
+
+    public function load_ccategory_details(CCategory $id){
+        $category = $id->category->title;
+        return Response::json($category);
+    }
+
+    public function load_ccategories(CBrand $id){
+        $ccategoris = $id->c_category;
+        return Response::json($ccategoris);
     }
 
     public function load_categories(Brand $id){
