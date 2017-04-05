@@ -45,8 +45,12 @@ Route::delete('emptyBucket', 'BucketController@emptyBucket');
 //=====================================================================================================================
 
 Route::group(['prefix' => ' /admin'], function () {
+
     Route::get('/', function () {
         return view('/admin/home');
+    });
+    Route::get('/test', function () {
+        return view('/admin/test');
     });
     Route::group(['prefix' => '/brands'], function () {
         Route::get('/', 'BrandsController@admin_index');

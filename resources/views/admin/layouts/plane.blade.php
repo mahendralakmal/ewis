@@ -16,23 +16,31 @@
 
     <link rel="shortcut icon" href="{{ elixir('img/favicon.ico') }}">
     <link rel="stylesheet" href="{{ elixir('css/admin_app.css') }}"/>
-    <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}"/>
+    {{--<link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}"/>--}}
     <link rel="stylesheet" href="{{ asset("assets/css/sb-admin-2.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/css/metisMenu.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/css/timeline.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/css/font-awesome.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/css/bootstrap-datepicker.min.css") }}"/>
+    {{--<link rel="stylesheet" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css">--}}
+
 </head>
 <body>
 @yield('body')
+
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script type="text/javascript" src="{{ elixir('js/bootstrap-datepicker.min.js') }}"></script>
-
+{{--<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>--}}
+{{--<script src="{{ asset("assets/js/bootstrap-datetimepicker.min.js") }}"></script>--}}
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
-
 <script>
     $('#sandbox-container .input-daterange').datepicker({});
+
+//    $(function () {
+//        $('#datetimepicker1').datetimepicker();
+//    });
 
     $('#title').on('change', function () {
         categoryKeyFix();
@@ -190,8 +198,29 @@
                     }
                 }
         );
+//        $.ajax(
+//                {
+//                    type: 'get',
+//                    url: '/admin/manage-product-list/cproduct/' + this.value,
+//                    success: function (response) {
+//                        var model = $('#product_id');
+//                        model.empty();
+//                        model.append("<option selected>Select Products</option>")
+//                        $.each(response, function (index, elem) {
+////                            model.append("<option value='" + elem.id + "'>" + elem.name + "</option>");
+//                            $.ajax({
+//                                type: 'get',
+//                                url: '/admin/manage-product-list/ccategory/category/' + elem.id,
+//                                success: function (res) {
+//                                    model.append("<option value='" + elem.id + "'>" + res + "</option>")
+//                                }
+//                            });
+//                        });
+//
+//                    }
+//                }
+//        );
     });
-
 
     $("#category_id").on('change', function () {
         $.ajax(
@@ -270,6 +299,7 @@
             image: "required"
         }
     });
+
     $("#categories").validate({
         rules: {
             title: "required",
@@ -284,6 +314,7 @@
             image: "required"
         }
     });
+
     $("#clientProfile").validate({
         rules: {
             name: "required",
@@ -320,6 +351,7 @@
             }
         }
     });
+
     $("#userCreate").validate({
         rules: {
             email: {
