@@ -16,9 +16,8 @@
                     <div class="row">
                         <div class="col-md-2 col-sm-3 col-lg-2">
                             <div class="form-group">
-                                {{--<label for="client"><h5></h5></label>--}}
                                 <select class="form-control" name="client" id="client" data-parsley-required="true">
-                                    <option>Select Client</option>
+                                    <option value="n">Select Client</optionvalue>
                                     @foreach ($client as $client)
                                         <option value="{{ $client->id }}">{{ $client->name }}</option>
                                     @endforeach
@@ -28,14 +27,15 @@
 
                         <div class="col-md-3 col-sm-4 col-lg-3" id="sandbox-container">
                             <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" class=" form-control" name="start" />
+                                <input type="text" class=" form-control" name="start" id="start" />
                                 <span class="input-group-addon">to</span>
-                                <input type="text" class=" form-control" name="end" />
+                                <input type="text" class=" form-control" name="end" id="end" />
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-3 col-lg-2">
                             <div class="form-group">
                                 <select id="postatus" name="postatus" class="form-control">
+                                    <option value="n">Select Status</option>
                                     <option value="P">Pending</option>
                                     <option value="PC">Partial Completed</option>
                                     <option value="C">Completed</option>

@@ -36,11 +36,54 @@
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
 <script>
-    $('#sandbox-container .input-daterange').datepicker({});
+    //Purchase orders
+    function purchase_orders(param1, param2, param3, param4) {
+        $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/manage-clients/completed-purchase-orders/' + param1 + '/' + param2 + '/' + param3 + '/' + param4,
+                    success: function (response) {
+                        console.log(response);
+                        var model = $('.tbody-completed');
+                        model.empty();
+                        $.each(response, function (index, elem) {
+                            model.append("<tr>");
+                            model.append("<td>" + elem.id + "</td>");
+                            model.append("<td>" + elem.name + "</td>");
+                            model.append("<td>" + elem.created_at + "</td>");
+                            model.append("<td>" + elem.updated_at + "</td>");
+                            model.append("<td>" + elem.del_cp + "</td>");
+                            model.append("<td>" + elem.del_branch + "</td>");
+                            model.append("<td>" + elem.del_tp + "</td>");
+                            model.append("</tr>");
+                        });
+                    },
+                    error:function (response) {
+                        console.log(response);
+                    }
+                }
+        );
+    }
 
-//    $(function () {
-//        $('#datetimepicker1').datetimepicker();
-//    });
+    $("#client").on('change', function () {
+        purchase_orders(this.value, $('#postatus').val(), ($('#start').val()!='')?$('#start').val():'n', ($('#end').val()!='')?$('#end').val():'n');
+    });
+
+    $("#postatus").on('change', function () {
+        purchase_orders($('#client').val(), this.value, ($('#start').val()!='')?$('#start').val():'n', ($('#end').val()!='')?$('#end').val():'n');
+    });
+
+    $("#start").on('change', function () {
+        purchase_orders($('#client').val(), $('#postatus').val(), this.value, ($('#end').val()!='')?$('#end').val():'n');
+    });
+
+    $("#end").on('change', function () {
+        purchase_orders($('#client').val(), $('#postatus').val(), ($('#start').val()!='')?$('#start').val():'n', this.value);
+    });
+    //end of purchase order
+
+    $('#sandbox-container .input-daterange').datepicker({ format: "dd-mm-yyyy" });
+
 
     $('#title').on('change', function () {
         categoryKeyFix();
@@ -60,57 +103,6 @@
         } else {
             $("#vat").val('');
         }
-    });
-
-    $("#client").on('change', function () {
-        var status = $('#postatus').val();
-        $.ajax(
-                {
-                    type: 'get',
-                    url: '/admin/manage-clients/completed-purchase-orders/' + this.value + '/' + status,
-                    success: function (response) {
-                        console.log(response);
-                        var model = $('.tbody-completed');
-                        model.empty();
-                        $.each(response, function (index, elem) {
-                            model.append("<tr>");
-                            model.append("<td>" + elem.id + "</td>");
-                            model.append("<td>" + elem.created_at + "</td>");
-                            model.append("<td>" + elem.updated_at + "</td>");
-                            model.append("<td>" + elem.del_cp + "</td>");
-                            model.append("<td>" + elem.del_branch + "</td>");
-                            model.append("<td>" + elem.del_tp + "</td>");
-                            model.append("</tr>");
-                        });
-                    }
-                }
-        );
-    });
-
-    $("#postatus").on('change', function () {
-        var client = $('#client').val();
-        $.ajax(
-                {
-                    type: 'get',
-                    url: '/admin/manage-clients/completed-purchase-orders/' + client + '/' + this.value,
-                    success: function (response) {
-                        console.log(response);
-                        var model = $('.tbody-completed');
-                        model.empty();
-                        $.each(response, function (index, elem) {
-                            model.append("<tr>");
-                            model.append("<td>" + elem.id + "</td>");
-
-                            model.append("<td>" + elem.created_at + "</td>");
-                            model.append("<td>" + elem.updated_at + "</td>");
-                            model.append("<td>" + elem.del_cp + "</td>");
-                            model.append("<td>" + elem.del_branch + "</td>");
-                            model.append("<td>" + elem.del_tp + "</td>");
-                            model.append("</tr>");
-                        });
-                    }
-                }
-        );
     });
 
     $("#P_client").on('change', function () {
@@ -177,7 +169,6 @@
                         model.empty();
                         model.append("<div class='col-md-4'><label>Description</label></div>");
                         model.append("<div class='col-md-8'><label class='lightslategrey'>" + response.description + "</label></div>");
-//                        model.text(response.description);
                     }
                 }
         );
@@ -198,28 +189,6 @@
                     }
                 }
         );
-//        $.ajax(
-//                {
-//                    type: 'get',
-//                    url: '/admin/manage-product-list/cproduct/' + this.value,
-//                    success: function (response) {
-//                        var model = $('#product_id');
-//                        model.empty();
-//                        model.append("<option selected>Select Products</option>")
-//                        $.each(response, function (index, elem) {
-////                            model.append("<option value='" + elem.id + "'>" + elem.name + "</option>");
-//                            $.ajax({
-//                                type: 'get',
-//                                url: '/admin/manage-product-list/ccategory/category/' + elem.id,
-//                                success: function (res) {
-//                                    model.append("<option value='" + elem.id + "'>" + res + "</option>")
-//                                }
-//                            });
-//                        });
-//
-//                    }
-//                }
-//        );
     });
 
     $("#category_id").on('change', function () {
@@ -234,7 +203,6 @@
                         $.each(response, function (index, elem) {
                             model.append("<option value='" + elem.id + "'>" + elem.name + "</option>")
                         });
-
                     }
                 }
         );
