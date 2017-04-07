@@ -27,9 +27,9 @@
 
                         <div class="col-md-3 col-sm-4 col-lg-3" id="sandbox-container">
                             <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" class=" form-control" name="start" id="start" />
+                                <input type="text" class="form-control" name="start" id="start" />
                                 <span class="input-group-addon">to</span>
-                                <input type="text" class=" form-control" name="end" id="end" />
+                                <input type="text" class="form-control" name="end" id="end" />
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-3 col-lg-2">
@@ -43,16 +43,16 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table">
+                    <table class="table table-condensed">
                         <thead>
                         <tr>
                             <td><h5>Po. No.</h5></td>
+                            <td class="col-md-3"><h5>Name</h5></td>
                             <td><h5>Created Date & Time</h5></td>
                             <td><h5>Completed Date & Time</h5></td>
                             <td><h5>Client User</h5></td>
                             <td><h5>Branch</h5></td>
                             <td><h5>Contact Number</h5></td>
-                            <td class="col-md-3"></td>
                         </tr>
                         </thead>
                         <tbody class="tbody-completed">
