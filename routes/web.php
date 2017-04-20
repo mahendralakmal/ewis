@@ -110,7 +110,6 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
         Route::get('/view-purchase-orders', 'BucketController@getPurchaseOrder');
         Route::get('/pending-purchase-orders', 'BucketController@pendingPurchaseOrder');
-        Route::get('/completed-purchase-orders','BucketController@CompletedPurchaseOrder');
         Route::get('/pc-purchase-orders', 'BucketController@pcPurchaseOrder');
         Route::get('/po-details/{id}', 'BucketController@getPODetails');
         Route::get('/po-details/change_status/{id}/{status}', 'BucketController@change_status');
@@ -123,9 +122,18 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/agent-assign/{id}', 'AgentController@index');
         Route::get('/assign/{user}/{agent}/{id}', 'AgentController@assign');
         Route::get('/remove/{user}/{agent}/{id}', 'AgentController@remove');
-        Route::get('/completed-purchase-orders/{client}/{status}/{start}/{end}','BucketController@getPurchaseOrdersByClient');
-//        Route::get('/completed-purchase-orders/{status}','BucketController@getPurchaseOrdersByStatus');
+    });
 
+    Route::group(['prefix' => '/reports'], function () {
+        Route::get('/completed-purchase-orders','BucketController@CompletedPurchaseOrder');
+        Route::get('/completed-purchase-orders/{client}/{status}/{start}/{end}','BucketController@getPurchaseOrdersByClient');
+
+        Route::get('/client-wise-price-list','BucketController@getPriceList');
+        Route::get('/client-wise-price-list/{client}/{start}/{end}','BucketController@getPriceListByClient');
+
+        Route::get('/get-brands/{brands}','BrandsController@get_brands');
+        Route::get('/get-category/{id}','CategoryController@get_categories');
+        Route::get('/get-product/{id}','ProductController@get_products');
     });
 
     Route::group(['prefix' => '/manage-product-list'], function () {

@@ -12,4 +12,14 @@ class Brand extends Model
     {
         return $this->hasMany(Category::class);
     }
+
+    public function c_brand()
+    {
+        return $this->hasMany(CBrand::class);
+    }
+
+    public function c_category()
+    {
+        return $this->hasMany(CCategory::class);
+    }
 }

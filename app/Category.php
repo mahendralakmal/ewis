@@ -15,4 +15,8 @@ class Category extends Model
     public function brand(){
         return $this->belongsTo(Brand::class);
     }
+
+    public function c_category(){
+        return $this->hasMany(CCategory::class);
+    }
 }

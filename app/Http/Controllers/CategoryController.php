@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    public function get_categories(CCategory $id){
+        return $id->category->title;
+    }
+
     public function remove_client_category(CCategory $id)
     {
         $id->update(['remove' => 1]);

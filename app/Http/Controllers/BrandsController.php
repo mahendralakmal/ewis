@@ -15,22 +15,29 @@ use Illuminate\Support\Facades\Storage;
 
 class BrandsController extends Controller
 {
-    public function remove_client_brands(CBrand $id){
-//        return $id;
-        $id->update(['remove'=>1]);
+    public function get_brands(Brand $brands)
+    {
+        return $brands->title;
+    }
+
+    public function remove_client_brands(CBrand $id)
+    {
+        $id->update(['remove' => 1]);
         return back();
     }
 
-    public function store_client_brands(Request $request){
+    public function store_client_brands(Request $request)
+    {
         CBrand::create($request->all());
         return back();
     }
 
-    public function assign_brands_to_client(User $id, Request $request){
+    public function assign_brands_to_client(User $id, Request $request)
+    {
         $cp_id = '';
-        $cbrands = CBrand::where([['user_id',$request->session()->get('User')],['client_id', $id->clientuser->first()->client->id]])->get();
+        $cbrands = CBrand::where([['user_id', $request->session()->get('User')], ['client_id', $id->clientuser->first()->client->id]])->get();
         $brands = Brand::orderBy('title')->get();
-        return view('/admin/clients/manage-brand-list', compact('brands', 'id', 'cbrands','cp_id'));
+        return view('/admin/clients/manage-brand-list', compact('brands', 'id', 'cbrands', 'cp_id'));
     }
 
     public function admin_index()
@@ -85,7 +92,7 @@ class BrandsController extends Controller
     public function brands()
     {
         $cuser = Clientuser::where('user_id', Session::get('User'))->first();
-        $brands = CBrand::where([['client_id', $cuser->client_id],['remove', 0]])->get();
+        $brands = CBrand::where([['client_id', $cuser->client_id], ['remove', 0]])->get();
         return view('user/brands', compact('brands'));
     }
 

@@ -18,9 +18,9 @@ class CCategory extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function cbrand()
+    public function brand()
     {
-        return $this->belongsTo(CBrand::class);
+        return $this->belongsTo(Brand::class);
     }
 
     public function cproduct(){

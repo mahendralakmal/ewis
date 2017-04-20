@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client_Product extends Model
 {
-    protected $fillable=['user_id','product_id','brand_id','c_category_id','client_id','special_price', 'remove'];
+    protected $fillable=['user_id','product_id','brand_id','c_category_id','clients_id','special_price', 'remove'];
 
     public function client(){
         return $this->belongsTo(Client::class);
@@ -18,5 +18,9 @@ class Client_Product extends Model
 
     public function ccategory(){
         return $this->belongsTo(CCategory::class);
+    }
+
+    public function cbrand(){
+        return $this->belongsTo(CBrand::class);
     }
 }

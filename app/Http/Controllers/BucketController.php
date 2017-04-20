@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Client_Product;
 use App\Mail\PoCompleted;
 use App\Mail\PoOnProcess;
 use App\Mail\PoPartialComplete;
@@ -25,6 +26,19 @@ use Carbon\Carbon;
 
 class BucketController extends Controller
 {
+    public function getPriceList()
+    {
+        $client = Client::all();
+        return view('admin/reports/client-wise-price-list', compact('client'));
+    }
+
+    public function getPriceListByClient(Client $client, $start, $end){
+        if($start != 'n' && $end != 'n') {
+            return Client_Product::whereBetween('client__products.created_at',array(new DateTime($start),new DateTime($end)))->get();
+        }else {
+            return $client->client_products;
+        }
+    }
 
     public function change_status($id, $status){
         $po = P_Order::find($id);
@@ -75,14 +89,10 @@ class BucketController extends Controller
         $bucket = new Bucket($oldBucket);
         $products = $bucket->items;
         foreach ($products as $product) {
-//            echo "id: ".$product['item'] ['id'];
             if ($product['item'] ['id'] == $item_id) {
-//                return $item_id;
                 $bucket->remove($product);
-//                $request->session()->forget($product);
             };
         }
-//    return ($product);
     }
 
     public function Checkout()
@@ -165,7 +175,7 @@ class BucketController extends Controller
     public function CompletedPurchaseOrder()
     {
         $client = Client::all();
-        return view('admin/clients/completed-purchase-orders', compact('client'));
+        return view('admin/reports/completed-purchase-orders', compact('client'));
     }
 
     public function getPurchaseOrdersByClient($client, $status, $start, $end){

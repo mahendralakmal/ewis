@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function get_products(Product $id){
+        return $id->name." | ".$id->part_no;
+    }
+
     public function remove_client_products(Client_Product $id){
         $id->update(['remove'=>1]);
         return back();
@@ -53,11 +57,6 @@ class ProductController extends Controller
     public function load_products_deta(Product $id){
         return Response::json($id);
     }
-
-//    public function load_cproducts_details(Client_Product $id){
-//        $product = $id->product;
-//        return Response::json($product);
-//    }
 
     public function load_cproducts(CCategory $id){
         $products = $id->category->product;

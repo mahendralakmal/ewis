@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Orders by Client')
+@section('page_heading','Purchase Orders by Client')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -67,4 +67,53 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+
+@section('scripts')
+    <script>
+        //Purchase orders
+        function purchase_orders(param1, param2, param3, param4) {
+            $.ajax(
+                    {
+                        type: 'get',
+                        url: '/admin/reports/completed-purchase-orders/' + param1 + '/' + param2 + '/' + param3 + '/' + param4,
+                        success: function (response) {
+                            console.log(response);
+                            var model = $('.tbody-completed');
+                            model.empty();
+                            $.each(response, function (index, elem) {
+                                model.append("<tr>");
+                                model.append("<td>" + elem.id + "</td>");
+                                model.append("<td>" + elem.name + "</td>");
+                                model.append("<td>" + elem.created_at + "</td>");
+                                model.append("<td>" + elem.updated_at + "</td>");
+                                model.append("<td>" + elem.del_cp + "</td>");
+                                model.append("<td>" + elem.del_branch + "</td>");
+                                model.append("<td>" + elem.del_tp + "</td>");
+                                model.append("</tr>");
+                            });
+                        },
+                        error:function (response) {
+                            console.log(response);
+                        }
+                    }
+            );
+        }
+
+        $("#client").on('change', function () {
+            purchase_orders(this.value, $('#postatus').val(), ($('#start').val()!='')?$('#start').val():'n', ($('#end').val()!='')?$('#end').val():'n');
+        });
+
+        $("#postatus").on('change', function () {
+            purchase_orders($('#client').val(), this.value, ($('#start').val()!='')?$('#start').val():'n', ($('#end').val()!='')?$('#end').val():'n');
+        });
+
+        $("#start").on('change', function () {
+            purchase_orders($('#client').val(), $('#postatus').val(), this.value, ($('#end').val()!='')?$('#end').val():'n');
+        });
+
+        $("#end").on('change', function () {
+            purchase_orders($('#client').val(), $('#postatus').val(), ($('#start').val()!='')?$('#start').val():'n', this.value);
+        });
+    </script>
 @stop

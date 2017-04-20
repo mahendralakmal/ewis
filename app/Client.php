@@ -12,6 +12,10 @@ class Client extends Model
         return $this->hasMany(Clientuser::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function cproducts(){
         return $this->hasMany(CBrand::class);
     }
@@ -21,7 +25,7 @@ class Client extends Model
     }
 
     public function client_products(){
-        return $this->hasMany(Client_Products::class);
+        return $this->hasMany(Client_Product::class);
     }
 
     public function P_Orders(){
