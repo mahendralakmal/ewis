@@ -31,7 +31,7 @@
                                                     <tr>
                                                         <td><h5>Part No</h5></td>
                                                         <td><h5>Name</h5></td>
-                                                        <td><h5>Description</h5></td>
+                                                        {{--<td><h5>Description</h5></td>--}}
                                                         <td><h5>price</h5></td>
                                                         <td class="col-md-3"></td>
                                                     </tr>
@@ -42,7 +42,7 @@
                                                             <tr>
                                                                 <td>{{$prod->product->part_no}}</td>
                                                                 <td>{{$prod->product->name}}</td>
-                                                                <td>{{$prod->product->description}}</td>
+{{--                                                                <td>{{$prod->product->description}}</td>--}}
                                                                 <td class="text-right">{{$prod->special_price}}</td>
                                                                 <td>
                                                                     <a href="/admin/products/{{$prod->id}}"
@@ -125,7 +125,7 @@
                         <div class="col-md-8">
                             @if($cp_id == null)
                                 <select name="product_id" id="product_id" class="form-control">
-                                    <option>Select Product</option>
+                                    <option>Select Part No</option>
                                 </select>
                             @else
                                 <select name="product_id" id="product_id" class="form-control">

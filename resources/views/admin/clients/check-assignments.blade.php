@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Check Assignments ')
+@section('page_heading','Check Assignments')
 @section('section')
     {{--{{ $id }}--}}
     <div class="col-md-6">
@@ -19,7 +19,7 @@
     <div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Assign Clents</h3>
+                <h3 class="panel-title">Assigned Clients</h3>
             </div>
             <div class="panel-body">
                 <table class="table">

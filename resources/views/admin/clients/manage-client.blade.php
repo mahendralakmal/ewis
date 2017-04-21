@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Manage Clients')
+@section('page_heading','Client Users')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && strtolower((\Illuminate\Support\Facades\Session::get('Type')) !== 'client')
@@ -16,11 +16,11 @@
                     <tr>
                         <td></td>
                         <td><h5>Client</h5></td>
-                        <td><h5>User</h5></td>
-                        <td><h5>Designation</h5></td>
-                        <td><h5>Branch</h5></td>
-                        <td><h5>Contact No</h5></td>
-                        <td><h5>Email</h5></td>
+                        {{--<td><h5>User</h5></td>--}}
+                        {{--<td><h5>Designation</h5></td>--}}
+                        {{--<td><h5>Branch</h5></td>--}}
+                        {{--<td><h5>Contact No</h5></td>--}}
+                        {{--<td><h5>Email</h5></td>--}}
                     </tr>
                     </thead>
                     <tbody>
@@ -33,11 +33,11 @@
                                     <i class="fa fa-check green fa-fw"></i>
                                     @endif</td>
                                     <td>{{ $cuser->client->name }}</td>
-                                    <td>{{ $cuser->cp_name }}</td>
-                                    <td>{{ $cuser->cp_designation }}</td>
-                                    <td>{{ $cuser->cp_branch }}</td>
-                                    <td>{{ $cuser->cp_telephone }}</td>
-                                    <td>{{ $cuser->cp_email }}</td>
+                                    {{--<td>{{ $cuser->cp_name }}</td>--}}
+                                    {{--<td>{{ $cuser->cp_designation }}</td>--}}
+                                    {{--<td>{{ $cuser->cp_branch }}</td>--}}
+                                    {{--<td>{{ $cuser->cp_telephone }}</td>--}}
+                                    {{--<td>{{ $cuser->cp_email }}</td>--}}
                                 </tr>
                                 <tr>
                                     <td style="border-top:none;"></td>
@@ -51,7 +51,7 @@
                                             Profile</a>
                                         <a href="/admin/manage-clients/agent-assign/{{ $user->id }}"
                                            class="btn btn-primary btn-outline">Assign
-                                            Sales Executive</a>
+                                            Account Manager</a>
                                         <a href="/admin/manage-product-list/{{ $user->id }}/brands"
                                            class="btn btn-primary btn-outline">Add
                                             Brands</a>

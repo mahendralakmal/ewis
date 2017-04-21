@@ -49,7 +49,7 @@
                                 (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->add_user) ||
                                 (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->user_approve)
                                 )
-                                    <a href="#">Manage Users<span class="fa arrow"></span></a>
+                                    <a href="#">Manage Users (Internal / Clients)<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->designation))
                                             <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
@@ -259,6 +259,7 @@
                             $('#list_price').val(response.default_price);
                             $('#list_price').prop('readonly', true);
                             $('#vat').val(response.vat);
+                            $('#vat').prop('readonly', true);
                             var model = $('#description');
                             model.empty();
                             model.append("<div class='col-md-4'><label>Description</label></div>");
@@ -276,9 +277,9 @@
                         success: function (response) {
                             var model = $('#product_id');
                             model.empty();
-                            model.append("<option selected>Select Category</option>")
+                            model.append("<option selected>Select Part No</option>")
                             $.each(response, function (index, elem) {
-                                model.append("<option value='" + elem.id + "'>" + elem.name + "</option>");
+                                model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>");
                             });
                         }
                     }
