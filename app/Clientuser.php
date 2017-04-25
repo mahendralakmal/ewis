@@ -6,16 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Clientuser extends Model
 {
-    protected $fillable = ['client_id', 'client_id', 'user_id', 'cp_name', 'cp_designation', 'cp_branch', 'cp_telephone', 'cp_email'];
+    protected $fillable = ['client_branch_id', 'user_id', 'cp_name', 'cp_designation', 'cp_branch', 'cp_telephone', 'cp_email'];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function client()
+    public function client_branch()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(ClientsBranch::class);
     }
 
 }
