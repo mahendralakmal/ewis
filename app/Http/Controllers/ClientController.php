@@ -14,8 +14,7 @@ class ClientController extends Controller
     public function index()
     {
         $clients = Client::all();
-        $users = User::all();
-        return view('/admin/clients/manage-client', compact('users', 'clients'));
+        return view('/admin/clients/manage-client', compact('clients'));
     }
 
     public function create_profile()
