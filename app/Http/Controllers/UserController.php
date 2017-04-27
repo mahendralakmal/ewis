@@ -148,20 +148,19 @@ class UserController extends Controller
     public function create()
     {
         $id = "";
-//        $seHeads = User::where()
         $users = User::all();
         $designations = Designation::all();
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));
     }
+
+    //Create client user
     public function client()
     {
         $id = "";
-//        $seHeads = User::where()
         $users = User::all();
         $designations = Designation::all();
         return view('/admin/clients/create-clientuser', compact('users', 'designations', 'id'));
     }
-
     public function edit(User $id)
     {
         $users = User::all();
@@ -169,11 +168,12 @@ class UserController extends Controller
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));
     }
 
+    //Edit client user
     public function clientedit(User $id)
     {
         $users = User::all();
-        $designations = Designation::all();
-        return view('/admin/clients/create-clientuser', compact('users', 'designations', 'id'));
+        $designation = Designation::find(2);
+        return view('/admin/clients/create-clientuser', compact('users', 'designation', 'id'));
     }
 
     public function delete(Request $request)

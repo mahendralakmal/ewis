@@ -99,8 +99,6 @@ Route::group(['prefix' => ' /admin'], function () {
 
     Route::group(['prefix' => '/manage-clients'], function () {
         Route::get('/', 'ClientController@index');
-//        Route::get('/create-clientuser', function () {
-//            return view('/admin/clients/create-clientuser');});
         Route::get('/create-clientuser', 'UserController@client');
         Route::get('/create-clientuser/{id}', 'UserController@clientedit');
         Route::get('/create-profile/', 'ClientController@create_profile');
