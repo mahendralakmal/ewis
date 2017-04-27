@@ -124,8 +124,8 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::post('/agent-assign/store', 'AgentController@store');
         Route::post('/agent-assign/update', 'AgentController@update');
         Route::get('/agent-assign/{id}', 'AgentController@index');
-        Route::get('/assign/{user}/{agent}/{id}', 'AgentController@assign');
-        Route::get('/remove/{user}/{agent}/{id}', 'AgentController@remove');
+        Route::get('/assign/{branch}/{agent}', 'AgentController@assign');
+        Route::get('/remove/{branch}/{agent}', 'AgentController@remove');
     });
 
     Route::group(['prefix' => '/reports'], function () {

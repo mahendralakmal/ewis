@@ -1,5 +1,9 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Assign Customer Account Manager')
+@section('page_heading')
+    <strong>{{ $id->client->name }} - {{ $id->name }}</strong>
+    <br>
+    Assign Customer Account Manager
+@stop
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -25,8 +29,8 @@
                         @if(strtolower($user->designation->designation) != "client")
                             <tr>
                                 <td>
-                                    @if($user->id === $id->clientuser->first()->client->agent_id)
-                                        <i class="fa fa-check green fa-fw"></i>
+                                    @if($user->id === $id->agent_id)
+                                    <i class="fa fa-check green fa-fw"></i>
                                     @endif
                                 </td>
                                 <td>{{ $user->email }}</td>
@@ -35,18 +39,19 @@
                                 <td>
                                     <a href="{{ url('/admin/manage-clients/check-assignments/'.$user->id) }}"
                                        class="btn btn-primary btn-outline">Check Assigned Clients</a>
-                                    <a href="@if($user->id === $id->clientuser->first()->client->agent_id)
-                                    {{ url('/admin/manage-clients/remove/'.$id->id.'/'.$user->id.'/'.$id->clientuser->first()->client->id) }}
+
+                                    <a href="@if($user->id === $id->agent_id)
+                                    {{ url('/admin/manage-clients/remove/'.$id->id.'/'.$user->id) }}
                                     @else
-                                    {{ url('/admin/manage-clients/assign/'.$id->id.'/'.$user->id.'/'.$id->clientuser->first()->client->id) }}
+                                    {{ url('/admin/manage-clients/assign/'.$id->id.'/'.$user->id) }}
                                     @endif
-                                            " class="btn @if($user->id === $id->clientuser->first()->client->agent_id)
+                                            " class="btn @if($user->id === $id->agent_id)
                                             btn-danger
                                             @else
                                             btn-success
                                             @endif
                                             btn-outline">
-                                        @if($user->id === $id->clientuser->first()->client->agent_id) Remove @else
+                                        @if($user->id === $id->agent_id) Remove @else
                                             Assign @endif
                                     </a>
                                 </td>

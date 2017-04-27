@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\ClientsBranch;
 use App\Clientuser;
 use App\User;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class AgentController extends Controller
         return redirect('/admin/users/create-users');
     }
 
-    public function index(User $id)
+    public function index(ClientsBranch $id)
     {
         $users = User::all();
         return view('/admin/clients/agent-assign', compact('users', 'id'));
@@ -54,16 +55,16 @@ class AgentController extends Controller
         return view('/admin/clients/check-assignments', compact('id', 'clients'));
     }
 
-    public function assign(User $user, User $agent, Client $id)
+    public function assign(ClientsBranch $branch, User $agent)
     {
-        $id->update(['agent_id' => $agent->id]);
-        return redirect('/admin/manage-clients/agent-assign/' . $user->id);
+        $branch->update(['agent_id' => $agent->id]);
+        return redirect('/admin/manage-clients/agent-assign/' . $branch->id);
     }
 
-    public function remove(User $user, User $agent, Client $id)
+    public function remove(ClientsBranch $branch, User $agent)
     {
-        $id->update(['agent_id' => null]);
-        return redirect('/admin/manage-clients/agent-assign/' . $user->id);
+        $branch->update(['agent_id' => null]);
+        return redirect('/admin/manage-clients/agent-assign/' . $branch->id);
     }
 
     public function client_user(User $user)

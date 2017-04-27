@@ -19,7 +19,9 @@ class CreateClientsBranchesTable extends Migration
             $table->text('address');
             $table->text('contact_no');
             $table->text('email');
+            $table->boolean('activation')->default(0);
             $table->integer('client_id')->unsigned()->index();
+            $table->integer('agent_id')->unsigned()->index()->nullable(true);
             $table->timestamps();
         });
     }
