@@ -41,7 +41,7 @@ class UserController extends Controller
 
     public function UpdatePrivileges(Request $request)
     {
-        $privilege = (User::find($request->user_id))->privilege;
+  //      $privilege = (User::find($request->user_id))->privilege;
         $privilege->update([
             'brand' => ($request->brand == "on") ? true : false,
             'category' => ($request->category == "on") ? true : false,
@@ -153,7 +153,14 @@ class UserController extends Controller
         $designations = Designation::all();
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));
     }
-
+    public function client()
+    {
+        $id = "";
+//        $seHeads = User::where()
+        $users = User::all();
+        $designations = Designation::all();
+        return view('/admin/clients/create-clientuser', compact('users', 'designations', 'id'));
+    }
     public function edit(User $id)
     {
         $users = User::all();
