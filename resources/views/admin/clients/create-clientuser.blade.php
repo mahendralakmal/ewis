@@ -29,7 +29,7 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->designation->designation}}</td>
                                         <td>
-                                            <a href="/admin/users/create-users/{{ $user->id }}"
+                                            <a href="/admin/manage-clients/create-clientuser/{{ $user->id }}"
                                                class="btn btn-primary btn-outline">Edit</a>
                                             <form method="POST" action="/admin/users/delete" role="form">
                                                 @if($user->designation_id !== 1)
@@ -117,21 +117,18 @@
                             @if(!$id == "")
                                 @foreach($designations as $designation)
                                         @if($designation->id ==2)
-                                        <option value="{{ $designation->id }}"
-                                                @if($designation->id ==$id->designation_id) selected @endif>{{ $designation->designation }}</option>
+                                        <option value="{{ $designation->id}}"
+                                                @if($designation->id ==2) selected @endif>{{ $designation->designation }}</option>
                                             @endif
                                 @endforeach
                             @else
                                 @foreach($designations as $designation)
                                         @if($designation->id ==2)
-                                        <option value="{{ $designation->id }}">{{ $designation->designation }}</option>
+                                        <option value="{{ $designation->id ="2" }}">{{ $designation->designation }}</option>
                                             @endif
                                 @endforeach
                             @endif
                         </select>
-                    </div>
-                    <div class="col-md-1">
-                        <a href="/admin/users/manage-user-designations"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div style="display: none" class="form-group shead">
