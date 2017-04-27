@@ -23,7 +23,7 @@
                             <tbody>
                             @foreach($users as $user)
                                 @if(!$user->deleted == 1)
-                                    @if($user->designation_id !== 2)
+                                    @if($user->designation_id == 2)
                                     <tr>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->name}}</td>
@@ -42,7 +42,7 @@
                                             </form>
                                         </td>
                                     </tr>
-                                    @endif
+                                        @endif
                                 @endif
                             @endforeach
                             </tbody>
@@ -116,20 +116,16 @@
                             <option>Select Designation</option>
                             @if(!$id == "")
                                 @foreach($designations as $designation)
-                                    @if($designation->id != 1)
-                                        @if($designation->id !=2)
+                                        @if($designation->id ==2)
                                         <option value="{{ $designation->id }}"
                                                 @if($designation->id ==$id->designation_id) selected @endif>{{ $designation->designation }}</option>
                                             @endif
-                                    @endif
                                 @endforeach
                             @else
                                 @foreach($designations as $designation)
-                                    @if($designation->id != 1)
-                                        @if($designation->id !=2)
+                                        @if($designation->id ==2)
                                         <option value="{{ $designation->id }}">{{ $designation->designation }}</option>
                                             @endif
-                                    @endif
                                 @endforeach
                             @endif
                         </select>
