@@ -132,20 +132,6 @@
                         {{--</select>--}}
                     </div>
                 </div>
-                <div style="display: none" class="form-group shead">
-                    <div class="col-md-5"><label>Sector Head</label></div>
-                    <div class="col-md-7">
-                        <select name="section_head_id" id="section_head_id" class="form-control">
-                            <option>Select Sectional Head</option>
-                            @foreach($users as $user)
-                                @if((strtolower($user->designation->designation) != 'client') && ($user->deleted == 0)))
-                                <option value="{{ $user->id }}"> {{ $user->name }}
-                                    | {{ $user->designation->designation }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 <div class="form-group">
                     <div class="col-md-5">
                         <label>NIC/ Passport No</label>
