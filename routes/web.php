@@ -46,6 +46,10 @@ Route::delete('emptyBucket', 'BucketController@emptyBucket');
 
 Route::group(['prefix' => ' /admin'], function () {
 
+    Route::get('/clean', function (){
+        session()->forget('success_message');
+        session()->forget('error_message');
+    });
     Route::get('/', function () {
         return view('/admin/home');
     });
