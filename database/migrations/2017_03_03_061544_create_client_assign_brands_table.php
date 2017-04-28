@@ -17,7 +17,7 @@ class CreateClientAssignBrandsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('brand_id');
-            $table->integer('client_id');
+            $table->integer('clients_branch_id');
             $table->boolean('remove')->default(0);
             $table->timestamps();
         });

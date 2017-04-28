@@ -179,6 +179,16 @@
     @yield('scripts')
     <script>
 
+        setTimeout(function () {
+            if ($('.alert').length > 0) {
+                $('.alert').remove();
+                $.ajax({
+                    type:'get',
+                    url:'/admin/clean',
+                });
+            }
+        },5000)
+
         //end of purchase order
 
         $('#sandbox-container .input-daterange').datepicker({ format: "dd-mm-yyyy" });

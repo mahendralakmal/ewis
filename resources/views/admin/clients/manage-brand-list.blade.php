@@ -39,6 +39,21 @@
             <h4>Assign Brands</h4>
             <hr>
             <div class="col-md-12">
+
+                @if (session()->has('success_message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success_message') }}
+                    </div>
+                @endif
+
+                @if (session()->has('error_message'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error_message') }}
+                    </div>
+                @endif
+
+
+
                 <form class="form-horizontal" id="asignProduct" role="form" method="POST"
                         action="@if($cp_id==null) /admin/manage-product-list/brand/details/{{ $id->id }}/store @else /admin/manage-product-list/brand/details/update @endif"
                 >
@@ -48,8 +63,7 @@
                         @if($cp_id!=null)
                             <input type="hidden" id="id" name="id" value="{{ $cp_id->id }}">
                         @endif
-                        {{--{{ $id }}--}}
-                        <input type="hidden" id="client_id" name="client_id" value="{{ \App\User::find($id->id)->clientuser->first()->client->id }}">
+                        <input type="hidden" id="clients_branch_id" name="clients_branch_id" value="{{ $id->id }}">
                         <input type="hidden" id="user_id" name="user_id"
                                value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
 
