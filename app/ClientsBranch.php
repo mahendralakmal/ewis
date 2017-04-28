@@ -19,4 +19,8 @@ class ClientsBranch extends Model
     public function cbrands(){
         return $this->hasMany(CBrand::class);
     }
+
+    public function ccategory(){
+        return $this->hasMany(CCategory::class);
+    }
 }

@@ -6,6 +6,7 @@ use App\Brand;
 use App\Category;
 use App\CBrand;
 use App\CCategory;
+use App\ClientsBranch;
 use App\Clientuser;
 use App\User;
 use Illuminate\Http\Request;
@@ -26,16 +27,23 @@ class CategoryController extends Controller
 
     public function store_client_category(Request $request)
     {
-        CCategory::create($request->all());
+        if(CCategory::where([['clients_branch_id', $request->clients_branch_id],['category_id', $request->category_id],['remove','0']])->get()->count()==0) {
+            CCategory::create($request->all());
+            session()->put('success_message','Successfully added..');
+        } else{
+            session()->put('error_message','This category is already exist.');
+        }
         return back();
     }
 
-    public function assign_category_to_client(User $id, Request $request)
+    public function assign_category_to_client(ClientsBranch $id, Request $request)
     {
         $cp_id = '';
         $brands = Brand::all();
-        $cbrands = CBrand::where([['user_id', $request->session()->get('User')], ['client_id', $id->clientuser->first()->client->id]])->get();
-        $ccategories = CCategory::where([['user_id', $request->session()->get('User')], ['client_id', $id->clientuser->first()->client->id]])->get();
+        $cbrands = CBrand::where('clients_branch_id', $id->id)->get();
+
+
+        $ccategories = CCategory::where([['clients_branch_id', $request->session()->get('ClientsBranch')], ['clients_branch_id', $id->id]])->get();
         $categories = Category::orderBy('title')->get();
         return view('/admin/clients/manage-category-list', compact('categories', 'id', 'ccategories', 'cp_id', 'cbrands', 'brands'));
     }

@@ -10,26 +10,87 @@
                     <h3 class="panel-title">Categories</h3>
                 </div>
                 <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <td><h5>Category</h5></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($ccategories as $ccategory)
-                            @if($ccategory->remove == 0)
-                                <tr>
-                                    <td>{{ App\Category::find($ccategory->category_id)->title }}</td>
-                                    <td>
-                                        <a href="/admin/manage-product-list/category/details/remove/{{ $ccategory->id }}"
-                                           class="btn btn-danger btn-outline">Remove</a>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
-                        </tbody>
-                    </table>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            @foreach($cbrands as $cbrand)
+                                <li class="list-group-item">
+                                    <a @if($cbrand->brand->count() >0)href="#{{ $cbrand->id }}"
+                                       @endif class="list-group-item active" data-toggle="collapse">
+                                        <strong>{{ $cbrand->brand->title }}</strong>
+                                        <span class="badge">@if($cbrand->brand->count() >0){{$cbrand->c_category->count()}}@endif</span>
+                                    </a>
+                                    @if($cbrand->brand->count() >0)
+                                        <div id="{{$cbrand->id}}" class="collapse">
+                                            <table class="table">
+                                                <tbody>
+                                                @foreach($cbrand->c_category as $category)
+                                                    <tr>
+                                                        @if($category->remove == 0)
+                                                        <tr>
+                                                        <td>{{ $category->category->title }}</td>
+                                                        <td>
+                                                        <a href="/admin/manage-product-list/category/details/remove/{{ $category->id }}"
+                                                        class="btn btn-danger btn-outline">Remove</a>
+                                                        </td>
+                                                        </tr>
+                                                        @endif
+                                                        <tr>
+                                                        <td>
+                                                            {{--<a @if($cbranch->activation != 1) href="/admin/manage-clients/client_user/{{ $cbranch->id }}/activate"--}}
+                                                            {{--@else href="/admin/manage-clients/client_user/{{ $cbranch->id }}/deactivate"--}}
+                                                            {{--@endif class="btn @if($cbranch->activation != 1) btn-success @else btn-danger @endif btn-outline">@if($cbranch->activation != 1)--}}
+                                                            {{--Activate @else Deactivate @endif</a>--}}
+                                                            {{--<a href="#" class="btn btn-success btn-outline">Activate Users</a>--}}
+                                                            {{--<a href="/admin/manage-clients/client_user/{{ $cbranch->id }}"--}}
+                                                            {{--class="btn btn-primary btn-outline">Update--}}
+                                                            {{--Profile</a>--}}
+                                                            {{--<a href="/admin/manage-clients/agent-assign/{{ $category->id }}"--}}
+{{--                                                               class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign--}}
+                                                                {{--Account Manager</a>--}}
+                                                            {{--<a href="/admin/manage-product-list/{{ $cbranch->id }}/brands"--}}
+                                                               {{--class="btn btn-primary btn-outline">Add--}}
+                                                                {{--Brands</a>--}}
+                                                            {{--<a href="/admin/manage-product-list/{{ $cbranch->id }}/categories"--}}
+                                                               {{--class="btn btn-primary btn-outline">Add--}}
+                                                                {{--Categories</a>--}}
+                                                            {{--<a href="/admin/manage-product-list/{{ $cbranch->id }}"--}}
+                                                               {{--class="btn btn-primary btn-outline">Add--}}
+                                                                {{--Products</a>--}}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @endif
+                                </li>
+                            @endforeach
+                        </ul>
+                    {{--<table class="table">--}}
+                        {{--<thead>--}}
+
+                        {{--</thead>--}}
+                        {{--<tbody>--}}
+                        {{--@foreach($cbrands as $cbrand)--}}
+                        {{--{{$cbrand->brand->title}}--}}
+                        {{--<br>--}}
+                            {{--@foreach($cbrand->c_category as $category)--}}
+                                {{--{{$category->category->title}}--}}
+
+                        {{--@if($category->remove == 0)--}}
+                        {{--<tr>--}}
+                        {{--<td>{{ $category->category->title }}</td>--}}
+                        {{--<td>--}}
+                        {{--<a href="/admin/manage-product-list/category/details/remove/{{ $category->id }}"--}}
+                        {{--class="btn btn-danger btn-outline">Remove</a>--}}
+                        {{--</td>--}}
+                        {{--</tr>--}}
+                        {{--@endif--}}
+                            {{--@endforeach--}}
+                        {{--@endforeach--}}
+                        {{--</tbody>--}}
+                    {{--</table>--}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,8 +108,7 @@
                             <input type="hidden" id="id" name="id" value="{{ $cp_id->id }}">
                         @endif
                         {{--{{ $id }}--}}
-                        <input type="hidden" id="client_id" name="client_id"
-                               value="{{ \App\User::find($id->id)->clientuser->first()->client->id }}">
+                        <input type="hidden" id="clients_branch_id" name="clients_branch_id" value="{{ $id->id }}">
                         <input type="hidden" id="user_id" name="user_id"
                                value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                         <div class="form-group">

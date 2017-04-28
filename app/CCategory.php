@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class CCategory extends Model
 {
-    protected $fillable = ['user_id', 'category_id', 'c_brand_id', 'client_id', 'remove'];
+    protected $fillable = ['user_id', 'category_id', 'c_brand_id', 'clients_branch_id', 'remove'];
 
     public function client()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(ClientsBranch::class);
     }
 
     public function category()
