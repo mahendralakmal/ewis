@@ -29,8 +29,6 @@ class BrandsController extends Controller
 
     public function store_client_brands(Request $request)
     {
-        session()->forget('success_message');
-        session()->forget('error_message');
         if(CBrand::where([['clients_branch_id', $request->clients_branch_id],['brand_id', $request->brand_id],['remove','0']])->get()->count()==0) {
             CBrand::create($request->all());
             session()->put('success_message','Successfully added..');
@@ -42,9 +40,6 @@ class BrandsController extends Controller
 
     public function assign_brands_to_client(ClientsBranch $id, Request $request)
     {
-        //clear the sessions here
-//        Session::flush('success_message');
-//        Session::flush('error_message');
         $cp_id = '';
         $cbrands = CBrand::where('clients_branch_id', $id->id)->get();
         $brands = Brand::orderBy('title')->get();
