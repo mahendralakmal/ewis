@@ -318,28 +318,28 @@
             );
         });
 
-        $("#c_brand_id").on('change', function () {
-            $.ajax(
-                    {
-                        type: 'get',
-                        url: '/admin/manage-product-list/ccategory/' + this.value,
-                        success: function (response) {
-                            var model = $('#c_category_id');
-                            model.empty();
-                            model.append("<option selected>Select Category</option>")
-                            $.each(response, function (index, elem) {
-                                $.ajax({
-                                    type: 'get',
-                                    url: '/admin/manage-product-list/ccategory/category/' + elem.id,
-                                    success: function (res) {
-                                        model.append("<option value='" + elem.id + "'>" + res + "</option>")
-                                    }
-                                });
-                            });
-                        }
-                    }
-            );
-        });
+//        $("#c_brand_id").on('change', function () {
+//            $.ajax(
+//                    {
+//                        type: 'get',
+//                        url: '/admin/manage-product-list/ccategory/' + this.value,
+//                        success: function (response) {
+//                            var model = $('#c_category_id');
+//                            model.empty();
+//                            model.append("<option selected>Select Category</option>")
+//                            $.each(response, function (index, elem) {
+//                                $.ajax({
+//                                    type: 'get',
+//                                    url: '/admin/manage-product-list/ccategory/category/' + elem.id,
+//                                    success: function (res) {
+//                                        model.append("<option value='" + elem.id + "'>" + res + "</option>")
+//                                    }
+//                                });
+//                            });
+//                        }
+//                    }
+//            );
+//        });
 
         $("#brand_id").on('change', function () {
             $.ajax(

@@ -38,14 +38,17 @@ class CategoryController extends Controller
 
     public function assign_category_to_client(ClientsBranch $id, Request $request)
     {
+//        return $id;
         $cp_id = '';
-        $brands = Brand::all();
-        $cbrands = CBrand::where('clients_branch_id', $id->id)->get();
+        return view('/admin/clients/manage-category-list', compact('id','cp_id'));
+
+//        $brands = Brand::all();
+//        $cbrands = CBrand::where('clients_branch_id', $id->id)->get();
 
 
-        $ccategories = CCategory::where([['clients_branch_id', $request->session()->get('ClientsBranch')], ['clients_branch_id', $id->id]])->get();
-        $categories = Category::orderBy('title')->get();
-        return view('/admin/clients/manage-category-list', compact('categories', 'id', 'ccategories', 'cp_id', 'cbrands', 'brands'));
+//        $ccategories = CCategory::where([['clients_branch_id', $request->session()->get('ClientsBranch')], ['clients_branch_id', $id->id]])->get();
+//        $categories = Category::orderBy('title')->get();
+//        return view('/admin/clients/manage-category-list', compact('categories', 'id', 'ccategories', 'cp_id', 'cbrands', 'brands'));
     }
 
     public function delete(Category $id)

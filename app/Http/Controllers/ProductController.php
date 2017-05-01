@@ -9,6 +9,7 @@ use App\CCategory;
 use App\Client;
 use App\CBrand;
 use App\Client_Product;
+use App\ClientsBranch;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
@@ -69,12 +70,12 @@ class ProductController extends Controller
     }
 
     public function load_ccategory_details(CCategory $id){
-        $category = $id->category->title;
+        $category = $id->category;
         return Response::json($category);
     }
 
-    public function load_ccategories(CBrand $id){
-        $ccategoris = $id->c_category;
+    public function load_ccategories(CBrand $brand, ClientsBranch $branch){
+        $ccategoris = $branch->cbrands->find($brand->id)->brand->category;
         return Response::json($ccategoris);
     }
 
