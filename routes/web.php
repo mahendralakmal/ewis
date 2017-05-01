@@ -128,6 +128,9 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/agent-assign/{id}', 'AgentController@index');
         Route::get('/assign/{branch}/{agent}', 'AgentController@assign');
         Route::get('/remove/{branch}/{agent}', 'AgentController@remove');
+
+        Route::get('/create-branch', 'ClientsBranchController@create');
+        Route::post('/create-branch', 'ClientsBranchController@store');
     });
 
     Route::group(['prefix' => '/reports'], function () {
@@ -146,7 +149,7 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/{id}', 'ProductController@assign_products_to_client');
         Route::get('/ccategory/category/{id}', 'ProductController@load_ccategory_details');
         Route::get('/ccategory/{brand}/{branch}', 'ProductController@load_ccategories');
-//        Route::get('/category/{id}', 'ProductController@load_categories');
+        Route::get('/category/{id}', 'ProductController@load_categories');
         Route::get('/cproduct/product/{id}', 'ProductController@load_cproducts_details');
 
         Route::get('/cproduct/{id}', 'ProductController@load_cproducts');

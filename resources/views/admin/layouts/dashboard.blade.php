@@ -76,15 +76,21 @@
                                     <a href="#">Manage Clients<span
                                                 class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
-                                        @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->add_user))
+                                        @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_users))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/manage-clients/create-clientuser') }}">Add New User</a>
+                                                <a href="{{ url ('/admin/manage-clients/create-clientuser') }}">Add New
+                                                    User</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_prof))
                                             <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Client
                                                     Profile</a>
+                                            </li>
+                                        @endif
+                                        @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_branch))
+                                            <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                                <a href="{{ url ('/admin/manage-clients/create-branch' ) }}">Add New Branch</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_users))
@@ -139,7 +145,8 @@
                                         @endif
                                         @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->view_reports))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/reports/client-wise-price-list' ) }}">Price List By Customer</a>
+                                                <a href="{{ url ('/admin/reports/client-wise-price-list' ) }}">Price
+                                                    List By Customer</a>
                                             </li>
                                         @endif
                                     </ul>
@@ -183,15 +190,15 @@
             if ($('.alert').length > 0) {
                 $('.alert').toggle(1000);
                 $.ajax({
-                    type:'get',
-                    url:'/admin/clean',
+                    type: 'get',
+                    url: '/admin/clean',
                 });
             }
-        },5000)
+        }, 5000)
 
         //end of purchase order
 
-        $('#sandbox-container .input-daterange').datepicker({ format: "dd-mm-yyyy" });
+        $('#sandbox-container .input-daterange').datepicker({format: "dd-mm-yyyy"});
 
 
         $('#title').on('change', function () {
@@ -285,7 +292,6 @@
         });
 
 
-
         $("#category_id").on('change', function () {
             $.ajax(
                     {
@@ -302,7 +308,6 @@
                     }
             );
         });
-
 
 
         $("#brand_id").on('change', function () {
@@ -421,7 +426,8 @@
         });
     </script>
 
-    <script src="http://demo.startlaravel.com/sb-admin-laravel/assets/scripts/frontend.js" type="text/javascript"></script>
+    <script src="http://demo.startlaravel.com/sb-admin-laravel/assets/scripts/frontend.js"
+            type="text/javascript"></script>
 
     <script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
 @stop
