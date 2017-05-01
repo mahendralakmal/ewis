@@ -1,5 +1,7 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Assign Brands to Clients')
+@section('page_heading')
+    Assign Brands to <strong>{{ $id->client->name }}</strong>
+@stop
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)

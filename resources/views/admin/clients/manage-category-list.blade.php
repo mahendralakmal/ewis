@@ -1,5 +1,7 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Assign Categories to Clients')
+@section('page_heading')
+    Assign Categories to <strong>{{ $id->client->name }}</strong>
+@stop
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -11,7 +13,6 @@
                 </div>
                 <div class="panel-body">
                     <div class="panel-body">
-                        <input type="hidden" id="branch_id" value="{{$id->id}}">
                         <ul class="list-group">
                             @foreach($id->cbrands as $cbrand)
                                 {{--{{ $cbrand->brand->title }} | {{ $cbrand->brand->count() }}--}}
@@ -118,7 +119,7 @@
             $.ajax(
                     {
                         type: 'get',
-                        url: '/admin/manage-product-list/ccategory/' + this.value + '/' + $('#branch_id').val(),
+                        url: '/admin/manage-product-list/ccategory/' + this.value + '/' + $('#clients_branch_id').val(),
                         success: function (response) {
                             var model = $('#c_category_id');
                             model.empty();

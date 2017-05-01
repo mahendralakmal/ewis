@@ -17,82 +17,103 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+
 //use Session;
 
 class ProductController extends Controller
 {
-    public function get_products(Product $id){
-        return $id->name." | ".$id->part_no;
+    public function get_products(Product $id)
+    {
+        return $id->name . " | " . $id->part_no;
     }
 
-    public function remove_client_products(Client_Product $id){
-        $id->update(['remove'=>1]);
+    public function remove_client_products(Client_Product $id)
+    {
+        $id->update(['remove' => 1]);
         return back();
     }
-    public function update_client_products(Request $request){
+
+    public function update_client_products(Request $request)
+    {
         $cprod = Client_Product::find($request->id);
 
         $cprod->update([
-            'brand_id'=>$request->brand_id,
-            'category_id'=>$request->category_id,
-            'product_id'=>$request->product_id,
-            'special_price'=>$request->special_price
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
+            'product_id' => $request->product_id,
+            'special_price' => $request->special_price
         ]);
         return back();
     }
 
-    public function edit_client_products(Client_Product $id, Request $request){
+    public function edit_client_products(Client_Product $id, Request $request)
+    {
         $cp_id = $id;
         $cp_products = Product::all();
         $categories = Category::all();
-        $products = Client_Product::where([['user_id',$request->session()->get('User')],['client_id', $id->client_id]])->get();
+        $products = Client_Product::where([['user_id', $request->session()->get('User')], ['client_id', $id->client_id]])->get();
         $brands = Brand::orderBy('title')->get();
-        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products', 'cp_id', 'categories','cp_products'));
+        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products', 'cp_id', 'categories', 'cp_products'));
     }
 
-    public function store_client_products(Request $request){
+    public function store_client_products(Request $request)
+    {
         Client_Product::create($request->all());
         return back();
     }
 
-    public function load_products_deta(Product $id){
+    public function load_products_deta(Product $id)
+    {
         return Response::json($id);
     }
 
-    public function load_cproducts(CCategory $id){
+    public function load_cproducts(CCategory $id)
+    {
         $products = $id->category->product;
         return Response::json($products);
     }
 
-    public function load_products(Category $id){
+    public function load_products(Category $id)
+    {
         $products = $id->product;
         return Response::json($products);
     }
 
-    public function load_ccategory_details(CCategory $id){
+    public function load_cproducts_ccategorie(CBrand $brand, ClientsBranch $branch)
+    {
+        $ccategoris = $branch->cbrands->find($brand->id)->c_category;
+        return Response::json($ccategoris);
+    }
+
+    public function load_ccategory_details(CCategory $id)
+    {
         $category = $id->category;
         return Response::json($category);
     }
 
-    public function load_ccategories(CBrand $brand, ClientsBranch $branch){
+    public function load_ccategories(CBrand $brand, ClientsBranch $branch)
+    {
         $ccategoris = $branch->cbrands->find($brand->id)->brand->category;
         return Response::json($ccategoris);
     }
 
-    public function load_categories(Brand $id){
+    public function load_categories(Brand $id)
+    {
         $categoris = $id->category;
         return Response::json($categoris);
     }
 
-    public function assign_products_to_client(User $id, Request $request)
+    public function assign_products_to_client(ClientsBranch $id)
     {
         $cp_id = '';
-        $cp_products = Client_Product::where('client_id', $id->clientuser[0]['client_id'])->get();
-        $categories = CCategory::where('user_id', $id->clientuser[0]['client_id'])->get();
-        $products = Product::orderBy('part_no')->get();
-        $brands = Brand::orderBy('title')->get();
-        $cbrands = CBrand::where([['user_id',$request->session()->get('User')],['client_id', $id->clientuser->first()->client->id]])->get();
-        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products','cp_id', 'categories','cp_products','cbrands'));
+        return view('/admin/clients/manage-product-list', compact('id', 'cp_id'));
+
+//        $cp_products = Client_Product::where('client_id', $id->clientuser[0]['client_id'])->get();
+//        $categories = CCategory::where('user_id', $id->clientuser[0]['client_id'])->get();
+//        $products = Product::orderBy('part_no')->get();
+//        $brands = Brand::orderBy('title')->get();
+//        $cbrands = CBrand::where([['user_id',$request->session()->get('User')],['client_id', $id->clientuser->first()->client->id]])->get();
+//        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products','cp_id', 'categories','cp_products','cbrands'));
     }
 
     public function delete(Product $id)
@@ -108,8 +129,8 @@ class ProductController extends Controller
         ]);
         $product = Product::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
-        $product->update(['part_no' => $request->part_no, 'name' => $request->name,'category_id' => $request->category_id, 'description' => $request->description,
-            'image' => $image, 'user_id' => $request->user_id, 'default_price'=> $request->default_price]);
+        $product->update(['part_no' => $request->part_no, 'name' => $request->name, 'category_id' => $request->category_id, 'description' => $request->description,
+            'image' => $image, 'user_id' => $request->user_id, 'default_price' => $request->default_price]);
 
         Session::flash('success', 'Product successfully updated...!');
         return redirect('/admin/products');
@@ -150,7 +171,7 @@ class ProductController extends Controller
         $product->user_id = $request->user_id;
         $product->status = 1;
         $product->default_price = $request->default_price;
-        $product->vat_apply = ($request->vat_apply == 'on')? true:false;
+        $product->vat_apply = ($request->vat_apply == 'on') ? true : false;
         $product->vat = $request->vat;
         $product->save();
 

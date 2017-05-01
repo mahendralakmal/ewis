@@ -284,22 +284,22 @@
             );
         });
 
-        $("#c_category_id").on('change', function () {
-            $.ajax(
-                    {
-                        type: 'get',
-                        url: '/admin/manage-product-list/cproduct/' + this.value,
-                        success: function (response) {
-                            var model = $('#product_id');
-                            model.empty();
-                            model.append("<option selected>Select Part No</option>")
-                            $.each(response, function (index, elem) {
-                                model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>");
-                            });
-                        }
-                    }
-            );
-        });
+//        $("#c_category_id").on('change', function () {
+//            $.ajax(
+//                    {
+//                        type: 'get',
+//                        url: '/admin/manage-product-list/cproduct/' + this.value,
+//                        success: function (response) {
+//                            var model = $('#product_id');
+//                            model.empty();
+//                            model.append("<option selected>Select Part No</option>")
+//                            $.each(response, function (index, elem) {
+//                                model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>");
+//                            });
+//                        }
+//                    }
+//            );
+//        });
 
         $("#category_id").on('change', function () {
             $.ajax(

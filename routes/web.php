@@ -148,7 +148,11 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/ccategory/{brand}/{branch}', 'ProductController@load_ccategories');
 //        Route::get('/category/{id}', 'ProductController@load_categories');
         Route::get('/cproduct/product/{id}', 'ProductController@load_cproducts_details');
+
         Route::get('/cproduct/{id}', 'ProductController@load_cproducts');
+
+        Route::get('/cproduct/{brand}/{branch}', 'ProductController@load_cproducts_ccategorie');
+
         Route::get('/product/{id}', 'ProductController@load_products');
         Route::get('/product/details/{id}', 'ProductController@load_products_deta');
         Route::post('/product/details/{id}/store', 'ProductController@store_client_products');

@@ -1,5 +1,7 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Assign Products to Clients')
+@section('page_heading')
+    Assign Products to <strong>{{ $id->client->name }}</strong>
+@stop
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -11,55 +13,52 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        @foreach($cbrands as $c_brand)
-                            @if($c_brand->remove !=1)
-                                <li class="list-group-item">
-                                    <a href="#{{ $c_brand->id }}" class="list-group-item active"
-                                       data-toggle="collapse"><strong>{{ $c_brand->brand->title }}</strong>
-                                        <span class="badge">{{$c_brand->c_category->count()}}</span>
-                                    </a>
-                                    <div id="{{$c_brand->id}}" class="collapse">
-                                        @foreach($c_brand->c_category as $cate)
-                                            <a href="#c{{ $cate->id }}" class="list-group-sub-item active"
-                                               data-toggle="collapse"><strong>{{ $cate->category->title }}</strong>
-                                                <span class="badge">{{$cate->cproduct->count()}}</span>
-                                            </a>
-                                            <div id="c{{$cate->id}}" class="collapse">
-                                                {{--{{$cate->cproduct->first()}}--}}
-                                                <table class="table">
-                                                    <thead>
-                                                    <tr>
-                                                        <td><h5>Part No</h5></td>
-                                                        <td><h5>Name</h5></td>
-                                                        {{--<td><h5>Description</h5></td>--}}
-                                                        <td><h5>price</h5></td>
-                                                        <td class="col-md-3"></td>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    @foreach($cate->cproduct as $prod)
-                                                        @if(!$prod->remove)
-                                                            <tr>
-                                                                <td>{{$prod->product->part_no}}</td>
-                                                                <td>{{$prod->product->name}}</td>
-{{--                                                                <td>{{$prod->product->description}}</td>--}}
-                                                                <td class="text-right">{{$prod->special_price}}</td>
-                                                                <td>
-                                                                    <a href="/admin/products/{{$prod->id}}"
-                                                                       class="btn btn-primary btn-outline">Edit</a>
-                                                                    <a href="/admin/products/{{$prod->id}}/remove"
-                                                                       class="btn btn-danger btn-outline">Delete</a>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </li>
-                            @endif
+                        @foreach($id->cbrands as $cbrand)
+                            <li class="list-group-item">
+                                <a href="#{{ $cbrand->id }}" class="list-group-item active"
+                                   data-toggle="collapse"><strong>{{ $cbrand->brand->title }}</strong>
+                                    <span class="badge">{{$cbrand->c_category->count()}}</span>
+                                </a>
+                                <div id="{{ $cbrand->id }}" class="collapse">
+                                    @foreach($cbrand->c_category as $ccategory)
+                                        <a href="#c{{ $ccategory->id }}" class="list-group-sub-item active"
+                                           data-toggle="collapse"><strong>{{ $ccategory->category->title }}</strong>
+                                            <span class="badge">{{$ccategory->cproduct->count()}}</span>
+                                        </a>
+                                        <div id="c{{$ccategory->id}}" class="collapse">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <td><h5>Part No</h5></td>
+                                                    <td><h5>Name</h5></td>
+                                                    <td><h5>Description</h5></td>
+                                                    <td><h5>price</h5></td>
+                                                    <td class="col-md-3"></td>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach($ccategory->cproduct as $product)
+                                                    @if(!$product->product->remove)
+                                                        <tr>
+                                                            <td>{{$product->product->part_no}}</td>
+                                                            <td>{{$product->product->name}}</td>
+                                                            <td>{{$product->product->description}}</td>
+                                                            <td class="text-right">{{$product->special_price}}</td>
+                                                            <td>
+                                                                <a href="/admin/products/{{$product->id}}"
+                                                                   class="btn btn-primary btn-outline">Edit</a>
+                                                                <a href="/admin/products/{{$product->id}}/remove"
+                                                                   class="btn btn-danger btn-outline">Delete</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </li>
                         @endforeach
                     </ul>
                 </div>
@@ -69,55 +68,53 @@
             <h4>Assign Products</h4>
             <hr>
             <div class="col-md-12">
+
+                @if (session()->has('success_message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('success_message') }}
+                    </div>
+                @endif
+
+                @if (session()->has('error_message'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('error_message') }}
+                    </div>
+                @endif
+
                 <form class="form-horizontal" id="asignProduct" role="form" method="POST"
                       action="@if($cp_id==null) /admin/manage-product-list/product/details/{{ $id->id }}/store @else /admin/manage-product-list/product/details/update @endif"
                 >
                     {{ csrf_field() }}
-                    <div class="form-group row">
+                    @if($cp_id!=null)
+                        <input type="hidden" id="id" name="id" value="{{ $cp_id->id }}">
+                    @endif
 
-                        @if($cp_id!=null)
-                            <input type="hidden" id="id" name="id" value="{{ $cp_id->id }}">
-                        @endif
-                        <input type="hidden" id="client_id" name="client_id"
-                               value="{{ \App\User::find($id->id)->clientuser->first()->client->id }}">
-                        <input type="hidden" id="user_id" name="user_id"
-                               value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
 
+                    <input type="hidden" id="clients_branch_id" name="clients_branch_id" value="{{ $id->id }}">
+                    <input type="hidden" id="user_id" name="user_id"
+                           value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
+                    <div class="form-group">
                         <div class="col-md-4"><label>Brand</label></div>
                         <div class="col-md-8">
+
+
                             <select name="brand_id" id="c_brand_id" class="form-control">
                                 <option>Select Brand</option>
-                                {{--@foreach($brands as $brand)--}}
-                                @foreach($cbrands as $cbrand)
+                                @foreach($id->cbrands as $cbrand)
                                     @if($cbrand->remove !=1)
-                                        {{--@if($brand->id == $cbrand->brand_id)--}}
                                         <option value="{{$cbrand->id}}"
-                                                @if($cp_id!=null && $cbrand->id == \App\Product::find($cp_id->product_id)->category->brand->id) selected @endif
                                         >{{$cbrand->brand->title}}</option>
-                                        {{--@endif--}}
                                     @endif
                                 @endforeach
-                                {{--@endforeach--}}
                             </select>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group">
                         <div class="col-md-4"><label>Category</label></div>
                         <div class="col-md-8">
-                            @if($cp_id == null)
-                                <select name="c_category_id" id="c_category_id" class="form-control">
-                                    <option>Select Category</option>
-                                </select>
-                            @else
-                                <select name="c_category_id" id="c_category_id" class="form-control">
-                                    <option>Select Category</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{$category->id}}"
-                                                @if($category->id == \App\Product::find($cp_id->product_id)->category->id) selected @endif
-                                        >{{$category->title}}</option>
-                                    @endforeach
-                                </select>
-                            @endif
+                            <select name="c_category_id" id="c_category_id" class="form-control">
+                                <option>Select Category</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -130,11 +127,6 @@
                             @else
                                 <select name="product_id" id="product_id" class="form-control">
                                     <option>Select Product</option>
-                                    @foreach($cp_products as $product)
-                                        <option value="{{$product->id}}"
-                                                @if($product->id == \App\Product::find($cp_id->product_id)->category->id) selected @endif
-                                        >{{$product->part_no}}</option>
-                                    @endforeach
                                 </select>
                             @endif
 
@@ -177,4 +169,48 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+@section('scripts')
+    <script>
+        $("#c_brand_id").on('change', function () {
+            $.ajax(
+                    {
+                        type: 'get',
+                        url: '/admin/manage-product-list/cproduct/' + this.value + '/' + $('#clients_branch_id').val(),
+                        success: function (response) {
+                            var model = $('#c_category_id');
+                            model.empty();
+                            model.append("<option selected>Select Category</option>")
+                            $.each(response, function (index, elem) {
+//                                model.append("<option value='" + elem.id + "'>" + elem.title + "</option>");
+                                $.ajax({
+                                    type: 'get',
+                                    url: '/admin/manage-product-list/ccategory/category/' + elem.id,
+                                    success: function (res) {
+                                        model.append("<option value='" + elem.id + "'>" + res.title + "</option>")
+                                    }
+                                });
+                            });
+                        }
+                    }
+            );
+        });
+
+        $("#c_category_id").on('change', function () {
+            $.ajax(
+                    {
+                        type: 'get',
+                        url: '/admin/manage-product-list/cproduct/' + this.value,
+                        success: function (response) {
+                            var model = $('#product_id');
+                            model.empty();
+                            model.append("<option selected>Select Part No</option>")
+                            $.each(response, function (index, elem) {
+                                model.append("<option value='" + elem.id + "'>" + elem.part_no + ' | ' + elem.name + "</option>");
+                            });
+                        }
+                    }
+            );
+        });
+    </script>
 @stop
