@@ -181,7 +181,7 @@
 
         setTimeout(function () {
             if ($('.alert').length > 0) {
-                $('.alert').remove();
+                $('.alert').toggle(1000);
                 $.ajax({
                     type:'get',
                     url:'/admin/clean',
@@ -284,22 +284,7 @@
             );
         });
 
-//        $("#c_category_id").on('change', function () {
-//            $.ajax(
-//                    {
-//                        type: 'get',
-//                        url: '/admin/manage-product-list/cproduct/' + this.value,
-//                        success: function (response) {
-//                            var model = $('#product_id');
-//                            model.empty();
-//                            model.append("<option selected>Select Part No</option>")
-//                            $.each(response, function (index, elem) {
-//                                model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>");
-//                            });
-//                        }
-//                    }
-//            );
-//        });
+
 
         $("#category_id").on('change', function () {
             $.ajax(
@@ -318,28 +303,7 @@
             );
         });
 
-//        $("#c_brand_id").on('change', function () {
-//            $.ajax(
-//                    {
-//                        type: 'get',
-//                        url: '/admin/manage-product-list/ccategory/' + this.value,
-//                        success: function (response) {
-//                            var model = $('#c_category_id');
-//                            model.empty();
-//                            model.append("<option selected>Select Category</option>")
-//                            $.each(response, function (index, elem) {
-//                                $.ajax({
-//                                    type: 'get',
-//                                    url: '/admin/manage-product-list/ccategory/category/' + elem.id,
-//                                    success: function (res) {
-//                                        model.append("<option value='" + elem.id + "'>" + res + "</option>")
-//                                    }
-//                                });
-//                            });
-//                        }
-//                    }
-//            );
-//        });
+
 
         $("#brand_id").on('change', function () {
             $.ajax(

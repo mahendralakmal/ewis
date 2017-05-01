@@ -51,14 +51,25 @@ class ProductController extends Controller
         $cp_id = $id;
         $cp_products = Product::all();
         $categories = Category::all();
-        $products = Client_Product::where([['user_id', $request->session()->get('User')], ['client_id', $id->client_id]])->get();
+        $products = Client_Product::where([['user_id', $request->session()->get('User')], ['client_id',
+            $id->client_id]])->get();
         $brands = Brand::orderBy('title')->get();
-        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products', 'cp_id', 'categories', 'cp_products'));
+        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products', 'cp_id',
+            'categories', 'cp_products'));
     }
 
     public function store_client_products(Request $request)
     {
-        Client_Product::create($request->all());
+        if (Client_Product::where([['clients_branch_id', $request->clients_branch_id], ['brand_id', $request->brand_id],
+                ['c_category_id', $request->c_category_id], ['product_id', $request->product_id],
+                ['remove', '0']])->get()->count() == 0
+        ) {
+
+            Client_Product::create($request->all());
+            session()->put('success_message','Successfully added..');
+        } else {
+            session()->put('error_message', 'This Product is already exist.');
+        }
         return back();
     }
 
