@@ -158,8 +158,8 @@ class UserController extends Controller
     {
         $id = "";
         $users = User::all();
-        $designations = Designation::all();
-        return view('/admin/clients/create-clientuser', compact('users', 'designations', 'id'));
+        $designation = Designation::find(2);
+        return view('/admin/clients/create-clientuser', compact('users', 'designation', 'id'));
     }
     public function edit(User $id)
     {

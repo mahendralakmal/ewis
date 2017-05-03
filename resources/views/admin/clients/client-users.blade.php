@@ -22,7 +22,7 @@
                     <div class="col-md-4"><label>Client</label></div>
                     <div class="col-md-8">
                         <select name="client_id" id="client_id" class="form-control">
-                            <option> Select Clinet</option>
+                            <option> Select Client</option>
                             @foreach($clients as $client)
                                 <option value="{{$client->id}}"
                                         @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
@@ -43,10 +43,18 @@
                                                  class="form-control"
                                                  @if(!$id ==null) value="{{ $id->cp_designation }}" @endif></div>
                 </div>
+                {{--<div class="form-group row">--}}
+                    {{--<div class="col-md-4"><label>Branch</label></div>--}}
+                    {{--<div class="col-md-8"><input type="text" id="cp_branch" name="cp_branch" class="form-control"--}}
+                                                 {{--@if(!$id ==null) value="{{ $id->cp_branch }}" @endif></div>--}}
+                {{--</div>--}}
                 <div class="form-group row">
                     <div class="col-md-4"><label>Branch</label></div>
-                    <div class="col-md-8"><input type="text" id="cp_branch" name="cp_branch" class="form-control"
-                                                 @if(!$id ==null) value="{{ $id->cp_branch }}" @endif></div>
+                    <div class="col-md-8">
+                        <select name="branch_id" id="branch_id" class="form-control">
+                            <option>Select Branch</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Telephone</label></div>
@@ -69,4 +77,25 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+@section('scripts')
+    <script>
+        $("#client_id").on('change', function () {
+            $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/manage-clients/client_branch/' + $(this).val(),
+                    success: function (response) {
+                        console.log(response);
+                        var model = $('#branch_id');
+                        model.empty();
+                        model.append("<option selected>Select Branch</option>")
+                        $.each(response, function (index, elem) {
+                            model.append("<option value='" + elem.id + "'>" + elem.name + "</option>")
+                        });
+                    }
+                }
+            );
+        });
+    </script>
 @stop

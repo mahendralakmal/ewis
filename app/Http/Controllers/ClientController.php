@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\ClientsBranch;
 use App\Clientuser;
 use App\Client;
 use App\User;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
+    public function get_client_Branches(Client $client_id){
+        $branches = $client_id->client_branch;
+        return Response::json($branches);
+    }
+
     public function index()
     {
+        $id = "";
         $clients = Client::all();
-        return view('/admin/clients/manage-client', compact('clients'));
+        return view('/admin/clients/manage-client', compact('clients', 'id'));
     }
 
     public function create_profile()
@@ -29,6 +37,7 @@ class ClientController extends Controller
         $clients = Client::orderBy('name')->get();
         return view('/admin/clients/client-profile', compact('id', 'clients'));
     }
+
 
     public function store(Request $request)
     {

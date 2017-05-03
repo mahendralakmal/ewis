@@ -120,7 +120,10 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/po-details/{id}', 'BucketController@getPODetails');
         Route::get('/po-details/change_status/{id}/{status}', 'BucketController@change_status');
 
+        Route::get('/client_branch/{client_id}', 'ClientController@get_client_Branches');
+
         Route::get('/client_user/{user}', 'AgentController@client_user');
+
         Route::get('/client_user/{user}/activate', 'AgentController@client_user_activate');
         Route::get('/client_user/{user}/deactivate', 'AgentController@client_user_deactivate');
         Route::post('/agent-assign/store', 'AgentController@store');

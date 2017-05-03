@@ -19,11 +19,11 @@ class AgentController extends Controller
         $cuser->user_id = $request->user_id;
         $cuser->cp_name = $request->cp_name;
         $cuser->cp_designation = $request->cp_designation;
-        $cuser->cp_branch = $request->cp_branch;
+        $cuser->clients_branch_id = $request->branch_id;
         $cuser->cp_telephone = $request->cp_telephone;
         $cuser->cp_email = $request->cp_email;
         $cuser->save();
-        return redirect('/admin/users/create-users');
+        return redirect('/admin/manage-clients/create-clientuser');
     }
 
     public function update(Request $request)
@@ -36,11 +36,11 @@ class AgentController extends Controller
             'user_id' => $request->user_id,
             'cp_name' => $request->cp_name,
             'cp_designation' => $request->cp_designation,
-            'cp_branch' => $request->cp_branch,
+            'clients_branch_id' => $request->branch_id,
             'cp_telephone' => $request->cp_telephone,
             'cp_email' => $request->cp_email
         ]);
-        return redirect('/admin/users/create-users');
+        return redirect('/admin/manage-clients/create-clientuser');
     }
 
     public function index(ClientsBranch $id)
