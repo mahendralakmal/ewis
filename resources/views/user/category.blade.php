@@ -20,31 +20,19 @@
                             <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                 <div class="thumbnail">
                                     <div class="caption text-center row">
-                                        <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/'.\App\Category::find($category->category_id)->brand->title.'/'.\App\Category::find($category->category_id)->title.'/'.\App\Category::find($category->category_id)->id) }}">
-                                        <img src="{{ asset('/' . \App\Category::find($category->category_id)->image) }}" alt="category" class="img-responsive">
-                                        {{--<a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/'.\App\Category::find($category->category_id)->title.'/'.\App\Category::find($category->category_id)->id) }}">--}}
-                                            {{--<img src="{{ asset('/' . \App\Category::find($category->category_id)->image) }}" alt="brand"--}}
-                                                 {{--class="img-responsive">--}}
+                                        <a href="{{ url('client-profile/'.$category->c_brand->client->client->name.'/'.
+                                        $category->c_brand->brand->title.'/'.
+                                        $category->category->title.'/'.
+                                        $category->category->id) }}">
+                                        <img src="{{ asset('/' . $category->category->image) }}" alt="category" class="img-responsive">
                                             <br>
-                                            <p>{{ \App\Category::find($category->category_id)->description }}</p>
+                                            <p>{{ $category->category->title }}</p>
 
                                         </a>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        {{--@foreach ($categories as $category)--}}
-                            {{--<div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">--}}
-                                {{--<div class="thumbnail">--}}
-                                    {{--<div class="caption text-center row">--}}
-                                        {{--<a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/'.$category->brand->title.'/'.$category->title.'/'.$category->id) }}">--}}
-                                            {{--<img src="{{ asset('/' . $category->image) }}" alt="category" class="img-responsive">--}}
-                                            {{--<p>{{ $category->description }}</p>--}}
-                                        {{--</a>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--@endforeach--}}
                     </div>
                 </div>
             </div>

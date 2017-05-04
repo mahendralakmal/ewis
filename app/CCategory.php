@@ -23,6 +23,11 @@ class CCategory extends Model
         return $this->belongsTo(Brand::class);
     }
 
+    public function c_brand()
+    {
+        return $this->belongsTo(CBrand::class);
+    }
+
     public function cproduct(){
         return $this->hasMany(Client_Product::class);
     }

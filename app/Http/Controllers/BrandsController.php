@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Brand;
 use App\Category;
 use App\CBrand;
+use App\Client;
 use App\Client_Product;
 use App\ClientsBranch;
 use App\Clientuser;
@@ -95,12 +96,16 @@ class BrandsController extends Controller
         return back();
     }
 
-    public function brands()
+    //Following method is use for retreaving clients details
+    public function brands(Client $id)
     {
-        $cuser = Clientuser::where('user_id', Session::get('User'))->first();
-        $brands = CBrand::where([['clients_branch_id', $cuser->client_branch->id], ['remove', 0]])->get();
+        //$cuser = Clientuser::where('user_id', Session::get('User'))->first();
+
+        $cbranch = User::find(Session::get('User'))->c_user->client_branch;
+//        return $user;
+//        $brands = CBrand::where([['clients_branch_id', $cuser->client_branch->id], ['remove', 0]])->get();
 //        dd($brands);
-        return view('user/brands', compact('brands'));
+        return view('user/brands', compact('cbranch'));
     }
 
 

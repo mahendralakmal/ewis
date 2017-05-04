@@ -10,7 +10,7 @@ class CBrand extends Model
 
     public function client()
     {
-        return $this->belongsTo(ClientsBranch::class);
+        return $this->belongsTo(ClientsBranch::class, 'clients_branch_id');
     }
 
     public function brand(){
