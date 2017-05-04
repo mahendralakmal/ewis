@@ -20,7 +20,7 @@
                             <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                 <div class="thumbnail">
                                     <div class="caption text-center row">
-                                        <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/'.\App\Brand::find($brand->brand_id)->title.'/'.\App\Brand::find($brand->brand_id)->id) }}">
+                                        <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->id.'/'.\App\Brand::find($brand->brand_id)->title.'/'.\App\Brand::find($brand->brand_id)->id) }}">
                                             <img src="{{ asset('/' . \App\Brand::find($brand->brand_id)->image) }}" alt="brand"
                                                  class="img-responsive">
                                         </a>

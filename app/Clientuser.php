@@ -15,7 +15,14 @@ class Clientuser extends Model
 
     public function client_branch()
     {
-        return $this->belongsTo(ClientsBranch::class);
+        return $this->belongsTo(ClientsBranch::class, 'clients_branch_id');
     }
+
+//    public function cbranch()
+//    {
+//        return $this->belongsTo(ClientsBranch::class);
+//    }
+
+
 
 }

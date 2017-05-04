@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\ClientsBranch;
 use App\Designation;
 use App\Privilege;
 use App\User;
@@ -41,7 +42,7 @@ class UserController extends Controller
 
     public function UpdatePrivileges(Request $request)
     {
-        $privilege = (User::find($request->user_id))->privilege;
+//        $privilege = (User::find($request->user_id))->privilege;
         $privilege->update([
             'brand' => ($request->brand == "on") ? true : false,
             'category' => ($request->category == "on") ? true : false,
@@ -229,13 +230,13 @@ class UserController extends Controller
 
     public function welcome()
     {
-        if (Session::has('LoggedIn') && Session::get('LoggedIn')) {
-            return redirect('/client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id . '/brands');
+        if (Session::has('LoggedIn') && Session::get('LoggedIn')) { //Check whether if the user already logged in
+            return redirect('/client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id . '/brands');
         } else {
-            if (!(User::all()->count()) == 0) {
+            if (!(User::all()->count()) == 0) { //Check if there is an user then redirected to signin page
                 $error = '';
                 return view('welcome', compact('error'));
-            } else {
+            } else { //if there is not created user redirected to create super user
                 return redirect('/signup');
             }
         }
@@ -251,9 +252,10 @@ class UserController extends Controller
                     Session::put('LoggedIn', true);
                     Session::put('User', $user->id);
                     Session::put('Type', $user->designation->designation);
-                    Session::put('BaseColor', $user->clientuser->first()->client->color);
-                    return redirect('/client-profile/' . $user->clientuser->first()->client->id . '/brands');
-                } else {
+                    Session::put('BaseColor', $user->c_user->client_branch->client->color);
+                    return redirect('/client-profile/' . $user->c_user->client_branch->id . '/brands');
+                }
+                else {
                     Session::put('LoggedIn', true);
                     Session::put('User', $user->id);
                     Session::put('Type', $user->designation->designation);

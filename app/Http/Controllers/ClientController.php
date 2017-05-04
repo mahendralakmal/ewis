@@ -72,11 +72,11 @@ class ClientController extends Controller
     {
 //        return $request->all();
         $users = User::all();
-        $client = Client::find($request->id);
+        $clients = Client::find($request->id);
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
-        $client->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
+        $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
             'logo' => $logo, 'color' => $request->color]);
-        return view('/admin/clients/manage-client', compact('users'));
+        return view('/admin/clients/manage-client', compact('clients', 'users'));
     }
 
     public function show(Clientuser $id)

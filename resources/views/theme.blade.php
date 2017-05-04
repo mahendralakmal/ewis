@@ -4,18 +4,18 @@
     <div class="container-fluid profile-background"
          style="background-color: {{ \Illuminate\Support\Facades\Session::get('BaseColor') }}">
         <div class="container white-background gradiant-background">
-            @if((\Illuminate\Support\Facades\Session::has('User')) && (App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id != null))
+            @if((\Illuminate\Support\Facades\Session::has('User')) && (App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->agent_id != null))
                 <div class=" col-md-12 profile-head">
                     <div class="col-md- col-sm-4 col-xs-12">
-                        <img alt="{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->name }}"
-                             src="{{ elixir(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->logo)}}"
+                        <img alt="{{ App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->name }}"
+                             src="{{ elixir(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->logo)}}"
                              width="209" hight="67" class="img-responsive"/>
                     </div>
 
                     <div class="col-md-6 col-sm-8 col-xs-12 profile-head pull-right">
                         <div class="description">
                             <div class="inner">
-                                <h3><span class="fa fa-user-circle-o"></span>&nbsp;&nbsp;{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->name }}</h3>
+                                <h3><span class="fa fa-user-circle-o"></span>&nbsp;&nbsp;{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->agent_id)->name }}</h3>
                                 <ul>
                                     <li><span class="fa fa-university"></span> EWIS Peripherals (Pvt) Ltd</li>
                                     <li><span class="fa fa-map-marker"></span>&nbsp;&nbsp;&nbsp;No.142, Yathama Building,
@@ -25,7 +25,7 @@
                                     </li>
                                     <li><span class="fa fa-phone-square"></span>&nbsp;&nbsp;<a href="#" title="Phone">+94 11 749 6000</a>
                                     </li>
-                                    <li><span class="fa fa-envelope"></span><a href="#" title="Email">&nbsp;&nbsp;{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->agent_id)->email }}</a>
+                                    <li><span class="fa fa-envelope"></span><a href="#" title="Email">&nbsp;&nbsp;{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->agent_id)->email }}</a>
                                     </li>
 
                                 </ul>

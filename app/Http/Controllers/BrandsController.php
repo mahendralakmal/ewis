@@ -98,7 +98,8 @@ class BrandsController extends Controller
     public function brands()
     {
         $cuser = Clientuser::where('user_id', Session::get('User'))->first();
-        $brands = CBrand::where([['client_id', $cuser->client_id], ['remove', 0]])->get();
+        $brands = CBrand::where([['clients_branch_id', $cuser->client_branch->id], ['remove', 0]])->get();
+//        dd($brands);
         return view('user/brands', compact('brands'));
     }
 

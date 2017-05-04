@@ -16,6 +16,10 @@ class User extends Model
         return $this->belongsTo(Designation::class);
     }
 
+    public function c_user(){
+        return $this->hasOne(Clientuser::class);
+    }
+
 //    public function clientuser(){
 //        return $this->hasMany(Clientuser::class);
 //    }
