@@ -1,8 +1,6 @@
 @extends('theme')
 
 @section('content')
-
-            <!-- Nav tabs -->
             <div class="col-md-12">
                 <ul class="nav nav-tabs nav-menu" role="tablist">
                     <li class="active">
@@ -12,16 +10,11 @@
                     </li>
 
                 </ul>
-
-                <!-- Tab panes -->
                 <div class="tab-content white-background">
                     <div class="tab-pane fade active in" id="agent">
                         <div class="container">
                             <div class="col-sm-11" style="float:left;">
                                 <br clear="all"/>
-                                {{--<img alt="agent" src="https://diasp.eu/assets/user/default.png" width="100"--}}
-                                     {{--class="img-responsive"/><!--hve-pro close-->--}}
-                                <!--col-sm-12 close-->
                                 <br clear="all"/>
                                 <div class="row">
                                     <div class="col-md-8">
@@ -51,7 +44,8 @@
                                                 <label>Branch Name</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" value="{{$id->cp_branch}}" class="form-control" name="cp_branch" id="cp_branch">
+                                                <label>{{$id->client_branch->name}}</label>
+                                                <input type="hidden" id="clients_branch_id" name="clients_branch_id" value="{{$id->client_branch->id}}">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -60,6 +54,7 @@
                                             </div>
                                             <div class="col-md-7">
                                                 <input type="text" class="form-control" value="{{$id->cp_telephone}}" name="cp_telephone" id="cp_telephone" maxlength="12">
+                                                Eg: +94 xxxxxxxx
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -68,12 +63,12 @@
                                             </div>
                                             <div class="col-md-7">
                                                 <input type="text" class="form-control" value="{{$id->cp_email}}" name="cp_email" id="cp_email" maxlength="12">
+                                                Eg: xxxxxxxxx@xxxx.com
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-7">
                                                 <button class="btn btn-primary btn-outline" type="submit" value="save-form">Submit</button>
-                                                <button class="btn btn-primary btn-outline" type="reset" value="clear-form">Clear</button>
                                             </div>
                                         </div>
                                     </form>
