@@ -16,7 +16,7 @@ class CreatePOrdersTable extends Migration
         Schema::create('p__orders', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('client_id');
+            $table->integer('clients_branch_id');
             $table->text('bucket');
             $table->text('del_cp');
             $table->text('del_branch');

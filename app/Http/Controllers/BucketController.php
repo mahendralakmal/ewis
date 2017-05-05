@@ -116,7 +116,8 @@ class BucketController extends Controller
         $order = new P_Order();
 
         $user = User::find(\Illuminate\Support\Facades\Session::get('User'));
-        $order->client_id = $user->c_user->client_branch->client->id;
+//        $order->client_id = $user->c_user->client_branch->client->id;
+        $order->clients_branch_id = $user->c_user->client_branch->id;
         $order->bucket = serialize($bucket);
         $order->del_branch = $request->input('del_branch');
         $order->del_cp = $request->input('del_cp');
@@ -146,7 +147,7 @@ class BucketController extends Controller
 
     public function getHistory()
     {
-        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id)->all();
+        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id)->all();
         $orders->transform(function ($order, $key) {
             $order->bucket = unserialize($order->bucket);
             return $order;

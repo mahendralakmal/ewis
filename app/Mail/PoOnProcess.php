@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Client;
+use App\ClientsBranch;
 use App\P_Order;
 use App\User;
 use Illuminate\Bus\Queueable;
@@ -15,7 +16,7 @@ class PoOnProcess extends Mailable
     use Queueable, SerializesModels;
     public $user;
     public $order;
-    public $client;
+    public $client_branch;
     /**
      * Create a new message instance.
      *
@@ -25,7 +26,7 @@ class PoOnProcess extends Mailable
     {
         $this->user = $user;
         $this->order = $po;
-        $this->client = Client::find($po->client_id);
+        $this->client_branch = ClientsBranch::find($po->clients_branch_id);
     }
 
     /**
