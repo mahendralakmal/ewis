@@ -230,7 +230,7 @@ CREATE TABLE `clients_branches` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `clients_branches`
+-- Dumping data for aactable `clients_branches`
 --
 
 LOCK TABLES `clients_branches` WRITE;

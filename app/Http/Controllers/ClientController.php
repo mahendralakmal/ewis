@@ -41,7 +41,6 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-//        Client::create($request->all());
         $client = new Client();
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
         $client->user_id = $request->user_id;
@@ -58,19 +57,18 @@ class ClientController extends Controller
 
     public function cp_update(Request $request)
     {
-//        return $request->all();
         $client = Clientuser::find($request->client_id);
         $client->update(['cp_name' => $request->cp_name,
-            'cp_designation' => $request->cp_designation, 'cp_branch' => $request->cp_branch,
-            'cp_telephone' => $request->cp_telephone, 'cp_email' => $request->cp_email, 'user_id' => $request->user_id]);
-
-//        return \Illuminate\Support\Facades\Session::get('User');
-        return redirect('/client-profile/' . User::find(Session::get('User'))->clientuser->first()->client->id);
+            'cp_designation' => $request->cp_designation,
+            'clients_branch_id' => $request->clients_branch_id,
+            'cp_telephone' => $request->cp_telephone,
+            'cp_email' => $request->cp_email,
+            'user_id' => $request->user_id]);
+        return redirect('/client-profile/' . ClientsBranch::find($request->clients_branch_id)->id);//User::find(Session::get('User'))->clientuser->first()->client->id);
     }
 
     public function update(Request $request)
     {
-//        return $request->all();
         $users = User::all();
         $clients = Client::find($request->id);
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
@@ -92,7 +90,6 @@ class ClientController extends Controller
     public function approval()
     {
         $users = User::where('designation_id', 4)->get();
-      //  return redirect('/admin/users/create-users');
         return view('admin/clients/approval-client', compact('users'));
     }
 
