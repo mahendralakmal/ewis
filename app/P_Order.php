@@ -15,4 +15,9 @@ class P_Order extends Model
     public function Client() {
         return $this->belongsTo('App\Client');
     }
+
+    public function client_branch()
+    {
+        return $this->belongsTo(ClientsBranch::class, 'clients_branch_id');
+    }
 }

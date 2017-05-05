@@ -46,16 +46,19 @@
 
                                                 @foreach($orders as $porder)
                                                 <tr>
-                                                    <td class="col-md-3">{{$porder->id}}</td>
-                                                    <td class="col-md-3">{{$porder->created_at}}</td>
-                                                    <td class="col-md-3">{{\App\User::find(\App\Client::find($porder->client_id)->agent_id)->name}}</td>
-                                                    <td class="col-md-3">{{$porder->del_branch}}</td>
-                                                    <td class="col-md-3">@if($porder->status === "P") Pending
-                                                        @elseif($porder->status === "PC") Partial Completed
-                                                        @elseif($porder->status === "C") Completed
-                                                        @endif
-                                                    </td>
-                                                    <td class="col-md-3"><a href="{{ url('/client-profile/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>
+                                                    <td>{{ App\Client::find($porder->client_id) }}</td>
+                                                    {{--<td class="col-md-3">{{$porder->id}}</td>--}}
+                                                    {{--<td class="col-md-3">{{$porder->created_at}}</td>--}}
+
+{{--                                                    <td class="col-md-3">{{\App\User::find(\App\Client::find($porder->client_id)->agent_id)->name}}</td>--}}
+
+                                                    {{--<td class="col-md-3">{{$porder->del_branch}}</td>--}}
+                                                    {{--<td class="col-md-3">@if($porder->status === "P") Pending--}}
+                                                        {{--@elseif($porder->status === "PC") Partial Completed--}}
+                                                        {{--@elseif($porder->status === "C") Completed--}}
+                                                        {{--@endif--}}
+                                                    {{--</td>--}}
+                                                    {{--<td class="col-md-3"><a href="{{ url('/client-profile/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>--}}
                                                 </tr>
                                                 {{--<tr>--}}
                                                     {{--<td><h5>{{ $item['item'] ['part_no'] }}</h5></td>--}}

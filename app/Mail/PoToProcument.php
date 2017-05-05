@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Client;
+use App\ClientsBranch;
 use App\P_Order;
 use App\User;
 use Illuminate\Bus\Queueable;
@@ -16,7 +17,7 @@ class PoToProcument extends Mailable
 
     public $user;
     public $order;
-    public $client;
+    public $client_branch;
     public $agent;
 
     /**
@@ -29,7 +30,7 @@ class PoToProcument extends Mailable
         $this->user = $user;
         $this->order = $order;
         $this->agent = $agent;
-        $this->client = Client::find($order->client_id);
+        $this->client_branch = ClientsBranch::find($order->clients_branch_id);
     }
 
     /**

@@ -25,10 +25,10 @@
     <tr>
         <td>
             <strong>Contact Person</strong>
-            <p>{{ $client->name }}</p>
+            <p>{{ $client_branch->name }}</p>
             <strong>Billing Address</strong>
-            <p>{{ $client->address }}</p>
-            <p>tel: {{ $client->telephone }}</p>
+            <p>{{ $client_branch->address }}</p>
+            <p>tel: {{ $client_branch->contact_no }}</p>
             <strong>Special Notes</strong>
             <p>{{ $order->cp_notes }}</p>
         </td>
