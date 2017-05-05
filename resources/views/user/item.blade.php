@@ -18,11 +18,15 @@
                     <div class="col-md-8">
 <br>
                         <br>
-                        <h4>Item No:- {{ $items->part_no }}</h4>
-                        <h4>Item Name:- {{ $items->name }}</h4>
-                        <h4>Item Price:- {{ $items->default_price }}</h4>
+                        <table class="table table-bordered">
+                                <td>Item No </td>
+                                <td>{{ $items->part_no }}</td></tr>
+                            <tr><td>Item Name </td>
+                                <td>{{ $items->name }}</td></tr>
 
-                        {{ $items->description }}
+                            <tr><td>Description</td>
+                                <td>{{ $items->description}}</td></tr>
+                        </table>
                     </div>
                     </div><!-- end col-md-8 -->
                 </div> <!-- end row -->

@@ -22,8 +22,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function get_products(Product $id)
+    public function get_products(Client_Product $id)
     {
+//        return($id);
         return $id->name . " | " . $id->part_no;
     }
 
