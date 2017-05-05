@@ -28,7 +28,7 @@
                         <tr>
                             <td>{{$porder->id}}</td>
                             <td>{{$porder->created_at}}</td>
-                            <td>{{\App\Client::find($porder->client_id)->name}}</td>
+                            <td>{{$porder->client_branch->client->name}}</td>
                             <td>{{$porder->del_branch}}</td>
                             <td>@if($porder->status === "P") Pending
                                 @elseif($porder->status === "PC") Partial Completed

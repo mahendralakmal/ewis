@@ -29,7 +29,7 @@
                             <tr>
                                 <td>{{$porder->id}}</td>
                                 <td>{{$porder->created_at}}</td>
-                                <td>{{\App\Client::find($porder->client_id)->name}}</td>
+                                <td>{{$porder->client_branch->client->name}}</td>
                                 <td>{{$porder->del_branch}}</td>
                                 <td>
                                     <form method="get" id="{{$porder->id}}" action="">
@@ -50,7 +50,6 @@
                                 <td>
                                     <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
                                        class="btn btn-success btn-outline">View Order</a>
-                                    {{--                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id.'/change_status') }}" class="btn btn-success btn-outline">Change Status</a>--}}
                                 </td>
                             </tr>
 
