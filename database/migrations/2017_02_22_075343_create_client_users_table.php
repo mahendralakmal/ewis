@@ -17,9 +17,9 @@ class CreateClientUsersTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
             $table->integer('client_id')->unsigned()->index();
+            $table->integer('clients_branch_id')->unsigned()->index();
             $table->string('cp_name');
             $table->string('cp_designation');
-            $table->string('cp_branch');
             $table->string('cp_telephone');
             $table->string('cp_email');
             $table->integer('created_user')->unsigned()->index();
