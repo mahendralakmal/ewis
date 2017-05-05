@@ -17,7 +17,7 @@
                 <div class="container">
                     <div class="col-md-11 col-sm-11 col-sx-11 col-lg-11">
 
-                        {{--@if($products->count()!= 0)--}}
+                        @if($products->count()!= 0)
                             <table class="table table-bordered">
                                 <tr>
                                     <td> Product Number</td>
@@ -43,9 +43,9 @@
                                             <td><img src="{{ asset('/' . $product->product->image) }}" alt="product"
                                                      class="img-responsive" height="25" width="30"></td>
                                             <td>
-                                                <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->name]) }}">{{ $product->product->name }}</a>
+                                                <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a>
                                             </td>
-                                            <td><p> Rs.{{ $product->product->default_price }}</p></td>
+                                            <td><p> Rs.{{ $product->special_price }}</p></td>
                                             <td><input type="number" value="1" name="Qty" id="Qty"
                                                        class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></td>
                                             <td><input class="btn btn-success btn-sm" type="submit"
@@ -55,16 +55,16 @@
 
                                 @endforeach
                             </table>
-                        {{--@else--}}
-                            {{--<div class="jumbotron text-center clearfix">--}}
-                                {{--<h2>No items found</h2>--}}
-                                {{--<p>--}}
-                                    {{--<a href="{{ URL::previous() }}" class="btn btn-primary btn-lg" target="_blank">Category</a>--}}
+                        @else
+                            <div class="jumbotron text-center clearfix">
+                                <h2>No items found</h2>
+                                <p>
+                                    <a href="{{ URL::previous() }}" class="btn btn-primary btn-lg" target="_blank">Category</a>
                                     {{--<a href="javascript:history.back()" class="btn btn-primary btn-lg" target="_blank">Category</a>--}}
-                                    {{--<a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/brands'):'' }}" class="btn btn-success btn-lg">Brand</a>--}}
-                                {{--</p>--}}
-                            {{--</div> <!-- end jumbotron -->--}}
-                        {{--@endif--}}
+                                    <a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/brands'):'' }}" class="btn btn-success btn-lg">Brand</a>
+                                </p>
+                            </div> <!-- end jumbotron -->
+                        @endif
                     </div>
                 </div>
             </div>
