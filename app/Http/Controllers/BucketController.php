@@ -116,7 +116,7 @@ class BucketController extends Controller
         $order = new P_Order();
 
         $user = User::find(\Illuminate\Support\Facades\Session::get('User'));
-        $order->client_id = $user->clientuser->first()->client->id;
+        $order->client_id = $user->c_user->client_branch->client->id;
         $order->bucket = serialize($bucket);
         $order->del_branch = $request->input('del_branch');
         $order->del_cp = $request->input('del_cp');
@@ -124,7 +124,7 @@ class BucketController extends Controller
         $order->cp_notes = $request->input('cp_notes');
         $order->del_notes = $request->input('del_notes');
         $order->status = "P";
-        $order->agent_id =  $user->clientuser->first()->client->agent_id;
+        $order->agent_id =  $user->c_user->client_branch->agent_id;
 
 
         $order->save();

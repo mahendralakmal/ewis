@@ -19,7 +19,7 @@ Route::group(['prefix' => ' /client-profile'], function () {
 
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::post('/{id}/postCheckout', 'BucketController@postCheckout');
-    Route::get('/{id}/postCheckout', 'BucketController@postCheckout');
+//    Route::get('/{id}/postCheckout', 'BucketController@postCheckout');
     Route::post('/SendMail', 'MailController@SendMail');
 
     Route::get('/{id}/brands', 'BrandsController@brands');

@@ -25,7 +25,7 @@
                             </div>
                                 <ul class="list-group">
 
-                                <form  method="POST" action="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id.'/postCheckout') }}" id="postCheckout" name="postCheckout" enctype="multipart/form-data" class="form-horizontal">
+                                <form  method="POST" action="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/postCheckout') }}" id="postCheckout" name="postCheckout" enctype="multipart/form-data" class="form-horizontal">
                                     {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-md-6">
@@ -36,12 +36,12 @@
 
 
                                                 <div class="form-group">
-                                                    <input type="hidden" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->client->id}}" name="user_id" id="user_id">
+                                                    <input type="hidden" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id}}" name="user_id" id="user_id">
                                                     <div class="col-md-3">
                                                         <label>Contact Person</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input type="text"  value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->cp_name}}" class="form-control" name="cp_name" id="cp_name">
+                                                        <input type="text"  value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_name}}" class="form-control" name="cp_name" id="cp_name">
                                                     </div>
                                                 </div>
 
@@ -50,7 +50,7 @@
                                                         <label>Branch Name</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input type="text" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->cp_branch}}" class="form-control" name="cp_designation" id="cp_designation">
+                                                        <input type="text" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->name}}" class="form-control" name="cp_designation" id="cp_designation">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -58,7 +58,7 @@
                                                         <label>Contact Number</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->cp_telephone}}" name="cp_telephone" id="cp_telephone" maxlength="12">
+                                                        <input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_telephone}}" name="cp_telephone" id="cp_telephone" maxlength="12">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -83,7 +83,7 @@
                                                 <label>Contact Person</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text"  value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->cp_name}}" class="form-control" name="del_cp" id="cp_name">
+                                                <input type="text"  value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_name}}" class="form-control" name="del_cp" id="cp_name">
                                             </div>
                                         </div>
 
@@ -92,7 +92,7 @@
                                                 <label>Branch Name</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->cp_branch}}" class="form-control" name="del_branch" id="del_branch">
+                                                <input type="text" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->name}}" class="form-control" name="del_branch" id="del_branch">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -100,7 +100,7 @@
                                                 <label>Contact Number</label>
                                             </div>
                                             <div class="col-md-7">
-                                                <input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->clientuser->first()->cp_telephone}}" name="del_tp" id="del_telephone" maxlength="12">
+                                                <input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_telephone}}" name="del_tp" id="del_telephone" maxlength="12">
                                             </div>
                                         </div>
                                         <div class="form-group">
