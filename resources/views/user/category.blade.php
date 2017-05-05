@@ -19,15 +19,14 @@
                         @foreach ($categories as $category)
                             <div class="col-md-2 col-xs-12 col-sm-3 col-lg-2">
                                 <div class="thumbnail">
-                                    <div class="caption text-center row">
+                                    <div class="caption text-center row"> <!-- $category->c_brand->client->name.'/'. -->
                                         <a href="{{ url('client-profile/'.$category->c_brand->client->client->name.'/'.
+                                        $category->c_brand->client->name.'/'.
                                         $category->c_brand->brand->title.'/'.
-                                        $category->category->title.'/'.
-                                        $category->category->id) }}">
+                                        $category->id) }}">
                                         <img src="{{ asset('/' . $category->category->image) }}" alt="category" class="img-responsive">
                                             <br>
                                             <p>{{ $category->category->title }}</p>
-
                                         </a>
                                     </div>
                                 </div>

@@ -17,7 +17,7 @@ class Client_Product extends Model
     }
 
     public function ccategory(){
-        return $this->belongsTo(CCategory::class);
+        return $this->belongsTo(CCategory::class, 'c_category_id');
     }
 
     public function cbrand(){

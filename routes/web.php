@@ -23,8 +23,8 @@ Route::group(['prefix' => ' /client-profile'], function () {
     Route::post('/SendMail', 'MailController@SendMail');
 
     Route::get('/{id}/brands', 'BrandsController@brands');
+    Route::get('/{id}/{branch}/{brand}/{category}', 'ProductController@products');
     Route::get('/{id}/{brand}/{brand_id}', 'CategoryController@category');
-    Route::get('/{id}/{brand}/{category}/{category_id}', 'ProductController@products');
 
     Route::get('/{id}/checkout', 'BucketController@Checkout');
     Route::get('/{id}/{part_no}', 'ProductController@index');

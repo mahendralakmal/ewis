@@ -197,9 +197,10 @@ class ProductController extends Controller
         return view('user/item', compact('items'));
     }
 
-    public function products($id, $brand, $category, Category $category_id)
+    public function products($id, $branch, $brand, CCategory $category )
     {
-        $products = $category_id->product;
+//        return $category;
+        $products = $category->cproduct;
         return view('user/product', compact('products'));
     }
 
