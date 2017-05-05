@@ -38,14 +38,14 @@
                                             <td>
                                                 <input type="hidden" id="part_no" name="part_no"
                                                        value="{{ $product->product->part_no }}">
-                                                <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->part_no]) }}"> {{$product->part_no}}</a>
+                                                <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a>
                                             </td>
-                                            <td><img src="{{ asset('/' . $product->image) }}" alt="product"
+                                            <td><img src="{{ asset('/' . $product->product->image) }}" alt="product"
                                                      class="img-responsive" height="25" width="30"></td>
                                             <td>
-                                                <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->name]) }}">{{ $product->name }}</a>
+                                                <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->name]) }}">{{ $product->product->name }}</a>
                                             </td>
-                                            <td><p> Rs.{{ $product->default_price }}</p></td>
+                                            <td><p> Rs.{{ $product->product->default_price }}</p></td>
                                             <td><input type="number" value="1" name="Qty" id="Qty"
                                                        class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></td>
                                             <td><input class="btn btn-success btn-sm" type="submit"
