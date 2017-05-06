@@ -19,7 +19,6 @@ Route::group(['prefix' => ' /client-profile'], function () {
 
     Route::get('/{id}/edit', 'ClientController@editClientProfile');
     Route::post('/{id}/postCheckout', 'BucketController@postCheckout');
-//    Route::get('/{id}/postCheckout', 'BucketController@postCheckout');
     Route::post('/SendMail', 'MailController@SendMail');
 
     Route::get('/{id}/brands', 'BrandsController@brands');
@@ -137,8 +136,10 @@ Route::group(['prefix' => ' /admin'], function () {
     });
 
     Route::group(['prefix' => '/reports'], function () {
+
         Route::get('/completed-purchase-orders','BucketController@CompletedPurchaseOrder');
-        Route::get('/completed-purchase-orders/{client}/{status}/{start}/{end}','BucketController@getPurchaseOrdersByClient');
+//        Route::get('/completed-purchase-orders/{client}/{status}/{start}/{end}','BucketController@getPurchaseOrdersByClient');
+        Route::post('/completed-purchase-orders','BucketController@getPurchaseOrdersByClient');
 
         Route::get('/client-wise-price-list','BucketController@getPriceList');
         Route::get('/client-wise-price-list/{client}/{start}/{end}','BucketController@getPriceListByClient');

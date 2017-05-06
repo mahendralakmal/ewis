@@ -23,4 +23,8 @@ class ClientsBranch extends Model
     public function ccategory(){
         return $this->hasMany(CCategory::class);
     }
+
+    public function p_orders(){
+        return $this->hasMany(P_Order::class);
+    }
 }

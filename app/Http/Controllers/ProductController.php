@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
-use App\Bucket;
 use App\Category;
 use App\CCategory;
-use App\Client;
 use App\CBrand;
 use App\Client_Product;
 use App\ClientsBranch;
 use App\Product;
-use App\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Response;
