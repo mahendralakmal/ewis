@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Client Activation')
+@section('page_heading','Client Manager')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && strtolower((\Illuminate\Support\Facades\Session::get('Type')) !== 'client')

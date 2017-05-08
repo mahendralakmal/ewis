@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Client POs</h3>
+                    <h3 class="panel-title">Total Sales</h3>
                 </div>
                 <div class="panel-body">
 
@@ -26,11 +26,25 @@
                             </div>
                         </div>
 
-                        <div class="col-md-3 col-sm-4 col-lg-3" id="sandbox-container">
-                            <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" class="form-control" name="start" id="start"/>
-                                <span class="input-group-addon">to</span>
-                                <input type="text" class="form-control" name="end" id="end"/>
+                        <div class="col-md-2 col-sm-3 col-lg-2">
+                            <div class="form-group">
+                                <select class="form-control" name="branch" id="branch" data-parsley-required="true">
+                                    <option value="n">Select Branch</option>
+                                    {{--@foreach ($client as $client)--}}
+                                        {{--<option value="{{ $client->id }}">{{ $client->name }}</option>--}}
+                                    {{--@endforeach--}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-3 col-lg-2">
+                            <div class="form-group">
+                                <select class="form-control" name="brand" id="brand" data-parsley-required="true">
+                                    <option value="n">Select Client</option>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -60,7 +74,25 @@
     @endif
 @stop
 @section('scripts')
+
     <script>
+        $("#client").on('change', function () {
+            $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/manage-clients/client_branch/' + $(this).val(),
+                    success: function (response) {
+                        console.log(response);
+                        var model = $('#branch');
+                        model.empty();
+                        model.append("<option selected>Select Branch</option>")
+                        $.each(response, function (index, elem) {
+                            model.append("<option value='" + elem.id + "'>" + elem.name + "</option>")
+                        });
+                    }
+                }
+            );
+        });
 
         function getBrand(param, index) {
             $.ajax({
