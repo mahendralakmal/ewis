@@ -81,6 +81,8 @@
                                             <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Add New Client
                                                     </a>
+                                            </li>
+                                        @endif
                                         @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_branch))
                                             <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients/create-branch' ) }}">Add New Branch</a>
