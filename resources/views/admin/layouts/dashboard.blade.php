@@ -76,16 +76,15 @@
                                     <a href="#">Manage Clients<span
                                                 class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
+                                        @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_prof))
+                                            <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                                <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Add New Client</a>
+                                            </li>
+                                        @endif
                                         @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_users))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients/create-clientuser') }}">Add New
                                                     User</a>
-                                            </li>
-                                        @endif
-                                        @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_prof))
-                                            <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Client
-                                                    Profile</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_branch))

@@ -18,6 +18,7 @@ class UserController extends Controller
 {
     public function StorePrivileges(Request $request)
     {
+//        return $request->all();
         $user = User::find($request->user_id);
         $user->privilege()->create([
             'brand' => ($request->brand == "on") ? true : false,
@@ -28,20 +29,26 @@ class UserController extends Controller
             'designation' => ($request->designation == "on") ? true : false,
             'client_prof' => ($request->client_prof == "on") ? true : false,
             'client_users' => ($request->client_users == "on") ? true : false,
+            'client_branch' => ($request->client_branch == "on") ? true : false,
             'view_po' => ($request->view_po == "on") ? true : false,
             'change_po_status' => ($request->change_po_status == "on") ? true : false,
             'created_user_id' => $request->user_id,
             'privilege' => ($request->privilege == "on") ? true : false,
             'assign_agent' => ($request->assign_agent == "on") ? true : false,
+            'asign_brand' => ($request->asign_brand == "on") ? true : false,
+            'asign_category' => ($request->asign_category == "on") ? true : false,
             'asign_product' => ($request->asign_product == "on") ? true : false,
             'product_cost' => ($request->product_cost == "on") ? true : false,
-            'view_reports' => ($request->view_reports == "on") ? true : false
+            'view_reports' => ($request->view_reports == "on") ? true : false,
+
+
         ]);
         return redirect('/admin/users/manage-users');
     }
 
     public function UpdatePrivileges(Request $request)
     {
+//        return $request->all();
         $privilege = (User::find($request->user_id))->privilege;
         $privilege->update([
             'brand' => ($request->brand == "on") ? true : false,
@@ -52,11 +59,14 @@ class UserController extends Controller
             'designation' => ($request->designation == "on") ? true : false,
             'client_prof' => ($request->client_prof == "on") ? true : false,
             'client_users' => ($request->client_users == "on") ? true : false,
+            'client_branch' => ($request->client_branch == "on") ? true : false,
             'view_po' => ($request->view_po == "on") ? true : false,
             'change_po_status' => ($request->change_po_status == "on") ? true : false,
             'created_user_id' => $request->user_id,
             'privilege' => ($request->privilege == "on") ? true : false,
             'assign_agent' => ($request->assign_agent == "on") ? true : false,
+            'asign_brand' => ($request->asign_brand == "on") ? true : false,
+            'asign_category' => ($request->asign_category == "on") ? true : false,
             'asign_product' => ($request->asign_product == "on") ? true : false,
             'product_cost' => ($request->product_cost == "on") ? true : false,
             'view_reports' => ($request->view_reports == "on") ? true : false

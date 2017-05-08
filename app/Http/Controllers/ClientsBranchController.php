@@ -19,7 +19,7 @@ class ClientsBranchController extends Controller
 
         $this->validate(request(), [
             'client_id' => 'required',
-            'name' => 'required|unique:brands|max:100',
+            'name' => 'required|max:100',
             'address' => 'required',
             'contact_no' => 'required',
             'email' => 'required|email',

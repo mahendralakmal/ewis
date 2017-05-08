@@ -52,7 +52,7 @@ class ClientController extends Controller
         $client->color = $request->color;
         $client->save();
 
-        return redirect('/admin/users/create-users');
+        return redirect('/admin/manage-clients/create-clientuser');
     }
 
     public function cp_update(Request $request)
