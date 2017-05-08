@@ -26,12 +26,14 @@
                     <thead>
                     <tr>
                         <td><h5>Client</h5></td>
+                        <td><h5>Branch</h5></td>
                         <td><h5>Address</h5></td>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($clients as $client)
                         <tr>
+                            <td>{{ $client->client->name }}</td>
                             <td>{{ $client->name }}</td>
                             <td>{{ $client->address }}</td>
                         </tr>

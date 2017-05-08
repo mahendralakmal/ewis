@@ -51,7 +51,7 @@ class AgentController extends Controller
 
     public function check_assignment(User $id)
     {
-        $clients = Client::where('agent_id', $id->id)->get();
+        $clients = ClientsBranch::where('agent_id', $id->id)->get();
         return view('/admin/clients/check-assignments', compact('id', 'clients'));
     }
 

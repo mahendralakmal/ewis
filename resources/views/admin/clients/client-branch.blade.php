@@ -75,7 +75,7 @@
                         <div class="col-md-4"><label>Client</label></div>
                         <div class="col-md-8">
                             <select name="client_id" id="client_id" class="form-control">
-                                <option> Select Clinet</option>
+                                <option> Select Client</option>
                                 @foreach($clients as $client)
                                     @if($client->approval == 1)
                                         <option value="{{$client->id}}"
