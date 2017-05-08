@@ -52,6 +52,7 @@ class ClientController extends Controller
         $client->color = $request->color;
         $client->save();
 
+
         return redirect('/admin/manage-clients/create-branch/');
     }
 

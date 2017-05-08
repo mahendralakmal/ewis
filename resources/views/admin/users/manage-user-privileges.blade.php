@@ -89,13 +89,13 @@
                                     Add New Client</label></div>
                         </div>
                         <div class="col-md-4">
-                            <div class="checkbox"><label><input type="checkbox" id="client_users" name="client_users"
+                            <div class="checkbox"><label><input type="checkbox" id="client_branch" name="client_branch"
                                                                 @if($user->id == 1) disabled @endif
                                                                 @if(!$user->privilege == null && $user->privilege->client_users == true) checked @endif>
                                     Add Client Branch</label></div>
                         </div>
                         <div class="col-md-4">
-                            <div class="checkbox"><label><input type="checkbox" id="client_branch" name="client_branch"
+                            <div class="checkbox"><label><input type="checkbox" id="client_users" name="client_users"
                                                                 @if($user->id == 1) disabled @endif
                                                                 @if(!$user->privilege == null && $user->privilege->client_branch == true) checked @endif>
                                     Add New Client Users</label></div>
