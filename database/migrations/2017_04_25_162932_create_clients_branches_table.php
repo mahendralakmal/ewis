@@ -15,7 +15,7 @@ class CreateClientsBranchesTable extends Migration
     {
         Schema::create('clients_branches', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',50)->unique();
+            $table->string('name',100);
             $table->text('address');
             $table->text('contact_no');
             $table->text('email');

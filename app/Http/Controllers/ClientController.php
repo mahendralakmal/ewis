@@ -52,8 +52,9 @@ class ClientController extends Controller
         $client->color = $request->color;
         $client->save();
 
+        return back();
+//        return redirect('/admin/manage-clients/create-clientuser');
 
-        return redirect('/admin/manage-clients/create-branch/');
     }
 
     public function cp_update(Request $request)
@@ -97,12 +98,13 @@ class ClientController extends Controller
     public function approved(Client $id)
     {
         $id->update(['approval' => 1]);
-        return redirect('/admin/manage-clients/approval');
+        return redirect('/admin/manage-clients/create-branch');
     }
 
     public function unapproved(Client $id)
     {
         $id->update(['approval' => 0]);
-        return redirect('/admin/manage-clients/approval');
+        return back();
+//        return redirect('/admin/manage-clients/approval');
     }
 }
