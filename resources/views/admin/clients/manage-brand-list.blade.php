@@ -22,7 +22,7 @@
                         @foreach($cbrands as $cbrand)
                             @if($cbrand->remove == 0)
                                 <tr>
-                                    <td>{{ App\Brand::find($cbrand->brand_id)->title }}</td>
+                                    <td>{{ $cbrand->brand->title }}</td>
                                     <td>
                                         {{--<a href="/admin/manage-product-list/brand/details/edit/{{ $cbrand->id }}"--}}
                                            {{--class="btn btn-primary btn-outline">Edit</a>--}}

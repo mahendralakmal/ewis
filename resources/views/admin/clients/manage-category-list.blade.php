@@ -21,7 +21,7 @@
                                     <a @if($cbrand->brand->count() >0)href="#{{ $cbrand->id }}"
                                        @endif class="list-group-item active" data-toggle="collapse">
                                         <strong>{{ $cbrand->brand->title }}</strong>
-                                        <span class="badge">@if($cbrand->brand->count() >0){{$cbrand->c_category->count()}}@endif</span>
+                                        <span class="badge">@if($cbrand->brand->count() >0){{$cbrand->c_category->where('remove',0)->count()}}@endif</span>
                                     </a>
                                     @if($cbrand->brand->count() >0)
                                         <div id="{{$cbrand->id}}" class="collapse">

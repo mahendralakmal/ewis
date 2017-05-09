@@ -27,6 +27,7 @@ class ProductController extends Controller
 
     public function remove_client_products(Client_Product $id)
     {
+//        return $id;
         $id->update(['remove' => 1]);
         return back();
     }
@@ -46,11 +47,13 @@ class ProductController extends Controller
 
     public function edit_client_products(Client_Product $id, Request $request)
     {
+//        return $id;
         $cp_id = $id;
         $cp_products = Product::all();
         $categories = Category::all();
-        $products = Client_Product::where([['user_id', $request->session()->get('User')], ['client_id',
-            $id->client_id]])->get();
+        $products = $id;
+//        $products = Client_Product::where([['user_id', $request->session()->get('User')], ['clients_branch_id',
+//            $id->clients_branch_id]])->get();
         $brands = Brand::orderBy('title')->get();
         return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products', 'cp_id',
             'categories', 'cp_products'));
