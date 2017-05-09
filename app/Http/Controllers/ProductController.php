@@ -27,8 +27,8 @@ class ProductController extends Controller
 
     public function remove_client_products(Client_Product $id)
     {
-//        return $id;
-        $id->update(['remove' => 1]);
+        return $id;
+        $id->update([   'remove' => 1]);
         return back();
     }
 
@@ -105,7 +105,7 @@ class ProductController extends Controller
 
     public function load_ccategories(CBrand $brand, ClientsBranch $branch)
     {
-        $ccategoris = $branch->cbrands->find($brand->id)->brand->category;
+        $ccategoris = $branch->cbrands->find($brand->id)->brand->category->where('remove',0);
         return Response::json($ccategoris);
     }
 

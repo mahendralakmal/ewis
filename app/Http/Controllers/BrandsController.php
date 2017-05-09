@@ -24,9 +24,20 @@ class BrandsController extends Controller
 
     public function remove_client_brands(CBrand $id)
     {
-        $id->update(['remove' => 1]);
+        if($id->c_category->count()>0){
+            foreach ($id->c_category as $ccategory){
+                if($ccategory->cproduct->count()>0){
+                    foreach ($ccategory->cproduct as $cproduct){
+                        $cproduct->update(['remove' => 1]);
+                    }
+                }
+                $ccategory->update(['remove' => 1]);
+            }
+            $id->update(['remove' => 1]);
+        }
         return back();
     }
+
 
     public function store_client_brands(Request $request)
     {
