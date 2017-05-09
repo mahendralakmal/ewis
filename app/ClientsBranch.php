@@ -24,6 +24,10 @@ class ClientsBranch extends Model
         return $this->hasMany(CCategory::class);
     }
 
+    public function cproduct(){
+        return $this->hasMany(Client_Product::class);
+    }
+
     public function p_orders(){
         return $this->hasMany(P_Order::class);
     }

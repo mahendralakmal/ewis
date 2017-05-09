@@ -17,7 +17,7 @@ class CreateClientAssignCategoriesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('category_id');
-            $table->integer('client_id');
+            $table->integer('clients_branch_id');
             $table->integer('c_brand_id');
             $table->boolean('remove')->default(0);
             $table->timestamps();

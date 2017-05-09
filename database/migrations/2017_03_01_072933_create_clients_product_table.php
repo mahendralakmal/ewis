@@ -18,7 +18,7 @@ class CreateClientsProductTable extends Migration
             $table->integer('user_id');
             $table->integer('brand_id');
             $table->integer('c_category_id');
-            $table->integer('clients_id');
+            $table->integer('clients_branch_id');
             $table->integer('product_id');
             $table->decimal('special_price',11,2);
             $table->boolean('remove')->default(0);

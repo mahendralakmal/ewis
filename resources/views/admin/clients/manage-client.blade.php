@@ -46,13 +46,13 @@
                                                            class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign
                                                             Account Manager</a>
                                                         <a href="/admin/manage-product-list/{{ $cbranch->id }}/brands"
-                                                           class="btn btn-primary btn-outline">Add
+                                                           class="btn @if($cbranch->cbrands->count()>0) btn-success @else btn-primary @endif btn-outline">Add
                                                             Brands</a>
                                                         <a href="/admin/manage-product-list/{{ $cbranch->id }}/categories"
-                                                           class="btn btn-primary btn-outline">Add
+                                                           class="btn @if($cbranch->ccategory->count()>0) btn-success @else btn-primary @endif btn-outline">Add
                                                             Categories</a>
                                                         <a href="/admin/manage-product-list/{{ $cbranch->id }}"
-                                                           class="btn btn-primary btn-outline">Add
+                                                           class="btn @if($cbranch->cproduct->count()>0) btn-success @else btn-primary @endif btn-outline">Add
                                                             Products</a>
                                                     </td>
                                                 </tr>
