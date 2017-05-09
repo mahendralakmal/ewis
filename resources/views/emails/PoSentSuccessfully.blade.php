@@ -12,7 +12,8 @@
             <p>Head Office<br>
                 No 142, Yathama Building,<br>
                 Galle Road,<br>
-                Colombo 03.<br>
+                Colombo 03,<br>
+                Sri Lanka.<br>
                 Phone:117 496000<br>
                 Fax: 112 380580</p>
         </td>

@@ -24,7 +24,6 @@ class CreatePrivilegesTable extends Migration
             $table->boolean('designation')->default(false);
             $table->boolean('client_prof')->default(false);
             $table->boolean('client_users')->default(false);
-            $table->boolean('client_branch')->default(false);
             $table->boolean('view_po')->default(false);
             $table->boolean('change_po_status')->default(false);
             $table->boolean('privilege')->default(false);

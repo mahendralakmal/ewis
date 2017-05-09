@@ -15,6 +15,7 @@
                     <div class="panel-body">
                         <ul class="list-group">
                             @foreach($id->cbrands as $cbrand)
+                                @if($cbrand->remove !=1)
                                 {{--{{ $cbrand->brand->title }} | {{ $cbrand->brand->count() }}--}}
                                 <li class="list-group-item">
                                     <a @if($cbrand->brand->count() >0)href="#{{ $cbrand->id }}"
@@ -42,6 +43,7 @@
                                         </div>
                                     @endif
                                 </li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>

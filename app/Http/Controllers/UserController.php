@@ -32,7 +32,6 @@ class UserController extends Controller
             'client_branch' => ($request->client_branch == "on") ? true : false,
             'view_po' => ($request->view_po == "on") ? true : false,
             'change_po_status' => ($request->change_po_status == "on") ? true : false,
-            'created_user_id' => $request->user_id,
             'privilege' => ($request->privilege == "on") ? true : false,
             'assign_agent' => ($request->assign_agent == "on") ? true : false,
             'asign_brand' => ($request->asign_brand == "on") ? true : false,
@@ -41,6 +40,7 @@ class UserController extends Controller
             'product_cost' => ($request->product_cost == "on") ? true : false,
             'view_reports' => ($request->view_reports == "on") ? true : false,
 
+            'created_user_id' => $request->user_id,
 
         ]);
         return redirect('/admin/users/manage-users');
