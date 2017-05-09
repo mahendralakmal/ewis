@@ -14,6 +14,7 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         @foreach($id->cbrands as $cbrand)
+                            @if($cbrand->remove !=1)
                             <li class="list-group-item">
                                 <a href="#{{ $cbrand->id }}" class="list-group-item active"
                                    data-toggle="collapse"><strong>{{ $cbrand->brand->title }}</strong>
@@ -21,6 +22,7 @@
                                 </a>
                                 <div id="{{ $cbrand->id }}" class="collapse">
                                     @foreach($cbrand->c_category as $ccategory)
+                                        @if($ccategory->remove !=1)
                                         <a href="#c{{ $ccategory->id }}" class="list-group-sub-item active"
                                            data-toggle="collapse"><strong>{{ $ccategory->category->title }}</strong>
                                             <span class="badge">{{$ccategory->cproduct->count()}}</span>
@@ -56,9 +58,11 @@
                                                 </tbody>
                                             </table>
                                         </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
