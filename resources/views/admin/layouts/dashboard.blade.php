@@ -215,7 +215,7 @@
         }
 
         $("#vat_apply").on('change', function () {
-            if ($(this).val() == "on") {
+            if (($(this).val() == "on") && ($("#vat").val() == '')) {
                 $("#vat").val('15');
             } else {
                 $("#vat").val('');
