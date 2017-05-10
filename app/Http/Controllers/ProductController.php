@@ -27,7 +27,6 @@ class ProductController extends Controller
 
     public function remove_client_products(Client_Product $id)
     {
-        return $id;
         $id->update([   'remove' => 1]);
         return back();
     }

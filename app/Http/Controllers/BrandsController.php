@@ -24,28 +24,29 @@ class BrandsController extends Controller
 
     public function remove_client_brands(CBrand $id)
     {
-        if($id->c_category->count()>0){
-            foreach ($id->c_category as $ccategory){
-                if($ccategory->cproduct->count()>0){
-                    foreach ($ccategory->cproduct as $cproduct){
+        if ($id->c_category->count() > 0) {
+            foreach ($id->c_category as $ccategory) {
+                if ($ccategory->cproduct->count() > 0) {
+                    foreach ($ccategory->cproduct as $cproduct) {
                         $cproduct->update(['remove' => 1]);
                     }
                 }
                 $ccategory->update(['remove' => 1]);
             }
-            $id->update(['remove' => 1]);
         }
+        $id->update(['remove' => 1]);
+
         return back();
     }
 
 
     public function store_client_brands(Request $request)
     {
-        if(CBrand::where([['clients_branch_id', $request->clients_branch_id],['brand_id', $request->brand_id],['remove','0']])->get()->count()==0) {
+        if (CBrand::where([['clients_branch_id', $request->clients_branch_id], ['brand_id', $request->brand_id], ['remove', '0']])->get()->count() == 0) {
             CBrand::create($request->all());
-            session()->put('success_message','Successfully added..');
-        } else{
-            session()->put('error_message','This brand is already exist.');
+            session()->put('success_message', 'Successfully added..');
+        } else {
+            session()->put('error_message', 'This brand is already exist.');
         }
         return back();
     }

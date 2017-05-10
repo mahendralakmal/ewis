@@ -15,23 +15,30 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
-    public function get_categories(CCategory $id){
+    public function get_categories(CCategory $id)
+    {
         return $id->category->title;
     }
 
     public function remove_client_category(CCategory $id)
     {
+
+        if ($id->cproduct->count() > 0) {
+            foreach ($id->cproduct as $cproduct) {
+                $cproduct->update(['remove' => 1]);
+            }
+        }
         $id->update(['remove' => 1]);
         return back();
     }
 
     public function store_client_category(Request $request)
     {
-        if(CCategory::where([['clients_branch_id', $request->clients_branch_id],['category_id', $request->category_id],['remove','0']])->get()->count()==0) {
+        if (CCategory::where([['clients_branch_id', $request->clients_branch_id], ['category_id', $request->category_id], ['remove', '0']])->get()->count() == 0) {
             CCategory::create($request->all());
-            session()->put('success_message','Successfully added..');
-        } else{
-            session()->put('error_message','This category is already exist.');
+            session()->put('success_message', 'Successfully added..');
+        } else {
+            session()->put('error_message', 'This category is already exist.');
         }
         return back();
     }
@@ -39,7 +46,7 @@ class CategoryController extends Controller
     public function assign_category_to_client(ClientsBranch $id)
     {
         $cp_id = '';
-        return view('/admin/clients/manage-category-list', compact('id','cp_id'));
+        return view('/admin/clients/manage-category-list', compact('id', 'cp_id'));
     }
 
     public function delete(Category $id)
@@ -107,7 +114,7 @@ class CategoryController extends Controller
         $categories = $brand_id->c_category;
         //$cuser = Clientuser::where('user_id', Session::get('User'))->first();
 //        $categories = CCategory::where([['clients_branch_id', $cuser->clients_branch_id], ['remove', 0],['c_brand_id',$brand_id->id]])->get();
- //       dd($brand_id);
+        //       dd($brand_id);
         return view('user/category', compact('categories'));
     }
 }

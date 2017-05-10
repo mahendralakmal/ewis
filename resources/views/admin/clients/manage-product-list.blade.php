@@ -207,6 +207,9 @@
                             <div class="col-md-4"><label>list Price</label></div>
                             <div class="col-md-8">
                                 <input type="number" id="list_price" name="list_price" class="form-control"
+                                       @if(strtolower(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->designation->designation) != 'super admin')
+                                               readonly
+                                       @endif
                                        @if($cp_id != null) value="{{\App\Product::find($cp_id->product_id)->default_price}}" @endif>
                             </div>
                         </div>
