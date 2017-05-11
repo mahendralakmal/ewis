@@ -99,14 +99,14 @@
                         <div class="col-md-8">
                             @if($id == null)
                                 <select name="brand_id" id="brand_id" class="form-control">
-                                    <option>Select Brand</option>
+                                    <option value="">Select Brand</option>
                                     @foreach($brands as $brand)
                                         <option value="{{$brand->id}}">{{$brand->title}}</option>
                                     @endforeach
                                 </select>
                             @else
                                 <select name="brand_id" id="brand_id" class="form-control">
-                                    <option>Select Brand</option>
+                                    <option value="">Select Brand</option>
                                     @foreach($brands as $brand)
                                         <option value="{{$brand->id}}"
                                                 @if(!$id == null)@if($brand->id==\App\Category::find($id->category_id)->brand->id) selected @endif @endif>{{$brand->title}}</option>
@@ -122,11 +122,11 @@
                         <div class="col-md-8">
                             @if($id == null)
                                 <select name="category_id" id="category_id" class="form-control">
-                                    <option>Select Category</option>
+                                    <option value="">Select Category</option>
                                 </select>
                             @else
                                 <select name="category_id" id="category_id" class="form-control">
-                                    <option>Select Category</option>
+                                    <option value="">Select Category</option>
                                     @foreach($categories as $category)
                                         @if($category->status != 0)
                                             <option value="{{$category->id}}"
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Image *</label></div>
+                        <div class="col-md-4"><label>Image <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             <input type="file" name="image" id="image">
                         </div>
@@ -195,4 +195,19 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+@section('scripts')
+    <script>
+        $("#products").validate({
+            rules: {
+                part_no: "required",
+                name: "required",
+                brand_id: "required",
+                category_id: "required",
+                description: "required",
+                image: "required",
+                default_price: "required"
+            }
+        });
+    </script>
 @stop

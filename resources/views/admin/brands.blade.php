@@ -85,3 +85,16 @@
         </div>
     @endif
 @stop
+
+@section('scripts')
+    <script>
+        $("#brands").validate({
+            rules: {
+                title: "required",
+                brand_id: "required",
+                description: 'required',
+                image: "required"
+            }
+        });
+    </script>
+@stop

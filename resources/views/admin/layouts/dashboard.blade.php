@@ -340,21 +340,7 @@
             }
         });
 
-        $("#products").validate({
-            rules: {
-                title: "required",
-                category_id: "required",
-                image: "required"
-            }
-        });
 
-        $("#categories").validate({
-            rules: {
-                title: "required",
-                brand_id: "required",
-                image: "required"
-            }
-        });
 
         $("#brands").validate({
             rules: {

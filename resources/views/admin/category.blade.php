@@ -76,7 +76,7 @@
                         <div class="col-md-4"><label>Brand <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             <select name="brand_id" id="brand_id" class="form-control">
-                                <option>Select Brand</option>
+                                <option value="">Select Brand</option>
                                 @foreach($brands as $brand)
                                     <option value="{{$brand->id}}"
                                             @if(!$id == null)@if($brand->id==$id->brand_id) selected @endif @endif>{{$brand->title}}</option>
@@ -110,4 +110,16 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+@section('scripts')
+    <script>
+        $("#categories").validate({
+            rules: {
+                title: "required",
+                brand_id: "required",
+                description: 'required',
+                image: "required"
+            }
+        });
+    </script>
 @stop
