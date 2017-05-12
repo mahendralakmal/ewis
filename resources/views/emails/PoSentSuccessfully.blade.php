@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
 
 </head>
-<body>
+
+<body style="width: 894px">
 <p>Thank You for your valued order. Our Order Management Team will acknowledge the receipt of your order shortly. </p>
 <p>You may contact your Account Manager for further information or for any clarifications with regard to this order.</p>
 <p>Thank You</p>

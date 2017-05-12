@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
 
 </head>
-<body>
+
+<body style="width: 894px">
 <table width="100%" border="0">
     <tr>
         <td>
