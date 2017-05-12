@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
 </head>
-<body>
+<body style="width: 894px">
 <h5>Order Completed</h5>
 <p>Your order process is Completed. Please contact sales department for further details</p>
 <table width="100%" border="0">

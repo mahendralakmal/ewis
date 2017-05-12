@@ -7,7 +7,8 @@
 <p>Thank You for your valued order. Your order is being Processed.</p>
 <p>Our Order Management Team will update the status of your order shortly.</p>
 <p>Thank You.</p>
-<body>
+
+<body style="width: 894px">
 <table width="100%" border="0">
     <tr>
         <td>
