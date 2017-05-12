@@ -32,6 +32,7 @@ class UserController extends Controller
             'client_branch' => ($request->client_branch == "on") ? true : false,
             'view_po' => ($request->view_po == "on") ? true : false,
             'change_po_status' => ($request->change_po_status == "on") ? true : false,
+            'created_user_id' => $request->user_id,
             'privilege' => ($request->privilege == "on") ? true : false,
             'assign_agent' => ($request->assign_agent == "on") ? true : false,
             'asign_brand' => ($request->asign_brand == "on") ? true : false,
@@ -40,7 +41,6 @@ class UserController extends Controller
             'product_cost' => ($request->product_cost == "on") ? true : false,
             'view_reports' => ($request->view_reports == "on") ? true : false,
 
-            'created_user_id' => $request->user_id,
 
         ]);
         return redirect('/admin/users/manage-users');
@@ -241,7 +241,7 @@ class UserController extends Controller
     public function welcome()
     {
         if (Session::has('LoggedIn') && Session::get('LoggedIn')) { //Check whether if the user already logged in
-            return redirect('/client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id . '/brands');
+            return redirect('/client-profile/' . User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->id . '/brands');
         } else {
             if (!(User::all()->count()) == 0) { //Check if there is an user then redirected to signin page
                 $error = '';
