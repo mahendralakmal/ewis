@@ -5,6 +5,8 @@
 
 </head>
 <body>
+<h5>Order Completed</h5>
+<p>Your order process is Completed. Please contact sales department for further details</p>
 <table width="100%" border="0">
     <tr>
         <td>
@@ -39,13 +41,6 @@
             <p>{{ $order->del_branch }}</p>
             <strong>Special Notes for the delivery</strong>
             <p>{{ $order->del_notes }}</p>
-        </td>
-    </tr>
-    <tr>
-        <td clospan="2">
-            <h5>Order Completed</h5>
-            <p>Your order process is Completed. Please contact sales department for further details</p>
-
         </td>
     </tr>
     <tr>

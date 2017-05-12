@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
 
 </head>
+<p>Thank You for your valued order. Your order is being Processed.</p>
+<p>Our Order Management Team will update the status of your order shortly.</p>
+<p>Thank You.</p>
 <body>
 <table width="100%" border="0">
     <tr>
