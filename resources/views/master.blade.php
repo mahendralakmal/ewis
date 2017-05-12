@@ -62,10 +62,10 @@
                                     <a href={{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/'):'' }}>User
                                         Profile</a></li>
                                 <li>
-                                    {{--<a href={{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/brands'):'' }}>User--}}
-                                        {{--Dashboard</a>--}}
+                                    {{--<a href={{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/brands'):'' }}>User
+                                        Dashboard</a>--}}
                                     <a href={{ url('/') }} >
-                                        Dashboard </a>
+                                        User Dashboard </a>
                                 </li>
                                 <li>
                                     <a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/bucket/history'):'' }}">Puchase
