@@ -13,16 +13,21 @@ use Illuminate\Support\Facades\Session;
 
 class ClientController extends Controller
 {
-    public function get_client_Branches(Client $client_id){
+    public function get_client_Branches(Client $client_id)
+    {
         $branches = $client_id->client_branch;
         return Response::json($branches);
     }
 
     public function index()
     {
-        $id = "";
-        $clients = Client::all();
-        return view('/admin/clients/manage-client', compact('clients', 'id'));
+        $user = User::find(session('User'));
+        if ($user->id != 1)
+            $clients = ClientsBranch::where('agent_id', $user->id)->get();
+        else
+            $clients = Client::all();
+
+        return view('/admin/clients/manage-client', compact('clients', 'user'));
     }
 
     public function create_profile()

@@ -20,14 +20,6 @@ class User extends Model
         return $this->hasOne(Clientuser::class);
     }
 
-//    public function clientuser(){
-//        return $this->hasMany(Clientuser::class);
-//    }
-
-//    public function client(){
-//        return $this->hasMany(Client::class);
-//    }
-
     public function P_Orders(){
         return $this->hasMany('App\P_Order');
     }
