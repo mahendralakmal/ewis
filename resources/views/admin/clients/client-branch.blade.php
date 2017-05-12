@@ -18,7 +18,7 @@
                                         <a @if($client->client_branch->count() >0)href="#{{ $client->id }}"
                                            @endif class="list-group-item active" data-toggle="collapse">
                                             <strong>{{ $client->name }}</strong>
-                                            <span class="badge">@if($client->client_branch->count() >0){{ $client->client_branch->count() }}@endif</span>
+                                            <span class="badge">@if($client->client_branch->count() >0){{ $client->client_branch->where('activation',0)->count() }}@endif</span>
                                         </a>
                                         @if($client->client_branch->count() >0)
                                             <div id="{{$client->id}}" class="collapse">
@@ -29,7 +29,7 @@
                                                             <tr>
                                                                 <td>{{ $branch->name }}</td>
                                                                 <td class="col-md-2">
-                                                                    <a href="/admin/manage-product-list/category/details/remove/{{ $branch->id }}"
+                                                                    <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/remove"
                                                                        class="btn btn-danger btn-outline">Remove</a>
                                                                 </td>
                                                             </tr>
@@ -49,6 +49,8 @@
             <div class="col-xs-12 col-sm-12 col-md-4">
 
 
+                @include('admin.messages.success')
+                @include('admin.messages.error')
                 @if (session()->has('success_message'))
                     <div class="alert alert-success">
                         {{ session()->get('success_message') }}

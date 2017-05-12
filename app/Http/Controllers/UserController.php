@@ -127,9 +127,10 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'email' => 'required|unique:users|max:100',
-        ]);
+        $this->validate(request(),
+            ['email' => 'required|unique:users|max:100'],
+            ['email.unique' => 'E-mail Address Already Exists....!!!, Please verify and enter the details again.']
+        );
 
         $user = new User();
 
@@ -145,7 +146,6 @@ class UserController extends Controller
 
         if (strtolower(User::find($user->id)->designation->designation) === 'client') {
             return redirect('/admin/manage-clients/client_user/' . $user->id);
-//            return redirect('/admin/manage-clients/create-profile/');
         } else {
             return back();
         }

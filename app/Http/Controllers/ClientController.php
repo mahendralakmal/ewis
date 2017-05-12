@@ -43,9 +43,15 @@ class ClientController extends Controller
         return view('/admin/clients/client-profile', compact('id', 'clients'));
     }
 
-
     public function store(Request $request)
     {
+        $this->validate(request(),
+            ['name' => 'required|unique:clients|max:100'],
+            [
+                'name.unique' => "Client Organization Already Exists....!!!, You may Add a New Branch to the Client Organization or Please verify and enter the details again."
+            ]
+        );
+
         $client = new Client();
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
         $client->user_id = $request->user_id;
@@ -58,8 +64,6 @@ class ClientController extends Controller
         $client->save();
 
         return back();
-//        return redirect('/admin/manage-clients/create-clientuser');
-
     }
 
     public function cp_update(Request $request)

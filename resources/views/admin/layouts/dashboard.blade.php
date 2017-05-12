@@ -341,6 +341,13 @@
         });
 
 
+        $("#categories").validate({
+            rules: {
+                title: "required",
+                brand_id: "required",
+                image: "required"
+            }
+        });
 
         $("#brands").validate({
             rules: {
@@ -386,31 +393,6 @@
             }
         });
 
-        $("#userCreate").validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true
-                },
-                password: {
-                    required: true,
-                    minlength: 6,
-                    maxlength: 12
-                },
-                cpassword: {
-                    equalTo: "#password"
-                },
-                name: "required",
-                designation: {
-                    required: true,
-                },
-                nic_pass: {
-                    required: true,
-                    maxlength: 12,
-                    minlength: 7
-                },
-            }
-        });
     </script>
 
     <script src="http://demo.startlaravel.com/sb-admin-laravel/assets/scripts/frontend.js"

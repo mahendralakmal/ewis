@@ -68,9 +68,13 @@ class BrandsController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'title' => 'required|unique:brands|max:100',
-        ]);
+        $this->validate(request(),
+            ['title' => 'required|unique:brands|max:100'],
+            [
+                'title.unique' => "Brand Already Exists....!!!, Please verify and enter the details again."
+            ]
+        );
+
 
         $brand = new Brand();
         $brand->title = $request->title;
@@ -90,9 +94,10 @@ class BrandsController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate(request(), [
-            'title' => 'required|max:100',
-        ]);
+        $this->validate(request(),
+            ['title' => 'required|max:100',],
+            ['title.required'=>"Brand title is required"]);
+
         $brand = Brand::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;
         $brand->update(['title' => $request->title, 'description' => $request->description, 'image' => $image, 'user_id' => $request->user_id]);
@@ -112,12 +117,6 @@ class BrandsController extends Controller
     public function brands(ClientsBranch $id)
     {
         $cbranch = $id;
-        //$cuser = Clientuser::where('user_id', Session::get('User'))->first();
-
-//        $cbranch = User::find(Session::get('User'))->c_user->client_branch;
-//        return $user;
-//        $brands = CBrand::where([['clients_branch_id', $cuser->client_branch->id], ['remove', 0]])->get();
-//        dd($brands);
         return view('user/brands', compact('cbranch'));
     }
 

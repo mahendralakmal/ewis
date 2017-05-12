@@ -23,9 +23,11 @@ class DesignationController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'designation' => 'required|unique:designations|max:100',
-        ]);
+        $this->validate(request(),
+            ['designation' => 'required|unique:designations|max:100'],
+            ['designation.unique' => 'Designation Already Exists....!!!, Please verify and enter the details again.']
+        );
+
         Designation::create($request->all());
         Session::flash('success', 'Designation successfully added...!');
         return back();

@@ -88,9 +88,13 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'category_key' => 'unique:categories',
-        ]);
+        $this->validate(request(),
+            ['category_key' => 'unique:categories'],
+            ['category_key.unique' => "Category Already Exists within Selected
+Brand....!!!, Please verify and enter the details again."]
+        );
+
+
         $cate = new Category();
         $cate->title = $request->title;
         $cate->user_id = $request->user_id;

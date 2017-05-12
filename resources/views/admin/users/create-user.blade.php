@@ -113,7 +113,7 @@
                     </div>
                     <div class="col-md-6">
                         <select type="text" class="form-control" name="designation_id" id="designation_id">
-                            <option>Select Designation</option>
+                            <option value="">Select Designation</option>
                             @if(!$id == "")
                                 @foreach($designations as $designation)
                                     @if($designation->id != 1)
@@ -142,7 +142,7 @@
                     <div class="col-md-5"><label>Sector Head</label></div>
                     <div class="col-md-7">
                         <select name="section_head_id" id="section_head_id" class="form-control">
-                            <option>Select Sectional Head</option>
+                            <option value="">Select Sectional Head</option>
                             @foreach($users as $user)
                                 @if((strtolower($user->designation->designation) != 'client') && ($user->deleted == 0)))
                                 <option value="{{ $user->id }}"> {{ $user->name }}
@@ -177,4 +177,36 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+@section('scripts')
+    <script>
+        $("#userCreate").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 12
+                },
+                cpassword: {
+                    equalTo: "#password"
+                },
+                name: "required",
+                designation_id: {
+                    required: true,
+                },
+                section_head_id: {
+                    required: true,
+                },
+                nic_pass: {
+                    required: true,
+                    maxlength: 12,
+                    minlength: 7
+                },
+            }
+        });
+    </script>
 @stop

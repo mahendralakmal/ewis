@@ -118,13 +118,6 @@ class ProductController extends Controller
     {
         $cp_id = '';
         return view('/admin/clients/manage-product-list', compact('id', 'cp_id'));
-
-//        $cp_products = Client_Product::where('client_id', $id->clientuser[0]['client_id'])->get();
-//        $categories = CCategory::where('user_id', $id->clientuser[0]['client_id'])->get();
-//        $products = Product::orderBy('part_no')->get();
-//        $brands = Brand::orderBy('title')->get();
-//        $cbrands = CBrand::where([['user_id',$request->session()->get('User')],['client_id', $id->clientuser->first()->client->id]])->get();
-//        return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products','cp_id', 'categories','cp_products','cbrands'));
     }
 
     public function delete(Product $id)
@@ -167,9 +160,10 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate(request(), [
-            'part_no' => 'required|unique:products|max:100',
-        ]);
+        $this->validate(request(),
+            ['part_no' => 'required|unique:products|max:100'],
+            ['part_no.unique'=>'Part No. Already Exists within Selected Brand / Category....!!!, Please verify and enter the details again.']
+        );
 
         $product = new Product();
 
