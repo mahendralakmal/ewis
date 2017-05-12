@@ -109,11 +109,12 @@ class BrandsController extends Controller
     }
 
     //Following method is use for retreaving clients details
-    public function brands(Client $id)
+    public function brands(ClientsBranch $id)
     {
+        $cbranch = $id;
         //$cuser = Clientuser::where('user_id', Session::get('User'))->first();
 
-        $cbranch = User::find(Session::get('User'))->c_user->client_branch;
+//        $cbranch = User::find(Session::get('User'))->c_user->client_branch;
 //        return $user;
 //        $brands = CBrand::where([['clients_branch_id', $cuser->client_branch->id], ['remove', 0]])->get();
 //        dd($brands);

@@ -51,8 +51,13 @@
                 <div class="form-group row">
                     <div class="col-md-4"><label>Branch</label></div>
                     <div class="col-md-8">
+{{--                        {{ $id->client }}--}}
                         <select name="branch_id" id="branch_id" class="form-control">
                             <option>Select Branch</option>
+                            {{--@foreach($clients as $client)--}}
+                                {{--<option value="{{$client->id}}"--}}
+                                        {{--@if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>--}}
+                            {{--@endforeach--}}
                         </select>
                     </div>
                 </div>

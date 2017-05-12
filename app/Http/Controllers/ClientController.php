@@ -79,7 +79,7 @@ class ClientController extends Controller
         return view('/admin/clients/manage-client', compact('clients', 'users'));
     }
 
-    public function show(Clientuser $id)
+    public function show(ClientsBranch $id)
     {
         return view('user.user', compact('id'));
     }

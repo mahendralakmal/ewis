@@ -4,7 +4,7 @@
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->add_user))
-        <div class="col-md-7">
+        <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Users</h3>
@@ -24,25 +24,31 @@
                             @foreach($users as $user)
                                 @if(!$user->deleted == 1)
                                     @if($user->designation_id == 2)
-                                    <tr>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->designation->designation}}</td>
-                                        <td>
-                                            <a href="/admin/manage-clients/create-clientuser/{{ $user->id }}"
-                                               class="btn btn-primary btn-outline">Edit</a>
-                                            <form method="POST" action="/admin/users/delete" role="form">
-                                                @if($user->designation_id !== 1)
-                                                    <button class="btn btn-danger btn-outline" type="submit">Delete
-                                                    </button>
+                                        <tr>
+                                            <td>{{$user->email}}</td>
+                                            <td>{{$user->name}}</td>
+                                            <td>{{$user->designation->designation}}</td>
+                                            <td class="col-md-6">
+                                                <form method="POST" action="/admin/users/delete" role="form">
+                                                    <a href="/admin/manage-clients/client_user/{{ $user->id }}"
+                                                       class="btn btn-primary btn-outline">Profile</a>
+                                                    <a href="/admin/manage-clients/create-clientuser/{{ $user->id }}"
+                                                       class="btn btn-primary btn-outline">Edit</a>
+                                                    <a href="@if($user->approval == 0 ) /admin/manage-clients/client_user/{{ $user->id }}/activate @else /admin/manage-clients/client_user/{{ $user->id }}/deactivate @endif"
+                                                       class="btn @if($user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($user->approval == 0 )
+                                                            Approve @else Unapprove @endif</a>
+                                                    @if($user->designation_id !== 1)
+                                                        <button class="btn btn-danger btn-outline" type="submit">Delete
+                                                        </button>
 
-                                                @endif
-                                                {{ csrf_field() }}
-                                                <input type="hidden" id="hidId" name="hidId" value="{{ $user->id }}">
-                                            </form>
-                                        </td>
-                                    </tr>
-                                        @endif
+                                                    @endif
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" id="hidId" name="hidId"
+                                                           value="{{ $user->id }}">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endif
                                 @endif
                             @endforeach
                             </tbody>
@@ -53,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             @include('admin.messages.success')
             @include('admin.messages.error')
             <form id="userCreate" class="form-horizontal" role="form" method="POST"
@@ -115,20 +121,20 @@
                         <label class="form-control">Client</label>
                         <input type="hidden" name="designation_id" id="designation_id" value="{{$designation->id}}">
                         {{--<select type="text" class="form-control" name="designation_id" id="designation_id">--}}
-                            {{--@if(!$id == "")--}}
-                                {{--@foreach($designations as $designation)--}}
-                                        {{--@if($designation->id ==2)--}}
-                                        {{--<option value="{{ $designation->id}}"--}}
-                                                {{--@if($designation->id ==2) selected @endif>{{ $designation->designation }}</option>--}}
-                                            {{--@endif--}}
-                                {{--@endforeach--}}
-                            {{--@else--}}
-                                {{--@foreach($designations as $designation)--}}
-                                        {{--@if($designation->id ==2)--}}
-                                        {{--<option value="{{ $designation->id ="2" }}">{{ $designation->designation }}</option>--}}
-                                            {{--@endif--}}
-                                {{--@endforeach--}}
-                            {{--@endif--}}
+                        {{--@if(!$id == "")--}}
+                        {{--@foreach($designations as $designation)--}}
+                        {{--@if($designation->id ==2)--}}
+                        {{--<option value="{{ $designation->id}}"--}}
+                        {{--@if($designation->id ==2) selected @endif>{{ $designation->designation }}</option>--}}
+                        {{--@endif--}}
+                        {{--@endforeach--}}
+                        {{--@else--}}
+                        {{--@foreach($designations as $designation)--}}
+                        {{--@if($designation->id ==2)--}}
+                        {{--<option value="{{ $designation->id ="2" }}">{{ $designation->designation }}</option>--}}
+                        {{--@endif--}}
+                        {{--@endforeach--}}
+                        {{--@endif--}}
                         {{--</select>--}}
                     </div>
                 </div>
