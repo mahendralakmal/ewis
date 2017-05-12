@@ -36,6 +36,6 @@ class PoCompleted extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.PoCompleted');
+        return $this->subject('EWIS Peripherals Order Management System - Your Order has been Completed')->view('emails.PoCompleted');
     }
 }
