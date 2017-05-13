@@ -68,8 +68,6 @@ class ClientController extends Controller
 
     public function cp_update(Request $request)
     {
-
-//        return $request->all();
         $client = Clientuser::find($request->id);
         $client->update(['cp_name' => $request->cp_name,
             'cp_designation' => $request->cp_designation,
