@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','View Purchase Orders')
+@section('page_heading','View All / Update Status of Purchase Orders')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -20,7 +20,6 @@
                             <td><h5>Client</h5></td>
                             <td><h5>Branch</h5></td>
                             <td><h5>Status</h5></td>
-                            {{--<td><h5>NIC/ Passport</h5></td>--}}
                             <td class="col-md-3"></td>
                         </tr>
                         </thead>
@@ -37,7 +36,7 @@
                                         <select id="{{$porder->id}}" name="postatus" class="form-control postatus">
                                             <option value="P" @if($porder->status === "P") selected @endif>Pending
                                             </option>
-                                            <option value="OP" @if($porder->status === "OP") selected @endif>On Process
+                                            <option value="OP" @if($porder->status === "OP") selected @endif>Processing
                                             </option>
                                             <option value="PC" @if($porder->status === "PC") selected @endif>Partial
                                                 Completed
@@ -49,7 +48,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                       class="btn btn-success btn-outline">View Order</a>
+                                       class="btn btn-success btn-outline">Update Status / View Order</a>
                                 </td>
                             </tr>
 

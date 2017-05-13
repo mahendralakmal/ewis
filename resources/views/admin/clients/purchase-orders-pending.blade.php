@@ -19,7 +19,6 @@
                         <td><h5>Client</h5></td>
                         <td><h5>Branch</h5></td>
                         <td><h5>Status</h5></td>
-                        {{--<td><h5>NIC/ Passport</h5></td>--}}
                         <td class="col-md-3"></td>
                     </tr>
                     </thead>
@@ -35,7 +34,7 @@
                                 @elseif($porder->status === "C") Completed
                                 @endif
                             </td>
-                            <td><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>
+                            <td><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}" class="btn btn-success btn-outline">Update Status / View Order</a></td>
                         </tr>
 
                     @endforeach
