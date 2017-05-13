@@ -15,6 +15,7 @@ use App\Notifications\PerchaseOrder;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Session;
 use Illuminate\Http\Request;
 use App\Bucket;
@@ -184,6 +185,25 @@ class BucketController extends Controller
         return view('admin/clients/purchase-orders-partial-completed', compact('porder'));
     }
 
+    public function ajaxPurchaseOrderStatus($from,$to,$status)
+    {
+        if($from!='' && $to!='' && $status != '' && $status != 'a')
+            $porder = P_Order::whereBetween('p__orders.created_at',[$from,$to])
+                ->where('p__orders.status',$status)
+                ->join('clients_branches','p__orders.clients_branch_id','clients_branches.id')
+                ->join('clients','clients_branches.client_id','clients.id')
+                ->select('p__orders.id','p__orders.created_at','p__orders.del_branch','p__orders.updated_at','clients.name','p__orders.status')->get();
+        else if($from!='' && $to!='' && $status == 'a')
+            $porder = P_Order::whereBetween('p__orders.created_at',[$from,$to])
+                ->join('clients_branches','p__orders.clients_branch_id','clients_branches.id')
+                ->join('clients','clients_branches.client_id','clients.id')
+                ->select('p__orders.id','p__orders.created_at','p__orders.del_branch','p__orders.updated_at','clients.name','p__orders.status')->get();
+        else
+            $porder = P_Order::where('status', 'P' )->get();
+
+        return Response::json($porder);
+    }
+
     public function CompletedPurchaseOrders()
     {
         $porder = P_Order::where('status', 'C' )->get();
@@ -199,43 +219,6 @@ class BucketController extends Controller
         $end = "";
         return view('admin/reports/completed-purchase-orders', compact('clients','po','status','start','end'));
     }
-
-//    public function getPurchaseOrdersByClient($client, $status, $start, $end){
-//
-//        if($client !='n' && $status!= 'n' && $start != 'n' && $end != 'n') {
-//            $porder = P_Order::join('clients','p__orders.client_id','clients.id')
-//                ->whereBetween('p__orders.created_at',array(new DateTime($start),new DateTime($end)))
-//                ->where([['client_id',2],['p__orders.status','P']])
-//                ->select('p__orders.id','p__orders.created_at','p__orders.updated_at','clients.name','p__orders.bucket',
-//                    'p__orders.del_cp','p__orders.del_branch','p__orders.del_tp','p__orders.del_notes',
-//                    'p__orders.cp_notes','p__orders.agent_id','p__orders.status')->get();
-//            return $porder;
-//        } else if ($client !='n' && $status!= 'n' && $start == 'n' && $end == 'n'){
-//            $porder = P_Order::join('clients','p__orders.client_id','clients.id')
-//                ->where([['client_id',$client],['p__orders.status',$status]])
-//                ->select('p__orders.id','p__orders.created_at','p__orders.updated_at','clients.name','p__orders.bucket',
-//                    'p__orders.del_cp','p__orders.del_branch','p__orders.del_tp','p__orders.del_notes',
-//                    'p__orders.cp_notes','p__orders.agent_id','p__orders.status')
-//                ->get();
-//            return $porder;
-//        }else if ($client =='n' && $start == 'n' && $end == 'n'){
-//            $porder = P_Order::join('clients','p__orders.client_id','clients.id')
-//                ->where('p__orders.status',$status)
-//                ->select('p__orders.id','p__orders.created_at','p__orders.updated_at','clients.name','p__orders.bucket',
-//                    'p__orders.del_cp','p__orders.del_branch','p__orders.del_tp','p__orders.del_notes',
-//                    'p__orders.cp_notes','p__orders.agent_id','p__orders.status')
-//                ->get();
-//            return $porder;
-//        }else {
-//            $porder = P_Order::join('clients','p__orders.client_id','clients.id')
-//                ->where('p__orders.status',$status)
-//                ->select('p__orders.id','p__orders.created_at','p__orders.updated_at','clients.name','p__orders.bucket',
-//                    'p__orders.del_cp','p__orders.del_branch','p__orders.del_tp','p__orders.del_notes',
-//                    'p__orders.cp_notes','p__orders.agent_id','p__orders.status')
-//                ->get();
-//            return $porder;
-//        }
-//    }
 
     public function getPurchaseOrdersByStatus($status){
         $order = P_Order::where('status',$status);

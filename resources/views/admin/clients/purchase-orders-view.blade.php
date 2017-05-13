@@ -9,9 +9,15 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Purchase Orders</h3>
                 </div>
-                {{--{{ $porder[0]['bucket'] }}--}}
                 <div class="panel-body">
-                    {{--<div class="msg"></div>--}}
+                    <div class="col-md-7 row">
+                        <div class="col-md-1">Date</div>
+                        <div class="col-md-1"> Form</div>
+                        <div class="col-md-4"><input type="date" class="form-control" name="from" id="from"></div>
+                        <div class="col-md-1"> To</div>
+                        <div class="col-md-4"><input type="date" class="form-control" name="to" id="to"></div>
+                    </div>
+                    <div class="col-md-5" id="alert"></div>
                     <table class="table">
                         <thead>
                         <tr>
@@ -23,7 +29,7 @@
                             <td class="col-md-3"></td>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="tablePO">
                         @foreach($porder as $porder)
                             <tr>
                                 <td>{{$porder->id}}</td>
@@ -63,4 +69,52 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+@section('scripts')
+    <script>
+        $("#from").on('change', function () {
+            getPendingPO($(this).val(), $('#to').val());
+        });
+        $("#to").on('change', function () {
+            getPendingPO($('#from').val(), $(this).val());
+        });
+
+        function getPendingPO(from, to) {
+            if (from != '' && to != '') {
+                if (Date.parse(from) < Date.parse(to)) {
+                    $.ajax({
+                        type: 'get',
+                        url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/a',
+                        success: function (response) {
+                            console.log(response);
+                            var model = $('.tablePO');
+                            model.empty();
+                            $.each(response, function (index, elem) {
+                                model.append("<tr><td>" + elem.id +
+                                        "</td><td>" + elem.created_at +
+                                        "</td><td>" + elem.name +
+                                        "</td><td>" + elem.del_branch +
+                                        "</td><td><form method='get' id='"+elem.id+"' action=''>" +
+
+                                        "<input type='hidden' id='id' name='id' value='"+elem.id+"'>" +
+                                        "<select id='"+elem.id+"' name='postatus' class='form-control postatus'>" +
+                                        "<option value='P' @if($porder->status === 'P') selected @endif>Pending </option>"+
+                                        "<option value='OP' @if($porder->status === 'OP') selected @endif>Processing </option>"+
+                                        "<option value='OP' @if($porder->status === 'PC') selected @endif>Partial Completed </option>"+
+                                        "<option value='C' @if($porder->status === 'C') selected @endif>Completed </option>"+
+                                        "</select>"+
+                                "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id + "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
+                            });
+                        }
+                    });
+                } else {
+                    $('#alert').append('<span class="col-md-12 alert alert-danger">check entered dates</span>');
+                    setTimeout(function () {
+                        $('.alert').hide(3000);
+                    }, 5000);
+                }
+            }
+
+        }
+    </script>
 @stop

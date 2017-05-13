@@ -196,7 +196,7 @@
 
         setTimeout(function () {
             if ($('.alert').length > 0) {
-                $('.alert').toggle(1000);
+                $('.alert').toggle(3000);
                 $.ajax({
                     type: 'get',
                     url: '/admin/clean',
@@ -233,7 +233,7 @@
             $.ajax(
                     {
                         type: 'get',
-                        url: '/admin/manage-clients/pc-purchase-orders/' + this.value,
+                        url: '/admin/manage-clients/purchase-orders-partial-completed/' + this.value,
                         success: function (response) {
                             console.log(response);
                             var model = $('.tbody-completed');
