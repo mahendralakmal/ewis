@@ -16,7 +16,7 @@ use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
-use Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Bucket;
 use App\Product;
@@ -95,16 +95,20 @@ class BucketController extends Controller
 
     }
 
-    public function remove_item(Request $request, $item_id)
+    public function remove_item($item_id)
     {
+        $selected = [];
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
         $products = $bucket->items;
         foreach ($products as $product) {
-            if ($product['item'] ['id'] == $item_id) {
+            if ($product == $item_id) {
                 $bucket->remove($product);
             };
         }
+
+
+        return back();
     }
 
     public function Checkout()

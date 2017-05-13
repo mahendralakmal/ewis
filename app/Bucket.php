@@ -40,7 +40,8 @@ class Bucket
 
     public function remove($product)
     {
-        dd($this->items[$product]);
+//        dd($this->items[$product]);
+//        return $product;
 //      $item = $product->item;
 //      dd($product);
 //        $this->items[$item_id]['qty'] = $this->items[$item_id]['qty'] - 1;

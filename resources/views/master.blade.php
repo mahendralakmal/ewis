@@ -39,14 +39,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ url('/') }}"><img
+                    <a class="navbar-brand" href="{{ url('/ewis-home') }}"><img
                                 src="{{ elixir('img/ewis-logo.png') }}">{{ config('app.name', 'Ewis Peripherals') }}</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">About</a></li>
+                        <li><a href="/">Home</a></li>
 
                         <li>
                             <a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/bucket') :"" }}">Bucket
@@ -59,8 +59,10 @@
                                 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href={{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/'):'' }}>User
-                                        Profile</a></li>
+                                    {{--{{Session::get('User')}}--}}
+                                    <a href={{ (Session::has('User')) ? url('client-profile/'.App\User::find(Session::get('User'))->c_user->id.'/'):'' }}>User
+                                        Profile</a>
+                                </li>
                                 <li>
                                     {{--<a href={{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/brands'):'' }}>User
                                         Dashboard</a>--}}

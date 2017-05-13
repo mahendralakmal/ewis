@@ -22,6 +22,7 @@
                                     <form method="POST" id="cp_update" enctype="multipart/form-data" action="/admin/manage-clients/cp_update" class="form-horizontal">
                                         {{ csrf_field() }}
                                         <div class="form-group">
+                                            <input type="hidden" id="id" name="id" value="{{$id->id}}">
                                             <input type="hidden" value="{{$id->user_id}}" name="user_id" id="user_id">
                                             <input type="hidden" value="{{$id->client_id}}" name="client_id" id="client_id">
                                             <div class="col-md-3">

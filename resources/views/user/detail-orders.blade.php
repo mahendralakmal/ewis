@@ -34,14 +34,14 @@
                                             <td>{{ $item['item'] ['name'] }}</td>
                                             <td>{{ $item['qty'] }}</td>
                                             {{--<td>{{ $item['price'] }}</td>--}}
-                                            <td>{{ number_format($item['price'],2) }}</td>
+                                            <td style="text-align: right">{{ number_format($item['price'],2) }}</td>
                                             @endforeach
                                         </tr>
                                         <tr>
                                             <td><h5>Total</h5></td>
                                             <td></td>
                                             <td></td>
-                                            <td style="border-bottom: double #333"><h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>
+                                            <td style="border-bottom: double #333; text-align: right"><h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>
                                         </tr>
                                 </table>
                             </div>

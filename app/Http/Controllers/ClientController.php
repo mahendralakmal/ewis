@@ -68,14 +68,16 @@ class ClientController extends Controller
 
     public function cp_update(Request $request)
     {
-        $client = Clientuser::find($request->client_id);
+
+//        return $request->all();
+        $client = Clientuser::find($request->id);
         $client->update(['cp_name' => $request->cp_name,
             'cp_designation' => $request->cp_designation,
             'clients_branch_id' => $request->clients_branch_id,
             'cp_telephone' => $request->cp_telephone,
             'cp_email' => $request->cp_email,
             'user_id' => $request->user_id]);
-        return redirect('/client-profile/' . ClientsBranch::find($request->clients_branch_id)->id);//User::find(Session::get('User'))->clientuser->first()->client->id);
+        return redirect('/client-profile/' . $request->id);
     }
 
     public function update(Request $request)
@@ -88,7 +90,7 @@ class ClientController extends Controller
         return view('/admin/clients/manage-client', compact('clients', 'users'));
     }
 
-    public function show(ClientsBranch $id)
+    public function show(Clientuser $id)
     {
         return view('user.user', compact('id'));
     }
