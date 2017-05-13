@@ -19,41 +19,48 @@
 
                         @if($products->count()!= 0)
                             <table class="table table-bordered">
+                                <thead>
                                 <tr>
-                                    <td> Product Number</td>
-                                    <td> Image</td>
-                                    <td>Product Name</td>
-                                    <td>List Price</td>
+                                    <td> Part Number</td>
+                                    <td> Product Image</td>
+                                    <td> Product Name</td>
+                                    <td> Vat Applicalbe</td>
+                                    <td> Unit Price (Rs.)</td>
                                     <td class="col-sm-2 col-lg-2 col-md-2">Quantity</td>
                                     <td></td>
 
                                 </tr>
+                                </thead>
+                                <tbody>
                                 @foreach ($products as $product)
-
-
-                                    <form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">
-                                        {{--                                                <form action="{{ route('add-to-bucket/{id}', ['id' => $product->part_no]) }}" method="GET" class="side-by-side">--}}
-                                        {!! csrf_field() !!}
-                                        <tr>
-                                            <td>
-                                                <input type="hidden" id="part_no" name="part_no"
-                                                       value="{{ $product->product->part_no }}">
-                                                <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a>
-                                            </td>
-                                            <td><img src="{{ asset('/' . $product->product->image) }}" alt="product"
-                                                     class="img-responsive" height="25" width="30"></td>
-                                            <td>
-                                                <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a>
-                                            </td>
-                                            <td><p> Rs.{{ $product->special_price }}</p></td>
-                                            <td><input type="number" value="1" name="Qty" id="Qty"
-                                                       class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></td>
-                                            <td><input class="btn btn-success btn-sm" type="submit"
-                                                       value="Add To Bucket"></td>
-                                        </tr>
-                                    </form>
-
+                                    @if($product->remove !=1)
+                                        <form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">
+                                            {{--                                                <form action="{{ route('add-to-bucket/{id}', ['id' => $product->part_no]) }}" method="GET" class="side-by-side">--}}
+                                            {!! csrf_field() !!}
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" id="part_no" name="part_no"
+                                                           value="{{ $product->product->part_no }}">
+                                                    <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a>
+                                                </td>
+                                                <td><img src="{{ asset('/' . $product->product->image) }}" alt="product"
+                                                         class="img-responsive" height="25" width="30"></td>
+                                                <td>
+                                                    <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a>
+                                                </td>
+                                                <td> @if($product->product->vat_apply) Yes @else No @endif</td>
+                                                <td style="text-align: right"><p>
+                                                        {{ number_format($product->special_price,2,'.',',') }}</p>
+                                                </td>
+                                                <td><input type="number" value="1" name="Qty" id="Qty"
+                                                           class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></td>
+                                                <td><input class="btn btn-success btn-sm" type="submit"
+                                                           value="Add To Bucket"></td>
+                                            </tr>
+                                        </form>
+                                    @endif
                                 @endforeach
+                                </tbody>
                             </table>
                         @else
                             <div class="jumbotron text-center clearfix">
@@ -61,7 +68,8 @@
                                 <p>
                                     <a href="{{ URL::previous() }}" class="btn btn-primary btn-lg" target="_blank">Category</a>
                                     {{--<a href="javascript:history.back()" class="btn btn-primary btn-lg" target="_blank">Category</a>--}}
-                                    <a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/brands'):'' }}" class="btn btn-success btn-lg">Brand</a>
+                                    <a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/brands'):'' }}"
+                                       class="btn btn-success btn-lg">Brand</a>
                                 </p>
                             </div> <!-- end jumbotron -->
                         @endif

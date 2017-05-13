@@ -5777,6 +5777,21 @@ button.close {
 .navbar {
   margin-bottom: 0px !important; }
 
+.table-bordered {
+  border: 1px solid #ddd; }
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td,
+  .table-bordered > tbody > tr > th,
+  .table-bordered > tbody > tr > td,
+  .table-bordered > tfoot > tr > th,
+  .table-bordered > tfoot > tr > td {
+    border: 1px solid #ddd; }
+  .table-bordered > thead > tr > th,
+  .table-bordered > thead > tr > td {
+    border-bottom-width: 2px;
+    text-align: center;
+    background-color: #f0f8ff; }
+
 .jumbotron {
   background-color: #fbfbfb !important; }
 
