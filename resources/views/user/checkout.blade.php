@@ -63,11 +63,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-3">
-                                                        <label>Special Notes</label>
+                                                        <label>Address</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <textarea class="form-control" name="cp_notes" id="cp_notes" rows="10" placeholder="Enter any notes for delivery"></textarea>
-                                                        {{--<input type="text" class="form-control" value="text_area" name="cp_email" id="cp_email" maxlength="120">--}}
+                                                      {{--/  <textarea class="form-control" name="cp_notes" id="cp_notes" rows="10" placeholder="Enter any notes for delivery"></textarea>--}}
+                                                        <input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}" name="cp_email" id="cp_email" maxlength="120">
                                                     </div>
                                                 </div>
 
@@ -116,11 +116,11 @@
                                 </div>
                                 </div>
 
-                                                <h5>Your Total Items: {{ $total_qty }} </h5>
-                                                <hr>
-                                                <h5 id="value">Your Total Payment: Rs. {{ number_format($total_price,2) }} </h5>
-                                                <hr>
-                                                <br>
+                                                {{--<h5>Your Total Items: {{ $total_qty }} </h5>--}}
+                                                {{--<hr>--}}
+                                                {{--<h5 id="value">Your Total Payment: Rs. {{ number_format($total_price,2) }} </h5>--}}
+                                                {{--<hr>--}}
+                                                {{--<br>--}}
 
                                     <div class="col-md-6 col-lg-6 col-sm-6">
                                     <label id="success"></label>
