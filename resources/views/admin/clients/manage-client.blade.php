@@ -56,7 +56,6 @@
                             @endforeach
                         @else
                             @foreach($clients as $client)
-{{--                                --}}
                                 <li class="list-group-item">
                                     <a @if((\App\Client::find($client->client->id))->client_branch->count() >0)href="#{{ $client->client->id }}" @endif class="list-group-item active" data-toggle="collapse">
                                         <strong>{{ $client->client->name }}</strong>

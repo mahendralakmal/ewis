@@ -21,9 +21,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
-                                @if(!$user->deleted == 1)
-                                    @if($user->designation_id == 2)
+                            @if(\Illuminate\Support\Facades\Session::get('User') == 1)
+                                @foreach($users as $user)
+                                    @if(!$user->deleted == 1 && $user->designation_id == 2)
                                         <tr>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->name}}</td>
@@ -38,7 +38,8 @@
                                                        class="btn @if($user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($user->approval == 0 )
                                                             Approve @else Unapprove @endif</a>
                                                     @if($user->designation_id !== 1)
-                                                        <button class="btn btn-danger btn-outline" type="submit">Delete
+                                                        <button class="btn btn-danger btn-outline" type="submit">
+                                                            Delete
                                                         </button>
 
                                                     @endif
@@ -49,8 +50,39 @@
                                             </td>
                                         </tr>
                                     @endif
-                                @endif
-                            @endforeach
+                                @endforeach
+                            @else
+                                @foreach($users as $cbranch)
+                                    @foreach($cbranch->client_user as $user)
+                                    @if(!$user->user->deleted == 1 && $user->user->designation_id == 2)
+                                        <tr>
+                                            <td>{{$user->user->email}}</td>
+                                            <td>{{$user->user->name}}</td>
+                                            <td>{{$user->user->designation->designation}}</td>
+                                            <td class="col-md-6">
+                                                <form method="POST" action="/admin/users/delete" role="form">
+                                                    <a href="/admin/manage-clients/client_user/{{ $user->user->id }}"
+                                                       class="btn btn-primary btn-outline">Profile</a>
+                                                    {{--<a href="/admin/manage-clients/create-clientuser/{{ $user->user->id }}"--}}
+                                                       {{--class="btn btn-primary btn-outline">Edit</a>--}}
+                                                    <a href="@if($user->user->approval == 0 ) /admin/manage-clients/client_user/{{ $user->user->id }}/activate @else /admin/manage-clients/client_user/{{ $user->user->id }}/deactivate @endif"
+                                                       class="btn @if($user->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($user->user->approval == 0 )
+                                                            Approve @else Unapprove @endif</a>
+                                                    @if($user->user->designation_id !== 1)
+                                                        <button class="btn btn-danger btn-outline" type="submit">
+                                                            Delete
+                                                        </button>
+                                                    @endif
+                                                    {{ csrf_field() }}
+                                                    <input type="hidden" id="hidId" name="hidId"
+                                                           value="{{ $user->user->id }}">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @endforeach
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                     @else
