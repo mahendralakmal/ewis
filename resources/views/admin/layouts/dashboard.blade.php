@@ -209,17 +209,6 @@
         $('#sandbox-container .input-daterange').datepicker({format: "dd-mm-yyyy"});
 
 
-        $('#title').on('change', function () {
-            categoryKeyFix();
-        })
-        $('#brand_id').on('change', function () {
-            categoryKeyFix();
-        })
-
-        function categoryKeyFix() {
-            if (!$('#title').val() == '' && !$('#brand_id').val() == '')
-                $('#category_key').val($('#title').val() + "_" + $('#brand_id').val());
-        }
 
         $("#vat_apply").on('change', function () {
             if (($(this).val() == "on") && ($("#vat").val() == '')) {

@@ -121,5 +121,19 @@
                 image: "required"
             }
         });
+
+
+        $('#title').on('change', function () {
+            categoryKeyFix();
+        })
+        $('#brand_id').on('change', function () {
+            categoryKeyFix();
+        })
+
+        function categoryKeyFix() {
+            if (!$('#title').val() == '' && !$('#brand_id').val() == '')
+                $('#category_key').val($('#title').val() + "_" + $('#brand_id').val());
+        }
+
     </script>
 @stop
