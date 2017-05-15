@@ -174,7 +174,12 @@ class UserController extends Controller
     public function client()
     {
         $id = "";
-        $users = User::all();
+        $user = User::find(session('User'));
+        if ($user->id != 1)
+            $users = ClientsBranch::where('agent_id', $user->id)->get();
+        else
+            $users = User::all();
+
         $designation = Designation::find(2);
         return view('/admin/clients/create-clientuser', compact('users', 'designation', 'id'));
     }

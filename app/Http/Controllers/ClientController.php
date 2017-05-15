@@ -33,6 +33,10 @@ class ClientController extends Controller
     public function create_profile()
     {
         $id = null;
+        $user = User::find(session('User'));
+        if ($user->id != 1)
+            $clients = ClientsBranch::where('agent_id', $user->id)->orderBy('name')->get();
+        else
         $clients = Client::orderBy('name')->get();
         return view('/admin/clients/client-profile', compact('id', 'clients'));
     }

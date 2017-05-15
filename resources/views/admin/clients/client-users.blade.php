@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Client User sProfile ')
+@section('page_heading','Client User Profile ')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -32,32 +32,28 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Name</label></div>
-                    <div class="col-md-8"><label class="form-control">{{ $user->name }}</label>
-                        <input type="hidden" id="cp_name" name="cp_name"
+                    <div class="col-md-8">
+                        <input type="text" id="cp_name" name="cp_name" class="form-control"
                                @if(!$id ==null) value="{{ $id->cp_name }}" @else value="{{ $user->name }}" @endif>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Designation</label></div>
-                    <div class="col-md-8"><input type="text" id="cp_designation" name="cp_designation"
-                                                 class="form-control"
+                    <div class="col-md-8"><label class="form-control">@if(!$id ==null) {{ $id->cp_designation }} @endif</label>
+                        <input type="hidden" id="cp_designation" name="cp_designation"
                                                  @if(!$id ==null) value="{{ $id->cp_designation }}" @endif></div>
                 </div>
-                {{--<div class="form-group row">--}}
-                    {{--<div class="col-md-4"><label>Branch</label></div>--}}
-                    {{--<div class="col-md-8"><input type="text" id="cp_branch" name="cp_branch" class="form-control"--}}
-                                                 {{--@if(!$id ==null) value="{{ $id->cp_branch }}" @endif></div>--}}
-                {{--</div>--}}
                 <div class="form-group row">
                     <div class="col-md-4"><label>Branch</label></div>
                     <div class="col-md-8">
-{{--                        {{ $id->client }}--}}
                         <select name="branch_id" id="branch_id" class="form-control">
                             <option>Select Branch</option>
-                            {{--@foreach($clients as $client)--}}
-                                {{--<option value="{{$client->id}}"--}}
-                                        {{--@if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>--}}
-                            {{--@endforeach--}}
+                            @if(!$id ==null)
+                                @foreach($id->client_branch->client->client_branch as $branch)
+                                    <option value="{{$branch->id}}"
+                                            @if((!$id ==null) && ($id->clients_branch_id == $branch->id)) selected @endif>{{$branch->name}}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
                 </div>
@@ -72,7 +68,7 @@
                         <label class="form-control">{{ $user->email }}</label>
                         <input type="hidden" id="cp_email" name="cp_email"
                                @if(!$id ==null) value="{{ $id->cp_email }}" @else value="{{ $user->email }}" @endif>
-                        </div>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-outline">Submit</button>
             </form>
@@ -87,19 +83,19 @@
     <script>
         $("#client_id").on('change', function () {
             $.ajax(
-                {
-                    type: 'get',
-                    url: '/admin/manage-clients/client_branch/' + $(this).val(),
-                    success: function (response) {
-                        console.log(response);
-                        var model = $('#branch_id');
-                        model.empty();
-                        model.append("<option selected>Select Branch</option>")
-                        $.each(response, function (index, elem) {
-                            model.append("<option value='" + elem.id + "'>" + elem.name + "</option>")
-                        });
+                    {
+                        type: 'get',
+                        url: '/admin/manage-clients/client_branch/' + $(this).val(),
+                        success: function (response) {
+                            console.log(response);
+                            var model = $('#branch_id');
+                            model.empty();
+                            model.append("<option selected>Select Branch</option>")
+                            $.each(response, function (index, elem) {
+                                model.append("<option value='" + elem.id + "'>" + elem.name + "</option>")
+                            });
+                        }
                     }
-                }
             );
         });
     </script>
