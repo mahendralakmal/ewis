@@ -67,7 +67,7 @@
                                 @endif
                             @endforeach
                         @else
-                            @foreach((App\ClientsBranch::find($id->ccategory->c_brand->client->id))->cbrands as $cbrand)
+                            @foreach((App\ClientsBranch::find($id->ccategory->c_brand->client->id)->cbrands) as $cbrand)
                                 @if($cbrand->remove !=1)
                                     <li class="list-group-item">
                                         <a href="#{{ $cbrand->id }}" class="list-group-item active"
@@ -167,7 +167,7 @@
                                         @endif
                                     @endforeach
                                 @else
-                                    @foreach((App\ClientsBranch::find($id->ccategory->c_brand->client->id))->cbrands as $cbrand)
+                                    @foreach((App\ClientsBranch::find($id->ccategory->c_brand->client->id)->cbrands) as $cbrand)
                                         @if($cbrand->remove !=1)
                                             <option @if($id->brand_id == $cbrand->id) selected @endif value="{{$cbrand->id}}"
                                             >{{$cbrand->brand->title}}</option>

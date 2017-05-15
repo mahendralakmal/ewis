@@ -102,8 +102,9 @@ class BucketController extends Controller
         $bucket = new Bucket($oldBucket);
         $products = $bucket->items;
         foreach ($products as $product) {
-            if ($product == $item_id) {
-                $bucket->remove($product);
+            if ($product['item']->id == $item_id) {
+//            return($product['item']->id);
+                Session::pull('product');
             };
         }
 

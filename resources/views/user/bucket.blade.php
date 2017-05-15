@@ -63,12 +63,12 @@
                                 <div class="row">
                                     <strong>Total : Rs. {{ number_format($totalPrice,'2','.',',') }}</strong>
 
-                                </div>
-                                <div class="row">
-                                    {{--{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id}}--}}
-                                    <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                                        <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/checkout') }}"
-                                           type="button" class="btn btn-success"> Checkout </a>
+                            </div>
+                            <div class="row">
+                                {{--{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id}}--}}
+                                <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+                                    <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/checkout') }}"
+                                       type="button" class="btn btn-success"> Proceed with Order </a>
 
                                     </div>
                                 </div>

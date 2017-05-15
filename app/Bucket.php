@@ -38,18 +38,18 @@ class Bucket
         $this->totalPrice += $storedItem['price'];
     }
 
-    public function remove($product)
+    public function forget($product)
     {
 //        dd($this->items[$product]);
-//        return $product;
+        return $product;
 //      $item = $product->item;
 //      dd($product);
 //        $this->items[$item_id]['qty'] = $this->items[$item_id]['qty'] - 1;
- //       $this->items[$item_id]['price'] -= $this->items[$item_id]['item']['price'];
-  //      $this->totalQty -= $this->items[$item_id]['qty'];
-  //      $this->totalPrice -= $this->items[$item_id]['item']['price'];
-        unset($this->items['item']);
-//
+//        $this->items[$item_id]['price'] -= $this->items[$item_id]['item']['price'];
+//        $this->totalQty -= $this->items[$item_id]['qty'];
+//        $this->totalPrice -= $this->items[$item_id]['item']['price'];
+//        unset($this->items['item']);
+
 //        return back();
     }
 }
