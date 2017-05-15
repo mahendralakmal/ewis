@@ -39,8 +39,8 @@
                                             {!! csrf_field() !!}
                                             <tr>
                                                 <td>
-                                                    <input type="hidden" id="part_no" name="part_no"
-                                                           value="{{ $product->product->part_no }}">
+                                                    <input type="hidden" id="id" name="id"
+                                                           value="{{ $product->id }}">
                                                     <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a>
                                                 </td>
                                                 <td><img src="{{ asset('/' . $product->product->image) }}" alt="product"

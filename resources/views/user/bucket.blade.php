@@ -34,6 +34,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($products as $product)
+{{--                                            {{$product}}--}}
                                             <tr>
                                                 <td>
                                                     {{ $product['item'] ['part_no'] }}

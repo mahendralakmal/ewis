@@ -166,8 +166,9 @@ class ProductController extends Controller
         );
 
         $product = new Product();
-
+//        $product = $products->product;
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
+        $product->id = $request->id;
         $product->part_no = $request->part_no;
         $product->name = $request->name;
         $product->category_id = $request->category_id;
@@ -187,7 +188,8 @@ class ProductController extends Controller
 
     public function index($id, $part_no)
     {
-        $items = Product::where('part_no', $part_no)->first();
+//        $client_product = Client_Product::where('product_id',$id);
+        $items = Product::where('part_no',$part_no)->first();
         return view('user/item', compact('items'));
     }
 

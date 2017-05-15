@@ -75,10 +75,12 @@ class BucketController extends Controller
 
     public function getAddToBucket(Request $request)
     {
-        $product = Product::where('part_no', $request->part_no)->first();
+//        $product = Product::where('part_no', $request->part_no)->first();
+        $product = Client_Product::find($request->id);
+//        $product = $client_product->product;
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
-        $bucket->add($product, $product->part_no, $request->Qty);
+        $bucket->add($product->product, $product->product->part_no, $request->Qty);
         $request->session()->put('bucket', $bucket);
 //        return route('client-profile/SendMail',[]);
         return back();
@@ -102,10 +104,10 @@ class BucketController extends Controller
         $bucket = new Bucket($oldBucket);
         $products = $bucket->items;
         foreach ($products as $product) {
-            if ($product['item']->id == $item_id) {
+//            if ($product['item']->id == $item_id) {
 //            return($product['item']->id);
-                Session::pull('product');
-            };
+                Session::forget('product');
+//            };
         }
 
 

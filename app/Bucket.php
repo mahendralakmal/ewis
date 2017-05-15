@@ -25,7 +25,7 @@ class Bucket
 
     public function add($item, $id, $qty)
     {
-        $storedItem = ['qty' => $qty, 'price' => $item->default_price, 'item' => $item];
+        $storedItem = ['qty' => $qty, 'price' => $item->default_price, 'item' => $item->product];
         if ($this->items) {
             if (array_key_exists($id, $this->items)) {
                 $storedItem = $this->items[$id];
