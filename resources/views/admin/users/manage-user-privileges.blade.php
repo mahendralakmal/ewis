@@ -91,13 +91,13 @@
                         <div class="col-md-4">
                             <div class="checkbox"><label><input type="checkbox" id="client_branch" name="client_branch"
                                                                 @if($user->id == 1) disabled @endif
-                                                                @if(!$user->privilege == null && $user->privilege->client_users == true) checked @endif>
+                                                                @if(!$user->privilege == null && $user->privilege->client_branch == true) checked @endif>
                                     Add Client Branch</label></div>
                         </div>
                         <div class="col-md-4">
                             <div class="checkbox"><label><input type="checkbox" id="client_users" name="client_users"
                                                                 @if($user->id == 1) disabled @endif
-                                                                @if(!$user->privilege == null && $user->privilege->client_branch == true) checked @endif>
+                                                                @if(!$user->privilege == null && $user->privilege->client_users == true) checked @endif>
                                     Add New Client Users</label></div>
                         </div>
                         <div class="col-md-4">
@@ -124,6 +124,12 @@
                                                                 @if($user->id == 1) disabled @endif
                                                                 @if(!$user->privilege == null && $user->privilege->asign_product == true) checked @endif>
                                     Assign Product to Client</label></div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="checkbox"><label><input type="checkbox" id="manage_client" name="manage_client"
+                                                                @if($user->id == 1) disabled @endif
+                                                                @if(!$user->privilege == null && $user->privilege->manage_client == true) checked @endif>
+                                    Manage Client</label></div>
                         </div>
                         <div class="col-md-12">
                             <hr>

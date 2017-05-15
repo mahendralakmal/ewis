@@ -40,6 +40,7 @@ class UserController extends Controller
             'asign_product' => ($request->asign_product == "on") ? true : false,
             'product_cost' => ($request->product_cost == "on") ? true : false,
             'view_reports' => ($request->view_reports == "on") ? true : false,
+            'manage_client' => ($request->manage_client == "on") ? true : false
 
 
         ]);
@@ -48,8 +49,12 @@ class UserController extends Controller
 
     public function UpdatePrivileges(Request $request)
     {
+
 //        return $request->all();
 //        $privilege = (User::find($request->user_id))->privilege;
+
+        $privilege = (User::find($request->user_id))->privilege;
+
         $privilege->update([
             'brand' => ($request->brand == "on") ? true : false,
             'category' => ($request->category == "on") ? true : false,
@@ -69,7 +74,8 @@ class UserController extends Controller
             'asign_category' => ($request->asign_category == "on") ? true : false,
             'asign_product' => ($request->asign_product == "on") ? true : false,
             'product_cost' => ($request->product_cost == "on") ? true : false,
-            'view_reports' => ($request->view_reports == "on") ? true : false
+            'view_reports' => ($request->view_reports == "on") ? true : false,
+            'manage_client' => ($request->manage_client == "on") ? true : false
         ]);
         return redirect('/admin/users/manage-users');
     }

@@ -96,7 +96,7 @@
                                                     User</a>
                                             </li>
                                         @endif
-                                        @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_users))
+                                        @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->manage_client))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients') }}">Client Manager</a>
                                             </li>

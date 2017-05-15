@@ -34,6 +34,7 @@ class CreatePrivilegesTable extends Migration
             $table->boolean('product_cost')->default(false);
             $table->boolean('view_reports')->default(false);
             $table->boolean('client_branch')->default(false);
+            $table->boolean('manage_client')->default(false);
             $table->integer('created_user_id');
             $table->timestamps();
         });

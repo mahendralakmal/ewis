@@ -22,27 +22,30 @@
                         @if (Session::has('bucket'))
                             <div class="row">
                                 <div class="col-md-11 col-sm-11 col-sx-11 col-lg-11">
-                                    <table class="table-bordered col-sm-10 col-lg-10 col-md-10">
+                                    <table class="table table-bordered">
+                                        <thead>
                                         <tr>
-                                            <td><strong>Product Number</strong></td>
+                                            <td><strong>Part Number</strong></td>
                                             <td><strong>Product Name</strong></td>
                                             <td><strong>Quantity</strong></td>
-                                            <td><strong>Price</strong></td>
+                                            <td><strong>Unit Price (Rs.)</strong></td>
                                             <td><strong>Edit Bucket</strong></td>
                                         </tr>
+                                        </thead>
+                                        <tbody>
                                         @foreach($products as $product)
                                             <tr>
                                                 <td>
-                                                    <center>{{ $product['item'] ['part_no'] }}</center>
+                                                    {{ $product['item'] ['part_no'] }}
                                                 </td>
                                                 <td>
-                                                    <center>{{ $product['item'] ['name'] }}</center>
+                                                    {{ $product['item'] ['name'] }}
                                                 </td>
-                                                <td>
-                                                    <center>{{ $product['qty'] }}</center>
+                                                <td style="text-align: center">
+                                                    {{ $product['qty'] }}
                                                 </td>
-                                                <td>
-                                                    <center>{{ $product['price'] }}</center>
+                                                <td style="text-align: right">
+                                                    {{ number_format($product['price'],'2','.',',') }}
                                                 </td>
                                                 {{--<input type="hidden" id="item_id" name="item_id" value="{{ $product['item']['id'] }}">--}}
                                                 <td>
@@ -52,12 +55,13 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div class="col-lg-8 col-sm-8 col-xs-8 col-md-8 col-md-offset-7 col-lg-offset-7">
-                            <div class="row">
-                                    <strong>Total : {{ $totalPrice }}</strong>
+                                <div class="row">
+                                    <strong>Total : Rs. {{ number_format($totalPrice,'2','.',',') }}</strong>
 
                             </div>
                             <div class="row">
@@ -66,19 +70,19 @@
                                     <a href="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/checkout') }}"
                                        type="button" class="btn btn-success"> Proceed with Order </a>
 
-                            </div>
-                            </div>
-                        @else
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                                    <h2>No Items in the Bucket! </h2>
+                                    </div>
                                 </div>
+                                @else
+                                    <div class="row">
+                                        <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+                                            <h2>No Items in the Bucket! </h2>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
-                        @endif
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\ClientsBranch;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
@@ -21,7 +22,11 @@ class ClientsBranchController extends Controller
     public function create()
     {
         $id = '';
-        $clients = Client::all();
+        $user = User::find(session('User'));
+        if ($user->id != 1)
+            $clients = ClientsBranch::where('agent_id', $user->id)->get();
+        else
+            $clients = Client::all();
         return view('/admin/clients/client-branch', compact('clients', 'id'));
     }
 
