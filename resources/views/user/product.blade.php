@@ -50,7 +50,7 @@
                                                 </td>
                                                 <td> @if($product->product->vat_apply) Yes @else No @endif</td>
                                                 <td style="text-align: right"><p>
-                                                        {{ number_format($product->special_price,2,'.',',') }}</p>
+                                                       @if($product->product->vat_apply) {{ number_format($product->special_price+$product->special_price*15/100,2,'.',',') }} @else{{number_format($product->special_price,2,'.',',')}}@endif </p>
                                                 </td>
                                                 <td><input type="number" value="1" name="Qty" id="Qty"
                                                            class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></td>

@@ -46,7 +46,7 @@
                                                     {{ $product['qty'] }}
                                                 </td>
                                                 <td style="text-align: right">
-                                                    {{ number_format($product['price'],'2','.',',') }}
+                                                   @if($product['item']['vat_apply']) {{number_format($product['price']+$product['price']*15/100,'2','.',',') }} @else {{ number_format($product['price'],'2','.',',')}} @endif
                                                 </td>
                                                 {{--<input type="hidden" id="item_id" name="item_id" value="{{ $product['item']['id'] }}">--}}
                                                 <td>
