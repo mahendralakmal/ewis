@@ -61,7 +61,7 @@
                         <td>{{ $porder['item'] ['part_no'] }}</td>
                         <td>{{ $porder['item'] ['name'] }}</td>
                         <td>{{ $porder['qty'] }}</td>
-                        <td>{{ $porder['price'] }}</td>
+                        <td> @if($product['item']['vat_apply']) {{number_format($product['price']+$product['price']*15/100,'2','.',',') }} @else {{ number_format($product['price'],'2','.',',')}} @endif</td>
                     </tr>
                 @endforeach
             </table>

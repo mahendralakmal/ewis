@@ -97,19 +97,16 @@ class BucketController extends Controller
 
     }
 
-    public function remove_item($item_id)
+    public function remove_item($part_no)
     {
-        $selected = [];
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
-        $products = $bucket->items;
-        foreach ($products as $product) {
-//            if ($product['item']->id == $item_id) {
-//            return($product['item']->id);
-                Session::forget('product');
-//            };
-        }
+        $bucket->remove($part_no);
+        Session::put('bucket', $bucket);
 
+
+//        $request->item->remove($id);
+//        Session::put('bucket',$bucket);
 
         return back();
     }

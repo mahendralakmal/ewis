@@ -11,7 +11,7 @@ Route::get('/signout', 'UserController@signout');
 Route::get('/signup', 'UserController@signup');
 Route::post('/signup/go', 'UserController@signup_store');
 
-Route::get('/remove_item/{item_id}', 'BucketController@remove_item');
+Route::get('/remove_item/{part_no}', 'BucketController@remove_item');
 
 Route::group(['prefix' => ' /client-profile'], function () {
     Route::get('/{id}', 'ClientController@show');
