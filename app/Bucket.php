@@ -25,14 +25,14 @@ class Bucket
 
     public function add($item, $id, $qty)
     {
-        $storedItem = ['qty' => $qty, 'price' => $item->default_price, 'item' => $item->product];
+        $storedItem = ['qty' => $qty, 'price' => $item->special_price, 'item' => $item->product];
         if ($this->items) {
             if (array_key_exists($id, $this->items)) {
                 $storedItem = $this->items[$id];
                 $storedItem['qty'] += $qty;
             }
         }
-        $storedItem['price'] = $item->default_price * $storedItem['qty'];
+        $storedItem['price'] = $item->special_price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
         $this->totalQty += $qty;
         $this->totalPrice += $storedItem['price'];

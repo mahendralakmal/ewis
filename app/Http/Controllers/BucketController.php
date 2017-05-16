@@ -80,7 +80,7 @@ class BucketController extends Controller
 //        $product = $client_product->product;
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
-        $bucket->add($product->product, $product->product->part_no, $request->Qty);
+        $bucket->add($product, $product->product->part_no, $request->Qty);
         $request->session()->put('bucket', $bucket);
 //        return route('client-profile/SendMail',[]);
         return back();
