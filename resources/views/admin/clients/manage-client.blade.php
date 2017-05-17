@@ -13,8 +13,9 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         @if($user->id == 1)
+
                             @foreach($clients as $client)
-                                <li class="list-group-item">
+                                    <li class="list-group-item">
                                     <a @if($client->client_branch->count() >0)href="#{{ $client->id }}"
                                        @endif class="list-group-item active" data-toggle="collapse">
                                         <strong>{{ $client->name }}</strong>
