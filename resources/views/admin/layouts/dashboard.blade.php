@@ -243,22 +243,6 @@
             );
         });
 
-        $('#designation_id').on('change', function () {
-            var selectedVal = $("#designation_id option:selected").text();
-            if ((selectedVal.toLowerCase() != 'client') && (selectedVal != 'Super Admin')) {
-                $('.shead').show();
-            } else {
-                $('.shead').hide();
-                $('#section_head_id').remove();
-                $('<input>').attr({
-                    type: 'hidden',
-                    id: 'section_head_id',
-                    name: 'section_head_id',
-                    value: ''
-                }).appendTo('#userCreate')
-            }
-        });
-
         $(".postatus").on('change', function () {
             var poid = this.id;
             $.ajax({
