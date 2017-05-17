@@ -34,6 +34,7 @@
                                         </thead>
                                         <tbody>
                                         @foreach($products as $product)
+{{--                                            {{$product}}--}}
                                             <tr>
                                                 <td>
                                                     {{ $product['item'] ['part_no'] }}
@@ -45,12 +46,12 @@
                                                     {{ $product['qty'] }}
                                                 </td>
                                                 <td style="text-align: right">
-                                                    {{ number_format($product['price'],'2','.',',') }}
+                                                    {{ number_format($product['price'],'2','.',',')}}
                                                 </td>
                                                 {{--<input type="hidden" id="item_id" name="item_id" value="{{ $product['item']['id'] }}">--}}
                                                 <td>
                                                     <a type="button"
-                                                       href="{{ url('remove_item/'.$product['item']['id']) }}"
+                                                       href="{{ url('remove_item/'.$product['item']['part_no']) }}"
                                                        class="btn btn-error btn-sm">Remove Item </a>
                                                 </td>
                                             </tr>

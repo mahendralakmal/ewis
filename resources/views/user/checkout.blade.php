@@ -70,6 +70,12 @@
                                                         <input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}" name="cp_email" id="cp_email" maxlength="120">
                                                     </div>
                                                 </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-4"><label>Attachment <span style="color: red">*</span></label></div>
+                                                <div class="col-md-8">
+                                                    <input type="file" name="file" id="file">
+                                                </div>
+                                            </div>
 
                                         </div>
 
@@ -115,12 +121,6 @@
                                     </div>
                                 </div>
                                 </div>
-
-                                                {{--<h5>Your Total Items: {{ $total_qty }} </h5>--}}
-                                                {{--<hr>--}}
-                                                {{--<h5 id="value">Your Total Payment: Rs. {{ number_format($total_price,2) }} </h5>--}}
-                                                {{--<hr>--}}
-                                                {{--<br>--}}
 
                                     <div class="col-md-6 col-lg-6 col-sm-6">
                                     <label id="success"></label>

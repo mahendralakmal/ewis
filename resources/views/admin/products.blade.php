@@ -209,5 +209,23 @@
                 default_price: "required"
             }
         });
+        $("#brand_id").on('change', function () {
+            $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/manage-product-list/category/' + this.value,
+                    success: function (response) {
+                        var model = $('#category_id');
+                        model.empty();
+                        model.append("<option selected>Select Category</option>")
+                        $.each(response, function (index, elem) {
+                            if (elem.status == 1) {
+                                model.append("<option value='" + elem.id + "'>" + elem.title + "</option>")
+                            }
+                        });
+                    }
+                }
+            );
+        });
     </script>
 @stop

@@ -25,31 +25,30 @@ class Bucket
 
     public function add($item, $id, $qty)
     {
-        $storedItem = ['qty' => $qty, 'price' => $item->default_price, 'item' => $item];
+         if ($item->product->vat_apply){
+            $product_price= $item->special_price + $item->special_price*15/100;
+        }
+             else {
+            $product_price = $item->special_price;
+
+        }
+        $storedItem = ['qty' => $qty, 'price' => $product_price, 'item' => $item->product];
+
         if ($this->items) {
             if (array_key_exists($id, $this->items)) {
                 $storedItem = $this->items[$id];
                 $storedItem['qty'] += $qty;
             }
         }
-        $storedItem['price'] = $item->default_price * $storedItem['qty'];
+        $storedItem['price'] = $product_price * $storedItem['qty'];
         $this->items[$id] = $storedItem;
         $this->totalQty += $qty;
-        $this->totalPrice += $storedItem['price'];
+        $this->totalPrice = $this->totalPrice+$storedItem['price'];
     }
-
-    public function forget($product)
+    public function remove($part_no)
     {
-//        dd($this->items[$product]);
-        return $product;
-//      $item = $product->item;
-//      dd($product);
-//        $this->items[$item_id]['qty'] = $this->items[$item_id]['qty'] - 1;
-//        $this->items[$item_id]['price'] -= $this->items[$item_id]['item']['price'];
-//        $this->totalQty -= $this->items[$item_id]['qty'];
-//        $this->totalPrice -= $this->items[$item_id]['item']['price'];
-//        unset($this->items['item']);
-
-//        return back();
+        $this->totalQty -= $this->items[$part_no]['qty'];
+        $this->totalPrice -= $this->items[$part_no]['price'];
+        unset($this->items[$part_no]);
     }
 }

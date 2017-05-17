@@ -34,8 +34,7 @@
             <strong>Billing Address</strong>
             <p>{{ $client_branch->address }}</p>
             <p>tel: {{ $client_branch->contact_no }}</p>
-            <strong>Special Notes</strong>
-            <p>{{ $order->cp_notes }}</p>
+
         </td>
         <td>
             <strong>Contact Person</strong>
@@ -61,7 +60,7 @@
                         <td>{{ $porder['item'] ['part_no'] }}</td>
                         <td>{{ $porder['item'] ['name'] }}</td>
                         <td>{{ $porder['qty'] }}</td>
-                        <td>{{ $porder['price'] }}</td>
+                        <td>{{number_format($porder['price'],'2','.',',') }}</td>
                     </tr>
                 @endforeach
             </table>
