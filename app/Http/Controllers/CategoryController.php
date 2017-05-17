@@ -59,11 +59,18 @@ class CategoryController extends Controller
     {
         $cate = Category::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/categories', $request->file('image')) : null;
+        if($request->hasFile('image'))
         $cate->update([
             'title' => $request->title,
             'brand_id' => $request->brand_id,
             'description' => $request->description,
             'image' => $image,
+            'user_id' => $request->user_id]);
+
+        else  $cate->update([
+            'title' => $request->title,
+            'brand_id' => $request->brand_id,
+            'description' => $request->description,
             'user_id' => $request->user_id
         ]);
 
@@ -89,9 +96,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            ['category_key' => 'unique:categories'],
-            ['category_key.unique' => "Category Already Exists within Selected
-Brand....!!!, Please verify and enter the details again."]
+            [
+                'category_key' => 'unique:categories',
+                'image' => 'required',
+            ],
+            [
+                'category_key.unique' => "Category Already Exists within Selected Brand....!!!, Please verify and enter the details again.",
+                'image.required' => "Please add an image."
+            ]
+
         );
 
 

@@ -71,6 +71,7 @@
                     <div class="form-group row">
                         <div class="col-md-4"><label>Image <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
+                            @if(!$id == null){{ $id->image }}@endif
                             <input type="file" id="image" name="image">
                         </div>
                     </div>
@@ -93,7 +94,7 @@
                 title: "required",
                 brand_id: "required",
                 description: 'required',
-                image: "required"
+//                image: "required"
             }
         });
     </script>

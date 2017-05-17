@@ -69,9 +69,13 @@ class BrandsController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            ['title' => 'required|unique:brands|max:100'],
             [
-                'title.unique' => "Brand Already Exists....!!!, Please verify and enter the details again."
+                'title' => 'required|unique:brands|max:100',
+                'image' => 'required',
+            ],
+            [
+                'title.unique' => "Brand Already Exists....!!!, Please verify and enter the details again.",
+                'image.required' => "Please add an image."
             ]
         );
 
@@ -96,11 +100,14 @@ class BrandsController extends Controller
     {
         $this->validate(request(),
             ['title' => 'required|max:100',],
-            ['title.required'=>"Brand title is required"]);
+            ['title.required' => "Brand title is required"]);
 
         $brand = Brand::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/brands', $request->file('image')) : null;
-        $brand->update(['title' => $request->title, 'description' => $request->description, 'image' => $image, 'user_id' => $request->user_id]);
+        if ($request->hasFile('image'))
+            $brand->update(['title' => $request->title, 'description' => $request->description, 'image' => $image, 'user_id' => $request->user_id]);
+        else
+            $brand->update(['title' => $request->title, 'description' => $request->description, 'user_id' => $request->user_id]);
 
         Session::flash('success', 'Brand successfully updated...!');
 
