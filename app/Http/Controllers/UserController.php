@@ -53,7 +53,7 @@ class UserController extends Controller
 //        return $request->all();
 //        $privilege = (User::find($request->user_id))->privilege;
 
-        $privilege = (User::find($request->user_id))->privilege;
+        $privilege = (User::find($request->user_id)->privilege);
 
         $privilege->update([
             'brand' => ($request->brand == "on") ? true : false,
