@@ -52,6 +52,9 @@ class ClientsBranchController extends Controller
                 ClientsBranch::create($request->all());
                 Session::flash('success_message', 'successfully added...!');
             }
+        }else {
+            ClientsBranch::create($request->all());
+            Session::flash('success_message', 'successfully added...!');
         }
         return back();
     }
