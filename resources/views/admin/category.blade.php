@@ -102,7 +102,7 @@
                     <input type="hidden" id="category_key" name="category_key">
                     <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
                             Add @endif</button>
-            </div>
+            {{--</div>--}}
             </form>
         </div>
         </div>

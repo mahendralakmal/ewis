@@ -133,8 +133,12 @@ class ProductController extends Controller
         ]);
         $product = Product::find($request->id);
         $image = $request->hasFile('image') ? 'storage/' . Storage::disk('local')->put('/products', $request->file('image')) : null;
+        if ($request->hasFile('image'))
         $product->update(['part_no' => $request->part_no, 'name' => $request->name, 'category_id' => $request->category_id, 'description' => $request->description,
             'image' => $image, 'user_id' => $request->user_id, 'default_price' => $request->default_price]);
+        else
+        $product->update(['part_no' => $request->part_no, 'name' => $request->name, 'category_id' => $request->category_id, 'description' => $request->description,
+            'user_id' => $request->user_id, 'default_price' => $request->default_price]);
 
         Session::flash('success', 'Product successfully updated...!');
         return redirect('/admin/products');
@@ -161,8 +165,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            ['part_no' => 'required|unique:products|max:100'],
-            ['part_no.unique'=>'Part No. Already Exists within Selected Brand / Category....!!!, Please verify and enter the details again.']
+            [
+                'part_no' => 'required|unique:products|max:100',
+                'image' => 'required',
+            ],
+            [
+                'part_no.unique'=>'Part No. Already Exists within Selected Brand / Category....!!!, Please verify and enter the details again.',
+                'image.required' => "Please add an image."
+            ]
         );
 
         $product = new Product();
