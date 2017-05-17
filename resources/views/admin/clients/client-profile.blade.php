@@ -84,6 +84,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4"><label>Logo</label></div>
+                        @if(!$id == null){{ $id->logo }}@endif
                         <div class="col-md-8"><input type="file" id="logo" name="logo"></div>
                     </div>
                     <div class="form-group row">
@@ -113,9 +114,8 @@
                 email: {
                     required: true,
                     email: true
-                },
-                logo: "required"
-            },
+                }
+            }
         });
     </script>
 @stop

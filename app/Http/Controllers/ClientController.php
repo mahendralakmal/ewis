@@ -51,9 +51,13 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(),
-            ['name' => 'required|unique:clients|max:100'],
             [
-                'name.unique' => "Client Organization Already Exists....!!!, You may Add a New Branch to the Client Organization or Please verify and enter the details again."
+                'name' => 'required|unique:clients|max:100',
+                'image' => 'required'
+            ],
+            [
+                'name.unique' => "Client Organization Already Exists....!!!, You may Add a New Branch to the Client Organization or Please verify and enter the details again.",
+                'image.unique' => "Please choose a logo"
             ]
         );
 
@@ -89,8 +93,12 @@ class ClientController extends Controller
         $users = User::all();
         $clients = Client::find($request->id);
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
+        if($request->hasFile('logo'))
         $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
             'logo' => $logo, 'color' => $request->color]);
+        else
+            $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
+                'color' => $request->color]);
 //        return view('/admin/clients/manage-client', compact('clients', 'users', 'user'));
         return redirect('/admin/manage-clients/create-profile');
     }
