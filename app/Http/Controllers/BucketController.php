@@ -25,6 +25,8 @@ use App\User;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
 
+use Illuminate\Support\Facades\Storage;
+
 class BucketController extends Controller
 {
     public  function getPurchaseOrdersByClient(Request $request){
@@ -120,6 +122,7 @@ class BucketController extends Controller
         $bucket = new Bucket($oldBucket);
         $total_price = $bucket->totalPrice;
         $total_qty = $bucket->totalQty;
+
         return view('user/checkout', ['total_price' => $total_price, 'total_qty' => $total_qty]);
     }
 
@@ -130,7 +133,7 @@ class BucketController extends Controller
         }
         $bucket = Session::get('bucket');
         $order = new P_Order();
-
+        $file = $request->hasFile('file') ? 'storage/' . Storage::disk('local')->put('/checkout', $request->file('file')) : null;
         $user = User::find(\Illuminate\Support\Facades\Session::get('User'));
 //        $order->client_id = $user->c_user->client_branch->client->id;
         $order->clients_branch_id = $user->c_user->client_branch->id;
@@ -138,7 +141,8 @@ class BucketController extends Controller
         $order->del_branch = $request->input('del_branch');
         $order->del_cp = $request->input('del_cp');
         $order->del_tp = $request->input('del_tp');
-        $order->cp_notes = $request->input('cp_notes');
+        $order->file = $file;
+//        $order->cp_notes = $request->input('cp_notes');
         $order->del_notes = $request->input('del_notes');
         $order->status = "P";
         $order->agent_id =  $user->c_user->client_branch->agent_id;
