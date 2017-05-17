@@ -53,7 +53,7 @@ class UserController extends Controller
 //        return $request->all();
 //        $privilege = (User::find($request->user_id))->privilege;
 
-//        $privilege = (User::find($request->user_id))->privilege;
+        $privilege = (User::find($request->user_id))->privilege;
 
         $privilege->update([
             'brand' => ($request->brand == "on") ? true : false,
@@ -103,11 +103,28 @@ class UserController extends Controller
         $user->approval = $request->approval;
         $user->section_head_id = null;
         $user->save();
-        $user->privilege()->create(['brand' => true, 'category' => true, 'product' => true, 'add_user' => true,
-            'user_approve' => true, 'designation' => true, 'client_prof' => true, 'client_users' => true,
-            'view_po' => true, 'change_po_status' => true, 'created_user_id' => $request->user_id,
-            'privilege' => true, 'assign_agent' => true, 'asign_brand' => true, 'asign_category' => true,
-            'asign_product' => true, 'product_cost' => true]);
+        $user->privilege()->create([
+            'brand' => true,
+            'category' => true,
+            'product' => true,
+            'add_user' => true,
+            'user_approve' => true,
+            'designation' => true,
+            'client_prof' => true,
+            'client_users' => true,
+            'client_branch' => true,
+            'view_po' => true,
+            'change_po_status' => true,
+            'privilege' => true,
+            'assign_agent' => true,
+            'asign_brand' => true,
+            'asign_category' => true,
+            'asign_product' => true,
+            'product_cost' => true,
+            'view_reports' => true,
+            'manage_client' => true,
+            'created_user_id' => $request->user_id
+        ]);
 
         Session::put('LoggedIn', true);
         Session::put('User', $request->user_id);
