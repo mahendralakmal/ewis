@@ -36,27 +36,27 @@
                                             <tr>
                                                 <td class="col-md-3"><h5>Po. No.</h5></td>
                                                 <td class="col-md-3"><h5>Created Date & Time</h5></td>
-                                                <td class="col-md-3"><h5>Agent Name</h5></td>
+                                                <td class="col-md-3"><h5>Account Manager</h5></td>
                                                 <td class="col-md-3"><h5>Branch</h5></td>
                                                 <td class="col-md-3"><h5>Status</h5></td>
                                                 {{--<td><h5>NIC/ Passport</h5></td>--}}
-                                                <td class="col-md-3">View Order</td>
+                                                <td class="col-md-3">Details</td>
                                             </tr>
                                             <hr>
 
                                                 @foreach($orders as $porder)
                                                 <tr>
 {{--                                                    <td>{{ $porder->client_branch }}</td>--}}
-                                                    <td class="col-md-3">{{$porder->id}}</td>
-                                                    <td class="col-md-3">{{$porder->created_at}}</td>
+                                                    <td class="col-md-3"><center>{{$porder->id}}</center></td>
+                                                    <td class="col-md-3"><center>{{$porder->created_at}}</center></td>
 
-                                                    <td class="col-md-3">{{App\User::find($porder->client_branch->agent_id)->name}}</td>
+                                                    <td class="col-md-3"><center>{{App\User::find($porder->client_branch->agent_id)->name}}</center></td>
 
-                                                    <td class="col-md-3">{{$porder->del_branch}}</td>
-                                                    <td class="col-md-3">@if($porder->status === "P") Pending
+                                                    <td class="col-md-3"><center>{{$porder->del_branch}}</center></td>
+                                                    <td class="col-md-3"><center>@if($porder->status === "P") Pending
                                                         @elseif($porder->status === "PC") Partial Completed
                                                         @elseif($porder->status === "C") Completed
-                                                        @endif
+                                                            @endif</center>
                                                     </td>
                                                     <td class="col-md-3"><a href="{{ url('/client-profile/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>
                                                 </tr>
