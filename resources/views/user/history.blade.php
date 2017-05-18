@@ -31,14 +31,14 @@
                                             {{--</div>--}}
                                         {{--</div>--}}
                                     {{--</div>--}}
-                                    <div class="col-lg-11 col-sm-11 col-xs-11 col-md-11">
-                                        <table class="table-bordered col-sm-12 col-lg-12 col-md-12">
+                                    <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
+                                        <table class="table-bordered ">
                                             <tr>
                                                 <td class="col-md-2"><center><h5>Po. No.</h5></center></td>
-                                                <td class="col-md-4"><center><h5>Created Date & Time</h5></center></td>
-                                                <td class="col-md-5"><center><h5>Account Manager</h5></center></td>
-                                                <td class="col-md-5"><center><h5>Branch</h5></center></td>
-                                                <td class="col-md-5"><center><h5>Status</h5></center></td>
+                                                <td class="col-md-3"><center><h5>Created Date & Time</h5></center></td>
+                                                <td class="col-md-3"><center><h5>Account Manager</h5></center></td>
+                                                <td class="col-md-2"><center><h5>Branch</h5></center></td>
+                                                <td class="col-md-2"><center><h5>Status</h5></center></td>
                                                 {{--<td><h5>NIC/ Passport</h5></td>--}}
                                                 <td class="col-md-3"><center>Details</center></td>
                                             </tr>
@@ -47,18 +47,18 @@
                                                 @foreach($orders as $porder)
                                                 <tr>
 {{--                                                    <td>{{ $porder->client_branch }}</td>--}}
-                                                    <td class="col-md-3"><center>{{$porder->id}}</center></td>
-                                                    <td class="col-md-3"><center>{{$porder->created_at}}</center></td>
+                                                    <td><center>{{$porder->id}}</center></td>
+                                                    <td><center>{{$porder->created_at}}</center></td>
 
-                                                    <td class="col-md-3"><center>{{App\User::find($porder->client_branch->agent_id)->name}}</center></td>
+                                                    <td><center>{{App\User::find($porder->client_branch->agent_id)->name}}</center></td>
 
-                                                    <td class="col-md-3"><center>{{$porder->del_branch}}</center></td>
-                                                    <td class="col-md-3"><center>@if($porder->status === "P") Pending
+                                                    <td><center>{{$porder->del_branch}}</center></td>
+                                                    <td><center>@if($porder->status === "P") Pending
                                                         @elseif($porder->status === "PC") Partial Completed
                                                         @elseif($porder->status === "C") Completed
                                                             @endif</center>
                                                     </td>
-                                                    <td class="col-md-3"><a href="{{ url('/client-profile/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>
+                                                    <td><a href="{{ url('/client-profile/po-details/'.$porder->id) }}" class="btn btn-success">View Order</a></td>
                                                 </tr>
                                                 @endforeach
 
