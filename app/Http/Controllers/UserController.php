@@ -288,21 +288,25 @@ class UserController extends Controller
 
 //        return $user;
         if (!$user == null && Hash::check($request->password, $user->password)) {
-            if ($user->approval && $user->privilege) {
-                if (strtolower($user->designation->designation) == 'client') {
-                    Session::put('LoggedIn', true);
-                    Session::put('User', $user->id);
-                    Session::put('Type', $user->designation->designation);
-                    Session::put('BaseColor', $user->c_user->client_branch->client->color);
-                    return redirect('/client-profile/' . $user->c_user->client_branch->id . '/brands');
-                }
-                else {
-//                    return $user;
-                    Session::put('LoggedIn', true);
-                    Session::put('User', $user->id);
-                    Session::put('Type', $user->designation->designation);
-                    Session::put('ip', $request->ip());
-                    return redirect('/admin');
+            if ($user->approval) {
+                if ($user->privilege) {
+                    if (strtolower($user->designation->designation) == 'client') {
+                        Session::put('LoggedIn', true);
+                        Session::put('User', $user->id);
+                        Session::put('Type', $user->designation->designation);
+                        Session::put('BaseColor', $user->c_user->client_branch->client->color);
+                        return redirect('/client-profile/' . $user->c_user->client_branch->id . '/brands');
+                    } else {
+                        //                    return $user;
+                        Session::put('LoggedIn', true);
+                        Session::put('User', $user->id);
+                        Session::put('Type', $user->designation->designation);
+                        Session::put('ip', $request->ip());
+                        return redirect('/admin');
+                    }
+                } else {
+                    $error = 'You do not have assign privileges yet...!';
+                    return view('welcome', compact('error'));
                 }
             } else {
                 $error = 'You are not authorised yet...!';
