@@ -186,6 +186,7 @@ class UserController extends Controller
         if(Session::get('User') == 1)
             $users = User::all();
         else
+            return User::find(Session::get('User'));
             $users = User::where('user_id', User::find(Session::get('User'))->id)->get();
         $designations = Designation::all();
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));
