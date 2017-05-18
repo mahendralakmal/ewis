@@ -95,7 +95,6 @@ body, label, .checkbox label {
       color: $list-group-disabled-text-color;
     }
   }
-
   // Active class on item itself, not parent
   &.active,
   &.active:hover,
@@ -120,6 +119,10 @@ body, label, .checkbox label {
       float: right;
     }
   }
+}
+
+.item2{
+  background-color: #c8bfd8 !important;
 }
 
 .badge{

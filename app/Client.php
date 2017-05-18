@@ -16,9 +16,9 @@ class Client extends Model
 //        return $this->hasMany(Clientuser::class);
 //    }
 //
-//    public function user(){
-//        return $this->belongsTo(User::class);
-//    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 //
 //    public function cproducts(){
 //        return $this->hasMany(CBrand::class);

@@ -14,12 +14,9 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                {{--<td></td>--}}
                                 <td><h5>Name</h5></td>
                                 <td><h5>Email</h5></td>
                                 <td><h5>Telephone</h5></td>
-                                {{--<td><h5>Logo</h5></td>--}}
-                                {{--<td><h5>Color</h5></td>--}}
                                 <td class="col-md-3"></td>
                             </tr>
                             </thead>
@@ -29,7 +26,6 @@
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->email }}</td>
                                     <td>{{ $client->telephone }}</td>
-                                    {{--<td style="padding: 10px;"><span style="background-color: {{ $client->color }}; height: 10px; width: 10px;"></span></td>--}}
                                     <td>
                                         <a href="/admin/manage-clients/update-profile/{{ $client->id }}"
                                            class="btn btn-primary btn-outline">Edit</a>

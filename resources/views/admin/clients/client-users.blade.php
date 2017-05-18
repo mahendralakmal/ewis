@@ -39,9 +39,8 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Designation</label></div>
-                    <div class="col-md-8"><label class="form-control">@if(!$id ==null) {{ $id->cp_designation }} @endif</label>
-                        <input type="hidden" id="cp_designation" name="cp_designation"
-                                                 @if(!$id ==null) value="{{ $id->cp_designation }}" @endif></div>
+                    <div class="col-md-8"><label class="form-control">{{ $user->designation->designation }}</label>
+                        <input type="hidden" id="cp_designation" name="cp_designation" value="{{ $user->designation->designation }}"></div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Branch</label></div>

@@ -24,6 +24,10 @@ class User extends Model
         return $this->hasMany('App\P_Order');
     }
 
+    public function clients(){
+        return $this->hasMany(Client::class);
+    }
+
     public function client_branch(){
         return $this->belongsTo(ClientsBranch::class);
     }

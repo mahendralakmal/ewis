@@ -5843,6 +5843,9 @@ body, label, .checkbox label {
       color: #ffffff;
       float: right; }
 
+.item2 {
+  background-color: #c8bfd8 !important; }
+
 .badge {
   background-color: #ff001f !important;
   margin-left: 5px;

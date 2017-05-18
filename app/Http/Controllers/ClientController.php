@@ -22,10 +22,10 @@ class ClientController extends Controller
     public function index()
     {
         $user = User::find(session('User'));
-        if ($user->id != 1)
-            $clients = ClientsBranch::where('agent_id', $user->id)->get();
-        else
+        if ($user->id == 1)
             $clients = Client::all();
+        else
+            $clients = Client::where('user_id',$user->id)->get();
 
         return view('/admin/clients/manage-client', compact('clients', 'user'));
     }
@@ -35,7 +35,7 @@ class ClientController extends Controller
         $id = null;
         $user = User::find(session('User'));
         if ($user->id != 1)
-            $clients = ClientsBranch::where('agent_id', $user->id)->orderBy('name')->get();
+            $clients = Client::where('user_id',$user->id)->orderBy('name')->get();
         else
             $clients = Client::orderBy('name')->get();
 
@@ -51,7 +51,6 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
-//        return $request->all();
         $this->validate(request(),
             [
                 'name' => 'required|unique:clients|max:100',
@@ -145,6 +144,5 @@ class ClientController extends Controller
     {
         $id->update(['approval' => 0]);
         return back();
-//        return redirect('/admin/manage-clients/approval');
     }
 }

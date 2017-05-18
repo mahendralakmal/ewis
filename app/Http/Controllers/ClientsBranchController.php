@@ -24,7 +24,7 @@ class ClientsBranchController extends Controller
         $id = '';
         $user = User::find(session('User'));
         if ($user->id != 1)
-            $clients = ClientsBranch::where('agent_id', $user->id)->get();
+            $clients = Client::where('user_id',$user->id)->get();
         else
             $clients = Client::all();
         return view('/admin/clients/client-branch', compact('clients', 'id'));
