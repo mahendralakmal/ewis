@@ -82,7 +82,7 @@ class BucketController extends Controller
 //        $product = $client_product->product;
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
-        $bucket->add($product, $product->product->part_no, $request->Qty);
+        $bucket->add($product, $product->product->part_no, $product->special_price, $request->Qty);
         $request->session()->put('bucket', $bucket);
 //        return route('client-profile/SendMail',[]);
         return back();
@@ -95,7 +95,9 @@ class BucketController extends Controller
         }
         $oldBucket = Session::get('bucket');
         $bucket = new Bucket($oldBucket);
-        return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice]);
+        $client_product = Client_Product::all();
+
+        return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice, 'client_product' => $client_product ]);
 
     }
 

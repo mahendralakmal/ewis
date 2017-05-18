@@ -28,13 +28,14 @@
                                             <td><strong>Part Number</strong></td>
                                             <td><strong>Product Name</strong></td>
                                             <td><strong>Quantity</strong></td>
-                                            <td><strong>Unit Price (Rs.)</strong></td>
+                                            <td><strong>Unit Price</strong></td>
+                                            <td><strong>VAT</strong></td>
+                                            <td><strong>Total Price (Rs.)</strong></td>
                                             <td><strong>Edit Bucket</strong></td>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($products as $product)
-{{--                                            {{$product}}--}}
                                             <tr>
                                                 <td>
                                                     {{ $product['item'] ['part_no'] }}
@@ -44,6 +45,12 @@
                                                 </td>
                                                 <td style="text-align: center">
                                                     {{ $product['qty'] }}
+                                                </td>
+                                                <td style="text-align: right">
+                                                    {{number_format((\App\Client_Product::where('product_id', $product['item'] ['id'])->first()->special_price),'2','.',',')}}
+                                                </td>
+                                                <td style="text-align: right">
+                                                    @if($product['item'] ['vat_apply'])15% @else 0% @endif
                                                 </td>
                                                 <td style="text-align: right">
                                                     {{ number_format($product['price'],'2','.',',')}}
@@ -62,7 +69,7 @@
                             </div>
                             <div class="col-lg-8 col-sm-8 col-xs-8 col-md-8 col-md-offset-7 col-lg-offset-7">
                                 <div class="row">
-                                    <strong>Total : Rs. {{ number_format($totalPrice,'2','.',',') }}</strong>
+                                    <strong>Grand Total : Rs. {{ number_format($totalPrice,'2','.',',') }}</strong>
 
                             </div>
                             <div class="row">

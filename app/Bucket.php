@@ -23,14 +23,13 @@ class Bucket
         }
     }
 
-    public function add($item, $id, $qty)
+    public function add($item, $id, $product, $qty)
     {
          if ($item->product->vat_apply){
             $product_price= $item->special_price + $item->special_price*15/100;
         }
              else {
             $product_price = $item->special_price;
-
         }
         $storedItem = ['qty' => $qty, 'price' => $product_price, 'item' => $item->product];
 
