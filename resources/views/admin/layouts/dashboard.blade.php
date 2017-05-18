@@ -16,9 +16,9 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li> Welcome {{App\User::find(Session::get('User'))->name}} </li>
-                    <li><a href="{{ url('/admin/manage-clients/pending-purchase-orders') }}">Pending<span
+                    <li><a href="{{ url('/admin/manage-clients/purchase-orders-pending') }}">Pending<span
                                     class="badge">{{App\P_Order::where('status', 'P' )->count()}}</span></a></li>
-                    <li><a href="{{ url('/admin/manage-clients/pc-purchase-orders') }}">Partial Completed<span
+                    <li><a href="{{ url('/admin/manage-clients/purchase-orders-partial-completed') }}">Partial Completed<span
                                     class="badge">{{App\P_Order::where('status', 'PC' )->count()}}</span></a></li>
                     <li><a href="{{ url('/signout') }}">Signout</a></li>
                 </ul>
