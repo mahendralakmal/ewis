@@ -51,9 +51,8 @@
                 @include('admin.messages.success')
                 @include('admin.messages.error')
 
-                <form method="post" id="clientProfile" enctype="multipart/form-data"
-                      @if($id == null)action="/admin/manage-clients/store"
-                      @else action="/admin/manage-clients/update" @endif role="form" class="form-horizontal">
+                <form id="clientProfile" @if($id == null)action="/admin/manage-clients/store"
+                      @else action="/admin/manage-clients/update" @endif enctype="multipart/form-data" role="form" method="POST" class="form-horizontal">
                     {{ csrf_field() }}
                     <input type="hidden" id="user_id" name="user_id"
                            value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
@@ -84,8 +83,9 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4"><label>Logo</label></div>
-                        {{--@if(!$id == null)<label>{{ $id->logo }}</label>@endif--}}
-                        <div class="col-md-8"><input type="file" id="logo" name="logo"></div>
+                        <div class="col-md-8">
+                            <input type="file" id="logo" name="logo">
+                        </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4"><label>Profile Colour</label></div>

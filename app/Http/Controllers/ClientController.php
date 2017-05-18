@@ -55,11 +55,11 @@ class ClientController extends Controller
         $this->validate(request(),
             [
                 'name' => 'required|unique:clients|max:100',
-                'image' => 'required',
+                'logo' => 'required',
             ],
             [
                 'name.unique' => "Client Organization Already Exists....!!!, You may Add a New Branch to the Client Organization or Please verify and enter the details again.",
-                'image' => "Please choose a logo"
+                'logo' => "Please choose a logo"
             ]
         );
 
