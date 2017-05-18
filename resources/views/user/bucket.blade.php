@@ -37,17 +37,18 @@
                                         <tbody>
                                         @foreach($products as $product)
                                             <tr>
-                                                <td>
+                                                <td style="text-align: center">
                                                     {{ $product['item'] ['part_no'] }}
                                                 </td>
-                                                <td>
+                                                <td style="text-align: center">
                                                     {{ $product['item'] ['name'] }}
                                                 </td>
                                                 <td style="text-align: center">
                                                     {{ $product['qty'] }}
                                                 </td>
                                                 <td style="text-align: right">
-                                                    {{number_format((\App\Client_Product::where('product_id', $product['item'] ['id'])->first()->special_price),'2','.',',')}}
+                                                    {{--{{$product['item'] ['id']}}--}}
+{{--                                                    {{number_format((\App\Client_Product::where(['product_id', $product['item']['id']])->first()->special_price),'2','.',',')}}--}}
                                                 </td>
                                                 <td style="text-align: right">
                                                     @if($product['item'] ['vat_apply'])15% @else 0% @endif
@@ -56,7 +57,7 @@
                                                     {{ number_format($product['price'],'2','.',',')}}
                                                 </td>
                                                 {{--<input type="hidden" id="item_id" name="item_id" value="{{ $product['item']['id'] }}">--}}
-                                                <td>
+                                                <td style="text-align: center">
                                                     <a type="button"
                                                        href="{{ url('remove_item/'.$product['item']['part_no']) }}"
                                                        class="btn btn-error btn-sm">Remove Item </a>
@@ -72,6 +73,8 @@
                                     <strong>Grand Total : Rs. {{ number_format($totalPrice,'2','.',',') }}</strong>
 
                             </div>
+                                <br>
+                                <br>
                             <div class="row">
                                 {{--{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id}}--}}
                                 <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">

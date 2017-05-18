@@ -221,7 +221,7 @@
                         <div class="col-md-4"><label>Vat (%)</label></div>
                         <div class="col-md-8">
                             <input type="number" id="vat" name="vat" class="form-control"
-                                   @if($cp_id != null) value="{{\App\Product::find($cp_id->product_id)->vat}}" @endif>
+                                   @if($cp_id != null) value="{{\App\Product::find($cp_id->product_id)->vat}}" @endif readonly>
                         </div>
                     </div>
                     <div class="form-group row">
