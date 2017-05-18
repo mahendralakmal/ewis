@@ -18,6 +18,8 @@
                                 <br clear="all"/>
                                 <div class="row">
                                     <div class="col-md-8">
+                                        @include('admin.messages.success')
+                                        @include('admin.messages.error')
                                         <h4 class="pro-title">Edit Profile</h4>
                                     <form method="POST" id="cp_update" enctype="multipart/form-data" action="/admin/manage-clients/cp_update" class="form-horizontal">
                                         {{ csrf_field() }}
@@ -80,4 +82,18 @@
                     </div>
                 </div>
             </div>
+@stop
+
+@section('scripts')
+    <script>
+        $("#cp_update").validate({
+            rules: {
+                cp_name: "required",
+                cp_designation: "required",
+                cp_telephone: 'required',
+                cp_email: 'required',
+                clients_branch_id: 'required'
+            }
+        });
+    </script>
 @stop

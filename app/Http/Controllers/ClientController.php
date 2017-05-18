@@ -79,6 +79,20 @@ class ClientController extends Controller
 
     public function cp_update(Request $request)
     {
+        $this->validate(request(),
+            [
+                'cp_name' => 'required',
+                'cp_designation' => 'required',
+                'cp_telephone' => 'required',
+                'cp_email' => 'required'
+            ],
+            [
+                'cp_name.required'=>'Please enter name.',
+                'cp_designation.required' => "Please Enter Designation.",
+                'cp_telephone.required' => 'Please Enter Telephone Number',
+                'cp_email.required' => 'Please Enter Email Address'
+            ]
+        );
         $client = Clientuser::find($request->id);
         $client->update(['cp_name' => $request->cp_name,
             'cp_designation' => $request->cp_designation,

@@ -93,7 +93,7 @@
             rules: {
                 title: "required",
                 brand_id: "required",
-                description: 'required',
+                description: 'required'
 //                image: "required"
             }
         });

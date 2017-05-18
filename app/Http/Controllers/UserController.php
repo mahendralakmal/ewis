@@ -298,7 +298,7 @@ class UserController extends Controller
 //        return $user;
         if (!$user == null && Hash::check($request->password, $user->password)) {
             if ($user->approval) {
-                if ($user->privilege) {
+//                if ($user->privilege) {
                     if (strtolower($user->designation->designation) == 'client') {
                         Session::put('LoggedIn', true);
                         Session::put('User', $user->id);
@@ -313,10 +313,10 @@ class UserController extends Controller
                         Session::put('ip', $request->ip());
                         return redirect('/admin');
                     }
-                } else {
-                    $error = 'You do not have assign privileges yet...!';
-                    return view('welcome', compact('error'));
-                }
+//                } else {
+//                    $error = 'You do not have assign privileges yet...!';
+//                    return view('welcome', compact('error'));
+//                }
             } else {
                 $error = 'You are not authorised yet...!';
                 return view('welcome', compact('error'));
