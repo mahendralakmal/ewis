@@ -182,7 +182,11 @@ class UserController extends Controller
     public function create()
     {
         $id = "";
-        $users = User::all();
+
+        if(Session::get('User') == 1)
+            $users = User::all();
+        else
+            $users = User::where('user_id', User::find(Session::get('User'))->id)->get();
         $designations = Designation::all();
         return view('/admin/users/create-user', compact('users', 'designations', 'id'));
     }
@@ -248,8 +252,11 @@ class UserController extends Controller
     public function mange_user()
     {
         $id = "";
-        $designation = Designation::where('designation', 'Client')->first();
-        $users = User::where('designation_id', '!=', $designation->id)->get();
+        if(Session::get('User') == 1)
+            $users = User::all();
+        else
+            $users = User::where('user_id', User::find(Session::get('User'))->id)->get();
+
         $designations = Designation::all();
         return view('/admin/users/manage-users', compact('users', 'designations', 'id'));
     }
