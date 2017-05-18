@@ -45,7 +45,6 @@ class ClientsBranchController extends Controller
 
         $client = Client::find($request->client_id);
         if ($client->client_branch->count() > 0) {
-//            return $client->client_branch->count();
             if (ClientsBranch::where([['name', $request->name], ['activation', 0], ['client_id', $client->id]])->count() > 0) {
                 Session::flash('error_message', 'Branch Already Exists....!!!, You may Add a Different Branch to the 
                 Client Organization, Please verify and enter the details again.');
