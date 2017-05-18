@@ -182,9 +182,15 @@ class UserController extends Controller
     public function create()
     {
         $id = "";
-        $users = User::all();
+
+        if(Session::get('User') == 1)
+            $users = User::all();
+        else
+            $users = User::where('user_id', User::find(Session::get('User'))->id)->get();
+
+        $sectorHeads = User::all();
         $designations = Designation::all();
-        return view('/admin/users/create-user', compact('users', 'designations', 'id'));
+        return view('/admin/users/create-user', compact('users', 'designations', 'id', 'sectorHeads'));
     }
 
     //Create client user
@@ -248,8 +254,11 @@ class UserController extends Controller
     public function mange_user()
     {
         $id = "";
-        $designation = Designation::where('designation', 'Client')->first();
-        $users = User::where('designation_id', '!=', $designation->id)->get();
+        if(Session::get('User') == 1)
+            $users = User::all();
+        else
+            $users = User::where('user_id', User::find(Session::get('User'))->id)->get();
+
         $designations = Designation::all();
         return view('/admin/users/manage-users', compact('users', 'designations', 'id'));
     }
@@ -282,23 +291,31 @@ class UserController extends Controller
 
     public function signin(Request $request)
     {
+
         Session::put('LoggedIn', false);
         $user = User::where([['email', $request->email]])->first();
+
+//        return $user;
         if (!$user == null && Hash::check($request->password, $user->password)) {
             if ($user->approval) {
-                if (strtolower($user->designation->designation) == 'client') {
-                    Session::put('LoggedIn', true);
-                    Session::put('User', $user->id);
-                    Session::put('Type', $user->designation->designation);
-                    Session::put('BaseColor', $user->c_user->client_branch->client->color);
-                    return redirect('/client-profile/' . $user->c_user->client_branch->id . '/brands');
-                }
-                else {
-                    Session::put('LoggedIn', true);
-                    Session::put('User', $user->id);
-                    Session::put('Type', $user->designation->designation);
-                    Session::put('ip', $request->ip());
-                    return redirect('/admin');
+                if ($user->privilege) {
+                    if (strtolower($user->designation->designation) == 'client') {
+                        Session::put('LoggedIn', true);
+                        Session::put('User', $user->id);
+                        Session::put('Type', $user->designation->designation);
+                        Session::put('BaseColor', $user->c_user->client_branch->client->color);
+                        return redirect('/client-profile/' . $user->c_user->client_branch->id . '/brands');
+                    } else {
+                        //                    return $user;
+                        Session::put('LoggedIn', true);
+                        Session::put('User', $user->id);
+                        Session::put('Type', $user->designation->designation);
+                        Session::put('ip', $request->ip());
+                        return redirect('/admin');
+                    }
+                } else {
+                    $error = 'You do not have assign privileges yet...!';
+                    return view('welcome', compact('error'));
                 }
             } else {
                 $error = 'You are not authorised yet...!';

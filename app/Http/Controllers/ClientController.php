@@ -37,7 +37,8 @@ class ClientController extends Controller
         if ($user->id != 1)
             $clients = ClientsBranch::where('agent_id', $user->id)->orderBy('name')->get();
         else
-        $clients = Client::orderBy('name')->get();
+            $clients = Client::orderBy('name')->get();
+
         return view('/admin/clients/client-profile', compact('id', 'clients'));
     }
 
@@ -50,14 +51,15 @@ class ClientController extends Controller
 
     public function store(Request $request)
     {
+//        return $request->all();
         $this->validate(request(),
             [
                 'name' => 'required|unique:clients|max:100',
-                'image' => 'required'
+                'logo' => 'required',
             ],
             [
                 'name.unique' => "Client Organization Already Exists....!!!, You may Add a New Branch to the Client Organization or Please verify and enter the details again.",
-                'image.unique' => "Please choose a logo"
+                'logo' => "Please choose a logo"
             ]
         );
 
