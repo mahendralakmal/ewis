@@ -28,6 +28,7 @@
                             <li {{ (Request::is('*dashbord') ? 'class="active"' : '') }}>
                                 <a href="{{ url ('/admin') }}">Home</a>
                             </li>
+
                             @if((\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->brand))
                                 <li {{ (Request::is('*dashbord') ? 'class="active"' : '') }}>
                                     <a href="{{ url ('/admin/brands') }}">Brands</a>

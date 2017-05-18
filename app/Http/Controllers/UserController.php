@@ -282,10 +282,13 @@ class UserController extends Controller
 
     public function signin(Request $request)
     {
+
         Session::put('LoggedIn', false);
         $user = User::where([['email', $request->email]])->first();
+
+//        return $user;
         if (!$user == null && Hash::check($request->password, $user->password)) {
-            if ($user->approval) {
+            if ($user->approval && $user->privilege) {
                 if (strtolower($user->designation->designation) == 'client') {
                     Session::put('LoggedIn', true);
                     Session::put('User', $user->id);
@@ -294,6 +297,7 @@ class UserController extends Controller
                     return redirect('/client-profile/' . $user->c_user->client_branch->id . '/brands');
                 }
                 else {
+//                    return $user;
                     Session::put('LoggedIn', true);
                     Session::put('User', $user->id);
                     Session::put('Type', $user->designation->designation);
