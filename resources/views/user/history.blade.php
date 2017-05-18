@@ -31,11 +31,11 @@
                                             {{--</div>--}}
                                         {{--</div>--}}
                                     {{--</div>--}}
-                                    <div class="col-lg-11 col-sm-11 col-xs-11 col-md-11 col-md-offset-1 col-lg-offset-1">
+                                    <div class="col-lg-11 col-sm-11 col-xs-11 col-md-11">
                                         <table class="table-bordered col-sm-12 col-lg-12 col-md-12">
                                             <tr>
                                                 <td class="col-md-2"><center><h5>Po. No.</h5></center></td>
-                                                <td class="col-md-5"><center><h5>Created Date & Time</h5></center></td>
+                                                <td class="col-md-4"><center><h5>Created Date & Time</h5></center></td>
                                                 <td class="col-md-5"><center><h5>Account Manager</h5></center></td>
                                                 <td class="col-md-5"><center><h5>Branch</h5></center></td>
                                                 <td class="col-md-5"><center><h5>Status</h5></center></td>
