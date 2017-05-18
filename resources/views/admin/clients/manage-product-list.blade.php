@@ -284,5 +284,24 @@
                     }
             );
         });
+
+        $("#product_id").on('change', function () {
+            $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/manage-product-list/product/details/' + this.value,
+                    success: function (response) {
+                        $('#list_price').val(response.default_price);
+                        $('#list_price').prop('readonly', true);
+                        $('#vat').val(response.vat);
+                        $('#vat').prop('readonly', true);
+                        var model = $('#description');
+                        model.empty();
+                        model.append("<div class='col-md-4'><label>Description</label></div>");
+                        model.append("<div class='col-md-8'><label class='lightslategrey'>" + response.description + "</label></div>");
+                    }
+                }
+            );
+        });
     </script>
 @stop
