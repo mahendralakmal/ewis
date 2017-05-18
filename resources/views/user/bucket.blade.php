@@ -37,10 +37,10 @@
                                         <tbody>
                                         @foreach($products as $product)
                                             <tr>
-                                                <td>
+                                                <td style="text-align: center">
                                                     {{ $product['item'] ['part_no'] }}
                                                 </td>
-                                                <td>
+                                                <td style="text-align: center">
                                                     {{ $product['item'] ['name'] }}
                                                 </td>
                                                 <td style="text-align: center">
@@ -56,7 +56,7 @@
                                                     {{ number_format($product['price'],'2','.',',')}}
                                                 </td>
                                                 {{--<input type="hidden" id="item_id" name="item_id" value="{{ $product['item']['id'] }}">--}}
-                                                <td>
+                                                <td style="text-align: center">
                                                     <a type="button"
                                                        href="{{ url('remove_item/'.$product['item']['part_no']) }}"
                                                        class="btn btn-error btn-sm">Remove Item </a>
