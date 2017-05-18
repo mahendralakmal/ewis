@@ -31,16 +31,16 @@
                                             {{--</div>--}}
                                         {{--</div>--}}
                                     {{--</div>--}}
-                                    <div class="col-lg-10 col-sm-10 col-xs-10 col-md-10 col-md-offset-1 col-lg-offset-1">
-                                        <table class="table-bordered col-sm-10 col-lg-10 col-md-10">
+                                    <div class="col-lg-11 col-sm-11 col-xs-11 col-md-11 col-md-offset-1 col-lg-offset-1">
+                                        <table class="table-bordered col-sm-12 col-lg-12 col-md-12">
                                             <tr>
-                                                <td class="col-md-3"><h5>Po. No.</h5></td>
-                                                <td class="col-md-3"><h5>Created Date & Time</h5></td>
-                                                <td class="col-md-3"><h5>Account Manager</h5></td>
-                                                <td class="col-md-3"><h5>Branch</h5></td>
-                                                <td class="col-md-3"><h5>Status</h5></td>
+                                                <td class="col-md-2"><center><h5>Po. No.</h5></center></td>
+                                                <td class="col-md-5"><center><h5>Created Date & Time</h5></center></td>
+                                                <td class="col-md-5"><center><h5>Account Manager</h5></center></td>
+                                                <td class="col-md-5"><center><h5>Branch</h5></center></td>
+                                                <td class="col-md-5"><center><h5>Status</h5></center></td>
                                                 {{--<td><h5>NIC/ Passport</h5></td>--}}
-                                                <td class="col-md-3">Details</td>
+                                                <td class="col-md-3"><center>Details</center></td>
                                             </tr>
                                             <hr>
 
