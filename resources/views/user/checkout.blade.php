@@ -14,34 +14,41 @@
             </li>
 
         </ul>
-    <div class="tab-content white-background">
-        <div class="tab-pane fade active in" id="agent">
+        <div class="tab-content white-background">
+            <div class="tab-pane fade active in" id="agent">
                 <div class="col-sm-11" style="float:left;">
                     <br clear="all"/>
                     <div class="container">
                         @if (Session::has('bucket'))
                             <div class="col-md-offset-4">
-                            <h3 class="pro-title">Complete Order</h3>
+                                <h3 class="pro-title">Complete Order</h3>
                             </div>
-                                <ul class="list-group">
+                            <ul class="list-group">
 
-                                <form  method="POST" action="{{ url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/postCheckout') }}" id="postCheckout" name="postCheckout" enctype="multipart/form-data" class="form-horizontal">
+                                <form method="POST"
+                                      action="{{ url('client-profile/'.App\User::find(Session::get('User'))->c_user->client_branch->client->id.'/postCheckout') }}"
+                                      id="postCheckout" name="postCheckout" enctype="multipart/form-data"
+                                      class="form-horizontal">
                                     {{ csrf_field() }}
-                                <div class="row">
-                                    <div class="col-md-6">
-                                    <h4>Contact Details</h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h4>Contact Details</h4>
 
-                                        <div class="col-md-12">
-                                            <hr>
+                                            <div class="col-md-12">
+                                                <hr>
 
 
                                                 <div class="form-group">
-                                                    <input type="hidden" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id}}" name="user_id" id="user_id">
+                                                    <input type="hidden"
+                                                           value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id}}"
+                                                           name="user_id" id="user_id">
                                                     <div class="col-md-3">
                                                         <label>Contact Person</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input type="text"  value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_name}}" class="form-control" name="cp_name" id="cp_name">
+                                                        <input type="text"
+                                                               value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_name}}"
+                                                               class="form-control" name="cp_name" id="cp_name">
                                                     </div>
                                                 </div>
 
@@ -50,7 +57,10 @@
                                                         <label>Branch Name</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input type="text" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->name}}" class="form-control" name="cp_designation" id="cp_designation">
+                                                        <input type="text"
+                                                               value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->name}}"
+                                                               class="form-control" name="cp_designation"
+                                                               id="cp_designation">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -58,7 +68,9 @@
                                                         <label>Contact Number</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_telephone}}" name="cp_telephone" id="cp_telephone" maxlength="12">
+                                                        <input type="text" class="form-control"
+                                                               value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_telephone}}"
+                                                               name="cp_telephone" id="cp_telephone" maxlength="12">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -66,94 +78,112 @@
                                                         <label>Address</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                      {{--/  <textarea class="form-control" name="cp_notes" id="cp_notes" rows="10" placeholder="Enter any notes for delivery"></textarea>--}}
+                                                        {{--/  <textarea class="form-control" name="cp_notes" id="cp_notes" rows="10" placeholder="Enter any notes for delivery"></textarea>--}}
                                                         {{--<input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}" name="cp_email" id="cp_email" maxlength="400">--}}
-                                                        <textarea class="form-control" name="cp_email" id="cp_email" rows="3">{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}</textarea>
+                                                        <textarea class="form-control" name="cp_email" id="cp_email"
+                                                                  rows="3">{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}</textarea>
                                                     </div>
                                                 </div>
-                                            <br>
-                                            <div class="form-group row">
-                                                <div class="col-md-3"><label>Attachment</label></div>
-                                                <div class="col-md-4">
-                                                <input type="file" name="file" id="file">
+                                                <br>
+                                                <div class="form-group row">
+                                                    <div class="col-md-3"><label>Attachment</label></div>
+                                                    <div class="col-md-4">
+                                                        <input type="file" name="file" id="file">
+                                                    </div>
                                                 </div>
+
                                             </div>
 
                                         </div>
+                                        <div class="col-md-6">
+                                            <h4>Delivery Details</h4>
+                                            <div class="col-md-12">
+                                                <hr>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <label>Contact Person</label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <input type="text"
+                                                               value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_name}}"
+                                                               class="form-control" name="del_cp" id="cp_name">
+                                                    </div>
+                                                </div>
 
-                                </div>
-                                    <div class="col-md-6">
-                                    <h4>Delivery Details</h4>
-                                    <div class="col-md-12">
-                                        <hr>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                <label>Contact Person</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="text"  value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_name}}" class="form-control" name="del_cp" id="cp_name">
-                                            </div>
-                                        </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <label>Branch Name</label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <input type="text"
+                                                               value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->name}}"
+                                                               class="form-control" name="del_branch" id="del_branch">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <label>Contact Number</label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <input type="text" class="form-control"
+                                                               value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_telephone}}"
+                                                               name="del_tp" id="del_telephone" maxlength="12">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <label>Special Notes</label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        <textarea class="form-control"
+                                                                  placeholder="Enter any notes for delivery"
+                                                                  name="del_notes" id="del_notes" rows="7"></textarea>
+                                                    </div>
+                                                </div>
 
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                <label>Branch Name</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="text" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->name}}" class="form-control" name="del_branch" id="del_branch">
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                <label>Contact Number</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->cp_telephone}}" name="del_tp" id="del_telephone" maxlength="12">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-md-3">
-                                                <label>Special Notes</label>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <textarea class="form-control" placeholder="Enter any notes for delivery" name="del_notes" id="del_notes" rows="7"></textarea>
-                                            </div>
-                                        </div>
-
                                     </div>
-                                </div>
-                                </div>
 
                                     <div class="col-md-5 col-lg-5 col-sm-5">
-                                    <label id="success"></label>
+                                        <label id="success"></label>
                                     </div>
-                                                <div class="form-group">
-                                                    {{--<div class="col-md-3">--}}
-                                                        <button class="btn btn-primary btn-outline" onclick="Success();" type="submit" value="save-form" id="save-form">Submit</button>
-                                                        <button class="btn btn-primary btn-outline" type="reset" value="clear-form">Clear</button>
-                                                    {{--</div>--}}
-                                                </div>
+                                    <div class="form-group">
+                                        {{--<div class="col-md-3">--}}
+                                        <button class="btn btn-primary btn-outline" onclick="Success();" type="submit"
+                                                value="save-form" id="save-form">Submit
+                                        </button>
+                                        <button class="btn btn-primary btn-outline" type="reset" value="clear-form">
+                                            Clear
+                                        </button>
+                                        {{--</div>--}}
+                                    </div>
                                 </form>
-                                </ul>
+                            </ul>
                             <script>
                                 function Success() {
+
+                                    $('#postCheckout').submit(function () {
+                                        $('#save-form').prop('disabled', true);
+                                    });
                                     document.getElementById("success").innerHTML = "<div class='alert alert-success'>Your Purchase Order submited Successfully</div>";
                                 }
                             </script>
-                            </div>
                     </div>
                 </div>
+            </div>
         </div>
 
     </div>
-                            @else
-                            <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                                    <h2>No Items in the Bucket! </h2>
-                                </div>
-                            </div>
-                            @endif
-</div>
+    @else
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
+                <h2>No Items in the Bucket! </h2>
+            </div>
+        </div>
+        @endif
+        </div>
+
 @endsection
 <script>
     var h1content = document.getElementById("value").Text();
@@ -161,4 +191,24 @@
     function numberWithCommas(value) {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+
+//    $('#postCheckout').preventDoubleSubmission();
+
+//    jQuery.fn.preventDoubleSubmission = function () {
+    $('#postCheckout').on('submit', function (e) {
+        console.log('hihi');
+//            var $form = $(this);
+//
+//            if ($form.data('submitted') === true) {
+//                // Previously submitted - don't submit again
+//                e.preventDefault();
+//            } else {
+//                // Mark it so that the next submit can be ignored
+//                $form.data('submitted', true);
+//            }
+        });
+
+         //Keep chainability
+//        return this;
+//    };
 </script>
