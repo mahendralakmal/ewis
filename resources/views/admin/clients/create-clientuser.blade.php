@@ -15,77 +15,79 @@
 
                             @if(Session::get('User') == 1)
                                 @foreach($users as $user)
-                                    <li class="list-group-item">
-                                        <a href="#{{ $user->id }}" class="list-group-item active"
-                                           data-toggle="collapse"><strong>{{ $user->name }}</strong>
-                                            <span class="badge">@if($user->clients->count() > 0){{$user->clients->count()}}@endif</span>
-                                        </a>
-                                        <div id="{{$user->id}}" class="collapse">
-                                            @foreach($user->clients as $client)
-                                                <a href="#c{{ $client->id }}" class="list-group-sub-item active"
-                                                   data-toggle="collapse"><strong>{{ $client->name }}</strong>
-                                                    <span class="badge">@if($client->client_branch->count() > 0){{$client->client_branch->count()}}@endif</span></a>
-                                                <div id="c{{$client->id}}" class="collapse">
-                                                    @foreach($client->client_branch as $c_Branch)
-                                                        <a href="#c{{ $c_Branch->id }}"
-                                                           class="list-group-sub-item item2 active"
-                                                           data-toggle="collapse"><strong>{{ $c_Branch->name }}</strong>
-                                                            <span class="badge">@if($c_Branch->client_user->count() > 0){{$c_Branch->client_user->count()}}@endif</span></a>
-                                                        <div id="c{{$c_Branch->id}}" class="collapse">
-                                                            <table class="table">
-                                                                <thead>
-                                                                <tr>
-                                                                    <td><h5>Email</h5></td>
-                                                                    <td><h5>Name</h5></td>
-                                                                    <td><h5>Designation</h5></td>
-                                                                    <td class="col-md-3"></td>
-                                                                </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                @foreach($c_Branch->client_user as $c_User)
-                                                                    @if(!$c_User->user->deleted == 1 && $c_User->user->designation_id == 2)
+                                    @if($user->designation_id != 2)
+                                        <li class="list-group-item">
+                                            <a href="#{{ $user->id }}" class="list-group-item active"
+                                               data-toggle="collapse"><strong>{{ $user->name }}</strong>
+                                                <span class="badge">@if($user->clients->count() > 0){{$user->clients->count()}}@endif</span>
+                                            </a>
+                                            <div id="{{$user->id}}" class="collapse">
+                                                @foreach($user->clients as $client)
+                                                    <a href="#c{{ $client->id }}" class="list-group-sub-item active"
+                                                       data-toggle="collapse"><strong>{{ $client->name }}</strong>
+                                                        <span class="badge">@if($client->client_branch->count() > 0){{$client->client_branch->count()}}@endif</span></a>
+                                                    <div id="c{{$client->id}}" class="collapse">
+                                                        @foreach($client->client_branch as $c_Branch)
+                                                            <a href="#c{{ $c_Branch->id }}"
+                                                               class="list-group-sub-item item2 active"
+                                                               data-toggle="collapse"><strong>{{ $c_Branch->name }}</strong>
+                                                                <span class="badge">@if($c_Branch->client_user->count() > 0){{$c_Branch->client_user->count()}}@endif</span></a>
+                                                            <div id="c{{$c_Branch->id}}" class="collapse">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <td><h5>Email</h5></td>
+                                                                        <td><h5>Name</h5></td>
+                                                                        <td><h5>Designation</h5></td>
+                                                                        <td class="col-md-3"></td>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    @foreach($c_Branch->client_user as $c_User)
+                                                                        @if(!$c_User->user->deleted == 1 && $c_User->user->designation_id == 2)
 
-                                                                        <tr>
-                                                                            <td>{{$c_User->user->email}}</td>
-                                                                            <td>{{$c_User->user->name}}</td>
-                                                                            <td>{{$c_User->user->designation->designation}}</td>
+                                                                            <tr>
+                                                                                <td>{{$c_User->user->email}}</td>
+                                                                                <td>{{$c_User->user->name}}</td>
+                                                                                <td>{{$c_User->user->designation->designation}}</td>
 
-                                                                            <td class="col-md-6">
-                                                                                <form method="POST"
-                                                                                      action="/admin/users/delete"
-                                                                                      role="form">
-                                                                                    <a href="/admin/manage-clients/client_user/{{ $user->id }}"
-                                                                                       class="btn btn-primary btn-outline">Profile</a>
-                                                                                    <a href="/admin/manage-clients/create-clientuser/{{ $user->id }}"
-                                                                                       class="btn btn-primary btn-outline">Edit</a>
-                                                                                    <a href="@if($user->approval == 0 ) /admin/manage-clients/client_user/{{ $user->id }}/activate @else /admin/manage-clients/client_user/{{ $user->id }}/deactivate @endif"
-                                                                                       class="btn @if($user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($user->approval == 0 )
-                                                                                            Approve @else
-                                                                                            Unapprove @endif</a>
-                                                                                    @if($user->designation_id !== 1)
-                                                                                        <button class="btn btn-danger btn-outline"
-                                                                                                type="submit">
-                                                                                            Delete
-                                                                                        </button>
-                                                                                        {{----}}
-                                                                                    @endif
-                                                                                    {{ csrf_field() }}
-                                                                                    <input type="hidden" id="hidId"
-                                                                                           name="hidId"
-                                                                                           value="{{ $user->id }}">
-                                                                                </form>
-                                                                            </td>
-                                                                        </tr>
-                                                                    @endif
-                                                                @endforeach
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </li>
+                                                                                <td class="col-md-6">
+                                                                                    <form method="POST"
+                                                                                          action="/admin/users/delete"
+                                                                                          role="form">
+                                                                                        <a href="/admin/manage-clients/client_user/{{ $user->id }}"
+                                                                                           class="btn btn-primary btn-outline">Profile</a>
+                                                                                        <a href="/admin/manage-clients/create-clientuser/{{ $user->id }}"
+                                                                                           class="btn btn-primary btn-outline">Edit</a>
+                                                                                        <a href="@if($user->approval == 0 ) /admin/manage-clients/client_user/{{ $user->id }}/activate @else /admin/manage-clients/client_user/{{ $user->id }}/deactivate @endif"
+                                                                                           class="btn @if($user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($user->approval == 0 )
+                                                                                                Approve @else
+                                                                                                Unapprove @endif</a>
+                                                                                        @if($user->designation_id !== 1)
+                                                                                            <button class="btn btn-danger btn-outline"
+                                                                                                    type="submit">
+                                                                                                Delete
+                                                                                            </button>
+                                                                                            {{----}}
+                                                                                        @endif
+                                                                                        {{ csrf_field() }}
+                                                                                        <input type="hidden" id="hidId"
+                                                                                               name="hidId"
+                                                                                               value="{{ $user->id }}">
+                                                                                    </form>
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </li>
+                                    @endif
                                 @endforeach
                             @else
                                 <li class="list-group-item">
