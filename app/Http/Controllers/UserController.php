@@ -200,12 +200,10 @@ class UserController extends Controller
         $user = User::find(session('User'));
         if ($user->id != 1) {
             $users = $user;
-//            $users = User::where('user_id', $user->id)->get();
         }
         else
             $users = User::all();
 
-//        return $users;
         $designation = Designation::find(2);
         return view('/admin/clients/create-clientuser', compact('users', 'designation', 'id'));
     }
@@ -220,7 +218,13 @@ class UserController extends Controller
     //Edit client user
     public function clientedit(User $id)
     {
-        $users = User::all();
+        $user = User::find(session('User'));
+        if ($user->id != 1) {
+            $users = $user;
+        }
+        else
+            $users = User::all();
+//        $users = User::all();
         $designation = Designation::find(2);
         return view('/admin/clients/create-clientuser', compact('users', 'designation', 'id'));
     }

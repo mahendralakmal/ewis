@@ -24,7 +24,7 @@
                             </thead>
                             <tbody>
                             @foreach($users as $user)
-                                @if(!$user->deleted == 1)
+                                @if(!$user->deleted == 1 && $user->designation_id != 2)
                                     <tr>
                                         <td>@if($user->approval == 1)
 
@@ -37,10 +37,10 @@
                                         <td>
                                             {{--                                        {{ $user->designation->designation }}--}}
                                             {{--{{ $user->designation_id }}--}}
-                                            @if(strtolower($user->designation->designation) != "client")
-                                                <a href="/admin/users/manage-users/{{ $user->id }}/privileges"
-                                                   class="btn btn-primary btn-outline">Privileges</a>
-                                            @endif
+                                            {{--@if(strtolower($user->designation->designation) != "client")--}}
+                                                {{--<a href="/admin/users/manage-users/{{ $user->id }}/privileges"--}}
+                                                   {{--class="btn btn-primary btn-outline">Privileges</a>--}}
+                                            {{--@endif--}}
 
                                             @if(strtolower($user->designation->designation) != "super admin")
                                                 <a @if($user->approval != 1) href="/admin/users/manage-users/approved/{{ $user->id }}"

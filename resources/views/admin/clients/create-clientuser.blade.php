@@ -225,22 +225,6 @@
                     <div class="col-md-7">
                         <label class="form-control">Client</label>
                         <input type="hidden" name="designation_id" id="designation_id" value="{{$designation->id}}">
-                        {{--<select type="text" class="form-control" name="designation_id" id="designation_id">--}}
-                        {{--@if(!$id == "")--}}
-                        {{--@foreach($designations as $designation)--}}
-                        {{--@if($designation->id ==2)--}}
-                        {{--<option value="{{ $designation->id}}"--}}
-                        {{--@if($designation->id ==2) selected @endif>{{ $designation->designation }}</option>--}}
-                        {{--@endif--}}
-                        {{--@endforeach--}}
-                        {{--@else--}}
-                        {{--@foreach($designations as $designation)--}}
-                        {{--@if($designation->id ==2)--}}
-                        {{--<option value="{{ $designation->id ="2" }}">{{ $designation->designation }}</option>--}}
-                        {{--@endif--}}
-                        {{--@endforeach--}}
-                        {{--@endif--}}
-                        {{--</select>--}}
                     </div>
                 </div>
                 <div class="form-group">
