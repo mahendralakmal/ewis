@@ -27,9 +27,9 @@
                                     <td>
                                         <a href="/admin/brands/{{$brand->id}}"
                                            class="btn btn-primary btn-outline">Edit</a>
-                                        <a href="/admin/brands/{{$brand->id}}/remove"
-                                           class="btn btn-danger btn-outline">Delete</a>
-                                    </td>
+                                        {{--<a href="/admin/brands/{{$brand->id}}/remove"--}}
+                                           {{--class="btn btn-danger btn-outline">Delete</a>--}}
+                                    {{--</td>--}}
                                 </tr>
                             @endif
                         @endforeach
@@ -77,7 +77,9 @@
                     </div>
                     <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
                             Add @endif</button>
+                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Brands</a>
                 </form>
+
             </div>
         </div>
     @else

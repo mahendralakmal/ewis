@@ -232,6 +232,7 @@
                         </div>
                     </div>
                     <button class="btn btn-primary" name="submit" id="submit">Add</button>
+                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin/manage-clients') }}">Finished Assigning Products</a>
                 </form>
             </div>
         </div>

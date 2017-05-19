@@ -136,12 +136,12 @@
                             @else
                                 @foreach($clients as $client)
                                     <li class="list-group-item">
-                                        <a @if((\App\Client::find($client->id))->client_branch->count() >0)href="#{{ $client->id }}"
+                                        <a @if((\App\Client::find($client->id)->client_branch->count()) >0)href="#{{ $client->id }}"
                                            @endif class="list-group-item active" data-toggle="collapse">
                                             <strong>{{ $client->name }}</strong>
-                                            <span class="badge">@if((\App\Client::find($client->id))->client_branch->count() >0){{(\App\Client::find($client->id))->client_branch->count()}}@endif</span>
+                                            <span class="badge">@if((\App\Client::find($client->id)->client_branch->count()) >0){{(\App\Client::find($client->id)->client_branch->count())}}@endif</span>
                                         </a>
-                                        @if((\App\Client::find($client->id))->client_branch->count() >0)
+                                        @if((\App\Client::find($client->id)->client_branch->count()) >0)
                                             <div id="{{$client->id}}" class="collapse">
                                                 <table class="table">
                                                     <thead>
@@ -150,7 +150,7 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    @foreach((\App\Client::find($client->id))->client_branch as $cbranch)
+                                                    @foreach((\App\Client::find($client->id)->client_branch) as $cbranch)
                                                         <tr>
                                                             <td>{{ $cbranch->name }}</td>
                                                             <td>

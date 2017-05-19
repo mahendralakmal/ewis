@@ -40,6 +40,7 @@
                                     <form method="get" id="{{$porder->id}}" action="">
                                         <input type="hidden" id="id" name="id" value="{{$porder->id}}">
                                         <select id="{{$porder->id}}" name="postatus" class="form-control postatus">
+                                            @if($porder->status === "P")
                                             <option value="P" @if($porder->status === "P") selected @endif>Pending
                                             </option>
                                             <option value="OP" @if($porder->status === "OP") selected @endif>Processing
@@ -49,6 +50,24 @@
                                             </option>
                                             <option value="C" @if($porder->status === "C") selected @endif>Completed
                                             </option>
+                                                @elseif($porder->status === "OP")
+                                                <option value="OP" @if($porder->status === "OP") selected @endif>Processing
+                                                </option>
+                                                <option value="PC" @if($porder->status === "PC") selected @endif>Partial
+                                                    Completed
+                                                </option>
+                                                <option value="C" @if($porder->status === "C") selected @endif>Completed
+                                                </option>
+                                                @elseif($porder->status === "PC")
+                                                <option value="PC" @if($porder->status === "PC") selected @endif>Partial
+                                                    Completed
+                                                </option>
+                                                <option value="C" @if($porder->status === "C") selected @endif>Completed
+                                                </option>
+                                                @elseif($porder->status === "C")
+                                                <option value="C" @if($porder->status === "C") selected @endif>Completed
+                                                </option>
+                                                @endif
                                         </select>
                                     </form>
                                 </td>
@@ -72,9 +91,20 @@
 @stop
 @section('scripts')
     <script>
+        $(".postatus").on('change', function () {
+            var poid = this.id;
+            $.ajax({
+                type: 'get',
+                url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
+                success: function (response) {
+                }
+            });
+        });
+
         $("#from").on('change', function () {
             getPendingPO($(this).val(), $('#to').val());
         });
+
         $("#to").on('change', function () {
             getPendingPO($('#from').val(), $(this).val());
         });

@@ -35,8 +35,8 @@
                                                         <td>
                                                             <a href="/admin/categories/{{$cate->id}}"
                                                                class="btn btn-primary btn-outline">Edit</a>
-                                                            <a href="/admin/categories/{{$cate->id}}/remove"
-                                                               class="btn btn-danger btn-outline">Delete</a>
+                                                            {{--<a href="/admin/categories/{{$cate->id}}/remove"--}}
+                                                               {{--class="btn btn-danger btn-outline">Delete</a>--}}
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -102,6 +102,7 @@
                     <input type="hidden" id="category_key" name="category_key">
                     <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
                             Add @endif</button>
+                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Categories</a>
             {{--</div>--}}
             </form>
         </div>
