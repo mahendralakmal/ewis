@@ -50,7 +50,7 @@
                                                     {{--{{$product['item'] ['id']}}--}}
                                                     {{number_format((\App\Client_Product::where([['product_id', $product['item'] ['id']],['clients_branch_id', $branch->id ]])->first()->special_price),'2','.',',')}}
                                                 </td>
-                                                <td style="text-align: right">
+                                                <td style="text-align: center">
                                                     @if($product['item'] ['vat_apply'])15% @else 0% @endif
                                                 </td>
                                                 <td style="text-align: right">
