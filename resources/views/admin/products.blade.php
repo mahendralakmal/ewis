@@ -188,6 +188,7 @@
                     </div>
                     <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
                             Add @endif</button>
+                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Products</a>
                 </form>
             </div>
         </div>
