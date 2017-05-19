@@ -45,8 +45,8 @@
                                                                     <td>
                                                                         <a href="/admin/products/{{$prod->id}}"
                                                                            class="btn btn-primary btn-outline">Edit</a>
-                                                                        <a href="/admin/products/{{$prod->id}}/remove"
-                                                                           class="btn btn-danger btn-outline">Delete</a>
+                                                                        {{--<a href="/admin/products/{{$prod->id}}/remove"--}}
+                                                                           {{--class="btn btn-danger btn-outline">Delete</a>--}}
                                                                     </td>
                                                                 </tr>
                                                             @endif

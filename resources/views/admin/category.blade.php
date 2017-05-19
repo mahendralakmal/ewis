@@ -35,8 +35,8 @@
                                                         <td>
                                                             <a href="/admin/categories/{{$cate->id}}"
                                                                class="btn btn-primary btn-outline">Edit</a>
-                                                            <a href="/admin/categories/{{$cate->id}}/remove"
-                                                               class="btn btn-danger btn-outline">Delete</a>
+                                                            {{--<a href="/admin/categories/{{$cate->id}}/remove"--}}
+                                                               {{--class="btn btn-danger btn-outline">Delete</a>--}}
                                                         </td>
                                                     </tr>
                                                 @endif
