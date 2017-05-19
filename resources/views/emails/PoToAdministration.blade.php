@@ -60,12 +60,12 @@
                 </tr>
                 @foreach($order->bucket->items as $porder)
                     <tr>
-                        <td>{{ $porder['item'] ['part_no'] }}</td>
-                        <td>{{ $porder['item'] ['name'] }}</td>
-                        <td>{{number_format((\App\Client_Product::where([['product_id', $porder['item'] ['id']],['clients_branch_id', $user->c_user->client_branch->id ]])->first()->special_price),'2','.',',')}}</td>
-                        <td>{{ $porder['qty'] }}</td>
-                        <td>@if($porder['item'] ['vat_apply'])15% @else 0% @endif</td>
-                        <td>{{number_format($porder['price'],'2','.',',') }}</td>
+                        <td style="text-align: center">{{ $porder['item'] ['part_no'] }}</td>
+                        <td style="text-align: center">{{ $porder['item'] ['name'] }}</td>
+                        <td style="text-align: right">{{number_format((\App\Client_Product::where([['product_id', $porder['item'] ['id']],['clients_branch_id', $user->c_user->client_branch->id ]])->first()->special_price),'2','.',',')}}</td>
+                        <td style="text-align: center">{{ $porder['qty'] }}</td>
+                        <td style="text-align: center">@if($porder['item'] ['vat_apply'])15% @else 0% @endif</td>
+                        <td style="text-align: right">{{number_format($porder['price'],'2','.',',') }}</td>
                     </tr>
                 @endforeach
                 <tr>
