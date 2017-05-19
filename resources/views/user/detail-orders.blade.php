@@ -19,7 +19,7 @@
                                     <thead>
                                     <tr>
                                         <td><strong>Part Number</strong></td>
-                                        <td><strong>Product Name</strong></td>
+                                        <td style="text-align: center"><strong>Product Name</strong></td>
                                         <td><strong>Quantity</strong></td>
                                         <td><strong>Unit Price</strong></td>
                                         <td><strong>VAT</strong></td>
