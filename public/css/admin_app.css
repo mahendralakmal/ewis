@@ -5855,6 +5855,9 @@ body, label, .checkbox label {
 .error {
   color: #ee001d; }
 
+.btn {
+  font-size: 12px !important; }
+
 .fa-check {
   color: #008000 !important; }
 
