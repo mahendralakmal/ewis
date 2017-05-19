@@ -38,8 +38,8 @@
                                             {{--                                        {{ $user->designation->designation }}--}}
                                             {{--{{ $user->designation_id }}--}}
                                             {{--@if(strtolower($user->designation->designation) != "client")--}}
-                                                {{--<a href="/admin/users/manage-users/{{ $user->id }}/privileges"--}}
-                                                   {{--class="btn btn-primary btn-outline">Privileges</a>--}}
+                                                <a href="/admin/users/manage-users/{{ $user->id }}/privileges"
+                                                   class="btn btn-primary btn-outline">Privileges</a>
                                             {{--@endif--}}
 
                                             @if(strtolower($user->designation->designation) != "super admin")
