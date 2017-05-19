@@ -20,12 +20,12 @@
         {{--Fax: 112 380580</p>--}}
         {{--</td>--}}
         <td>
-            <p><strong>Date / Time:</strong> {{ $order->created_at }}</p>
-            <p><strong>P.O Reference#:</strong> {{ $order->id }}</p>
+            <p><strong>Date / Time: </strong> {{ $order->created_at }}</p>
+            <p><strong>P.O Reference#: </strong> {{ $order->id }}</p>
             <br>
-            <p><strong>Customer Name:</strong>{{ $client_branch->client->name }} </p>
+            <p><strong>Customer Name: </strong>{{ $client_branch->client->name }} </p>
             <br>
-            <p><strong>Contact Name:</strong>{{ $order->del_cp }} </p>
+            <p><strong>Contact Name: </strong>{{ $order->del_cp }} </p>
         </td>
     </tr>
     <tr>
@@ -52,15 +52,17 @@
             <table width="100%" border="1">
                 <tr>
                     <td width="15%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Product Number</h5></td>
-                    <td width="55%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Product Name</h5></td>
+                    <td width="45%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Description</h5></td>
                     <td width="10%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Quantity</h5></td>
-                    <td width="10%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Vat</h5></td>
-                    <td width="10%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Price</h5></td>
+                    <td width="10%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Unit Price</h5></td>
+                    <td width="10%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Vat (%)</h5></td>
+                    <td width="10%" style="background-color: #2a88bd; min-height: 25px; color: #000;"><h5>Total Price</h5></td>
                 </tr>
                 @foreach($order->bucket->items as $porder)
                     <tr>
                         <td>{{ $porder['item'] ['part_no'] }}</td>
                         <td>{{ $porder['item'] ['name'] }}</td>
+                        <td>{{number_format((\App\Client_Product::where([['product_id', $porder['item'] ['id']],['clients_branch_id', $user->c_user->client_branch->id ]])->first()->special_price),'2','.',',')}}</td>
                         <td>{{ $porder['qty'] }}</td>
                         <td>@if($porder['item'] ['vat_apply'])15% @else 0% @endif</td>
                         <td>{{number_format($porder['price'],'2','.',',') }}</td>
@@ -70,8 +72,8 @@
 
                 </tr>
             </table>
-            <p><strong>Account Manager </strong> {{ (\App\User::find($client_branch->agent_id)->name) }}</p>
-            <p><strong>Special Notes :</strong> {{$order->del_notes}}</p>
+            <p><strong>Account Manager : </strong> {{ (\App\User::find($client_branch->agent_id)->name) }}</p>
+            <p><strong>Special Notes : </strong> {{$order->del_notes}}</p>
         </td>
     </tr>
     <tr>
