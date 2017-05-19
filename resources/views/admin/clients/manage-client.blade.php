@@ -1,10 +1,11 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Client Manager')
 @section('section')
-    @if((\Illuminate\Support\Facades\Session::has('User'))
-    && strtolower((\Illuminate\Support\Facades\Session::get('Type')) !== 'client')
-    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
-    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_users))
+    @if((Session::has('User'))
+    && strtolower((Session::get('Type')) !== 'client')
+    && (\App\User::find(Session::get('User'))->privilege != null)
+    && (\App\User::find(Session::get('User'))->privilege->client_users)
+    )
         <div class="col-md-12 col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
