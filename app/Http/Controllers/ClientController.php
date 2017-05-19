@@ -22,12 +22,13 @@ class ClientController extends Controller
     public function index()
     {
         $user = User::find(session('User'));
+//        return $user;
         if ($user->id == 1)
             $users = User::where('designation_id',6)->get();
         else {
 //            $sh = User::where('section_head_id', $user->id)->get();
 //            $clients = Client::where('user_id', $user->id)->get();
-            $users = User::where('designation_id',$user->id)->get();
+            $users = User::where('designation_id',$user->designation_id)->get();
         }
         return view('/admin/clients/manage-client', compact('clients', 'users','user', 'sh'));
     }

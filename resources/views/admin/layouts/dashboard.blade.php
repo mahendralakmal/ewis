@@ -75,7 +75,10 @@
                                 (\App\User::find(Session::get('User'))->privilege->client_prof) ||
                                 (\App\User::find(Session::get('User'))->privilege->client_users) ||
                                 (\App\User::find(Session::get('User'))->privilege->client_branch) ||
-                                (\App\User::find(Session::get('User'))->privilege->manage_client)
+                                (\App\User::find(Session::get('User'))->privilege->manage_client)||
+                                (\App\User::find(Session::get('User'))->privilege->assign_agent)||
+                                (\App\User::find(Session::get('User'))->privilege->asign_brand)||
+                                (\App\User::find(Session::get('User'))->privilege->asign_category)
                                 )
                                     <a href="#">Manage Clients<span
                                                 class="fa arrow"></span></a>
