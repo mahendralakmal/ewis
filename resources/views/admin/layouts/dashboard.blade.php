@@ -247,15 +247,6 @@
             );
         });
 
-        $(".postatus").on('change', function () {
-            var poid = this.id;
-            $.ajax({
-                type: 'get',
-                url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
-                success: function (response) {
-                }
-            });
-        });
 
         $("#product_id").on('change', function () {
             $.ajax(
