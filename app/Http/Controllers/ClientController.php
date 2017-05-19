@@ -24,10 +24,10 @@ class ClientController extends Controller
         $user = User::find(session('User'));
         if ($user->id == 1)
             $users = User::where('designation_id',6)->get();
-//            $clients = Client::all();
         else {
-            $sh = User::where('section_head_id', $user->id)->get();
-            $clients = Client::where('user_id', $user->id)->get();
+//            $sh = User::where('section_head_id', $user->id)->get();
+//            $clients = Client::where('user_id', $user->id)->get();
+            $users = User::where('designation_id',$user->id)->get();
         }
         return view('/admin/clients/manage-client', compact('clients', 'users','user', 'sh'));
     }
