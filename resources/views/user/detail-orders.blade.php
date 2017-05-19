@@ -18,12 +18,12 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <td><h5>Part Number</h5></td>
-                                        <td><h5>Part Name</h5></td>
-                                        <td><h5>Quantity</h5></td>
-                                        <td><h5>Price</h5></td>
-                                        {{--<td></td>--}}
-                                        {{--<td><h5>NIC/ Passport</h5></td>--}}
+                                        <td><strong>Part Number</strong></td>
+                                        <td><strong>Product Name</strong></td>
+                                        <td><strong>Quantity</strong></td>
+                                        <td><strong>Unit Price</strong></td>
+                                        <td><strong>VAT</strong></td>
+                                        <td><strong>Total Price (Rs.)</strong></td>
                                         <td class="col-md-3"></td>
                                     </tr>
                                     </thead>
@@ -33,12 +33,15 @@
                                             <td>{{ $item['item'] ['part_no'] }}</td>
                                             <td>{{ $item['item'] ['name'] }}</td>
                                             <td>{{ $item['qty'] }}</td>
-                                            {{--<td>{{ $item['price'] }}</td>--}}
+                                            <td>{{number_format((\App\Client_Product::where([['product_id', $item['item'] ['id']],['clients_branch_id', $branch->id ]])->first()->special_price),'2','.',',')}}</td>
+                                            <td>@if($item['item'] ['vat_apply'])15% @else 0% @endif</td>
                                             <td style="text-align: right">{{ number_format($item['price'],2) }}</td>
                                             @endforeach
                                         </tr>
                                         <tr>
                                             <td><h5>Total</h5></td>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td style="border-bottom: double #333; text-align: right"><h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>

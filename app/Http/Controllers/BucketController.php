@@ -247,7 +247,9 @@ class BucketController extends Controller
     {
         $order = P_Order::find($id);
         $order->bucket = unserialize($order->bucket);
-        return view('user/detail-orders', compact('order'));
+        $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
+
+        return view('user/detail-orders', compact('order','branch'));
     }
 
 }
