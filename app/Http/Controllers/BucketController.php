@@ -96,8 +96,9 @@ class BucketController extends Controller
         $oldBucket = Session::get('bucket');
         $bucket = new Bucket($oldBucket);
         $client_product = Client_Product::all();
+        $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
 
-        return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice, 'client_product' => $client_product ]);
+        return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice, 'client_product' => $client_product, 'branch' => $branch ]);
 
     }
 
