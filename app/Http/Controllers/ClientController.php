@@ -23,15 +23,13 @@ class ClientController extends Controller
     {
         $user = User::find(session('User'));
         if ($user->id == 1)
-            $clients = Client::all();
+            $users = User::where('designation_id',6)->get();
+//            $clients = Client::all();
         else {
             $sh = User::where('section_head_id', $user->id)->get();
-//            if($sh->count()>0)
-//                $clients = $sh;
-//            else
             $clients = Client::where('user_id', $user->id)->get();
         }
-        return view('/admin/clients/manage-client', compact('clients', 'user', 'sh'));
+        return view('/admin/clients/manage-client', compact('clients', 'users','user', 'sh'));
     }
 
     public function create_profile()
