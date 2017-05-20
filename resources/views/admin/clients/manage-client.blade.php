@@ -123,6 +123,49 @@
                                         <span class="badge">@if(App\User::where('section_head_id',$user->id)->count() >0){{App\User::where('section_head_id',$user->id)->count()}}@endif</span>
                                     </a>
                                     <div id="{{$user->id}}" class="collapse">
+
+                                        @if(App\ClientsBranch::where('agent_id',$user->id)->count() > 0)
+                                            <a @if(App\ClientsBranch::where('agent_id',$user->id)->count() > 0)href="#s{{ $user->id }}"
+                                               @endif class="list-group-sub-item item2 active"
+                                               data-toggle="collapse"><strong>{{ $user->name }}</strong>
+                                                <span class="badge">@if(App\ClientsBranch::where('agent_id',$user->id)->count() > 0){{App\ClientsBranch::where('agent_id',$user->id)->count()}}@endif</span></a>
+                                            <div id="s{{$user->id}}" class="collapse">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <td><h5>Client</h5></td>
+                                                        <td><h5>Branch</h5></td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach(App\ClientsBranch::where('agent_id',$user->id)->get() as $cbranch)
+                                                        @if($cbranch->activation == 0)
+                                                            <tr>
+                                                                <td class="col-md-4">{{ $cbranch->client->name }}</td>
+                                                                <td class="col-md-2">{{ $cbranch->name }}</td>
+                                                                <td class="col-md-6">
+                                                                    <a href="/admin/manage-clients/agent-assign/{{ $cbranch->id }}"
+                                                                       class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign
+                                                                        Account Manager</a>
+                                                                    <a href="/admin/manage-product-list/{{ $cbranch->id }}/brands"
+                                                                       class="btn @if($cbranch->cbrands->where('remove',0)->count()>0) btn-success @else btn-primary @endif btn-outline">Add
+                                                                        Brands</a>
+                                                                    <a href="/admin/manage-product-list/{{ $cbranch->id }}/categories"
+                                                                       class="btn @if($cbranch->ccategory->where('remove',0)->count()>0) btn-success @else btn-primary @endif btn-outline">Add
+                                                                        Categories</a>
+                                                                    <a href="/admin/manage-product-list/{{ $cbranch->id }}"
+                                                                       class="btn @if($cbranch->cproduct->where('remove',0)->count()>0) btn-success @else btn-primary @endif btn-outline">Add
+                                                                        Products</a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        @endif
+
                                         @foreach(App\User::where('section_head_id',$user->id)->get() as $secHead)
                                             <a href="#c{{ $secHead->id }}" class="list-group-sub-item active"
                                                data-toggle="collapse"><strong>{{ $secHead->name }}</strong>
