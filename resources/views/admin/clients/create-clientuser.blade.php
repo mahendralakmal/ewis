@@ -17,6 +17,8 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <td><h5>Client</h5></td>
+                                <td><h5>Branch</h5></td>
                                 <td><h5>Email</h5></td>
                                 <td><h5>Name</h5></td>
                                 <td><h5>Designation</h5></td>
@@ -24,10 +26,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @if(\Illuminate\Support\Facades\Session::get('User') == 1)
+                            @if(Session::get('User') == 1)
                                 @foreach($users as $user)
                                     @if(!$user->deleted == 1 && $user->designation_id == 2)
                                         <tr>
+                                            <td>{{$user->c_user->client->name}}</td>
+                                            <td>{{$user->c_user->client_branch->name}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->designation->designation}}</td>
@@ -55,9 +59,11 @@
                                     @endif
                                 @endforeach
                             @else
-                                @foreach($users as $user)
+                                @foreach(App\User::where('user_id', $users->id)->get() as $user)
                                     @if(!$user->deleted == 1 && $user->designation_id == 2)
                                         <tr>
+                                            <td>{{$user->c_user->client->name}}</td>
+                                            <td>{{$user->c_user->client_branch->name}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->name}}</td>
                                             <td>{{$user->designation->designation}}</td>
@@ -82,6 +88,40 @@
                                             </td>
                                         </tr>
                                     @endif
+                                @endforeach
+
+                                @foreach(App\User::where('section_head_id', $users->id)->get() as $client)
+                                    @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
+                                        @foreach($cbranch->client_user as $cuser)
+                                            <tr>
+                                                <td>{{$cbranch->client->name}}</td>
+                                                <td>{{$cbranch->name}}</td>
+                                                <td>{{$cuser->user->email}}</td>
+                                                <td>{{$cuser->user->name}}</td>
+                                                <td>{{$cuser->user->designation->designation}}</td>
+                                                <td class="col-md-6">
+                                                    <form method="POST" action="/admin/users/delete" role="form">
+                                                        <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
+                                                           class="btn btn-primary btn-outline">Profile</a>
+                                                        <a href="/admin/manage-clients/create-clientuser/{{ $cuser->user->id }}"
+                                                           class="btn btn-primary btn-outline">Edit</a>
+                                                        <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
+                                                           class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
+                                                                Approve @else Unapprove @endif</a>
+                                                        @if($cuser->user->designation_id !== 1)
+                                                            <button class="btn btn-danger btn-outline"
+                                                                    type="submit">
+                                                                Delete
+                                                            </button>
+                                                        @endif
+                                                        {{ csrf_field() }}
+                                                        <input type="hidden" id="hidId" name="hidId"
+                                                               value="{{ $cuser->user->id }}">
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
                                 @endforeach
                             @endif
                             </tbody>

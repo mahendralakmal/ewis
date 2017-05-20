@@ -199,7 +199,7 @@ class UserController extends Controller
         $id = "";
         $user = User::find(session('User'));
         if ($user->id != 1) {
-            $users = User::where('user_id', $user->id)->get();
+            $users = $user;
         }
         else
             $users = User::all();
@@ -220,7 +220,7 @@ class UserController extends Controller
     {
         $user = User::find(session('User'));
         if ($user->id != 1) {
-            $users = User::where('user_id', $user->id)->get();
+            $users = $user;
         }
         else
             $users = User::all();

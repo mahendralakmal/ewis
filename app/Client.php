@@ -12,9 +12,9 @@ class Client extends Model
         return $this->hasMany(ClientsBranch::class);
     }
 
-//    public function clientuser(){
-//        return $this->hasMany(Clientuser::class);
-//    }
+    public function clientuser(){
+        return $this->hasMany(Clientuser::class);
+    }
 //
     public function user(){
         return $this->belongsTo(User::class);

@@ -18,6 +18,11 @@ class Clientuser extends Model
         return $this->belongsTo(ClientsBranch::class, 'clients_branch_id');
     }
 
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
 //    public function cbranch()
 //    {
 //        return $this->belongsTo(ClientsBranch::class);
