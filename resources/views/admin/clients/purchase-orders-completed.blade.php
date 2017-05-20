@@ -27,7 +27,6 @@
                         <td><h5>Client</h5></td>
                         <td><h5>Branch</h5></td>
                         <td><h5>Attachment</h5></td>
-                        {{--<td><h5>Status</h5></td>--}}
                         <td class="col-md-3"></td>
                     </tr>
                     </thead>
