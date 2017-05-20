@@ -145,27 +145,39 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-5 col-lg-5 col-sm-5">
-                                        <label id="success"></label>
-                                    </div>
-                                    <div class="form-group">
-                                        {{--<div class="col-md-3">--}}
-                                        <button class="btn btn-primary btn-outline" onclick="Success();" type="submit"
-                                                value="save-form" id="save-form">Submit
-                                        </button>
-                                        <button class="btn btn-primary btn-outline" type="reset" value="clear-form">
-                                            Clear
-                                        </button>
-                                        <script>
-                                            function Success() {
+                                    <div class="row">
+                                        <div class="col-md-12" align="center">
+                                            <div class="form-group">
+                                                {{--<div class="col-md-3">--}}
+                                                <button class="btn btn-primary btn-outline" onclick="Success();" type="submit"
+                                                        value="save-form" id="save-form">Submit
+                                                </button>
+                                                <button class="btn btn-primary btn-outline" type="reset" value="clear-form">
+                                                    Clear
+                                                </button>
 
-                                                $('#postCheckout').submit(function () {
-                                                    $('#save-form').prop('disabled', true);
-                                                });
-                                                document.getElementById("success").innerHTML = "<div class='alert alert-success'>Your Purchase Order Submitted Successfully</div>";
-                                            }
-                                        </script>
+                                                <script>
+                                                    function Success() {
+
+                                                        $('#postCheckout').submit(function () {
+                                                            $('#save-form').prop('disabled', true);
+                                                        });
+                                                        document.getElementById("success").innerHTML = "<div class='alert alert-success'>Your Purchase Order Submitted Successfully</div>";
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" align="center">
+                                            <div>
+                                                <label id="success"></label>
+                                            </div>
+                                        </div>
                                     </div>
+
+
+
+
+
                                 </form>
                             </ul>
                     </div>
