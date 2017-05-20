@@ -13,34 +13,83 @@
                     <div class="panel-body">
                         <div class="panel-body">
                             <ul class="list-group">
-                                @foreach($clients as $client)
-                                    <li class="list-group-item">
-                                        <a @if($client->client_branch->count() >0)href="#{{ $client->id }}"
-                                           @endif class="list-group-item active" data-toggle="collapse">
-                                            <strong>{{ $client->name }}</strong>
-                                            <span class="badge">@if($client->client_branch->count() >0){{ $client->client_branch->where('activation',0)->count() }}@endif</span>
-                                        </a>
-                                        @if($client->client_branch->count() >0)
-                                            <div id="{{$client->id}}" class="collapse">
-                                                <table class="table">
-                                                    <tbody>
-                                                    @foreach($client->client_branch as $branch)
-                                                        @if($branch->activation == 0)
-                                                            <tr>
-                                                                <td>{{ $branch->name }}</td>
-                                                                <td class="col-md-2">
-                                                                    <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/remove"
-                                                                       class="btn btn-danger btn-outline">Remove</a>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        @endif
-                                    </li>
-                                @endforeach
+                                @if(Session::get('User') == 1)
+                                    @foreach($clients as $client)
+                                        <li class="list-group-item">
+                                            <a @if($client->client_branch->count() >0)href="#{{ $client->id }}"
+                                               @endif class="list-group-item active" data-toggle="collapse">
+                                                <strong>{{ $client->name }}</strong>
+                                                <span class="badge">@if($client->client_branch->count() >0){{ $client->client_branch->where('activation',0)->count() }}@endif</span>
+                                            </a>
+                                            @if($client->client_branch->count() >0)
+                                                <div id="{{$client->id}}" class="collapse">
+                                                    <table class="table">
+                                                        <tbody>
+                                                        @foreach($client->client_branch as $branch)
+                                                            @if($branch->activation == 0)
+                                                                <tr>
+                                                                    <td>{{ $branch->name }}</td>
+                                                                    <td class="col-md-2">
+                                                                        <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/remove"
+                                                                           class="btn btn-danger btn-outline">Remove</a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                @else
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <td><h5>Client</h5></td>
+                                            <td><h5>Branch</h5></td>
+                                            <td></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach(App\Client::where('user_id',$clients->id)->get() as $client)
+                                            @foreach(App\ClientsBranch::where('client_id',$client->id)->get() as $cbranch)
+                                                <tr>
+                                                    <td>{{ $client->name }}</td>
+                                                    <td>{{ $cbranch->name }}</td>
+                                                    <td>
+                                                        <a href="/admin/manage-clients/update-profile/{{ $cbranch->id }}"
+                                                           class="btn btn-primary btn-outline">Edit</a>
+                                                        <a @if(!$cbranch->approval) href="/admin/manage-clients/approved/{{ $cbranch->id }}"
+                                                           class="btn btn-primary btn-outline"
+                                                           @else href="/admin/manage-clients/unapproved/{{ $cbranch->id }}"
+                                                           class="btn btn-danger btn-outline"@endif>@if(!$cbranch->approval)
+                                                                Approve @else Unapprove @endif</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                        @foreach(App\User::where('section_head_id', $clients->id)->get() as $client)
+                                            @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
+                                                <tr>
+                                                    <td>{{ $cbranch->client->name }}</td>
+                                                    <td>{{ $cbranch->name }}</td>
+                                                    <td>
+                                                        <a href="/admin/manage-clients/update-profile/{{ $cbranch->id }}"
+                                                           class="btn btn-primary btn-outline">Edit</a>
+                                                        <a @if(!$cbranch->approval) href="/admin/manage-clients/approved/{{ $cbranch->id }}"
+                                                           class="btn btn-primary btn-outline"
+                                                           @else href="/admin/manage-clients/unapproved/{{ $cbranch->id }}"
+                                                           class="btn btn-danger btn-outline"@endif>@if(!$cbranch->approval)
+                                                                Approve @else Unapprove @endif</a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+
+                                        </tbody>
+                                    </table>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -78,12 +127,31 @@
                         <div class="col-md-8">
                             <select name="client_id" id="client_id" class="form-control">
                                 <option> Select Client</option>
-                                @foreach($clients as $client)
-                                    @if($client->approval == 1)
+                                @if(Session::get('User') == 1)
+                                    @foreach($clients as $client)
+                                        @if($client->approval == 1)
+                                            <option value="{{$client->id}}"
+                                                    @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
+                                        @endif
+                                    @endforeach
+                                @else
+
+                                    @foreach(App\Client::where('user_id',$clients->id)->get() as $client)
+                                        @if($client->approval == 1)
                                         <option value="{{$client->id}}"
                                                 @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
-                                    @endif
-                                @endforeach
+                                        @endif
+                                    @endforeach
+                                    @foreach(App\User::where('section_head_id', $clients->id)->get() as $client)
+                                        @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
+                                                @if($cbranch->client->approval == 1)
+                                                <option value="{{$client->id}}"
+                                                        @if((!$id ==null) && ($id->client_id == $cbranch->client->id)) selected @endif>{{$cbranch->client->name}}</option>
+                                                @endif
+                                        @endforeach
+                                    @endforeach
+
+                                @endif
                             </select>
                         </div>
                     </div>
