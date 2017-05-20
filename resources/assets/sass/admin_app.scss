@@ -11,6 +11,7 @@
 
 body, label, .checkbox label {
   font-weight: 300;
+  font-size: 12px !important;
 }
 
 #privilegepnl{
@@ -139,7 +140,9 @@ $mobile: "(max-width: 768px)";
   color: $red;
 }
 
-
+.btn{
+  font-size: 11px !important;
+}
 
 .fa-check{
   color: $green !important;

@@ -5769,7 +5769,8 @@ button.close {
 @btn-font-weight : 300;
 @font-family-sans-serif : "Roboto", Helvetica, Arial, sans-serif;
 body, label, .checkbox label {
-  font-weight: 300; }
+  font-weight: 300;
+  font-size: 12px !important; }
 
 #privilegepnl h5 {
   margin-top: 20px; }
@@ -5853,6 +5854,9 @@ body, label, .checkbox label {
 
 .error {
   color: #ee001d; }
+
+.btn {
+  font-size: 11px !important; }
 
 .fa-check {
   color: #008000 !important; }
