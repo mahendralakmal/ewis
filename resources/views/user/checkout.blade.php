@@ -156,19 +156,18 @@
                                         <button class="btn btn-primary btn-outline" type="reset" value="clear-form">
                                             Clear
                                         </button>
-                                        {{--</div>--}}
+                                        <script>
+                                            function Success() {
+
+                                                $('#postCheckout').submit(function () {
+                                                    $('#save-form').prop('disabled', true);
+                                                });
+                                                document.getElementById("success").innerHTML = "<div class='alert alert-success'>Your Purchase Order Submitted Successfully</div>";
+                                            }
+                                        </script>
                                     </div>
                                 </form>
                             </ul>
-                            <script>
-                                function Success() {
-
-                                    $('#postCheckout').submit(function () {
-                                        $('#save-form').prop('disabled', true);
-                                    });
-                                    document.getElementById("success").innerHTML = "<div class='alert alert-success'>Your Purchase Order submited Successfully</div>";
-                                }
-                            </script>
                     </div>
                 </div>
             </div>

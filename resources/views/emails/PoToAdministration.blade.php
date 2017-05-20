@@ -69,7 +69,8 @@
                     </tr>
                 @endforeach
                 <tr>
-
+                    <td colspan="5">Grand Total</td>
+                    <td>{{number_format($order->bucket->totalPrice,'2','.',',')}}</td>
                 </tr>
             </table>
             <p><strong>Account Manager : </strong> {{ (\App\User::find($client_branch->agent_id)->name) }}</p>

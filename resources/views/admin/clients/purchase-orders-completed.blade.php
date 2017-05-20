@@ -22,27 +22,33 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <td><h5>Po. No.</h5></td>
+                        <td><h5>P.O No.</h5></td>
                         <td><h5>Created Date & Time</h5></td>
                         <td><h5>Client</h5></td>
                         <td><h5>Branch</h5></td>
+                        <td><h5>Attachment</h5></td>
                         {{--<td><h5>Status</h5></td>--}}
                         <td class="col-md-3"></td>
                     </tr>
                     </thead>
-                    <tbody class="tableC">
+                    <tbody class="tablePending">
                     @foreach($porder as $porder)
                         <tr>
                             <td>{{$porder->id}}</td>
                             <td>{{$porder->created_at}}</td>
                             <td>{{$porder->client_branch->client->name}}</td>
                             <td>{{$porder->del_branch}}</td>
+                            @if($porder->file !== null){
+                            <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a></td>
+                            @else <td>No Attachment</td>
+                            @endif
                             {{--<td>@if($porder->status === "P") Pending--}}
-                                {{--@elseif($porder->status === "PC") Partial Completed--}}
-                                {{--@elseif($porder->status === "C") Completed--}}
-                                {{--@endif--}}
+                            {{--@elseif($porder->status === "PC") Partial Completed--}}
+                            {{--@elseif($porder->status === "C") Completed--}}
+                            {{--@endif--}}
                             {{--</td>--}}
-                            <td><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}" class="btn btn-success btn-outline">Update Status / View Order</a></td>
+                            <td><a target="_blank" href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
+                                   class="btn btn-success btn-outline">Update Status / View Order</a></td>
                         </tr>
 
                     @endforeach

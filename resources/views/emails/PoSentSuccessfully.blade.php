@@ -75,9 +75,11 @@
                         <td style="text-align: right">{{number_format($porder['price'],'2','.',',') }}</td>
                     </tr>
                 @endforeach
-                <tr>
+                    <tr>
+                        <td colspan="5">Grand Total</td>
+                        <td>{{number_format($order->bucket->totalPrice,'2','.',',')}}</td>
+                    </tr>
 
-                </tr>
             </table>
             <p><strong>Account Manager : </strong> {{ (\App\User::find($client_branch->agent_id)->name) }}</p>
             <p><strong>Special Notes : </strong> {{$order->del_notes}}</p>
