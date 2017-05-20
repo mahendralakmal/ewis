@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Client_Product;
+use App\ClientsBranch;
 use App\Mail\PoCompleted;
 use App\Mail\PoOnProcess;
 use App\Mail\PoPartialComplete;
@@ -239,8 +240,9 @@ class BucketController extends Controller
     public function getPODetails($id)
     {
         $order = P_Order::find($id);
-            $order->bucket = unserialize($order->bucket);
-        return view('admin/clients/detail-orders', compact('order'));
+        $order->bucket = unserialize($order->bucket);
+        $branch = ClientsBranch::find($order->clients_branch_id);
+        return view('admin/clients/detail-orders', compact('order','branch'));
     }
 
     public function historyPODetails($id)

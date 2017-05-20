@@ -27,6 +27,7 @@
                             <td style="text-align: center">{{ $item['item'] ['name'] }}</td>
                             <td style="text-align: center">{{ $item['qty'] }}</td>
                             <td style="text-align: right">{{number_format((\App\Client_Product::where([['product_id', $item['item'] ['id']],['clients_branch_id', $branch->id ]])->first()->special_price),'2','.',',')}}</td>
+{{--                            <td>{{$branch->id}}</td>--}}
                             <td style="text-align: center">@if($item['item'] ['vat_apply'])15% @else 0% @endif</td>
                             <td style="text-align: right">{{ number_format($item['price'],2) }}</td>
                             @endforeach
