@@ -75,17 +75,25 @@ class AgentController extends Controller
         } else {
             $id = null;
         }
-        $clients = Client::where('approval', 1)->get();
+
+        $ses = User::find(session('User'));
+        if ($ses->id == 1)
+            $clients = Client::where('approval', 1)->get();
+        else
+            $clients = ClientsBranch::where('agent_id', $ses->id)->get();
+
         return view('/admin/clients/client-users', compact('user', 'clients', 'id'));
     }
 
-    public function client_user_activate(User $user){
-        $user->update(['approval'=>1]);
+    public function client_user_activate(User $user)
+    {
+        $user->update(['approval' => 1]);
         return back();
     }
 
-    public function client_user_deactivate(User $user){
-        $user->update(['approval'=>0]);
+    public function client_user_deactivate(User $user)
+    {
+        $user->update(['approval' => 0]);
         return back();
     }
 }
