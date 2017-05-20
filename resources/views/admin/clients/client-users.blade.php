@@ -1,9 +1,9 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading','Client User Profile ')
 @section('section')
-    @if((\Illuminate\Support\Facades\Session::has('User'))
-    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
-    && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_prof))
+    @if((Session::has('User'))
+    && (\App\User::find(Session::get('User'))->privilege != null)
+    && (\App\User::find(Session::get('User'))->privilege->client_prof))
         <div class="col-md-7">
             <form method="post" id="clientProfile" enctype="multipart/form-data"
                   @if($id == null)action="/admin/manage-clients/agent-assign/store"
@@ -24,11 +24,11 @@
                         <select name="client_id" id="client_id" class="form-control">
                             <option> Select Client</option>
                             @if(Session::get('User') == 1)
-                            @foreach($clients as $client)
-                                <option value="{{$client->id}}"
-                                        @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
-                            @endforeach
-                                @else
+                                @foreach($clients as $client)
+                                    <option value="{{$client->id}}"
+                                            @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
+                                @endforeach
+                            @else
                                 @foreach($clients as $branch)
                                     <option value="{{$branch->client->id}}"
                                             @if((!$id ==null) && ($id->client_id == $branch->client->id)) selected @endif>{{$branch->client->name}}</option>
@@ -47,7 +47,8 @@
                 <div class="form-group row">
                     <div class="col-md-4"><label>Designation</label></div>
                     <div class="col-md-8"><label class="form-control">{{ $user->designation->designation }}</label>
-                        <input type="hidden" id="cp_designation" name="cp_designation" value="{{ $user->designation->designation }}"></div>
+                        <input type="hidden" id="cp_designation" name="cp_designation"
+                               value="{{ $user->designation->designation }}"></div>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Branch</label></div>
