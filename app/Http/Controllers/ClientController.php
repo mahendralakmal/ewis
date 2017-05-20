@@ -23,21 +23,21 @@ class ClientController extends Controller
     {
         $user = User::find(session('User'));
         if ($user->id == 1)
-            $users = User::where('designation_id',6)->get();
+            $users = User::where('designation_id', 6)->get();
         else {
-            $users = User::where('designation_id',$user->designation_id)->get();
+            $users = User::where('designation_id', $user->designation_id)->get();
         }
-        return view('/admin/clients/manage-client', compact('clients', 'users','user', 'sh'));
+        return view('/admin/clients/manage-client', compact('clients', 'users', 'user', 'sh'));
     }
 
     public function create_profile()
     {
         $id = null;
         $user = User::find(session('User'));
-        if ($user->id != 1)
-            $clients = Client::where('user_id',$user->id)->orderBy('name')->get();
+        if ($user->id == 1)
+            $clients = Client::where('user_id', $user->id)->orderBy('name')->get();
         else
-            $clients = Client::orderBy('name')->get();
+            $clients = $user;
 
         return view('/admin/clients/client-profile', compact('id', 'clients'));
     }
@@ -45,8 +45,11 @@ class ClientController extends Controller
     public function update_profile(Client $id)
     {
         $user = User::find(session('User'));
-        $clients = Client::orderBy('name')->get();
-        return view('/admin/clients/client-profile', compact('id', 'clients','user'));
+        if ($user->id == 1)
+            $clients = Client::where('user_id', $user->id)->orderBy('name')->get();
+        else
+            $clients = $user;
+        return view('/admin/clients/client-profile', compact('id', 'clients', 'user'));
     }
 
     public function store(Request $request)
@@ -86,7 +89,7 @@ class ClientController extends Controller
                 'cp_email' => 'required'
             ],
             [
-                'cp_name.required'=>'Please enter name.',
+                'cp_name.required' => 'Please enter name.',
                 'cp_designation.required' => "Please Enter Designation.",
                 'cp_telephone.required' => 'Please Enter Telephone Number',
                 'cp_email.required' => 'Please Enter Email Address'
@@ -108,9 +111,9 @@ class ClientController extends Controller
         $users = User::all();
         $clients = Client::find($request->id);
         $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
-        if($request->hasFile('logo'))
-        $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
-            'logo' => $logo, 'color' => $request->color]);
+        if ($request->hasFile('logo'))
+            $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
+                'logo' => $logo, 'color' => $request->color]);
         else
             $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
                 'color' => $request->color]);
