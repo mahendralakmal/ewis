@@ -40,40 +40,118 @@
                                     </tr>
                                 @endforeach
                             @else
-                                @foreach(App\Client::where('user_id',$clients->id)->get() as $cbranch)
-                                    <tr>
-                                        <td>{{ $cbranch->name }}</td>
-                                        <td>{{ $cbranch->email }}</td>
-                                        <td>{{ $cbranch->telephone }}</td>
-                                        <td>
-                                            <a href="/admin/manage-clients/update-profile/{{ $cbranch->id }}"
-                                               class="btn btn-primary btn-outline">Edit</a>
-                                            <a @if(!$cbranch->approval) href="/admin/manage-clients/approved/{{ $cbranch->id }}"
-                                               class="btn btn-primary btn-outline"
-                                               @else href="/admin/manage-clients/unapproved/{{ $cbranch->id }}"
-                                               class="btn btn-danger btn-outline"@endif>@if(!$cbranch->approval)
-                                                    Approve @else Unapprove @endif</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                @foreach(App\User::where('section_head_id', $clients->id)->get() as $client)
-                                    @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
+                                @if($clients->designation_id == 6 )
+                                    @foreach(App\User::where('section_head_id',$clients->id)->get() as $user)
+                                        @foreach(App\Client::where('user_id',$user->id)->get() as $cbranch)
+                                            <tr>
+                                                <td>{{ $cbranch->name }}</td>
+                                                <td>{{ $cbranch->email }}</td>
+                                                <td>{{ $cbranch->telephone }}</td>
+                                                <td>
+                                                    <a href="/admin/manage-clients/update-profile/{{ $cbranch->id }}"
+                                                       class="btn btn-primary btn-outline">Edit</a>
+                                                    <a @if(!$cbranch->approval) href="/admin/manage-clients/approved/{{ $cbranch->id }}"
+                                                       class="btn btn-primary btn-outline"
+                                                       @else href="/admin/manage-clients/unapproved/{{ $cbranch->id }}"
+                                                       class="btn btn-danger btn-outline"@endif>@if(!$cbranch->approval)
+                                                            Approve @else Unapprove @endif</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        @foreach(App\ClientsBranch::where('agent_id',$user->id)->get() as $cbranch)
+                                            @if($cbranch->activation == 0)
+                                                <tr>
+                                                    <td>{{ $cbranch->client->name }}</td>
+                                                    <td>{{ $cbranch->client->email }}</td>
+                                                    <td>{{ $cbranch->client->telephone }}</td>
+                                                    <td>
+                                                        <a href="/admin/manage-clients/update-profile/{{ $cbranch->client->id }}"
+                                                           class="btn btn-primary btn-outline">Edit</a>
+                                                        <a @if(!$cbranch->client->approval) href="/admin/manage-clients/approved/{{ $cbranch->client->id }}"
+                                                           class="btn btn-primary btn-outline"
+                                                           @else href="/admin/manage-clients/unapproved/{{ $cbranch->client->id }}"
+                                                           class="btn btn-danger btn-outline"@endif>@if(!$cbranch->client->approval)
+                                                                Approve @else Unapprove @endif</a>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                        @foreach(App\User::where('section_head_id',$user->id)->get() as $cuser)
+                                            @foreach(App\ClientsBranch::where('agent_id',$cuser->id)->get() as $cbranch)
+                                                @if($cbranch->activation == 0)
+                                                    <tr>
+                                                        <td>{{ $cbranch->client->name }}</td>
+                                                        <td>{{ $cbranch->client->email }}</td>
+                                                        <td>{{ $cbranch->client->telephone }}</td>
+                                                        <td>
+                                                            <a href="/admin/manage-clients/update-profile/{{ $cbranch->client->id }}"
+                                                               class="btn btn-primary btn-outline">Edit</a>
+                                                            <a @if(!$cbranch->client->approval) href="/admin/manage-clients/approved/{{ $cbranch->client->id }}"
+                                                               class="btn btn-primary btn-outline"
+                                                               @else href="/admin/manage-clients/unapproved/{{ $cbranch->client->id }}"
+                                                               class="btn btn-danger btn-outline"@endif>@if(!$cbranch->client->approval)
+                                                                    Approve @else Unapprove @endif</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+
+                                    @endforeach
+                                @else
+                                    @foreach(App\Client::where('user_id',$clients->id)->get() as $cbranch)
                                         <tr>
-                                            <td>{{ $cbranch->client->name }}</td>
-                                            <td>{{ $cbranch->client->email }}</td>
-                                            <td>{{ $cbranch->client->telephone }}</td>
+                                            <td>{{ $cbranch->name }}</td>
+                                            <td>{{ $cbranch->email }}</td>
+                                            <td>{{ $cbranch->telephone }}</td>
                                             <td>
-                                                <a href="/admin/manage-clients/update-profile/{{ $cbranch->client->id }}"
+                                                <a href="/admin/manage-clients/update-profile/{{ $cbranch->id }}"
                                                    class="btn btn-primary btn-outline">Edit</a>
-                                                <a @if(!$cbranch->client->approval) href="/admin/manage-clients/approved/{{ $cbranch->client->id }}"
+                                                <a @if(!$cbranch->approval) href="/admin/manage-clients/approved/{{ $cbranch->id }}"
                                                    class="btn btn-primary btn-outline"
-                                                   @else href="/admin/manage-clients/unapproved/{{ $cbranch->client->id }}"
-                                                   class="btn btn-danger btn-outline"@endif>@if(!$cbranch->client->approval)
+                                                   @else href="/admin/manage-clients/unapproved/{{ $cbranch->id }}"
+                                                   class="btn btn-danger btn-outline"@endif>@if(!$cbranch->approval)
                                                         Approve @else Unapprove @endif</a>
                                             </td>
                                         </tr>
                                     @endforeach
-                                @endforeach
+                                    @foreach(App\ClientsBranch::where('agent_id',$clients->id)->get() as $cbranch)
+                                        @if($cbranch->activation == 0)
+                                            <tr>
+                                                <td>{{ $cbranch->client->name }}</td>
+                                                <td>{{ $cbranch->client->email }}</td>
+                                                <td>{{ $cbranch->client->telephone }}</td>
+                                                <td>
+                                                    <a href="/admin/manage-clients/update-profile/{{ $cbranch->client->id }}"
+                                                       class="btn btn-primary btn-outline">Edit</a>
+                                                    <a @if(!$cbranch->client->approval) href="/admin/manage-clients/approved/{{ $cbranch->client->id }}"
+                                                       class="btn btn-primary btn-outline"
+                                                       @else href="/admin/manage-clients/unapproved/{{ $cbranch->client->id }}"
+                                                       class="btn btn-danger btn-outline"@endif>@if(!$cbranch->client->approval)
+                                                            Approve @else Unapprove @endif</a>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                    @foreach(App\User::where('section_head_id', $clients->id)->get() as $client)
+                                        @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
+                                            <tr>
+                                                <td>{{ $cbranch->client->name }}</td>
+                                                <td>{{ $cbranch->client->email }}</td>
+                                                <td>{{ $cbranch->client->telephone }}</td>
+                                                <td>
+                                                    <a href="/admin/manage-clients/update-profile/{{ $cbranch->client->id }}"
+                                                       class="btn btn-primary btn-outline">Edit</a>
+                                                    <a @if(!$cbranch->client->approval) href="/admin/manage-clients/approved/{{ $cbranch->client->id }}"
+                                                       class="btn btn-primary btn-outline"
+                                                       @else href="/admin/manage-clients/unapproved/{{ $cbranch->client->id }}"
+                                                       class="btn btn-danger btn-outline"@endif>@if(!$cbranch->client->approval)
+                                                            Approve @else Unapprove @endif</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+                                @endif
                             @endif
                             </tbody>
                         </table>
