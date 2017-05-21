@@ -31,15 +31,8 @@
                                         <td>
                                             <a href="/admin/users/create-users/{{ $user->id }}"
                                                class="btn btn-primary btn-outline">Edit</a>
-                                            {{--<form method="POST" action="/admin/users/delete" role="form">--}}
-                                                {{--@if($user->designation_id !== 1)--}}
-                                                    {{--<button class="btn btn-danger btn-outline" type="submit">Delete--}}
-                                                    {{--</button>--}}
-{{----}}
-                                                {{--@endif--}}
                                                 {{ csrf_field() }}
                                                 <input type="hidden" id="hidId" name="hidId" value="{{ $user->id }}">
-                                            {{--</form>--}}
                                         </td>
                                     </tr>
                                     @endif

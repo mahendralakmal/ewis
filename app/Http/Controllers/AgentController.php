@@ -7,9 +7,19 @@ use App\ClientsBranch;
 use App\Clientuser;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AgentController extends Controller
 {
+    public function index(ClientsBranch $id)
+    {
+        if(Session::get('User') ==1)
+            $users = User::all();
+        else
+            $users = User::find(Session::get('User'));
+        return view('/admin/clients/agent-assign', compact('users', 'id'));
+    }
+
     public function store(Request $request)
     {
         $cuser = new Clientuser();
@@ -41,12 +51,6 @@ class AgentController extends Controller
             'cp_email' => $request->cp_email
         ]);
         return redirect('/admin/manage-clients/create-clientuser');
-    }
-
-    public function index(ClientsBranch $id)
-    {
-        $users = User::all();
-        return view('/admin/clients/agent-assign', compact('users', 'id'));
     }
 
     public function check_assignment(User $id)
