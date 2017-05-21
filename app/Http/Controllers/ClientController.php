@@ -25,7 +25,10 @@ class ClientController extends Controller
         if ($user->id == 1)
             $users = User::where('designation_id', 6)->get();
         else {
-            $users = User::where('designation_id', $user->designation_id)->get();
+            if($user->designation->id == 4)
+                $users = $user;
+            else
+                $users = User::where('designation_id', $user->designation_id)->get();
         }
         return view('/admin/clients/manage-client', compact('clients', 'users', 'user', 'sh'));
     }
