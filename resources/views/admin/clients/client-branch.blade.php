@@ -52,40 +52,86 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach(App\Client::where('user_id',$clients->id)->get() as $client)
-                                            @foreach(App\ClientsBranch::where('client_id',$client->id)->get() as $cbranch)
-                                                <tr>
-                                                    <td>{{ $client->name }}</td>
-                                                    <td>{{ $cbranch->name }}</td>
-                                                    <td>
-                                                        <a href="/admin/manage-clients/update-profile/{{ $cbranch->id }}"
-                                                           class="btn btn-primary btn-outline">Edit</a>
-                                                        <a @if(!$cbranch->approval) href="/admin/manage-clients/approved/{{ $cbranch->id }}"
-                                                           class="btn btn-primary btn-outline"
-                                                           @else href="/admin/manage-clients/unapproved/{{ $cbranch->id }}"
-                                                           class="btn btn-danger btn-outline"@endif>@if(!$cbranch->approval)
-                                                                Approve @else Unapprove @endif</a>
-                                                    </td>
-                                                </tr>
+                                        @if($clients->designation_id == 6 )
+                                            @foreach(App\Client::where('user_id',$clients->id)->get() as $clientt)
+                                                @foreach(App\ClientsBranch::where('agent_id',$clientt->id)->get() as $cbranch)
+                                                    <tr>
+                                                        <td>{{ $clientt->name }}</td>
+                                                        <td>{{ $cbranch->name }}</td>
+                                                        <td class="col-md-2">
+                                                            <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
+                                                               class="btn btn-danger btn-outline">Remove</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             @endforeach
-                                        @endforeach
-                                        @foreach(App\User::where('section_head_id', $clients->id)->get() as $client)
-                                            @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
-                                                <tr>
-                                                    <td>{{ $cbranch->client->name }}</td>
-                                                    <td>{{ $cbranch->name }}</td>
-                                                    <td>
-                                                        <a href="/admin/manage-clients/update-profile/{{ $cbranch->id }}"
-                                                           class="btn btn-primary btn-outline">Edit</a>
-                                                        <a @if(!$cbranch->approval) href="/admin/manage-clients/approved/{{ $cbranch->id }}"
-                                                           class="btn btn-primary btn-outline"
-                                                           @else href="/admin/manage-clients/unapproved/{{ $cbranch->id }}"
-                                                           class="btn btn-danger btn-outline"@endif>@if(!$cbranch->approval)
-                                                                Approve @else Unapprove @endif</a>
-                                                    </td>
-                                                </tr>
+                                            @foreach(App\User::where('section_head_id',$clients->id)->get() as $user)
+                                                @foreach(App\ClientsBranch::where('agent_id',$user->id)->get() as $cbranch)
+                                                    @if($cbranch->activation == 0)
+                                                        <tr>
+                                                            <td>{{ $cbranch->client->name }}</td>
+                                                            <td>{{ $cbranch->name }}</td>
+                                                            <td class="col-md-2">
+                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
+                                                                   class="btn btn-danger btn-outline">Remove</a>
+                                                            </td>
+                                                        </tr>
+                                                    @endif
+                                                @endforeach
+                                                @foreach(App\User::where('section_head_id',$user->id)->get() as $cuser)
+                                                    @foreach(App\ClientsBranch::where('agent_id',$cuser->id)->get() as $cbranch)
+                                                        @if($cbranch->activation == 0)
+                                                            <tr>
+                                                                <td>{{ $cbranch->client->name }}</td>
+                                                                <td>{{ $cbranch->name }}</td>
+                                                                <td class="col-md-2">
+                                                                    <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
+                                                                       class="btn btn-danger btn-outline">Remove</a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+
                                             @endforeach
-                                        @endforeach
+                                        @else
+                                            @foreach(App\Client::where('user_id',$clients->id)->get() as $clientt)
+                                                @foreach(App\ClientsBranch::where('agent_id',$clientt->id)->get() as $cbranch)
+                                                    <tr>
+                                                        <td>{{ $clientt->name }}</td>
+                                                        <td>{{ $cbranch->name }}</td>
+                                                        <td class="col-md-2">
+                                                            <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
+                                                               class="btn btn-danger btn-outline">Remove</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endforeach
+                                            @foreach(App\ClientsBranch::where('agent_id',$clients->id)->get() as $cbranch)
+                                                @if($cbranch->activation == 0)
+                                                    <tr>
+                                                        <td>{{ $cbranch->client->name }}</td>
+                                                        <td>{{ $cbranch->name }}</td>
+                                                        <td class="col-md-2">
+                                                            <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
+                                                               class="btn btn-danger btn-outline">Remove</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                            @foreach(App\User::where('section_head_id', $clients->id)->get() as $client)
+                                                @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
+                                                    <tr>
+                                                        <td>{{ $cbranch->client->name }}</td>
+                                                        <td>{{ $cbranch->name }}</td>
+                                                        <td class="col-md-2">
+                                                            <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
+                                                               class="btn btn-danger btn-outline">Remove</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endforeach
+                                        @endif
 
                                         </tbody>
                                     </table>
@@ -135,22 +181,59 @@
                                         @endif
                                     @endforeach
                                 @else
-
-                                    @foreach(App\Client::where('user_id',$clients->id)->get() as $client)
-                                        @if($client->approval == 1)
-                                        <option value="{{$client->id}}"
-                                                @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
-                                        @endif
-                                    @endforeach
-                                    @foreach(App\User::where('section_head_id', $clients->id)->get() as $client)
-                                        @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
-                                                @if($cbranch->client->approval == 1)
-                                                <option value="{{$client->id}}"
-                                                        @if((!$id ==null) && ($id->client_id == $cbranch->client->id)) selected @endif>{{$cbranch->client->name}}</option>
-                                                @endif
+                                    @if($clients->designation_id == 6 )
+                                        @foreach(App\Client::where('user_id',$clients->id)->get() as $cbranch)
+                                            @if($cbranch->approval == 1)
+                                                <option value="{{$cbranch->id}}"
+                                                        @if((!$id ==null) && ($id->client_id == $cbranch->id)) selected @endif>{{$cbranch->name}}</option>
+                                            @endif
                                         @endforeach
-                                    @endforeach
+                                        @foreach(App\User::where('section_head_id',$clients->id)->get() as $user)
+                                            @foreach(App\Client::where('user_id',$user->id)->get() as $cbranch)
+                                                @if($cbranch->approval == 1)
+                                                    <option value="{{$cbranch->id}}"
+                                                            @if((!$id ==null) && ($id->client_id == $cbranch->id)) selected @endif>{{$cbranch->name}}</option>
+                                                @endif
+                                            @endforeach
+                                            @foreach(App\ClientsBranch::where('agent_id',$user->id)->get() as $cbranch)
+                                                @if($cbranch->client->approval == 1)
+                                                    <option value="{{$cbranch->client->id}}"
+                                                            @if((!$id ==null) && ($id->client_id == $cbranch->client->id)) selected @endif>{{$cbranch->client->name}}</option>
+                                                @endif
+                                            @endforeach
+                                            @foreach(App\User::where('section_head_id',$user->id)->get() as $cuser)
+                                                @foreach(App\ClientsBranch::where('agent_id',$cuser->id)->get() as $cbranch)
+                                                    @if($cbranch->client->approval == 1)
+                                                        <option value="{{$cbranch->client->id}}"
+                                                                @if((!$id ==null) && ($id->client_id == $cbranch->client->id)) selected @endif>{{$cbranch->client->name}}</option>
+                                                    @endif
 
+                                                @endforeach
+                                            @endforeach
+
+                                        @endforeach
+                                    @else
+                                        @foreach(App\Client::where('user_id',$clients->id)->get() as $cbranch)
+                                            @if($cbranch->approval == 1)
+                                                <option value="{{$cbranch->id}}"
+                                                        @if((!$id ==null) && ($id->client_id == $cbranch->id)) selected @endif>{{$cbranch->name}}</option>
+                                            @endif
+                                        @endforeach
+                                        @foreach(App\ClientsBranch::where('agent_id',$clients->id)->get() as $cbranch)
+                                            @if($cbranch->client->approval == 1)
+                                                <option value="{{$cbranch->client->id}}"
+                                                        @if((!$id ==null) && ($id->client_id == $cbranch->client->id)) selected @endif>{{$cbranch->client->name}}</option>
+                                            @endif
+                                        @endforeach
+                                        @foreach(App\User::where('section_head_id', $clients->id)->get() as $client)
+                                            @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
+                                                @if($cbranch->client->approval == 1)
+                                                    <option value="{{$cbranch->client->id}}"
+                                                            @if((!$id ==null) && ($id->client_id == $cbranch->client->id)) selected @endif>{{$cbranch->client->name}}</option>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+                                    @endif
                                 @endif
                             </select>
                         </div>

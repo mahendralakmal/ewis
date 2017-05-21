@@ -41,6 +41,22 @@
                                 @endforeach
                             @else
                                 @if($clients->designation_id == 6 )
+                                    @foreach(App\Client::where('user_id',$clients->id)->get() as $cbranch)
+                                        <tr>
+                                            <td>{{ $cbranch->name }}</td>
+                                            <td>{{ $cbranch->email }}</td>
+                                            <td>{{ $cbranch->telephone }}</td>
+                                            <td>
+                                                <a href="/admin/manage-clients/update-profile/{{ $cbranch->id }}"
+                                                   class="btn btn-primary btn-outline">Edit</a>
+                                                <a @if(!$cbranch->approval) href="/admin/manage-clients/approved/{{ $cbranch->id }}"
+                                                   class="btn btn-primary btn-outline"
+                                                   @else href="/admin/manage-clients/unapproved/{{ $cbranch->id }}"
+                                                   class="btn btn-danger btn-outline"@endif>@if(!$cbranch->approval)
+                                                        Approve @else Unapprove @endif</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     @foreach(App\User::where('section_head_id',$clients->id)->get() as $user)
                                         @foreach(App\Client::where('user_id',$user->id)->get() as $cbranch)
                                             <tr>

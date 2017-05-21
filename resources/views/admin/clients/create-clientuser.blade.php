@@ -59,42 +59,178 @@
                                     @endif
                                 @endforeach
                             @else
-                                @foreach(App\User::where('user_id', $users->id)->get() as $user)
-                                    @if(!$user->deleted == 1 && $user->designation_id == 2)
-                                        <tr>
-                                            <td>{{$user->c_user->client->name}}</td>
-                                            <td>{{$user->c_user->client_branch->name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->designation->designation}}</td>
-                                            <td class="col-md-6">
-                                                <form method="POST" action="/admin/users/delete" role="form">
-                                                    <a href="/admin/manage-clients/client_user/{{ $user->id }}"
-                                                       class="btn btn-primary btn-outline">Profile</a>
-                                                    <a href="/admin/manage-clients/create-clientuser/{{ $user->id }}"
-                                                       class="btn btn-primary btn-outline">Edit</a>
-                                                    <a href="@if($user->approval == 0 ) /admin/manage-clients/client_user/{{ $user->id }}/activate @else /admin/manage-clients/client_user/{{ $user->id }}/deactivate @endif"
-                                                       class="btn @if($user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($user->approval == 0 )
-                                                            Approve @else Unapprove @endif</a>
-                                                    @if($user->designation_id !== 1)
-                                                        <button class="btn btn-danger btn-outline" type="submit">
-                                                            Delete
-                                                        </button>
-                                                    @endif
-                                                    {{ csrf_field() }}
-                                                    <input type="hidden" id="hidId" name="hidId"
-                                                           value="{{ $user->id }}">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
+                                @if($users->designation_id == 6 )
+                                    @foreach(App\Client::where('user_id',$users->id)->get() as $client)
+                                        @foreach($client->client_branch as $cbranch)
+                                            @foreach($cbranch->client_user as $cuser)
+                                                <tr>
+                                                    <td>{{$client->name}}</td>
+                                                    <td>{{$cbranch->name}}</td>
+                                                    <td>{{$cuser->user->email}}</td>
+                                                    <td>{{$cuser->user->name}}</td>
+                                                    <td>{{$cuser->user->designation->designation}}</td>
+                                                    <td class="col-md-6">
+                                                        <form method="POST" action="/admin/users/delete" role="form">
+                                                            <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
+                                                               class="btn btn-primary btn-outline">Profile</a>
+                                                            <a href="/admin/manage-clients/create-clientuser/{{ $cuser->user->id }}"
+                                                               class="btn btn-primary btn-outline">Edit</a>
+                                                            <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
+                                                               class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
+                                                                    Approve @else Unapprove @endif</a>
+                                                            @if($cuser->user->designation_id !== 1)
+                                                                <button class="btn btn-danger btn-outline"
+                                                                        type="submit">
+                                                                    Delete
+                                                                </button>
+                                                            @endif
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" id="hidId" name="hidId"
+                                                                   value="{{ $cuser->user->id }}">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                    @endforeach
+                                    @foreach(App\User::where('section_head_id',$users->id)->get() as $user)
+                                        @foreach(App\Client::where('user_id',$user->id)->get() as $client)
+                                            @foreach($client->client_branch as $cbranch)
+                                                @foreach($cbranch->client_user as $cuser)
+                                                    <tr>
+                                                        <td>{{$client->name}}</td>
+                                                        <td>{{$cbranch->name}}</td>
+                                                        <td>{{$cuser->user->email}}</td>
+                                                        <td>{{$cuser->user->name}}</td>
+                                                        <td>{{$cuser->user->designation->designation}}</td>
+                                                        <td class="col-md-6">
+                                                            <form method="POST" action="/admin/users/delete" role="form">
+                                                                <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
+                                                                   class="btn btn-primary btn-outline">Profile</a>
+                                                                <a href="/admin/manage-clients/create-clientuser/{{ $cuser->user->id }}"
+                                                                   class="btn btn-primary btn-outline">Edit</a>
+                                                                <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
+                                                                   class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
+                                                                        Approve @else Unapprove @endif</a>
+                                                                @if($cuser->user->designation_id !== 1)
+                                                                    <button class="btn btn-danger btn-outline"
+                                                                            type="submit">
+                                                                        Delete
+                                                                    </button>
+                                                                @endif
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" id="hidId" name="hidId"
+                                                                       value="{{ $cuser->user->id }}">
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endforeach
+                                        @endforeach
+                                        @foreach(App\ClientsBranch::where('agent_id',$user->id)->get() as $cbranch)
+                                            @foreach($cbranch->client_user as $cuser)
+                                                <tr>
+                                                    <td>{{$cbranch->client->name}}</td>
+                                                    <td>{{$cbranch->name}}</td>
+                                                    <td>{{$cuser->user->email}}</td>
+                                                    <td>{{$cuser->user->name}}</td>
+                                                    <td>{{$cuser->user->designation->designation}}</td>
+                                                    <td class="col-md-6">
+                                                        <form method="POST" action="/admin/users/delete" role="form">
+                                                            <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
+                                                               class="btn btn-primary btn-outline">Profile</a>
+                                                            <a href="/admin/manage-clients/create-clientuser/{{ $cuser->user->id }}"
+                                                               class="btn btn-primary btn-outline">Edit</a>
+                                                            <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
+                                                               class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
+                                                                    Approve @else Unapprove @endif</a>
+                                                            @if($cuser->user->designation_id !== 1)
+                                                                <button class="btn btn-danger btn-outline"
+                                                                        type="submit">
+                                                                    Delete
+                                                                </button>
+                                                            @endif
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" id="hidId" name="hidId"
+                                                                   value="{{ $cuser->user->id }}">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                        @foreach(App\User::where('section_head_id',$user->id)->get() as $cuser)
+                                            @foreach(App\ClientsBranch::where('agent_id',$cuser->id)->get() as $cbranch)
+                                                @foreach($cbranch->client_user as $cuser)
+                                                    <tr>
+                                                        <td>{{$cbranch->client->name}}</td>
+                                                        <td>{{$cbranch->name}}</td>
+                                                        <td>{{$cuser->user->email}}</td>
+                                                        <td>{{$cuser->user->name}}</td>
+                                                        <td>{{$cuser->user->designation->designation}}</td>
+                                                        <td class="col-md-6">
+                                                            <form method="POST" action="/admin/users/delete" role="form">
+                                                                <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
+                                                                   class="btn btn-primary btn-outline">Profile</a>
+                                                                <a href="/admin/manage-clients/create-clientuser/{{ $cuser->user->id }}"
+                                                                   class="btn btn-primary btn-outline">Edit</a>
+                                                                <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
+                                                                   class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
+                                                                        Approve @else Unapprove @endif</a>
+                                                                @if($cuser->user->designation_id !== 1)
+                                                                    <button class="btn btn-danger btn-outline"
+                                                                            type="submit">
+                                                                        Delete
+                                                                    </button>
+                                                                @endif
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" id="hidId" name="hidId"
+                                                                       value="{{ $cuser->user->id }}">
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endforeach
+                                        @endforeach
 
-                                @foreach(App\User::where('section_head_id', $users->id)->get() as $client)
-                                    @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
+                                    @endforeach
+                                @else
+                                    @foreach(App\Client::where('user_id',$users->id)->get() as $client)
+                                        @foreach($client->client_branch as $cbranch)
+                                            @foreach($client->client_branch->client_user as $cuser)
+                                                <tr>
+                                                    <td>{{$client->name}}</td>
+                                                    <td>{{$cbranch->name}}</td>
+                                                    <td>{{$cuser->user->email}}</td>
+                                                    <td>{{$cuser->user->name}}</td>
+                                                    <td>{{$cuser->user->designation->designation}}</td>
+                                                    <td class="col-md-6">
+                                                        <form method="POST" action="/admin/users/delete" role="form">
+                                                            <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
+                                                               class="btn btn-primary btn-outline">Profile</a>
+                                                            <a href="/admin/manage-clients/create-clientuser/{{ $cuser->user->id }}"
+                                                               class="btn btn-primary btn-outline">Edit</a>
+                                                            <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
+                                                               class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
+                                                                    Approve @else Unapprove @endif</a>
+                                                            @if($cuser->user->designation_id !== 1)
+                                                                <button class="btn btn-danger btn-outline"
+                                                                        type="submit">
+                                                                    Delete
+                                                                </button>
+                                                            @endif
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" id="hidId" name="hidId"
+                                                                   value="{{ $cuser->user->id }}">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                    @endforeach
+                                    @foreach(App\ClientsBranch::where('agent_id',$users->id)->get() as $cbranch)
                                         @foreach($cbranch->client_user as $cuser)
                                             <tr>
-                                                <td>{{$cbranch->client->name}}</td>
+                                                <td>{{$cuser->client->name}}</td>
                                                 <td>{{$cbranch->name}}</td>
                                                 <td>{{$cuser->user->email}}</td>
                                                 <td>{{$cuser->user->name}}</td>
@@ -122,7 +258,41 @@
                                             </tr>
                                         @endforeach
                                     @endforeach
-                                @endforeach
+                                    @foreach(App\User::where('section_head_id', $users->id)->get() as $user)
+                                        @foreach(App\ClientsBranch::where('agent_id',$user->id)->get() as $cbranch)
+                                            @foreach($cbranch->client_user as $cuser)
+                                                <tr>
+                                                    <td>{{$cbranch->client->name}}</td>
+                                                    <td>{{$cbranch->name}}</td>
+                                                    <td>{{$cuser->user->email}}</td>
+                                                    <td>{{$cuser->user->name}}</td>
+                                                    <td>{{$cuser->user->designation->designation}}</td>
+                                                    <td class="col-md-6">
+                                                        <form method="POST" action="/admin/users/delete" role="form">
+                                                            <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
+                                                               class="btn btn-primary btn-outline">Profile</a>
+                                                            <a href="/admin/manage-clients/create-clientuser/{{ $cuser->user->id }}"
+                                                               class="btn btn-primary btn-outline">Edit</a>
+                                                            <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
+                                                               class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
+                                                                    Approve @else Unapprove @endif</a>
+                                                            @if($cuser->user->designation_id !== 1)
+                                                                <button class="btn btn-danger btn-outline"
+                                                                        type="submit">
+                                                                    Delete
+                                                                </button>
+                                                            @endif
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" id="hidId" name="hidId"
+                                                                   value="{{ $cuser->user->id }}">
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                    @endforeach
+
+                                @endif
                             @endif
                             </tbody>
                         </table>
