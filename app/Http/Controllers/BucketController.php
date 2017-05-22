@@ -184,7 +184,10 @@ class BucketController extends Controller
         if(Session::get('User')==1)
             $porders = P_Order::all();
         else
-            $porders = User::where('designation_id', User::find(Session::get('User'))->designation_id)->get();
+//            return User::find(Session::get('User'))->designation;
+            $porders = User::find(Session::get('User'));
+//        else
+//            $porders = User::where('designation_id', User::find(Session::get('User'))->designation_id)->get();
 
 
         return view('admin/clients/purchase-orders-view', compact('porders'));
