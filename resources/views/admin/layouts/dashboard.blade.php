@@ -125,19 +125,19 @@
                                                     Purchase Orders</a>
                                             </li>
                                         @endif
-                                        @if((\App\User::find(Session::get('User'))->privilege->change_po_status))
+                                        @if((\App\User::find(Session::get('User'))->privilege->view_po))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients/purchase-orders-pending') }}">Pending
                                                     Purchase Orders</a>
                                             </li>
                                         @endif
-                                        @if((\App\User::find(Session::get('User'))->privilege->change_po_status))
+                                        @if((\App\User::find(Session::get('User'))->privilege->view_po))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients/purchase-orders-partial-completed' ) }}">Partial
                                                     Complete Purchase Orders</a>
                                             </li>
                                         @endif
-                                        @if((\App\User::find(Session::get('User'))->privilege->change_po_status))
+                                        @if((\App\User::find(Session::get('User'))->privilege->view_po))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients/purchase-orders-completed' ) }}">Completed Purchase Orders</a>
                                             </li>

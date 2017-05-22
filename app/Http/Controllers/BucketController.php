@@ -30,7 +30,8 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
-    public  function getPurchaseOrdersByClient(Request $request){
+    public function getPurchaseOrdersByClient(Request $request)
+    {
 //        return $request->all();
         $clients = Client::all();
         $po = Client::find($request->client);
@@ -38,7 +39,7 @@ class BucketController extends Controller
         $start = $request->start;
         $end = $request->end;
 
-        return view('admin.reports.completed-purchase-orders', compact('clients','po','status','start','end'));
+        return view('admin.reports.completed-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
     }
 
     public function getPriceList()
@@ -47,29 +48,29 @@ class BucketController extends Controller
         return view('admin/reports/client-wise-price-list', compact('client'));
     }
 
-    public function getPriceListByClient(Client $client, $start, $end){
-        if($start != 'n' && $end != 'n') {
-            return Client_Product::whereBetween('client__products.created_at',array(new DateTime($start),new DateTime($end)))->get();
-        }else {
+    public function getPriceListByClient(Client $client, $start, $end)
+    {
+        if ($start != 'n' && $end != 'n') {
+            return Client_Product::whereBetween('client__products.created_at', array(new DateTime($start), new DateTime($end)))->get();
+        } else {
             return $client->client_products;
         }
     }
 
-    public function change_status($id, $status){
+    public function change_status($id, $status)
+    {
         $po = P_Order::find($id);
-        $po->update(['status'=>$status]);
+        $po->update(['status' => $status]);
         $user = User::where('name', $po->del_cp)->first();
 
         $agent = User::find($po->agent_id)->first();
-        if($status==="OP"){
+        if ($status === "OP") {
             Mail::to($user)->send(new PoOnProcess($user, $po));
             //Mail::to($agent)->send(new PoOnProcess($user, $po));
-        }
-        elseif ($status==="PC") {
+        } elseif ($status === "PC") {
             Mail::to($user)->send(new PoPartialComplete($user, $po));
             //Mail::to($agent)->send(new PoPartialComplete($user, $po));
-        }
-        elseif ($status==="C") {
+        } elseif ($status === "C") {
             Mail::to($user)->send(new PoCompleted($user, $po));
             //Mail::to($agent)->send(new PoCompleted($user, $po));
         }
@@ -99,7 +100,7 @@ class BucketController extends Controller
         $client_product = Client_Product::all();
         $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
 
-        return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice, 'client_product' => $client_product, 'branch' => $branch ]);
+        return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice, 'client_product' => $client_product, 'branch' => $branch]);
 
     }
 
@@ -149,7 +150,7 @@ class BucketController extends Controller
 //        $order->cp_notes = $request->input('cp_notes');
         $order->del_notes = $request->input('del_notes');
         $order->status = "P";
-        $order->agent_id =  $user->c_user->client_branch->agent_id;
+        $order->agent_id = $user->c_user->client_branch->agent_id;
 
 
         $order->save();
@@ -181,7 +182,7 @@ class BucketController extends Controller
 
     public function getPurchaseOrder()
     {
-        if(Session::get('User')==1)
+        if (Session::get('User') == 1)
             $porders = P_Order::all();
         else
             $porders = User::find(Session::get('User'));
@@ -191,39 +192,50 @@ class BucketController extends Controller
 
     public function pendingPurchaseOrder()
     {
-        $porder = P_Order::where('status', 'P' )->get();
-        return view('admin/clients/purchase-orders-pending', compact('porder'));
+        if (Session::get('User') == 1)
+            $porders = P_Order::where('status', 'P')->get();
+        else
+            $porders = User::find(Session::get('User'));
+
+        return view('admin/clients/purchase-orders-pending', compact('porders'));
     }
 
     public function pcPurchaseOrder()
     {
-        $porder = P_Order::where('status', 'PC' )->get();
-        return view('admin/clients/purchase-orders-partial-completed', compact('porder'));
+        if (Session::get('User') == 1)
+            $porders = P_Order::where('status', 'PC')->get();
+        else
+            $porders = User::find(Session::get('User'));
+        return view('admin/clients/purchase-orders-partial-completed', compact('porders'));
     }
 
-    public function ajaxPurchaseOrderStatus($from,$to,$status)
+    public function ajaxPurchaseOrderStatus($from, $to, $status)
     {
-        if($from!='' && $to!='' && $status != '' && $status != 'a')
-            $porder = P_Order::whereBetween('p__orders.created_at',[$from,$to])
-                ->where('p__orders.status',$status)
-                ->join('clients_branches','p__orders.clients_branch_id','clients_branches.id')
-                ->join('clients','clients_branches.client_id','clients.id')
-                ->select('p__orders.id','p__orders.created_at','p__orders.del_branch','p__orders.updated_at','clients.name','p__orders.status')->get();
-        else if($from!='' && $to!='' && $status == 'a')
-            $porder = P_Order::whereBetween('p__orders.created_at',[$from,$to])
-                ->join('clients_branches','p__orders.clients_branch_id','clients_branches.id')
-                ->join('clients','clients_branches.client_id','clients.id')
-                ->select('p__orders.id','p__orders.created_at','p__orders.del_branch','p__orders.updated_at','clients.name','p__orders.status')->get();
+        if ($from != '' && $to != '' && $status != '' && $status != 'a')
+            $porder = P_Order::whereBetween('p__orders.created_at', [$from, $to])
+                ->where('p__orders.status', $status)
+                ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
+                ->join('clients', 'clients_branches.client_id', 'clients.id')
+                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status')->get();
+        else if ($from != '' && $to != '' && $status == 'a')
+            $porder = P_Order::whereBetween('p__orders.created_at', [$from, $to])
+                ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
+                ->join('clients', 'clients_branches.client_id', 'clients.id')
+                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status')->get();
         else
-            $porder = P_Order::where('status', 'P' )->get();
+            $porder = P_Order::where('status', 'P')->get();
 
         return Response::json($porder);
     }
 
     public function CompletedPurchaseOrders()
     {
-        $porder = P_Order::where('status', 'C' )->get();
-        return view('admin/clients/purchase-orders-completed', compact('porder'));
+        if (Session::get('User') == 1)
+            $porders = P_Order::where('status', 'C')->get();
+        else
+            $porders = User::find(Session::get('User'));
+
+        return view('admin/clients/purchase-orders-completed', compact('porders'));
     }
 
     public function CompletedPurchaseOrder()
@@ -233,11 +245,12 @@ class BucketController extends Controller
         $status = "";
         $start = "";
         $end = "";
-        return view('admin/reports/completed-purchase-orders', compact('clients','po','status','start','end'));
+        return view('admin/reports/completed-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
     }
 
-    public function getPurchaseOrdersByStatus($status){
-        $order = P_Order::where('status',$status);
+    public function getPurchaseOrdersByStatus($status)
+    {
+        $order = P_Order::where('status', $status);
         return $order;
     }
 
@@ -246,7 +259,7 @@ class BucketController extends Controller
         $order = P_Order::find($id);
         $order->bucket = unserialize($order->bucket);
         $branch = ClientsBranch::find($order->clients_branch_id);
-        return view('admin/clients/detail-orders', compact('order','branch'));
+        return view('admin/clients/detail-orders', compact('order', 'branch'));
     }
 
     public function historyPODetails($id)
@@ -255,7 +268,7 @@ class BucketController extends Controller
         $order->bucket = unserialize($order->bucket);
         $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
 
-        return view('user/detail-orders', compact('order','branch'));
+        return view('user/detail-orders', compact('order', 'branch'));
     }
 
 }
