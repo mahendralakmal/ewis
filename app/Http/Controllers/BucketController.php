@@ -181,8 +181,13 @@ class BucketController extends Controller
 
     public function getPurchaseOrder()
     {
-        $porder = P_Order::all();
-        return view('admin/clients/purchase-orders-view', compact('porder'));
+        if(Session::get('User')==1)
+            $porders = P_Order::all();
+        else
+            $porders = User::where('designation_id', User::find(Session::get('User'))->designation_id)->get();
+
+
+        return view('admin/clients/purchase-orders-view', compact('porders'));
     }
 
     public function pendingPurchaseOrder()
