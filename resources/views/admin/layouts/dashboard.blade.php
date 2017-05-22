@@ -16,10 +16,13 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li> Welcome {{App\User::find(Session::get('User'))->name}} </li>
-                    <li><a href="{{ url('/admin/manage-clients/purchase-orders-pending') }}">Pending<span
-                                    class="badge">{{App\P_Order::where('status', 'P' )->count()}}</span></a></li>
-                    <li><a href="{{ url('/admin/manage-clients/purchase-orders-partial-completed') }}">Partial Completed<span
-                                    class="badge">{{App\P_Order::where('status', 'PC' )->count()}}</span></a></li>
+                    <li>
+                        <a href="{{ url('/admin/manage-clients/purchase-orders-pending') }}">Pending
+                            <span class="badge pending"></span>
+                        </a>
+                    </li>
+                    <li><a href="{{ url('/admin/manage-clients/purchase-orders-partial-completed') }}">Partial Completed
+                            <span class="badge partialComplet"></span></a></li>
                     <li><a href="{{ url('/signout') }}">Signout</a></li>
                 </ul>
                 <div class="navbar-default sidebar" role="navigation">
@@ -200,6 +203,31 @@
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
     @yield('scripts')
     <script>
+
+        $(window).on("load", function () {
+            $.ajax(
+                    {
+                        type: 'get',
+                        url: '/admin/getPendingPoCount',
+                        success: function (response) {
+                            console.log(response);
+                            var model = $('.pending');
+                            model.text(response);
+                        }
+                    }
+            );
+            $.ajax(
+                    {
+                        type: 'get',
+                        url: '/admin/getPCompletePoCount',
+                        success: function (response) {
+                            console.log(response);
+                            var model = $('.partialComplet');
+                            model.text(response);
+                        }
+                    }
+            );
+        });
 
         setTimeout(function () {
             if ($('.alert').length > 0) {

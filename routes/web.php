@@ -54,6 +54,10 @@ Route::group(['prefix' => ' /admin'], function () {
     Route::get('/', function () {
         return view('/admin/home');
     });
+
+    Route::get('/getPendingPoCount', 'BucketController@getPendingPoCount');
+    Route::get('/getPCompletePoCount', 'BucketController@getPCompletePoCount');
+
     Route::get('/test', function () {
         return view('/admin/test');
     });
