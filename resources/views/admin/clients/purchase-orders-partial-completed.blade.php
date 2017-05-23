@@ -33,7 +33,7 @@
                         </tr>
                         </thead>
                         <tbody class="tablePending">
-                        @if(Session::get('User') == 1)
+                        @if(Session::get('User') == 1 || \App\User::find(Session::get('User'))->designation_id == 5 || \App\User::find(Session::get('User'))->designation_id == 7)
                             @foreach($porders as $porder)
                                 <tr>
                                     <td>{{$porder->id}}</td>

@@ -192,7 +192,7 @@ class BucketController extends Controller
 
     public function pendingPurchaseOrder()
     {
-        if (Session::get('User') == 1)
+        if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
             $porders = P_Order::where('status', 'P')->get();
         else
             $porders = User::find(Session::get('User'));
@@ -280,7 +280,7 @@ class BucketController extends Controller
 
     public function pcPurchaseOrder()
     {
-        if (Session::get('User') == 1)
+        if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
             $porders = P_Order::where('status', 'PC')->get();
         else
             $porders = User::find(Session::get('User'));
@@ -308,7 +308,7 @@ class BucketController extends Controller
 
     public function CompletedPurchaseOrders()
     {
-        if (Session::get('User') == 1)
+        if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
             $porders = P_Order::where('status', 'C')->get();
         else
             $porders = User::find(Session::get('User'));
