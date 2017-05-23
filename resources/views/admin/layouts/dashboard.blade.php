@@ -205,6 +205,10 @@
     <script>
 
         $(window).on("load", function () {
+            getPoStattus();
+        });
+
+        function getPoStattus(){
             $.ajax(
                     {
                         type: 'get',
@@ -227,7 +231,7 @@
                         }
                     }
             );
-        });
+        }
 
         setTimeout(function () {
             if ($('.alert').length > 0) {

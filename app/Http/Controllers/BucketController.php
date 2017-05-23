@@ -203,7 +203,7 @@ class BucketController extends Controller
     public function getPendingPoCount()
     {
         $user = User::find(Session::get('User'));
-        if ($user->id == 1) {
+        if ($user->id == 1 || $user->designation_id ==5 || $user->designation_id ==7) {
             $porder = P_Order::where('status', 'P')->count();
         } else {
             $porder = 0;
@@ -242,7 +242,7 @@ class BucketController extends Controller
     public function getPCompletePoCount()
     {
         $user = User::find(Session::get('User'));
-        if ($user->id == 1) {
+        if ($user->id == 1 || $user->designation_id ==5 || $user->designation_id ==7) {
             $porder = P_Order::where('status', 'PC')->count();
         } else {
             $porder = 0;
