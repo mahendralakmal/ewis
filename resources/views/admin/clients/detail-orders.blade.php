@@ -4,7 +4,8 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Users</h3>
+                <h3 class="panel-title">Order No :- {{$order->id}}</h3>
+{{--                <h3 style="align-content: right">{{\App\User::find(($order->clients_branch_id))}}</h3>--}}
             </div>
             {{--{{ $porder[0]['bucket'] }}--}}
             <div class="panel-body">
