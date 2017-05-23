@@ -139,7 +139,10 @@ $mobile: "(max-width: 768px)";
 .error{
   color: $red;
 }
-
+.error_tr{
+  background-color: #ff5459;
+  color: #ffffff;
+}
 .btn{
   font-size: 11px !important;
 }

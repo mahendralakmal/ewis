@@ -5855,6 +5855,10 @@ body, label, .checkbox label {
 .error {
   color: #ee001d; }
 
+.error_tr {
+  background-color: #ff5459;
+  color: #ffffff; }
+
 .btn {
   font-size: 11px !important; }
 
