@@ -143,7 +143,9 @@ Route::group(['prefix' => ' /admin'], function () {
 
         Route::get('/create-branch', 'ClientsBranchController@create');
         Route::post('/create-branch', 'ClientsBranchController@store');
-        Route::get('/create-branch/{id}/remove', 'ClientsBranchController@remove');
+        Route::post('/update-branch', 'ClientsBranchController@update');
+        Route::get('/create-branch/{id}/edit', 'ClientsBranchController@edit');
+//        Route::get('/create-branch/{id}/remove', 'ClientsBranchController@remove');
     });
 
     Route::group(['prefix' => '/reports'], function () {

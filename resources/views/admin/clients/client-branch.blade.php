@@ -30,8 +30,8 @@
                                                                 <tr>
                                                                     <td>{{ $branch->name }}</td>
                                                                     <td class="col-md-2">
-                                                                        <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/remove"
-                                                                           class="btn btn-danger btn-outline">Remove</a>
+                                                                        <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                           class="btn btn-primary btn-outline">Edit</a>
                                                                     </td>
                                                                 </tr>
                                                             @endif

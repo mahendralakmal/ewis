@@ -44,12 +44,7 @@
                                                     <a href="@if($user->approval == 0 ) /admin/manage-clients/client_user/{{ $user->id }}/activate @else /admin/manage-clients/client_user/{{ $user->id }}/deactivate @endif"
                                                        class="btn @if($user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($user->approval == 0 )
                                                             Approve @else Unapprove @endif</a>
-                                                    @if($user->designation_id !== 1)
-                                                        <button class="btn btn-danger btn-outline" type="submit">
-                                                            Delete
-                                                        </button>
 
-                                                    @endif
                                                     {{ csrf_field() }}
                                                     <input type="hidden" id="hidId" name="hidId"
                                                            value="{{ $user->id }}">
@@ -78,12 +73,7 @@
                                                             <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
                                                                class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
                                                                     Approve @else Unapprove @endif</a>
-                                                            @if($cuser->user->designation_id !== 1)
-                                                                <button class="btn btn-danger btn-outline"
-                                                                        type="submit">
-                                                                    Delete
-                                                                </button>
-                                                            @endif
+
                                                             {{ csrf_field() }}
                                                             <input type="hidden" id="hidId" name="hidId"
                                                                    value="{{ $cuser->user->id }}">
@@ -112,12 +102,7 @@
                                                                 <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
                                                                    class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
                                                                         Approve @else Unapprove @endif</a>
-                                                                @if($cuser->user->designation_id !== 1)
-                                                                    <button class="btn btn-danger btn-outline"
-                                                                            type="submit">
-                                                                        Delete
-                                                                    </button>
-                                                                @endif
+
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" id="hidId" name="hidId"
                                                                        value="{{ $cuser->user->id }}">
@@ -144,12 +129,7 @@
                                                             <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
                                                                class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
                                                                     Approve @else Unapprove @endif</a>
-                                                            @if($cuser->user->designation_id !== 1)
-                                                                <button class="btn btn-danger btn-outline"
-                                                                        type="submit">
-                                                                    Delete
-                                                                </button>
-                                                            @endif
+
                                                             {{ csrf_field() }}
                                                             <input type="hidden" id="hidId" name="hidId"
                                                                    value="{{ $cuser->user->id }}">
@@ -176,12 +156,7 @@
                                                                 <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
                                                                    class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
                                                                         Approve @else Unapprove @endif</a>
-                                                                @if($cuser->user->designation_id !== 1)
-                                                                    <button class="btn btn-danger btn-outline"
-                                                                            type="submit">
-                                                                        Delete
-                                                                    </button>
-                                                                @endif
+
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" id="hidId" name="hidId"
                                                                        value="{{ $cuser->user->id }}">
@@ -212,12 +187,7 @@
                                                             <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
                                                                class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
                                                                     Approve @else Unapprove @endif</a>
-                                                            @if($cuser->user->designation_id !== 1)
-                                                                <button class="btn btn-danger btn-outline"
-                                                                        type="submit">
-                                                                    Delete
-                                                                </button>
-                                                            @endif
+
                                                             {{ csrf_field() }}
                                                             <input type="hidden" id="hidId" name="hidId"
                                                                    value="{{ $cuser->user->id }}">
@@ -244,12 +214,7 @@
                                                         <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
                                                            class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
                                                                 Approve @else Unapprove @endif</a>
-                                                        @if($cuser->user->designation_id !== 1)
-                                                            <button class="btn btn-danger btn-outline"
-                                                                    type="submit">
-                                                                Delete
-                                                            </button>
-                                                        @endif
+
                                                         {{ csrf_field() }}
                                                         <input type="hidden" id="hidId" name="hidId"
                                                                value="{{ $cuser->user->id }}">
@@ -276,12 +241,7 @@
                                                             <a href="@if($cuser->user->approval == 0 ) /admin/manage-clients/client_user/{{ $cuser->user->id }}/activate @else /admin/manage-clients/client_user/{{ $cuser->user->id }}/deactivate @endif"
                                                                class="btn @if($cuser->user->approval == 0 ) btn-primary @else btn-danger @endif btn-outline">@if($cuser->user->approval == 0 )
                                                                     Approve @else Unapprove @endif</a>
-                                                            @if($cuser->user->designation_id !== 1)
-                                                                <button class="btn btn-danger btn-outline"
-                                                                        type="submit">
-                                                                    Delete
-                                                                </button>
-                                                            @endif
+
                                                             {{ csrf_field() }}
                                                             <input type="hidden" id="hidId" name="hidId"
                                                                    value="{{ $cuser->user->id }}">

@@ -19,6 +19,17 @@ class ClientsBranchController extends Controller
         return back();
     }
 
+    public function edit(ClientsBranch $id)
+    {
+        $user = User::find(session('User'));
+        if ($user->id != 1)
+            $clients = $user;
+//                Client::where('user_id',$user->id)->get();
+        else
+            $clients = Client::all();
+        return view('/admin/clients/client-branch', compact('clients', 'id'));
+    }
+
     public function create()
     {
         $id = '';
@@ -53,10 +64,17 @@ class ClientsBranchController extends Controller
                 ClientsBranch::create($request->all());
                 Session::flash('success_message', 'successfully added...!');
             }
-        }else {
+        } else {
             ClientsBranch::create($request->all());
             Session::flash('success_message', 'successfully added...!');
         }
+        return back();
+    }
+
+    public function update(Request $request)
+    {
+        $cbranch = ClientsBranch::find($request->id);
+        $cbranch->update($request->all());
         return back();
     }
 }
