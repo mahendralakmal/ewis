@@ -44,12 +44,6 @@
                                                                 @if(!$user->privilege == null && $user->privilege->product == true) checked @endif>
                                     Products</label></div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="checkbox"><label><input type="checkbox" id="product_cost" name="product_cost"
-                                                                @if($user->id == 1) disabled @endif
-                                                                @if(!$user->privilege == null && $user->privilege->product == true) checked @endif>
-                                    View Product Cost</label></div>
-                        </div>
                         <div class="col-md-12">
                             <hr>
                             <h5>Manage Users</h5></div>
@@ -130,6 +124,13 @@
                                                                 @if($user->id == 1) disabled @endif
                                                                 @if(!$user->privilege == null && $user->privilege->manage_client == true) checked @endif>
                                     Manage Client</label></div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="checkbox"><label><input type="checkbox" id="product_cost" name="product_cost"
+                                                                @if($user->id == 1) disabled @endif
+                                                                @if(!$user->privilege == null && $user->privilege->product_cost == true) checked @endif>
+                                    View Product Cost</label></div>
                         </div>
                         <div class="col-md-12">
                             <hr>
