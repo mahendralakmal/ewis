@@ -66,13 +66,13 @@ class BucketController extends Controller
         $agent = User::find($po->agent_id)->first();
         if ($status === "OP") {
             Mail::to($user)->send(new PoOnProcess($user, $po));
-            //Mail::to($agent)->send(new PoOnProcess($user, $po));
+            Mail::to($agent)->send(new PoOnProcess($user, $po));
         } elseif ($status === "PC") {
             Mail::to($user)->send(new PoPartialComplete($user, $po));
-            //Mail::to($agent)->send(new PoPartialComplete($user, $po));
+            Mail::to($agent)->send(new PoPartialComplete($user, $po));
         } elseif ($status === "C") {
             Mail::to($user)->send(new PoCompleted($user, $po));
-            //Mail::to($agent)->send(new PoCompleted($user, $po));
+            Mail::to($agent)->send(new PoCompleted($user, $po));
         }
         return back();
     }
