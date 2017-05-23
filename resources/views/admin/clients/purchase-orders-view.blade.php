@@ -4,6 +4,7 @@
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->view_po))
+
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -25,11 +26,12 @@
                             <td><h5>Created Date & Time</h5></td>
                             <td><h5>Client</h5></td>
                             <td><h5>Branch</h5></td>
-                            <td><h5>Attachment</h5></td>
+                            <td width="200px"><h5>Customer Account Manager</h5></td>
+                            <td width="150px"><h5>Attachment</h5></td>
                             @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                <td><h5>Status</h5></td>
+                                <td width="180px"><h5>Status</h5></td>
                             @endif
-                            <td class="col-md-3"></td>
+                            <td class="col-md-2"></td>
                         </tr>
                         </thead>
                         <tbody class="tablePO">
@@ -40,7 +42,8 @@
                                     <td>{{$porder->created_at}}</td>
                                     <td>{{$porder->client_branch->client->name}}</td>
                                     <td>{{$porder->del_branch}}</td>
-                                    @if($porder->file !== null){
+                                    <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                    @if($porder->file !== null)
                                     <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a></td>
                                     @else
                                         <td>No Attachment</td>
@@ -112,6 +115,7 @@
                                         <td>{{$porder->created_at}}</td>
                                         <td>{{$porder->client_branch->client->name}}</td>
                                         <td>{{$porder->del_branch}}</td>
+                                        <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
                                         @if($porder->file !== null){
                                         <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                         </td>
@@ -193,6 +197,7 @@
                                                 <td>{{$porder->created_at}}</td>
                                                 <td>{{$porder->client_branch->client->name}}</td>
                                                 <td>{{$porder->del_branch}}</td>
+                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
                                                 @if($porder->file !== null){
                                                 <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
@@ -274,6 +279,7 @@
                                                     <td>{{$porder->created_at}}</td>
                                                     <td>{{$porder->client_branch->client->name}}</td>
                                                     <td>{{$porder->del_branch}}</td>
+                                                    <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
                                                     @if($porder->file !== null){
                                                     <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                     </td>
@@ -356,6 +362,7 @@
                                                 <td>{{$porder->created_at}}</td>
                                                 <td>{{$porder->client_branch->client->name}}</td>
                                                 <td>{{$porder->del_branch}}</td>
+                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
                                                 @if($porder->file !== null){
                                                 <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
@@ -439,6 +446,7 @@
                                                 <td>{{$porder->created_at}}</td>
                                                 <td>{{$porder->client_branch->client->name}}</td>
                                                 <td>{{$porder->del_branch}}</td>
+                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
                                                 @if($porder->file !== null){
                                                 <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
@@ -523,6 +531,7 @@
                                                     <td>{{$porder->created_at}}</td>
                                                     <td>{{$porder->client_branch->client->name}}</td>
                                                     <td>{{$porder->del_branch}}</td>
+                                                    <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
                                                     @if($porder->file !== null){
                                                     <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                     </td>
@@ -625,7 +634,6 @@
 
             getPoStattus();
         });
-
 
 
         $("#from").on('change', function () {
