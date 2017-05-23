@@ -37,7 +37,7 @@
                         <tbody class="tablePO">
                         @if(Session::get('User') == 1)
                             @foreach($porders as $porder)
-                                @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
+                                @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" ||  Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 &&  $porder->status === "PC")
                                     <tr class="error_tr">
                                 @else
                                     <tr>
