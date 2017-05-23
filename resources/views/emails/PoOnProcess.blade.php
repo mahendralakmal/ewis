@@ -45,13 +45,7 @@
             <p>{{ $order->del_notes }}</p>
         </td>
     </tr>
-    <tr>
-        <td clospan="2">
-            <h5>Purchase Order Acknowledgement</h5>
-            <p>Your order is being Processed. Please contact sales department for further details</p>
 
-        </td>
-    </tr>
     <tr>
         <td colspan="2"><hr><img src="{{ url('/img/footer.png') }}" width="100%"></td>
     </tr>

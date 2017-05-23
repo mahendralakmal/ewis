@@ -33,7 +33,7 @@
                             @endforeach
                         </tr>
                         <tr>
-                            <td colspan="5"><h5>Total</h5></td>
+                            <td colspan="5"><h5>Grand Total</h5></td>
                             <td style="border-bottom: double #333; text-align: right"><h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>
                         </tr>
                 </table>

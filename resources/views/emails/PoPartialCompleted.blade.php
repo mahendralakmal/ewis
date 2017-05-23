@@ -6,7 +6,7 @@
 </head>
 
 <body style="width: 894px">
-
+<p>Thank You for your valued order. Your order has being Dispatched.</p>
 <p>You may view the status of your order through the Order Management Portal.</p>
 <p>You may contact your Account Manager for further information or for any clarifications with regard to this order.</p>
 <p>Thank You</p>
