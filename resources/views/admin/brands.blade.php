@@ -75,9 +75,9 @@
                             <input type="file" id="image" name="image">
                         </div>
                     </div>
-                    <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
-                            Add @endif</button>
-                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Brands</a>
+                    <div class="col-md-12 text-center form-group"><button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
+                                Add @endif</button></div>
+                    <div class="col-md-12 text-center form-group"><a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Brands</a></div>
                 </form>
 
             </div>

@@ -222,8 +222,9 @@
                                                      @if(!$id == null) value="{{ $id->color }}"
                                                      @else value="#ffffff"@endif></div>
                     </div>
-                    <div class="col-md-12">&nbsp;</div>
+                    <div class="col-md-12 text-center">&nbsp;
                     <button type="submit" class="btn btn-primary btn-outline">Submit</button>
+                    </div>
                 </form>
             </div>
         </div>

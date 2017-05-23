@@ -20,4 +20,9 @@ class P_Order extends Model
     {
         return $this->belongsTo(ClientsBranch::class, 'clients_branch_id');
     }
+
+    public function cam()
+    {
+        return $this->belongsTo(User::class, 'agent_id');
+    }
 }

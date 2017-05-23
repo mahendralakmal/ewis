@@ -333,10 +333,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-5">
-                        <label>Confirm Passworde</label>
-                    </div>
-                    <div class="col-md-7">
+                    <div class="col-md-12 text-center">
                         <button class="btn btn-primary btn-outline" type="submit">@if($id === "")Add @else
                                 Update @endif</button>
                     </div>

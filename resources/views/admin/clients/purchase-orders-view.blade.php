@@ -674,6 +674,7 @@
                 type: 'get',
                 url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
                 success: function (response) {
+                    console.log(response);
                 }
             });
 

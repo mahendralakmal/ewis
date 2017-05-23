@@ -26,7 +26,7 @@ class PoPartialComplete extends Mailable
     {
         $this->user = $user;
         $this->order = $po;
-        $this->client_branch = ClientsBranch::find($po->clients_branch_id);
+        $this->client_branch = $po->client_branch;
     }
 
     /**

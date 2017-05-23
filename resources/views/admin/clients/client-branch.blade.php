@@ -241,7 +241,7 @@
                     <div class="form-group row">
                         <div class="col-md-4"><label>Name</label></div>
                         <div class="col-md-8"><input type="text" id="name" name="name" class="form-control"
-                                                     @if(!$id == null) value="{{ $id->name }}" disabled @endif>
+                                                     @if(!$id == null) value="{{ $id->name }}" @endif>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -261,8 +261,8 @@
                                                      @if(!$id == null) value="{{ $id->email }}" @endif></div>
                     </div>
 
-                    <div class="col-md-12">&nbsp;</div>
-                    <button type="submit" class="btn btn-primary btn-outline">Submit</button>
+                    <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-outline">Submit</button>&nbsp;</div>
                 </form>
             </div>
         </div>
