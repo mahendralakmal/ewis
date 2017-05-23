@@ -35,8 +35,9 @@ class PoSentSuccessfully extends Mailable
      *
      * @return $this
      */
+
     public function build()
     {
-        return $this->subject('EWIS Peripherals Order Management System - Thank You for your Order.')->view('emails.PoSentSuccessfully');
+        return $this->subject('EWIS Peripherals Order Management System - Thank You for your Order.' )->view('emails.PoSentSuccessfully');
     }
 }

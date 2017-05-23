@@ -6,7 +6,7 @@
 </head>
 <body style="width: 894px">
 <h5>Order Completed</h5>
-<p>Your order process is Completed. Please contact sales department for further details</p>
+<p>Thank You for your valued order. Your order has being Completed</p>
 <table width="100%" border="0">
     <tr>
         <td>

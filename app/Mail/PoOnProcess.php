@@ -36,6 +36,6 @@ class PoOnProcess extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.PoOnProcess');
+        return $this->subject('EWIS Peripherals Order Management System - Order Acknowledged')->view('emails.PoOnProcess');
     }
 }

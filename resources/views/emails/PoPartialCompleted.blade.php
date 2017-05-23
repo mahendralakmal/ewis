@@ -6,6 +6,10 @@
 </head>
 
 <body style="width: 894px">
+
+<p>You may view the status of your order through the Order Management Portal.</p>
+<p>You may contact your Account Manager for further information or for any clarifications with regard to this order.</p>
+<p>Thank You</p>
 <table width="100%" border="0">
     <tr>
         <td>
@@ -44,8 +48,7 @@
     </tr>
     <tr>
         <td clospan="2">
-            <h5>Purchase Order Partially</h5>
-            <p>Your order is being Completed Partially. Please contact sales department for further details</p>
+
 
         </td>
     </tr>

@@ -36,6 +36,6 @@ class PoPartialComplete extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.PoPartialCompleted');
+        return $this->subject('EWIS Peripherals Order Management System - Your Order has been Dispatched')->view('emails.PoPartialCompleted');
     }
 }
