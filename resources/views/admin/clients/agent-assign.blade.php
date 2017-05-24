@@ -2,7 +2,6 @@
 @section('page_heading')
     <strong>{{ $id->client->name }} - {{ $id->name }}</strong>
     <br>
-    Assign Customer Account Manager
 @stop
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
@@ -11,7 +10,7 @@
         <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Agents</h3>
+                    <h3 class="panel-title">Assign Customer Account Manager</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table">

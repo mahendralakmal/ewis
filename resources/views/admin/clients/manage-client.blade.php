@@ -41,8 +41,8 @@
                                                         <table class="table">
                                                             <thead>
                                                             <tr>
-                                                                <td><h5>Client</h5></td>
-                                                                <td><h5>Branch</h5></td>
+                                                                <td><h5>Organization</h5></td>
+                                                                <td><h5>Branch / Department</h5></td>
                                                             </tr>
                                                             </thead>
                                                             <tbody>

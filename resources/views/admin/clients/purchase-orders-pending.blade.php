@@ -24,8 +24,8 @@
                         <tr>
                             <td><h5>P.O No.</h5></td>
                             <td><h5>Created Date & Time</h5></td>
-                            <td><h5>Client</h5></td>
-                            <td><h5>Branch</h5></td>
+                            <td><h5>Organization</h5></td>
+                            <td><h5>Branch / Department</h5></td>
                             <td width="200px"><h5>Customer Account Manager</h5></td>
                             <td width="150px"><h5>Attachment</h5></td>
                             <td class="col-md-2"></td>

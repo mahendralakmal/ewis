@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Client Branches ')
+@section('page_heading','Branch / Department ')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -8,7 +8,7 @@
             <div class="col-xs-12 col-sm-12 col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Clients</h3>
+                        <h3 class="panel-title">Branch / Department</h3>
                     </div>
                     <div class="panel-body">
                         <div class="panel-body">
@@ -169,7 +169,7 @@
                     @endif
 
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Client</label></div>
+                        <div class="col-md-4"><label>Organization</label></div>
                         <div class="col-md-8">
                             <select name="client_id" id="client_id" class="form-control">
                                 <option> Select Client</option>

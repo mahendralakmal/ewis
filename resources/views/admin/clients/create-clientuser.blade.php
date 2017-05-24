@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Add New Users')
+@section('page_heading','Users')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
         && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -17,11 +17,11 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <td><h5>Client</h5></td>
-                                <td><h5>Branch</h5></td>
+                                <td><h5>Organization</h5></td>
+                                <td><h5>Branch / Department</h5></td>
                                 <td><h5>Email</h5></td>
                                 <td><h5>Name</h5></td>
-                                <td><h5>Designation</h5></td>
+                                {{--<td><h5>Designation</h5></td>--}}
                                 <td class="col-md-3"></td>
                             </tr>
                             </thead>
@@ -34,7 +34,7 @@
                                             <td>{{$user->c_user->client_branch->name}}</td>
                                             <td>{{$user->email}}</td>
                                             <td>{{$user->name}}</td>
-                                            <td>{{$user->designation->designation}}</td>
+                                            {{--<td>{{$user->designation->designation}}</td>--}}
                                             <td class="col-md-6">
                                                 <form method="POST" action="/admin/users/delete" role="form">
                                                     <a href="/admin/manage-clients/client_user/{{ $user->id }}"
@@ -63,7 +63,7 @@
                                                     <td>{{$cbranch->name}}</td>
                                                     <td>{{$cuser->user->email}}</td>
                                                     <td>{{$cuser->user->name}}</td>
-                                                    <td>{{$cuser->user->designation->designation}}</td>
+                                                    {{--<td>{{$cuser->user->designation->designation}}</td>--}}
                                                     <td class="col-md-6">
                                                         <form method="POST" action="/admin/users/delete" role="form">
                                                             <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
@@ -92,7 +92,7 @@
                                                         <td>{{$cbranch->name}}</td>
                                                         <td>{{$cuser->user->email}}</td>
                                                         <td>{{$cuser->user->name}}</td>
-                                                        <td>{{$cuser->user->designation->designation}}</td>
+                                                        {{--<td>{{$cuser->user->designation->designation}}</td>--}}
                                                         <td class="col-md-6">
                                                             <form method="POST" action="/admin/users/delete" role="form">
                                                                 <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
@@ -119,7 +119,7 @@
                                                     <td>{{$cbranch->name}}</td>
                                                     <td>{{$cuser->user->email}}</td>
                                                     <td>{{$cuser->user->name}}</td>
-                                                    <td>{{$cuser->user->designation->designation}}</td>
+                                                    {{--<td>{{$cuser->user->designation->designation}}</td>--}}
                                                     <td class="col-md-6">
                                                         <form method="POST" action="/admin/users/delete" role="form">
                                                             <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
@@ -146,7 +146,7 @@
                                                         <td>{{$cbranch->name}}</td>
                                                         <td>{{$cuser->user->email}}</td>
                                                         <td>{{$cuser->user->name}}</td>
-                                                        <td>{{$cuser->user->designation->designation}}</td>
+                                                        {{--<td>{{$cuser->user->designation->designation}}</td>--}}
                                                         <td class="col-md-6">
                                                             <form method="POST" action="/admin/users/delete" role="form">
                                                                 <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
@@ -177,7 +177,7 @@
                                                     <td>{{$cbranch->name}}</td>
                                                     <td>{{$cuser->user->email}}</td>
                                                     <td>{{$cuser->user->name}}</td>
-                                                    <td>{{$cuser->user->designation->designation}}</td>
+                                                    {{--<td>{{$cuser->user->designation->designation}}</td>--}}
                                                     <td class="col-md-6">
                                                         <form method="POST" action="/admin/users/delete" role="form">
                                                             <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
@@ -204,7 +204,7 @@
                                                 <td>{{$cbranch->name}}</td>
                                                 <td>{{$cuser->user->email}}</td>
                                                 <td>{{$cuser->user->name}}</td>
-                                                <td>{{$cuser->user->designation->designation}}</td>
+                                                {{--<td>{{$cuser->user->designation->designation}}</td>--}}
                                                 <td class="col-md-6">
                                                     <form method="POST" action="/admin/users/delete" role="form">
                                                         <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"
@@ -231,7 +231,7 @@
                                                     <td>{{$cbranch->name}}</td>
                                                     <td>{{$cuser->user->email}}</td>
                                                     <td>{{$cuser->user->name}}</td>
-                                                    <td>{{$cuser->user->designation->designation}}</td>
+                                                    {{--<td>{{$cuser->user->designation->designation}}</td>--}}
                                                     <td class="col-md-6">
                                                         <form method="POST" action="/admin/users/delete" role="form">
                                                             <a href="/admin/manage-clients/client_user/{{ $cuser->user->id }}"

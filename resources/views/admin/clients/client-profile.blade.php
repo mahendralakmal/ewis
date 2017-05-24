@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Client Profile ')
+@section('page_heading','Organizations ')
 @section('section')
     @if((Session::has('User'))
     && (\App\User::find(Session::get('User'))->privilege != null)
