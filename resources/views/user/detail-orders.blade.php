@@ -16,6 +16,10 @@
                         <ul class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">
                             <div class="panel-body">
                                 <table class="table">
+                                    <div class="row">
+                                        <div class="col-md-3"><strong>Order No :- {{$order->id}}</strong></div>
+                                        <div class="col-md-6 text-right"><strong>{{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}</strong></div>
+                                    </div>
                                     <thead>
                                     <tr>
                                         <td><strong>Part Number</strong></td>
@@ -39,7 +43,7 @@
                                             @endforeach
                                         </tr>
                                         <tr>
-                                            <td colspan="5"><h5>Grand Total</h5></td>
+                                            <td colspan="5"><h5><strong>Grand Total</strong></h5></td>
                                             <td style="border-bottom: double #333; text-align: right"><h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>
                                         </tr>
                                 </table>

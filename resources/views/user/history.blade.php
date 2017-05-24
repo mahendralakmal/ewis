@@ -37,7 +37,7 @@
                                                 <td class="col-md-2"><center><h5>Po. No.</h5></center></td>
                                                 <td class="col-md-3"><center><h5>Created Date & Time</h5></center></td>
                                                 <td class="col-md-3"><center><h5>Account Manager</h5></center></td>
-                                                <td class="col-md-2"><center><h5>Branch</h5></center></td>
+                                                <td class="col-md-2"><center><h5>Branch / Department</h5></center></td>
                                                 <td class="col-md-2"><center><h5>Status</h5></center></td>
                                                 {{--<td><h5>NIC/ Passport</h5></td>--}}
                                                 <td class="col-md-3"><center>Details</center></td>

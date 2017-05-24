@@ -20,7 +20,7 @@
                                     <div class="col-md-8">
                                         @include('admin.messages.success')
                                         @include('admin.messages.error')
-                                        <h4 class="pro-title">Edit Profile</h4>
+                                        {{--<h4 class="pro-title">Edit Profile</h4>--}}
                                     <form method="POST" id="cp_update" enctype="multipart/form-data" action="/admin/manage-clients/cp_update" class="form-horizontal">
                                         {{ csrf_field() }}
                                         <div class="form-group">
@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="col-md-7">
+                                            <div class="col-md-7 text-center">
                                                 <button class="btn btn-primary btn-outline" type="submit" value="save-form">Submit</button>
                                             </div>
                                         </div>

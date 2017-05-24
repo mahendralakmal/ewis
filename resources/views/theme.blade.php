@@ -15,8 +15,9 @@
                     <div class="col-md-6 col-sm-8 col-xs-12 profile-head pull-right">
                         <div class="description">
                             <div class="inner">
-                                <h3><span class="fa fa-user-circle-o"></span>&nbsp;&nbsp;{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->agent_id)->name }}</h3>
+                                <h3>Customer Account Manager Details</h3>
                                 <ul>
+                                    <li><span class="fa fa-user-circle-o"></span>&nbsp;&nbsp;{{ App\User::find(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->agent_id)->name }}</li>
                                     <li><span class="fa fa-university"></span> EWIS Peripherals (Pvt) Ltd</li>
                                     <li><span class="fa fa-map-marker"></span>&nbsp;&nbsp;&nbsp;No.142, Yathama Building,
                                         Galle Road,

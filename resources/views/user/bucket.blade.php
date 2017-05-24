@@ -86,7 +86,7 @@
                                 @else
                                     <div class="row">
                                         <div class="col-lg-6 col-sm-6 col-xs-6 col-md-6 col-md-offset-3 col-lg-offset-3">
-                                            <h2>No Items in the Bucket! </h2>
+                                            <h2>Your Bucket is Empty.....! </h2>
                                         </div>
                                     </div>
                                 @endif
