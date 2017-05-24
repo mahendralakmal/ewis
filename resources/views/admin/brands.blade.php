@@ -7,13 +7,13 @@
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Brand Categories</h3>
+                    <h3 class="panel-title">Brands</h3>
                 </div>
                 <div class="panel-body">
                     <table class="table">
                         <thead>
                         <tr>
-                            <td><h5>Title</h5></td>
+                            <td><h5>Brand</h5></td>
                             <td><h5>Description</h5></td>
                             <td></td>
                         </tr>
@@ -55,7 +55,7 @@
                     <input type="hidden" id="user_id" name="user_id"
                            value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Title <span style="color: red">*</span></label></div>
+                        <div class="col-md-4"><label>Name <span style="color: red">*</span></label></div>
                         <div class="col-md-8">
                             <input type="text" name="title" id="title" class="form-control"
                                    @if(!$id == null) value="{{ $id->title }}" @endif>
@@ -75,9 +75,11 @@
                             <input type="file" id="image" name="image">
                         </div>
                     </div>
-                    <div class="col-md-12 text-center form-group"><button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
-                                Add @endif</button></div>
-                    <div class="col-md-12 text-center form-group"><a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Brands</a></div>
+                    <div class="form-group row">
+                    <div class="text-center form-group"><button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
+                                Add @endif</button>
+                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Brands</a></div>
+                    </div>
                 </form>
 
             </div>

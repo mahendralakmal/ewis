@@ -8,7 +8,7 @@
         <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Product Categories</h3>
+                    <h3 class="panel-title">Products</h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
@@ -186,9 +186,11 @@
                         </div>
                         <div class="col-md-1">%</div>
                     </div>
-                    <div class="col-md-12 text-center form-group"><button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
-                                Add @endif</button></div>
-                    <div class="col-md-12 text-center form-group"><a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Products</a></div>
+                    <div class="form-group row">
+                    <div class="text-center form-group"><button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
+                                Add @endif</button>
+                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Products</a></div>
+                    </div>
                 </form>
             </div>
         </div>
