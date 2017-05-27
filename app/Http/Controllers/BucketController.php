@@ -211,8 +211,7 @@ class BucketController extends Controller
         return view('admin/clients/purchase-orders-view', compact('porders'));
     }
 
-    public
-    function pendingPurchaseOrder()
+    public function pendingPurchaseOrder()
     {
         if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
             $porders = P_Order::where('status', 'P')->get();
@@ -220,6 +219,56 @@ class BucketController extends Controller
             $porders = User::find(Session::get('User'));
 
         return view('admin/clients/purchase-orders-pending', compact('porders'));
+    }
+
+
+    public function processingPurchaseOrder()
+    {
+        if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+            $porders = P_Order::where('status', 'OP')->get();
+        else
+            $porders = User::find(Session::get('User'));
+
+        return view('admin/clients/purchase-orders-processing', compact('porders'));
+    }
+
+    public function getProcessingPoCount()
+    {
+        $user = User::find(Session::get('User'));
+        if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
+            $porder = P_Order::where('status', 'OP')->count();
+        } else {
+            $porder = 0;
+            if ($user->designation_id == 6) {
+                foreach (User::where('section_head_id', $user->id)->get() as $cbranch) {
+                    foreach (ClientsBranch::where('agent_id', $cbranch->id)->get() as $tbranch) {
+                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'OP']])->count();
+                    }
+                }
+                foreach (User::where('section_head_id', $cbranch->id)->get() as $sbranch) {
+                    foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'OP']])->count();
+                    }
+                }
+                foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
+                    $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'OP']])->count();
+                }
+            } else {
+                foreach (User::where('section_head_id', $user->id)->get() as $sbranch) {
+                    foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'OP']])->count();
+                    }
+                }
+                if (ClientsBranch::where('agent_id', $user->id)->count() > 0) {
+                    foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
+                        if (P_Order::where('clients_branch_id', $cbranch->id)->count() > 0) {
+                            $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'OP']])->count();
+                        }
+                    }
+                }
+            }
+        }
+        return Response::json($porder);
     }
 
     public

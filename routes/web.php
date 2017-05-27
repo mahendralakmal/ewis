@@ -121,6 +121,7 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
         Route::get('/purchase-orders-view', 'BucketController@getPurchaseOrder');
         Route::get('/purchase-orders-pending', 'BucketController@pendingPurchaseOrder');
+        Route::get('/purchase-orders-processing', 'BucketController@processingPurchaseOrder');
 
         Route::get('/purchase-orders/{from}/{to}/{status}', 'BucketController@ajaxPurchaseOrderStatus');
 

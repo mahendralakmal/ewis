@@ -38,6 +38,7 @@
                                     <select id="postatus" name="postatus" class="form-control">
                                         <option value="n">Select Status</option>
                                         <option value="P">Pending</option>
+                                        <option value="OP">Processing</option>
                                         <option value="PC">Partial Completed</option>
                                         <option value="C">Completed</option>
                                     </select>

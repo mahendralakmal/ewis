@@ -130,6 +130,11 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                                <a href="{{ url ('/admin/manage-clients/purchase-orders-processing' ) }}">Processing</a>
+                                            </li>
+                                        @endif
+                                        @if((\App\User::find(Session::get('User'))->privilege->view_po))
+                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/manage-clients/purchase-orders-partial-completed' ) }}">Partial
                                                     Complete</a>
                                             </li>
