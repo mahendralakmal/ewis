@@ -30,6 +30,19 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
+    public function getPurchaseOrdersByAccountManager(Request $request)
+    {
+        $agents = User::where('designation_id', 4);
+        $po = User::find($request->agent);
+        $branch = ClientsBranch::where('agent_id', $po->id)->get();
+//        $clients =
+        $status = $request->postatus;
+//        $start = $request->start;
+//        $end = $request->end;
+
+        return view('admin.reports.agent-wise-purchase-orders', compact('clients', 'po', 'status', 'branch','agents'));
+    }
+
     public function getPurchaseOrdersByClient(Request $request)
     {
         $clients = Client::all();
@@ -339,6 +352,19 @@ class BucketController extends Controller
         $start = "";
         $end = "";
         return view('admin/reports/completed-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
+    }
+
+    function AgentPurchaseOrder()
+    {
+        $clients = Client::all();
+        $branch = ClientsBranch::all();
+        $agents = User::where('designation_id', '4')->get();
+
+        $po = "";
+        $status = "";
+        $start = "";
+        $end = "";
+        return view('admin.reports.agent-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'agents', 'branch'));
     }
 
     public

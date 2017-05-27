@@ -39,12 +39,12 @@
 
                         <div class="col-md-2 col-sm-3 col-lg-2">
                             <div class="form-group">
-                                <select class="form-control" name="brand" id="brand" data-parsley-required="true">
-                                    <option value="n">Select Client</option>
-                                    @foreach ($brands as $brand)
-                                        <option value="{{ $client->id }}">{{ $client->name }}</option>
-                                    @endforeach
-                                </select>
+                                {{--<select class="form-control" name="brand" id="brand" data-parsley-required="true">--}}
+                                    {{--<option value="n">Select Client</option>--}}
+                                    {{--@foreach ($brands as $brand)--}}
+                                        {{--<option value="{{ $client->id }}">{{ $client->name }}</option>--}}
+                                    {{--@endforeach--}}
+                                {{--</select>--}}
                             </div>
                         </div>
                     </div>

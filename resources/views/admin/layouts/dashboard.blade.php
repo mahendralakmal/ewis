@@ -139,6 +139,7 @@
                                                 <a href="{{ url ('/admin/manage-clients/purchase-orders-completed' ) }}">Completed</a>
                                             </li>
                                         @endif
+
                                     </ul>
                                 @endif
                             </li>
@@ -153,6 +154,12 @@
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/reports/completed-purchase-orders' ) }}">Purchase
                                                     Orders by Clients</a>
+                                            </li>
+                                        @endif
+                                        @if((\App\User::find(Session::get('User'))->privilege->view_reports))
+                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                                <a href="{{ url ('/admin/reports/agent-wise-purchase-orders' ) }}">Purchase
+                                                    Orders by Account Manager</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))

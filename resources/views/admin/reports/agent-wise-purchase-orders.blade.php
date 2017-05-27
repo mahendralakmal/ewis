@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Purchase Orders by Client')
+@section('page_heading','Purchase Orders by Account Manager')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Client POs</h3>
+                    <h3 class="panel-title">Account Manager P.Os</h3>
                 </div>
                 <div class="panel-body">
                     <form action="" method="post" id="po">
@@ -17,11 +17,11 @@
                         <div class="row">
                             <div class="col-md-2 col-sm-3 col-lg-2">
                                 <div class="form-group">
-                                    <select class="form-control" name="client" id="client" data-parsley-required="true">
-                                        <option value="n">Select Client</option>
-                                        @foreach ($clients as $client)
-                                            <option value="{{ $client->id }}">{{ $client->name }}</option>
-                                        @endforeach
+                                    <select class="form-control" name="agent" id="agent" data-parsley-required="true">
+                                        <option value="n">Select Account Manager</option>
+                                            @foreach ($agents as $agent)
+                                                        <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -55,10 +55,10 @@
                                 <tr>
                                     <td><h4><strong>{{$po->name}}</strong></h4></td>
                                 </tr>
-                                @foreach($po->client_branch as $branch)
-                                    @if( $branch->activation !== 1)
+                                @foreach($branch as $branch)
+                                    @if(! $branch->activation == 1)
                                     <tr>
-                                        <td><strong>{{$branch->name}} Branch</strong></td>
+                                        <td><strong>{{$branch->client->name}} - {{$branch->name}}</strong></td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -73,11 +73,10 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-{{--                                                @if($start !="" && $end!="")--}}
+{{--                                                        @foreach($po->client_branch as $brnch)--}}
                                                     @if($branch->p_orders->count()>0)
-                                                        @foreach($branch->p_orders as $order)
+                                                        @foreach( $branch->p_orders as $order)
                                                             @if($order->status == $status)
-{{--                                                            {{$order}}--}}
                                                                 <tr>
                                                                     <td>{{$order->id}}</td>
                                                                     <td>{{$order->created_at}}</td>
@@ -86,13 +85,14 @@
                                                                     <td>{{$order->del_tp}}</td>
                                                                 </tr>
                                                             @endif
+                                                                {{--@endforeach--}}
                                                         @endforeach
                                                     @else
                                                         <tr>
                                                             <td> No records found...!</td>
                                                         </tr>
-                                                    @endif
-                                                {{--@endif--}}
+                                                    {{--@endif--}}
+                                                @endif
                                                 </tbody>
                                             </table>
                                         </td>

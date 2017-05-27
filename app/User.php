@@ -29,6 +29,6 @@ class User extends Model
     }
 
     public function client_branch(){
-        return $this->belongsTo(ClientsBranch::class);
+        return $this->hasMany(ClientsBranch::class);
     }
 }

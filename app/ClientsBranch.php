@@ -31,4 +31,9 @@ class ClientsBranch extends Model
     public function p_orders(){
         return $this->hasMany(P_Order::class);
     }
+
+    public function agent()
+    {
+        return $this->belongsTo(User::class,'agent_id');
+    }
 }

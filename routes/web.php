@@ -151,8 +151,12 @@ Route::group(['prefix' => ' /admin'], function () {
     Route::group(['prefix' => '/reports'], function () {
 
         Route::get('/completed-purchase-orders','BucketController@CompletedPurchaseOrder');
+        Route::get('/agent-wise-purchase-orders','BucketController@AgentPurchaseOrder');
+
 //        Route::get('/completed-purchase-orders/{client}/{status}/{start}/{end}','BucketController@getPurchaseOrdersByClient');
         Route::post('/completed-purchase-orders','BucketController@getPurchaseOrdersByClient');
+        Route::post('/agent-wise-purchase-orders','BucketController@getPurchaseOrdersByAccountManager');
+
 
         Route::get('/client-wise-price-list','BucketController@getPriceList');
         Route::get('/client-wise-price-list/{client}/{start}/{end}','BucketController@getPriceListByClient');
