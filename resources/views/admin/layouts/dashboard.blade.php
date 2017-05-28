@@ -169,6 +169,12 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                                <a href="{{ url ('/admin/reports/all-purchase-orders' ) }}">Purchase
+                                                    Orders by Status</a>
+                                            </li>
+                                        @endif
+                                        @if((\App\User::find(Session::get('User'))->privilege->view_reports))
+                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/reports/client-wise-price-list' ) }}">Price
                                                     List By Customer</a>
                                             </li>

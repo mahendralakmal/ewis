@@ -30,6 +30,19 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
+    public function getAllPurchaseOrders(Request $request)
+    {
+        $agents = User::where('designation_id', 4);
+        $p_orders = P_Order::all();
+//        $branch = ClientsBranch::where('agent_id', $po->id)->get();
+//        $clients =
+        $status = $request->postatus;
+//        $start = $request->start;
+//        $end = $request->end;
+
+        return view('admin.reports.all-purchase-orders', compact('clients', 'p_orders', 'status','agents'));
+    }
+
     public function getPurchaseOrdersByAccountManager(Request $request)
     {
         $agents = User::where('designation_id', 4);
@@ -403,7 +416,7 @@ class BucketController extends Controller
         return view('admin/reports/completed-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
     }
 
-    function AgentPurchaseOrder()
+    public function AgentPurchaseOrder()
     {
         $clients = Client::all();
         $branch = ClientsBranch::all();
@@ -414,6 +427,19 @@ class BucketController extends Controller
         $start = "";
         $end = "";
         return view('admin.reports.agent-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'agents', 'branch'));
+    }
+
+    public function AllPurchaseOrder()
+    {
+        $clients = Client::all();
+        $branch = ClientsBranch::all();
+        $agents = User::where('designation_id', '4')->get();
+
+        $p_orders = P_Order::all();
+        $status = "";
+        $start = "";
+        $end = "";
+        return view('admin.reports.all-purchase-orders', compact('clients', 'p_orders', 'status', 'start', 'end', 'agents', 'branch'));
     }
 
     public
