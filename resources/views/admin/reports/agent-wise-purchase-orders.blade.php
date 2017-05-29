@@ -17,11 +17,17 @@
                         <div class="row">
                             <div class="col-md-2 col-sm-3 col-lg-2">
                                 <div class="form-group">
+
                                     <select class="form-control" name="agent" id="agent" data-parsley-required="true">
                                         <option value="n">Select Account Manager</option>
-                                            @foreach ($agents as $agent)
-                                                        <option value="{{ $agent->id }}">{{ $agent->name }}</option>
-                                            @endforeach
+                                        @foreach($agents as $user)
+                                            @if(\App\ClientsBranch::where('agent_id', $user->id)->count() > 0)
+                                                <option value="{{ \App\ClientsBranch::where('agent_id', $user->id)->first()->agent->id }}">{{ \App\ClientsBranch::where('agent_id', $user->id)->first()->agent->name }}</option>
+                                            @endif
+                                        @endforeach
+                                        @foreach ($agents->where('designation_id',4) as $agent)
+                                            <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -58,23 +64,23 @@
                                 </tr>
                                 @foreach($branch as $branch)
                                     @if(! $branch->activation == 1)
-                                    <tr>
-                                        <td><strong>{{$branch->client->name}} - {{$branch->name}}</strong></td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <table class="table table-condensed">
-                                                <thead>
-                                                <tr>
-                                                    <td><h5>Po. No.</h5></td>
-                                                    <td><h5>Created Date & Time</h5></td>
-                                                    <td><h5>Completed Date & Time</h5></td>
-                                                    <td><h5>Client User</h5></td>
-                                                    <td><h5>Contact Number</h5></td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-{{--                                                        @foreach($po->client_branch as $brnch)--}}
+                                        <tr>
+                                            <td><strong>{{$branch->client->name}} - {{$branch->name}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <table class="table table-condensed">
+                                                    <thead>
+                                                    <tr>
+                                                        <td><h5>Po. No.</h5></td>
+                                                        <td><h5>Created Date & Time</h5></td>
+                                                        <td><h5>Completed Date & Time</h5></td>
+                                                        <td><h5>Client User</h5></td>
+                                                        <td><h5>Contact Number</h5></td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {{--                                                        @foreach($po->client_branch as $brnch)--}}
                                                     @if($branch->p_orders->count()>0)
                                                         @foreach( $branch->p_orders as $order)
                                                             @if($order->status == $status)
@@ -86,18 +92,18 @@
                                                                     <td>{{$order->del_tp}}</td>
                                                                 </tr>
                                                             @endif
-                                                                {{--@endforeach--}}
+                                                            {{--@endforeach--}}
                                                         @endforeach
                                                     @else
                                                         <tr>
                                                             <td> No records found...!</td>
                                                         </tr>
-                                                    {{--@endif--}}
-                                                @endif
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
+                                                        {{--@endif--}}
+                                                    @endif
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
                                     @endif
                                 @endforeach
                                 </tbody>

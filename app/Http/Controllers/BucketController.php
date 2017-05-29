@@ -420,7 +420,9 @@ class BucketController extends Controller
     {
         $clients = Client::all();
         $branch = ClientsBranch::all();
-        $agents = User::where('designation_id', '4')->get();
+//        $agents = User::where('designation_id', '4')->get();
+        $agents = User::all();
+
 
         $po = "";
         $status = "";
