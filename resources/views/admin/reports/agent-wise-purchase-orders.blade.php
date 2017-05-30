@@ -25,9 +25,9 @@
                                                 <option value="{{ \App\ClientsBranch::where('agent_id', $user->id)->first()->agent->id }}">{{ \App\ClientsBranch::where('agent_id', $user->id)->first()->agent->name }}</option>
                                             @endif
                                         @endforeach
-                                        @foreach ($agents->where('designation_id',4) as $agent)
-                                            <option value="{{ $agent->id }}">{{ $agent->name }}</option>
-                                        @endforeach
+                                        {{--@foreach ($agents->where('designation_id',4) as $agent)--}}
+                                            {{--<option value="{{ $agent->id }}">{{ $agent->name }}</option>--}}
+                                        {{--@endforeach--}}
                                     </select>
                                 </div>
                             </div>
