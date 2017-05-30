@@ -19,6 +19,16 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function getAllProducts()
+    {
+//        return "hi";
+        $id = "";
+        $brands = Brand::all();
+        $categories = Category::where('status', 1)->get();
+        $products = Product::where('status', 1)->get();
+        return view('admin.reports.all-products-list', compact('categories', 'products', 'id', 'brands'));
+    }
+
     public function get_products(Client_Product $id)
     {
 //        return($id);
