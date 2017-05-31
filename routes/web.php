@@ -45,7 +45,7 @@ Route::delete('emptyBucket', 'BucketController@emptyBucket');
 
 //=====================================================================================================================
 
-Route::group(['prefix' => ' /admin'], function () {
+Route::group(['prefix' => '/admin'], function () {
 
     Route::get('/clean', function (){
         session()->forget('success_message');
@@ -163,8 +163,8 @@ Route::group(['prefix' => ' /admin'], function () {
         Route::post('/all-purchase-orders','BucketController@getAllPurchaseOrders');
 
 
-        Route::get('/client-wise-price-list','BucketController@getPriceList');
-        Route::get('/client-wise-price-list/{client}/{start}/{end}','BucketController@getPriceListByClient');
+        Route::post('/account-manager-wise-price-list','BucketController@getPLByAccMgr');
+        Route::get('/account-manager-wise-price-list','BucketController@getPriceListByAccMgr');
 
         Route::get('/get-brands/{brands}','BrandsController@get_brands');
         Route::get('/get-category/{id}','CategoryController@get_categories');
