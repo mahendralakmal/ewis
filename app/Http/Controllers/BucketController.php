@@ -81,10 +81,24 @@ class BucketController extends Controller
         return view('admin.reports.completed-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
     }
 
-    public function getPriceList()
+    public function getPriceListByAccMgr()
     {
-        $client = Client::all();
-        return view('admin/reports/client-wise-price-list', compact('client'));
+        $users = User::all();
+        $branchs = "";
+        $clients = "";
+        $s_user = "";
+        return view('admin/reports/account-manager-wise-price-list', compact('users', 'branchs','clients', 's_user'));
+    }
+
+    public function getPLByAccMgr(Request $request)
+    {
+        $users = User::all();
+
+        $branchs = ClientsBranch::where('agent_id', $request->agent)->orderby('client_id')->get();
+        $clients = Client::all();
+        $s_user = User::find($request->agent);
+
+        return view('admin/reports/account-manager-wise-price-list', compact('users', 'branchs','clients', 's_user'));
     }
 
     public function getPriceListByClient(Client $client, $start, $end)
@@ -438,7 +452,6 @@ class BucketController extends Controller
     {
         $clients = Client::all();
         $branch = ClientsBranch::all();
-//        $agents = User::where('designation_id', '4')->get();
         $agents = User::all();
 
         $po = "";

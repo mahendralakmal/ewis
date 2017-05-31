@@ -180,8 +180,8 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/reports/client-wise-price-list' ) }}">Price
-                                                    List By Customer</a>
+                                                <a href="{{ url ('/admin/reports/account-manager-wise-price-list' ) }}">Price
+                                                    List By Account Manger</a>
                                             </li>
                                         @endif
                                     </ul>
