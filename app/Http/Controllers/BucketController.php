@@ -57,14 +57,36 @@ class BucketController extends Controller
 
     public function getPurchaseOrdersByAccountManager(Request $request)
     {
+        $this->validate(request(),
+            [
+                'agent' => 'required',
+                'postatus' => 'required',
+            ],
+            [
+                'agent.required' => 'Please select an Account Manager.',
+                'postatus.required' => "Please select Status."
+            ]
+        );
 //        return $request->all();
         $agents = User::all();
         $po = User::find($request->agent);
         $branch = ClientsBranch::where('agent_id', $po->id)->get();
-        $p_orders = P_Order::all();
         $status = $request->postatus;
         $start = $request->from;
         $end = $request->to;
+        if ($start != "" && $end != "" && $status !=""){
+            $p_orders = P_Order::whereBetween('p__orders.created_at', [$start, $end])->get();
+            $p_orders->transform(function ($p_orders, $key) {
+                $p_orders->bucket = unserialize($p_orders->bucket);
+                return $p_orders;
+            });}
+
+        else {
+            $p_orders = P_Order::all();
+            $p_orders->transform(function ($p_orders, $key) {
+                $p_orders->bucket = unserialize($p_orders->bucket);
+                return $p_orders;
+            });}
 
         return view('admin.reports.agent-wise-purchase-orders',
             compact('po', 'status', 'branch','agents','start','end','p_orders'));
@@ -73,12 +95,26 @@ class BucketController extends Controller
     public function getPurchaseOrdersByClient(Request $request)
     {
         $clients = Client::all();
+        $branch = ClientsBranch::where('client_id')->get();
+        $start = $request->from;
+        $end = $request->to;
+        if ($start != "" && $end != ""){
+            $p_orders = P_Order::whereBetween('p__orders.created_at', [$start, $end])->get();
+            $p_orders->transform(function ($p_orders, $key) {
+                $p_orders->bucket = unserialize($p_orders->bucket);
+                return $p_orders;
+            });}
+
+        else {
+            $p_orders = P_Order::all();
+            $p_orders->transform(function ($p_orders, $key) {
+                $p_orders->bucket = unserialize($p_orders->bucket);
+                return $p_orders;
+            });}
         $po = Client::find($request->client);
         $status = $request->postatus;
-        $start = $request->start;
-        $end = $request->end;
 
-        return view('admin.reports.completed-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
+        return view('admin.reports.client-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'branch','p_orders'));
     }
 
     public function getPriceListByAccMgr()
@@ -445,7 +481,7 @@ class BucketController extends Controller
         $status = "";
         $start = "";
         $end = "";
-        return view('admin/reports/completed-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
+        return view('admin/reports/client-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
     }
 
     public function AgentPurchaseOrder()

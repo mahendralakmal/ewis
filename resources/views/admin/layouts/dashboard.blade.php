@@ -157,7 +157,7 @@
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/reports/completed-purchase-orders' ) }}">Purchase
+                                                <a href="{{ url ('/admin/reports/client-wise-purchase-orders' ) }}">Purchase
                                                     Orders by Clients</a>
                                             </li>
                                         @endif
@@ -204,7 +204,7 @@
                 </div>
             </div>
             <footer id="footer" class="col-md-12">
-                <p class="text-muted">Design & Developed by <a href="http://proitsolutions.lk">ProIT Solutions</a></p>
+                <p class="text-muted">“Copyright © E-WIS Peripherals (Pvt) Ltd.2017, All Right Reserved”</p>
             </footer>
         </div>
     @else

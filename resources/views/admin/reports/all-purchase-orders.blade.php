@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Purchase Orders')
+@section('page_heading','Purchase Orders By Status')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -16,13 +16,13 @@
                         @endif
                 </div>
                 <div class="panel-body">
-                    <form action="" method="post" id="po">
+                    <form action="" method="post" id="po" name="po">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-2 col-sm-3 col-lg-2">
                                 <div class="form-group">
                                     <select id="postatus" name="postatus" class="form-control">
-                                        <option value="n">Select Status</option>
+                                        <option value="">Select Status</option>
                                         <option value="P">Pending</option>
                                         <option value="OP">Processing</option>
                                         <option value="PC">Partial Completed</option>
@@ -31,7 +31,7 @@
                                 </div>
                             </div>
                             {{--<div class="col-md-3 col-sm-4 col-lg-3" id="sandbox-container">--}}
-                                <div class="col-md-7 row">
+                                <div class="col-md-6 row">
                                     {{--<div class="col-md-1">Date</div>--}}
                                     <div class="col-md-1"> Form Date</div>
                                     <div class="col-md-4"><input type="date" class="form-control" name="from" id="from"></div>
@@ -129,4 +129,13 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+@section('scripts')
+    <script>
+        $("#po").validate({
+            rules: {
+                postatus: "required"
+            }
+        });
+    </script>
 @stop

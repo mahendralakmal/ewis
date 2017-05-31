@@ -95,7 +95,7 @@
     <hr>
     <div class="container">
         <div class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p class="text-muted">Design & Developed by <a href="http://proitsolutions.lk">ProIT Solutions</a></p>
+            <p class="text-muted">“Copyright © E-WIS Peripherals (Pvt) Ltd.2017, All Right Reserved”</p>
         </div>
     </div>
 </footer>
