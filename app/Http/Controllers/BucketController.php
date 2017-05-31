@@ -30,6 +30,43 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
+    public function getPurchaseOrdersBySectorHead(Request $request)
+    {
+//        $this->validate(request(),
+//            [
+//                'agent' => 'required',
+//                'postatus' => 'required',
+//            ],
+//            [
+//                'agent.required' => 'Please select an Account Manager.',
+//                'postatus.required' => "Please select Status."
+//            ]
+//        );
+//        return $request->all();
+        $sheads = User::all();
+        $po = User::find($request->shead);
+        $branch = ClientsBranch::where('agent_id', $po->id)->get();
+        $status = $request->postatus;
+        $start = $request->from;
+        $end = $request->to;
+        if ($start != "" && $end != "" && $status !=""){
+            $p_orders = P_Order::whereBetween('p__orders.created_at', [$start, $end])->get();
+            $p_orders->transform(function ($p_orders, $key) {
+                $p_orders->bucket = unserialize($p_orders->bucket);
+                return $p_orders;
+            });}
+
+        else {
+            $p_orders = P_Order::all();
+            $p_orders->transform(function ($p_orders, $key) {
+                $p_orders->bucket = unserialize($p_orders->bucket);
+                return $p_orders;
+            });}
+
+        return view('admin.reports.sectorhead-wise-purchase-orders',
+            compact('po', 'status', 'branch','sheads','start','end','p_orders'));
+    }
+
     public function getAllPurchaseOrders(Request $request)
     {
 //        return $request->all();
@@ -482,6 +519,20 @@ class BucketController extends Controller
         $start = "";
         $end = "";
         return view('admin.reports.agent-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'agents', 'branch'));
+    }
+
+    public function SectorHeadPurchaseOrder()
+    {
+        $clients = Client::all();
+        $branch = ClientsBranch::all();
+//        $agents = User::where('designation_id', '4')->get();
+        $sheads = User::all();
+
+        $po = "";
+        $status = "";
+        $start = "";
+        $end = "";
+        return view('admin.reports.sectorhead-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'sheads', 'branch'));
     }
 
     public function AllPurchaseOrder()

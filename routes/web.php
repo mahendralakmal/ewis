@@ -153,11 +153,13 @@ Route::group(['prefix' => ' /admin'], function () {
 
         Route::get('/client-wise-purchase-orders','BucketController@CompletedPurchaseOrder');
         Route::get('/agent-wise-purchase-orders','BucketController@AgentPurchaseOrder');
+        Route::get('/sectorhead-wise-purchase-orders','BucketController@SectorHeadPurchaseOrder');
         Route::get('/all-purchase-orders','BucketController@AllPurchaseOrder');
         Route::get('/all-products-list','ProductController@getAllProducts');
 //        Route::get('/completed-purchase-orders/{client}/{status}/{start}/{end}','BucketController@getPurchaseOrdersByClient');
         Route::post('/client-wise-purchase-orders','BucketController@getPurchaseOrdersByClient');
         Route::post('/agent-wise-purchase-orders','BucketController@getPurchaseOrdersByAccountManager');
+        Route::post('/sectorhead-wise-purchase-orders','BucketController@getPurchaseOrdersBySectorHead');
         Route::post('/all-purchase-orders','BucketController@getAllPurchaseOrders');
 
 
