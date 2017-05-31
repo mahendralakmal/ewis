@@ -16,13 +16,13 @@
                         @endif
                 </div>
                 <div class="panel-body">
-                    <form action="" method="post" id="po">
+                    <form action="" method="post" id="po" name="po">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-2 col-sm-3 col-lg-2">
                                 <div class="form-group">
                                     <select id="postatus" name="postatus" class="form-control">
-                                        <option value="n">Select Status</option>
+                                        <option value="">Select Status</option>
                                         <option value="P">Pending</option>
                                         <option value="OP">Processing</option>
                                         <option value="PC">Partial Completed</option>
@@ -129,4 +129,13 @@
             <h2 class="error">You are Not Authorize for access this page</h2>
         </div>
     @endif
+@stop
+@section('scripts')
+    <script>
+        $("#po").validate({
+            rules: {
+                postatus: "required"
+            }
+        });
+    </script>
 @stop
