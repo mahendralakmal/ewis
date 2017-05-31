@@ -204,7 +204,7 @@
                 </div>
             </div>
             <footer id="footer" class="col-md-12">
-                <p class="text-muted">Design & Developed by <a href="http://proitsolutions.lk">ProIT Solutions</a></p>
+                <p class="text-muted">“Copyright © E-WIS Peripherals (Pvt) Ltd.2017, All Right Reserved”</p>
             </footer>
         </div>
     @else
