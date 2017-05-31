@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Account Manager P.Os</h3>
+                    <h3 class="panel-title">Account Manager P.O's</h3>
                 </div>
                 <div class="panel-body">
                     <form action="" method="post" id="po">
@@ -17,7 +17,6 @@
                         <div class="row">
                             <div class="col-md-2 col-sm-3 col-lg-2">
                                 <div class="form-group">
-
                                     <select class="form-control" name="agent" id="agent" data-parsley-required="true">
                                         <option value="n">Select Account Manager</option>
                                         @foreach($agents as $user)
@@ -25,21 +24,19 @@
                                                 <option value="{{ \App\ClientsBranch::where('agent_id', $user->id)->first()->agent->id }}">{{ \App\ClientsBranch::where('agent_id', $user->id)->first()->agent->name }}</option>
                                             @endif
                                         @endforeach
-                                        {{--@foreach ($agents->where('designation_id',4) as $agent)--}}
-                                            {{--<option value="{{ $agent->id }}">{{ $agent->name }}</option>--}}
-                                        {{--@endforeach--}}
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2"><label>Created Date</label></div>
-                            <div class="col-md-3 col-sm-4 col-lg-3" id="sandbox-container">
-                                <div class="input-daterange input-group" id="datepicker">
-                                    <input type="text" class="form-control" name="start" id="start"/>
-                                    <span class="input-group-addon">to</span>
-                                    <input type="text" class="form-control" name="end" id="end"/>
-                                </div>
+                            {{--<div class="col-md-2"><label>Created Date</label></div>--}}
+                            <div class="col-md-7 row">
+                                <div class="col-md-1">Date</div>
+                                <div class="col-md-1"> Form</div>
+                                <div class="col-md-4"><input type="date" class="form-control" name="from" id="from"></div>
+                                <div class="col-md-1"> To</div>
+                                <div class="col-md-4"><input type="date" class="form-control" name="to" id="to"></div>
                             </div>
-                            <div class="col-md-2 col-sm-3 col-lg-2">
+
+                            <div class="col-md-2 col-sm-2 col-lg-2">
                                 <div class="form-group">
                                     <select id="postatus" name="postatus" class="form-control">
                                         <option value="n">Select Status</option>
@@ -63,7 +60,7 @@
                                     <td><h4><strong>{{$po->name}}</strong></h4></td>
                                 </tr>
                                 @foreach($branch as $branch)
-                                    @if(! $branch->activation == 1)
+                                    @if( $branch->activation  !== 1)
                                         <tr>
                                             <td><strong>{{$branch->client->name}} - {{$branch->name}}</strong></td>
                                         </tr>
@@ -81,25 +78,40 @@
                                                     </thead>
                                                     <tbody>
                                                     {{--                                                        @foreach($po->client_branch as $brnch)--}}
-                                                    @if($branch->p_orders->count()>0)
-                                                        @foreach( $branch->p_orders as $order)
-                                                            @if($order->status == $status)
+                                                    {{--@if($branch->p_orders->count()>0)--}}
+                                                        {{--@foreach( $branch->p_orders as $order)--}}
+                                                            @if($start !="" && $end!="" && $agents!="")
+                                                            @foreach($p_orders->whereBetween('p__orders.created_at', [$start, $end])->get() as $porder)
+                                                                @if($porder->status == $status)
                                                                 <tr>
-                                                                    <td>{{$order->id}}</td>
-                                                                    <td>{{$order->created_at}}</td>
-                                                                    <td>{{$order->created_at}}</td>
-                                                                    <td>{{$order->del_cp}}</td>
-                                                                    <td>{{$order->del_tp}}</td>
+                                                                    <td>{{$porder->id}}</td>
+                                                                    <td>{{$porder->created_at}}</td>
+                                                                    <td>{{$porder->created_at}}</td>
+                                                                    <td>{{$porder->del_cp}}</td>
+                                                                    <td>{{$porder->del_tp}}</td>
                                                                 </tr>
-                                                            @endif
+                                                                @endif
+                                                            @endforeach
+                                                                {{--@else--}}
+                                                                    {{--<tr>--}}
+                                                                        {{--<td>{{$porder->id}}</td>--}}
+                                                                        {{--<td>{{$porder->created_at}}</td>--}}
+                                                                        {{--<td>{{$porder->created_at}}</td>--}}
+                                                                        {{--<td>{{$porder->del_cp}}</td>--}}
+                                                                        {{--<td>{{$porder->del_tp}}</td>--}}
+                                                                    {{--</tr>--}}
+                                                                {{--@endif--}}
                                                             {{--@endforeach--}}
-                                                        @endforeach
+                                                                {{--@endif--}}
+                                                        {{--@endforeach--}}
+
                                                     @else
                                                         <tr>
                                                             <td> No records found...!</td>
                                                         </tr>
-                                                        {{--@endif--}}
                                                     @endif
+
+
                                                     </tbody>
                                                 </table>
                                             </td>

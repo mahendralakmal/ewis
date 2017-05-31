@@ -9,7 +9,11 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">All Purchase Orders</h3>
+                    @if($status == 'P')<h3 class="panel-title">Pending Purchase Orders</h3>
+                    @elseif($status == 'OP')<h3 class="panel-title">Processing Purchase Orders</h3>
+                    @elseif($status == 'PC')<h3 class="panel-title">Partial Completed Purchase Orders</h3>
+                    @elseif($status == 'C')<h3 class="panel-title">Completed Purchase Orders</h3>
+                        @endif
                 </div>
                 <div class="panel-body">
                     <form action="" method="post" id="po">
@@ -26,14 +30,15 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-2"><label>Created Date</label></div>
-                            <div class="col-md-3 col-sm-4 col-lg-3" id="sandbox-container">
-                                <div class="input-daterange input-group" id="datepicker">
-                                    <input type="text" class="form-control" name="start" id="start"/>
-                                    <span class="input-group-addon">to</span>
-                                    <input type="text" class="form-control" name="end" id="end"/>
+                            {{--<div class="col-md-3 col-sm-4 col-lg-3" id="sandbox-container">--}}
+                                <div class="col-md-7 row">
+                                    {{--<div class="col-md-1">Date</div>--}}
+                                    <div class="col-md-1"> Form Date</div>
+                                    <div class="col-md-4"><input type="date" class="form-control" name="from" id="from"></div>
+                                    <div class="col-md-1"> To Date</div>
+                                    <div class="col-md-4"><input type="date" class="form-control" name="to" id="to"></div>
                                 </div>
-                            </div>
+                            {{--</div>--}}
 
                             <div class="col-md-2 col-sm-3 col-lg-2">
                                 <div class="form-group">
@@ -46,26 +51,39 @@
                                 <tbody class="tbody-completed">
                                             <table class="table table-condensed">
                                                 <thead>
+
+                                                @if($status == 'C')
+
                                                 <tr>
-                                                    <td><h5>Po. No.</h5></td>
+                                                    <td><h5>P.0. No.</h5></td>
                                                     <td><h5>Created Date & Time</h5></td>
                                                     <td><h5>Completed Date & Time</h5></td>
-                                                    <td><h5>Client User</h5></td>
-                                                    <td><h5>Contact Number</h5></td>
+                                                    <td><h5>Organization</h5></td>
+                                                    <td><h5>Customer User</h5></td>
+                                                    <td><h5>Grand Total</h5></td>
                                                 </tr>
+                                                    @else
+                                                    <tr>
+                                                        <td><h5>P.O. No.</h5></td>
+                                                        <td><h5>Created Date & Time</h5></td>
+                                                        <td><h5>Organization</h5></td>
+                                                        <td><h5>Customer User</h5></td>
+                                                        <td><h5>Grand Total</h5></td>
+                                                    </tr>
+                                                    @endif
                                                 </thead>
                                                 <tbody>
-{{--                                                @if($start !="" && $end!="")--}}
+                                                @if($start !="" && $end!="")
                                                     @if($p_orders->count()>0)
                                                         @foreach($p_orders as $order)
                                                             @if($order->status == $status)
-{{--                                                            {{$order}}--}}
                                                                 <tr>
-                                                                    <td>{{$order->id}}</td>
+                                                                    <td><a href="{{ url('/admin/manage-clients/po-details/'.$order->id) }}">{{$order->id}}</a></td>
                                                                     <td>{{$order->created_at}}</td>
-                                                                    <td>{{$order->created_at}}</td>
+                                                                   @if($order->status == 'C') <td>{{$order->updated_at}}</td> @endif
+                                                                    <td>{{$order->client_branch->client->name}}</td>
                                                                     <td>{{$order->del_cp}}</td>
-                                                                    <td>{{$order->del_tp}}</td>
+                                                                    <td>{{number_format($order->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach
@@ -74,7 +92,26 @@
                                                             <td> No records found...!</td>
                                                         </tr>
                                                     @endif
-                                                {{--@endif--}}
+                                                @else
+                                                    @if($p_orders->count()>0)
+                                                        @foreach($p_orders as $order)
+                                                            @if($order->status == $status)
+                                                                <tr>
+                                                                    <td><a href="{{ url('/admin/manage-clients/po-details/'.$order->id) }}">{{$order->id}}</a></td>
+                                                                    <td>{{$order->created_at}}</td>
+                                                                    @if($order->status == 'C') <td>{{$order->updated_at}}</td> @endif
+                                                                    <td>{{$order->client_branch->client->name}}</td>
+                                                                    <td>{{$order->del_cp}}</td>
+                                                                    <td>{{number_format($order->bucket->totalPrice,2)}}</td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @else
+                                                        <tr>
+                                                            <td> No records found...!</td>
+                                                        </tr>
+                                                    @endif
+                                                @endif
                                                 </tbody>
                                             </table>
                                         </td>

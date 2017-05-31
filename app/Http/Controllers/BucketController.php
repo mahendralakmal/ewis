@@ -32,28 +32,42 @@ class BucketController extends Controller
 {
     public function getAllPurchaseOrders(Request $request)
     {
+//        return $request->all();
         $agents = User::where('designation_id', 4);
-        $p_orders = P_Order::all();
-//        $branch = ClientsBranch::where('agent_id', $po->id)->get();
-//        $clients =
-        $status = $request->postatus;
-//        $start = $request->start;
-//        $end = $request->end;
 
-        return view('admin.reports.all-purchase-orders', compact('clients', 'p_orders', 'status','agents'));
+        $status = $request->postatus;
+        $start = $request->from;
+        $end = $request->to;
+        if ($start != "" && $end != ""){
+            $p_orders = P_Order::whereBetween('p__orders.created_at', [$start, $end])->get();
+        $p_orders->transform(function ($p_orders, $key) {
+            $p_orders->bucket = unserialize($p_orders->bucket);
+            return $p_orders;
+        });}
+
+        else {
+            $p_orders = P_Order::all();
+            $p_orders->transform(function ($p_orders, $key) {
+            $p_orders->bucket = unserialize($p_orders->bucket);
+            return $p_orders;
+        });}
+
+            return view('admin.reports.all-purchase-orders', compact('clients', 'p_orders' , 'status', 'agents', 'start', 'end'));
     }
 
     public function getPurchaseOrdersByAccountManager(Request $request)
     {
-        $agents = User::where('designation_id', 4);
+//        return $request->all();
+        $agents = User::all();
         $po = User::find($request->agent);
         $branch = ClientsBranch::where('agent_id', $po->id)->get();
-//        $clients =
+        $p_orders = P_Order::all();
         $status = $request->postatus;
-//        $start = $request->start;
-//        $end = $request->end;
+        $start = $request->from;
+        $end = $request->to;
 
-        return view('admin.reports.agent-wise-purchase-orders', compact('clients', 'po', 'status', 'branch','agents'));
+        return view('admin.reports.agent-wise-purchase-orders',
+            compact('po', 'status', 'branch','agents','start','end','p_orders'));
     }
 
     public function getPurchaseOrdersByClient(Request $request)
@@ -422,7 +436,6 @@ class BucketController extends Controller
         $branch = ClientsBranch::all();
 //        $agents = User::where('designation_id', '4')->get();
         $agents = User::all();
-
 
         $po = "";
         $status = "";

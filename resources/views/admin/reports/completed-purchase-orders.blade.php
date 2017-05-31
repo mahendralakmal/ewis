@@ -71,10 +71,11 @@
                                                     <td><h5>Completed Date & Time</h5></td>
                                                     <td><h5>Client User</h5></td>
                                                     <td><h5>Contact Number</h5></td>
+                                                    <td><h5>Grand Total</h5></td>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-{{--                                                @if($start !="" && $end!="")--}}
+                                                @if($start !="" && $end!="")
                                                     @if($branch->p_orders->count()>0)
                                                         @foreach($branch->p_orders as $order)
                                                             @if($order->status == $status)
@@ -85,6 +86,7 @@
                                                                     <td>{{$order->created_at}}</td>
                                                                     <td>{{$order->del_cp}}</td>
                                                                     <td>{{$order->del_tp}}</td>
+                                                                    <td>{{$order->totalPrice}}</td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach
@@ -93,7 +95,7 @@
                                                             <td> No records found...!</td>
                                                         </tr>
                                                     @endif
-                                                {{--@endif--}}
+                                                @endif
                                                 </tbody>
                                             </table>
                                         </td>
