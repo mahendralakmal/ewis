@@ -779,16 +779,16 @@
 
                                                 "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
                                                 "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                                "<option value='P' if(elem.status == 'P')? selected :''+">Pending </option>" +
-                                                "<option value='OP' if(elem.status == 'OP')? selected :''>Processing </option>" +
-                                                "<option value='PC' if(elem.status == 'PC')? selected :''>Partial Completed </option>" +
-                                                "<option value='C' if(elem.status == 'C')? selected :''>Completed </option>" +
+                                                "<option value='P' (elem.status == 'P')? selected :''>Pending </option>" +
+                                                "<option value='OP' (elem.status == 'OP')? selected :''>Processing </option>" +
+                                                "<option value='PC' (elem.status == 'PC')? selected :''>Partial Completed </option>" +
+                                                "<option value='C' (elem.status == 'C')? selected :''>Completed </option>" +
                                                 "</select>" +
                                                 "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
                                                 "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
                                     }
                                 } else {
-                                    if ((Date.now() - elem.created_at) > 13 && elem.status == 'P' || elem.status == 'PC') {
+                                     if((Date.now() - elem.created_at) > 13 && elem.status == 'P' || elem.status == 'PC') {
                                         model.append("<tr class='error_tr'>" +
                                                 "<td>" + elem.id +
                                                 "</td><td>" + elem.created_at +
@@ -798,10 +798,10 @@
                                                 "</td><td> No Attachment </td><td><form method='get' id='" + elem.id + "' action=''>" +
                                                 "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
                                                 "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                                "<option value='P' if(elem.status == 'P')? selected :''>Pending </option>" +
-                                                "<option value='OP' if(elem.status == 'OP')? selected :''>Processing </option>" +
-                                                "<option value='PC' if(elem.status == 'PC')? selected :''>Partial Completed </option>" +
-                                                "<option value='C' if(elem.status == 'C')? selected :''>Completed </option>" +
+                                                "<option value='P' (elem.status == 'P')? selected :''>Pending </option>" +
+                                                "<option value='OP' (elem.status == 'OP')? selected :''>Processing </option>" +
+                                                "<option value='PC' (elem.status == 'PC')? selected :''>Partial Completed </option>" +
+                                                "<option value='C' (elem.status == 'C')? selected :''>Completed </option>" +
                                                 "</select>" +
                                                 "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
                                                 "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
@@ -816,10 +816,10 @@
 
                                                 "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
                                                 "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                                "<option value='P' if(elem.status == 'P')? selected :''>Pending </option>" +
-                                                "<option value='OP' if(elem.status == 'OP')? selected :''>Processing </option>" +
-                                                "<option value='PC' if(elem.status == 'PC')? selected :''>Partial Completed </option>" +
-                                                "<option value='C' if(elem.status == 'C')? selected :''>Completed </option>" +
+                                                "<option value='P' (elem.status == 'P')? selected :''>Pending </option>" +
+                                                "<option value='OP' (elem.status == 'OP')? selected :''>Processing </option>" +
+                                                "<option value='PC' (elem.status == 'PC')? selected :''>Partial Completed </option>" +
+                                                "<option value='C' (elem.status == 'C')? selected :''>Completed </option>" +
                                                 "</select>" +
                                                 "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
                                                 "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
