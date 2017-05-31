@@ -41,7 +41,7 @@
                                     <tr class="error_tr">
                                 @else
                                     <tr>
-                                @endif
+                                        @endif
                                         <td>{{$porder->id}}</td>
                                         <td>{{$porder->created_at}}</td>
                                         <td>{{$porder->client_branch->client->name}}</td>
@@ -124,537 +124,581 @@
                                                 @else
                                                     <tr>
                                                         @endif
-                                                    <td>{{$porder->id}}</td>
-                                                    <td>{{$porder->created_at}}</td>
-                                                    <td>{{$porder->client_branch->client->name}}</td>
-                                                    <td>{{$porder->del_branch}}</td>
-                                                    <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                    @if($porder->file !== null){
-                                                    <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
-                                                    </td>
-                                                    @else
-                                                        <td>No Attachment</td>
-                                                    @endif
-                                                    @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                                        <td>
-                                                            <form method="get" id="{{$porder->id}}" action="">
-                                                                <input type="hidden" id="id" name="id"
-                                                                       value="{{$porder->id}}">
-                                                                <select id="{{$porder->id}}" name="postatus"
-                                                                        class="form-control postatus">
-                                                                    @if($porder->status === "P")
-                                                                        <option value="P"
-                                                                                @if($porder->status === "P") selected @endif>
-                                                                            Pending
-                                                                        </option>
-                                                                        <option value="OP"
-                                                                                @if($porder->status === "OP") selected @endif>
-                                                                            Processing
-                                                                        </option>
-                                                                        <option value="PC"
-                                                                                @if($porder->status === "PC") selected @endif>
-                                                                            Partial
-                                                                            Completed
-                                                                        </option>
-                                                                        <option value="C"
-                                                                                @if($porder->status === "C") selected @endif>
-                                                                            Completed
-                                                                        </option>
-                                                                    @elseif($porder->status === "OP")
-                                                                        <option value="OP"
-                                                                                @if($porder->status === "OP") selected @endif>
-                                                                            Processing
-                                                                        </option>
-                                                                        <option value="PC"
-                                                                                @if($porder->status === "PC") selected @endif>
-                                                                            Partial
-                                                                            Completed
-                                                                        </option>
-                                                                        <option value="C"
-                                                                                @if($porder->status === "C") selected @endif>
-                                                                            Completed
-                                                                        </option>
-                                                                    @elseif($porder->status === "PC")
-                                                                        <option value="PC"
-                                                                                @if($porder->status === "PC") selected @endif>
-                                                                            Partial
-                                                                            Completed
-                                                                        </option>
-                                                                        <option value="C"
-                                                                                @if($porder->status === "C") selected @endif>
-                                                                            Completed
-                                                                        </option>
-                                                                    @elseif($porder->status === "C")
-                                                                        <option value="C"
-                                                                                @if($porder->status === "C") selected @endif>
-                                                                            Completed
-                                                                        </option>
-                                                                    @endif
-                                                                </select>
-                                                            </form>
+                                                        <td>{{$porder->id}}</td>
+                                                        <td>{{$porder->created_at}}</td>
+                                                        <td>{{$porder->client_branch->client->name}}</td>
+                                                        <td>{{$porder->del_branch}}</td>
+                                                        <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                        @if($porder->file !== null){
+                                                        <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                         </td>
-                                                    @endif
-                                                    <td>
-                                                        <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                           class="btn btn-success btn-outline">Update Status / View
-                                                            Order</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @elseif($porders->designation_id == 6 )
-                                            @foreach(App\User::where('section_head_id',$porders->id)->get() as $cbranch)
-                                                @foreach(App\ClientsBranch::where('agent_id',$cbranch->id)->get() as $tbranch)
-                                                    @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
-                                                        @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
-                                                            <tr class="error_tr">
                                                         @else
-                                                            <tr>
-                                                                @endif
-                                                            <td>{{$porder->id}}</td>
-                                                            <td>{{$porder->created_at}}</td>
-                                                            <td>{{$porder->client_branch->client->name}}</td>
-                                                            <td>{{$porder->del_branch}}</td>
-                                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                            @if($porder->file !== null){
-                                                            <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                    Attachment</a>
-                                                            </td>
-                                                            @else
-                                                                <td>No Attachment</td>
-                                                            @endif
-                                                            @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                                                <td>
-                                                                    <form method="get" id="{{$porder->id}}" action="">
-                                                                        <input type="hidden" id="id" name="id"
-                                                                               value="{{$porder->id}}">
-                                                                        <select id="{{$porder->id}}" name="postatus"
-                                                                                class="form-control postatus">
-                                                                            @if($porder->status === "P")
-                                                                                <option value="P"
-                                                                                        @if($porder->status === "P") selected @endif>
-                                                                                    Pending
-                                                                                </option>
-                                                                                <option value="OP"
-                                                                                        @if($porder->status === "OP") selected @endif>
-                                                                                    Processing
-                                                                                </option>
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "OP")
-                                                                                <option value="OP"
-                                                                                        @if($porder->status === "OP") selected @endif>
-                                                                                    Processing
-                                                                                </option>
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "PC")
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "C")
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @endif
-                                                                        </select>
-                                                                    </form>
-                                                                </td>
-                                                            @endif
+                                                            <td>No Attachment</td>
+                                                        @endif
+                                                        @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
                                                             <td>
-                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                                   class="btn btn-success btn-outline">Update Status /
-                                                                    View
-                                                                    Order</a>
+                                                                <form method="get" id="{{$porder->id}}" action="">
+                                                                    <input type="hidden" id="id" name="id"
+                                                                           value="{{$porder->id}}">
+                                                                    <select id="{{$porder->id}}" name="postatus"
+                                                                            class="form-control postatus">
+                                                                        @if($porder->status === "P")
+                                                                            <option value="P"
+                                                                                    @if($porder->status === "P") selected @endif>
+                                                                                Pending
+                                                                            </option>
+                                                                            <option value="OP"
+                                                                                    @if($porder->status === "OP") selected @endif>
+                                                                                Processing
+                                                                            </option>
+                                                                            <option value="PC"
+                                                                                    @if($porder->status === "PC") selected @endif>
+                                                                                Partial
+                                                                                Completed
+                                                                            </option>
+                                                                            <option value="C"
+                                                                                    @if($porder->status === "C") selected @endif>
+                                                                                Completed
+                                                                            </option>
+                                                                        @elseif($porder->status === "OP")
+                                                                            <option value="OP"
+                                                                                    @if($porder->status === "OP") selected @endif>
+                                                                                Processing
+                                                                            </option>
+                                                                            <option value="PC"
+                                                                                    @if($porder->status === "PC") selected @endif>
+                                                                                Partial
+                                                                                Completed
+                                                                            </option>
+                                                                            <option value="C"
+                                                                                    @if($porder->status === "C") selected @endif>
+                                                                                Completed
+                                                                            </option>
+                                                                        @elseif($porder->status === "PC")
+                                                                            <option value="PC"
+                                                                                    @if($porder->status === "PC") selected @endif>
+                                                                                Partial
+                                                                                Completed
+                                                                            </option>
+                                                                            <option value="C"
+                                                                                    @if($porder->status === "C") selected @endif>
+                                                                                Completed
+                                                                            </option>
+                                                                        @elseif($porder->status === "C")
+                                                                            <option value="C"
+                                                                                    @if($porder->status === "C") selected @endif>
+                                                                                Completed
+                                                                            </option>
+                                                                        @endif
+                                                                    </select>
+                                                                </form>
                                                             </td>
-                                                        </tr>
+                                                        @endif
+                                                        <td>
+                                                            <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
+                                                               class="btn btn-success btn-outline">Update Status / View
+                                                                Order</a>
+                                                        </td>
+                                                    </tr>
                                                     @endforeach
-                                                @endforeach
-                                                @foreach(App\User::where('section_head_id',$cbranch->id)->get() as $sbranch)
-                                                    @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
-                                                        @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
-                                                            @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
-                                                                <tr class="error_tr">
-                                                            @else
-                                                                <tr>
-                                                                    @endif
-                                                                <td>{{$porder->id}}</td>
-                                                                <td>{{$porder->created_at}}</td>
-                                                                <td>{{$porder->client_branch->client->name}}</td>
-                                                                <td>{{$porder->del_branch}}</td>
-                                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                                @if($porder->file !== null){
-                                                                <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                        Attachment</a>
-                                                                </td>
-                                                                @else
-                                                                    <td>No Attachment</td>
-                                                                @endif
-                                                                @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                                                    <td>
-                                                                        <form method="get" id="{{$porder->id}}"
-                                                                              action="">
-                                                                            <input type="hidden" id="id" name="id"
-                                                                                   value="{{$porder->id}}">
-                                                                            <select id="{{$porder->id}}" name="postatus"
-                                                                                    class="form-control postatus">
-                                                                                @if($porder->status === "P")
-                                                                                    <option value="P"
-                                                                                            @if($porder->status === "P") selected @endif>
-                                                                                        Pending
-                                                                                    </option>
-                                                                                    <option value="OP"
-                                                                                            @if($porder->status === "OP") selected @endif>
-                                                                                        Processing
-                                                                                    </option>
-                                                                                    <option value="PC"
-                                                                                            @if($porder->status === "PC") selected @endif>
-                                                                                        Partial
-                                                                                        Completed
-                                                                                    </option>
-                                                                                    <option value="C"
-                                                                                            @if($porder->status === "C") selected @endif>
-                                                                                        Completed
-                                                                                    </option>
-                                                                                @elseif($porder->status === "OP")
-                                                                                    <option value="OP"
-                                                                                            @if($porder->status === "OP") selected @endif>
-                                                                                        Processing
-                                                                                    </option>
-                                                                                    <option value="PC"
-                                                                                            @if($porder->status === "PC") selected @endif>
-                                                                                        Partial
-                                                                                        Completed
-                                                                                    </option>
-                                                                                    <option value="C"
-                                                                                            @if($porder->status === "C") selected @endif>
-                                                                                        Completed
-                                                                                    </option>
-                                                                                @elseif($porder->status === "PC")
-                                                                                    <option value="PC"
-                                                                                            @if($porder->status === "PC") selected @endif>
-                                                                                        Partial
-                                                                                        Completed
-                                                                                    </option>
-                                                                                    <option value="C"
-                                                                                            @if($porder->status === "C") selected @endif>
-                                                                                        Completed
-                                                                                    </option>
-                                                                                @elseif($porder->status === "C")
-                                                                                    <option value="C"
-                                                                                            @if($porder->status === "C") selected @endif>
-                                                                                        Completed
-                                                                                    </option>
-                                                                                @endif
-                                                                            </select>
-                                                                        </form>
-                                                                    </td>
-                                                                @endif
-                                                                <td>
-                                                                    <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                                       class="btn btn-success btn-outline">Update Status
-                                                                        / View
-                                                                        Order</a>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    @endforeach
-                                                @endforeach
+                                                    @elseif($porders->designation_id == 6 )
+                                                        @foreach(App\User::where('section_head_id',$porders->id)->get() as $cbranch)
+                                                            @foreach(App\ClientsBranch::where('agent_id',$cbranch->id)->get() as $tbranch)
+                                                                @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
+                                                                    @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
+                                                                        <tr class="error_tr">
+                                                                    @else
+                                                                        <tr>
+                                                                            @endif
+                                                                            <td>{{$porder->id}}</td>
+                                                                            <td>{{$porder->created_at}}</td>
+                                                                            <td>{{$porder->client_branch->client->name}}</td>
+                                                                            <td>{{$porder->del_branch}}</td>
+                                                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                                            @if($porder->file !== null){
+                                                                            <td><a href="{{url('/'.$porder->file)}}">Download
+                                                                                    Attachment</a>
+                                                                            </td>
+                                                                            @else
+                                                                                <td>No Attachment</td>
+                                                                            @endif
+                                                                            @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
+                                                                                <td>
+                                                                                    <form method="get"
+                                                                                          id="{{$porder->id}}"
+                                                                                          action="">
+                                                                                        <input type="hidden" id="id"
+                                                                                               name="id"
+                                                                                               value="{{$porder->id}}">
+                                                                                        <select id="{{$porder->id}}"
+                                                                                                name="postatus"
+                                                                                                class="form-control postatus">
+                                                                                            @if($porder->status === "P")
+                                                                                                <option value="P"
+                                                                                                        @if($porder->status === "P") selected @endif>
+                                                                                                    Pending
+                                                                                                </option>
+                                                                                                <option value="OP"
+                                                                                                        @if($porder->status === "OP") selected @endif>
+                                                                                                    Processing
+                                                                                                </option>
+                                                                                                <option value="PC"
+                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                    Partial
+                                                                                                    Completed
+                                                                                                </option>
+                                                                                                <option value="C"
+                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                    Completed
+                                                                                                </option>
+                                                                                            @elseif($porder->status === "OP")
+                                                                                                <option value="OP"
+                                                                                                        @if($porder->status === "OP") selected @endif>
+                                                                                                    Processing
+                                                                                                </option>
+                                                                                                <option value="PC"
+                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                    Partial
+                                                                                                    Completed
+                                                                                                </option>
+                                                                                                <option value="C"
+                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                    Completed
+                                                                                                </option>
+                                                                                            @elseif($porder->status === "PC")
+                                                                                                <option value="PC"
+                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                    Partial
+                                                                                                    Completed
+                                                                                                </option>
+                                                                                                <option value="C"
+                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                    Completed
+                                                                                                </option>
+                                                                                            @elseif($porder->status === "C")
+                                                                                                <option value="C"
+                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                    Completed
+                                                                                                </option>
+                                                                                            @endif
+                                                                                        </select>
+                                                                                    </form>
+                                                                                </td>
+                                                                            @endif
+                                                                            <td>
+                                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
+                                                                                   class="btn btn-success btn-outline">Update
+                                                                                    Status /
+                                                                                    View
+                                                                                    Order</a>
+                                                                            </td>
+                                                                        </tr>
+                                                                        @endforeach
+                                                                        @endforeach
+                                                                        @foreach(App\User::where('section_head_id',$cbranch->id)->get() as $sbranch)
+                                                                            @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
+                                                                                @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
+                                                                                    @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
+                                                                                        <tr class="error_tr">
+                                                                                    @else
+                                                                                        <tr>
+                                                                                            @endif
+                                                                                            <td>{{$porder->id}}</td>
+                                                                                            <td>{{$porder->created_at}}</td>
+                                                                                            <td>{{$porder->client_branch->client->name}}</td>
+                                                                                            <td>{{$porder->del_branch}}</td>
+                                                                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                                                            @if($porder->file !== null){
+                                                                                            <td>
+                                                                                                <a href="{{url('/'.$porder->file)}}">Download
+                                                                                                    Attachment</a>
+                                                                                            </td>
+                                                                                            @else
+                                                                                                <td>No Attachment</td>
+                                                                                            @endif
+                                                                                            @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
+                                                                                                <td>
+                                                                                                    <form method="get"
+                                                                                                          id="{{$porder->id}}"
+                                                                                                          action="">
+                                                                                                        <input type="hidden"
+                                                                                                               id="id"
+                                                                                                               name="id"
+                                                                                                               value="{{$porder->id}}">
+                                                                                                        <select id="{{$porder->id}}"
+                                                                                                                name="postatus"
+                                                                                                                class="form-control postatus">
+                                                                                                            @if($porder->status === "P")
+                                                                                                                <option value="P"
+                                                                                                                        @if($porder->status === "P") selected @endif>
+                                                                                                                    Pending
+                                                                                                                </option>
+                                                                                                                <option value="OP"
+                                                                                                                        @if($porder->status === "OP") selected @endif>
+                                                                                                                    Processing
+                                                                                                                </option>
+                                                                                                                <option value="PC"
+                                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                                    Partial
+                                                                                                                    Completed
+                                                                                                                </option>
+                                                                                                                <option value="C"
+                                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                                    Completed
+                                                                                                                </option>
+                                                                                                            @elseif($porder->status === "OP")
+                                                                                                                <option value="OP"
+                                                                                                                        @if($porder->status === "OP") selected @endif>
+                                                                                                                    Processing
+                                                                                                                </option>
+                                                                                                                <option value="PC"
+                                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                                    Partial
+                                                                                                                    Completed
+                                                                                                                </option>
+                                                                                                                <option value="C"
+                                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                                    Completed
+                                                                                                                </option>
+                                                                                                            @elseif($porder->status === "PC")
+                                                                                                                <option value="PC"
+                                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                                    Partial
+                                                                                                                    Completed
+                                                                                                                </option>
+                                                                                                                <option value="C"
+                                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                                    Completed
+                                                                                                                </option>
+                                                                                                            @elseif($porder->status === "C")
+                                                                                                                <option value="C"
+                                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                                    Completed
+                                                                                                                </option>
+                                                                                                            @endif
+                                                                                                        </select>
+                                                                                                    </form>
+                                                                                                </td>
+                                                                                            @endif
+                                                                                            <td>
+                                                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
+                                                                                                   class="btn btn-success btn-outline">Update
+                                                                                                    Status
+                                                                                                    / View
+                                                                                                    Order</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        @endforeach
+                                                                                        @endforeach
+                                                                                        @endforeach
 
-                                                @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
-                                                    @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
-                                                        @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
-                                                            <tr class="error_tr">
-                                                        @else
-                                                            <tr>
-                                                                @endif
-                                                            <td>{{$porder->id}}</td>
-                                                            <td>{{$porder->created_at}}</td>
-                                                            <td>{{$porder->client_branch->client->name}}</td>
-                                                            <td>{{$porder->del_branch}}</td>
-                                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                            @if($porder->file !== null){
-                                                            <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                    Attachment</a>
-                                                            </td>
-                                                            @else
-                                                                <td>No Attachment</td>
-                                                            @endif
-                                                            @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                                                <td>
-                                                                    <form method="get" id="{{$porder->id}}" action="">
-                                                                        <input type="hidden" id="id" name="id"
-                                                                               value="{{$porder->id}}">
-                                                                        <select id="{{$porder->id}}" name="postatus"
-                                                                                class="form-control postatus">
-                                                                            @if($porder->status === "P")
-                                                                                <option value="P"
-                                                                                        @if($porder->status === "P") selected @endif>
-                                                                                    Pending
-                                                                                </option>
-                                                                                <option value="OP"
-                                                                                        @if($porder->status === "OP") selected @endif>
-                                                                                    Processing
-                                                                                </option>
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "OP")
-                                                                                <option value="OP"
-                                                                                        @if($porder->status === "OP") selected @endif>
-                                                                                    Processing
-                                                                                </option>
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "PC")
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "C")
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @endif
-                                                                        </select>
-                                                                    </form>
-                                                                </td>
-                                                            @endif
-                                                            <td>
-                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                                   class="btn btn-success btn-outline">Update Status /
-                                                                    View
-                                                                    Order</a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endforeach
-                                            @endforeach
-                                        @else
-                                            @foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)
-                                                @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
-                                                    @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
-                                                        @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
-                                                            <tr class="error_tr">
-                                                        @else
-                                                            <tr>
-                                                                @endif
-                                                            <td>{{$porder->id}}</td>
-                                                            <td>{{$porder->created_at}}</td>
-                                                            <td>{{$porder->client_branch->client->name}}</td>
-                                                            <td>{{$porder->del_branch}}</td>
-                                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                            @if($porder->file !== null){
-                                                            <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                    Attachment</a>
-                                                            </td>
-                                                            @else
-                                                                <td>No Attachment</td>
-                                                            @endif
-                                                            @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                                                <td>
-                                                                    <form method="get" id="{{$porder->id}}" action="">
-                                                                        <input type="hidden" id="id" name="id"
-                                                                               value="{{$porder->id}}">
-                                                                        <select id="{{$porder->id}}" name="postatus"
-                                                                                class="form-control postatus">
-                                                                            @if($porder->status === "P")
-                                                                                <option value="P"
-                                                                                        @if($porder->status === "P") selected @endif>
-                                                                                    Pending
-                                                                                </option>
-                                                                                <option value="OP"
-                                                                                        @if($porder->status === "OP") selected @endif>
-                                                                                    Processing
-                                                                                </option>
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "OP")
-                                                                                <option value="OP"
-                                                                                        @if($porder->status === "OP") selected @endif>
-                                                                                    Processing
-                                                                                </option>
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "PC")
-                                                                                <option value="PC"
-                                                                                        @if($porder->status === "PC") selected @endif>
-                                                                                    Partial
-                                                                                    Completed
-                                                                                </option>
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @elseif($porder->status === "C")
-                                                                                <option value="C"
-                                                                                        @if($porder->status === "C") selected @endif>
-                                                                                    Completed
-                                                                                </option>
-                                                                            @endif
-                                                                        </select>
-                                                                    </form>
-                                                                </td>
-                                                            @endif
-                                                            <td>
-                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                                   class="btn btn-success btn-outline">Update Status /
-                                                                    View
-                                                                    Order</a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endforeach
-                                            @endforeach
+                                                                                        @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
+                                                                                            @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
+                                                                                                @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
+                                                                                                    <tr class="error_tr">
+                                                                                                @else
+                                                                                                    <tr>
+                                                                                                        @endif
+                                                                                                        <td>{{$porder->id}}</td>
+                                                                                                        <td>{{$porder->created_at}}</td>
+                                                                                                        <td>{{$porder->client_branch->client->name}}</td>
+                                                                                                        <td>{{$porder->del_branch}}</td>
+                                                                                                        <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                                                                        @if($porder->file !== null)
+                                                                                                            {
+                                                                                                            <td>
+                                                                                                                <a href="{{url('/'.$porder->file)}}">Download
+                                                                                                                    Attachment</a>
+                                                                                                            </td>
+                                                                                                        @else
+                                                                                                            <td>No
+                                                                                                                Attachment
+                                                                                                            </td>
+                                                                                                        @endif
+                                                                                                        @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
+                                                                                                            <td>
+                                                                                                                <form method="get"
+                                                                                                                      id="{{$porder->id}}"
+                                                                                                                      action="">
+                                                                                                                    <input type="hidden"
+                                                                                                                           id="id"
+                                                                                                                           name="id"
+                                                                                                                           value="{{$porder->id}}">
+                                                                                                                    <select id="{{$porder->id}}"
+                                                                                                                            name="postatus"
+                                                                                                                            class="form-control postatus">
+                                                                                                                        @if($porder->status === "P")
+                                                                                                                            <option value="P"
+                                                                                                                                    @if($porder->status === "P") selected @endif>
+                                                                                                                                Pending
+                                                                                                                            </option>
+                                                                                                                            <option value="OP"
+                                                                                                                                    @if($porder->status === "OP") selected @endif>
+                                                                                                                                Processing
+                                                                                                                            </option>
+                                                                                                                            <option value="PC"
+                                                                                                                                    @if($porder->status === "PC") selected @endif>
+                                                                                                                                Partial
+                                                                                                                                Completed
+                                                                                                                            </option>
+                                                                                                                            <option value="C"
+                                                                                                                                    @if($porder->status === "C") selected @endif>
+                                                                                                                                Completed
+                                                                                                                            </option>
+                                                                                                                        @elseif($porder->status === "OP")
+                                                                                                                            <option value="OP"
+                                                                                                                                    @if($porder->status === "OP") selected @endif>
+                                                                                                                                Processing
+                                                                                                                            </option>
+                                                                                                                            <option value="PC"
+                                                                                                                                    @if($porder->status === "PC") selected @endif>
+                                                                                                                                Partial
+                                                                                                                                Completed
+                                                                                                                            </option>
+                                                                                                                            <option value="C"
+                                                                                                                                    @if($porder->status === "C") selected @endif>
+                                                                                                                                Completed
+                                                                                                                            </option>
+                                                                                                                        @elseif($porder->status === "PC")
+                                                                                                                            <option value="PC"
+                                                                                                                                    @if($porder->status === "PC") selected @endif>
+                                                                                                                                Partial
+                                                                                                                                Completed
+                                                                                                                            </option>
+                                                                                                                            <option value="C"
+                                                                                                                                    @if($porder->status === "C") selected @endif>
+                                                                                                                                Completed
+                                                                                                                            </option>
+                                                                                                                        @elseif($porder->status === "C")
+                                                                                                                            <option value="C"
+                                                                                                                                    @if($porder->status === "C") selected @endif>
+                                                                                                                                Completed
+                                                                                                                            </option>
+                                                                                                                        @endif
+                                                                                                                    </select>
+                                                                                                                </form>
+                                                                                                            </td>
+                                                                                                        @endif
+                                                                                                        <td>
+                                                                                                            <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
+                                                                                                               class="btn btn-success btn-outline">Update
+                                                                                                                Status /
+                                                                                                                View
+                                                                                                                Order</a>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                    @endforeach
+                                                                                                    @endforeach
+                                                                                                    @endforeach
+                                                                                                    @else
+                                                                                                        @foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)
+                                                                                                            @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
+                                                                                                                @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
+                                                                                                                    @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
+                                                                                                                        <tr class="error_tr">
+                                                                                                                    @else
+                                                                                                                        <tr>
+                                                                                                                            @endif
+                                                                                                                            <td>{{$porder->id}}</td>
+                                                                                                                            <td>{{$porder->created_at}}</td>
+                                                                                                                            <td>{{$porder->client_branch->client->name}}</td>
+                                                                                                                            <td>{{$porder->del_branch}}</td>
+                                                                                                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                                                                                            @if($porder->file !== null)
+                                                                                                                                {
+                                                                                                                                <td>
+                                                                                                                                    <a href="{{url('/'.$porder->file)}}">Download
+                                                                                                                                        Attachment</a>
+                                                                                                                                </td>
+                                                                                                                            @else
+                                                                                                                                <td>
+                                                                                                                                    No
+                                                                                                                                    Attachment
+                                                                                                                                </td>
+                                                                                                                            @endif
+                                                                                                                            @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
+                                                                                                                                <td>
+                                                                                                                                    <form method="get"
+                                                                                                                                          id="{{$porder->id}}"
+                                                                                                                                          action="">
+                                                                                                                                        <input type="hidden"
+                                                                                                                                               id="id"
+                                                                                                                                               name="id"
+                                                                                                                                               value="{{$porder->id}}">
+                                                                                                                                        <select id="{{$porder->id}}"
+                                                                                                                                                name="postatus"
+                                                                                                                                                class="form-control postatus">
+                                                                                                                                            @if($porder->status === "P")
+                                                                                                                                                <option value="P"
+                                                                                                                                                        @if($porder->status === "P") selected @endif>
+                                                                                                                                                    Pending
+                                                                                                                                                </option>
+                                                                                                                                                <option value="OP"
+                                                                                                                                                        @if($porder->status === "OP") selected @endif>
+                                                                                                                                                    Processing
+                                                                                                                                                </option>
+                                                                                                                                                <option value="PC"
+                                                                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                                                                    Partial
+                                                                                                                                                    Completed
+                                                                                                                                                </option>
+                                                                                                                                                <option value="C"
+                                                                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                                                                    Completed
+                                                                                                                                                </option>
+                                                                                                                                            @elseif($porder->status === "OP")
+                                                                                                                                                <option value="OP"
+                                                                                                                                                        @if($porder->status === "OP") selected @endif>
+                                                                                                                                                    Processing
+                                                                                                                                                </option>
+                                                                                                                                                <option value="PC"
+                                                                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                                                                    Partial
+                                                                                                                                                    Completed
+                                                                                                                                                </option>
+                                                                                                                                                <option value="C"
+                                                                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                                                                    Completed
+                                                                                                                                                </option>
+                                                                                                                                            @elseif($porder->status === "PC")
+                                                                                                                                                <option value="PC"
+                                                                                                                                                        @if($porder->status === "PC") selected @endif>
+                                                                                                                                                    Partial
+                                                                                                                                                    Completed
+                                                                                                                                                </option>
+                                                                                                                                                <option value="C"
+                                                                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                                                                    Completed
+                                                                                                                                                </option>
+                                                                                                                                            @elseif($porder->status === "C")
+                                                                                                                                                <option value="C"
+                                                                                                                                                        @if($porder->status === "C") selected @endif>
+                                                                                                                                                    Completed
+                                                                                                                                                </option>
+                                                                                                                                            @endif
+                                                                                                                                        </select>
+                                                                                                                                    </form>
+                                                                                                                                </td>
+                                                                                                                            @endif
+                                                                                                                            <td>
+                                                                                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
+                                                                                                                                   class="btn btn-success btn-outline">Update
+                                                                                                                                    Status
+                                                                                                                                    /
+                                                                                                                                    View
+                                                                                                                                    Order</a>
+                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                        @endforeach
+                                                                                                                        @endforeach
+                                                                                                                        @endforeach
 
-                                            @if(App\ClientsBranch::where('agent_id',$porders->id)->count() >0)
-                                                @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
-                                                    @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
-                                                        @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
-                                                            @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
-                                                                <tr class="error_tr">
-                                                            @else
-                                                                <tr>
-                                                                    @endif
-                                                                <td>{{$porder->id}}</td>
-                                                                <td>{{$porder->created_at}}</td>
-                                                                <td>{{$porder->client_branch->client->name}}</td>
-                                                                <td>{{$porder->del_branch}}</td>
-                                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                                @if($porder->file !== null){
-                                                                <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                        Attachment</a>
-                                                                </td>
-                                                                @else
-                                                                    <td>No Attachment</td>
-                                                                @endif
-                                                                @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                                                    <td>
-                                                                        <form method="get" id="{{$porder->id}}"
-                                                                              action="">
-                                                                            <input type="hidden" id="id" name="id"
-                                                                                   value="{{$porder->id}}">
-                                                                            <select id="{{$porder->id}}" name="postatus"
-                                                                                    class="form-control postatus">
-                                                                                @if($porder->status === "P")
-                                                                                    <option value="P"
-                                                                                            @if($porder->status === "P") selected @endif>
-                                                                                        Pending
-                                                                                    </option>
-                                                                                    <option value="OP"
-                                                                                            @if($porder->status === "OP") selected @endif>
-                                                                                        Processing
-                                                                                    </option>
-                                                                                    <option value="PC"
-                                                                                            @if($porder->status === "PC") selected @endif>
-                                                                                        Partial
-                                                                                        Completed
-                                                                                    </option>
-                                                                                    <option value="C"
-                                                                                            @if($porder->status === "C") selected @endif>
-                                                                                        Completed
-                                                                                    </option>
-                                                                                @elseif($porder->status === "OP")
-                                                                                    <option value="OP"
-                                                                                            @if($porder->status === "OP") selected @endif>
-                                                                                        Processing
-                                                                                    </option>
-                                                                                    <option value="PC"
-                                                                                            @if($porder->status === "PC") selected @endif>
-                                                                                        Partial
-                                                                                        Completed
-                                                                                    </option>
-                                                                                    <option value="C"
-                                                                                            @if($porder->status === "C") selected @endif>
-                                                                                        Completed
-                                                                                    </option>
-                                                                                @elseif($porder->status === "PC")
-                                                                                    <option value="PC"
-                                                                                            @if($porder->status === "PC") selected @endif>
-                                                                                        Partial
-                                                                                        Completed
-                                                                                    </option>
-                                                                                    <option value="C"
-                                                                                            @if($porder->status === "C") selected @endif>
-                                                                                        Completed
-                                                                                    </option>
-                                                                                @elseif($porder->status === "C")
-                                                                                    <option value="C"
-                                                                                            @if($porder->status === "C") selected @endif>
-                                                                                        Completed
-                                                                                    </option>
-                                                                                @endif
-                                                                            </select>
-                                                                        </form>
-                                                                    </td>
-                                                                @endif
-                                                                <td>
-                                                                    <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                                       class="btn btn-success btn-outline">Update Status
-                                                                        / View
-                                                                        Order</a>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    @else
-                                                    @endif
-                                                @endforeach
-                                            @endif
-                                        @endif
-                                    @endif
+                                                                                                                        @if(App\ClientsBranch::where('agent_id',$porders->id)->count() >0)
+                                                                                                                            @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
+                                                                                                                                @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
+                                                                                                                                    @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
+                                                                                                                                        @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13 && $porder->status === "P" || $porder->status === "PC")
+                                                                                                                                            <tr class="error_tr">
+                                                                                                                                        @else
+                                                                                                                                            <tr>
+                                                                                                                                                @endif
+                                                                                                                                                <td>{{$porder->id}}</td>
+                                                                                                                                                <td>{{$porder->created_at}}</td>
+                                                                                                                                                <td>{{$porder->client_branch->client->name}}</td>
+                                                                                                                                                <td>{{$porder->del_branch}}</td>
+                                                                                                                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                                                                                                                @if($porder->file !== null)
+                                                                                                                                                    {
+                                                                                                                                                    <td>
+                                                                                                                                                        <a href="{{url('/'.$porder->file)}}">Download
+                                                                                                                                                            Attachment</a>
+                                                                                                                                                    </td>
+                                                                                                                                                @else
+                                                                                                                                                    <td>
+                                                                                                                                                        No
+                                                                                                                                                        Attachment
+                                                                                                                                                    </td>
+                                                                                                                                                @endif
+                                                                                                                                                @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
+                                                                                                                                                    <td>
+                                                                                                                                                        <form method="get"
+                                                                                                                                                              id="{{$porder->id}}"
+                                                                                                                                                              action="">
+                                                                                                                                                            <input type="hidden"
+                                                                                                                                                                   id="id"
+                                                                                                                                                                   name="id"
+                                                                                                                                                                   value="{{$porder->id}}">
+                                                                                                                                                            <select id="{{$porder->id}}"
+                                                                                                                                                                    name="postatus"
+                                                                                                                                                                    class="form-control postatus">
+                                                                                                                                                                @if($porder->status === "P")
+                                                                                                                                                                    <option value="P"
+                                                                                                                                                                            @if($porder->status === "P") selected @endif>
+                                                                                                                                                                        Pending
+                                                                                                                                                                    </option>
+                                                                                                                                                                    <option value="OP"
+                                                                                                                                                                            @if($porder->status === "OP") selected @endif>
+                                                                                                                                                                        Processing
+                                                                                                                                                                    </option>
+                                                                                                                                                                    <option value="PC"
+                                                                                                                                                                            @if($porder->status === "PC") selected @endif>
+                                                                                                                                                                        Partial
+                                                                                                                                                                        Completed
+                                                                                                                                                                    </option>
+                                                                                                                                                                    <option value="C"
+                                                                                                                                                                            @if($porder->status === "C") selected @endif>
+                                                                                                                                                                        Completed
+                                                                                                                                                                    </option>
+                                                                                                                                                                @elseif($porder->status === "OP")
+                                                                                                                                                                    <option value="OP"
+                                                                                                                                                                            @if($porder->status === "OP") selected @endif>
+                                                                                                                                                                        Processing
+                                                                                                                                                                    </option>
+                                                                                                                                                                    <option value="PC"
+                                                                                                                                                                            @if($porder->status === "PC") selected @endif>
+                                                                                                                                                                        Partial
+                                                                                                                                                                        Completed
+                                                                                                                                                                    </option>
+                                                                                                                                                                    <option value="C"
+                                                                                                                                                                            @if($porder->status === "C") selected @endif>
+                                                                                                                                                                        Completed
+                                                                                                                                                                    </option>
+                                                                                                                                                                @elseif($porder->status === "PC")
+                                                                                                                                                                    <option value="PC"
+                                                                                                                                                                            @if($porder->status === "PC") selected @endif>
+                                                                                                                                                                        Partial
+                                                                                                                                                                        Completed
+                                                                                                                                                                    </option>
+                                                                                                                                                                    <option value="C"
+                                                                                                                                                                            @if($porder->status === "C") selected @endif>
+                                                                                                                                                                        Completed
+                                                                                                                                                                    </option>
+                                                                                                                                                                @elseif($porder->status === "C")
+                                                                                                                                                                    <option value="C"
+                                                                                                                                                                            @if($porder->status === "C") selected @endif>
+                                                                                                                                                                        Completed
+                                                                                                                                                                    </option>
+                                                                                                                                                                @endif
+                                                                                                                                                            </select>
+                                                                                                                                                        </form>
+                                                                                                                                                    </td>
+                                                                                                                                                @endif
+                                                                                                                                                <td>
+                                                                                                                                                    <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
+                                                                                                                                                       class="btn btn-success btn-outline">Update
+                                                                                                                                                        Status
+                                                                                                                                                        /
+                                                                                                                                                        View
+                                                                                                                                                        Order</a>
+                                                                                                                                                </td>
+                                                                                                                                            </tr>
+                                                                                                                                            @endforeach
+                                                                                                                                            @else
+                                                                                                                                            @endif
+                                                                                                                                            @endforeach
+                                                                                                                                        @endif
+                                                                                                                                        @endif
+                                                                                                                                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -703,29 +747,57 @@
                             var model = $('.tablePO');
                             model.empty();
                             $.each(response, function (index, elem) {
-                                model.append("<tr>"+
-                                        "<td>" + elem.id +
-                                        "</td><td>" + elem.created_at +
-                                        "</td><td>" + elem.name +
-                                        "</td><td>" + elem.del_branch +
-                                        "</td><td><form method='get' id='" + elem.id + "' action=''>" +
+//                                var now = new Date.now();
+//                                var old = new Date(elem.created_at);
+//                                var now = (elem.created_at - new Date.now()) / (1000 * 60 * 60 * 24);
+                                if (elem.file != null) {
+//                                    if (now > 13)
+//                                        model.append("<tr class='error_tr'>" +
+//                                    else
+                                    model.append("<tr>" +
+                                            "<td>" + elem.id +
+                                            "</td><td>" + elem.created_at +
+                                            "</td><td>" + elem.name +
+                                            "</td><td>" + elem.del_branch +
+                                            "</td><td>" + elem.user +
+                                            "</td><td><a href='/" + elem.file + "'>Download Attachment</a>" +
+                                            "</td><td><form method='get' id='" + elem.id + "' action=''>" +
 
-                                        "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
-                                        "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                        "<option value='P'>Pending </option>" +
-                                        "<option value='OP'>Processing </option>" +
-                                        "<option value='OP'>Partial Completed </option>" +
-                                        "<option value='C'>Completed </option>" +
+                                            "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
+                                            "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
+                                            "<option value='P'>Pending </option>" +
+                                            "<option value='OP'>Processing </option>" +
+                                            "<option value='OP'>Partial Completed </option>" +
+                                            "<option value='C'>Completed </option>" +
 
-                                        "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                                {{--"<option value='P' "+ @if($porder->status === 'P') +"selected"+">Pending </option>" +--}}
-                                                {{--"<option value='OP' @if($porder->status === 'OP') selected @endif>Processing </option>" +--}}
-                                                {{--"<option value='OP' @if($porder->status === 'PC') selected @endif>Partial Completed </option>" +--}}
-                                                {{--"<option value='C' @if($porder->status === 'C') selected @endif>Completed </option>" +--}}
-//
-                                                "</select>" +
-                                        "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
-                                        "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
+                                            "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" + "</select>" +
+                                            "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
+                                            "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
+                                } else {
+//                                    if (now > 13)
+//                                        model.append("<tr class='error_tr'>" +
+//                                    else
+                                    model.append("<tr>" +
+                                            "<td>" + elem.id +
+                                            "</td><td>" + elem.created_at +
+                                            "</td><td>" + elem.name +
+                                            "</td><td>" + elem.del_branch +
+                                            "</td><td>" + elem.user +
+                                            "</td><td> No Attachment " +
+                                            "</td><td><form method='get' id='" + elem.id + "' action=''>" +
+                                            "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
+                                            "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
+                                            "<option value='P'>Pending </option>" +
+                                            "<option value='OP'>Processing </option>" +
+                                            "<option value='OP'>Partial Completed </option>" +
+                                            "<option value='C'>Completed </option>" +
+
+                                            "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" + "</select>" +
+                                            "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
+                                            "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
+
+                                }
+
                             });
                         }
                     });

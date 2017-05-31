@@ -450,12 +450,16 @@ class BucketController extends Controller
                 ->where('p__orders.status', $status)
                 ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
                 ->join('clients', 'clients_branches.client_id', 'clients.id')
-                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status')->get();
+                ->join('users', 'p__orders.agent_id','users.id')
+                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status', 'p__orders.file', 'users.name as user')
+                ->get();
         else if ($from != '' && $to != '' && $status == 'a')
             $porder = P_Order::whereBetween('p__orders.created_at', [$from, $to])
                 ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
                 ->join('clients', 'clients_branches.client_id', 'clients.id')
-                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status')->get();
+                ->join('users', 'p__orders.agent_id','users.id')
+                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status', 'p__orders.file', 'users.name as user')
+                ->get();
         else
             $porder = P_Order::where('status', 'P')->get();
 
