@@ -157,7 +157,7 @@
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/reports/completed-purchase-orders' ) }}">Purchase
+                                                <a href="{{ url ('/admin/reports/client-wise-purchase-orders' ) }}">Purchase
                                                     Orders by Clients</a>
                                             </li>
                                         @endif
