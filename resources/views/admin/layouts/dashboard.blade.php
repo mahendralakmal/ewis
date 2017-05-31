@@ -163,6 +163,12 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
                                             <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                                <a href="{{ url ('/admin/reports/sectorhead-wise-purchase-orders' ) }}">Purchase Orders
+                                                    by Sector Head</a>
+                                            </li>
+                                        @endif
+                                        @if((\App\User::find(Session::get('User'))->privilege->view_reports))
+                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
                                                 <a href="{{ url ('/admin/reports/agent-wise-purchase-orders' ) }}">Purchase
                                                     Orders by Account Manager</a>
                                             </li>
