@@ -183,17 +183,18 @@
                                                         </thead>
                                                         <tbody>
                                                         @foreach(App\P_Order::where('clients_branch_id', $shBranch->id )->get() as $shPos)
-                                                            <tr>
-                                                                <td>
-                                                                    <a href="{{ url('/admin/manage-clients/po-details/'.$shPos->id) }}">{{$shPos->id}}</a>
-                                                                </td>
-                                                                <td>{{$shPos->created_at}}</td>
-                                                                <td>{{$shPos->updated_at}}</td>
-                                                                <td>{{$shPos->client_branch->client->name}}</td>
-                                                                <td>{{$shPos->del_cp}}</td>
-                                                                <td>{{number_format(unserialize($shPos->bucket)->totalPrice,2)}}</td>
-                                                                {{--<td>{{number_format($shPos->bucket->totalPrice,2)}}</td>--}}
-                                                            </tr>
+                                                            @if($shPos->status == $status)
+                                                                <tr>
+                                                                    <td>
+                                                                        <a href="{{ url('/admin/manage-clients/po-details/'.$shPos->id) }}">{{$shPos->id}}</a>
+                                                                    </td>
+                                                                    <td>{{$shPos->created_at}}</td>
+                                                                    <td>{{$shPos->updated_at}}</td>
+                                                                    <td>{{$shPos->client_branch->client->name}}</td>
+                                                                    <td>{{$shPos->del_cp}}</td>
+                                                                    <td>{{number_format(unserialize($shPos->bucket)->totalPrice,2)}}</td>
+                                                                </tr>
+                                                            @endif
                                                         @endforeach
                                                         </tbody>
                                                     </table>
