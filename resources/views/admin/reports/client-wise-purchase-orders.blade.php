@@ -88,7 +88,7 @@
                                                 </thead>
                                                 <tbody>
                                                 @if($start !="" && $end!="")
-                                                    @if($p_orders->count()>0)
+                                                    @if($branch->p_orders->count()>0)
                                                         @foreach($p_orders as $porder)
                                                             @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
                                                                 <tr>
@@ -103,11 +103,11 @@
                                                         @endforeach
                                                     @else
                                                         <tr>
-                                                            <td> No records found...!</td>
+                                                            <td class="alert-danger"> No records found...!</td>
                                                         </tr>
                                                     @endif
                                                 @else
-                                                    @if($p_orders->count()>0)
+                                                    @if($branch->p_orders->count()>0)
                                                         @foreach($p_orders as $porder)
                                                             @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
                                                                 <tr>
@@ -122,7 +122,7 @@
                                                         @endforeach
                                                     @else
                                                         <tr>
-                                                            <td> No records found...!</td>
+                                                            <td class="alert-danger"> No records found...!</td>
                                                         </tr>
                                                     @endif
 

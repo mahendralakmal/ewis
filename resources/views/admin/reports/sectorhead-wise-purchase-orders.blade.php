@@ -88,7 +88,7 @@
                                                             <td class="text-center"><h5>Created Date & Time</h5></td>
                                                             <td class="text-center"><h5>Completed Date & Time</h5></td>
                                                             <td class="text-center"><h5>Organization</h5></td>
-                                                            <td class="text-center"><h5>Customer User</h5></td>
+                                                            <td class="text-center"><h5>Contact Name</h5></td>
                                                             <td class="text-right"><h5>Grand Total</h5></td>
                                                         </tr>
                                                     @else
@@ -96,14 +96,14 @@
                                                             <td class="text-center"><h5>P.O. No.</h5></td>
                                                             <td class="text-center"><h5>Created Date & Time</h5></td>
                                                             <td class="text-center"><h5>Organization</h5></td>
-                                                            <td class="text-center"><h5>Customer User</h5></td>
+                                                            <td class="text-center"><h5>Contact Name</h5></td>
                                                             <td class="text-right"><h5>Grand Total</h5></td>
                                                         </tr>
                                                     @endif
                                                     </thead>
                                                     <tbody>
                                                     @if($start !="" && $end!="")
-                                                        @if($p_orders->count()>0)
+                                                        @if($branch->p_orders->count()>0)
                                                             @foreach($p_orders as $porder)
                                                                 @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
                                                                     <tr>
@@ -121,11 +121,11 @@
                                                             @endforeach
                                                         @else
                                                             <tr>
-                                                                <td> No records found...!</td>
+                                                                <td class="alert-danger"> No records found...!</td>
                                                             </tr>
                                                         @endif
                                                     @else
-                                                        @if($p_orders->count()>0)
+                                                        @if($branch->p_orders->count()>0)
                                                             @foreach($p_orders as $porder)
                                                                 @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
                                                                     <tr>
@@ -143,7 +143,7 @@
                                                             @endforeach
                                                         @else
                                                             <tr>
-                                                                <td> No records found...!</td>
+                                                                <td class="alert-danger"> No records found...!</td>
                                                             </tr>
                                                         @endif
 
