@@ -55,20 +55,20 @@
                                                 @if($status == 'C')
 
                                                 <tr>
-                                                    <td><h5>P.0. No.</h5></td>
-                                                    <td><h5>Created Date & Time</h5></td>
-                                                    <td><h5>Completed Date & Time</h5></td>
-                                                    <td><h5>Organization</h5></td>
-                                                    <td><h5>Customer User</h5></td>
-                                                    <td><h5>Grand Total</h5></td>
+                                                    <td class="text-center"><h5>P.O. No.</h5></td>
+                                                    <td class="text-center"><h5>Created Date & Time</h5></td>
+                                                    <td class="text-center"><h5>Completed Date & Time</h5></td>
+                                                    <td class="text-center"><h5>Organization</h5></td>
+                                                    <td class="text-center"><h5>Contact Name</h5></td>
+                                                    <td class="text-right"><h5>Grand Total</h5></td>
                                                 </tr>
                                                     @else
                                                     <tr>
-                                                        <td><h5>P.O. No.</h5></td>
-                                                        <td><h5>Created Date & Time</h5></td>
-                                                        <td><h5>Organization</h5></td>
-                                                        <td><h5>Customer User</h5></td>
-                                                        <td><h5>Grand Total</h5></td>
+                                                        <td class="text-center"><h5>P.O. No.</h5></td>
+                                                        <td class="text-center"><h5>Created Date & Time</h5></td>
+                                                        <td class="text-center"><h5>Organization</h5></td>
+                                                        <td class="text-center"><h5>Contact Name</h5></td>
+                                                        <td class="text-right"><h5>Grand Total</h5></td>
                                                     </tr>
                                                     @endif
                                                 </thead>
@@ -78,11 +78,11 @@
                                                         @foreach($p_orders as $order)
                                                             @if($order->status == $status)
                                                                 <tr>
-                                                                    <td><a href="{{ url('/admin/manage-clients/po-details/'.$order->id) }}">{{$order->id}}</a></td>
-                                                                    <td>{{$order->created_at}}</td>
-                                                                   @if($order->status == 'C') <td>{{$order->updated_at}}</td> @endif
-                                                                    <td>{{$order->client_branch->client->name}}</td>
-                                                                    <td>{{$order->del_cp}}</td>
+                                                                    <td class="text-center"><a href="{{ url('/admin/manage-clients/po-details/'.$order->id) }}">{{$order->id}}</a></td>
+                                                                    <td class="text-center">{{$order->created_at}}</td>
+                                                                   @if($order->status == 'C') <td class="text-center">{{$order->updated_at}}</td> @endif
+                                                                    <td class="text-center">{{$order->client_branch->client->name}}</td>
+                                                                    <td class="text-center">{{$order->del_cp}}</td>
                                                                     <td class="text-right">{{number_format($order->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                             @endif
@@ -97,11 +97,11 @@
                                                         @foreach($p_orders as $order)
                                                             @if($order->status == $status)
                                                                 <tr>
-                                                                    <td><a href="{{ url('/admin/manage-clients/po-details/'.$order->id) }}">{{$order->id}}</a></td>
-                                                                    <td>{{$order->created_at}}</td>
-                                                                    @if($order->status == 'C') <td>{{$order->updated_at}}</td> @endif
-                                                                    <td>{{$order->client_branch->client->name}}</td>
-                                                                    <td>{{$order->del_cp}}</td>
+                                                                    <td class="text-center"><a href="{{ url('/admin/manage-clients/po-details/'.$order->id) }}">{{$order->id}}</a></td>
+                                                                    <td class="text-center">{{$order->created_at}}</td>
+                                                                    @if($order->status == 'C') <td class="text-center">{{$order->updated_at}}</td> @endif
+                                                                    <td class="text-center">{{$order->client_branch->client->name}}</td>
+                                                                    <td class="text-center">{{$order->del_cp}}</td>
                                                                     <td class="text-right">{{number_format($order->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                             @endif

@@ -75,19 +75,19 @@
                                                     @if($status == 'C')
 
                                                         <tr>
-                                                            <td><h5>P.0. No.</h5></td>
-                                                            <td><h5>Created Date & Time</h5></td>
-                                                            <td><h5>Completed Date & Time</h5></td>
-                                                            <td><h5>Organization</h5></td>
-                                                            <td><h5>Customer User</h5></td>
+                                                            <td class="text-center"><h5>P.O. No.</h5></td>
+                                                            <td class="text-center"><h5>Created Date & Time</h5></td>
+                                                            <td class="text-center"><h5>Completed Date & Time</h5></td>
+                                                            <td class="text-center"><h5>Organization</h5></td>
+                                                            <td class="text-center"><h5>Contact Name</h5></td>
                                                             <td class="text-right"><h5>Grand Total</h5></td>
                                                         </tr>
                                                     @else
                                                         <tr>
-                                                            <td><h5>P.O. No.</h5></td>
-                                                            <td><h5>Created Date & Time</h5></td>
-                                                            <td><h5>Organization</h5></td>
-                                                            <td><h5>Customer User</h5></td>
+                                                            <td class="text-center"><h5>P.O. No.</h5></td>
+                                                            <td class="text-center"><h5>Created Date & Time</h5></td>
+                                                            <td class="text-center"><h5>Organization</h5></td>
+                                                            <td class="text-center"><h5>Contact Name</h5></td>
                                                             <td class="text-right"><h5>Grand Total</h5></td>
                                                         </tr>
                                                     @endif
@@ -98,11 +98,11 @@
                                                             @foreach($p_orders as $porder)
                                                                 @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
                                                                 <tr>
-                                                                    <td><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}">{{$porder->id}}</a></td>
-                                                                    <td>{{$porder->created_at}}</td>
-                                                                    @if($porder->status == 'C') <td>{{$porder->updated_at}}</td> @endif
-                                                                    <td>{{$porder->client_branch->client->name}}</td>
-                                                                    <td>{{$porder->del_cp}}</td>
+                                                                    <td class="text-center"><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}">{{$porder->id}}</a></td>
+                                                                    <td class="text-center">{{$porder->created_at}}</td>
+                                                                    @if($porder->status == 'C') <td class="text-center">{{$porder->updated_at}}</td> @endif
+                                                                    <td class="text-center">{{$porder->client_branch->client->name}}</td>
+                                                                    <td class="text-center">{{$porder->del_cp}}</td>
                                                                     <td class="text-right">{{number_format($porder->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                                 @endif
@@ -117,11 +117,11 @@
                                                         @foreach($p_orders as $porder)
                                                             @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
                                                                 <tr>
-                                                                    <td><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}">{{$porder->id}}</a></td>
-                                                                    <td>{{$porder->created_at}}</td>
-                                                                    @if($porder->status == 'C') <td>{{$porder->updated_at}}</td> @endif
-                                                                    <td>{{$porder->client_branch->client->name}}</td>
-                                                                    <td>{{$porder->del_cp}}</td>
+                                                                    <td class="text-center"><a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}">{{$porder->id}}</a></td>
+                                                                    <td class="text-center">{{$porder->created_at}}</td>
+                                                                    @if($porder->status == 'C') <td class="text-center">{{$porder->updated_at}}</td> @endif
+                                                                    <td class="text-center">{{$porder->client_branch->client->name}}</td>
+                                                                    <td class="text-center">{{$porder->del_cp}}</td>
                                                                     <td class="text-right">{{number_format($porder->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                             @endif
