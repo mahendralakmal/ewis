@@ -83,7 +83,7 @@
                                                                    @if($order->status == 'C') <td>{{$order->updated_at}}</td> @endif
                                                                     <td>{{$order->client_branch->client->name}}</td>
                                                                     <td>{{$order->del_cp}}</td>
-                                                                    <td>{{number_format($order->bucket->totalPrice,2)}}</td>
+                                                                    <td class="text-right">{{number_format($order->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach
@@ -102,7 +102,7 @@
                                                                     @if($order->status == 'C') <td>{{$order->updated_at}}</td> @endif
                                                                     <td>{{$order->client_branch->client->name}}</td>
                                                                     <td>{{$order->del_cp}}</td>
-                                                                    <td>{{number_format($order->bucket->totalPrice,2)}}</td>
+                                                                    <td class="text-right">{{number_format($order->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach

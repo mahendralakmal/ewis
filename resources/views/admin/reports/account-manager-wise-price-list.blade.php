@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Purchase Orders by Account Manager')
+@section('page_heading','Price List by Account Manager')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Account Manager P.O's</h3>
+                    <h3 class="panel-title">Price List by Account Manager</h3>
                 </div>
                 <div class="panel-body">
                     <form action="" method="post" id="accmgrpricelist">
@@ -75,7 +75,7 @@
                                                                     <tr>
                                                                         <td><h5>Part No</h5></td>
                                                                         <td><h5>Name</h5></td>
-                                                                        <td><h5>Price</h5></td>
+                                                                        <td class="text-right"><h5>Price</h5></td>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -83,7 +83,7 @@
                                                                         <tr>
                                                                             <td>{{$cproduct->product->part_no}}</td>
                                                                             <td>{{$cproduct->product->name}}</td>
-                                                                            <td>{{$cproduct->special_price}}</td>
+                                                                            <td class="text-right">{{$cproduct->special_price}}</td>
                                                                             <td></td>
                                                                         </tr>
                                                                     @endforeach

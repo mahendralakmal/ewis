@@ -74,7 +74,7 @@
                                                         <td><h5>Completed Date & Time</h5></td>
                                                         <td><h5>Organization</h5></td>
                                                         <td><h5>Customer User</h5></td>
-                                                        <td><h5>Grand Total</h5></td>
+                                                        <td class="text-right"><h5>Grand Total</h5></td>
                                                     </tr>
                                                 @else
                                                     <tr>
@@ -82,7 +82,7 @@
                                                         <td><h5>Created Date & Time</h5></td>
                                                         <td><h5>Organization</h5></td>
                                                         <td><h5>Customer User</h5></td>
-                                                        <td><h5>Grand Total</h5></td>
+                                                        <td class="text-right"><h5>Grand Total</h5></td>
                                                     </tr>
                                                 @endif
                                                 </thead>
@@ -97,7 +97,7 @@
                                                                     @if($porder->status == 'C') <td>{{$porder->updated_at}}</td> @endif
                                                                     <td>{{$porder->client_branch->client->name}}</td>
                                                                     <td>{{$porder->del_cp}}</td>
-                                                                    <td>{{number_format($porder->bucket->totalPrice,2)}}</td>
+                                                                    <td class="text-right">{{number_format($porder->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach
@@ -116,7 +116,7 @@
                                                                     @if($porder->status == 'C') <td>{{$porder->updated_at}}</td> @endif
                                                                     <td>{{$porder->client_branch->client->name}}</td>
                                                                     <td>{{$porder->del_cp}}</td>
-                                                                    <td>{{number_format($porder->bucket->totalPrice,2)}}</td>
+                                                                    <td class="text-right">{{number_format($porder->bucket->totalPrice,2)}}</td>
                                                                 </tr>
                                                             @endif
                                                         @endforeach
