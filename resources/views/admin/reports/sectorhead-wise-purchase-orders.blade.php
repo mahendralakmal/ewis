@@ -182,6 +182,7 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
+                                                        @if((App\P_Order::where('clients_branch_id', $shBranch->id )->count())>0)
                                                         @foreach(App\P_Order::where('clients_branch_id', $shBranch->id )->get() as $shPos)
                                                             @if($shPos->status == $status)
                                                                 <tr>
@@ -196,6 +197,11 @@
                                                                 </tr>
                                                             @endif
                                                         @endforeach
+                                                            @else
+                                                                <tr>
+                                                                    <td class="alert-danger"> No records found...!</td>
+                                                                </tr>
+                                                            @endif
                                                         </tbody>
                                                     </table>
                                                 </td>
