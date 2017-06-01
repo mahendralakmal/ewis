@@ -31,7 +31,7 @@
                         <td class="col-md-2"></td>
                     </tr>
                     </thead>
-                    <tbody class="tablePending">
+                    <tbody class="tableCompleted">
                     @if(Session::get('User') == 1 || \App\User::find(Session::get('User'))->designation_id == 5 || \App\User::find(Session::get('User'))->designation_id == 7)
                         @foreach($porders as $porder)
                             <tr>
@@ -202,14 +202,41 @@
                         url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/C',
                         success: function (response) {
                             console.log(response);
-                            var model = $('.tableC');
+                            var model = $('.tableCompleted');
                             model.empty();
                             $.each(response, function (index, elem) {
-                                model.append("<tr><td>" + elem.id +
+//                                var now = new Date.now();
+//                                var old = new Date(elem.created_at);
+//                                var now = (elem.created_at - new Date.now()) / (1000 * 60 * 60 * 24);
+                                if (elem.file != null) {
+//                                    if (now > 13)
+//                                        model.append("<tr class='error_tr'>" +
+//                                    else
+                                    model.append("<tr>" +
+                                        "<td>" + elem.id +
                                         "</td><td>" + elem.created_at +
                                         "</td><td>" + elem.name +
                                         "</td><td>" + elem.del_branch +
-                                        "</td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id + "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
+                                        "</td><td>" + elem.user +
+                                        "</td><td><a href='/" + elem.file + "'>Download Attachment</a>" +
+                                        "</td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
+                                        "' class='btn btn-success btn-outline'>View Order</a></td></tr>");
+                                } else {
+//                                    if (now > 13)
+//                                        model.append("<tr class='error_tr'>" +
+//                                    else
+                                    model.append("<tr>" +
+                                        "<td>" + elem.id +
+                                        "</td><td>" + elem.created_at +
+                                        "</td><td>" + elem.name +
+                                        "</td><td>" + elem.del_branch +
+                                        "</td><td>" + elem.user +
+                                        "</td><td> No Attachment " + "</td>" +
+                                        "<td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
+                                        "' class='btn btn-success btn-outline'>View Order</a></td></tr>");
+
+                                }
+
                             });
                         }
                     });

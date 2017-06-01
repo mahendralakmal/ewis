@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Products')
+@section('page_heading','All Products')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Products</h3>
+                    <h3 class="panel-title">All Products</h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
@@ -31,7 +31,7 @@
                                                         <tr>
                                                             <td><h5>Part No</h5></td>
                                                             <td><h5>Name</h5></td>
-                                                            <td><h5>price</h5></td>
+                                                            <td class="text-right"><h5>Price</h5></td>
                                                             <td></td>
                                                         </tr>
                                                         </thead>
@@ -43,8 +43,8 @@
                                                                     <td>{{$prod->name}}</td>
                                                                     <td class="text-right">{{$prod->default_price}}</td>
                                                                     <td>
-                                                                        <a href="/admin/products/{{$prod->id}}"
-                                                                           class="btn btn-primary btn-outline">Edit</a>
+                                                                        {{--<a href="/admin/products/{{$prod->id}}"--}}
+                                                                           {{--class="btn btn-primary btn-outline">Edit</a>--}}
                                                                         {{--<a href="/admin/products/{{$prod->id}}/remove"--}}
                                                                            {{--class="btn btn-danger btn-outline">Delete</a>--}}
                                                                     </td>

@@ -9,22 +9,19 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Purchase Orders</h3>
                 </div>
-
                 <div class="panel-body">
-
-
                     <div class="col-md-7 row">
                         <div class="col-md-1">Date</div>
-                        <div class="col-md-1"> Form</div>
+                        <div class="col-md-1">Form</div>
                         <div class="col-md-4"><input type="date" class="form-control" name="from" id="from"></div>
-                        <div class="col-md-1"> To</div>
+                        <div class="col-md-1">To</div>
                         <div class="col-md-4"><input type="date" class="form-control" name="to" id="to"></div>
                     </div>
                     <div class="col-md-5" id="alert"></div>
                     <table class="table">
                         <thead>
                         <tr>
-                            <td><h5>P.O No.</h5></td>
+                            <td><h5>P.O. No.</h5></td>
                             <td><h5>Created Date & Time</h5></td>
                             <td><h5>Organization</h5></td>
                             <td><h5>Branch / Department</h5></td>
@@ -33,7 +30,7 @@
                             <td class="col-md-2"></td>
                         </tr>
                         </thead>
-                        <tbody class="tablePending">
+                        <tbody class="tablePC">
                         @if(Session::get('User') == 1 || \App\User::find(Session::get('User'))->designation_id == 5 || \App\User::find(Session::get('User'))->designation_id == 7)
                             @foreach($porders as $porder)
                                 @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13)
@@ -215,13 +212,13 @@
 @section('scripts')
     <script>
         $("#from").on('change', function () {
-            getPendingPO($(this).val(), $('#to').val());
+            getPartialCompletePO($(this).val(), $('#to').val());
         });
         $("#to").on('change', function () {
-            getPendingPO($('#from').val(), $(this).val());
+            getPartialCompletePO($('#from').val(), $(this).val());
         });
 
-        function getPendingPO(from, to) {
+        function getPartialCompletePO(from, to) {
             if (from != '' && to != '') {
                 if (Date.parse(from) < Date.parse(to)) {
                     $.ajax({
@@ -232,11 +229,38 @@
                             var model = $('.tablePC');
                             model.empty();
                             $.each(response, function (index, elem) {
-                                model.append("<tr><td>" + elem.id +
+//                                var now = new Date.now();
+//                                var old = new Date(elem.created_at);
+//                                var now = (elem.created_at - new Date.now()) / (1000 * 60 * 60 * 24);
+                                if (elem.file != null) {
+//                                    if (now > 13)
+//                                        model.append("<tr class='error_tr'>" +
+//                                    else
+                                    model.append("<tr>" +
+                                        "<td>" + elem.id +
                                         "</td><td>" + elem.created_at +
                                         "</td><td>" + elem.name +
                                         "</td><td>" + elem.del_branch +
-                                        "</td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id + "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
+                                        "</td><td>" + elem.user +
+                                        "</td><td><a href='/" + elem.file + "'>Download Attachment</a>" +
+                                        "</td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
+                                        "' class='btn btn-success btn-outline'>View Order</a></td></tr>");
+                                } else {
+//                                    if (now > 13)
+//                                        model.append("<tr class='error_tr'>" +
+//                                    else
+                                    model.append("<tr>" +
+                                        "<td>" + elem.id +
+                                        "</td><td>" + elem.created_at +
+                                        "</td><td>" + elem.name +
+                                        "</td><td>" + elem.del_branch +
+                                        "</td><td>" + elem.user +
+                                        "</td><td> No Attachment " + "</td>" +
+                                        "<td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
+                                        "' class='btn btn-success btn-outline'>View Order</a></td></tr>");
+
+                                }
+
                             });
                         }
                     });
