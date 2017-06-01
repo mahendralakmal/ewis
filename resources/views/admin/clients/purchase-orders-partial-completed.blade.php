@@ -36,7 +36,6 @@
                         <tbody class="tablePending">
                         @if(Session::get('User') == 1 || \App\User::find(Session::get('User'))->designation_id == 5 || \App\User::find(Session::get('User'))->designation_id == 7)
                             @foreach($porders as $porder)
-                                {{ Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days }}
                                 @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13)
                                     <tr class="error_tr">
                                 @else
