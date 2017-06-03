@@ -322,6 +322,7 @@ class BucketController extends Controller
         else
             $porders = User::find(Session::get('User'));
 
+
         return view('admin/clients/purchase-orders-view', compact('porders'));
     }
 
