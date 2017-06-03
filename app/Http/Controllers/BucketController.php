@@ -306,12 +306,14 @@ class BucketController extends Controller
     public
     function getHistory()
     {
-        $orders = P_Order::find(User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id)->all();
-        $orders->transform(function ($order, $key) {
-            $order->bucket = unserialize($order->bucket);
-            return $order;
-        });
-        return view('user/history', ['orders' => $orders]);
+        $orders = P_Order::find(User::find(Session::get('User'))->c_user->client_branch->client->id);
+        if($orders != null) {
+            $orders->transform(function ($order, $key) {
+                $order->bucket = unserialize($order->bucket);
+                return $order;
+            });
+        }
+        return view('user/history', compact('orders'));
     }
 
     public
