@@ -588,7 +588,7 @@
                                     @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                         @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
                                             @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
-                                                <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
+                                                <tr @if((integer)(  Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
                                 (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
                                                     class="error_tr" @endif>
                                                     <td>{{$porder->id}}</td>
@@ -724,6 +724,17 @@
             getPoStattus();
         });
 
+        function getDateDiff(start, end){
+            if(start != null)
+                from = new Date(start);
+
+            if(end != null)
+                to = new Date(end)
+            else to = Date.now();
+
+            return Math.round((to - from)/(1000*60*60*24));
+        }
+
         function getPendingPO(from, to) {
             if (from != '' && to != '') {
                 if (Date.parse(from) < Date.parse(to)) {
@@ -734,88 +745,7 @@
                             console.log(response);
                             var model = $('.tablePO');
                             model.empty();
-                            $.each(response, function (index, elem) {
-                                if (elem.file != null) {
-                                    if ((Date.now() - elem.created_at) > 13 && elem.status == 'P' && elem.status == 'PC') {
-                                        model.append("<tr class='error_tr'>" +
-                                                "<td>" + elem.id +
-                                                "</td><td>" + elem.created_at +
-                                                "</td><td>" + elem.name +
-                                                "</td><td>" + elem.del_branch +
-                                                "</td><td>" + elem.user +
-                                                "</td><td><a href='/" + elem.file + "'>Download Attachment</a>" +
-                                                "</td><td><form method='get' id='" + elem.id + "' action=''>" +
-
-                                                "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
-                                                "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                                "<option value='P' if(elem.status == 'P')? selected :''>Pending </option>" +
-                                                "<option value='OP' if(elem.status == 'OP')? selected :''>Processing </option>" +
-                                                "<option value='PC' if(elem.status == 'PC')? selected :''>Partial Completed </option>" +
-                                                "<option value='C' if(elem.status == 'C')? selected :''>Completed </option>" +
-                                                "</select>" +
-                                                "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
-                                                "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
-                                    } else {
-                                        model.append("<tr>" +
-                                                "<td>" + elem.id +
-                                                "</td><td>" + elem.created_at +
-                                                "</td><td>" + elem.name +
-                                                "</td><td>" + elem.del_branch +
-                                                "</td><td>" + elem.user +
-                                                "</td><td><a href='/" + elem.file + "'>Download Attachment</a>" +
-                                                "</td><td><form method='get' id='" + elem.id + "' action=''>" +
-
-                                                "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
-                                                "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                                "<option value='P' (elem.status == 'P')? selected :''>Pending </option>" +
-                                                "<option value='OP' (elem.status == 'OP')? selected :''>Processing </option>" +
-                                                "<option value='PC' (elem.status == 'PC')? selected :''>Partial Completed </option>" +
-                                                "<option value='C' (elem.status == 'C')? selected :''>Completed </option>" +
-                                                "</select>" +
-                                                "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
-                                                "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
-                                    }
-                                } else {
-                                    if ((Date.now() - elem.created_at) > 13 && elem.status == 'P' || elem.status == 'PC') {
-                                        model.append("<tr class='error_tr'>" +
-                                                "<td>" + elem.id +
-                                                "</td><td>" + elem.created_at +
-                                                "</td><td>" + elem.name +
-                                                "</td><td>" + elem.del_branch +
-                                                "</td><td>" + elem.user +
-                                                "</td><td> No Attachment </td><td><form method='get' id='" + elem.id + "' action=''>" +
-                                                "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
-                                                "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                                "<option value='P' (elem.status == 'P')? selected :''>Pending </option>" +
-                                                "<option value='OP' (elem.status == 'OP')? selected :''>Processing </option>" +
-                                                "<option value='PC' (elem.status == 'PC')? selected :''>Partial Completed </option>" +
-                                                "<option value='C' (elem.status == 'C')? selected :''>Completed </option>" +
-                                                "</select>" +
-                                                "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
-                                                "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
-                                    } else {
-                                        model.append("<tr>" +
-                                                "<td>" + elem.id +
-                                                "</td><td>" + elem.created_at +
-                                                "</td><td>" + elem.name +
-                                                "</td><td>" + elem.del_branch +
-                                                "</td><td>" + elem.user +
-                                                "</td><td> No Attachment </td><td><form method='get' id='" + elem.id + "' action=''>" +
-
-                                                "<input type='hidden' id='id' name='id' value='" + elem.id + "'>" +
-                                                "<select id='" + elem.id + "' name='postatus' class='form-control postatus'>" +
-                                                "<option value='P' (elem.status == 'P')? selected :''>Pending </option>" +
-                                                "<option value='OP' (elem.status == 'OP')? selected :''>Processing </option>" +
-                                                "<option value='PC' (elem.status == 'PC')? selected :''>Partial Completed </option>" +
-                                                "<option value='C' (elem.status == 'C')? selected :''>Completed </option>" +
-                                                "</select>" +
-                                                "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
-                                                "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>");
-                                    }
-
-                                }
-
-                            });
+                            model.append(response);
                         }
                     });
                 } else {
