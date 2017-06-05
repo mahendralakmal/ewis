@@ -27,7 +27,7 @@
                             @if(!$id ==null)
                                 @foreach($clients as $client)
                                     <option value="{{$client->id}}"
-                                            @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
+                                            @if((!$id ==null) && ($id->id == $client->id)) selected @endif>{{$client->name}}</option>
                                 @endforeach
                             @endif
                             {{--@else--}}
