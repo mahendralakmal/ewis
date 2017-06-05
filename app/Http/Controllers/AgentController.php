@@ -81,10 +81,10 @@ class AgentController extends Controller
         }
 
         $ses = User::find(session('User'));
-        if ($ses->id == 1)
+//        if ($ses->id == 1)
             $clients = Client::where('approval', 1)->get();
-        else
-            $clients = ClientsBranch::where('agent_id', $ses->id)->get();
+//        else
+//            $clients = ClientsBranch::where('agent_id', $ses->id)->get();
 
         return view('/admin/clients/client-users', compact('user', 'clients', 'id'));
     }
