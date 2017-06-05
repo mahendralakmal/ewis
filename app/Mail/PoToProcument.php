@@ -40,6 +40,6 @@ class PoToProcument extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.PoToProcument');
+        return $this->subject('EWIS Peripherals Order Management System.' )->view('emails.PoToProcument');
     }
 }

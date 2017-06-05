@@ -37,6 +37,6 @@ class PoToAdministration extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.PoToAdministration');
+        return $this->subject('EWIS Peripherals Order Management System.' )->view('emails.PoToAdministration');
     }
 }

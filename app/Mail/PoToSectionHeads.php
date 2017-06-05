@@ -40,6 +40,6 @@ class PoToSectionHeads extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.PoToSectionHead');
+        return $this->subject('EWIS Peripherals Order Management System.' )->view('emails.PoToSectionHead');
     }
 }
