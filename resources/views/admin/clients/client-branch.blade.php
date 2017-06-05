@@ -76,7 +76,7 @@
                                                                 </td>
                                                             @endif
                                                             <td>
-                                                                <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/edit"
                                                                    class="btn btn-primary btn-outline">Edit</a>
                                                             </td>
                                                             {{--<td class="col-md-2">--}}
@@ -101,7 +101,7 @@
                                                                 </td>
                                                             @endif
                                                             <td>
-                                                                <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/edit"
                                                                    class="btn btn-primary btn-outline">Edit</a>
                                                             </td>
                                                             {{--<td class="col-md-2">--}}
@@ -125,7 +125,7 @@
                                                                     </td>
                                                                 @endif
                                                                 <td>
-                                                                    <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                    <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/edit"
                                                                        class="btn btn-primary btn-outline">Edit</a>
                                                                 </td>
                                                                 {{--<td class="col-md-2">--}}
@@ -153,7 +153,7 @@
                                                                 </td>
                                                             @endif
                                                             <td>
-                                                                <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/edit"
                                                                    class="btn btn-primary btn-outline">Edit</a>
                                                             </td>
                                                             {{--<td class="col-md-2">--}}
@@ -177,7 +177,7 @@
                                                             </td>
                                                         @endif
                                                         <td>
-                                                            <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                            <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/edit"
                                                                class="btn btn-primary btn-outline">Edit</a>
                                                         </td>
                                                         {{--<td class="col-md-2">--}}
@@ -201,7 +201,7 @@
                                                                 </td>
                                                             @endif
                                                             <td>
-                                                                <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/edit"
                                                                    class="btn btn-primary btn-outline">Edit</a>
                                                             </td>
                                                             {{--<td class="col-md-2">--}}
