@@ -23,17 +23,17 @@
                     <div class="col-md-8">
                         <select name="client_id" id="client_id" class="form-control">
                             <option> Select Client</option>
-                            @if(Session::get('User') == 1)
+                            {{--@if(Session::get('User') == 1)--}}
                                 @foreach($clients as $client)
                                     <option value="{{$client->id}}"
                                             @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
                                 @endforeach
-                            @else
-                                @foreach($clients as $branch)
-                                    <option value="{{$branch->id}}"
-                                            @if((!$id ==null) && ($id->client_id == $branch->id)) selected @endif>{{$branch->name}}</option>
-                                @endforeach
-                            @endif
+                            {{--@else--}}
+                                {{--@foreach($clients as $branch)--}}
+                                    {{--<option value="{{$branch->id}}"--}}
+                                            {{--@if((!$id ==null) && ($id->client_id == $branch->id)) selected @endif>{{$branch->name}}</option>--}}
+                                {{--@endforeach--}}
+                            {{--@endif--}}
                         </select>
                     </div>
                 </div>
