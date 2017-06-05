@@ -15,7 +15,7 @@ return [
 
     */
 
-    'P_Order_Pending_Timeout' => 14
+    'P_Order_Pending_Timeout' => 7
 
 
 ];
