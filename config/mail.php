@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'marketting@ewis.com'),
-        'name' => env('MAIL_FROM_NAME', 'EWIS Marketting'),
+        'address' => env('MAIL_FROM_ADDRESS', 'ordermanagement@ewisl.net'),
+        'name' => env('MAIL_FROM_NAME', 'EWIS Order Management System'),
     ],
 
     /*
