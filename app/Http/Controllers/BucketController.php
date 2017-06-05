@@ -49,22 +49,22 @@ class BucketController extends Controller
         $status = $request->postatus;
         $start = $request->from;
         $end = $request->to;
-        if ($start != "" && $end != "" && $status !=""){
+        if ($start != "" && $end != "" && $status != "") {
             $p_orders = P_Order::whereBetween('p__orders.created_at', [$start, $end])->get();
             $p_orders->transform(function ($p_orders, $key) {
                 $p_orders->bucket = unserialize($p_orders->bucket);
                 return $p_orders;
-            });}
-
-        else {
+            });
+        } else {
             $p_orders = P_Order::all();
             $p_orders->transform(function ($p_orders, $key) {
                 $p_orders->bucket = unserialize($p_orders->bucket);
                 return $p_orders;
-            });}
+            });
+        }
 
         return view('admin.reports.sectorhead-wise-purchase-orders',
-            compact('po', 'status', 'branch','sheads','start','end','p_orders'));
+            compact('po', 'status', 'branch', 'sheads', 'start', 'end', 'p_orders'));
     }
 
     public function getAllPurchaseOrders(Request $request)
@@ -75,21 +75,21 @@ class BucketController extends Controller
         $status = $request->postatus;
         $start = $request->from;
         $end = $request->to;
-        if ($start != "" && $end != ""){
+        if ($start != "" && $end != "") {
             $p_orders = P_Order::whereBetween('p__orders.created_at', [$start, $end])->get();
-        $p_orders->transform(function ($p_orders, $key) {
-            $p_orders->bucket = unserialize($p_orders->bucket);
-            return $p_orders;
-        });}
-
-        else {
+            $p_orders->transform(function ($p_orders, $key) {
+                $p_orders->bucket = unserialize($p_orders->bucket);
+                return $p_orders;
+            });
+        } else {
             $p_orders = P_Order::all();
             $p_orders->transform(function ($p_orders, $key) {
-            $p_orders->bucket = unserialize($p_orders->bucket);
-            return $p_orders;
-        });}
+                $p_orders->bucket = unserialize($p_orders->bucket);
+                return $p_orders;
+            });
+        }
 
-            return view('admin.reports.all-purchase-orders', compact('clients', 'p_orders' , 'status', 'agents', 'start', 'end'));
+        return view('admin.reports.all-purchase-orders', compact('clients', 'p_orders', 'status', 'agents', 'start', 'end'));
     }
 
     public function getPurchaseOrdersByAccountManager(Request $request)
@@ -111,22 +111,22 @@ class BucketController extends Controller
         $status = $request->postatus;
         $start = $request->from;
         $end = $request->to;
-        if ($start != "" && $end != "" && $status !=""){
+        if ($start != "" && $end != "" && $status != "") {
             $p_orders = P_Order::whereBetween('p__orders.created_at', [$start, $end])->get();
             $p_orders->transform(function ($p_orders, $key) {
                 $p_orders->bucket = unserialize($p_orders->bucket);
                 return $p_orders;
-            });}
-
-        else {
+            });
+        } else {
             $p_orders = P_Order::all();
             $p_orders->transform(function ($p_orders, $key) {
                 $p_orders->bucket = unserialize($p_orders->bucket);
                 return $p_orders;
-            });}
+            });
+        }
 
         return view('admin.reports.agent-wise-purchase-orders',
-            compact('po', 'status', 'branch','agents','start','end','p_orders'));
+            compact('po', 'status', 'branch', 'agents', 'start', 'end', 'p_orders'));
     }
 
     public function getPurchaseOrdersByClient(Request $request)
@@ -135,23 +135,23 @@ class BucketController extends Controller
         $branch = ClientsBranch::where('client_id')->get();
         $start = $request->from;
         $end = $request->to;
-        if ($start != "" && $end != ""){
+        if ($start != "" && $end != "") {
             $p_orders = P_Order::whereBetween('p__orders.created_at', [$start, $end])->get();
             $p_orders->transform(function ($p_orders, $key) {
                 $p_orders->bucket = unserialize($p_orders->bucket);
                 return $p_orders;
-            });}
-
-        else {
+            });
+        } else {
             $p_orders = P_Order::all();
             $p_orders->transform(function ($p_orders, $key) {
                 $p_orders->bucket = unserialize($p_orders->bucket);
                 return $p_orders;
-            });}
+            });
+        }
         $po = Client::find($request->client);
         $status = $request->postatus;
 
-        return view('admin.reports.client-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'branch','p_orders'));
+        return view('admin.reports.client-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'branch', 'p_orders'));
     }
 
     public function getPriceListByAccMgr()
@@ -160,7 +160,7 @@ class BucketController extends Controller
         $branchs = "";
         $clients = "";
         $s_user = "";
-        return view('admin/reports/account-manager-wise-price-list', compact('users', 'branchs','clients', 's_user'));
+        return view('admin/reports/account-manager-wise-price-list', compact('users', 'branchs', 'clients', 's_user'));
     }
 
     public function getPLByAccMgr(Request $request)
@@ -171,7 +171,7 @@ class BucketController extends Controller
         $clients = Client::all();
         $s_user = User::find($request->agent);
 
-        return view('admin/reports/account-manager-wise-price-list', compact('users', 'branchs','clients', 's_user'));
+        return view('admin/reports/account-manager-wise-price-list', compact('users', 'branchs', 'clients', 's_user'));
     }
 
     public function getPriceListByClient(Client $client, $start, $end)
@@ -306,12 +306,14 @@ class BucketController extends Controller
     public
     function getHistory()
     {
-        $orders = P_Order::where('clients_branch_id',User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->id)->get();
-        $orders->transform(function ($order, $key) {
-            $order->bucket = unserialize($order->bucket);
-            return $order;
-        });
-        return view('user/history', ['orders' => $orders]);
+        $orders = P_Order::find(User::find(Session::get('User'))->c_user->client_branch->client->id);
+        if ($orders != null) {
+            $orders->transform(function ($order, $key) {
+                $order->bucket = unserialize($order->bucket);
+                return $order;
+            });
+        }
+        return view('user/history', compact('orders'));
     }
 
     public
@@ -328,7 +330,7 @@ class BucketController extends Controller
 
     public function pendingPurchaseOrder()
     {
-        if(Session::has('User')) {
+        if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
                 $porders = P_Order::where('status', 'P')->get();
             else
@@ -340,7 +342,7 @@ class BucketController extends Controller
 
     public function processingPurchaseOrder()
     {
-        if(Session::has('User')) {
+        if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
                 $porders = P_Order::where('status', 'OP')->get();
             else
@@ -351,7 +353,7 @@ class BucketController extends Controller
 
     public function getProcessingPoCount()
     {
-        if(Session::has('User')){
+        if (Session::has('User')) {
             $user = User::find(Session::get('User'));
             if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
                 $porder = P_Order::where('status', 'OP')->count();
@@ -480,28 +482,70 @@ class BucketController extends Controller
         return view('admin/clients/purchase-orders-partial-completed', compact('porders'));
     }
 
+    private function getDateDiff($date)
+    {
+        return (Carbon::parse($date)->diff(Carbon::now())->days);
+    }
+
     public
     function ajaxPurchaseOrderStatus($from, $to, $status)
     {
         if ($from != '' && $to != '' && $status != '' && $status != 'a')
-            $porder = P_Order::whereBetween('p__orders.created_at', [$from, $to])
+            $porders = P_Order::whereBetween('p__orders.created_at', [$from, $to])
                 ->where('p__orders.status', $status)
                 ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
                 ->join('clients', 'clients_branches.client_id', 'clients.id')
-                ->join('users', 'p__orders.agent_id','users.id')
+                ->join('users', 'p__orders.agent_id', 'users.id')
                 ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status', 'p__orders.file', 'users.name as user')
                 ->get();
         else if ($from != '' && $to != '' && $status == 'a')
-            $porder = P_Order::whereBetween('p__orders.created_at', [$from, $to])
+            $porders = P_Order::whereBetween('p__orders.created_at', [$from, $to])
                 ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
                 ->join('clients', 'clients_branches.client_id', 'clients.id')
-                ->join('users', 'p__orders.agent_id','users.id')
+                ->join('users', 'p__orders.agent_id', 'users.id')
                 ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status', 'p__orders.file', 'users.name as user')
                 ->get();
         else
-            $porder = P_Order::where('status', 'P')->get();
+            $porders = P_Order::where('status', 'P')->get();
 
-        return Response::json($porder);
+        $response = "";
+        foreach ($porders as $porder) {
+            if ((integer)$this->getDateDiff($porder->created_at) > (integer)(config('const.P_Order_Pending_Timeout')) && ($porder->status == "P" || $porder->status == "PC"))
+                $response = $response . "<tr class='error_tr'>";
+            else $response = $response . "<tr>";
+
+            $response = $response . "<td>" . $porder->id . "</td><td>" . $porder->created_at . "</td><td>" . $porder->name .
+                "</td><td>" . $porder->del_branch . "</td><td>" . $porder->user . "</td><td>";
+            if ($porder->file != null)
+                $response = $response . "<a href='/" . $porder->file . "'>Download Attachment</a>";
+            else
+                $response = $response . "No Attachment";
+
+            $response = $response . "</td><td><form method='get' id='" . $porder->id . "' action=''>" .
+                "<input type='hidden' id='id' name='id' value='" . $porder->id . "'>" .
+                "<select id=" . $porder->id . " name='postatus' class='form-control postatus'>" .
+                "<option value='P' ";
+            if ($porder->status == 'P')
+                $response = $response . "selected";
+            $response = $response . ">Pending </option>".
+                "<option value='OP' ";
+            if ($porder->status == 'OP')
+                $response = $response . "selected";
+            $response = $response . ">Processing </option>".
+                "<option value='PC' ";
+            if ($porder->status == 'PC')
+                $response = $response . "selected";
+            $response = $response . ">Partial Completed </option>".
+            "<option value='C' ";
+            if ($porder->status == 'C')
+                $response = $response . "selected";
+            $response = $response . ">Completed </option>".
+                "</select>" .
+                "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" . $porder->id .
+                "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>";
+        }
+
+        return $response;
     }
 
     public

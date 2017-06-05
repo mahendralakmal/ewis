@@ -237,7 +237,7 @@
                         type: 'get',
                         url: '/admin/getPendingPoCount',
                         success: function (response) {
-                            console.log(response);
+//                            console.log(response);
                             var model = $('.pending');
                             model.text(response);
                         }
@@ -248,7 +248,7 @@
                         type: 'get',
                         url: '/admin/getPCompletePoCount',
                         success: function (response) {
-                            console.log(response);
+//                            console.log(response);
                             var model = $('.partialComplet');
                             model.text(response);
                         }
@@ -286,7 +286,7 @@
                         type: 'get',
                         url: '/admin/manage-clients/purchase-orders-partial-completed/' + this.value,
                         success: function (response) {
-                            console.log(response);
+//                            console.log(response);
                             var model = $('.tbody-completed');
                             model.empty();
                             $.each(response, function (index, elem) {
