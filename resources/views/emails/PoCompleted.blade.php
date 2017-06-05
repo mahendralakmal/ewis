@@ -6,7 +6,7 @@
 </head>
 <body style="width: 894px">
 {{--<h5>Order Completed</h5>--}}
-<p>Thank You for your valued order. Your order has being Completed</p>
+<p>Thank You for your valued order. Your order has been Completed</p>
 <table width="100%" border="0">
     <tr>
         <td>
