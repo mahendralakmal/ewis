@@ -25,7 +25,7 @@
                             <option> Select Client</option>
 {{--                            @if(Session::get('User') == 1)--}}
                                 @foreach($clients as $client)
-                                    <option value="{{$client->id}}"
+                                    <option value="{{$client->id}}" disabled
                                             @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
                                 @endforeach
                             {{--@else--}}
