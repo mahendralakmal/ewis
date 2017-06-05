@@ -66,12 +66,23 @@
                                                 @if($client->approval)
                                                     @foreach(App\ClientsBranch::where('agent_id',$clientt->id)->get() as $cbranch)
                                                         <tr>
-                                                            <td>{{ $clientt->name }}</td>
-                                                            <td>{{ $cbranch->name }}</td>
-                                                            <td class="col-md-2">
-                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
-                                                                   class="btn btn-danger btn-outline">Remove</a>
+                                                            <td class="col-md-4">{{ $clientt->name }}</td>
+                                                            <td class="col-md-4">{{ $cbranch->name }}</td>
+                                                            @if(\App\User::find(Session::get('User'))->privilege->assign_agent == 1)
+                                                                <td>
+                                                                    <a href="/admin/manage-clients/agent-assign/{{ $cbranch->id }}"
+                                                                       class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign
+                                                                        Account Manager</a>
+                                                                </td>
+                                                            @endif
+                                                            <td>
+                                                                <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                   class="btn btn-primary btn-outline">Edit</a>
                                                             </td>
+                                                            {{--<td class="col-md-2">--}}
+                                                                {{--<a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"--}}
+                                                                   {{--class="btn btn-danger btn-outline">Remove</a>--}}
+                                                            {{--</td>--}}
                                                         </tr>
                                                     @endforeach
                                                 @endif
@@ -80,12 +91,23 @@
                                                 @foreach(App\ClientsBranch::where('agent_id',$user->id)->get() as $cbranch)
                                                     @if($cbranch->client->approval && $cbranch->activation == 0)
                                                         <tr>
-                                                            <td>{{ $cbranch->client->name }}</td>
-                                                            <td>{{ $cbranch->name }}</td>
-                                                            <td class="col-md-2">
-                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
-                                                                   class="btn btn-danger btn-outline">Remove</a>
+                                                            <td class="col-md-4">{{ $cbranch->client->name }}</td>
+                                                            <td class="col-md-4">{{ $cbranch->name }}</td>
+                                                            @if(\App\User::find(Session::get('User'))->privilege->assign_agent == 1)
+                                                                <td>
+                                                                    <a href="/admin/manage-clients/agent-assign/{{ $cbranch->id }}"
+                                                                       class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign
+                                                                        Account Manager</a>
+                                                                </td>
+                                                            @endif
+                                                            <td>
+                                                                <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                   class="btn btn-primary btn-outline">Edit</a>
                                                             </td>
+                                                            {{--<td class="col-md-2">--}}
+                                                                {{--<a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"--}}
+                                                                   {{--class="btn btn-danger btn-outline">Remove</a>--}}
+                                                            {{--</td>--}}
                                                         </tr>
                                                     @endif
                                                 @endforeach
@@ -93,12 +115,23 @@
                                                     @foreach(App\ClientsBranch::where('agent_id',$cuser->id)->get() as $cbranch)
                                                         @if($cbranch->client->approval && $cbranch->activation == 0)
                                                             <tr>
-                                                                <td>{{ $cbranch->client->name }}</td>
-                                                                <td>{{ $cbranch->name }}</td>
-                                                                <td class="col-md-2">
-                                                                    <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
-                                                                       class="btn btn-danger btn-outline">Remove</a>
+                                                                <td class="col-md-4">{{ $cbranch->client->name }}</td>
+                                                                <td class="col-md-4">{{ $cbranch->name }}</td>
+                                                                @if(\App\User::find(Session::get('User'))->privilege->assign_agent == 1)
+                                                                    <td>
+                                                                        <a href="/admin/manage-clients/agent-assign/{{ $cbranch->id }}"
+                                                                           class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign
+                                                                            Account Manager</a>
+                                                                    </td>
+                                                                @endif
+                                                                <td>
+                                                                    <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                       class="btn btn-primary btn-outline">Edit</a>
                                                                 </td>
+                                                                {{--<td class="col-md-2">--}}
+                                                                    {{--<a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"--}}
+                                                                       {{--class="btn btn-danger btn-outline">Remove</a>--}}
+                                                                {{--</td>--}}
                                                             </tr>
                                                         @endif
                                                     @endforeach
@@ -110,12 +143,23 @@
                                                 @if($clientt->approval)
                                                     @foreach(App\ClientsBranch::where('agent_id',$clientt->id)->get() as $cbranch)
                                                         <tr>
-                                                            <td>{{ $clientt->name }}</td>
-                                                            <td>{{ $cbranch->name }}</td>
-                                                            <td class="col-md-2">
-                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
-                                                                   class="btn btn-danger btn-outline">Remove</a>
+                                                            <td class="col-md-4">{{ $clientt->name }}</td>
+                                                            <td class="col-md-4">{{ $cbranch->name }}</td>
+                                                            @if(\App\User::find(Session::get('User'))->privilege->assign_agent == 1)
+                                                                <td>
+                                                                    <a href="/admin/manage-clients/agent-assign/{{ $cbranch->id }}"
+                                                                       class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign
+                                                                        Account Manager</a>
+                                                                </td>
+                                                            @endif
+                                                            <td>
+                                                                <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                   class="btn btn-primary btn-outline">Edit</a>
                                                             </td>
+                                                            {{--<td class="col-md-2">--}}
+                                                                {{--<a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"--}}
+                                                                   {{--class="btn btn-danger btn-outline">Remove</a>--}}
+                                                            {{--</td>--}}
                                                         </tr>
                                                     @endforeach
                                                 @endif
@@ -123,12 +167,23 @@
                                             @foreach(App\ClientsBranch::where('agent_id',$clients->id)->get() as $cbranch)
                                                 @if($cbranch->client->approval && $cbranch->activation == 0)
                                                     <tr>
-                                                        <td>{{ $cbranch->client->name }}</td>
-                                                        <td>{{ $cbranch->name }}</td>
-                                                        <td class="col-md-2">
-                                                            <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
-                                                               class="btn btn-danger btn-outline">Remove</a>
+                                                        <td class="col-md-4">{{ $cbranch->client->name }}</td>
+                                                        <td class="col-md-4">{{ $cbranch->name }}</td>
+                                                        @if(\App\User::find(Session::get('User'))->privilege->assign_agent == 1)
+                                                            <td>
+                                                                <a href="/admin/manage-clients/agent-assign/{{ $cbranch->id }}"
+                                                                   class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign
+                                                                    Account Manager</a>
+                                                            </td>
+                                                        @endif
+                                                        <td>
+                                                            <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                               class="btn btn-primary btn-outline">Edit</a>
                                                         </td>
+                                                        {{--<td class="col-md-2">--}}
+                                                            {{--<a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"--}}
+                                                               {{--class="btn btn-danger btn-outline">Remove</a>--}}
+                                                        {{--</td>--}}
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -136,12 +191,23 @@
                                                 @if($client->approval)
                                                     @foreach(App\ClientsBranch::where('agent_id',$client->id)->get() as $cbranch)
                                                         <tr>
-                                                            <td>{{ $cbranch->client->name }}</td>
-                                                            <td>{{ $cbranch->name }}</td>
-                                                            <td class="col-md-2">
-                                                                <a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"
-                                                                   class="btn btn-danger btn-outline">Remove</a>
+                                                            <td class="col-md-4">{{ $cbranch->client->name }}</td>
+                                                            <td class="col-md-4">{{ $cbranch->name }}</td>
+                                                            @if(\App\User::find(Session::get('User'))->privilege->assign_agent == 1)
+                                                                <td>
+                                                                    <a href="/admin/manage-clients/agent-assign/{{ $cbranch->id }}"
+                                                                       class="btn @if($cbranch->agent_id == '') btn-primary @else btn-success @endif btn-outline">Assign
+                                                                        Account Manager</a>
+                                                                </td>
+                                                            @endif
+                                                            <td>
+                                                                <a href="/admin/manage-clients/create-branch/{{ $branch->id }}/edit"
+                                                                   class="btn btn-primary btn-outline">Edit</a>
                                                             </td>
+                                                            {{--<td class="col-md-2">--}}
+                                                                {{--<a href="/admin/manage-clients/create-branch/{{ $cbranch->id }}/remove"--}}
+                                                                   {{--class="btn btn-danger btn-outline">Remove</a>--}}
+                                                            {{--</td>--}}
                                                         </tr>
                                                     @endforeach
                                                 @endif
