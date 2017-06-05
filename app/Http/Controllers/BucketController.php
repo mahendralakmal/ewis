@@ -291,12 +291,13 @@ class BucketController extends Controller
         $agent = User::find($order->agent_id);
         $sHead = User::find($agent->section_head_id);
         $order->bucket = unserialize($order->bucket);
+        $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net','harsha@ewisl.net','hashanp@ewisl.net','damayanthik@ewisl.net','chanakah@ewisl.net'];
 
         //send the notification to client
         Mail::to($user)->send(new PoSentSuccessfully($user, $order));
         Mail::to($agent)->send(new PoToAdministration($user, $order));
         Mail::to($sHead)->send(new PoToSectionHeads($user, $order, $agent));
-        Mail::to('ordermanagement@ewisl.net')->send(new PoToProcument($user, $order, $agent));
+        Mail::to($procument)->send(new PoToProcument($user, $order, $agent));
 
 
         Session::forget('bucket');
