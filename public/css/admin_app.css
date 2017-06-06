@@ -5868,7 +5868,7 @@ body, label, .checkbox label {
 footer {
   background-color: #585858;
   text-align: center;
-  padding: 20px 15px 15px 15px; }
+  padding: 10px 0 0 0; }
   footer p {
     color: #fff; }
 

@@ -61,7 +61,8 @@
                                             <td>{{$porder->created_at}}</td>
                                             <td>{{$porder->client_branch->client->name}}</td>
                                             <td>{{$porder->del_branch}}</td>
-                                            @if($porder->file !== null){
+                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                            @if($porder->file !== null)
                                             <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                             </td>
                                             @else
@@ -83,7 +84,8 @@
                                                 <td>{{$porder->created_at}}</td>
                                                 <td>{{$porder->client_branch->client->name}}</td>
                                                 <td>{{$porder->del_branch}}</td>
-                                                @if($porder->file !== null){
+                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                @if($porder->file !== null)
                                                 <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
                                                 @else
@@ -106,7 +108,8 @@
                                             <td>{{$porder->created_at}}</td>
                                             <td>{{$porder->client_branch->client->name}}</td>
                                             <td>{{$porder->del_branch}}</td>
-                                            @if($porder->file !== null){
+                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                            @if($porder->file !== null)
                                             <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                             </td>
                                             @else
@@ -130,7 +133,8 @@
                                             <td>{{$porder->created_at}}</td>
                                             <td>{{$porder->client_branch->client->name}}</td>
                                             <td>{{$porder->del_branch}}</td>
-                                            @if($porder->file !== null){
+                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                            @if($porder->file !== null)
                                             <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                             </td>
                                             @else
@@ -155,7 +159,8 @@
                                                 <td>{{$porder->created_at}}</td>
                                                 <td>{{$porder->client_branch->client->name}}</td>
                                                 <td>{{$porder->del_branch}}</td>
-                                                @if($porder->file !== null){
+                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                @if($porder->file !== null)
                                                 <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
                                                 @else

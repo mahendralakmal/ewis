@@ -106,6 +106,14 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/designation/update', 'DesignationController@update');
     });
 
+    Route::group(['prefix' => '/purchase-orders'], function () {
+        Route::get('/purchase-orders-view', 'BucketController@getPurchaseOrder');
+        Route::get('/purchase-orders-pending', 'BucketController@pendingPurchaseOrder');
+        Route::get('/purchase-orders-processing', 'BucketController@processingPurchaseOrder');
+        Route::get('/purchase-orders-partial-completed', 'BucketController@pcPurchaseOrder');
+        Route::get('/purchase-orders-completed', 'BucketController@CompletedPurchaseOrders');
+    });
+
     Route::group(['prefix' => '/manage-clients'], function () {
         Route::get('/', 'ClientController@index');
         Route::get('/create-clientuser', 'UserController@client');
@@ -119,14 +127,10 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
-        Route::get('/purchase-orders-view', 'BucketController@getPurchaseOrder');
-        Route::get('/purchase-orders-pending', 'BucketController@pendingPurchaseOrder');
-        Route::get('/purchase-orders-processing', 'BucketController@processingPurchaseOrder');
+
+
 
         Route::get('/purchase-orders/{from}/{to}/{status}', 'BucketController@ajaxPurchaseOrderStatus');
-
-        Route::get('/purchase-orders-partial-completed', 'BucketController@pcPurchaseOrder');
-        Route::get('/purchase-orders-completed', 'BucketController@CompletedPurchaseOrders');
         Route::get('/po-details/{id}', 'BucketController@getPODetails');
         Route::get('/po-details/change_status/{id}/{status}', 'BucketController@change_status');
 
