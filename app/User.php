@@ -31,4 +31,9 @@ class User extends Model
     public function client_branch(){
         return $this->hasMany(ClientsBranch::class);
     }
+
+    public function sector_head(){
+        return $this->belongsTo(User::class, 'section_head_id');
+    }
+
 }
