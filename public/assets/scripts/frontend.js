@@ -15140,7 +15140,9 @@ $(function() {
         }
 
         height = ((this.window.innerHeight > 0) ? this.window.innerHeight : this.screen.height) - 1;
-        height = height - topOffset;
+		f_height = $('footer').outerHeight();
+		console.log(f_height);
+        height = height - topOffset - f_height;
         if (height < 1) height = 1;
         if (height > topOffset) {
             $("#page-wrapper").css("min-height", (height) + "px");
@@ -15185,10 +15187,10 @@ var lineChartData = {
 }
 
 
-    var cline = document.getElementById("cline").getContext("2d");
-    new Chart(cline).Line(lineChartData, {
-        responsive: true
-    });
+    // var cline = document.getElementById("cline").getContext("2d");
+    // new Chart(cline).Line(lineChartData, {
+    //     responsive: true
+    // });
    
 
    var pdata = [

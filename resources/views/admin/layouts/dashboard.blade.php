@@ -17,11 +17,11 @@
                 <ul class="nav navbar-top-links navbar-right">
                     <li> Welcome {{App\User::find(Session::get('User'))->name}} </li>
                     <li>
-                        <a href="{{ url('/admin/manage-clients/purchase-orders-pending') }}">Pending
+                        <a href="{{ url('/admin/purchase-orders/purchase-orders-pending') }}">Pending
                             <span class="badge pending"></span>
                         </a>
                     </li>
-                    <li><a href="{{ url('/admin/manage-clients/purchase-orders-partial-completed') }}">Partial Completed
+                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-partial-completed') }}">Partial Completed
                             <span class="badge partialComplet"></span></a></li>
                     <li><a href="{{ url('/signout') }}">Signout</a></li>
                 </ul>
@@ -29,22 +29,22 @@
                     <div class="sidebar-nav navbar-collapse">
 
                         <ul class="nav" id="side-menu">
-                            <li {{ (Request::is('*dashbord') ? 'class="active"' : '') }}>
+                            <li>
                                 <a href="{{ url ('/admin') }}">Home</a>
                             </li>
 
                             @if((\App\User::find(Session::get('User'))->privilege->brand))
-                                <li {{ (Request::is('*dashbord') ? 'class="active"' : '') }}>
+                                <li>
                                     <a href="{{ url ('/admin/brands') }}">Brands</a>
                                 </li>
                             @endif
                             @if((\App\User::find(Session::get('User'))->privilege->category))
-                                <li {{ (Request::is('*charts') ? 'class="active"' : '') }}>
+                                <li>
                                     <a href="{{ url ('/admin/categories') }}">Categories</a>
                                 </li>
                             @endif
                             @if((\App\User::find(Session::get('User'))->privilege->product))
-                                <li {{ (Request::is('*tables') ? 'class="active"' : '') }}>
+                                <li>
                                     <a href="{{ url ('/admin/products') }}">Products</a>
                                 </li>
                             @endif
@@ -57,24 +57,25 @@
                                     <a href="#">Manage Internal Users<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(Session::get('User'))->privilege->designation))
-                                            <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/users/manage-user-designations' ) }}">Designations (Add / Edit)</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->add_user))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/users/create-users') }}">Users (Add / Edit)</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->user_approve))
-                                            <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/users/manage-users' ) }}">User Manager (Privileges / Approvals)</a>
                                             </li>
                                         @endif
                                     </ul>
                                 @endif
                             </li>
-                            <li>@if(
+                            <li>
+                                @if(
                                 (\App\User::find(Session::get('User'))->privilege->client_prof) ||
                                 (\App\User::find(Session::get('User'))->privilege->client_users) ||
                                 (\App\User::find(Session::get('User'))->privilege->client_branch) ||
@@ -83,68 +84,65 @@
                                 (\App\User::find(Session::get('User'))->privilege->asign_brand)||
                                 (\App\User::find(Session::get('User'))->privilege->asign_category)
                                 )
-                                    <a href="#">Manage External Customers<span
-                                                class="fa arrow"></span></a>
+                                    <a href="#">Manage External Customers<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
-
                                         @if((\App\User::find(Session::get('User'))->privilege->client_prof))
-                                            <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Organization (Add / Edit / Approve)
                                                 </a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->client_branch))
-                                            <li {{ (Request::is('*buttons') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/manage-clients/create-branch' ) }}">Branch / Department (Add / Edit)</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->client_users))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/manage-clients/create-clientuser') }}">Users (Add / Edit / Approve / Profile)</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->manage_client))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/manage-clients') }}">Client Manager</a>
                                             </li>
                                         @endif
                                     </ul>
                                 @endif
                             </li>
-                            <li>@if(
+                            <li>
+                                @if(
                                 (\App\User::find(Session::get('User'))->privilege->view_po) ||
                                 (\App\User::find(Session::get('User'))->privilege->change_po_status)
                                 )
-                                    <a href="#">Manage Purchase Orders<span
-                                                class="fa arrow"></span></a>
+                                    <a href="#">Manage Purchase Orders<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/manage-clients/purchase-orders-view') }}">View All / Update Status</a>
+                                            <li>
+                                                <a href="{{ url ('/admin/purchase-orders/purchase-orders-view') }}">View All / Update Status</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/manage-clients/purchase-orders-pending') }}">Pending</a>
+                                            <li>
+                                                <a href="{{ url ('/admin/purchase-orders/purchase-orders-pending') }}">Pending</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/manage-clients/purchase-orders-processing' ) }}">Processing</a>
+                                            <li>
+                                                <a href="{{ url ('/admin/purchase-orders/purchase-orders-processing' ) }}">Processing</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/manage-clients/purchase-orders-partial-completed' ) }}">Partial
+                                            <li>
+                                                <a href="{{ url ('/admin/purchase-orders/purchase-orders-partial-completed' ) }}">Partial
                                                     Complete</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
-                                                <a href="{{ url ('/admin/manage-clients/purchase-orders-completed' ) }}">Completed</a>
+                                            <li>
+                                                <a href="{{ url ('/admin/purchase-orders/purchase-orders-completed' ) }}">Completed</a>
                                             </li>
                                         @endif
-
                                     </ul>
                                 @endif
                             </li>
@@ -156,36 +154,36 @@
                                                 class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/reports/client-wise-purchase-orders' ) }}">Purchase
                                                     Orders by Clients</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/reports/sectorhead-wise-purchase-orders' ) }}">Purchase Orders
                                                     by Sector Head</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/reports/agent-wise-purchase-orders' ) }}">Purchase
                                                     Orders by Account Manager</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/reports/all-purchase-orders' ) }}">Purchase
                                                     Orders by Status</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/reports/all-products-list' ) }}">All Products List</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
-                                            <li {{ (Request::is('*panels') ? 'class="active"' : '') }}>
+                                            <li>
                                                 <a href="{{ url ('/admin/reports/account-manager-wise-price-list' ) }}">Price
                                                     List By Account Manger</a>
                                             </li>
@@ -210,7 +208,7 @@
                 </div>
             </div>
             <footer id="footer" class="col-md-12">
-                <p class="text-muted">“Copyright © E-WIS Peripherals (Pvt) Ltd.2017, All Right Reserved”</p>
+                <p>Copyright © E-WIS Peripherals (Pvt) Ltd.2017, All Right Reserved</p>
             </footer>
         </div>
     @else
@@ -226,6 +224,9 @@
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
     @yield('scripts')
     <script>
+
+
+//        console.log($('footer').outerHeight());
 
         $(window).on("load", function () {
             getPoStattus();
@@ -270,8 +271,6 @@
 
         $('#sandbox-container .input-daterange').datepicker({format: "dd-mm-yyyy"});
 
-
-
         $("#vat_apply").on('change', function () {
             if (($(this).val() == "on") && ($("#vat").val() == '')) {
                 $("#vat").val('15');
@@ -305,7 +304,6 @@
             );
         });
 
-
         $("#product_id").on('change', function () {
             $.ajax(
                     {
@@ -325,7 +323,6 @@
             );
         });
 
-
         $("#category_id").on('change', function () {
             $.ajax(
                     {
@@ -343,9 +340,6 @@
             );
         });
 
-
-
-
         $("#asignProduct").validate({
             rules: {
                 brand_id: "required",
@@ -355,7 +349,6 @@
                 special_price: "required",
             }
         });
-
 
         $("#categories").validate({
             rules: {
@@ -411,7 +404,7 @@
 
     </script>
 
-    <script src="http://demo.startlaravel.com/sb-admin-laravel/assets/scripts/frontend.js"
+    <script src="{{ asset('assets/scripts/frontend.js') }}"
             type="text/javascript"></script>
 
     <script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
