@@ -54,12 +54,14 @@
                                             </a>
                                             <div id="b{{$branch->id}}" class="collapse">
                                                 @foreach($branch->cbrands as $cbrand)
+                                                    @if( $cbrand->remove !== 1)
                                                     <a href="#c{{ $cbrand->id }}" class="list-group-sub-item active"
                                                        data-toggle="collapse"><strong>{{ $cbrand->brand->title }}</strong>
                                                         @if($cbrand->c_category->count() > 0)
                                                             <span class="badge">{{$cbrand->c_category->count()}}</span>
                                                         @endif
                                                     </a>
+                                                    @endif
                                                     <div id="c{{$cbrand->id}}" class="collapse">
                                                         @foreach($cbrand->c_category as $ccategory)
                                                             <a href="#p{{ $ccategory->id }}"
