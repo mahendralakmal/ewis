@@ -11,18 +11,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ url ('/admin') }}"><img
-                                src="{{ elixir('img/ewis-logo.png') }}">{{ config('app.admin', 'Laravel') }}</a>
+                    <a class="navbar-brand" href="{{ url ('/admin') }}"><img src="{{ elixir('img/ewis-logo.png') }}">
+                        {{--<span class="col-sm-12 col-sx-12">{{ config('app.admin', 'Laravel') }}</span>--}}
+                    </a>
                 </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li> Welcome {{App\User::find(Session::get('User'))->name}} </li>
-                    <li>
-                        <a href="{{ url('/admin/purchase-orders/purchase-orders-pending') }}">Pending
-                            <span class="badge pending"></span>
-                        </a>
-                    </li>
-                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-partial-completed') }}">Partial Completed
-                            <span class="badge partialComplet"></span></a></li>
+                <ul class="nav navbar-top-links navbar-nav navbar-right">
+                    <li><a>Welcome {{App\User::find(Session::get('User'))->name}}</a></li>
+                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-pending') }}">Pending<span class="badge pending"></span></a></li>
+                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-partial-completed') }}">Partial Completed<span class="badge partialComplet"></span></a></li>
                     <li><a href="{{ url('/signout') }}">Signout</a></li>
                 </ul>
                 <div class="navbar-default sidebar" role="navigation">
