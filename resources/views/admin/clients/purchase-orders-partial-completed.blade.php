@@ -33,11 +33,7 @@
                         <tbody class="tablePC">
                         @if(Session::get('User') == 1 || \App\User::find(Session::get('User'))->designation_id == 5 || \App\User::find(Session::get('User'))->designation_id == 7)
                             @foreach($porders as $porder)
-                                @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13)
-                                    <tr class="error_tr">
-                                @else
-                                    <tr>
-                                @endif
+                                <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')))class="error_tr"@endif>
                                     <td>{{$porder->id}}</td>
                                     <td>{{$porder->created_at}}</td>
                                     <td>{{$porder->client_branch->client->name}}</td>
@@ -59,16 +55,13 @@
                                 @foreach(App\User::where('section_head_id',$porders->id)->get() as $cbranch)
                                     @foreach(App\ClientsBranch::where('agent_id',$cbranch->id)->get() as $tbranch)
                                         @foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'PC']])->get() as $porder)
-                                            @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13)
-                                                <tr class="error_tr">
-                                            @else
-                                                <tr>
-                                            @endif
+                                            <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')))class="error_tr"@endif>
                                                 <td>{{$porder->id}}</td>
                                                 <td>{{$porder->created_at}}</td>
                                                 <td>{{$porder->client_branch->client->name}}</td>
                                                 <td>{{$porder->del_branch}}</td>
-                                                @if($porder->file !== null){
+                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                @if($porder->file !== null)
                                                 <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
                                                 @else
@@ -85,16 +78,13 @@
                                     @foreach(App\User::where('section_head_id',$cbranch->id)->get() as $sbranch)
                                         @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
                                             @foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'PC']])->get() as $porder)
-                                                @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13)
-                                                    <tr class="error_tr">
-                                                @else
-                                                    <tr>
-                                                @endif
+                                                <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')))class="error_tr"@endif>
                                                     <td>{{$porder->id}}</td>
                                                     <td>{{$porder->created_at}}</td>
                                                     <td>{{$porder->client_branch->client->name}}</td>
                                                     <td>{{$porder->del_branch}}</td>
-                                                    @if($porder->file !== null){
+                                                    <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                    @if($porder->file !== null)
                                                     <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                     </td>
                                                     @else
@@ -112,16 +102,13 @@
 
                                     @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                         @foreach(App\P_Order::where([['clients_branch_id',$cbranch->id], ['status', 'PC']])->get() as $porder)
-                                            @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13)
-                                                <tr class="error_tr">
-                                            @else
-                                                <tr>
-                                            @endif
+                                            <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')))class="error_tr"@endif>
                                                 <td>{{$porder->id}}</td>
                                                 <td>{{$porder->created_at}}</td>
                                                 <td>{{$porder->client_branch->client->name}}</td>
                                                 <td>{{$porder->del_branch}}</td>
-                                                @if($porder->file !== null){
+                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                @if($porder->file !== null)
                                                 <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
                                                 @else
@@ -140,16 +127,13 @@
                                 @foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)
                                     @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
                                         @foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'PC']])->get() as $porder)
-                                            @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13)
-                                                <tr class="error_tr">
-                                            @else
-                                                <tr>
-                                            @endif
+                                            <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')))class="error_tr"@endif>
                                                 <td>{{$porder->id}}</td>
                                                 <td>{{$porder->created_at}}</td>
                                                 <td>{{$porder->client_branch->client->name}}</td>
                                                 <td>{{$porder->del_branch}}</td>
-                                                @if($porder->file !== null){
+                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                @if($porder->file !== null)
                                                 <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
                                                 @else
@@ -169,16 +153,13 @@
                                     @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                         @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
                                             @foreach(App\P_Order::where([['clients_branch_id',$cbranch->id], ['status', 'PC']])->get() as $porder)
-                                                @if(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days > 13)
-                                                    <tr class="error_tr">
-                                                @else
-                                                    <tr>
-                                                @endif
+                                                <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')))class="error_tr"@endif>
                                                     <td>{{$porder->id}}</td>
                                                     <td>{{$porder->created_at}}</td>
                                                     <td>{{$porder->client_branch->client->name}}</td>
                                                     <td>{{$porder->del_branch}}</td>
-                                                    @if($porder->file !== null){
+                                                    <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                                    @if($porder->file !== null)
                                                     <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                     </td>
                                                     @else
