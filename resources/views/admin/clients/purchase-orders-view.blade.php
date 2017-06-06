@@ -788,7 +788,7 @@
                                 @if(App\ClientsBranch::where('agent_id',$porders->id)->count() >0)
                                     @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                         @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
-                                            @foreach(App\P_Order::where([['clients_branch_id',$cbranch->id], ['status', 'P']])->get() as $porder)
+                                            @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
                                                 <tr @if((integer)(  Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
                                 (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
                                                     class="error_tr" @endif>
