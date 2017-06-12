@@ -51,16 +51,19 @@ Route::group(['prefix' => '/admin'], function () {
         session()->forget('success_message');
         session()->forget('error_message');
     });
+
     Route::get('/', function () {
         return view('/admin/home');
     });
 
     Route::get('/getPendingPoCount', 'BucketController@getPendingPoCount');
+
     Route::get('/getPCompletePoCount', 'BucketController@getPCompletePoCount');
 
     Route::get('/test', function () {
         return view('/admin/test');
     });
+
     Route::group(['prefix' => '/brands'], function () {
         Route::get('/', 'BrandsController@admin_index');
         Route::get('/{id}', 'BrandsController@edit');

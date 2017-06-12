@@ -56,7 +56,7 @@ class ProductController extends Controller
 
     public function edit_client_products(Client_Product $id, Request $request)
     {
-//        return $id;
+//        return $id->product;
         $cp_id = $id;
         $cp_products = Product::all();
         $categories = Category::all();

@@ -1,7 +1,8 @@
 @extends('admin.layouts.dashboard')
 @section('page_heading')
     Assign Products to
-    <strong>@if($cp_id==null){{ $id->client->name }}@else{{ $id->ccategory->c_brand->client->client->name }}@endif</strong>
+    <strong>@if($cp_id==null){{ $id->client->name }} - {{ $id->name }}@else{{ $id->cbranch->client->name }}
+        - {{ $id->cbranch->name }}@endif</strong>
 @stop
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
@@ -167,9 +168,10 @@
                                         @endif
                                     @endforeach
                                 @else
-                                    @foreach((App\ClientsBranch::find($id->ccategory->c_brand->client->id)->cbrands) as $cbrand)
+                                    @foreach($id->cbranch->cbrands as $cbrand)
                                         @if($cbrand->remove !=1)
-                                            <option @if($id->brand_id == $cbrand->id) selected @endif value="{{$cbrand->id}}"
+                                            <option @if($id->brand_id == $cbrand->id) selected
+                                                    @endif value="{{$cbrand->id}}"
                                             >{{$cbrand->brand->title}}</option>
                                         @endif
                                     @endforeach
@@ -182,22 +184,34 @@
                         <div class="col-md-8">
                             <select name="c_category_id" id="c_category_id" class="form-control">
                                 <option>Select Category</option>
+                                @if($cp_id!=null)
+                                    @foreach($id->cbranch->ccategory as $ccategory)
+                                        @if($ccategory->remove !=1)
+                                            <option @if($id->c_category_id == $ccategory->id) selected
+                                                    @endif value="{{$ccategory->id}}"
+                                            >{{$ccategory->category->title}}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4"><label>Product</label></div>
                         <div class="col-md-8">
-                            @if($cp_id == null)
-                                <select name="product_id" id="product_id" class="form-control">
-                                    <option>Select Part No</option>
-                                </select>
-                            @else
-                                <select name="product_id" id="product_id" class="form-control">
-                                    <option>Select Product</option>
-                                </select>
-                            @endif
-
+{{--                            {{$cp_id->product_id}}--}}
+                            <select name="product_id" id="product_id" class="form-control">
+                                <option>Select Product</option>
+                                @if($cp_id!=null)
+                                    @foreach($id->cbranch->cproduct as $cproduct)
+                                        @if($cproduct->remove !=1)
+                                            <option @if($id->id == $cproduct->id) selected
+                                                    @endif value="{{$cproduct->id}}"
+                                            >{{$cproduct->product->part_no}} | {{$cproduct->product->name}}</option>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row" id="description">
@@ -208,7 +222,7 @@
                             <div class="col-md-8">
                                 <input type="number" id="list_price" name="list_price" class="form-control"
                                        @if(strtolower(App\User::find(\Illuminate\Support\Facades\Session::get('User'))->designation->designation) != 'super admin')
-                                               readonly
+                                       readonly
                                        @endif
                                        @if($cp_id != null) value="{{\App\Product::find($cp_id->product_id)->default_price}}" @endif>
                             </div>
@@ -221,18 +235,23 @@
                         <div class="col-md-4"><label>Vat (%)</label></div>
                         <div class="col-md-8">
                             <input type="number" id="vat" name="vat" class="form-control"
-                                   @if($cp_id != null) value="{{\App\Product::find($cp_id->product_id)->vat}}" @endif readonly>
+                                   @if($cp_id != null) value="{{\App\Product::find($id->product_id)->vat}}"
+                                   @endif readonly>
                         </div>
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4"><label>Special Price</label></div>
                         <div class="col-md-8">
                             <input type="number" id="special_price" name="special_price" class="form-control"
-                                   @if($cp_id != null) value="{{ number_format($cp_id->special_price,2)}}" @endif>
+                                   @if($cp_id != null) value="{{$id->special_price}}"
+                                   @endif>
+                            {{--<input type="number" id="special_price" name="special_price" class="form-control"--}}
+{{--                                   value="{{number_format($id->special_price,2)}}">--}}
                         </div>
                     </div>
                     <button class="btn btn-primary" name="submit" id="submit">Add</button>
-                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin/manage-clients') }}">Finished Assigning Products</a>
+                    <a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin/manage-clients') }}">Finished
+                        Assigning Products</a>
                 </form>
             </div>
         </div>
@@ -288,20 +307,20 @@
 
         $("#product_id").on('change', function () {
             $.ajax(
-                {
-                    type: 'get',
-                    url: '/admin/manage-product-list/product/details/' + this.value,
-                    success: function (response) {
-                        $('#list_price').val(response.default_price);
-                        $('#list_price').prop('readonly', true);
-                        $('#vat').val(response.vat);
-                        $('#vat').prop('readonly', true);
-                        var model = $('#description');
-                        model.empty();
-                        model.append("<div class='col-md-4'><label>Description</label></div>");
-                        model.append("<div class='col-md-8'><label class='lightslategrey'>" + response.description + "</label></div>");
+                    {
+                        type: 'get',
+                        url: '/admin/manage-product-list/product/details/' + this.value,
+                        success: function (response) {
+                            $('#list_price').val(response.default_price);
+                            $('#list_price').prop('readonly', true);
+                            $('#vat').val(response.vat);
+                            $('#vat').prop('readonly', true);
+                            var model = $('#description');
+                            model.empty();
+                            model.append("<div class='col-md-4'><label>Description</label></div>");
+                            model.append("<div class='col-md-8'><label class='lightslategrey'>" + response.description + "</label></div>");
+                        }
                     }
-                }
             );
         });
     </script>

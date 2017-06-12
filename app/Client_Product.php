@@ -23,4 +23,8 @@ class Client_Product extends Model
     public function cbrand(){
         return $this->belongsTo(CBrand::class);
     }
+
+    public function cbranch(){
+        return $this->belongsTo(ClientsBranch::class, 'clients_branch_id');
+    }
 }
