@@ -52,7 +52,9 @@
                                                 <td style="text-align: right">
                                                     <p>{{ number_format($product->special_price,2,'.',',') }} </p>
                                                 </td>
-                                                <td><input type="number" value="1" name="Qty" id="Qty" class="form-control"></td>
+
+                                                <td><input type="number" value="1" name="Qty" id="Qty"
+                                                           class="form-controls"></td>
                                                 <td><input class="btn btn-success btn-sm" type="submit"
                                                            value="Add To Bucket"></td>
                                             </tr>
