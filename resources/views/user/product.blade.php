@@ -45,14 +45,14 @@
                                                 </td>
                                                 <td align="middle"><img src="{{ asset('/' . $product->product->image) }}" alt="product"
                                                          class="img-responsive" height="25" width="30"></td>
-                                                <td style="text-align: center">
+                                                <td style="text-align: left">
                                                     <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a>
                                                 </td>
                                                 <td style="text-align: center"> @if($product->product->vat_apply) Yes @else No @endif</td>
                                                 <td style="text-align: right">
                                                     <p>{{ number_format($product->special_price,2,'.',',') }} </p>
                                                 </td>
-                                                <td><input style="width: 50px" type="number" min="1" value="1" name="Qty" id="Qty"
+                                                <td style="text-align: right"><input style="width: 50px" align="right" type="number" min="1" value="1" name="Qty" id="Qty"
                                                            class="form-controls"></td>
                                                 <td><input class="btn btn-success btn-sm" type="submit"
                                                            value="Add To Bucket"></td>
