@@ -26,7 +26,7 @@
                                     <td> Product Name</td>
                                     <td> Vat Applicalbe</td>
                                     <td> Unit Price (Rs.)</td>
-                                    <td class="col-sm-2 col-lg-2 col-md-2">Quantity</td>
+                                    <td class="col-sm-1 col-lg-1 col-md-1">Quantity</td>
                                     <td></td>
 
                                 </tr>
@@ -38,21 +38,21 @@
                                             {{--                                                <form action="{{ route('add-to-bucket/{id}', ['id' => $product->part_no]) }}" method="GET" class="side-by-side">--}}
                                             {!! csrf_field() !!}
                                             <tr>
-                                                <td>
+                                                <td style="text-align: center">
                                                     <input type="hidden" id="id" name="id"
                                                            value="{{ $product->id }}">
                                                     <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a>
                                                 </td>
-                                                <td><img src="{{ asset('/' . $product->product->image) }}" alt="product"
+                                                <td align="middle"><img src="{{ asset('/' . $product->product->image) }}" alt="product"
                                                          class="img-responsive" height="25" width="30"></td>
-                                                <td>
+                                                <td style="text-align: center">
                                                     <a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a>
                                                 </td>
-                                                <td> @if($product->product->vat_apply) Yes @else No @endif</td>
+                                                <td style="text-align: center"> @if($product->product->vat_apply) Yes @else No @endif</td>
                                                 <td style="text-align: right">
                                                     <p>{{ number_format($product->special_price,2,'.',',') }} </p>
                                                 </td>
-                                                <td><input type="number" value="1" name="Qty" id="Qty"
+                                                <td><input style="width: 50px" type="number" min="1" value="1" name="Qty" id="Qty"
                                                            class="form-controls"></td>
                                                 <td><input class="btn btn-success btn-sm" type="submit"
                                                            value="Add To Bucket"></td>
