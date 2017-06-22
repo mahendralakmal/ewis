@@ -56,7 +56,8 @@
                                         <td>
                                             <form method="get" id="{{$porder->id}}" action="">
                                                 <input type="hidden" id="id" name="id" value="{{$porder->id}}">
-                                                <select id="{{$porder->id}}" name="postatus"
+                                                <select id="{{$porder->id}}"
+                                                        name="postatus"
                                                         class="form-control postatus">
                                                     @if($porder->status === "P")
                                                         <option value="P"
@@ -66,6 +67,10 @@
                                                         <option value="OP"
                                                                 @if($porder->status === "OP") selected @endif>
                                                             Processing
+                                                        </option>
+                                                        <option value="CH" style="color:red"
+                                                                @if($porder->status === "CH") selected @endif>
+                                                            Credit Hold
                                                         </option>
                                                         <option value="PC"
                                                                 @if($porder->status === "PC") selected @endif>
@@ -81,6 +86,24 @@
                                                                 @if($porder->status === "OP") selected @endif>
                                                             Processing
                                                         </option>
+                                                        <option value="CH" style="color:red"
+                                                                @if($porder->status === "CH") selected @endif>
+                                                            Credit Hold
+                                                        </option>
+                                                        <option value="PC"
+                                                                @if($porder->status === "PC") selected @endif>
+                                                            Partial
+                                                            Completed
+                                                        </option>
+                                                        <option value="C"
+                                                                @if($porder->status === "C") selected @endif>
+                                                            Completed
+                                                        </option>
+                                                    @elseif($porder->status === "CH")
+                                                        <option value="CH" style="color:red"
+                                                                @if($porder->status === "CH") selected @endif>
+                                                            Credit Hold
+                                                        </option>
                                                         <option value="PC"
                                                                 @if($porder->status === "PC") selected @endif>
                                                             Partial
@@ -93,8 +116,7 @@
                                                     @elseif($porder->status === "PC")
                                                         <option value="PC"
                                                                 @if($porder->status === "PC") selected @endif>
-                                                            Partial
-                                                            Completed
+                                                            Partial Complete
                                                         </option>
                                                         <option value="C"
                                                                 @if($porder->status === "C") selected @endif>
@@ -138,7 +160,8 @@
                                                 <form method="get" id="{{$porder->id}}" action="">
                                                     <input type="hidden" id="id" name="id"
                                                            value="{{$porder->id}}">
-                                                    <select id="{{$porder->id}}" name="postatus"
+                                                    <select id="{{$porder->id}}"
+                                                            name="postatus"
                                                             class="form-control postatus">
                                                         @if($porder->status === "P")
                                                             <option value="P"
@@ -148,6 +171,10 @@
                                                             <option value="OP"
                                                                     @if($porder->status === "OP") selected @endif>
                                                                 Processing
+                                                            </option>
+                                                            <option value="CH" style="color:red"
+                                                                    @if($porder->status === "CH") selected @endif>
+                                                                Credit Hold
                                                             </option>
                                                             <option value="PC"
                                                                     @if($porder->status === "PC") selected @endif>
@@ -163,6 +190,24 @@
                                                                     @if($porder->status === "OP") selected @endif>
                                                                 Processing
                                                             </option>
+                                                            <option value="CH" style="color:red"
+                                                                    @if($porder->status === "CH") selected @endif>
+                                                                Credit Hold
+                                                            </option>
+                                                            <option value="PC"
+                                                                    @if($porder->status === "PC") selected @endif>
+                                                                Partial
+                                                                Completed
+                                                            </option>
+                                                            <option value="C"
+                                                                    @if($porder->status === "C") selected @endif>
+                                                                Completed
+                                                            </option>
+                                                        @elseif($porder->status === "CH")
+                                                            <option value="CH" style="color:red"
+                                                                    @if($porder->status === "CH") selected @endif>
+                                                                Credit Hold
+                                                            </option>
                                                             <option value="PC"
                                                                     @if($porder->status === "PC") selected @endif>
                                                                 Partial
@@ -175,8 +220,7 @@
                                                         @elseif($porder->status === "PC")
                                                             <option value="PC"
                                                                     @if($porder->status === "PC") selected @endif>
-                                                                Partial
-                                                                Completed
+                                                                Partial Complete
                                                             </option>
                                                             <option value="C"
                                                                     @if($porder->status === "C") selected @endif>
@@ -238,6 +282,10 @@
                                                                             @if($porder->status === "OP") selected @endif>
                                                                         Processing
                                                                     </option>
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
                                                                         Partial
@@ -252,6 +300,24 @@
                                                                             @if($porder->status === "OP") selected @endif>
                                                                         Processing
                                                                     </option>
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
+                                                                    <option value="PC"
+                                                                            @if($porder->status === "PC") selected @endif>
+                                                                        Partial
+                                                                        Completed
+                                                                    </option>
+                                                                    <option value="C"
+                                                                            @if($porder->status === "C") selected @endif>
+                                                                        Completed
+                                                                    </option>
+                                                                @elseif($porder->status === "CH")
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
                                                                         Partial
@@ -264,8 +330,7 @@
                                                                 @elseif($porder->status === "PC")
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
-                                                                        Partial
-                                                                        Completed
+                                                                        Partial Complete
                                                                     </option>
                                                                     <option value="C"
                                                                             @if($porder->status === "C") selected @endif>
@@ -332,6 +397,10 @@
                                                                                 @if($porder->status === "OP") selected @endif>
                                                                             Processing
                                                                         </option>
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
+                                                                        </option>
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
                                                                             Partial
@@ -346,6 +415,24 @@
                                                                                 @if($porder->status === "OP") selected @endif>
                                                                             Processing
                                                                         </option>
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
+                                                                        </option>
+                                                                        <option value="PC"
+                                                                                @if($porder->status === "PC") selected @endif>
+                                                                            Partial
+                                                                            Completed
+                                                                        </option>
+                                                                        <option value="C"
+                                                                                @if($porder->status === "C") selected @endif>
+                                                                            Completed
+                                                                        </option>
+                                                                    @elseif($porder->status === "CH")
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
+                                                                        </option>
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
                                                                             Partial
@@ -358,8 +445,7 @@
                                                                     @elseif($porder->status === "PC")
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
-                                                                            Partial
-                                                                            Completed
+                                                                            Partial Complete
                                                                         </option>
                                                                         <option value="C"
                                                                                 @if($porder->status === "C") selected @endif>
@@ -430,6 +516,10 @@
                                                                         @if($porder->status === "OP") selected @endif>
                                                                     Processing
                                                                 </option>
+                                                                <option value="CH" style="color:red"
+                                                                        @if($porder->status === "CH") selected @endif>
+                                                                    Credit Hold
+                                                                </option>
                                                                 <option value="PC"
                                                                         @if($porder->status === "PC") selected @endif>
                                                                     Partial
@@ -444,6 +534,24 @@
                                                                         @if($porder->status === "OP") selected @endif>
                                                                     Processing
                                                                 </option>
+                                                                <option value="CH" style="color:red"
+                                                                        @if($porder->status === "CH") selected @endif>
+                                                                    Credit Hold
+                                                                </option>
+                                                                <option value="PC"
+                                                                        @if($porder->status === "PC") selected @endif>
+                                                                    Partial
+                                                                    Completed
+                                                                </option>
+                                                                <option value="C"
+                                                                        @if($porder->status === "C") selected @endif>
+                                                                    Completed
+                                                                </option>
+                                                            @elseif($porder->status === "CH")
+                                                                <option value="CH" style="color:red"
+                                                                        @if($porder->status === "CH") selected @endif>
+                                                                    Credit Hold
+                                                                </option>
                                                                 <option value="PC"
                                                                         @if($porder->status === "PC") selected @endif>
                                                                     Partial
@@ -456,8 +564,7 @@
                                                             @elseif($porder->status === "PC")
                                                                 <option value="PC"
                                                                         @if($porder->status === "PC") selected @endif>
-                                                                    Partial
-                                                                    Completed
+                                                                    Partial Complete
                                                                 </option>
                                                                 <option value="C"
                                                                         @if($porder->status === "C") selected @endif>
@@ -528,6 +635,10 @@
                                                                             @if($porder->status === "OP") selected @endif>
                                                                         Processing
                                                                     </option>
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
                                                                         Partial
@@ -542,6 +653,24 @@
                                                                             @if($porder->status === "OP") selected @endif>
                                                                         Processing
                                                                     </option>
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
+                                                                    <option value="PC"
+                                                                            @if($porder->status === "PC") selected @endif>
+                                                                        Partial
+                                                                        Completed
+                                                                    </option>
+                                                                    <option value="C"
+                                                                            @if($porder->status === "C") selected @endif>
+                                                                        Completed
+                                                                    </option>
+                                                                @elseif($porder->status === "CH")
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
                                                                         Partial
@@ -554,8 +683,7 @@
                                                                 @elseif($porder->status === "PC")
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
-                                                                        Partial
-                                                                        Completed
+                                                                        Partial Complete
                                                                     </option>
                                                                     <option value="C"
                                                                             @if($porder->status === "C") selected @endif>
@@ -629,6 +757,10 @@
                                                                                 @if($porder->status === "OP") selected @endif>
                                                                             Processing
                                                                         </option>
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
+                                                                        </option>
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
                                                                             Partial
@@ -643,6 +775,24 @@
                                                                                 @if($porder->status === "OP") selected @endif>
                                                                             Processing
                                                                         </option>
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
+                                                                        </option>
+                                                                        <option value="PC"
+                                                                                @if($porder->status === "PC") selected @endif>
+                                                                            Partial
+                                                                            Completed
+                                                                        </option>
+                                                                        <option value="C"
+                                                                                @if($porder->status === "C") selected @endif>
+                                                                            Completed
+                                                                        </option>
+                                                                    @elseif($porder->status === "CH")
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
+                                                                        </option>
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
                                                                             Partial
@@ -655,8 +805,7 @@
                                                                     @elseif($porder->status === "PC")
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
-                                                                            Partial
-                                                                            Completed
+                                                                            Partial Complete
                                                                         </option>
                                                                         <option value="C"
                                                                                 @if($porder->status === "C") selected @endif>
@@ -729,6 +878,10 @@
                                                                             @if($porder->status === "OP") selected @endif>
                                                                         Processing
                                                                     </option>
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
                                                                         Partial
@@ -743,6 +896,24 @@
                                                                             @if($porder->status === "OP") selected @endif>
                                                                         Processing
                                                                     </option>
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
+                                                                    <option value="PC"
+                                                                            @if($porder->status === "PC") selected @endif>
+                                                                        Partial
+                                                                        Completed
+                                                                    </option>
+                                                                    <option value="C"
+                                                                            @if($porder->status === "C") selected @endif>
+                                                                        Completed
+                                                                    </option>
+                                                                @elseif($porder->status === "CH")
+                                                                    <option value="CH" style="color:red"
+                                                                            @if($porder->status === "CH") selected @endif>
+                                                                        Credit Hold
+                                                                    </option>
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
                                                                         Partial
@@ -755,8 +926,7 @@
                                                                 @elseif($porder->status === "PC")
                                                                     <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
-                                                                        Partial
-                                                                        Completed
+                                                                        Partial Complete
                                                                     </option>
                                                                     <option value="C"
                                                                             @if($porder->status === "C") selected @endif>
@@ -829,10 +999,13 @@
                                                                                 @if($porder->status === "OP") selected @endif>
                                                                             Processing
                                                                         </option>
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
+                                                                        </option>
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
-                                                                            Partial
-                                                                            Completed
+                                                                            Partial Complete
                                                                         </option>
                                                                         <option value="C"
                                                                                 @if($porder->status === "C") selected @endif>
@@ -842,6 +1015,23 @@
                                                                         <option value="OP"
                                                                                 @if($porder->status === "OP") selected @endif>
                                                                             Processing
+                                                                        </option>
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
+                                                                        </option>
+                                                                        <option value="PC"
+                                                                                @if($porder->status === "PC") selected @endif>
+                                                                            Partial Complete
+                                                                        </option>
+                                                                        <option value="C"
+                                                                                @if($porder->status === "C") selected @endif>
+                                                                            Completed
+                                                                        </option>
+                                                                    @elseif($porder->status === "CH")
+                                                                        <option value="CH" style="color:red"
+                                                                                @if($porder->status === "CH") selected @endif>
+                                                                            Credit Hold
                                                                         </option>
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
@@ -855,8 +1045,7 @@
                                                                     @elseif($porder->status === "PC")
                                                                         <option value="PC"
                                                                                 @if($porder->status === "PC") selected @endif>
-                                                                            Partial
-                                                                            Completed
+                                                                            Credit Hold
                                                                         </option>
                                                                         <option value="C"
                                                                                 @if($porder->status === "C") selected @endif>

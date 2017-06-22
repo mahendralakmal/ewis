@@ -115,6 +115,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/purchase-orders-processing', 'BucketController@processingPurchaseOrder');
         Route::get('/purchase-orders-partial-completed', 'BucketController@pcPurchaseOrder');
         Route::get('/purchase-orders-completed', 'BucketController@CompletedPurchaseOrders');
+        Route::get('/purchase-orders-credithold', 'BucketController@CreditHoldPurchaseOrder');
     });
 
     Route::group(['prefix' => '/manage-clients'], function () {

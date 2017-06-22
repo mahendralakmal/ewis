@@ -130,6 +130,11 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
                                             <li>
+                                                <a style="color: red" href="{{ url ('/admin/purchase-orders/purchase-orders-credithold' ) }}">Credit Hold</a>
+                                            </li>
+                                        @endif
+                                        @if((\App\User::find(Session::get('User'))->privilege->view_po))
+                                            <li>
                                                 <a href="{{ url ('/admin/purchase-orders/purchase-orders-partial-completed' ) }}">Partial
                                                     Complete</a>
                                             </li>

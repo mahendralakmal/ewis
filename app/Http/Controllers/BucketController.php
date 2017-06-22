@@ -199,6 +199,12 @@ class BucketController extends Controller
                 Mail::to($user)->send(new PoOnProcess($user, $po));
                 Mail::to($agent)->send(new PoOnProcess($user, $po));
             }
+        } elseif ($status === "CH") {
+            foreach ($users as $usr) {
+                $user = User::find($usr->user_id);
+                Mail::to($user)->send(new PoCreditHold($user, $po));
+                Mail::to($agent)->send(new PoCreditHold($user, $po));
+            }
         } elseif ($status === "PC") {
             foreach ($users as $usr) {
                 $user = User::find($usr->user_id);
@@ -586,6 +592,10 @@ class BucketController extends Controller
                 $response = $response . "selected";
             $response = $response . ">Processing </option>".
                 "<option value='PC' ";
+            if ($porder->status == 'CH')
+                $response = $response . "selected";
+            $response = $response . ">Credit Hold </option>".
+                "<option value='CH' ";
             if ($porder->status == 'PC')
                 $response = $response . "selected";
             $response = $response . ">Partial Completed </option>".

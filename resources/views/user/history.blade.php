@@ -56,6 +56,8 @@
                                         </td>
                                         <td>
                                             <center>@if($porder->status === "P") Pending
+                                                @elseif($porder->status === "OP") Processing
+                                                @elseif($porder->status === "CH") <p style="color: red">Credit Hold </p>
                                                 @elseif($porder->status === "PC") Partial Completed
                                                 @elseif($porder->status === "C") Completed
                                                 @endif</center>
