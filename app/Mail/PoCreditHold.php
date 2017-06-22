@@ -11,12 +11,13 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PoOnProcess extends Mailable
+class PoCreditHold extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
     public $order;
     public $client_branch;
+
     /**
      * Create a new message instance.
      *
@@ -36,6 +37,6 @@ class PoOnProcess extends Mailable
      */
     public function build()
     {
-        return $this->subject('EWIS Peripherals Order Management System - Order Acknowledged')->view('emails.PoOnProcess');
+        return $this->subject('EWIS Peripherals Order Management System - Your Order is on Credit Hold')->view('emails.PoCreditHold');
     }
 }
