@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,7 @@
 </head>
 <body style="width: 894px">
 {{--<h5>Order Completed</h5>--}}
-<h2>Password rest request</h2>
+<h2>Your password has been successully reset</h2>
 <table width="100%" border="0">
     <tr>
         <td>
@@ -22,7 +21,8 @@
     </tr>
     <tr>
         <td>
-            Click here to reset your password: <a href="{{ url('password/reset/'.$token) }}">{{$token}}</a>
+            <p>Dear {{$user->email}}</p>
+            <h5>Your password has been successully reset</h5>
         </td>
     </tr>
     <tr>

@@ -52,6 +52,7 @@
                                                 <td style="text-align: right">
                                                     <p>{{ number_format($product->special_price,2,'.',',') }} </p>
                                                 </td>
+
                                                 <td style="text-align: right"><input style="width: 50px" align="right" type="number" min="1" value="1" name="Qty" id="Qty"
                                                            class="form-controls"></td>
                                                 <td><input class="btn btn-success btn-sm" type="submit"

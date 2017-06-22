@@ -10,6 +10,11 @@ Route::post('/signin', 'UserController@signin');
 Route::get('/signout', 'UserController@signout');
 Route::get('/signup', 'UserController@signup');
 Route::post('/signup/go', 'UserController@signup_store');
+Route::get('/reset-password', 'UserController@password_reset_request');
+Route::post('/reset-password-request', 'UserController@password_reset_request_send');
+Route::get('/password/reset/{token}','UserController@password_reset_view');
+Route::post('/reset-password', 'UserController@pass_reset');
+
 
 Route::get('/remove_item/{part_no}', 'BucketController@remove_item');
 
@@ -34,7 +39,6 @@ Route::group(['prefix' => ' /client-profile'], function () {
 });
 
 Route::get('/sendmail', 'MailController@sendmail');
-
 Route::get('/brands/{brand}/{id}', 'CategoryController@index');
 Route::get('/category/{category}/{id}', 'ProductController@index');
 

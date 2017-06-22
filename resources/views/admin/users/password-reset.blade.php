@@ -19,44 +19,50 @@
 </head>
 <body>
 <div class="container welcome">
-    <div class="col-md-5 col-md-offset-4">
+    <div class="col-md-6 col-md-offset-3">
         @if(count ($errors) > 0)
             <div class="alert alert-danger">
                 @foreach($errors->all() as $error)
-                <p> {{ $error }}</p>
+                    <p> {{ $error }}</p>
                 @endforeach
             </div>
         @endif
-        <form method="post" action="/signin" role="form" class="form-horizontal">
+        <form method="post" action="/reset-password" role="form" class="form-horizontal">
             {{ csrf_field() }}
             <div class="user-login">
                 <div class="">
-                    <div class="col-md-5"><h4>User Login</h4></div>
+                    <div class="col-md-5"><h4>Reset Password</h4></div>
                     <div class="col-md-7"><img src="{{ elixir('img/ewis-logo.png') }}"></div>
                 </div>
                 <div>&nbsp;
                     <hr>
                 </div>
                 <div class="form-group row">
-                    <div class="col-md-4"><label>Username</label></div>
-                    <div class="col-md-8"><input type="text" name="email" id="email" class="form-control"></div>
+                    <div class="col-md-4"><label>User Name</label></div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" value="{{$email->email}}" disabled>
+                        <input type="hidden" name="email" id="email" value="{{$email->email}}">
+                    </div>
+                </div>
+                <div>
+                    <hr>
                 </div>
                 <div class="form-group row">
                     <div class="col-md-4"><label>Password</label></div>
                     <div class="col-md-8">
                         <input type="password" name="password" id="password" class="form-control">
-                        <a href="/reset-password">Forget your password ?</a>
                     </div>
                 </div>
-                @if(!$error == '')
-                <div class="alert alert-danger">
-                    <label>{{ $error }}</label>
+                <div class="form-group row">
+                    <div class="col-md-4"><label>Password</label></div>
+                    <div class="col-md-8">
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+                    </div>
                 </div>
-                @endif
                 <div>&nbsp;
                     <hr>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Reset</button>
             </div>
         </form>
     </div>
