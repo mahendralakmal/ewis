@@ -352,6 +352,58 @@ class BucketController extends Controller
         return view('admin/clients/purchase-orders-processing', compact('porders'));
     }
 
+    public function CreditHoldPurchaseOrder()
+    {
+        if (Session::has('User')) {
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'CH')->get();
+            else
+                $porders = User::find(Session::get('User'));
+        }
+        return view('admin/clients/purchase-orders-credithold', compact('porders'));
+    }
+
+    public function getCreditHoldPoCount()
+    {
+        if (Session::has('User')) {
+            $user = User::find(Session::get('User'));
+            if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
+                $porder = P_Order::where('status', 'CH')->count();
+            } else {
+                $porder = 0;
+                if ($user->designation_id == 6) {
+                    foreach (User::where('section_head_id', $user->id)->get() as $cbranch) {
+                        foreach (ClientsBranch::where('agent_id', $cbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'CH']])->count();
+                        }
+                    }
+                    foreach (User::where('section_head_id', $cbranch->id)->get() as $sbranch) {
+                        foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'CH']])->count();
+                        }
+                    }
+                    foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
+                        $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'CH']])->count();
+                    }
+                } else {
+                    foreach (User::where('section_head_id', $user->id)->get() as $sbranch) {
+                        foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'CH']])->count();
+                        }
+                    }
+                    if (ClientsBranch::where('agent_id', $user->id)->count() > 0) {
+                        foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
+                            if (P_Order::where('clients_branch_id', $cbranch->id)->count() > 0) {
+                                $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'CH']])->count();
+                            }
+                        }
+                    }
+                }
+            }
+            return Response::json($porder);
+        }
+    }
+
     public function getProcessingPoCount()
     {
         if (Session::has('User')) {
