@@ -7,6 +7,7 @@ use App\Client_Product;
 use App\ClientsBranch;
 use App\Mail\PoCompleted;
 use App\Mail\PoOnProcess;
+use App\Mail\PoCreditHold;
 use App\Mail\PoPartialComplete;
 use App\Mail\PoSentSuccessfully;
 use App\Mail\PoToAdministration;
