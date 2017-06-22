@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\ClientsBranch;
 use App\Designation;
+use App\Mail\password_reset_request;
+use App\Mail\password_reset_successfull;
 use App\Privilege;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -16,6 +19,52 @@ use App\mail\PoSentSuccessfully;
 
 class UserController extends Controller
 {
+    public function password_reset_view($token){
+        $email = DB::table(config('auth.passwords.users.table'))->where('token',$token)->get()->first();
+        return view('.admin.users.password-reset', compact('token', 'email'));
+    }
+
+    public function password_reset_request_send(Request $request){
+        $this->validate(request(), [
+            'email' => 'required|email'
+        ]);
+
+
+        if($user = User::where('email',$request->email)->get()->first()){
+            $token = str_random(64);
+
+            DB::table(config('auth.passwords.users.table'))->insert([
+                'email' => $user->email,
+                'token' => $token
+            ]);
+
+            Mail::to($user)->send(new password_reset_request($user, $token));
+        }
+
+        return view('.admin.users.password-reset-request-sent');
+    }
+
+    public function pass_reset(Request $request){
+        $this->validate(request(), [
+            'email' => 'required|max:100|email',
+            'password' => 'required',
+            'password_confirmation' => 'required'
+        ]);
+
+        $user = User::where('email',$request->email)->get()->first();
+
+        $user->Update(['password' => Hash::make($request->password)]);
+
+        Mail::to($user)->send(new password_reset_successfull($user));
+
+        return redirect('/');
+
+    }
+
+    public function password_reset_request(){
+        return view('/admin/users/password-reset-request');
+    }
+
     public function StorePrivileges(Request $request)
     {
 //        return $request->all();
