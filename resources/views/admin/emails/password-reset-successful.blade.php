@@ -6,7 +6,7 @@
 </head>
 <body style="width: 894px">
 {{--<h5>Order Completed</h5>--}}
-<h2>Your password has been successully reset</h2>
+<h2>Your password has been successfully reset</h2>
 <table width="100%" border="0">
     <tr>
         <td>
@@ -22,7 +22,7 @@
     <tr>
         <td>
             <p>Dear {{$user->email}}</p>
-            <h5>Your password has been successully reset</h5>
+            <h5>Your password has been successfully reset</h5>
         </td>
     </tr>
     <tr>
