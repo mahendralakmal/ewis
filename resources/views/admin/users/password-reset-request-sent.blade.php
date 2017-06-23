@@ -26,7 +26,8 @@
         </div>
         <div>
             <H4>Your password reset request has been sent Successfully</H4>
-            <p>You will be recieved an email from the system admin : Click here to <a href="/">sign in</a></p>
+            <p>You will receive an e-mail to reset your password. Once you've change / have reset your
+                password click here to <a href="/">Sign In.</a></p>
         </div>
     </div>
 </div>

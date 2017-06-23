@@ -7,7 +7,7 @@
 </head>
 <body style="width: 894px">
 {{--<h5>Order Completed</h5>--}}
-<h2>Password rest request</h2>
+<h2>Password Rest Request</h2>
 <table width="100%" border="0">
     <tr>
         <td>

@@ -45,7 +45,7 @@
                     <div class="col-md-4"><label>Password</label></div>
                     <div class="col-md-8">
                         <input type="password" name="password" id="password" class="form-control">
-                        <a href="/reset-password">Forget your password ?</a>
+                        <a href="/reset-password">Forgot / Change your PASSWORD....</a>
                     </div>
                 </div>
                 @if(!$error == '')

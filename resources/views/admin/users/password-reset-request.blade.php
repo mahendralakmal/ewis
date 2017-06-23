@@ -31,8 +31,8 @@
             {{ csrf_field() }}
             <div class="user-login">
                 <div class="">
-                    <div class="col-md-5"><h4>Reset Password</h4></div>
-                    <div class="col-md-7"><img src="{{ elixir('img/ewis-logo.png') }}"></div>
+                    <div align="middle"><img src="{{ elixir('img/ewis-logo.png') }}"></div>
+                    <div align="middle"><h4>Reset Password</h4></div>
                 </div>
                 <div>&nbsp;
                     <hr>
@@ -53,10 +53,10 @@
                         {{--<input type="password" name="password_confirmation" id="password_confirmation" class="form-control">--}}
                     {{--</div>--}}
                 {{--</div>--}}
-                <div>&nbsp;
+                <div>
                     <hr>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div align="middle"><button type="submit" class="btn btn-primary">Submit</button></div>
             </div>
         </form>
     </div>
