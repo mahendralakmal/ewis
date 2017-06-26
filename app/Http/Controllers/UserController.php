@@ -98,10 +98,6 @@ class UserController extends Controller
 
     public function UpdatePrivileges(Request $request)
     {
-
-//        return $request->all();
-//        $privilege = (User::find($request->user_id))->privilege;
-
         $privilege = (User::find($request->user_id)->privilege);
 
         $privilege->update([
