@@ -175,7 +175,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-md-4"><label>Vat</label></div>
-                        <div class="col-md-7">
+                        <div class="col-xs-10 col-sm-11 col-md-7">
                             <input type="number" name="vat" id="vat" class="form-control"
                                    @if((App\User::find(\Illuminate\Support\Facades\Session::get('User'))->designation->id != 1) )
                                    @if((App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product_cost == 0))
@@ -184,7 +184,7 @@
                                    @endif
                                    @if(!$id == null) value="{{ $id->vat }}" @endif>
                         </div>
-                        <div class="col-md-1">%</div>
+                        <div class="col-xs-1 col-sm-1 col-md-1">%</div>
                     </div>
                     <div class="col-md-12 text-center form-group"><button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
                                 Add @endif</button></div>
