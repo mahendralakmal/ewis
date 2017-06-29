@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="container welcome">
-    <div class="col-md-5 col-md-offset-4">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-sm-offset-3  col-md-offset-3 ">
         @if(count ($errors) > 0)
             <div class="alert alert-danger">
                 @foreach($errors->all() as $error)
@@ -32,7 +32,7 @@
             <div class="user-login">
                 <div class="">
                     <div class="col-md-5"><h4>User Login</h4></div>
-                    <div class="col-md-7"><img src="{{ elixir('img/ewis-logo.png') }}"></div>
+                    <div class="col-md-7"><img src="{{ elixir('img/ewis-logo.png') }}" class="img-responsives"></div>
                 </div>
                 <div>&nbsp;
                     <hr>
