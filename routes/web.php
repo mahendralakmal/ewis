@@ -64,9 +64,9 @@ Route::group(['prefix' => '/admin'], function () {
 
     Route::get('/getPCompletePoCount', 'BucketController@getPCompletePoCount');
 
-    Route::get('/test', function () {
-        return view('/admin/test');
-    });
+//    Route::get('/test', function () {
+//        return view('/admin/test');
+//    });
 
     Route::group(['prefix' => '/brands'], function () {
         Route::get('/', 'BrandsController@admin_index');

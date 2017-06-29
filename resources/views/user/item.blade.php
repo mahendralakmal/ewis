@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="container-fluid">
                     <div class="col-md-4">
-                        <img src="{{ asset ('/' .$items->image) }}" width="350" height="350" alt="product">
+                        <img src="{{ asset ('/' .$items->image) }}" width="350" height="350" alt="product" class="img-responsive">
                     </div>
 
                     <div class="col-md-8">
