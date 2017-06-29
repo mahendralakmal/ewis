@@ -349,9 +349,8 @@ class UserController extends Controller
         $user = User::where([['email', $request->email]])->first();
 
         if (!$user == null && Hash::check($request->password, $user->password)) {
-//            return $user;
             if ($user->approval) {
-                if (strtolower($user->designation->designation) == 'client') {
+                if (strtolower($user->designation_id) == 2) {
                     Session::put('LoggedIn', true);
                     Session::put('User', $user->id);
                     Session::put('Type', $user->designation->designation);
