@@ -11,6 +11,7 @@
                 <div class="panel-heading">
                     @if($status == 'P')<h3 class="panel-title">Pending Purchase Orders</h3>
                     @elseif($status == 'OP')<h3 class="panel-title">Processing Purchase Orders</h3>
+                    @elseif($status == 'CH')<h3 class="panel-title">Credit Hold Purchase Orders</h3>
                     @elseif($status == 'PC')<h3 class="panel-title">Partial Completed Purchase Orders</h3>
                     @elseif($status == 'C')<h3 class="panel-title">Completed Purchase Orders</h3>
                     @endif
@@ -48,6 +49,7 @@
                                         <option value="">Select Status</option>
                                         <option value="P">Pending</option>
                                         <option value="OP">Processing</option>
+                                        <option value="CH">Credit Hold</option>
                                         <option value="PC">Partial Completed</option>
                                         <option value="C">Completed</option>
                                     </select>

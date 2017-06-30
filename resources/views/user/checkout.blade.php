@@ -132,6 +132,18 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-3">
+                                                        <label>Address</label>
+                                                    </div>
+                                                    <div class="col-md-7">
+                                                        {{--/  <textarea class="form-control" name="cp_notes" id="cp_notes" rows="10" placeholder="Enter any notes for delivery"></textarea>--}}
+                                                        {{--<input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}" name="cp_email" id="cp_email" maxlength="400">--}}
+                                                        <textarea class="form-control" name="cp_email" id="cp_email"
+                                                                  rows="3">{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
                                                         <label>Special Notes</label>
                                                     </div>
                                                     <div class="col-md-7">
