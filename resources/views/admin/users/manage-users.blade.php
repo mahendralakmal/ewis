@@ -4,13 +4,15 @@
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->user_approve))
-        <div class="col-md-12">
+    <div class="row">
+        <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Users</h3>
                 </div>
                 <div class="panel-body">
                     @if(!$users->count() == 0)
+                        <div class="table-responsive">
                         <table class="table">
                             <thead>
                             <tr>
@@ -19,7 +21,7 @@
                                 <td><h5>Name</h5></td>
                                 <td><h5>Designation</h5></td>
                                 <td><h5>NIC/ Passport</h5></td>
-                                <td class="col-md-3"></td>
+                                <td></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -58,12 +60,14 @@
                             @endforeach
                             </tbody>
                         </table>
+                        </div>
                     @else
                         <p>No users found.</p>
                     @endif
                 </div>
             </div>
         </div>
+    </div>
     @else
         <div class="col-md-offset-3">
             <h2 class="error">You are Not Authorize for access this page</h2>
