@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
 
             Session::flash('flash_message_important', 'Sorry, your session seems to have expired. Please try again.');
 
-            return redirect('login');
+            return redirect('signin');
         }
 
         return parent::render($request, $e);
@@ -75,6 +75,6 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest('login');
+        return redirect()->guest('signin');
     }
 }
