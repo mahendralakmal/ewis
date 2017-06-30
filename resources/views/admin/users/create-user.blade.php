@@ -222,11 +222,11 @@
                     minlength: 7
                 },
             },
-            messages:{
-                password:{
-                    passwordcheck:"Password must contain a special character, a Capital letter, a simple letter and a numeric.s",
-                }
-            }
+//            messages:{
+//                password:{
+//                    passwordcheck:"Password must contain a special character, a Capital letter, a simple letter and a numeric.s",
+//                }
+//            }
         });
 
         {{--$.validator.addMethod("passwordcheck", function(value) {--}}

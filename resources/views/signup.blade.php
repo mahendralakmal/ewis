@@ -83,7 +83,7 @@
             },
             password: {
                 required: true,
-                passwordcheck: true,
+//                passwordcheck: true,
                 minlength: 6,
                 maxlength: 12
             },
@@ -100,18 +100,18 @@
                 minlength: 7
             },
         },
-        messages:{
-            password:{
-                passwordcheck:"Password must contain a special character, a Capital letter, a simple letter and a numeric.s",
-            }
-        }
+//        messages:{
+//            password:{
+//                passwordcheck:"Password must contain a special character, a Capital letter, a simple letter and a numeric.s",
+//            }
+//        }
     });
 
-    $.validator.addMethod("passwordcheck", function(value) {
-        return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
-            && /[a-z]/.test(value) // has a lowercase letter
-            && /\d/.test(value) // has a digit
-    });
+//    $.validator.addMethod("passwordcheck", function(value) {
+        {{--return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these--}}
+//            && /[a-z]/.test(value) // has a lowercase letter
+//            && /\d/.test(value) // has a digit
+//    });
 </script>
 </body>
 </html>
