@@ -42,9 +42,9 @@
                                     <tbody class="tablePO">
                                     @if(Session::has('User') && Session::get('User') == 1)
                                         @foreach($porders as $porder)
-                                            <tr
-                                                    @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(14) && $porder->status === "P" ||
-                                                    (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(14) && $porder->status === "PC")
+                                            <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
                                                     class="error_tr" @endif
                                             >
                                                 <td>{{$porder->id}}</td>
@@ -149,8 +149,9 @@
                                     @else
                                         @if($porders->designation_id == 5 || $porders->designation_id == 7)
                                             @foreach(App\P_Order::all() as $porder)
-                                                <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
-                                (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
+                                                <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
                                                     class="error_tr" @endif>
                                                     <td>{{$porder->id}}</td>
                                                     <td>{{$porder->created_at}}</td>
@@ -255,8 +256,9 @@
                                             @foreach(App\User::where('section_head_id',$porders->id)->get() as $cbranch)
                                                 @foreach(App\ClientsBranch::where('agent_id',$cbranch->id)->get() as $tbranch)
                                                     @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
-                                                        <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
-                                (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
+                                                        <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
                                                             class="error_tr" @endif>
                                                             <td>{{$porder->id}}</td>
                                                             <td>{{$porder->created_at}}</td>
@@ -368,8 +370,9 @@
                                                 @foreach(App\User::where('section_head_id',$cbranch->id)->get() as $sbranch)
                                                     @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
                                                         @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
-                                                            <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
-                                (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
+                                                            <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
                                                                 class="error_tr" @endif>
                                                                 <td>{{$porder->id}}</td>
                                                                 <td>{{$porder->created_at}}</td>
@@ -484,8 +487,9 @@
 
                                             @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                                 @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
-                                                    <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
-                                (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
+                                                    <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
                                                         class="error_tr" @endif>
                                                         <td>{{$porder->id}}</td>
                                                         <td>{{$porder->created_at}}</td>
@@ -602,8 +606,9 @@
                                             @foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)
                                                 @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
                                                     @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
-                                                        <tr @if((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
-                                (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
+                                                        <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
                                                             class="error_tr" @endif>
                                                             <td>{{$porder->id}}</td>
                                                             <td>{{$porder->created_at}}</td>
@@ -724,8 +729,9 @@
                                                 @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                                     @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
                                                         @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
-                                                            <tr @if((integer)(  Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
-                                (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
+                                                            <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
                                                                 class="error_tr" @endif>
                                                                 <td>{{$porder->id}}</td>
                                                                 <td>{{$porder->created_at}}</td>
@@ -846,8 +852,9 @@
                                             @foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)
                                                 @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
                                                     @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
-                                                        <tr @if((integer)(  Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
-                                (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
+                                                        <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
                                                             class="error_tr" @endif>
                                                             <td>{{$porder->id}}</td>
                                                             <td>{{$porder->created_at}}</td>
@@ -967,8 +974,9 @@
                                                 @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                                     @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
                                                         @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
-                                                            <tr @if((integer)(  Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P" ||
-                                (integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC")
+                                                            <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
+                                                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
                                                                 class="error_tr" @endif>
                                                                 <td>{{$porder->id}}</td>
                                                                 <td>{{$porder->created_at}}</td>
