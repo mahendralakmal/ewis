@@ -4,7 +4,8 @@
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->add_user))
-        <div class="col-md-7">
+    <div class="row">
+        <div class="col-sx-12 col-sm-12 col-md-8 col-lg-7">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Users</h3>
@@ -17,7 +18,7 @@
                                 <td><h5>Email</h5></td>
                                 <td><h5>Name</h5></td>
                                 <td><h5>Designation</h5></td>
-                                <td class="col-md-3"></td>
+                                <td></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-sx-12 col-sm-12 col-md-4 col-lg-5">
             @include('admin.messages.success')
             @include('admin.messages.error')
             <form id="userCreate" class="form-horizontal" role="form" method="POST"
@@ -104,7 +105,7 @@
                     <div class="col-md-5">
                         <label>Designation</label>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-xs-10 col-sm-10 col-md-6">
                         <select type="text" class="form-control" name="designation_id" id="designation_id">
                             <option value="">Select Designation</option>
                             @if(!$id == "")
@@ -127,7 +128,7 @@
                             @endif
                         </select>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-sx-1 col-sm-1 col-md-1">
                         <a href="/admin/users/manage-user-designations"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
@@ -165,6 +166,7 @@
                 </div>
             </form>
         </div>
+    </div>
     @else
         <div class="col-md-offset-3">
             <h2 class="error">You are Not Authorize for access this page</h2>
@@ -200,7 +202,7 @@
                 },
                 password: {
                     required: true,
-                    passwordcheck:true,
+//                    passwordcheck:true,
                     minlength: 6,
                     maxlength: 12
                 },
@@ -227,10 +229,10 @@
             }
         });
 
-        $.validator.addMethod("passwordcheck", function(value) {
-            return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
-                && /[a-z]/.test(value) // has a lowercase letter
-                && /\d/.test(value) // has a digit
-        });
+        {{--$.validator.addMethod("passwordcheck", function(value) {--}}
+            {{--return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these--}}
+                {{--&& /[a-z]/.test(value) // has a lowercase letter--}}
+                {{--&& /\d/.test(value) // has a digit--}}
+        {{--});--}}
     </script>
 @stop
