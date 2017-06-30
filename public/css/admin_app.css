@@ -5895,4 +5895,7 @@ footer {
 thead h5 {
   font-weight: 600; }
 
+.postatus {
+  width: 160px !important; }
+
 /*# sourceMappingURL=admin_app.css.map */
