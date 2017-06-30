@@ -5,13 +5,14 @@
     && (\App\User::find(Session::get('User'))->privilege != null)
     && (\App\User::find(Session::get('User'))->privilege->client_prof))
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Organizations</h3>
                     </div>
                     <div class="panel-body">
-                        <table class="table">
+                        <div class="table-responsive">
+                            <table class="table">
                             <thead>
                             <tr>
                                 <td><h5>Name</h5></td>
@@ -171,10 +172,11 @@
                             @endif
                             </tbody>
                         </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
 
                 @include('admin.messages.success')
                 @include('admin.messages.error')
