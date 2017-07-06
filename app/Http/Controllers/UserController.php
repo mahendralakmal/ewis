@@ -269,7 +269,6 @@ class UserController extends Controller
         }
         else
             $users = User::all();
-//        $users = User::all();
         $designation = Designation::find(2);
         return view('/admin/clients/create-clientuser', compact('users', 'designation', 'id'));
     }
@@ -290,6 +289,7 @@ class UserController extends Controller
         ]);
         $user = User::find($request->id);
         $user->update([
+            'email' => $request->email,
             'password' => Hash::make($request->password),
             'name' => $request->name,
             'designation_id' => $request->designation_id,
@@ -297,7 +297,7 @@ class UserController extends Controller
         ]);
         Session::flash('success', 'User successfully updated...!');
 
-        if (strtolower(User::find($user->id)->designation->designation) === 'client') {
+        if (User::find($user->id)->designation_id === 2) {
             return redirect('/admin/manage-clients/client_user/' . $user->id);
         } else {
             return back();

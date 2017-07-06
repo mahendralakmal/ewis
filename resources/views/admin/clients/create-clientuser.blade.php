@@ -284,9 +284,10 @@
                                 <input type="hidden" id="id" name="id" value="{{$id->id}}">
                             @endif
                             <input type="hidden" id="user_id" name="user_id"
-                                   value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
+                                   value="{{ Session::get('User') }}">
                             @if(!$id == "")
-                                <label class="form-control">{{$id->email}}</label>
+                                {{--<label class="form-control">{{$id->email}}</label>--}}
+                                <input type="email" class="form-control" name="email" id="email" value="{{$id->email}}">
                                 <input type="hidden" name="email" id="email" value="{{$id->email}}">
                             @else
                                 <input type="email" class="form-control" name="email" id="email">
