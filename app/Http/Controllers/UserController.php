@@ -300,7 +300,7 @@ class UserController extends Controller
         if (User::find($user->id)->designation_id === 2) {
             return redirect('/admin/manage-clients/client_user/' . $user->id);
         } else {
-            return back();
+            return redirect('/admin/users/create-users');
         }
     }
 
