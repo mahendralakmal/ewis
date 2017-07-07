@@ -21,18 +21,23 @@ class ClientsBranchController extends Controller
 
     public function edit(ClientsBranch $id)
     {
-        $user = User::find(session('User'));
-        if ($user->id != 1)
-            $clients = $user;
+        if (Session::has('User')) {
+            $user = User::find(session('User'));
+            if ($user->id != 1)
+                $clients = $user;
 //                Client::where('user_id',$user->id)->get();
-        else
-            $clients = Client::all();
-        return view('/admin/clients/client-branch', compact('clients', 'id'));
+            else
+                $clients = Client::all();
+            return view('/admin/clients/client-branch', compact('clients', 'id'));
+        } else {
+            return redirect('/');
+        }
     }
 
     public function create()
     {
         $id = '';
+        if (Session::has('User')) {
         $user = User::find(session('User'));
         if ($user->id != 1)
             $clients = $user;
@@ -40,6 +45,9 @@ class ClientsBranchController extends Controller
         else
             $clients = Client::all();
         return view('/admin/clients/client-branch', compact('clients', 'id'));
+        } else {
+            return redirect('/');
+        }
     }
 
     public function store(Request $request)

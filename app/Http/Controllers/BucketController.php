@@ -273,78 +273,87 @@ class BucketController extends Controller
     public
     function postCheckout(Request $request)
     {
-        if (!Session::has('bucket')) {
-            return view('user/bucket');
-        }
-        $bucket = Session::get('bucket');
-        $order = new P_Order();
-        $file = $request->hasFile('file') ? 'storage/' . Storage::disk('local')->put('/checkout', $request->file('file')) : null;
-        $user = User::find(Session::get('User'));
+        if (Session::has('User')) {
+            if (!Session::has('bucket')) {
+                return view('user/bucket');
+            }
+            $bucket = Session::get('bucket');
+            $order = new P_Order();
+            $file = $request->hasFile('file') ? 'storage/' . Storage::disk('local')->put('/checkout', $request->file('file')) : null;
+            $user = User::find(Session::get('User'));
 //        $order->client_id = $user->c_user->client_branch->client->id;
-        $order->clients_branch_id = $user->c_user->client_branch->id;
-        $order->bucket = serialize($bucket);
-        $order->del_branch = $request->input('del_branch');
-        $order->del_cp = $request->input('del_cp');
-        $order->del_tp = $request->input('del_tp');
-        $order->file = $file;
+            $order->clients_branch_id = $user->c_user->client_branch->id;
+            $order->bucket = serialize($bucket);
+            $order->del_branch = $request->input('del_branch');
+            $order->del_cp = $request->input('del_cp');
+            $order->del_tp = $request->input('del_tp');
+            $order->file = $file;
 //        $order->cp_notes = $request->input('cp_notes');
-        $order->del_notes = $request->input('del_notes');
-        $order->status = "P";
-        $order->agent_id = $user->c_user->client_branch->agent_id;
+            $order->del_notes = $request->input('del_notes');
+            $order->status = "P";
+            $order->agent_id = $user->c_user->client_branch->agent_id;
 
 
-        $order->save();
+            $order->save();
 
-        $agent = User::find($order->agent_id);
-        $sHead = User::find($agent->section_head_id);
-        $order->bucket = unserialize($order->bucket);
-        $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net','harsha@ewisl.net','hashanp@ewisl.net','damayanthik@ewisl.net','chanakah@ewisl.net'];
+            $agent = User::find($order->agent_id);
+            $sHead = User::find($agent->section_head_id);
+            $order->bucket = unserialize($order->bucket);
+            $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
 
-        //send the notification to client
-        Mail::to($user)->send(new PoSentSuccessfully($user, $order));
-        Mail::to($agent)->send(new PoToAdministration($user, $order));
-        Mail::to($sHead)->send(new PoToSectionHeads($user, $order, $agent));
-        Mail::to($procument)->send(new PoToProcument($user, $order, $agent));
+            //send the notification to client
+            Mail::to($user)->send(new PoSentSuccessfully($user, $order));
+            Mail::to($agent)->send(new PoToAdministration($user, $order));
+            Mail::to($sHead)->send(new PoToSectionHeads($user, $order, $agent));
+            Mail::to($procument)->send(new PoToProcument($user, $order, $agent));
 
 
-        Session::forget('bucket');
-        return redirect('/');
+            Session::forget('bucket');
+        } else
+            return redirect('/');
     }
 
     public
     function getHistory()
     {
-        $orders = P_Order::where('clients_branch_id',User::find(Session::get('User'))->c_user->client_branch->id)->get();
-        if ($orders != null) {
-            $orders->transform(function ($order, $key) {
-                $order->bucket = unserialize($order->bucket);
-                return $order;
-            });
-        }
-        return view('user/history', compact('orders'));
+        if (Session::has('User')) {
+            $orders = P_Order::where('clients_branch_id', User::find(Session::get('User'))->c_user->client_branch->id)->get();
+            if ($orders != null) {
+                $orders->transform(function ($order, $key) {
+                    $order->bucket = unserialize($order->bucket);
+                    return $order;
+                });
+            }
+            return view('user/history', compact('orders'));
+        } else
+            return redirect('/');
     }
 
     public
     function getPurchaseOrder()
     {
-        if (Session::get('User') == 1)
-            $porders = P_Order::all();
-        else
-            $porders = User::find(Session::get('User'));
+        if (Session::has('User')) {
+            if (Session::get('User') == 1)
+                $porders = P_Order::all();
+            else
+                $porders = User::find(Session::get('User'));
 
-
-        return view('admin/clients/purchase-orders-view', compact('porders'));
+            return view('admin/clients/purchase-orders-view', compact('porders'));
+        } else
+            return redirect('/');
     }
 
     public function pendingPurchaseOrder()
     {
+
         if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
                 $porders = P_Order::where('status', 'P')->get();
             else
                 $porders = User::find(Session::get('User'));
-        }
-        return view('admin/clients/purchase-orders-pending', compact('porders'));
+            return view('admin/clients/purchase-orders-pending', compact('porders'));
+        } else
+            return redirect('/');
     }
 
 
@@ -355,8 +364,9 @@ class BucketController extends Controller
                 $porders = P_Order::where('status', 'OP')->get();
             else
                 $porders = User::find(Session::get('User'));
-        }
-        return view('admin/clients/purchase-orders-processing', compact('porders'));
+            return view('admin/clients/purchase-orders-processing', compact('porders'));
+        } else
+            return redirect('/');
     }
 
     public function CreditHoldPurchaseOrder()
@@ -366,8 +376,9 @@ class BucketController extends Controller
                 $porders = P_Order::where('status', 'CH')->get();
             else
                 $porders = User::find(Session::get('User'));
-        }
-        return view('admin/clients/purchase-orders-credithold', compact('porders'));
+            return view('admin/clients/purchase-orders-credithold', compact('porders'));
+        } else
+            return redirect('/');
     }
 
     public function getCreditHoldPoCount()
@@ -409,6 +420,7 @@ class BucketController extends Controller
             }
             return Response::json($porder);
         }
+        else return redirect('/');
     }
 
     public function getProcessingPoCount()
@@ -450,11 +462,13 @@ class BucketController extends Controller
             }
             return Response::json($porder);
         }
+        else return redirect('/');
     }
 
     public
     function getPendingPoCount()
     {
+        if (Session::has('User')) {
         $user = User::find(Session::get('User'));
         if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
             $porder = P_Order::where('status', 'P')->count();
@@ -490,11 +504,14 @@ class BucketController extends Controller
             }
         }
         return Response::json($porder);
+        }
+        else return redirect('/');
     }
 
     public
     function getPCompletePoCount()
     {
+        if (Session::has('User')) {
         $user = User::find(Session::get('User'));
         if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
             $porder = P_Order::where('status', 'PC')->count();
@@ -529,17 +546,20 @@ class BucketController extends Controller
                 }
             }
         }
-        return Response::json($porder);
+        return Response::json($porder);}
+        else return redirect('/');
     }
 
     public
     function pcPurchaseOrder()
     {
+        if (Session::has('User')) {
         if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
             $porders = P_Order::where('status', 'PC')->get();
         else
             $porders = User::find(Session::get('User'));
-        return view('admin/clients/purchase-orders-partial-completed', compact('porders'));
+        return view('admin/clients/purchase-orders-partial-completed', compact('porders'));}
+        else return redirect('/');
     }
 
     private function getDateDiff($date)
@@ -615,12 +635,15 @@ class BucketController extends Controller
     public
     function CompletedPurchaseOrders()
     {
-        if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
-            $porders = P_Order::where('status', 'C')->get();
-        else
-            $porders = User::find(Session::get('User'));
+        if(Session::has('User')) {
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'C')->get();
+            else
+                $porders = User::find(Session::get('User'));
 
-        return view('admin/clients/purchase-orders-completed', compact('porders'));
+            return view('admin/clients/purchase-orders-completed', compact('porders'));
+        }
+        else return redirect('/');
     }
 
     public
@@ -693,11 +716,13 @@ class BucketController extends Controller
     public
     function historyPODetails($id)
     {
-        $order = P_Order::find($id);
-        $order->bucket = unserialize($order->bucket);
-        $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
+        if(Session::has('User')) {
+            $order = P_Order::find($id);
+            $order->bucket = unserialize($order->bucket);
+            $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
 
-        return view('user/detail-orders', compact('order', 'branch'));
+            return view('user/detail-orders', compact('order', 'branch'));
+        } else return redirect('/');
     }
 
 }

@@ -129,9 +129,6 @@ class CategoryController extends Controller
     public function category($id, $brand, CBrand $brand_id)
     {
         $categories = $brand_id->c_category;
-        //$cuser = Clientuser::where('user_id', Session::get('User'))->first();
-//        $categories = CCategory::where([['clients_branch_id', $cuser->clients_branch_id], ['remove', 0],['c_brand_id',$brand_id->id]])->get();
-        //       dd($brand_id);
         return view('user/category', compact('categories'));
     }
 }

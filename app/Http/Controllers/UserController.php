@@ -227,15 +227,18 @@ class UserController extends Controller
     public function create()
     {
         $id = "";
+        if(Session::has('User')) {
+            if (Session::get('User') == 1)
+                $users = User::all();
+            else
+                $users = User::where('user_id', User::find(Session::get('User'))->id)->get();
 
-        if (Session::get('User') == 1)
-            $users = User::all();
-        else
-            $users = User::where('user_id', User::find(Session::get('User'))->id)->get();
-
-        $sectorHeads = User::all();
-        $designations = Designation::all();
-        return view('/admin/users/create-user', compact('users', 'designations', 'id', 'sectorHeads'));
+            $sectorHeads = User::all();
+            $designations = Designation::all();
+            return view('/admin/users/create-user', compact('users', 'designations', 'id', 'sectorHeads'));
+        } else {
+            return redirect('/');
+        }
     }
 
     //Create client user

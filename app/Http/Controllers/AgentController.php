@@ -13,11 +13,15 @@ class AgentController extends Controller
 {
     public function index(ClientsBranch $id)
     {
+        if(Session::has('User')){
         if(Session::get('User') ==1)
             $users = User::all();
         else
             $users = User::find(Session::get('User'));
         return view('/admin/clients/agent-assign', compact('users', 'id'));
+        } else {
+            return redirect('/');
+        }
     }
 
     public function store(Request $request)
@@ -80,14 +84,17 @@ class AgentController extends Controller
         } else {
             $id = null;
         }
-
-        $ses = User::find(session('User'));
+        if (Session::has('User')) {
+            $ses = User::find(session('User'));
 //        if ($ses->id == 1)
             $clients = Client::where('approval', 1)->get();
 //        else
 //            $clients = ClientsBranch::where('agent_id', $ses->id)->get();
 
-        return view('/admin/clients/client-users', compact('user', 'clients', 'id'));
+            return view('/admin/clients/client-users', compact('user', 'clients', 'id'));
+        } else {
+            return redirect('/');
+        }
     }
 
     public function client_user_activate(User $user)

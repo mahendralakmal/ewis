@@ -21,38 +21,44 @@ class ClientController extends Controller
 
     public function index()
     {
-        $user = User::find(session('User'));
-        if ($user->id == 1)
-            $users = User::where('designation_id', 6)->get();
-        else {
-            if($user->designation->id == 4)
-                $users = $user;
-            else
-                $users = User::where('designation_id', $user->designation_id)->get();
-        }
-        return view('/admin/clients/manage-client', compact('clients', 'users', 'user', 'sh'));
+        if(Session::has('User')) {
+            $user = User::find(session('User'));
+            if ($user->id == 1)
+                $users = User::where('designation_id', 6)->get();
+            else {
+                if ($user->designation->id == 4)
+                    $users = $user;
+                else
+                    $users = User::where('designation_id', $user->designation_id)->get();
+            }
+            return view('/admin/clients/manage-client', compact('clients', 'users', 'user', 'sh'));
+        } else return redirect('/');
     }
 
     public function create_profile()
     {
         $id = null;
-        $user = User::find(session('User'));
-        if ($user->id == 1)
-            $clients = Client::where('user_id', $user->id)->orderBy('name')->get();
-        else
-            $clients = $user;
+        if(Session::has('User')) {
+            $user = User::find(session('User'));
+            if ($user->id == 1)
+                $clients = Client::where('user_id', $user->id)->orderBy('name')->get();
+            else
+                $clients = $user;
 
-        return view('/admin/clients/client-profile', compact('id', 'clients'));
+            return view('/admin/clients/client-profile', compact('id', 'clients'));
+        } else return redirect('/');
     }
 
     public function update_profile(Client $id)
     {
-        $user = User::find(session('User'));
-        if ($user->id == 1)
-            $clients = Client::where('user_id', $user->id)->orderBy('name')->get();
-        else
-            $clients = $user;
-        return view('/admin/clients/client-profile', compact('id', 'clients', 'user'));
+        if(Session::has('User')) {
+            $user = User::find(session('User'));
+            if ($user->id == 1)
+                $clients = Client::where('user_id', $user->id)->orderBy('name')->get();
+            else
+                $clients = $user;
+            return view('/admin/clients/client-profile', compact('id', 'clients', 'user'));
+        } else return redirect('/');
     }
 
     public function store(Request $request)
@@ -110,18 +116,20 @@ class ClientController extends Controller
 
     public function update(Request $request)
     {
-        $user = User::find(session('User'));
-        $users = User::all();
-        $clients = Client::find($request->id);
-        $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
-        if ($request->hasFile('logo'))
-            $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
-                'logo' => $logo, 'color' => $request->color]);
-        else
-            $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
-                'color' => $request->color]);
+        if(Session::has('User')) {
+            $user = User::find(session('User'));
+            $users = User::all();
+            $clients = Client::find($request->id);
+            $logo = $request->hasFile('logo') ? 'storage/' . Storage::disk('local')->put('/images', $request->file('logo')) : null;
+            if ($request->hasFile('logo'))
+                $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
+                    'logo' => $logo, 'color' => $request->color]);
+            else
+                $clients->update(['user_id' => $request->user_id, 'address' => $request->address, 'telephone' => $request->telephone, 'email' => $request->email,
+                    'color' => $request->color]);
 //        return view('/admin/clients/manage-client', compact('clients', 'users', 'user'));
-        return redirect('/admin/manage-clients/create-profile');
+            return redirect('/admin/manage-clients/create-profile');
+        } else return redirect('/');
     }
 
     public function show(Clientuser $id)
