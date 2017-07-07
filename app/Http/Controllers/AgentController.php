@@ -38,6 +38,7 @@ class AgentController extends Controller
 
     public function update(Request $request)
     {
+//        return $request->all();
         $cuser = Clientuser::find($request->id);
 
         $cuser->update([

@@ -21,12 +21,12 @@
                 <div class="form-group row">
                     <div class="col-md-4"><label>Client</label></div>
                     <div class="col-md-8">
-                        <select name="client_id" id="client_id" class="form-control">
+                        <select name="client_id" id="client_id" @if(!$id == null) disabled @endif class="form-control">
                             <option> Select Client</option>
 {{--                            @if(Session::get('User') == 1)--}}
                                 @foreach($clients as $client)
                                     <option value="{{$client->id}}"
-                                            @if((!$id ==null) && ($id->client_id == $client->id)) selected disabled @endif>{{$client->name}}</option>
+                                            @if((!$id ==null) && ($id->client_id == $client->id)) selected @endif>{{$client->name}}</option>
                                 @endforeach
                             {{--@else--}}
                                 {{--@foreach($clients as $branch)--}}
