@@ -56,13 +56,10 @@ class ProductController extends Controller
 
     public function edit_client_products(Client_Product $id, Request $request)
     {
-//        return $id->product;
         $cp_id = $id;
         $cp_products = Product::all();
         $categories = Category::all();
-        $products = $id;
-//        $products = Client_Product::where([['user_id', $request->session()->get('User')], ['clients_branch_id',
-//            $id->clients_branch_id]])->get();
+        $products = $id->product;
         $brands = Brand::orderBy('title')->get();
         return view('/admin/clients/manage-product-list', compact('brands', 'id', 'products', 'cp_id',
             'categories', 'cp_products'));
@@ -126,6 +123,7 @@ class ProductController extends Controller
 
     public function assign_products_to_client(ClientsBranch $id)
     {
+//        return $id;
         $cp_id = '';
         return view('/admin/clients/manage-product-list', compact('id', 'cp_id'));
     }

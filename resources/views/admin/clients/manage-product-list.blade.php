@@ -150,7 +150,7 @@
                     @endif
 
 
-                    <input type="hidden" id="clients_branch_id" name="clients_branch_id" value="{{ $id->id }}">
+                    <input type="hidden" id="clients_branch_id" name="clients_branch_id" value="@if($cp_id!=null){{ $id->clients_branch_id }}@else {{$id->id}} @endif">
                     <input type="hidden" id="user_id" name="user_id"
                            value="{{ \Illuminate\Support\Facades\Session::get('User') }}">
                     <div class="form-group">
@@ -206,7 +206,7 @@
                                     @foreach($id->cbranch->cproduct as $cproduct)
                                         @if($cproduct->remove !=1)
                                             <option @if($id->id == $cproduct->id) selected
-                                                    @endif value="{{$cproduct->id}}"
+                                                    @endif value="{{$cproduct->product_id}}"
                                             >{{$cproduct->product->part_no}} | {{$cproduct->product->name}}</option>
                                         @endif
                                     @endforeach
