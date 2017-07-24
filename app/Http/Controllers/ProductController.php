@@ -21,7 +21,6 @@ class ProductController extends Controller
 {
     public function getAllProducts()
     {
-//        return "hi";
         $id = "";
         $brands = Brand::all();
         $categories = Category::where('status', 1)->get();

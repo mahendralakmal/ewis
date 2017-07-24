@@ -1,6 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Redirect;
 
+Route::get('/test/{index}', 'ESearch@productSearch');
+
+
 Route::get('/ewis-home', function (){ return Redirect::to('http://www.ewisperipherals.lk/');});
 
 Route::get('add-to-bucket/{id}', 'BucketController@getAddToBucket');
