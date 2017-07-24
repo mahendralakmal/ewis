@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Elasticsearch\ClientBuilder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use App\Product;
 
 class ESearch extends Controller
@@ -13,19 +14,25 @@ class ESearch extends Controller
         $client = ClientBuilder::create()->build();
         $products = Product::all();
         $product = [];
-        foreach ($products as $prod){
+        foreach ($products as $prod) {
             $product[] = [
-                'index' => $index,
-                "body" => [
-                    'id'=>$prod->id,
-                    'paert_no' => $prod->part_no,
-                    'name' => $prod->name,
-                    'description' => $prod->description,
-                ]
+                'id' => $prod->id,
+                'paert_no' => $prod->part_no,
+                'name' => $prod->name,
+                'description' => $prod->description,
             ];
         }
 
+        $param = [
+            "index" => $index,
+            "body" => [
+                "product" => $product,
+            ]
+        ];
+
+        //$parrams = json_encode($param);
+        return Response::json($param);
 //        dd($product);
-        return view('admin.test', compact('product'));
+//        return view('admin.test', compact('parrams'));
     }
 }

@@ -1,7 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Redirect;
 
-Route::get('/test/{index}', 'ESearch@productSearch');
+Route::get('/search', function () {
+    $parrams = '';
+    return view('/admin.test', compact('parrams'));
+});
+Route::get('/search/{index}', 'ESearch@productSearch');
 
 
 Route::get('/ewis-home', function (){ return Redirect::to('http://www.ewisperipherals.lk/');});
