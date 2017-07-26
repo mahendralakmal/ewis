@@ -18,7 +18,22 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
     public function toSearchableArray()
     {
+        return [
+            'part_no' => $this->part_no
+        ];
     }
+
+//    public function toSearchableArray()
+//    {
+//        return [
+//            'part_no' => $this->part_no
+//        ];
+//    }
 }

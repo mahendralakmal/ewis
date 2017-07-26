@@ -37,10 +37,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($products as $product)
-                                    @if($product->remove !=1)
-                                        <form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">
-                                            {!! csrf_field() !!}
+                                <form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">
+                                    {!! csrf_field() !!}
+                                    @foreach ($products as $product)
+                                        @if($product->remove !=1)
                                             <tr>
                                                 <td style="text-align: center">
                                                     <input type="hidden" id="id" name="id"
@@ -67,9 +67,9 @@
                                                 <td><input class="btn btn-success btn-sm" type="submit"
                                                            value="Add To Bucket"></td>
                                             </tr>
-                                        </form>
-                                    @endif
-                                @endforeach
+                                        @endif
+                                    @endforeach
+                                </form>
                                 </tbody>
                             </table>
                         @else
@@ -95,18 +95,11 @@
             $.ajax(
                 {
                     type: 'get',
-                    url: '/client-profile/search/' +$('#hidCate').val()+'/'+ this.value,
+                    url: '/client-profile/search/' + $('#hidCate').val() + '/' + this.value,
                     success: function (response) {
                         var model = $(".laravel_container");
-                        if (response.length > 0) {
-                            model.empty();
-                            model.append(response);
-                        } else {
-                            model.empty();
-                            model.append(
-                                '<div class="jumbotron text-center clearfix"><h2>No items found</h2><p><a href="{{ URL::previous() }}" class="btn btn-primary btn-lg" target="_blank">Category</a><a href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/brands'):'' }}" class="btn btn-success btn-lg">Brand</a></p></div>'
-                            );
-                        }
+                        model.empty();
+                        model.append(response);
                     }
                 }
             );
