@@ -5,19 +5,40 @@
         <div class="row">
             <div class='col-sm-6'>
                 <div class="form-group">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                    </div>
+                    <input type='text' class="form-control" id="search" name="search"/>
                 </div>
             </div>
-            <script type="text/javascript">
-                $(function () {
-                    $('#datetimepicker1').datetimepicker();
-                });
-            </script>
+        </div>
+        <div class="row">
+            <ul class="list-group response">
+
+            </ul>
         </div>
     </div>
+@stop
+@section('scripts')
+    <script>
+        $("#search").on('keyup change', function () {
+            $.ajax(
+                {
+                    type: 'get',
+                    url: '/search/' + this.value,
+                    success: function (response) {
+                        var model = $(".response");
+                        model.empty();
+                        $.each(response, function (index, elem) {
+                            model.append(
+                                "<li>" +
+                                "<div>"+elem.id+"</div>" +
+                                "<div>"+elem.part_no+"</div>" +
+                                "<div>"+elem.name+"</div>" +
+                                "<div>"+elem.description+"</div>" +
+                                "</li>"
+                            );
+                        });
+                    }
+                }
+            );
+        });
+    </script>
 @stop
