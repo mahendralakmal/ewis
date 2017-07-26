@@ -6,7 +6,6 @@
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
-    {{--<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />--}}
     <meta http-equiv="pragma" content="no-cache" />
     <meta name="description" content="EWIS Peripherals">
 
@@ -17,16 +16,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Stylesheets -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
     <link rel="stylesheet" type="text/css" href="{{ elixir('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset("assets/stylesheets/styles.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/css/bootstrap-datetimepicker.min.css") }}"/>
     <link rel="stylesheet" href="{{ asset("assets/font-awesome/css/font-awesome.min.css") }}"/>
-    {{--<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css"/>--}}
 
 @yield('extra-css')
 
-<!-- Favicon and Apple Icons -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
 </head>
 <body>
@@ -106,6 +102,7 @@
 </footer>
 <!-- JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+@yield('scripts')
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="{{ asset("assets/js/bootstrap-datetimepicker.js") }}"></script>
 <script type="text/javascript">

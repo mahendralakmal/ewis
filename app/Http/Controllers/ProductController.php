@@ -21,7 +21,6 @@ class ProductController extends Controller
 {
     public function getAllProducts()
     {
-//        return "hi";
         $id = "";
         $brands = Brand::all();
         $categories = Category::where('status', 1)->get();
@@ -211,7 +210,7 @@ class ProductController extends Controller
     public function products($id, $branch, $brand, CCategory $category )
     {
         $products = $category->cproduct;
-        return view('user/product', compact('products'));
+        return view('user/product', compact('products', 'category'));
     }
 
     public function show($slug)
