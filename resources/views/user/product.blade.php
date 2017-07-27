@@ -97,9 +97,7 @@
                     type: 'get',
                     url: '/client-profile/search/' + $('#hidCate').val() + '/' + this.value,
                     success: function (response) {
-                        var model = $(".laravel_container");
-                        model.empty();
-                        model.append(response);
+                        $(".laravel_container").html(response);
                     }
                 }
             );

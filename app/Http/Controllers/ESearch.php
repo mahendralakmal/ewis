@@ -20,26 +20,33 @@ class ESearch extends Controller
         $produce = '';
         $top = '';
         $bottom = '';
+        $count = 0;
 
         foreach ($products as $key => $value) {
             foreach ($c_category->cproduct as $prod) {
                 if ($value->id == $prod->product_id && $prod->remove != 1) {
+                    $count += 1;
                     $produce = $produce . '<form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">';
-                    $produce = $produce . '<input type="hidden" name="_token" value="'.csrf_token().'">';
-                    $produce = $produce . '</form>';
+                    $produce = $produce . '<input type="hidden" name="_token" value="' . csrf_token() . '">';
                     $produce = $produce . '<tr>';
-                    $produce = $produce . '<td style="text-align: center"><input type="hidden" id="id" name="id" value=' . $value->id . '><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->part_no . '</a></td>';
+                    $produce = $produce . '<td style="text-align: center"><input type="hidden" name="id" id="id" value="' . $prod->id . '"><input type="hidden" id="id" name="id" value=' . $value->id . '><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->part_no . '</a></td>';
                     $produce = $produce . '<td align="middle"><img src="' . $value->image . '" alt="product" class="img-responsive" height="25" width="30"></td>';
                     $produce = $produce . '<td style="text-align: left"><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->name . '</a></td>';
+
                     if ($value->vat_apply)
-                    $produce = $produce . '<td style="text-align: center">Yes</td>';
-                else
-                    $produce = $produce . '<td style="text-align: center">No</td>';
+                        $produce = $produce . '<td style="text-align: center">Yes</td>';
+                    else
+                        $produce = $produce . '<td style="text-align: center">No</td>';
+
                     $produce = $produce . '<td style="text-align: right"><p>' . number_format($prod->special_price, 2, ".", ",") . '</p></td>';
-                    $produce = $produce . '<td style="text-align: right"><input style="width: 50px" align="right" type="number" min="1" value="1" name="Qty" id="Qty" class="form-controls"></td>';
+                    $produce = $produce . '<td style="text-align: right">
+<input style="width: 50px" align="right" type="number" min="1" value="1" name="Qty'.$count.'" id="Qty'.$count.'" class="form-controls">
+</td>';
+//                    $produce = $produce . '<td><a class="btn btn-success btn-sm" href="/client-profile/add-to-bucket">Add To Bucket</a></td>';
                     $produce = $produce . '<td><input class="btn btn-success btn-sm" type="submit" value="Add To Bucket"></td>';
 
                     $produce = $produce . '</tr>';
+                    $produce = $produce . '</form>';
                 }
             }
         }

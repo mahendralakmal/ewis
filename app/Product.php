@@ -29,11 +29,4 @@ class Product extends Model
             'part_no' => $this->part_no
         ];
     }
-
-//    public function toSearchableArray()
-//    {
-//        return [
-//            'part_no' => $this->part_no
-//        ];
-//    }
 }
