@@ -224,6 +224,7 @@ class BucketController extends Controller
 
     public function getAddToBucket(Request $request)
     {
+//        dd($request->all());
         $product = Client_Product::find($request->id);
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
