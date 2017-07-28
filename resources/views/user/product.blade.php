@@ -120,15 +120,20 @@
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script>
         $("#search").on('keyup change', function () {
-            $.ajax(
-                {
-                    type: 'get',
-                    url: '/client-profile/search/' + $('#hidCate').val() + '/' + this.value,
-                    success: function (response) {
-                        $(".laravel_container").html(response);
+            var path = window.location.pathname;
+            if(this.value != '') {
+                $.ajax(
+                    {
+                        type: 'get',
+                        url: '/client-profile/search/' + $('#hidCate').val() + '/' + this.value,
+                        success: function (response) {
+                            $(".laravel_container").html(response);
+                        }
                     }
-                }
-            );
+                );
+            } else {
+                window.location.replace(path);
+            }
         });
     </script>
 @stop
