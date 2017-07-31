@@ -15,7 +15,8 @@ return [
 
     */
 
-    'P_Order_Pending_Timeout' => 7
+    'P_Order_Pending_Timeout' => 7,
+    'PAGINATE'=> 10
 
 
 ];

@@ -335,7 +335,7 @@ class BucketController extends Controller
     {
         if (Session::has('User')) {
             if (Session::get('User') == 1)
-                $porders = P_Order::all();
+                $porders = P_Order::paginate(config('const.PAGINATE'));
             else
                 $porders = User::find(Session::get('User'));
 
