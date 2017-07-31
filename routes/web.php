@@ -118,10 +118,17 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/purchase-orders-view', 'BucketController@getPurchaseOrder');
         Route::get('/purchase-orders-view/{from}/{to}/{status}', 'BucketController@getPurchaseOrders');
         Route::get('/purchase-orders-pending', 'BucketController@pendingPurchaseOrder');
+        Route::get('/purchase-orders-pending/{from}/{to}', 'BucketController@pendingPurchaseOrders');
         Route::get('/purchase-orders-processing', 'BucketController@processingPurchaseOrder');
+        Route::get('/purchase-orders-processing/{from}/{to}', 'BucketController@processingPurchaseOrders');
         Route::get('/purchase-orders-partial-completed', 'BucketController@pcPurchaseOrder');
-        Route::get('/purchase-orders-completed', 'BucketController@CompletedPurchaseOrders');
+        Route::get('/purchase-orders-partial-completed/{from}/{to}', 'BucketController@pcPurchaseOrders');
+
+        Route::get('/purchase-orders-completed', 'BucketController@CompletedPurchaseOrder');
+        Route::get('/purchase-orders-completed/{from}/{to}', 'BucketController@CompletedPurchases');
+
         Route::get('/purchase-orders-credithold', 'BucketController@CreditHoldPurchaseOrder');
+        Route::get('/purchase-orders-credithold/{from}/{to}', 'BucketController@CreditHoldPurchaseOrders');
     });
 
     Route::group(['prefix' => '/manage-clients'], function () {

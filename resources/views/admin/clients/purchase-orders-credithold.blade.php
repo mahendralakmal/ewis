@@ -12,11 +12,15 @@
                 <div class="panel-body">
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
                         <div class="row">
-                            <div class="col-md-1">Date</div>
-                            <div class="col-md-1">Form</div>
-                            <div class="col-md-4"><input type="date" class="form-control" name="from" id="from"></div>
-                            <div class="col-md-1">To</div>
-                            <div class="col-md-4"><input type="date" class="form-control" name="to" id="to"></div>
+                            <div class="col-md-2">Date  Form</div>
+                            <div class="col-md-3"><input type="date" class="form-control" name="from" id="from" value="{{$from}}">
+                            </div>
+                            <div class="col-md-1"> To</div>
+                            <div class="col-md-3"><input type="date" class="form-control" name="to" id="to" value="{{$to}}"></div>
+                            <div class="col-md-2">
+                                <input type="hidden" id="hidStatus" value="a">
+                                <button class="btn" id="search">Search</button>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -192,6 +196,7 @@
                             </table>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">{{ $porders->links() }}</div>
                 </div>
             </div>
         </div>
@@ -204,67 +209,72 @@
 
 @section('scripts')
     <script>
-        $("#from").on('change', function () {
-            getPartialCompletePO($(this).val(), $('#to').val());
+        $("#search").on('click', function(){
+            var from = $('#from').val();
+            var to = $('#to').val();
+            var status = $('#hidStatus').val();
+            window.location.replace('/admin/purchase-orders/purchase-orders-credithold/'+from+'/'+to);
         });
-        $("#to").on('change', function () {
-            getPartialCompletePO($('#from').val(), $(this).val());
-        });
-
-        function getPartialCompletePO(from, to) {
-            if (from != '' && to != '') {
-                if (Date.parse(from) < Date.parse(to)) {
-                    $.ajax({
-                        type: 'get',
-                        url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/PC',
-                        success: function (response) {
-                            console.log(response);
-                            var model = $('.tablePC');
-                            model.empty();
-                            $.each(response, function (index, elem) {
-//                                var now = new Date.now();
-//                                var old = new Date(elem.created_at);
-//                                var now = (elem.created_at - new Date.now()) / (1000 * 60 * 60 * 24);
-                                if (elem.file != null) {
-//                                    if (now > 13)
-//                                        model.append("<tr class='error_tr'>" +
-//                                    else
-                                    model.append("<tr>" +
-                                        "<td>" + elem.id +
-                                        "</td><td>" + elem.created_at +
-                                        "</td><td>" + elem.name +
-                                        "</td><td>" + elem.del_branch +
-                                        "</td><td>" + elem.user +
-                                        "</td><td><a href='/" + elem.file + "'>Download Attachment</a>" +
-                                        "</td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
-                                        "' class='btn btn-success btn-outline'>View Order</a></td></tr>");
-                                } else {
-//                                    if (now > 13)
-//                                        model.append("<tr class='error_tr'>" +
-//                                    else
-                                    model.append("<tr>" +
-                                        "<td>" + elem.id +
-                                        "</td><td>" + elem.created_at +
-                                        "</td><td>" + elem.name +
-                                        "</td><td>" + elem.del_branch +
-                                        "</td><td>" + elem.user +
-                                        "</td><td> No Attachment " + "</td>" +
-                                        "<td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
-                                        "' class='btn btn-success btn-outline'>View Order</a></td></tr>");
-
-                                }
-
-                            });
-                        }
-                    });
-                } else {
-                    $('#alert').append('<span class="col-md-12 alert alert-danger">check entered dates</span>');
-                    setTimeout(function () {
-                        $('.alert').hide(3000);
-                    }, 5000);
-                }
-            }
-
-        }
+//        $("#from").on('change', function () {
+//            getPartialCompletePO($(this).val(), $('#to').val());
+//        });
+//        $("#to").on('change', function () {
+//            getPartialCompletePO($('#from').val(), $(this).val());
+//        });
+//        function getPartialCompletePO(from, to) {
+//            if (from != '' && to != '') {
+//                if (Date.parse(from) < Date.parse(to)) {
+//                    $.ajax({
+//                        type: 'get',
+//                        url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/PC',
+//                        success: function (response) {
+//                            console.log(response);
+//                            var model = $('.tablePC');
+//                            model.empty();
+//                            $.each(response, function (index, elem) {
+////                                var now = new Date.now();
+////                                var old = new Date(elem.created_at);
+////                                var now = (elem.created_at - new Date.now()) / (1000 * 60 * 60 * 24);
+//                                if (elem.file != null) {
+////                                    if (now > 13)
+////                                        model.append("<tr class='error_tr'>" +
+////                                    else
+//                                    model.append("<tr>" +
+//                                        "<td>" + elem.id +
+//                                        "</td><td>" + elem.created_at +
+//                                        "</td><td>" + elem.name +
+//                                        "</td><td>" + elem.del_branch +
+//                                        "</td><td>" + elem.user +
+//                                        "</td><td><a href='/" + elem.file + "'>Download Attachment</a>" +
+//                                        "</td><td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
+//                                        "' class='btn btn-success btn-outline'>View Order</a></td></tr>");
+//                                } else {
+////                                    if (now > 13)
+////                                        model.append("<tr class='error_tr'>" +
+////                                    else
+//                                    model.append("<tr>" +
+//                                        "<td>" + elem.id +
+//                                        "</td><td>" + elem.created_at +
+//                                        "</td><td>" + elem.name +
+//                                        "</td><td>" + elem.del_branch +
+//                                        "</td><td>" + elem.user +
+//                                        "</td><td> No Attachment " + "</td>" +
+//                                        "<td><a target='_blank' href='/admin/manage-clients/po-details/" + elem.id +
+//                                        "' class='btn btn-success btn-outline'>View Order</a></td></tr>");
+//
+//                                }
+//
+//                            });
+//                        }
+//                    });
+//                } else {
+//                    $('#alert').append('<span class="col-md-12 alert alert-danger">check entered dates</span>');
+//                    setTimeout(function () {
+//                        $('.alert').hide(3000);
+//                    }, 5000);
+//                }
+//            }
+//
+//        }
     </script>
 @stop

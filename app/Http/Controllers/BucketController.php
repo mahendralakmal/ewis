@@ -426,38 +426,83 @@ class BucketController extends Controller
 
     public function pendingPurchaseOrder()
     {
-
+        $from='';$to='';
         if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
-                $porders = P_Order::where('status', 'P')->get();
+                $porders = P_Order::where('status', 'P')->orderBy('id','desc')->paginate(config('const.PAGINATE'));
             else
                 $porders = User::find(Session::get('User'));
-            return view('admin/clients/purchase-orders-pending', compact('porders'));
+            return view('admin/clients/purchase-orders-pending', compact('porders','from', 'to'));
         } else
             return redirect('/');
     }
 
+    public function pendingPurchaseOrders($from, $to)
+    {
+
+        if (Session::has('User')) {
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::whereBetween('created_at', [$from, $to])
+                    ->where('status', 'P')
+                    ->orderBy('id','desc')
+                    ->paginate(config('const.PAGINATE'));
+            else
+                $porders = User::find(Session::get('User'));
+
+            return view('admin/clients/purchase-orders-pending', compact('porders','from', 'to'));
+        } else
+            return redirect('/');
+    }
 
     public function processingPurchaseOrder()
     {
+        $from='';$to='';
         if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
-                $porders = P_Order::where('status', 'OP')->get();
+                $porders = P_Order::where('status', 'OP')->orderBy('id','desc')->paginate(config('const.PAGINATE'));
             else
                 $porders = User::find(Session::get('User'));
-            return view('admin/clients/purchase-orders-processing', compact('porders'));
+            return view('admin/clients/purchase-orders-processing', compact('porders','from', 'to'));
+        } else
+            return redirect('/');
+    }
+
+    public function processingPurchaseOrders($from, $to)
+    {
+        if (Session::has('User')) {
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::whereBetween('created_at', [$from, $to])
+                    ->where('status', 'OP')
+                    ->orderBy('id','desc')
+                    ->paginate(config('const.PAGINATE'));
+            else
+                $porders = User::find(Session::get('User'));
+            return view('admin/clients/purchase-orders-processing', compact('porders','from', 'to'));
         } else
             return redirect('/');
     }
 
     public function CreditHoldPurchaseOrder()
     {
+        $from='';$to='';
         if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
-                $porders = P_Order::where('status', 'CH')->get();
+                $porders = P_Order::where('status', 'CH')->orderBy('id','desc')->paginate(config('const.PAGINATE'));
             else
                 $porders = User::find(Session::get('User'));
-            return view('admin/clients/purchase-orders-credithold', compact('porders'));
+            return view('admin/clients/purchase-orders-credithold', compact('porders','from', 'to'));
+        } else
+            return redirect('/');
+    }
+
+    public function CreditHoldPurchaseOrders($from,$to)
+    {
+        if (Session::has('User')) {
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::whereBetween('created_at', [$from, $to])->where('status', 'CH')->orderBy('id','desc')->paginate(config('const.PAGINATE'));
+            else
+                $porders = User::find(Session::get('User'));
+            return view('admin/clients/purchase-orders-credithold', compact('porders','from', 'to'));
         } else
             return redirect('/');
     }
@@ -631,12 +676,25 @@ class BucketController extends Controller
     public
     function pcPurchaseOrder()
     {
+        $from=''; $to='';
         if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
-                $porders = P_Order::where('status', 'PC')->get();
+                $porders = P_Order::where('status', 'PC')->orderBy('id','desc')->paginate(config('const.PAGINATE'));
             else
                 $porders = User::find(Session::get('User'));
-            return view('admin/clients/purchase-orders-partial-completed', compact('porders'));
+            return view('admin/clients/purchase-orders-partial-completed', compact('porders','from', 'to'));
+        } else return redirect('/');
+    }
+
+    public
+    function pcPurchaseOrders($from, $to)
+    {
+        if (Session::has('User')) {
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::whereBetween('created_at', [$from, $to])->where('status', 'PC')->orderBy('id','desc')->paginate(config('const.PAGINATE'));
+            else
+                $porders = User::find(Session::get('User'));
+            return view('admin/clients/purchase-orders-partial-completed', compact('porders','from', 'to'));
         } else return redirect('/');
     }
 
@@ -646,20 +704,34 @@ class BucketController extends Controller
     }
 
     public
-    function CompletedPurchaseOrders()
+    function CompletedPurchaseOrder()
     {
+        $from='';$to='';
         if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
-                $porders = P_Order::where('status', 'C')->get();
+                $porders = P_Order::where('status', 'C')->orderBy('id','desc')->paginate(config('const.PAGINATE'));
             else
                 $porders = User::find(Session::get('User'));
 
-            return view('admin/clients/purchase-orders-completed', compact('porders'));
+            return view('admin/clients/purchase-orders-completed', compact('porders','from', 'to'));
         } else return redirect('/');
     }
 
     public
-    function CompletedPurchaseOrder()
+    function CompletedPurchases($from, $to)
+    {
+        if (Session::has('User')) {
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::whereBetween('created_at', [$from, $to])->where('status', 'C')->orderBy('id','desc')->paginate(config('const.PAGINATE'));
+            else
+                $porders = User::find(Session::get('User'));
+
+            return view('admin/clients/purchase-orders-completed', compact('porders','from', 'to'));
+        } else return redirect('/');
+    }
+
+    public
+    function CompletedPurchaseOrders()
     {
         $clients = Client::all();
         $po = "";
