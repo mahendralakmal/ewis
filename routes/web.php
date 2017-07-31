@@ -116,6 +116,7 @@ Route::group(['prefix' => '/admin'], function () {
 
     Route::group(['prefix' => '/purchase-orders'], function () {
         Route::get('/purchase-orders-view', 'BucketController@getPurchaseOrder');
+        Route::get('/purchase-orders-view/{from}/{to}/{status}', 'BucketController@getPurchaseOrders');
         Route::get('/purchase-orders-pending', 'BucketController@pendingPurchaseOrder');
         Route::get('/purchase-orders-processing', 'BucketController@processingPurchaseOrder');
         Route::get('/purchase-orders-partial-completed', 'BucketController@pcPurchaseOrder');

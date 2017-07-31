@@ -12,14 +12,17 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row">
-                                <div class="col-md-1">Date</div>
-                                <div class="col-md-1"> Form</div>
-                                <div class="col-md-4"><input type="date" class="form-control" name="from" id="from">
+                                <div class="col-md-2">Date  Form</div>
+                                <div class="col-md-3"><input type="date" class="form-control" name="from" id="from" value="{{$from}}">
                                 </div>
                                 <div class="col-md-1"> To</div>
-                                <div class="col-md-4"><input type="date" class="form-control" name="to" id="to"></div>
+                                <div class="col-md-3"><input type="date" class="form-control" name="to" id="to" value="{{$to}}"></div>
+                                <div class="col-md-2">
+                                    <input type="hidden" id="hidStatus" value="a">
+                                    <button class="btn" id="search">Search</button>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -1111,6 +1114,13 @@
 @stop
 @section('scripts')
     <script>
+        $("#search").on('click', function(){
+            var from = $('#from').val();
+            var to = $('#to').val();
+            var status = $('#hidStatus').val();
+            window.location.replace('/admin/purchase-orders/purchase-orders-view/'+from+'/'+to+'/'+status);
+        });
+
         $(".postatus").on('change', function () {
             var poid = this.id;
             $.ajax({
@@ -1146,27 +1156,27 @@
             return Math.round((to - from) / (1000 * 60 * 60 * 24));
         }
 
-        function getPendingPO(from, to) {
-            if (from != '' && to != '') {
-                if (Date.parse(from) < Date.parse(to)) {
-                    $.ajax({
-                        type: 'get',
-                        url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/a',
-                        success: function (response) {
-                            console.log(response);
-                            var model = $('.tablePO');
-                            model.empty();
-                            model.append(response);
-                        }
-                    });
-                } else {
-                    $('#alert').append('<span class="col-md-12 alert alert-danger">check entered dates</span>');
-                    setTimeout(function () {
-                        $('.alert').hide(3000);
-                    }, 5000);
-                }
-            }
-
-        }
+//        function getPendingPO(from, to) {
+//            if (from != '' && to != '') {
+//                if (Date.parse(from) < Date.parse(to)) {
+//                    $.ajax({
+//                        type: 'get',
+//                        url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/a',
+//                        success: function (response) {
+//                            console.log(response);
+//                            var model = $('.tablePO');
+//                            model.empty();
+//                            model.append(response);
+//                        }
+//                    });
+//                } else {
+//                    $('#alert').append('<span class="col-md-12 alert alert-danger">check entered dates</span>');
+//                    setTimeout(function () {
+//                        $('.alert').hide(3000);
+//                    }, 5000);
+//                }
+//            }
+//          
+//        }
     </script>
 @stop

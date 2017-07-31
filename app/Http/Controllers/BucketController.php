@@ -224,7 +224,6 @@ class BucketController extends Controller
 
     public function getAddToBucket(Request $request)
     {
-//        dd($request->all());
         $product = Client_Product::find($request->id);
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
@@ -330,18 +329,99 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public
-    function getPurchaseOrder()
+    public function getPurchaseOrder()
     {
+        $from = '';
+        $to = '';
         if (Session::has('User')) {
             if (Session::get('User') == 1)
-                $porders = P_Order::paginate(config('const.PAGINATE'));
+                $porders = P_Order::orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
             else
                 $porders = User::find(Session::get('User'));
 
-            return view('admin/clients/purchase-orders-view', compact('porders'));
+            return view('admin/clients/purchase-orders-view', compact('porders', 'from', 'to'));
         } else
             return redirect('/');
+    }
+
+    public function getPurchaseOrders($from, $to, $status)
+    {
+        if (Session::has('User')) {
+            if (Session::get('User') == 1) {
+                if ($from != '' && $to != '')
+                    $porders = P_Order::whereBetween('created_at', [$from, $to])
+                        ->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+
+            } else
+                $porders = User::find(Session::get('User'));
+
+            return view('admin/clients/purchase-orders-view', compact('porders', 'from', 'to'));
+        } else
+            return redirect('/');
+    }
+
+    public function ajaxPurchaseOrderStatus($from, $to, $status)
+    {
+        if ($from != '' && $to != '' && $status != '' && $status != 'a')
+            $porders = P_Order::whereBetween('p__orders.created_at', [$from, $to])
+                ->where('p__orders.status', $status)
+                ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
+                ->join('clients', 'clients_branches.client_id', 'clients.id')
+                ->join('users', 'p__orders.agent_id', 'users.id')
+                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status', 'p__orders.file', 'users.name as user')
+                ->get();
+        else if ($from != '' && $to != '' && $status == 'a')
+            $porders = P_Order::whereBetween('p__orders.created_at', [$from, $to])
+                ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
+                ->join('clients', 'clients_branches.client_id', 'clients.id')
+                ->join('users', 'p__orders.agent_id', 'users.id')
+                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status', 'p__orders.file', 'users.name as user')
+                ->get();
+        else
+            $porders = P_Order::where('status', 'P')->get();
+
+        $response = "";
+        foreach ($porders as $porder) {
+            if ((integer)$this->getDateDiff($porder->created_at) > (integer)(config('const.P_Order_Pending_Timeout')) && ($porder->status == "P" || $porder->status == "PC"))
+                $response = $response . "<tr class='error_tr'>";
+            else $response = $response . "<tr>";
+
+            $response = $response . "<td>" . $porder->id . "</td><td>" . $porder->created_at . "</td><td>" . $porder->name .
+                "</td><td>" . $porder->del_branch . "</td><td>" . $porder->user . "</td><td>";
+            if ($porder->file != null)
+                $response = $response . "<a href='/" . $porder->file . "'>Download Attachment</a>";
+            else
+                $response = $response . "No Attachment";
+
+            $response = $response . "</td><td><form method='get' id='" . $porder->id . "' action=''>" .
+                "<input type='hidden' id='id' name='id' value='" . $porder->id . "'>" .
+                "<select id=" . $porder->id . " name='postatus' class='form-control postatus'>" .
+                "<option value='P' ";
+            if ($porder->status == 'P')
+                $response = $response . "selected";
+            $response = $response . ">Pending </option>" .
+                "<option value='OP' ";
+            if ($porder->status == 'OP')
+                $response = $response . "selected";
+            $response = $response . ">Processing </option>" .
+                "<option value='PC' ";
+            if ($porder->status == 'CH')
+                $response = $response . "selected";
+            $response = $response . ">Credit Hold </option>" .
+                "<option value='CH' ";
+            if ($porder->status == 'PC')
+                $response = $response . "selected";
+            $response = $response . ">Partial Completed </option>" .
+                "<option value='C' ";
+            if ($porder->status == 'C')
+                $response = $response . "selected";
+            $response = $response . ">Completed </option>" .
+                "</select>" .
+                "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" . $porder->id .
+                "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>";
+        }
+
+        return $response;
     }
 
     public function pendingPurchaseOrder()
@@ -420,8 +500,7 @@ class BucketController extends Controller
                 }
             }
             return Response::json($porder);
-        }
-        else return redirect('/');
+        } else return redirect('/');
     }
 
     public function getProcessingPoCount()
@@ -462,105 +541,103 @@ class BucketController extends Controller
                 }
             }
             return Response::json($porder);
-        }
-        else return redirect('/');
+        } else return redirect('/');
     }
 
     public
     function getPendingPoCount()
     {
         if (Session::has('User')) {
-        $user = User::find(Session::get('User'));
-        if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
-            $porder = P_Order::where('status', 'P')->count();
-        } else {
-            $porder = 0;
-            if ($user->designation_id == 6) {
-                foreach (User::where('section_head_id', $user->id)->get() as $cbranch) {
-                    foreach (ClientsBranch::where('agent_id', $cbranch->id)->get() as $tbranch) {
-                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'P']])->count();
-                    }
-                }
-                foreach (User::where('section_head_id', $cbranch->id)->get() as $sbranch) {
-                    foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
-                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'P']])->count();
-                    }
-                }
-                foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
-                    $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'P']])->count();
-                }
+            $user = User::find(Session::get('User'));
+            if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
+                $porder = P_Order::where('status', 'P')->count();
             } else {
-                foreach (User::where('section_head_id', $user->id)->get() as $sbranch) {
-                    foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
-                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'P']])->count();
+                $porder = 0;
+                if ($user->designation_id == 6) {
+                    foreach (User::where('section_head_id', $user->id)->get() as $cbranch) {
+                        foreach (ClientsBranch::where('agent_id', $cbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'P']])->count();
+                        }
                     }
-                }
-                if (ClientsBranch::where('agent_id', $user->id)->count() > 0) {
+                    foreach (User::where('section_head_id', $cbranch->id)->get() as $sbranch) {
+                        foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'P']])->count();
+                        }
+                    }
                     foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
-                        if (P_Order::where('clients_branch_id', $cbranch->id)->count() > 0) {
-                            $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'P']])->count();
+                        $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'P']])->count();
+                    }
+                } else {
+                    foreach (User::where('section_head_id', $user->id)->get() as $sbranch) {
+                        foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'P']])->count();
+                        }
+                    }
+                    if (ClientsBranch::where('agent_id', $user->id)->count() > 0) {
+                        foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
+                            if (P_Order::where('clients_branch_id', $cbranch->id)->count() > 0) {
+                                $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'P']])->count();
+                            }
                         }
                     }
                 }
             }
-        }
-        return Response::json($porder);
-        }
-        else return redirect('/');
+            return Response::json($porder);
+        } else return redirect('/');
     }
 
     public
     function getPCompletePoCount()
     {
         if (Session::has('User')) {
-        $user = User::find(Session::get('User'));
-        if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
-            $porder = P_Order::where('status', 'PC')->count();
-        } else {
-            $porder = 0;
-            if ($user->designation_id == 6) {
-                foreach (User::where('section_head_id', $user->id)->get() as $cbranch) {
-                    foreach (ClientsBranch::where('agent_id', $cbranch->id)->get() as $tbranch) {
-                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'PC']])->count();
-                    }
-                }
-                foreach (User::where('section_head_id', $cbranch->id)->get() as $sbranch) {
-                    foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
-                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'PC']])->count();
-                    }
-                }
-                foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
-                    $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'PC']])->count();
-                }
+            $user = User::find(Session::get('User'));
+            if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
+                $porder = P_Order::where('status', 'PC')->count();
             } else {
-                foreach (User::where('section_head_id', $user->id)->get() as $sbranch) {
-                    foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
-                        $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'PC']])->count();
+                $porder = 0;
+                if ($user->designation_id == 6) {
+                    foreach (User::where('section_head_id', $user->id)->get() as $cbranch) {
+                        foreach (ClientsBranch::where('agent_id', $cbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'PC']])->count();
+                        }
                     }
-                }
-                if (ClientsBranch::where('agent_id', $user->id)->count() > 0) {
+                    foreach (User::where('section_head_id', $cbranch->id)->get() as $sbranch) {
+                        foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'PC']])->count();
+                        }
+                    }
                     foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
-                        if (P_Order::where('clients_branch_id', $cbranch->id)->count() > 0) {
-                            $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'PC']])->count();
+                        $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'PC']])->count();
+                    }
+                } else {
+                    foreach (User::where('section_head_id', $user->id)->get() as $sbranch) {
+                        foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'PC']])->count();
+                        }
+                    }
+                    if (ClientsBranch::where('agent_id', $user->id)->count() > 0) {
+                        foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
+                            if (P_Order::where('clients_branch_id', $cbranch->id)->count() > 0) {
+                                $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'PC']])->count();
+                            }
                         }
                     }
                 }
             }
-        }
-        return Response::json($porder);}
-        else return redirect('/');
+            return Response::json($porder);
+        } else return redirect('/');
     }
 
     public
     function pcPurchaseOrder()
     {
         if (Session::has('User')) {
-        if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
-            $porders = P_Order::where('status', 'PC')->get();
-        else
-            $porders = User::find(Session::get('User'));
-        return view('admin/clients/purchase-orders-partial-completed', compact('porders'));}
-        else return redirect('/');
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'PC')->get();
+            else
+                $porders = User::find(Session::get('User'));
+            return view('admin/clients/purchase-orders-partial-completed', compact('porders'));
+        } else return redirect('/');
     }
 
     private function getDateDiff($date)
@@ -569,82 +646,16 @@ class BucketController extends Controller
     }
 
     public
-    function ajaxPurchaseOrderStatus($from, $to, $status)
-    {
-        if ($from != '' && $to != '' && $status != '' && $status != 'a')
-            $porders = P_Order::whereBetween('p__orders.created_at', [$from, $to])
-                ->where('p__orders.status', $status)
-                ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
-                ->join('clients', 'clients_branches.client_id', 'clients.id')
-                ->join('users', 'p__orders.agent_id', 'users.id')
-                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status', 'p__orders.file', 'users.name as user')
-                ->get();
-        else if ($from != '' && $to != '' && $status == 'a')
-            $porders = P_Order::whereBetween('p__orders.created_at', [$from, $to])
-                ->join('clients_branches', 'p__orders.clients_branch_id', 'clients_branches.id')
-                ->join('clients', 'clients_branches.client_id', 'clients.id')
-                ->join('users', 'p__orders.agent_id', 'users.id')
-                ->select('p__orders.id', 'p__orders.created_at', 'p__orders.del_branch', 'p__orders.updated_at', 'clients.name', 'p__orders.status', 'p__orders.file', 'users.name as user')
-                ->get();
-        else
-            $porders = P_Order::where('status', 'P')->get();
-
-        $response = "";
-        foreach ($porders as $porder) {
-            if ((integer)$this->getDateDiff($porder->created_at) > (integer)(config('const.P_Order_Pending_Timeout')) && ($porder->status == "P" || $porder->status == "PC"))
-                $response = $response . "<tr class='error_tr'>";
-            else $response = $response . "<tr>";
-
-            $response = $response . "<td>" . $porder->id . "</td><td>" . $porder->created_at . "</td><td>" . $porder->name .
-                "</td><td>" . $porder->del_branch . "</td><td>" . $porder->user . "</td><td>";
-            if ($porder->file != null)
-                $response = $response . "<a href='/" . $porder->file . "'>Download Attachment</a>";
-            else
-                $response = $response . "No Attachment";
-
-            $response = $response . "</td><td><form method='get' id='" . $porder->id . "' action=''>" .
-                "<input type='hidden' id='id' name='id' value='" . $porder->id . "'>" .
-                "<select id=" . $porder->id . " name='postatus' class='form-control postatus'>" .
-                "<option value='P' ";
-            if ($porder->status == 'P')
-                $response = $response . "selected";
-            $response = $response . ">Pending </option>".
-                "<option value='OP' ";
-            if ($porder->status == 'OP')
-                $response = $response . "selected";
-            $response = $response . ">Processing </option>".
-                "<option value='PC' ";
-            if ($porder->status == 'CH')
-                $response = $response . "selected";
-            $response = $response . ">Credit Hold </option>".
-                "<option value='CH' ";
-            if ($porder->status == 'PC')
-                $response = $response . "selected";
-            $response = $response . ">Partial Completed </option>".
-            "<option value='C' ";
-            if ($porder->status == 'C')
-                $response = $response . "selected";
-            $response = $response . ">Completed </option>".
-                "</select>" .
-                "</form></td><td><a target='_blank' href='/admin/manage-clients/po-details/" . $porder->id .
-                "' class='btn btn-success btn-outline'>Update Status / View Order</a></td></tr>";
-        }
-
-        return $response;
-    }
-
-    public
     function CompletedPurchaseOrders()
     {
-        if(Session::has('User')) {
+        if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
                 $porders = P_Order::where('status', 'C')->get();
             else
                 $porders = User::find(Session::get('User'));
 
             return view('admin/clients/purchase-orders-completed', compact('porders'));
-        }
-        else return redirect('/');
+        } else return redirect('/');
     }
 
     public
@@ -717,7 +728,7 @@ class BucketController extends Controller
     public
     function historyPODetails($id)
     {
-        if(Session::has('User')) {
+        if (Session::has('User')) {
             $order = P_Order::find($id);
             $order->bucket = unserialize($order->bucket);
             $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
