@@ -7,3 +7,4 @@ storage/.DS_Store
 Homestead.json
 Homestead.yaml
 .env
+app/.DS_Store
