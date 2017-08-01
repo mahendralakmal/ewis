@@ -6,9 +6,11 @@ use App\CCategory;
 use App\Client;
 use App\Client_Product;
 use App\ClientAssignProductView;
+use App\ClientsBranch;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Laravel\Scout\Searchable;
@@ -18,21 +20,73 @@ class ESearch extends Controller
 
     public function searchClients(User $user, $index)
     {
-        $produce='';
+        $produce = '';
         $header = '<table class="table"><thead><tr><td><h5>Name</h5></td><td><h5>Email</h5></td><td><h5>Telephone</h5></td><td class="col-md-3"></td></tr></thead><tbody>';
-        if ($user->id == 1) {
-            $results = Client::search($index)->get();
-            foreach ($results as $key=>$value){
-                $approval = (!$value->approval)? '<a href="/admin/manage-clients/approved/'.$value->id.'"
-                       class="btn btn-primary btn-outline">Approve</a>':'<a href="/admin/manage-clients/unapproved/'.$value->id.'"
-                                                       class="btn btn-danger btn-outline">Unapprove</a>';
-                $produce .= '<tr><td>'.$value->name.'</td><td>'.$value->email.'</td><td>'.$value->telephone.'</td><td><a href="/admin/manage-clients/update-profile/'.$value->id.'"
-                                                       class="btn btn-primary btn-outline">Edit</a>'.
-                    $approval.'               
-                </td></tr>';
+        $results = Client::search($index)->get();
+
+        foreach ($results as $key => $value) {
+
+//            dd($value);
+            if ($user->id == 1) {
+                $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
+                $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+            } else {
+                if ($user->designation_id == 6) {
+                    $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
+                    if ($user->id == $value->user_id) {
+                        $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+
+                    }
+                    foreach (User::where('section_head_id', $user->id)->get() as $shead) {
+                        if ($shead->id == $value->user_id) {
+                            $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+                        }
+
+                        foreach (ClientsBranch::where('agent_id', $shead->id)->get() as $cbranch) {
+                            if ($cbranch->client_id == $value->id) {
+                                $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+                            }
+                        }
+
+                        foreach (User::where('section_head_id', $user->id)->get() as $sheadd) {
+                            foreach (ClientsBranch::where('agent_id', $sheadd->id)->get() as $cbranch) {
+                                if ($cbranch->client_id == $value->id) {
+                                    $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    if ($user->id == $value->user_id) {
+                        $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+
+                    }
+
+                    foreach (ClientsBranch::where('agent_id', $value->user_id)->get() as $cbranch) {
+                        if ($cbranch->client_id == $value->id) {
+                            $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+                        }
+                    }
+
+                    foreach (User::where('section_head_id', $value->user_id)->get() as $shead) {
+                        foreach (ClientsBranch::where('agent_id', $shead->id)->get() as $cbranch) {
+                            if ($cbranch->client_id == $value->id) {
+                                $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+                            }
+                        }
+                    }
+                }
             }
         }
-        return Response::json($header.$produce);
+        return Response::json($header . $produce);
     }
 
     public function searchCProducts(CCategory $c_category, $index)

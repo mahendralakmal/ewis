@@ -119,7 +119,6 @@
                                                         @endif
                                                     @endforeach
                                                 @endforeach
-
                                             @endforeach
                                         @else
                                             @foreach(App\Client::where('user_id',$clients->id)->get() as $cbranch)
