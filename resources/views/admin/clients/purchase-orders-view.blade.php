@@ -14,11 +14,13 @@
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="row">
-                                <div class="col-md-2">Date  Form</div>
-                                <div class="col-md-3"><input type="date" class="form-control" name="from" id="from" value="{{$from}}">
+                                <div class="col-md-2">Date Form</div>
+                                <div class="col-md-3"><input type="date" class="form-control" name="from" id="from"
+                                                             value="{{$from}}">
                                 </div>
                                 <div class="col-md-1"> To</div>
-                                <div class="col-md-3"><input type="date" class="form-control" name="to" id="to" value="{{$to}}"></div>
+                                <div class="col-md-3"><input type="date" class="form-control" name="to" id="to"
+                                                             value="{{$to}}"></div>
                                 <div class="col-md-2">
                                     <input type="hidden" id="hidStatus" value="a">
                                     <button class="btn" id="search">Search</button>
@@ -48,7 +50,7 @@
                                             <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
                                 ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
                                 ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
-                                                    class="error_tr" @endif
+                                                class="error_tr" @endif
                                             >
                                                 <td>{{$porder->id}}</td>
                                                 <td>{{$porder->created_at}}</td>
@@ -487,7 +489,8 @@
                                                     @endforeach
                                                 @endforeach
                                             @endforeach
-
+                                            {{--**********************************************************************************************************************************************************--}}
+                                            {{--**********************************************************************************************************************************************************--}}
                                             @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                                 @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
                                                     <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
@@ -605,7 +608,8 @@
                                                     </tr>
                                                 @endforeach
                                             @endforeach
-
+                                            {{--**********************************************************************************************************************************************************--}}
+                                            {{--**********************************************************************************************************************************************************--}}
                                             @foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)
                                                 @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
                                                     @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
@@ -727,7 +731,8 @@
                                                     @endforeach
                                                 @endforeach
                                             @endforeach
-
+                                            {{--**********************************************************************************************************************************************************--}}
+                                            {{--**********************************************************************************************************************************************************--}}
                                             @if(App\ClientsBranch::where('agent_id',$porders->id)->count() >0)
                                                 @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                                     @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
@@ -851,7 +856,11 @@
                                                     @endif
                                                 @endforeach
                                             @endif
+                                            {{--**********************************************************************************************************************************************************--}}
+                                            {{--**********************************************************************************************************************************************************--}}
                                         @else
+                                            {{--**********************************************************************************************************************************************************--}}
+                                            {{--**********************************************************************************************************************************************************--}}
                                             @foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)
                                                 @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
                                                     @foreach(App\P_Order::where('clients_branch_id',$tbranch->id)->get() as $porder)
@@ -972,14 +981,18 @@
                                                     @endforeach
                                                 @endforeach
                                             @endforeach
-
+                                            {{--**********************************************************************************************************************************************************--}}
+                                            {{--**********************************************************************************************************************************************************--}}
                                             @if(App\ClientsBranch::where('agent_id',$porders->id)->count() >0)
                                                 @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
                                                     @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
                                                         @foreach(App\P_Order::where('clients_branch_id',$cbranch->id)->get() as $porder)
                                                             <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
                                 ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH"))
-                                                                ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC") ||
+                                                                ((integer)(Carbon\Carbon::parse($porder->
+                                                                created_at)->diff(\Carbon\Carbon::now())->days) >
+                                                                (int)(config('const.P_Order_Pending_Timeout')) &&
+                                                                $porder->status === "PC") ||
                                                                 class="error_tr" @endif>
                                                                 <td>{{$porder->id}}</td>
                                                                 <td>{{$porder->created_at}}</td>
@@ -1114,11 +1127,11 @@
 @stop
 @section('scripts')
     <script>
-        $("#search").on('click', function(){
+        $("#search").on('click', function () {
             var from = $('#from').val();
             var to = $('#to').val();
             var status = $('#hidStatus').val();
-            window.location.replace('/admin/purchase-orders/purchase-orders-view/'+from+'/'+to+'/'+status);
+            window.location.replace('/admin/purchase-orders/purchase-orders-view/' + from + '/' + to + '/' + status);
         });
 
         $(".postatus").on('change', function () {
@@ -1156,27 +1169,27 @@
             return Math.round((to - from) / (1000 * 60 * 60 * 24));
         }
 
-//        function getPendingPO(from, to) {
-//            if (from != '' && to != '') {
-//                if (Date.parse(from) < Date.parse(to)) {
-//                    $.ajax({
-//                        type: 'get',
-//                        url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/a',
-//                        success: function (response) {
-//                            console.log(response);
-//                            var model = $('.tablePO');
-//                            model.empty();
-//                            model.append(response);
-//                        }
-//                    });
-//                } else {
-//                    $('#alert').append('<span class="col-md-12 alert alert-danger">check entered dates</span>');
-//                    setTimeout(function () {
-//                        $('.alert').hide(3000);
-//                    }, 5000);
-//                }
-//            }
-//
-//        }
+        //        function getPendingPO(from, to) {
+        //            if (from != '' && to != '') {
+        //                if (Date.parse(from) < Date.parse(to)) {
+        //                    $.ajax({
+        //                        type: 'get',
+        //                        url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/a',
+        //                        success: function (response) {
+        //                            console.log(response);
+        //                            var model = $('.tablePO');
+        //                            model.empty();
+        //                            model.append(response);
+        //                        }
+        //                    });
+        //                } else {
+        //                    $('#alert').append('<span class="col-md-12 alert alert-danger">check entered dates</span>');
+        //                    setTimeout(function () {
+        //                        $('.alert').hide(3000);
+        //                    }, 5000);
+        //                }
+        //            }
+        //
+        //        }
     </script>
 @stop

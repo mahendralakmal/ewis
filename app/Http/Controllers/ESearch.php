@@ -25,8 +25,6 @@ class ESearch extends Controller
         $results = Client::search($index)->get();
 
         foreach ($results as $key => $value) {
-
-//            dd($value);
             if ($user->id == 1) {
                 $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
                 $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"

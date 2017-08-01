@@ -336,8 +336,14 @@ class BucketController extends Controller
         if (Session::has('User')) {
             if (Session::get('User') == 1)
                 $porders = P_Order::orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
-            else
-                $porders = User::find(Session::get('User'));
+            elseif (Session::get('User')->designation_id == 5 ||Session::get('User')->designation_id == 7 )
+                $porders = P_Order::orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (Session::get('User')->designation_id == 6){
+
+                $porders = P_Order::orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            }
+
+
 
             return view('admin/clients/purchase-orders-view', compact('porders', 'from', 'to'));
         } else
