@@ -23,10 +23,10 @@ class Product extends Model
      *
      * @return array
      */
-    public function toSearchableArray()
-    {
-        return [
-            'part_no' => $this->part_no
-        ];
-    }
+//    public function toSearchableArray()
+//    {
+//        return [
+//            'part_no' => $this->part_no
+//        ];
+//    }
 }

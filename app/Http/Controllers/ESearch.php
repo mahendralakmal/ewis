@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CCategory;
+use App\Client_Product;
 use App\ClientAssignProductView;
 use App\Product;
 use Illuminate\Http\Request;
@@ -12,23 +13,25 @@ use Laravel\Scout\Searchable;
 
 class ESearch extends Controller
 {
-    use Searchable;
+//    use Searchable;
 
     public function searchCProducts(CCategory $c_category, $index)
     {
-        $products = ClientAssignProductView::search($index)->get()->where('c_category_id', $c_category->id);
+        $products = ClientAssignProductView::search($index)->where('c_category_id', $c_category->id)->get();
         $produce = '';
         $count = 0;
 
         foreach ($products as $key => $value) {
-            $produce = $produce . '<form action="/client-profile/add-to-bucket" method="POST" class="side-by-side"><input type="hidden" name="_token" value="' . csrf_token() . '">
+            $image = Product::find($value->product_id)->image;
+            $vat_applicable = (Product::find($value->product_id)->vat_apply)?'Yes':'No';
+            $special_price = Client_Product::find($value->id)->special_price;
+            $produce .= '<form action="/client-profile/add-to-bucket" method="POST" class="side-by-side"><input type="hidden" name="_token" value="' . csrf_token() . '">
             <div class="row">
             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input type="hidden" id="id" name="id" value="' . $value->id . '"><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->part_no . '</a></div>
-            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="' . $value->image . '" alt="product" class="img-responsive" height="25" width="30"></div>
-            <div class="col-md-5 " style="border: 1px solid #dddddd; padding:5px; height:45px;"><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->name . '</a></div>
-            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">';
-            if ($value->vat_apply) $produce = $produce . 'Yes'; else $produce = $produce . 'No' . '</div>
-            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><p>' . number_format($value->special_price, 2, ".", ",") . '</p></div>
+            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="' . $image . '" alt="product" class="img-responsive" height="25" width="30"></div>
+            <div class="col-md-5 " style="border: 1px solid #dddddd; padding:5px; height:45px;"><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->name . '</a></div>'
+            .'<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">'.$vat_applicable.'</div>
+            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><p>' . number_format($special_price, 2, ".", ",") . '</p></div>
             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input style="width: 50px" align="right" type="number" min="1" value="1" name="Qty" id="Qty" class="form-controls"></div>
             <div class="col-md-2 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input class="btn btn-success btn-sm" type="submit" value="Add To Bucket"></div></div></form>';
         }
