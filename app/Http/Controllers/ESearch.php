@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\CCategory;
+use App\Client;
 use App\Client_Product;
 use App\ClientAssignProductView;
 use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
@@ -13,7 +15,25 @@ use Laravel\Scout\Searchable;
 
 class ESearch extends Controller
 {
-//    use Searchable;
+
+    public function searchClients(User $user, $index)
+    {
+        $produce='';
+        $header = '<table class="table"><thead><tr><td><h5>Name</h5></td><td><h5>Email</h5></td><td><h5>Telephone</h5></td><td class="col-md-3"></td></tr></thead><tbody>';
+        if ($user->id == 1) {
+            $results = Client::search($index)->get();
+            foreach ($results as $key=>$value){
+                $approval = (!$value->approval)? '<a href="/admin/manage-clients/approved/'.$value->id.'"
+                       class="btn btn-primary btn-outline">Approve</a>':'<a href="/admin/manage-clients/unapproved/'.$value->id.'"
+                                                       class="btn btn-danger btn-outline">Unapprove</a>';
+                $produce .= '<tr><td>'.$value->name.'</td><td>'.$value->email.'</td><td>'.$value->telephone.'</td><td><a href="/admin/manage-clients/update-profile/'.$value->id.'"
+                                                       class="btn btn-primary btn-outline">Edit</a>'.
+                    $approval.'               
+                </td></tr>';
+            }
+        }
+        return Response::json($header.$produce);
+    }
 
     public function searchCProducts(CCategory $c_category, $index)
     {
@@ -23,14 +43,14 @@ class ESearch extends Controller
 
         foreach ($products as $key => $value) {
             $image = Product::find($value->product_id)->image;
-            $vat_applicable = (Product::find($value->product_id)->vat_apply)?'Yes':'No';
+            $vat_applicable = (Product::find($value->product_id)->vat_apply) ? 'Yes' : 'No';
             $special_price = Client_Product::find($value->id)->special_price;
             $produce .= '<form action="/client-profile/add-to-bucket" method="POST" class="side-by-side"><input type="hidden" name="_token" value="' . csrf_token() . '">
             <div class="row">
             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input type="hidden" id="id" name="id" value="' . $value->id . '"><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->part_no . '</a></div>
             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="' . $image . '" alt="product" class="img-responsive" height="25" width="30"></div>
             <div class="col-md-5 " style="border: 1px solid #dddddd; padding:5px; height:45px;"><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->name . '</a></div>'
-            .'<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">'.$vat_applicable.'</div>
+                . '<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">' . $vat_applicable . '</div>
             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><p>' . number_format($special_price, 2, ".", ",") . '</p></div>
             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input style="width: 50px" align="right" type="number" min="1" value="1" name="Qty" id="Qty" class="form-controls"></div>
             <div class="col-md-2 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input class="btn btn-success btn-sm" type="submit" value="Add To Bucket"></div></div></form>';
@@ -48,8 +68,7 @@ class ESearch extends Controller
         return Response::json($produce);
     }
 
-    public
-    function searchProducts($index)
+    public function searchProducts($index)
     {
         $products = Product::search($index)->get();
         return Response::json($products);
