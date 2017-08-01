@@ -198,7 +198,7 @@
             </nav>
 
             <div id="page-wrapper" style="overflow: scroll; height: 400px">
-                <div class="row">
+                <div class="row ph">
                     <div class="col-lg-12">
                         <h1 class="page-header">@yield('page_heading')</h1>
                     </div>

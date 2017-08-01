@@ -16,7 +16,7 @@
                             <input type="text" id="search" name="search" placeholder="Search Organization"
                                    class="form-control">
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                             <div class="table-responsive tbl_ori">
                                 <table class="table">
                                     <thead>
@@ -178,10 +178,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="table-responsive tbl-ser"></div>
                         </div>
                     </div>
-                    {{--                    <div class="col-md-12">{{ $clients->links() }}</div>--}}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -246,6 +244,22 @@
 @stop
 @section('scripts')
     <script>
+        $(document).ready(function($) {
+            $(window).resize(function() {
+                var winH = $(window).height();
+                var fooH = $('#footer').height();
+                var phH = $('.ph').height();
+                var pnH = $('.panel-heading').height();
+
+                var tblNH = winH-fooH-(phH*2.5)-pnH;
+                $('.tbl_ori').height(tblNH);
+                $('.tbl_ori').css('overflow-y','auto');
+                var tblH = $('.tbl_ori').height();
+                console.log('tblori : '+tblH+'  window h : '+ winH+' footer :'+fooH);
+                console.log('phH : '+phH+'  pnH : '+ pnH+' new h : '+tblNH);
+            }).resize();
+        });
+
         $("#search").on('keyup change', function () {
             var path = window.location.pathname;
 

@@ -8,7 +8,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>{{ config('app.admin', 'Laravel') }}</title>
+    <title>{{ config('app.admin', 'ewis') }}</title>
 
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
