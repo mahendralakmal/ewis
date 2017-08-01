@@ -16,7 +16,7 @@ class CreateClientAssignProductViewsTable extends Migration
     {
         DB::statement('
             CREATE VIEW client_assign_product_views AS 
-               SELECT c.id, c.user_id, b.title AS brand, c.c_category_id,cg.title AS category, c.product_id, p.part_no, p.`name`, p.image,c.clients_branch_id, c.special_price, c.`remove`, c.created_at, c.updated_at 
+               SELECT c.id, c.c_category_id, c.product_id, p.part_no, p.`name` 
                 FROM client__products c
                 LEFT JOIN c_brands cb ON (c.brand_id = cb.id)
                 LEFT JOIN brands b ON (b.id = cb.brand_id)
