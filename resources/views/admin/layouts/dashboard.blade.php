@@ -17,8 +17,10 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-nav navbar-right">
                     <li><a>Welcome {{App\User::find(Session::get('User'))->name}}</a></li>
-                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-pending') }}">Pending<span class="badge pending"></span></a></li>
-                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-partial-completed') }}">Partial Completed<span class="badge partialComplet"></span></a></li>
+                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-pending') }}">Pending<span
+                                    class="badge pending"></span></a></li>
+                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-partial-completed') }}">Partial
+                            Completed<span class="badge partialComplet"></span></a></li>
                     <li><a href="{{ url('/signout') }}">Signout</a></li>
                 </ul>
                 <div class="navbar-default sidebar" role="navigation">
@@ -54,7 +56,8 @@
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(Session::get('User'))->privilege->designation))
                                             <li>
-                                                <a href="{{ url ('/admin/users/manage-user-designations' ) }}">Designations (Add / Edit)</a>
+                                                <a href="{{ url ('/admin/users/manage-user-designations' ) }}">Designations
+                                                    (Add / Edit)</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->add_user))
@@ -64,7 +67,8 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->user_approve))
                                             <li>
-                                                <a href="{{ url ('/admin/users/manage-users' ) }}">User Manager (Privileges / Approvals)</a>
+                                                <a href="{{ url ('/admin/users/manage-users' ) }}">User Manager
+                                                    (Privileges / Approvals)</a>
                                             </li>
                                         @endif
                                     </ul>
@@ -84,18 +88,21 @@
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(Session::get('User'))->privilege->client_prof))
                                             <li>
-                                                <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Organization (Add / Edit / Approve)
+                                                <a href="{{ url ('/admin/manage-clients/create-profile' ) }}">Organization
+                                                    (Add / Edit / Approve)
                                                 </a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->client_branch))
                                             <li>
-                                                <a href="{{ url ('/admin/manage-clients/create-branch' ) }}">Branch / Department (Add / Edit)</a>
+                                                <a href="{{ url ('/admin/manage-clients/create-branch' ) }}">Branch /
+                                                    Department (Add / Edit)</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->client_users))
                                             <li>
-                                                <a href="{{ url ('/admin/manage-clients/create-clientuser') }}">Users (Add / Edit / Approve / Profile)</a>
+                                                <a href="{{ url ('/admin/manage-clients/create-clientuser') }}">Users
+                                                    (Add / Edit / Approve / Profile)</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->manage_client))
@@ -115,7 +122,8 @@
                                     <ul class="nav nav-second-level">
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
                                             <li>
-                                                <a href="{{ url ('/admin/purchase-orders/purchase-orders-view') }}">View All / Update Status</a>
+                                                <a href="{{ url ('/admin/purchase-orders/purchase-orders-view') }}">View
+                                                    All / Update Status</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
@@ -130,7 +138,9 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
                                             <li>
-                                                <a style="color: red" href="{{ url ('/admin/purchase-orders/purchase-orders-credithold' ) }}">Credit Hold</a>
+                                                <a style="color: red"
+                                                   href="{{ url ('/admin/purchase-orders/purchase-orders-credithold' ) }}">Credit
+                                                    Hold</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_po))
@@ -162,7 +172,8 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
                                             <li>
-                                                <a href="{{ url ('/admin/reports/sectorhead-wise-purchase-orders' ) }}">Purchase Orders
+                                                <a href="{{ url ('/admin/reports/sectorhead-wise-purchase-orders' ) }}">Purchase
+                                                    Orders
                                                     by Sector Head</a>
                                             </li>
                                         @endif
@@ -180,7 +191,8 @@
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
                                             <li>
-                                                <a href="{{ url ('/admin/reports/all-products-list' ) }}">All Products List</a>
+                                                <a href="{{ url ('/admin/reports/all-products-list' ) }}">All Products
+                                                    List</a>
                                             </li>
                                         @endif
                                         @if((\App\User::find(Session::get('User'))->privilege->view_reports))
@@ -197,15 +209,17 @@
                 </div>
             </nav>
 
-            <div id="page-wrapper" style="overflow: scroll; height: 400px">
-                <div class="row ph">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">@yield('page_heading')</h1>
+            <div id="page-wrapper" style="overflow-y: auto; overflow-x:none; height: 400px">
+                <div class="container-fluid">
+                    <div class="row ph">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">@yield('page_heading')</h1>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    @yield('section')
+                    <div class="row">
+                        @yield('section')
 
+                    </div>
                 </div>
             </div>
             <footer id="footer" class="col-md-12">
@@ -231,32 +245,32 @@
             getPoStattus();
         });
 
-        $.validator.methods.email = function( value, element ) {
-            return this.optional( element ) || /[a-z]+@[a-z]+\.[a-z]+/.test( value );
+        $.validator.methods.email = function (value, element) {
+            return this.optional(element) || /[a-z]+@[a-z]+\.[a-z]+/.test(value);
         }
 
-        function getPoStattus(){
+        function getPoStattus() {
             $.ajax(
-                    {
-                        type: 'get',
-                        url: '/admin/getPendingPoCount',
-                        success: function (response) {
+                {
+                    type: 'get',
+                    url: '/admin/getPendingPoCount',
+                    success: function (response) {
 //                            console.log(response);
-                            var model = $('.pending');
-                            model.text(response);
-                        }
+                        var model = $('.pending');
+                        model.text(response);
                     }
+                }
             );
             $.ajax(
-                    {
-                        type: 'get',
-                        url: '/admin/getPCompletePoCount',
-                        success: function (response) {
+                {
+                    type: 'get',
+                    url: '/admin/getPCompletePoCount',
+                    success: function (response) {
 //                            console.log(response);
-                            var model = $('.partialComplet');
-                            model.text(response);
-                        }
+                        var model = $('.partialComplet');
+                        model.text(response);
                     }
+                }
             );
         }
 
@@ -284,62 +298,62 @@
 
         $("#P_client").on('change', function () {
             $.ajax(
-                    {
-                        type: 'get',
-                        url: '/admin/manage-clients/purchase-orders-partial-completed/' + this.value,
-                        success: function (response) {
+                {
+                    type: 'get',
+                    url: '/admin/manage-clients/purchase-orders-partial-completed/' + this.value,
+                    success: function (response) {
 //                            console.log(response);
-                            var model = $('.tbody-completed');
-                            model.empty();
-                            $.each(response, function (index, elem) {
+                        var model = $('.tbody-completed');
+                        model.empty();
+                        $.each(response, function (index, elem) {
 //                        model.append("<option value='" + elem.id + "'>" + elem.part_no + "</option>")
-                                model.append("<tr>");
-                                model.append("<td>" + elem.id + "</td>");
-                                model.append("<td>" + elem.created_at + "</td>");
-                                model.append("<td>" + elem.del_cp + "</td>");
-                                model.append("<td>" + elem.del_branch + "</td>");
-                                model.append("<td>" + elem.del_tp + "</td>");
-                                model.append("<td>" + elem.status + "</td>");
-                                model.append("</tr>");
-                            });
-                        }
+                            model.append("<tr>");
+                            model.append("<td>" + elem.id + "</td>");
+                            model.append("<td>" + elem.created_at + "</td>");
+                            model.append("<td>" + elem.del_cp + "</td>");
+                            model.append("<td>" + elem.del_branch + "</td>");
+                            model.append("<td>" + elem.del_tp + "</td>");
+                            model.append("<td>" + elem.status + "</td>");
+                            model.append("</tr>");
+                        });
                     }
+                }
             );
         });
 
         $("#product_id").on('change', function () {
             $.ajax(
-                    {
-                        type: 'get',
-                        url: '/admin/manage-product-list/product/details/' + this.value,
-                        success: function (response) {
-                            $('#list_price').val(response.default_price);
-                            $('#list_price').prop('readonly', true);
-                            $('#vat').val(response.vat);
-                            $('#vat').prop('readonly', true);
-                            var model = $('#description');
-                            model.empty();
-                            model.append("<div class='col-md-4'><label>Description</label></div>");
-                            model.append("<div class='col-md-8'><label class='lightslategrey'>" + response.description + "</label></div>");
-                        }
+                {
+                    type: 'get',
+                    url: '/admin/manage-product-list/product/details/' + this.value,
+                    success: function (response) {
+                        $('#list_price').val(response.default_price);
+                        $('#list_price').prop('readonly', true);
+                        $('#vat').val(response.vat);
+                        $('#vat').prop('readonly', true);
+                        var model = $('#description');
+                        model.empty();
+                        model.append("<div class='col-md-4'><label>Description</label></div>");
+                        model.append("<div class='col-md-8'><label class='lightslategrey'>" + response.description + "</label></div>");
                     }
+                }
             );
         });
 
         $("#category_id").on('change', function () {
             $.ajax(
-                    {
-                        type: 'get',
-                        url: '/admin/manage-product-list/product/' + this.value,
-                        success: function (response) {
-                            var model = $('#product_id');
-                            model.empty();
-                            model.append("<option selected>Select Products</option>")
-                            $.each(response, function (index, elem) {
-                                model.append("<option value='" + elem.id + "'>" + elem.name + "</option>")
-                            });
-                        }
+                {
+                    type: 'get',
+                    url: '/admin/manage-product-list/product/' + this.value,
+                    success: function (response) {
+                        var model = $('#product_id');
+                        model.empty();
+                        model.append("<option selected>Select Products</option>")
+                        $.each(response, function (index, elem) {
+                            model.append("<option value='" + elem.id + "'>" + elem.name + "</option>")
+                        });
                     }
+                }
             );
         });
 
