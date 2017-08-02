@@ -16,7 +16,7 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Clients</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body tbl_ori">
                     <ul class="list-group">
                         @if($user->id == 1)
                             @foreach($users as $user)

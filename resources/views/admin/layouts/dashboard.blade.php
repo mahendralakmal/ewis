@@ -239,7 +239,21 @@
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
     @yield('scripts')
     <script>
+        $(document).ready(function($) {
+            $(window).resize(function() {
+                var winH = $(window).height();
+                var fooH = $('#footer').height();
+                var phH = $('.ph').height();
+                var pnH = $('.panel-heading').height();
 
+                var tblNH = winH-fooH-(phH*2.5)-pnH;
+                $('.tbl_ori').height(tblNH);
+                $('.tbl_ori').css('overflow-y','auto');
+                var tblH = $('.tbl_ori').height();
+                console.log('tblori : '+tblH+'  window h : '+ winH+' footer :'+fooH);
+                console.log('phH : '+phH+'  pnH : '+ pnH+' new h : '+tblNH);
+            }).resize();
+        });
 
         $(window).on("load", function () {
             getPoStattus();
@@ -283,8 +297,6 @@
                 });
             }
         }, 5000)
-
-        //end of purchase order
 
         $('#sandbox-container .input-daterange').datepicker({format: "dd-mm-yyyy"});
 

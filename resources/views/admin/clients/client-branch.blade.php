@@ -11,7 +11,7 @@
                         <h3 class="panel-title">Branch / Department</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="panel-body">
+                        <div class="panel-body tbl_ori">
                             <ul class="list-group">
                                 @if(Session::get('User') == 1)
                                     @foreach($clients as $client)

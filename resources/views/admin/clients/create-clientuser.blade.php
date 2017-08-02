@@ -12,7 +12,7 @@
                     </div>
                     <div class="panel-body">
                         @if(!$users->count() == 0)
-                            <div class="table-responsive">
+                            <div class="table-responsive tbl_ori">
                                 <table class="table">
                                     <thead>
                                     <tr>
