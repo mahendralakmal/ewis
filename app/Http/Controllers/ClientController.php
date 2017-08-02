@@ -42,8 +42,42 @@ class ClientController extends Controller
             $user = User::find(session('User'));
             if ($user->id == 1)
                 $clients = Client::where('user_id', $user->id)->orderBy('name')->get();
-            else
-                $clients = $user;
+            else {
+                if ($user->designation_id == 6) {
+                    $clients = Client::where('user_id', $user->id)->orderBy('name')->get();
+                    foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbr) {
+                        $clients = $clients->merge(Client::where('id', $cbr->client_id)->get());
+                    }
+                    foreach (User::where('section_head_id', $user->id)->get() as $sec_H) {
+                        $clients = $clients->merge(Client::where('user_id', $sec_H->id)->get());
+
+                        foreach (ClientsBranch::where('agent_id', $sec_H->id)->get() as $cbr) {
+                            $clients = $clients->merge(Client::where('id', $cbr->client_id)->get());
+                        }
+                        foreach (User::where('section_head_id', $sec_H->id)->get() as $sec_HI) {
+                            foreach (ClientsBranch::where('agent_id', $sec_HI->id)->get() as $cbr) {
+                                $clients = $clients->merge(Client::where('id', $cbr->client_id)->get());
+                            }
+                        }
+                    }
+                } else {
+                    $clients = Client::where('user_id',$user->id)->get();
+                    foreach(ClientsBranch::where('agent_id',$user->id)->get() as $cbr){
+                        $clients = $clients->merge(Client::where('id', $cbr->client_id)->get());
+                    }
+                    foreach (User::where('section_head_id', $user->id)->get() as $sec_H) {
+                        $clients = $clients->merge(Client::where('user_id', $sec_H->id)->get());
+                        foreach (ClientsBranch::where('agent_id', $sec_H->id)->get() as $cbr) {
+                            $clients = $clients->merge(Client::where('id', $cbr->client_id)->get());
+                        }
+                        foreach (User::where('section_head_id', $sec_H->id)->get() as $sec_HI) {
+                            foreach (ClientsBranch::where('agent_id', $sec_HI->id)->get() as $cbr) {
+                                $clients = $clients->merge(Client::where('id', $cbr->client_id)->get());
+                            }
+                        }
+                    }
+                }
+            }
 
             return view('/admin/clients/client-profile', compact('id', 'clients'));
         } else return redirect('/');

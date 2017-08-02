@@ -25,64 +25,64 @@ class ESearch extends Controller
         $results = Client::search($index)->get();
 
         foreach ($results as $key => $value) {
-            if ($user->id == 1) {
+//            if ($user->id == 1) {
                 $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
                 $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
                                                        class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
-            } else {
-                if ($user->designation_id == 6) {
-                    $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
-                    if ($user->id == $value->user_id) {
-                        $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
-                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
-
-                    }
-                    foreach (User::where('section_head_id', $user->id)->get() as $shead) {
-                        if ($shead->id == $value->user_id) {
-                            $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
-                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
-                        }
-
-                        foreach (ClientsBranch::where('agent_id', $shead->id)->get() as $cbranch) {
-                            if ($cbranch->client_id == $value->id) {
-                                $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
-                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
-                            }
-                        }
-
-                        foreach (User::where('section_head_id', $user->id)->get() as $sheadd) {
-                            foreach (ClientsBranch::where('agent_id', $sheadd->id)->get() as $cbranch) {
-                                if ($cbranch->client_id == $value->id) {
-                                    $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
-                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    if ($user->id == $value->user_id) {
-                        $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
-                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
-
-                    }
-
-                    foreach (ClientsBranch::where('agent_id', $value->user_id)->get() as $cbranch) {
-                        if ($cbranch->client_id == $value->id) {
-                            $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
-                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
-                        }
-                    }
-
-                    foreach (User::where('section_head_id', $value->user_id)->get() as $shead) {
-                        foreach (ClientsBranch::where('agent_id', $shead->id)->get() as $cbranch) {
-                            if ($cbranch->client_id == $value->id) {
-                                $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
-                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
-                            }
-                        }
-                    }
-                }
-            }
+//            } else {
+//                if ($user->designation_id == 6) {
+//                    $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
+//                    if ($user->id == $value->user_id) {
+//                        $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+//                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+//
+//                    }
+//                    foreach (User::where('section_head_id', $user->id)->get() as $shead) {
+//                        if ($shead->id == $value->user_id) {
+//                            $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+//                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+//                        }
+//
+//                        foreach (ClientsBranch::where('agent_id', $shead->id)->get() as $cbranch) {
+//                            if ($cbranch->client_id == $value->id) {
+//                                $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+//                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+//                            }
+//                        }
+//
+//                        foreach (User::where('section_head_id', $user->id)->get() as $sheadd) {
+//                            foreach (ClientsBranch::where('agent_id', $sheadd->id)->get() as $cbranch) {
+//                                if ($cbranch->client_id == $value->id) {
+//                                    $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+//                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+//                                }
+//                            }
+//                        }
+//                    }
+//                } else {
+//                    if ($user->id == $value->user_id) {
+//                        $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+//                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+//
+//                    }
+//
+//                    foreach (ClientsBranch::where('agent_id', $value->user_id)->get() as $cbranch) {
+//                        if ($cbranch->client_id == $value->id) {
+//                            $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+//                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+//                        }
+//                    }
+//
+//                    foreach (User::where('section_head_id', $value->user_id)->get() as $shead) {
+//                        foreach (ClientsBranch::where('agent_id', $shead->id)->get() as $cbranch) {
+//                            if ($cbranch->client_id == $value->id) {
+//                                $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+//                                                       class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
+//                            }
+//                        }
+//                    }
+//                }
+//            }
         }
         return Response::json($header . $produce);
     }
