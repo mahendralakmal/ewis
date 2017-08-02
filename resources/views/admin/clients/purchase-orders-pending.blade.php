@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="table-responsive">
+                        <div class="table-responsive tbl_ori">
                             <table class="table">
                                 <thead>
                                 <tr>

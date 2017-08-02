@@ -5,7 +5,7 @@
         && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
         && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->client_users))
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-7 col-md-7">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Users</h3>
@@ -268,7 +268,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-5 col-md-5">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-md-4">
                 @include('admin.messages.success')
                 @include('admin.messages.error')
                 <form id="userCreate" class="form-horizontal" role="form" method="POST"
