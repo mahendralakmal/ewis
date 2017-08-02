@@ -10,10 +10,10 @@ class User extends Model
     use Searchable;
     protected $fillable=['email','password','name','designation_id','nic_pass','deleted','approval','user_id','section_head_id'];
 
-//    public function toSearchableArray()
-//    {
-//        return $this->toArray();
-//    }
+    public function toSearchableArray()
+    {
+        return $this->toArray();
+    }
 
     public function privilege(){
         return $this->hasOne(Privilege::class);
