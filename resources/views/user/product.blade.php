@@ -38,7 +38,7 @@
                                     <form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">
                                         {!! csrf_field() !!}
                                         <div class="row">
-                                            {{--<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input type="hidden" id="id" name="id" value="{{ $product->id }}"><a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a></div>--}}
+                                            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input type="hidden" id="id" name="id" value="{{ $product->id }}"></div>
                                             {{--<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="{{ asset('/' . $product->product->image) }}" alt="product" class="img-responsive" height="25" width="30"></div>--}}
 {{--                                            <div class="col-md-5 " style="border: 1px solid #dddddd; padding:5px; height:45px;"><a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a></div>--}}
                                             {{--<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">@if($product->product->vat_apply) Yes @else No @endif</div>--}}
