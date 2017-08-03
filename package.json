@@ -9,6 +9,7 @@
   "devDependencies": {
     "axios": "^0.15.2",
     "bootstrap-sass": "^3.3.7",
+    "font-awesome": "*",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-sass": "^3.1.0",
@@ -18,7 +19,6 @@
     "laravel-elixir-webpack-official": "^1.0.2",
     "laravel-mix": "^0.5.0",
     "lodash": "^4.16.2",
-    "vue": "^2.0.1",
-    "font-awesome": "*"
+    "vue": "^2.0.1"
   }
 }

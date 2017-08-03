@@ -61,161 +61,162 @@
                                 </div>
                             </div>
                         </div>
-                        @if($po !="")
-                            <table class="table table-condensed">
-                                <tbody class="tbody-completed">
-                                <tr>
-                                    <td><h4><strong>{{$po->name}}</strong></h4></td>
-                                </tr>
-                                @foreach($branch as $branch)
-                                    @if(\App\User::find($branch->agent_id)->section_head_id === $po->id)
-                                        <tr>
-                                            <td><h4><strong>{{\App\User::find($branch->agent_id)->name}}</strong></h4>
-                                            </td>
-                                        </tr>
-                                    @endif
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 tbl_ori">
+                            @if($po !="")
+                                <table class="table table-condensed">
+                                    <tbody class="tbody-completed">
                                     <tr>
-                                    @if( $branch->activation  !== 1)
-                                        <tr>
-                                            <td><strong>{{$branch->client->name}} - {{$branch->name}}</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <table class="table table-condensed">
-                                                    <thead>
-                                                    @if($status == 'C')
-
-                                                        <tr>
-                                                            <td class="text-center"><h5>P.O. No.</h5></td>
-                                                            <td class="text-center"><h5>Created Date & Time</h5></td>
-                                                            <td class="text-center"><h5>Completed Date & Time</h5></td>
-                                                            <td class="text-center"><h5>Organization</h5></td>
-                                                            <td class="text-center"><h5>Contact Name</h5></td>
-                                                            <td class="text-right"><h5>Grand Total</h5></td>
-                                                        </tr>
-                                                    @else
-                                                        <tr>
-                                                            <td class="text-center"><h5>P.O. No.</h5></td>
-                                                            <td class="text-center"><h5>Created Date & Time</h5></td>
-                                                            <td class="text-center"><h5>Organization</h5></td>
-                                                            <td class="text-center"><h5>Contact Name</h5></td>
-                                                            <td class="text-right"><h5>Grand Total</h5></td>
-                                                        </tr>
-                                                    @endif
-                                                    </thead>
-                                                    <tbody>
-                                                    @if($start !="" && $end!="")
-                                                        @if($branch->p_orders->count()>0)
-                                                            @foreach($p_orders as $porder)
-                                                                @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
-                                                                    <tr>
-                                                                        <td class="text-center">
-                                                                            <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}">{{$porder->id}}</a>
-                                                                        </td>
-                                                                        <td class="text-center">{{$porder->created_at}}</td>
-                                                                        @if($porder->status == 'C')
-                                                                            <td class="text-center">{{$porder->updated_at}}</td> @endif
-                                                                        <td class="text-center">{{$porder->client_branch->client->name}}</td>
-                                                                        <td class="text-center">{{$porder->del_cp}}</td>
-                                                                        <td class="text-right">{{number_format($porder->bucket->totalPrice,2)}}</td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        @else
-                                                            <tr>
-                                                                <td class="alert-danger"> No records found...!</td>
-                                                            </tr>
-                                                        @endif
-                                                    @else
-                                                        @if($branch->p_orders->count()>0)
-                                                            @foreach($p_orders as $porder)
-                                                                @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
-                                                                    <tr>
-                                                                        <td class="text-center">
-                                                                            <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}">{{$porder->id}}</a>
-                                                                        </td>
-                                                                        <td class="text-center">{{$porder->created_at}}</td>
-                                                                        @if($porder->status == 'C')
-                                                                            <td class="text-center">{{$porder->updated_at}}</td> @endif
-                                                                        <td class="text-center">{{$porder->client_branch->client->name}}</td>
-                                                                        <td class="text-center">{{$porder->del_cp}}</td>
-                                                                        <td class="text-right">{{number_format($porder->bucket->totalPrice,2)}}</td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        @else
-                                                            <tr>
-                                                                <td class="alert-danger"> No records found...!</td>
-                                                            </tr>
-                                                        @endif
-
-                                                        {{--@endforeach--}}
-                                                    @endif
-                                                    {{--@endforeach--}}
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                                @foreach(App\User::where('section_head_id', $po->id)->get() as $shead)
-                                    <tr>
-                                        <td><h4><strong>{{$shead->name}}</strong></h4></td>
+                                        <td><h4><strong>{{$po->name}}</strong></h4></td>
                                     </tr>
-
-                                    @if(App\ClientsBranch::where('agent_id', $shead->id)->count()>0)
-                                        @foreach(App\ClientsBranch::where('agent_id', $shead->id)->get() as $shBranch)
+                                    @foreach($branch as $branch)
+                                        @if(\App\User::find($branch->agent_id)->section_head_id === $po->id)
                                             <tr>
-                                                <td>
-                                                    <strong>{{ $shBranch->client->name." - ". $shBranch->name }}</strong>
+                                                <td><h4><strong>{{\App\User::find($branch->agent_id)->name}}</strong></h4>
                                                 </td>
+                                            </tr>
+                                        @endif
+                                        <tr>
+                                        @if( $branch->activation  !== 1)
+                                            <tr>
+                                                <td><strong>{{$branch->client->name}} - {{$branch->name}}</strong></td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <table class="table">
+                                                    <table class="table table-condensed">
                                                         <thead>
-                                                        <tr>
-                                                            <td><h5>P.0. No.</h5></td>
-                                                            <td><h5>Created Date & Time</h5></td>
-                                                            <td><h5>Completed Date & Time</h5></td>
-                                                            <td><h5>Organization</h5></td>
-                                                            <td><h5>Customer User</h5></td>
-                                                            <td class="text-right"><h5>Grand Total</h5></td>
-                                                        </tr>
+                                                        @if($status == 'C')
+
+                                                            <tr>
+                                                                <td class="text-center"><h5>P.O. No.</h5></td>
+                                                                <td class="text-center"><h5>Created Date & Time</h5></td>
+                                                                <td class="text-center"><h5>Completed Date & Time</h5></td>
+                                                                <td class="text-center"><h5>Organization</h5></td>
+                                                                <td class="text-center"><h5>Contact Name</h5></td>
+                                                                <td class="text-right"><h5>Grand Total</h5></td>
+                                                            </tr>
+                                                        @else
+                                                            <tr>
+                                                                <td class="text-center"><h5>P.O. No.</h5></td>
+                                                                <td class="text-center"><h5>Created Date & Time</h5></td>
+                                                                <td class="text-center"><h5>Organization</h5></td>
+                                                                <td class="text-center"><h5>Contact Name</h5></td>
+                                                                <td class="text-right"><h5>Grand Total</h5></td>
+                                                            </tr>
+                                                        @endif
                                                         </thead>
                                                         <tbody>
-                                                        @if((App\P_Order::where('clients_branch_id', $shBranch->id )->count())>0)
-                                                        @foreach(App\P_Order::where('clients_branch_id', $shBranch->id )->get() as $shPos)
-                                                            @if($shPos->status == $status)
-                                                                <tr>
-                                                                    <td>
-                                                                        <a href="{{ url('/admin/manage-clients/po-details/'.$shPos->id) }}">{{$shPos->id}}</a>
-                                                                    </td>
-                                                                    <td>{{$shPos->created_at}}</td>
-                                                                    <td>{{$shPos->updated_at}}</td>
-                                                                    <td>{{$shPos->client_branch->client->name}}</td>
-                                                                    <td>{{$shPos->del_cp}}</td>
-                                                                    <td>{{number_format(unserialize($shPos->bucket)->totalPrice,2)}}</td>
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach
+                                                        @if($start !="" && $end!="")
+                                                            @if($branch->p_orders->count()>0)
+                                                                @foreach($p_orders as $porder)
+                                                                    @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
+                                                                        <tr>
+                                                                            <td class="text-center">
+                                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}">{{$porder->id}}</a>
+                                                                            </td>
+                                                                            <td class="text-center">{{$porder->created_at}}</td>
+                                                                            @if($porder->status == 'C')
+                                                                                <td class="text-center">{{$porder->updated_at}}</td> @endif
+                                                                            <td class="text-center">{{$porder->client_branch->client->name}}</td>
+                                                                            <td class="text-center">{{$porder->del_cp}}</td>
+                                                                            <td class="text-right">{{number_format($porder->bucket->totalPrice,2)}}</td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endforeach
                                                             @else
                                                                 <tr>
                                                                     <td class="alert-danger"> No records found...!</td>
                                                                 </tr>
                                                             @endif
+                                                        @else
+                                                            @if($branch->p_orders->count()>0)
+                                                                @foreach($p_orders as $porder)
+                                                                    @if($porder->status == $status && $porder->clients_branch_id === $branch->id)
+                                                                        <tr>
+                                                                            <td class="text-center">
+                                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}">{{$porder->id}}</a>
+                                                                            </td>
+                                                                            <td class="text-center">{{$porder->created_at}}</td>
+                                                                            @if($porder->status == 'C')
+                                                                                <td class="text-center">{{$porder->updated_at}}</td> @endif
+                                                                            <td class="text-center">{{$porder->client_branch->client->name}}</td>
+                                                                            <td class="text-center">{{$porder->del_cp}}</td>
+                                                                            <td class="text-right">{{number_format($porder->bucket->totalPrice,2)}}</td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endforeach
+                                                            @else
+                                                                <tr>
+                                                                    <td class="alert-danger"> No records found...!</td>
+                                                                </tr>
+                                                            @endif
+
+                                                            {{--@endforeach--}}
+                                                        @endif
+                                                        {{--@endforeach--}}
                                                         </tbody>
                                                     </table>
                                                 </td>
                                             </tr>
+                                        @endif
+                                    @endforeach
+                                    @foreach(App\User::where('section_head_id', $po->id)->get() as $shead)
+                                        <tr>
+                                            <td><h4><strong>{{$shead->name}}</strong></h4></td>
+                                        </tr>
 
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                                </tbody>
-                            </table>
+                                        @if(App\ClientsBranch::where('agent_id', $shead->id)->count()>0)
+                                            @foreach(App\ClientsBranch::where('agent_id', $shead->id)->get() as $shBranch)
+                                                <tr>
+                                                    <td>
+                                                        <strong>{{ $shBranch->client->name." - ". $shBranch->name }}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <td><h5>P.0. No.</h5></td>
+                                                                <td><h5>Created Date & Time</h5></td>
+                                                                <td><h5>Completed Date & Time</h5></td>
+                                                                <td><h5>Organization</h5></td>
+                                                                <td><h5>Customer User</h5></td>
+                                                                <td class="text-right"><h5>Grand Total</h5></td>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            @if((App\P_Order::where('clients_branch_id', $shBranch->id )->count())>0)
+                                                                @foreach(App\P_Order::where('clients_branch_id', $shBranch->id )->get() as $shPos)
+                                                                    @if($shPos->status == $status)
+                                                                        <tr>
+                                                                            <td>
+                                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$shPos->id) }}">{{$shPos->id}}</a>
+                                                                            </td>
+                                                                            <td>{{$shPos->created_at}}</td>
+                                                                            <td>{{$shPos->updated_at}}</td>
+                                                                            <td>{{$shPos->client_branch->client->name}}</td>
+                                                                            <td>{{$shPos->del_cp}}</td>
+                                                                            <td>{{number_format(unserialize($shPos->bucket)->totalPrice,2)}}</td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endforeach
+                                                            @else
+                                                                <tr>
+                                                                    <td class="alert-danger"> No records found...!</td>
+                                                                </tr>
+                                                            @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
 
-                        @endif
+                                            @endforeach
+                                        @endif
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
                     </form>
                 </div>
             </div>

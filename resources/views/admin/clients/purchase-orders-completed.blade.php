@@ -39,7 +39,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class="tableCompleted">
-                                @if(Session::get('User') == 1 || \App\User::find(Session::get('User'))->designation_id == 5 || \App\User::find(Session::get('User'))->designation_id == 7)
+                                {{--@if(Session::get('User') == 1 || \App\User::find(Session::get('User'))->designation_id == 5 || \App\User::find(Session::get('User'))->designation_id == 7)--}}
                                     @foreach($porders as $porder)
                                         <tr>
                                             <td>{{$porder->id}}</td>
@@ -58,141 +58,141 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                @else
-                                    @if($porders->designation_id == 6 )
-                                        @foreach(App\User::where('section_head_id',$porders->id)->get() as $cbranch)
-                                            @foreach(App\ClientsBranch::where('agent_id',$cbranch->id)->get() as $tbranch)
-                                                @foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'C']])->get() as $porder)
-                                                    <tr>
-                                                        <td>{{$porder->id}}</td>
-                                                        <td>{{$porder->created_at}}</td>
-                                                        <td>{{$porder->client_branch->client->name}}</td>
-                                                        <td>{{$porder->del_branch}}</td>
-                                                        <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                        @if($porder->file !== null)
-                                                            <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                    Attachment</a>
-                                                            </td>
-                                                        @else
-                                                            <td>No Attachment</td>
-                                                        @endif
-                                                        <td>
-                                                            <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                               class="btn btn-success btn-outline">Update Status / View
-                                                                Order</a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endforeach
-                                            @foreach(App\User::where('section_head_id',$cbranch->id)->get() as $sbranch)
-                                                @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
-                                                    @foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'C']])->get() as $porder)
-                                                        <tr>
-                                                            <td>{{$porder->id}}</td>
-                                                            <td>{{$porder->created_at}}</td>
-                                                            <td>{{$porder->client_branch->client->name}}</td>
-                                                            <td>{{$porder->del_branch}}</td>
-                                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                            @if($porder->file !== null)
-                                                                <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                        Attachment</a>
-                                                                </td>
-                                                            @else
-                                                                <td>No Attachment</td>
-                                                            @endif
-                                                            <td>
-                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                                   class="btn btn-success btn-outline">Update Status /
-                                                                    View
-                                                                    Order</a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @endforeach
-                                            @endforeach
+                                {{--@else--}}
+                                    {{--@if($porders->designation_id == 6 )--}}
+                                        {{--@foreach(App\User::where('section_head_id',$porders->id)->get() as $cbranch)--}}
+                                            {{--@foreach(App\ClientsBranch::where('agent_id',$cbranch->id)->get() as $tbranch)--}}
+                                                {{--@foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'C']])->get() as $porder)--}}
+                                                    {{--<tr>--}}
+                                                        {{--<td>{{$porder->id}}</td>--}}
+                                                        {{--<td>{{$porder->created_at}}</td>--}}
+                                                        {{--<td>{{$porder->client_branch->client->name}}</td>--}}
+                                                        {{--<td>{{$porder->del_branch}}</td>--}}
+                                                        {{--<td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>--}}
+                                                        {{--@if($porder->file !== null)--}}
+                                                            {{--<td><a href="{{url('/'.$porder->file)}}">Download--}}
+                                                                    {{--Attachment</a>--}}
+                                                            {{--</td>--}}
+                                                        {{--@else--}}
+                                                            {{--<td>No Attachment</td>--}}
+                                                        {{--@endif--}}
+                                                        {{--<td>--}}
+                                                            {{--<a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"--}}
+                                                               {{--class="btn btn-success btn-outline">Update Status / View--}}
+                                                                {{--Order</a>--}}
+                                                        {{--</td>--}}
+                                                    {{--</tr>--}}
+                                                {{--@endforeach--}}
+                                            {{--@endforeach--}}
+                                            {{--@foreach(App\User::where('section_head_id',$cbranch->id)->get() as $sbranch)--}}
+                                                {{--@foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)--}}
+                                                    {{--@foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'C']])->get() as $porder)--}}
+                                                        {{--<tr>--}}
+                                                            {{--<td>{{$porder->id}}</td>--}}
+                                                            {{--<td>{{$porder->created_at}}</td>--}}
+                                                            {{--<td>{{$porder->client_branch->client->name}}</td>--}}
+                                                            {{--<td>{{$porder->del_branch}}</td>--}}
+                                                            {{--<td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>--}}
+                                                            {{--@if($porder->file !== null)--}}
+                                                                {{--<td><a href="{{url('/'.$porder->file)}}">Download--}}
+                                                                        {{--Attachment</a>--}}
+                                                                {{--</td>--}}
+                                                            {{--@else--}}
+                                                                {{--<td>No Attachment</td>--}}
+                                                            {{--@endif--}}
+                                                            {{--<td>--}}
+                                                                {{--<a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"--}}
+                                                                   {{--class="btn btn-success btn-outline">Update Status /--}}
+                                                                    {{--View--}}
+                                                                    {{--Order</a>--}}
+                                                            {{--</td>--}}
+                                                        {{--</tr>--}}
+                                                    {{--@endforeach--}}
+                                                {{--@endforeach--}}
+                                            {{--@endforeach--}}
 
-                                            @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
-                                                @foreach(App\P_Order::where([['clients_branch_id',$cbranch->id], ['status', 'C']])->get() as $porder)
-                                                    <tr>
-                                                        <td>{{$porder->id}}</td>
-                                                        <td>{{$porder->created_at}}</td>
-                                                        <td>{{$porder->client_branch->client->name}}</td>
-                                                        <td>{{$porder->del_branch}}</td>
-                                                        <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                        @if($porder->file !== null)
-                                                            <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                    Attachment</a>
-                                                            </td>
-                                                        @else
-                                                            <td>No Attachment</td>
-                                                        @endif
-                                                        <td>
-                                                            <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                               class="btn btn-success btn-outline">Update Status / View
-                                                                Order</a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endforeach
-                                        @endforeach
-                                    @else
-                                        @foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)
-                                            @foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)
-                                                @foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'C']])->get() as $porder)
-                                                    <tr>
-                                                        <td>{{$porder->id}}</td>
-                                                        <td>{{$porder->created_at}}</td>
-                                                        <td>{{$porder->client_branch->client->name}}</td>
-                                                        <td>{{$porder->del_branch}}</td>
-                                                        <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                        @if($porder->file !== null)
-                                                            <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                    Attachment</a>
-                                                            </td>
-                                                        @else
-                                                            <td>No Attachment</td>
-                                                        @endif
-                                                        <td>
-                                                            <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                               class="btn btn-success btn-outline">Update Status / View
-                                                                Order</a>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                            @endforeach
-                                        @endforeach
+                                            {{--@foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)--}}
+                                                {{--@foreach(App\P_Order::where([['clients_branch_id',$cbranch->id], ['status', 'C']])->get() as $porder)--}}
+                                                    {{--<tr>--}}
+                                                        {{--<td>{{$porder->id}}</td>--}}
+                                                        {{--<td>{{$porder->created_at}}</td>--}}
+                                                        {{--<td>{{$porder->client_branch->client->name}}</td>--}}
+                                                        {{--<td>{{$porder->del_branch}}</td>--}}
+                                                        {{--<td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>--}}
+                                                        {{--@if($porder->file !== null)--}}
+                                                            {{--<td><a href="{{url('/'.$porder->file)}}">Download--}}
+                                                                    {{--Attachment</a>--}}
+                                                            {{--</td>--}}
+                                                        {{--@else--}}
+                                                            {{--<td>No Attachment</td>--}}
+                                                        {{--@endif--}}
+                                                        {{--<td>--}}
+                                                            {{--<a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"--}}
+                                                               {{--class="btn btn-success btn-outline">Update Status / View--}}
+                                                                {{--Order</a>--}}
+                                                        {{--</td>--}}
+                                                    {{--</tr>--}}
+                                                {{--@endforeach--}}
+                                            {{--@endforeach--}}
+                                        {{--@endforeach--}}
+                                    {{--@else--}}
+                                        {{--@foreach(App\User::where('section_head_id',$porders->id)->get() as $sbranch)--}}
+                                            {{--@foreach(App\ClientsBranch::where('agent_id',$sbranch->id)->get() as $tbranch)--}}
+                                                {{--@foreach(App\P_Order::where([['clients_branch_id',$tbranch->id], ['status', 'C']])->get() as $porder)--}}
+                                                    {{--<tr>--}}
+                                                        {{--<td>{{$porder->id}}</td>--}}
+                                                        {{--<td>{{$porder->created_at}}</td>--}}
+                                                        {{--<td>{{$porder->client_branch->client->name}}</td>--}}
+                                                        {{--<td>{{$porder->del_branch}}</td>--}}
+                                                        {{--<td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>--}}
+                                                        {{--@if($porder->file !== null)--}}
+                                                            {{--<td><a href="{{url('/'.$porder->file)}}">Download--}}
+                                                                    {{--Attachment</a>--}}
+                                                            {{--</td>--}}
+                                                        {{--@else--}}
+                                                            {{--<td>No Attachment</td>--}}
+                                                        {{--@endif--}}
+                                                        {{--<td>--}}
+                                                            {{--<a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"--}}
+                                                               {{--class="btn btn-success btn-outline">Update Status / View--}}
+                                                                {{--Order</a>--}}
+                                                        {{--</td>--}}
+                                                    {{--</tr>--}}
+                                                {{--@endforeach--}}
+                                            {{--@endforeach--}}
+                                        {{--@endforeach--}}
 
-                                        @if(App\ClientsBranch::where('agent_id',$porders->id)->count() >0)
-                                            @foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)
-                                                @if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)
-                                                    @foreach(App\P_Order::where([['clients_branch_id',$cbranch->id], ['status', 'C']])->get() as $porder)
-                                                        <tr>
-                                                            <td>{{$porder->id}}</td>
-                                                            <td>{{$porder->created_at}}</td>
-                                                            <td>{{$porder->client_branch->client->name}}</td>
-                                                            <td>{{$porder->del_branch}}</td>
-                                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                            @if($porder->file !== null)
-                                                                <td><a href="{{url('/'.$porder->file)}}">Download
-                                                                        Attachment</a>
-                                                                </td>
-                                                            @else
-                                                                <td>No Attachment</td>
-                                                            @endif
-                                                            <td>
-                                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                                   class="btn btn-success btn-outline">Update Status /
-                                                                    View
-                                                                    Order</a>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                @else
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    @endif
-                                @endif
+                                        {{--@if(App\ClientsBranch::where('agent_id',$porders->id)->count() >0)--}}
+                                            {{--@foreach(App\ClientsBranch::where('agent_id',$porders->id)->get() as $cbranch)--}}
+                                                {{--@if(App\P_Order::where('clients_branch_id',$cbranch->id)->count() > 0)--}}
+                                                    {{--@foreach(App\P_Order::where([['clients_branch_id',$cbranch->id], ['status', 'C']])->get() as $porder)--}}
+                                                        {{--<tr>--}}
+                                                            {{--<td>{{$porder->id}}</td>--}}
+                                                            {{--<td>{{$porder->created_at}}</td>--}}
+                                                            {{--<td>{{$porder->client_branch->client->name}}</td>--}}
+                                                            {{--<td>{{$porder->del_branch}}</td>--}}
+                                                            {{--<td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>--}}
+                                                            {{--@if($porder->file !== null)--}}
+                                                                {{--<td><a href="{{url('/'.$porder->file)}}">Download--}}
+                                                                        {{--Attachment</a>--}}
+                                                                {{--</td>--}}
+                                                            {{--@else--}}
+                                                                {{--<td>No Attachment</td>--}}
+                                                            {{--@endif--}}
+                                                            {{--<td>--}}
+                                                                {{--<a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"--}}
+                                                                   {{--class="btn btn-success btn-outline">Update Status /--}}
+                                                                    {{--View--}}
+                                                                    {{--Order</a>--}}
+                                                            {{--</td>--}}
+                                                        {{--</tr>--}}
+                                                    {{--@endforeach--}}
+                                                {{--@else--}}
+                                                {{--@endif--}}
+                                            {{--@endforeach--}}
+                                        {{--@endif--}}
+                                    {{--@endif--}}
+                                {{--@endif--}}
                                 </tbody>
                             </table>
                         </div>

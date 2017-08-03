@@ -247,11 +247,9 @@
                 var pnH = $('.panel-heading').height();
 
                 var tblNH = winH-fooH-(phH*2.5)-pnH;
-                $('.tbl_ori').height(tblNH);
-                $('.tbl_ori').css('overflow-y','auto');
-                var tblH = $('.tbl_ori').height();
-                console.log('tblori : '+tblH+'  window h : '+ winH+' footer :'+fooH);
-                console.log('phH : '+phH+'  pnH : '+ pnH+' new h : '+tblNH);
+                var tblNHH = winH-fooH-(phH*3.5);
+                $('.tbl_ori').height(tblNH).css('overflow-y','auto');
+                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
             }).resize();
         });
 

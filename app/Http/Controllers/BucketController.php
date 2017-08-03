@@ -435,10 +435,20 @@ class BucketController extends Controller
         $from = '';
         $to = '';
         if (Session::has('User')) {
-            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//                $porders = P_Order::where('status', 'P')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+//            else
+//                $porders = User::find(Session::get('User'));
+
+            if (Session::get('User') == 1)
+                $porders = P_Order::where('status', 'P')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'P')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 6)
                 $porders = P_Order::where('status', 'P')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
             else
-                $porders = User::find(Session::get('User'));
+                $porders = P_Order::where('status', 'P')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+
             return view('admin/clients/purchase-orders-pending', compact('porders', 'from', 'to'));
         } else
             return redirect('/');
@@ -466,10 +476,20 @@ class BucketController extends Controller
         $from = '';
         $to = '';
         if (Session::has('User')) {
-            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//                $porders = P_Order::where('status', 'OP')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+//            else
+//                $porders = User::find(Session::get('User'));
+
+            if (Session::get('User') == 1)
+                $porders = P_Order::where('status', 'OP')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'OP')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 6)
                 $porders = P_Order::where('status', 'OP')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
             else
-                $porders = User::find(Session::get('User'));
+                $porders = P_Order::where('status', 'OP')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+
             return view('admin/clients/purchase-orders-processing', compact('porders', 'from', 'to'));
         } else
             return redirect('/');
@@ -495,11 +515,22 @@ class BucketController extends Controller
         $from = '';
         $to = '';
         if (Session::has('User')) {
-            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//                $porders = P_Order::where('status', 'CH')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+//            else
+//                $porders = User::find(Session::get('User'));
+
+            if (Session::get('User') == 1)
+                $porders = P_Order::where('status', 'CH')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'CH')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 6)
                 $porders = P_Order::where('status', 'CH')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
             else
-                $porders = User::find(Session::get('User'));
+                $porders = P_Order::where('status', 'CH')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+
             return view('admin/clients/purchase-orders-credithold', compact('porders', 'from', 'to'));
+
         } else
             return redirect('/');
     }
@@ -688,10 +719,21 @@ class BucketController extends Controller
         $from = '';
         $to = '';
         if (Session::has('User')) {
-            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//                $porders = P_Order::where('status', 'PC')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+//            else
+//                $porders = User::find(Session::get('User'));
+
+            if (Session::get('User') == 1)
+                $porders = P_Order::where('status', 'PC')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'PC')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 6)
                 $porders = P_Order::where('status', 'PC')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
             else
-                $porders = User::find(Session::get('User'));
+                $porders = P_Order::where('status', 'PC')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+
+
             return view('admin/clients/purchase-orders-partial-completed', compact('porders', 'from', 'to'));
         } else return redirect('/');
     }
@@ -719,10 +761,19 @@ class BucketController extends Controller
         $from = '';
         $to = '';
         if (Session::has('User')) {
-            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+//                $porders = P_Order::where('status', 'C')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+//            else
+//                $porders = User::find(Session::get('User'));
+
+            if (Session::get('User') == 1)
+                $porders = P_Order::where('status', 'C')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'C')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 6)
                 $porders = P_Order::where('status', 'C')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
             else
-                $porders = User::find(Session::get('User'));
+                $porders = P_Order::where('status', 'C')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
 
             return view('admin/clients/purchase-orders-completed', compact('porders', 'from', 'to'));
         } else return redirect('/');
