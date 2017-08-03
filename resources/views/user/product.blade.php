@@ -32,71 +32,23 @@
                                 <div class="col-md-1 text-center td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff">Quantity</div>
                                 <div class="col-md-2 td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff"></div>
                             </div>
-                            @foreach ($products as $product)
-                                @if($product->remove !=1)
-                                    <form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">
-                                        {!! csrf_field() !!}
-                                        <div class="row">
-                                            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input type="hidden" id="id" name="id" value="{{ $product->id }}"><a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a></div>
-                                            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="{{ asset('/' . $product->product->image) }}" alt="product" class="img-responsive" height="25" width="30"></div>
-                                            <div class="col-md-5 " style="border: 1px solid #dddddd; padding:5px; height:45px;"><a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a></div>
-                                            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">@if($product->product->vat_apply) Yes @else No @endif</div>
-                                            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><p>{{ number_format($product->special_price,2,'.',',') }} </p></div>
-                                            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input style="width: 50px" align="right" type="number" min="1" value="1" name="Qty" id="Qty" class="form-controls"></div>
-                                            <div class="col-md-2 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input class="btn btn-success btn-sm" type="submit" value="Add To Bucket"></div>
-                                        </div>
-                                    </form>
-                                @endif
-                            @endforeach
-                           {{--<!-- <table class="table table-bordered">--}}
-                                {{--<thead>--}}
-                                {{--<tr>--}}
-                                    {{--<td> Part Number</td>--}}
-                                    {{--<td> Product Image</td>--}}
-                                    {{--<td> Product Name</td>--}}
-                                    {{--<td> Vat Applicalbe</td>--}}
-                                    {{--<td> Unit Price (Rs.)</td>--}}
-                                    {{--<td class="col-sm-1 col-lg-1 col-md-1">Quantity</td>--}}
-                                    {{--<td></td>--}}
-
-                                {{--</tr>--}}
-                                {{--</thead>--}}
-                                {{--<tbody>--}}
-                                {{--<form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">--}}
-                                    {{--{!! csrf_field() !!}--}}
-                                    {{--@foreach ($products as $product)--}}
-                                        {{--@if($product->remove !=1)--}}
-                                            {{--<tr>--}}
-                                                {{--<td style="text-align: center">--}}
-                                                    {{--<input type="hidden" id="id" name="id"--}}
-                                                           {{--value="{{ $product->id }}">--}}
-                                                    {{--<a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a>--}}
-                                                {{--</td>--}}
-                                                {{--<td align="middle"><img--}}
-                                                            {{--src="{{ asset('/' . $product->product->image) }}"--}}
-                                                            {{--alt="product"--}}
-                                                            {{--class="img-responsive" height="25" width="30"></td>--}}
-                                                {{--<td style="text-align: left">--}}
-                                                    {{--<a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a>--}}
-                                                {{--</td>--}}
-                                                {{--<td style="text-align: center"> @if($product->product->vat_apply)--}}
-                                                        {{--Yes @else No @endif</td>--}}
-                                                {{--<td style="text-align: right">--}}
-                                                    {{--<p>{{ number_format($product->special_price,2,'.',',') }} </p>--}}
-                                                {{--</td>--}}
-
-                                                {{--<td style="text-align: right"><input style="width: 50px" align="right"--}}
-                                                                                     {{--type="number" min="1" value="1"--}}
-                                                                                     {{--name="Qty" id="Qty"--}}
-                                                                                     {{--class="form-controls"></td>--}}
-                                                {{--<td><input class="btn btn-success btn-sm" type="submit"--}}
-                                                           {{--value="Add To Bucket"></td>--}}
-                                            {{--</tr>--}}
-                                        {{--@endif--}}
-                                    {{--@endforeach--}}
-                                {{--</form>--}}
-                                {{--</tbody>--}}
-                            {{--</table> -->--}}
+                            {{ $products }}
+                            {{--@foreach ($products as $product)--}}
+                                {{--@if($product->remove !=1)--}}
+                                    {{--<form action="/client-profile/add-to-bucket" method="POST" class="side-by-side">--}}
+                                        {{--{!! csrf_field() !!}--}}
+                                        {{--<div class="row">--}}
+                                            {{--<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input type="hidden" id="id" name="id" value="{{ $product->id }}"><a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a></div>--}}
+                                            {{--<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="{{ asset('/' . $product->product->image) }}" alt="product" class="img-responsive" height="25" width="30"></div>--}}
+                                            {{--<div class="col-md-5 " style="border: 1px solid #dddddd; padding:5px; height:45px;"><a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a></div>--}}
+                                            {{--<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">@if($product->product->vat_apply) Yes @else No @endif</div>--}}
+                                            {{--<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><p>{{ number_format($product->special_price,2,'.',',') }} </p></div>--}}
+                                            {{--<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input style="width: 50px" align="right" type="number" min="1" value="1" name="Qty" id="Qty" class="form-controls"></div>--}}
+                                            {{--<div class="col-md-2 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input class="btn btn-success btn-sm" type="submit" value="Add To Bucket"></div>--}}
+                                        {{--</div>--}}
+                                    {{--</form>--}}
+                                {{--@endif--}}
+                            {{--@endforeach--}}
                         @else
                             <div class="jumbotron text-center clearfix">
                                 <h2>No items found</h2>
