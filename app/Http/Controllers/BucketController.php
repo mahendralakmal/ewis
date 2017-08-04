@@ -318,7 +318,7 @@ class BucketController extends Controller
     function getHistory()
     {
         if (Session::has('User')) {
-            $orders = P_Order::where('clients_branch_id', User::find(Session::get('User'))->c_user->client_branch->id)->get();
+            $orders = P_Order::where('clients_branch_id', User::find(Session::get('User'))->c_user->client_branch->id)->orderBy('id','desc')->get();
             if ($orders != null) {
                 $orders->transform(function ($order, $key) {
                     $order->bucket = unserialize($order->bucket);
