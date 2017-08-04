@@ -9,16 +9,6 @@
 <center><h2>Purchase Order</h2></center>
 <table width="100%" border="0">
     <tr>
-        {{--<td>--}}
-        {{--<img src="{{ url('/img/ewis-logo.png') }}" style="width: 150px;"><br>--}}
-        {{--<p>Head Office<br>--}}
-        {{--No 142, Yathama Building,<br>--}}
-        {{--Galle Road,<br>--}}
-        {{--Colombo 03,<br>--}}
-        {{--Sri Lanka.<br>--}}
-        {{--Phone:117 496000<br>--}}
-        {{--Fax: 112 380580</p>--}}
-        {{--</td>--}}
         <td>
             <p><strong>Date / Time: </strong> {{ $order->created_at }}</p>
             <p><strong>P.O Reference#: </strong> {{ $order->id }}</p>
@@ -31,18 +21,13 @@
     <tr>
         <td>
             <strong>Bill To</strong>
-            {{--<p>{{ $client_branch->name }}</p>--}}
-            {{--<strong>Billing Address</strong>--}}
             <p>{{ $client_branch->address }}</p>
             <p>tel: {{ $client_branch->contact_no }}</p>
 
         </td>
         <td>
             <strong>Deliver To</strong>
-            {{--<p>{{ $order->del_cp }}</p>--}}
-            {{--<strong>Delivery Address</strong>--}}
-            <p>{{ $client_branch->address }}</p>
-            {{--<strong>Special Notes for the delivery</strong>--}}
+            <p>{{ $order->del_address }}</p>
             <p>{{ $order->del_tp }}</p>
         </td>
     </tr>
