@@ -1,71 +1,82 @@
 @extends('theme')
 
 @section('content')
-            <!-- Nav tabs -->
-            <div class="col-md-12 col-sm-12 col-sx-12 col-lg-12">
-                <ul class="nav nav-tabs nav-menu" role="tablist">
-                    <li class="active">
-                        <a href="#agent" role="tab" data-toggle="tab"> Purchase History </a>
-                    </li>
-                </ul>
+    <!-- Nav tabs -->
+    <div class="col-md-12 col-sm-12 col-sx-12 col-lg-12">
+        <ul class="nav nav-tabs nav-menu" role="tablist">
+            <li class="active">
+                <a href="#agent" role="tab" data-toggle="tab"> Purchase History </a>
+            </li>
+        </ul>
 
-                <!-- Tab panes -->
-                <div class="tab-content white-background">
-                    <div class="tab-pane fade active in" id="agent">
-                        <ul class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">
-                            <div class="panel-body">
-                                <table class="table">
-                                    <div class="row">
-                                        <div class="col-md-3"><strong>Order No :- {{$order->id}}</strong></div>
-                                        <div class="col-md-6 text-right"><strong>{{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}</strong></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
-                                            <strong>Bill To</strong>
-                                            <p>{{ App\ClientsBranch::find($order->clients_branch_id)->address }}</p>
-                                            <p>tel: {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}</p>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
-                                            <strong>Deliver To</strong>
-                                            <p>{{ $order->del_address }}</p>
-                                            <p>{{ $order->del_tp }}</p>
-                                        </div>
-                                    </div>
-                                    <thead>
-                                    <tr>
-                                        <td><strong>Part Number</strong></td>
-                                        <td style="text-align: center"><strong>Product Name</strong></td>
-                                        <td><strong>Quantity</strong></td>
-                                        <td><strong>Unit Price</strong></td>
-                                        <td><strong>VAT</strong></td>
-                                        <td><strong>Total Price (Rs.)</strong></td>
-                                        <td class="col-md-3"></td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($order->bucket->items as $item)
-                                        <tr>
-                                            <td style="text-align: center">{{ $item['item'] ['part_no'] }}</td>
-                                            <td style="text-align: center">{{ $item['item'] ['name'] }}</td>
-                                            <td style="text-align: center">{{ $item['qty'] }}</td>
-                                            <td style="text-align: right">{{number_format((\App\Client_Product::where([['product_id', $item['item'] ['id']],['clients_branch_id', $branch->id ]])->first()->special_price),'2','.',',')}}</td>
-                                            <td style="text-align: center">@if($item['item'] ['vat_apply'])15% @else 0% @endif</td>
-                                            <td style="text-align: right">{{ number_format($item['price'],2) }}</td>
-                                            @endforeach
-                                        </tr>
-                                        <tr>
-                                            <td colspan="5"><h5><strong>Grand Total</strong></h5></td>
-                                            <td style="border-bottom: double #333; text-align: right"><h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>
-                                        </tr>
-                                </table>
+        <!-- Tab panes -->
+        <div class="tab-content white-background">
+            <div class="tab-pane fade active in" id="agent">
+                <ul class="container col-md-12 col-sm-12 col-sx-12 col-lg-12">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3"><strong>Order No :- {{$order->id}}</strong></div>
+                            <div class="col-md-6 text-right">
+                                <strong>{{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}</strong>
                             </div>
-
-
-
-
-                        </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                                <br>
+                                <strong>Bill To</strong>
+                                <p>{{ App\ClientsBranch::find($order->clients_branch_id)->address }}</p>
+                                <p>tel: {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                                <br>
+                                <strong>Deliver To</strong>
+                                <p>{{ $order->del_address }}</p>
+                                <p>{{ $order->del_tp }}</p>
+                                <br>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td><strong>Part Number</strong></td>
+                                <td style="text-align: center"><strong>Product Name</strong></td>
+                                <td><strong>Quantity</strong></td>
+                                <td><strong>Unit Price</strong></td>
+                                <td><strong>VAT</strong></td>
+                                <td><strong>Total Price (Rs.)</strong></td>
+                                <td class="col-md-3"></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($order->bucket->items as $item)
+                                <tr>
+                                    <td style="text-align: center">{{ $item['item'] ['part_no'] }}</td>
+                                    <td style="text-align: center">{{ $item['item'] ['name'] }}</td>
+                                    <td style="text-align: center">{{ $item['qty'] }}</td>
+                                    <td style="text-align: right">{{number_format((\App\Client_Product::where([['product_id', $item['item'] ['id']],['clients_branch_id', $branch->id ]])->first()->special_price),'2','.',',')}}</td>
+                                    <td style="text-align: center">@if($item['item'] ['vat_apply'])15% @else
+                                            0% @endif</td>
+                                    <td style="text-align: right">{{ number_format($item['price'],2) }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td colspan="5"><h5><strong>Grand Total</strong></h5></td>
+                                <td style="border-bottom: double #333; text-align: right">
+                                    <h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">Special Notes</div>
+                            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                                {{ $order->del_notes }}
+                            </div>
                         </div>
                     </div>
-                </div>
+
+
+                </ul>
             </div>
+        </div>
+    </div>
+    </div>
 @stop
