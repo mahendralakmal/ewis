@@ -11,63 +11,69 @@
                     <h3 class="panel-title">Products</h3>
                 </div>
                 <div class="panel-body">
-                    <ul class="list-group">
-                        @foreach($brands as $brand)
-                            @if($brand->status)
-                                <li class="list-group-item">
-                                    <a href="#{{ $brand->id }}" class="list-group-item active"
-                                       data-toggle="collapse"><strong>{{ $brand->title }}</strong>
-                                        <span class="badge">{{$brand->category->count()}}</span></a>
-                                    <div id="{{$brand->id}}" class="collapse">
-                                        @foreach($brand->category as $cate)
-                                            @if($cate->status)
-                                                <a href="#c{{ $cate->id }}" class="list-group-sub-item active"
-                                                   data-toggle="collapse"><strong>{{ $cate->title }}</strong>
-                                                    <span class="badge">{{$cate->product->count()}}</span></a>
-                                                <div id="c{{$cate->id}}" class="collapse">
-                                                    {{--{{$cate->product}}--}}
-                                                    <table class="table">
-                                                        <thead>
-                                                        <tr>
-                                                            <td><h5>Part No</h5></td>
-                                                            <td><h5>Name</h5></td>
-                                                            <td><h5>price</h5></td>
-                                                            <td></td>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        @foreach($cate->product as $prod)
-                                                            @if($prod->status)
-                                                                <tr>
-                                                                    <td>{{$prod->part_no}}</td>
-                                                                    <td>{{$prod->name}}</td>
-                                                                    <td class="text-right">{{$prod->default_price}}</td>
-                                                                    <td>
-                                                                        <a href="/admin/products/{{$prod->id}}"
-                                                                           class="btn btn-primary btn-outline">Edit</a>
-                                                                        {{--<a href="/admin/products/{{$prod->id}}/remove"--}}
-                                                                           {{--class="btn btn-danger btn-outline">Delete</a>--}}
-                                                                    </td>
-                                                                </tr>
-                                                            @endif
-                                                        @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                </li>
-                            @endif
-                        @endforeach
-                    </ul>
+                    <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 tbl_ori">
+                        <ul class="list-group">
+                            @foreach($brands as $brand)
+                                @if($brand->status)
+                                    <li class="list-group-item">
+                                        <a href="#{{ $brand->id }}" class="list-group-item active"
+                                           data-toggle="collapse"><strong>{{ $brand->title }}</strong>
+                                            <span class="badge">{{$brand->category->count()}}</span></a>
+                                        <div id="{{$brand->id}}" class="collapse">
+                                            @foreach($brand->category as $cate)
+                                                @if($cate->status)
+                                                    <a href="#c{{ $cate->id }}" class="list-group-sub-item active"
+                                                       data-toggle="collapse"><strong>{{ $cate->title }}</strong>
+                                                        <span class="badge">{{$cate->product->count()}}</span></a>
+                                                    <div id="c{{$cate->id}}" class="collapse">
+                                                        {{--{{$cate->product}}--}}
+                                                        <table class="table">
+                                                            <thead>
+                                                            <tr>
+                                                                <td><h5>Part No</h5></td>
+                                                                <td><h5>Name</h5></td>
+                                                                <td><h5>price</h5></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            </thead>
+                                                        </table>
+                                                        <div class="tbl_ori_inner">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                @foreach($cate->product as $prod)
+                                                                    @if($prod->status)
+                                                                        <tr>
+                                                                            <td>{{$prod->part_no}}</td>
+                                                                            <td>{{$prod->name}}</td>
+                                                                            <td class="text-right">{{$prod->default_price}}</td>
+                                                                            <td>
+                                                                                <a href="/admin/products/{{$prod->id}}"
+                                                                                   class="btn btn-primary btn-outline">Edit</a>
+                                                                                {{--<a href="/admin/products/{{$prod->id}}/remove"--}}
+                                                                                {{--class="btn btn-danger btn-outline">Delete</a>--}}
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endif
+                                                                @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-5">
             <h4>Add new Product</h4>
             <hr>
-            <div class="col-md-12">
+            <div class="col-md-12 side_pannel">
                 @include('admin.messages.success')
                 @include('admin.messages.error')
                 <form class="form-horizontal" id="products" enctype="multipart/form-data" role="form" method="POST"
@@ -186,9 +192,13 @@
                         </div>
                         <div class="col-xs-1 col-sm-1 col-md-1">%</div>
                     </div>
-                    <div class="col-md-12 text-center form-group"><button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
-                                Add @endif</button></div>
-                        <div class="col-md-12 text-center form-group"><a class="btn btn-danger" name="complete" id="complete" href="{{ url ('/admin') }}">Finished Adding Products</a></div>
+                    <div class="col-md-12 text-center form-group">
+                        <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
+                                Add @endif</button>
+                    </div>
+                    <div class="col-md-12 text-center form-group"><a class="btn btn-danger" name="complete"
+                                                                     id="complete" href="{{ url ('/admin') }}">Finished
+                            Adding Products</a></div>
                 </form>
             </div>
         </div>
@@ -200,6 +210,20 @@
 @stop
 @section('scripts')
     <script>
+        $(document).ready(function($) {
+            $(window).resize(function() {
+                var winH = $(window).height();
+                var fooH = $('#footer').height();
+                var phH = $('.ph').height();
+                var pnH = $('.panel-heading').height();
+
+                var tblNH = winH-fooH-(phH*2.5)-pnH;
+                var tblNHH = winH-fooH-(phH*3.5);
+                $('.tbl_ori').height(tblNH).css('overflow-y','auto');
+                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
+                $('.side_pannel').height(tblNH).css('overflow-y','auto');
+            }).resize();
+        });
         $("#products").validate({
             rules: {
                 part_no: "required",
