@@ -7,6 +7,7 @@ use App\Client;
 use App\Client_Product;
 use App\ClientAssignProductView;
 use App\ClientsBranch;
+use App\Designation;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
@@ -17,6 +18,60 @@ use Laravel\Scout\Searchable;
 
 class ESearch extends Controller
 {
+    public function searchUser($designation, $index)
+    {
+        if ($designation == 2) {
+            $produce = '';
+            $users = User::search($index)->where('designation_id', $designation)->get();
+            $header = '<table class="table"><thead><tr><td><h5>Organization</h5></td><td><h5>Branch / Department</h5></td><td><h5>Email</h5></td><td><h5>Name</h5></td><td class="col-md-3"></td></tr></thead><tbody>';
+            foreach ($users as $user) {
+                if ($user->approval == 0)
+                    $approval = '<a href="/admin/manage-clients/client_user/{{ $user->id }}/activate" class="btn btn-primary btn-outline">Approve</a>';
+                else
+                    $approval = '<a href="/admin/manage-clients/client_user/{{ $user->id }}/deactivate" class="btn btn-danger btn-outline">Unapprove</a>';
+
+                $produce .= '<tr><td><h5>' . $user->c_user->client->name . '</h5></td>
+                        <td><h5>' . $user->c_user->client_branch->name . '</h5></td>
+                        <td><h5>' . $user->email . '</h5></td>
+                        <td><h5>' . $user->name . '</h5></td>
+                        <td>
+                        <form method="POST" action="/admin/users/delete"
+                                                                      role="form">
+                                                                    <a href="/admin/manage-clients/client_user/' . $user->id . '"
+                                                                       class="btn btn-primary btn-outline">Profile</a>
+                                                                    <a href="/admin/manage-clients/create-clientuser/' . $user->id . '"
+                                                                       class="btn btn-primary btn-outline">Edit</a>
+                                                                       <input type="hidden" name="_token" value="' . csrf_token() . '">
+                                                                    ' . $approval . '<input type="hidden" id="hidId" name="hidId"value="{{ $user->id }}"></form></td></tr>';
+            }
+            $produce .= '</tbody></table>';
+            return Response::json($header . $produce);
+        } else {
+            $produce = '';
+            $users = User::search($index)->get();
+            $header = '<table class="table"><thead><tr><td><h5>Email</h5></td><td><h5>Name</h5></td><td><h5>Designation</h5></td><td></td></tr></thead><tbody>';
+            foreach ($users as $user) {
+                if ($user->designation_id != 2) {
+                    $produce .= '
+                    <tr>
+                        <td>' . $user->email . '</td>
+                        <td>' . $user->name . '</td>
+                        <td>' . $user->designation->designation . '</td>
+                        <td>
+                            <a href="/admin/users/create-users/{{ $user->id }}"
+                               class="btn btn-primary btn-outline">Edit</a>
+                                <input type="hidden" name="_token" value="' . csrf_token() . '">
+                                <input type="hidden" id="hidId" name="hidId" value="' . $user->id . '">
+                        </td>
+                    </tr>
+                ';
+                }
+            }
+            $produce .= '</tbody></table>';
+
+            return Response::json($header . $produce);
+        }
+    }
 
     public function searchClients(User $user, $index)
     {
@@ -25,8 +80,8 @@ class ESearch extends Controller
         $results = Client::search($index)->get();
 
         foreach ($results as $key => $value) {
-                $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
-                $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
+            $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
+            $produce .= '<tr><td>' . $value->name . '</td><td>' . $value->email . '</td><td>' . $value->telephone . '</td><td><a href="/admin/manage-clients/update-profile/' . $value->id . '"
                                                        class="btn btn-primary btn-outline">Edit</a>' . $approval . ' </td></tr>';
         }
         return Response::json($header . $produce);

@@ -135,6 +135,7 @@ Route::group(['prefix' => '/admin'], function () {
         Route::get('/', 'ClientController@index');
         Route::get('/create-clientuser', 'UserController@client');
         Route::get('/create-clientuser/{id}', 'UserController@clientedit');
+        Route::get('/create-clientuser/search/{designation}/{index}', 'ESearch@searchUser');
         Route::get('/create-profile/', 'ClientController@create_profile');
         Route::get('/create-profile/search/{user}/{index}', 'ESearch@searchClients');
         Route::get('/update-profile/{id}', 'ClientController@update_profile');
