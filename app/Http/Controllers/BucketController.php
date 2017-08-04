@@ -281,14 +281,14 @@ class BucketController extends Controller
             $order = new P_Order();
             $file = $request->hasFile('file') ? 'storage/' . Storage::disk('local')->put('/checkout', $request->file('file')) : null;
             $user = User::find(Session::get('User'));
-//        $order->client_id = $user->c_user->client_branch->client->id;
             $order->clients_branch_id = $user->c_user->client_branch->id;
             $order->bucket = serialize($bucket);
+
+            $order->file = $file;
             $order->del_branch = $request->input('del_branch');
             $order->del_cp = $request->input('del_cp');
             $order->del_tp = $request->input('del_tp');
-            $order->file = $file;
-//        $order->cp_notes = $request->input('cp_notes');
+            $order->del_address = $request->input('del_address');
             $order->del_notes = $request->input('del_notes');
             $order->status = "P";
             $order->agent_id = $user->c_user->client_branch->agent_id;
@@ -299,7 +299,7 @@ class BucketController extends Controller
             $agent = User::find($order->agent_id);
             $sHead = User::find($agent->section_head_id);
             $order->bucket = unserialize($order->bucket);
-            $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
+            $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net', 'mahendralakmal@gmail.com'];
 
             //send the notification to client
             Mail::to($user)->send(new PoSentSuccessfully($user, $order));

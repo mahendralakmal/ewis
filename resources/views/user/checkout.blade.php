@@ -31,13 +31,9 @@
                                       class="form-horizontal">
                                     {{ csrf_field() }}
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 row">
                                             <h4>Contact Details</h4>
-
-                                            <div class="col-md-12">
-                                                <hr>
-
-
+                                            <div class="col-md-12 row"><hr>
                                                 <div class="form-group">
                                                     <input type="hidden"
                                                            value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id}}"
@@ -51,7 +47,6 @@
                                                                class="form-control" name="cp_name" id="cp_name">
                                                     </div>
                                                 </div>
-
                                                 <div class="form-group">
                                                     <div class="col-md-3">
                                                         <label>Branch Name</label>
@@ -78,9 +73,7 @@
                                                         <label>Address</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        {{--/  <textarea class="form-control" name="cp_notes" id="cp_notes" rows="10" placeholder="Enter any notes for delivery"></textarea>--}}
-                                                        {{--<input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}" name="cp_email" id="cp_email" maxlength="400">--}}
-                                                        <textarea class="form-control" name="cp_email" id="cp_email"
+                                                        <textarea class="form-control" name="cp_address" id="cp_address"
                                                                   rows="3">{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}</textarea>
                                                     </div>
                                                 </div>
@@ -91,14 +84,11 @@
                                                         <input type="file" name="file" id="file">
                                                     </div>
                                                 </div>
-
                                             </div>
-
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 row">
                                             <h4>Delivery Details</h4>
-                                            <div class="col-md-12">
-                                                <hr>
+                                            <div class="col-md-12 row"><hr>
                                                 <div class="form-group">
                                                     <div class="col-md-3">
                                                         <label>Contact Person</label>
@@ -135,9 +125,7 @@
                                                         <label>Address</label>
                                                     </div>
                                                     <div class="col-md-7">
-                                                        {{--/  <textarea class="form-control" name="cp_notes" id="cp_notes" rows="10" placeholder="Enter any notes for delivery"></textarea>--}}
-                                                        {{--<input type="text" class="form-control" value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}" name="cp_email" id="cp_email" maxlength="400">--}}
-                                                        <textarea class="form-control" name="cp_email" id="cp_email"
+                                                        <textarea class="form-control" name="del_address" id="del_address"
                                                                   rows="3">{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->address}}</textarea>
                                                     </div>
                                                 </div>
