@@ -7,7 +7,6 @@
                     <li class="active">
                         <a href="#agent" role="tab" data-toggle="tab"> Purchase History </a>
                     </li>
-
                 </ul>
 
                 <!-- Tab panes -->
@@ -19,6 +18,18 @@
                                     <div class="row">
                                         <div class="col-md-3"><strong>Order No :- {{$order->id}}</strong></div>
                                         <div class="col-md-6 text-right"><strong>{{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}</strong></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                                            <strong>Bill To</strong>
+                                            <p>{{ App\ClientsBranch::find($order->clients_branch_id)->address }}</p>
+                                            <p>tel: {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}</p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                                            <strong>Deliver To</strong>
+                                            <p>{{ $order->del_address }}</p>
+                                            <p>{{ $order->del_tp }}</p>
+                                        </div>
                                     </div>
                                     <thead>
                                     <tr>
