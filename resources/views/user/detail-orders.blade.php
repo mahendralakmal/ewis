@@ -65,12 +65,22 @@
                                     <h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>
                             </tr>
                         </table>
+                        @if($order->file !== null)
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">Special Notes</div>
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><strong>Attachment</strong></div>
+                            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                                <a href="{{url('/'.$order->file)}}">Download Attachment</a>
+                            </div>
+                        </div>
+                        @endif
+                        @if($order->del_notes !== null && $order->del_notes !== '')
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><strong>Special Notes</strong></div>
                             <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
                                 {{ $order->del_notes }}
                             </div>
                         </div>
+                        @endif
                     </div>
 
 

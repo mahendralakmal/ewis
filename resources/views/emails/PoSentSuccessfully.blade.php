@@ -68,6 +68,9 @@
             </table>
             <p><strong>Account Manager : </strong> {{ (\App\User::find($client_branch->agent_id)->name) }}</p>
             <p><strong>Special Notes : </strong> {{$order->del_notes}}</p>
+            @if($order->file !== null)
+                <p><strong>Attachment : </strong><a href="{{url('/'.$order->file)}}">Download Attachment</a></p>
+            @endif
         </td>
     </tr>
     <tr>
