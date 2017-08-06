@@ -24,13 +24,17 @@
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
                                 <br>
                                 <strong>Bill To</strong>
-                                <p>{{ App\ClientsBranch::find($order->clients_branch_id)->address }}</p>
-                                <p>tel: {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}</p>
+                                @if($order->cp_name !== null || $order->cp_name !=='')<p>{{$order->cp_name}}</p>@endif
+                                <p>@if($order->cp_address !== null || $order->cp_address !==''){{ App\ClientsBranch::find($order->clients_branch_id)->address }} @else {{$order->cp_address}}@endif</p>
+                                <p>tel: @if($order->cp_telephone !== null || $order->cp_telephone !==''){{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }} @else {{$order->cp_telephone}}@endif</p>
+                                @if($order->cp_branch !== null || $order->cp_branch !=='')<p>{{$order->cp_branch}}</p>@endif
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
                                 <br>
                                 <strong>Deliver To</strong>
-                                <p>{{ $order->del_address }}</p>
+                                @if($order->del_cp !== null || $order->del_cp !=='')<p>{{$order->del_cp}}</p>@endif
+                                @if($order->del_branch !== null || $order->del_branch !=='')<p>{{$order->del_branch}}</p>@endif
+                                @if($order->del_address !== null || $order->del_address !=='')<p>{{$order->del_address}}</p>@endif
                                 <p>{{ $order->del_tp }}</p>
                                 <br>
                             </div>
