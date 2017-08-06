@@ -13,7 +13,8 @@
             <p><strong>Date / Time: </strong> {{ $order->created_at }}</p>
             <p><strong>P.O Reference#: </strong> {{ $order->id }}</p>
             <br>
-            <p><strong>Customer Name: </strong>{{ $client_branch->client->name }} </p>
+            <p><strong>Customer Name: </strong>{{ $order->cp_name }} </p>
+            <p><strong>Customer Branch: </strong>{{ $order->cp_branch }} </p>
             <br>
             <p><strong>Contact Name: </strong>{{ $order->del_cp }} </p>
         </td>
@@ -21,9 +22,8 @@
     <tr>
         <td>
             <strong>Bill To</strong>
-            <p>{{ $client_branch->address }}</p>
-            <p>tel: {{ $client_branch->contact_no }}</p>
-
+            <p>{{ $order->cp_address }}</p>
+            <p>Tel: {{ $order->cp_telephone }}</p>
         </td>
         <td>
             <strong>Deliver To</strong>

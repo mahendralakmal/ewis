@@ -54,8 +54,8 @@
                                                     <div class="col-md-7">
                                                         <input type="text"
                                                                value="{{App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->name}}"
-                                                               class="form-control" name="cp_designation"
-                                                               id="cp_designation">
+                                                               class="form-control" name="cp_branch"
+                                                               id="cp_branch">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

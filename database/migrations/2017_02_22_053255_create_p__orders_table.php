@@ -18,6 +18,12 @@ class CreatePOrdersTable extends Migration
             $table->timestamps();
             $table->integer('clients_branch_id');
             $table->text('bucket');
+
+            $table->text('cp_name');
+            $table->text('cp_branch');
+            $table->text('cp_telephone');
+            $table->text('cp_address');
+
             $table->text('del_cp');
             $table->text('del_branch');
             $table->text('del_tp');

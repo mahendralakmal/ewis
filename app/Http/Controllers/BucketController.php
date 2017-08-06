@@ -284,6 +284,10 @@ class BucketController extends Controller
             $order->clients_branch_id = $user->c_user->client_branch->id;
             $order->bucket = serialize($bucket);
 
+            $order->cp_name = $request->input('cp_name');
+            $order->cp_branch = $request->input('cp_branch');
+            $order->cp_telephone = $request->input('cp_telephone');
+            $order->cp_address = $request->input('cp_address');
             $order->file = $file;
             $order->del_branch = $request->input('del_branch');
             $order->del_cp = $request->input('del_cp');
