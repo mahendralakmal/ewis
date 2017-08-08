@@ -21,15 +21,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                 <br>
                                 <strong>Bill To</strong>
                                 @if($order->cp_name !== null || $order->cp_name !=='')<p>{{$order->cp_name}}</p>@endif
-                                <p>@if($order->cp_address !== null || $order->cp_address !==''){{ App\ClientsBranch::find($order->clients_branch_id)->address }} @else {{$order->cp_address}}@endif</p>
-                                <p>tel: @if($order->cp_telephone !== null || $order->cp_telephone !==''){{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }} @else {{$order->cp_telephone}}@endif</p>
                                 @if($order->cp_branch !== null || $order->cp_branch !=='')<p>{{$order->cp_branch}}</p>@endif
+                                <p>@if($order->cp_address !== null || $order->cp_address !=='') {{$order->cp_address}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->address }} @endif</p>
+                                <p>tel: @if($order->cp_telephone !== null || $order->cp_telephone !==''){{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }} @else {{$order->cp_telephone}}@endif</p>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                                 <br>
                                 <strong>Deliver To</strong>
                                 @if($order->del_cp !== null || $order->del_cp !=='')<p>{{$order->del_cp}}</p>@endif
@@ -86,8 +86,6 @@
                         </div>
                         @endif
                     </div>
-
-
                 </ul>
             </div>
         </div>
