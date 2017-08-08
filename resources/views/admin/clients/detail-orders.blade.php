@@ -17,7 +17,7 @@
                         @if($order->cp_name !== null || $order->cp_name !=='')<p>{{$order->cp_name}}</p>@endif
                         @if($order->cp_branch !== null || $order->cp_branch !=='')<p>{{$order->cp_branch}}</p>@endif
                         <p>@if($order->cp_address !== null || $order->cp_address !=='') {{$order->cp_address}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->address }} @endif</p>
-                        <p>tel: @if($order->cp_telephone !== null || $order->cp_telephone !==''){{$order->cp_telephone}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}@endif</p>
+                        <p>@if($order->cp_telephone !== null || $order->cp_telephone !==''){{$order->cp_telephone}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}@endif</p>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <br>
