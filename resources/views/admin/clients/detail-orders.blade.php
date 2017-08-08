@@ -6,7 +6,7 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="panel-title col-md-3">Order No :- {{$order->id}}</div>
-                    <div class="panel-title col-md-9 text-right">{{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}</div>
+                    {{--<div class="panel-title col-md-9 text-right">{{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}</div>--}}
                 </div>
             </div>
             <div class="panel-body">
@@ -58,6 +58,13 @@
                                 <h5>{{ number_format($order->bucket->totalPrice,2) }}</h5></td>
                         </tr>
                 </table>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><strong>Account Manager</strong></div>
+                    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                        {{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}
+                    </div>
+                </div>
                 @if($order->file !== null)
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><strong>Attachment</strong></div>
