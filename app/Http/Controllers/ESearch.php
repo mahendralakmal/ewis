@@ -100,7 +100,7 @@ class ESearch extends Controller
             $produce .= '<form action="/client-profile/add-to-bucket" method="POST" class="side-by-side"><input type="hidden" name="_token" value="' . csrf_token() . '">
             <div class="row">
             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input type="hidden" id="id" name="id" value="' . $value->id . '"><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->part_no . '</a></div>
-            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="' . $image . '" alt="product" class="img-responsive" height="25" width="30"></div>
+            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="/' . $image . '" alt="product" class="img-responsive" height="25" width="30"></div>
             <div class="col-md-5 " style="border: 1px solid #dddddd; padding:5px; height:45px;"><a href="/client-profile/' . $c_category->c_brand->client->client->id . '/' . $value->part_no . '">' . $value->name . '</a></div>'
                 . '<div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">' . $vat_applicable . '</div>
             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><p>' . number_format($special_price, 2, ".", ",") . '</p></div>
