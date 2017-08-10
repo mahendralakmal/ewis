@@ -30,15 +30,15 @@
     <tr>
         <td>
             <strong>Bill To</strong>
-            @if($order->cp_name !== null || $order->cp_name !=='')<p>{{$order->cp_name}}</p>@endif
-            @if($order->cp_branch !== null || $order->cp_branch !=='')<p>{{$order->cp_branch}}</p>@endif
+            @if($order->cp_name !== null || $order->cp_name !=='')<p>{{$order->cp_name}}</p>@else<p>{{$user->c_user->cp_name}}</p>@endif
+            @if($order->cp_branch !== null || $order->cp_branch !=='')<p>{{$order->cp_branch}}</p>@else<p>{{$user->c_user->client_branch->name}}</p>@endif
             <p>@if($order->cp_address !== null || $order->cp_address !=='') {{$order->cp_address}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->address }} @endif</p>
             <p>@if($order->cp_telephone !== null || $order->cp_telephone !==''){{$order->cp_telephone}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}@endif</p>
         </td>
         <td>
             <strong>Deliver To</strong>
-            @if($order->del_cp !== null || $order->del_cp !=='')<p>{{$order->del_cp}}</p>@endif
-            @if($order->del_branch !== null || $order->del_branch !=='')<p>{{$order->del_branch}}</p>@endif
+            @if($order->del_cp !== null || $order->del_cp !=='')<p>{{$order->del_cp}}</p>@else<p>{{$user->c_user->cp_name}}</p>@endif
+            @if($order->del_branch !== null || $order->del_branch !=='')<p>{{$order->del_branch}}</p>@else<p>{{$user->c_user->client_branch->name}}</p>@endif
             @if($order->del_address !== null || $order->del_address !=='')<p>{{$order->del_address}}</p>@endif
             <p>{{ $order->del_tp }}</p>
         </td>
