@@ -12,9 +12,9 @@
         <td>
             <p><strong>Date / Time: </strong> {{ $order->created_at }}</p>
             <p><strong>P.O Reference#: </strong> {{ $order->id }}</p>
-            {{--<br>--}}
-            {{--<p><strong>Customer Name: </strong>{{ $order->cp_name }} </p>--}}
-            {{--<p><strong>Customer Branch: </strong>{{ $order->cp_branch }} </p>--}}
+            <br>
+            <p><strong>Customer Name: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->client->name }} </p>
+            <p><strong>Customer Branch: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->name }} </p>
             {{--<br>--}}
             {{--<p><strong>Contact Name: </strong>{{ $order->del_cp }} </p>--}}
         </td>

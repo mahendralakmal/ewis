@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-3"><strong>Order No :- {{$order->id}}</strong></div>
                             {{--<div class="col-md-6 text-right">--}}
-                                {{--<strong>{{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}</strong>--}}
+                            {{--<strong>{{ \App\User::find(\App\ClientsBranch::find($order->clients_branch_id)->agent_id)->name }}</strong>--}}
                             {{--</div>--}}
                         </div>
                         <div class="row">
@@ -25,7 +25,8 @@
                                 <br>
                                 <strong>Bill To</strong>
                                 @if($order->cp_name !== null || $order->cp_name !=='')<p>{{$order->cp_name}}</p>@endif
-                                @if($order->cp_branch !== null || $order->cp_branch !=='')<p>{{$order->cp_branch}}</p>@endif
+                                @if($order->cp_branch !== null || $order->cp_branch !=='')
+                                    <p>{{$order->cp_branch}}</p>@endif
                                 <p>@if($order->cp_address !== null || $order->cp_address !=='') {{$order->cp_address}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->address }} @endif</p>
                                 <p>@if($order->cp_telephone !== null || $order->cp_telephone !==''){{$order->cp_telephone}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}@endif</p>
                             </div>
@@ -33,8 +34,10 @@
                                 <br>
                                 <strong>Deliver To</strong>
                                 @if($order->del_cp !== null || $order->del_cp !=='')<p>{{$order->del_cp}}</p>@endif
-                                @if($order->del_branch !== null || $order->del_branch !=='')<p>{{$order->del_branch}}</p>@endif
-                                @if($order->del_address !== null || $order->del_address !=='')<p>{{$order->del_address}}</p>@endif
+                                @if($order->del_branch !== null || $order->del_branch !=='')
+                                    <p>{{$order->del_branch}}</p>@endif
+                                @if($order->del_address !== null || $order->del_address !=='')
+                                    <p>{{$order->del_address}}</p>@endif
                                 <p>{{ $order->del_tp }}</p>
                                 <br>
                             </div>
@@ -78,20 +81,20 @@
                             </div>
                         </div>
                         @if($order->file !== null)
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><strong>Attachment</strong></div>
-                            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                                <a href="{{url('/'.$order->file)}}">Download Attachment</a>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><strong>Attachment</strong></div>
+                                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                                    <a href="{{url('/'.$order->file)}}">Download Attachment</a>
+                                </div>
                             </div>
-                        </div>
                         @endif
                         @if($order->del_notes !== null && $order->del_notes !== '')
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><strong>Special Notes</strong></div>
-                            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                                {{ $order->del_notes }}
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><strong>Special Notes</strong></div>
+                                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                                    {{ $order->del_notes }}
+                                </div>
                             </div>
-                        </div>
                         @endif
                     </div>
                 </ul>

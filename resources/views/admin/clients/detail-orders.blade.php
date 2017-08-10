@@ -11,6 +11,11 @@
             </div>
             <div class="panel-body">
                 <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                        <p><strong>Customer
+                                Name: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->client->name }} </p>
+                        <p><strong>Customer Branch: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->name }} </p>
+                    </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <br>
                         <strong>Bill To</strong>
@@ -24,7 +29,8 @@
                         <strong>Deliver To</strong>
                         @if($order->del_cp !== null || $order->del_cp !=='')<p>{{$order->del_cp}}</p>@endif
                         @if($order->del_branch !== null || $order->del_branch !=='')<p>{{$order->del_branch}}</p>@endif
-                        @if($order->del_address !== null || $order->del_address !=='')<p>{{$order->del_address}}</p>@endif
+                        @if($order->del_address !== null || $order->del_address !=='')
+                            <p>{{$order->del_address}}</p>@endif
                         <p>{{ $order->del_tp }}</p>
                         <br>
                     </div>
