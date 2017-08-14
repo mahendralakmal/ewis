@@ -476,16 +476,12 @@ class BucketController extends Controller
             return redirect('/');
     }
 
+//    public function
     public function processingPurchaseOrder()
     {
         $from = '';
         $to = '';
         if (Session::has('User')) {
-//            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
-//                $porders = P_Order::where('status', 'OP')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
-//            else
-//                $porders = User::find(Session::get('User'));
-
             if (Session::get('User') == 1)
                 $porders = P_Order::where('status', 'OP')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
             elseif (User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)

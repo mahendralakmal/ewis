@@ -19,8 +19,13 @@
                     <li><a>Welcome {{App\User::find(Session::get('User'))->name}}</a></li>
                     <li><a href="{{ url('/admin/purchase-orders/purchase-orders-pending') }}">Pending<span
                                     class="badge pending"></span></a></li>
+                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-processing') }}">Processing<span
+                                    class="badge procesing"></span></a></li>
                     <li><a href="{{ url('/admin/purchase-orders/purchase-orders-partial-completed') }}">Partial
                             Completed<span class="badge partialComplet"></span></a></li>
+                    <li><a style="color: red"
+                           href="{{ url('/admin/purchase-orders/purchase-orders-credithold') }}">Credit Hold<span
+                                    class="badge creditHold"></span></a></li>
                     <li><a href="{{ url('/signout') }}">Signout</a></li>
                 </ul>
                 <div class="navbar-default sidebar" role="navigation">
@@ -210,15 +215,15 @@
             </nav>
 
             {{--<div id="page-wrapper">--}}
-                <div id="page-wrapper" style="overflow-y: auto; overflow-x:none; height: 400px">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <h1 class="page-header">@yield('page_heading')</h1>
-                        </div>
+            <div id="page-wrapper" style="overflow-y: auto; overflow-x:hidden; height: 400px">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">@yield('page_heading')</h1>
                     </div>
-                    <div class="row">
-                        @yield('section')
-                    </div>
+                </div>
+                <div class="row">
+                    @yield('section')
+                </div>
             </div>
             <footer id="footer" class="col-md-12">
                 <p>Copyright © E-WIS Peripherals (Pvt) Ltd.2017, All Right Reserved</p>
@@ -237,22 +242,6 @@
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
     @yield('scripts')
     <script>
-//        $(document).ready(function($) {
-//            $(window).resize(function() {
-//                var winH = $(window).height();
-//                var fooH = $('#footer').height();
-//                var phH = $('.ph').height();
-//                var pnH = $('.panel-heading').height();
-//
-//                var tblNH = winH-fooH-(phH*2.5)-pnH;
-//                console.log('min height : '+tblNH);
-//                var tblNHH = winH-fooH-(phH*3.5);
-//                $('.page-wrapper').height(tblNH).css('!important','overflow-y','auto');
-////                $('.tbl_ori').height(tblNH).css('overflow-y','auto');
-////                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
-//            }).resize();
-//        });
-
         $(window).on("load", function () {
             getPoStattus();
         });
@@ -267,7 +256,6 @@
                     type: 'get',
                     url: '/admin/getPendingPoCount',
                     success: function (response) {
-//                            console.log(response);
                         var model = $('.pending');
                         model.text(response);
                     }
@@ -278,8 +266,27 @@
                     type: 'get',
                     url: '/admin/getPCompletePoCount',
                     success: function (response) {
-//                            console.log(response);
                         var model = $('.partialComplet');
+                        model.text(response);
+                    }
+                }
+            );
+            $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/getProcessingPoCount',
+                    success: function (response) {
+                        var model = $('.procesing');
+                        model.text(response);
+                    }
+                }
+            );
+            $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/getCreditHoldPoCount',
+                    success: function (response) {
+                        var model = $('.creditHold');
                         model.text(response);
                     }
                 }

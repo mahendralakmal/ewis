@@ -66,8 +66,9 @@ Route::group(['prefix' => '/admin'], function () {
     });
 
     Route::get('/getPendingPoCount', 'BucketController@getPendingPoCount');
-
     Route::get('/getPCompletePoCount', 'BucketController@getPCompletePoCount');
+    Route::get('/getProcessingPoCount', 'BucketController@getProcessingPoCount');
+    Route::get('/getCreditHoldPoCount', 'BucketController@getCreditHoldPoCount');
 
     Route::group(['prefix' => '/brands'], function () {
         Route::get('/', 'BrandsController@admin_index');
