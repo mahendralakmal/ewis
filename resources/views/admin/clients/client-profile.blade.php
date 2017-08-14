@@ -4,8 +4,8 @@
     @if((Session::has('User'))
     && (\App\User::find(Session::get('User'))->privilege != null)
     && (\App\User::find(Session::get('User'))->privilege->client_prof))
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+        {{--<div class="row">--}}
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Organizations</h3>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
 
                 @include('admin.messages.success')
                 @include('admin.messages.error')
@@ -104,7 +104,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        {{--</div>--}}
     @else
         <div class="col-md-offset-3">
             <h2 class="error">You are Not Authorize for access this page</h2>

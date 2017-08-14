@@ -70,7 +70,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5 right-pnl">
             <h4>Add new Product</h4>
             <hr>
             <div class="col-md-12 side_pannel">
@@ -210,20 +210,21 @@
 @stop
 @section('scripts')
     <script>
-        $(document).ready(function($) {
-            $(window).resize(function() {
-                var winH = $(window).height();
-                var fooH = $('#footer').height();
-                var phH = $('.ph').height();
-                var pnH = $('.panel-heading').height();
-
-                var tblNH = winH-fooH-(phH*2.5)-pnH;
-                var tblNHH = winH-fooH-(phH*3.5);
-                $('.tbl_ori').height(tblNH).css('overflow-y','auto');
-                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
-                $('.side_pannel').height(tblNH).css('overflow-y','auto');
-            }).resize();
-        });
+//        $(document).ready(function($) {
+//            $(window).resize(function() {
+//                var winH = $(window).height();
+//                var fooH = $('#footer').height();
+//                var phH = $('.ph').height();
+//                var pnH = $('.panel-heading').height();
+//                var pnRH = $('.right-pnl').height();
+//
+//                var tblNH = winH-fooH-(phH*2.5)-pnH;
+//                var tblNHH = winH-fooH-(phH*3.5);
+//                $('.tbl_ori').height(pnRH).css('overflow-y','auto');
+////                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
+////                $('.side_pannel').height(tblNH).css('overflow-y','auto');
+//            }).resize();
+//        });
         $("#products").validate({
             rules: {
                 part_no: "required",

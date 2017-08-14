@@ -209,18 +209,16 @@
                 </div>
             </nav>
 
-            <div id="page-wrapper" style="overflow-y: auto; overflow-x:none; height: 400px">
-                <div class="container-fluid">
-                    <div class="row ph">
+            {{--<div id="page-wrapper">--}}
+                <div id="page-wrapper" style="overflow-y: auto; overflow-x:none; height: 400px">
+                    <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">@yield('page_heading')</h1>
                         </div>
                     </div>
                     <div class="row">
                         @yield('section')
-
                     </div>
-                </div>
             </div>
             <footer id="footer" class="col-md-12">
                 <p>Copyright © E-WIS Peripherals (Pvt) Ltd.2017, All Right Reserved</p>
@@ -239,19 +237,21 @@
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
     @yield('scripts')
     <script>
-        $(document).ready(function($) {
-            $(window).resize(function() {
-                var winH = $(window).height();
-                var fooH = $('#footer').height();
-                var phH = $('.ph').height();
-                var pnH = $('.panel-heading').height();
-
-                var tblNH = winH-fooH-(phH*2.5)-pnH;
-                var tblNHH = winH-fooH-(phH*3.5);
-                $('.tbl_ori').height(tblNH).css('overflow-y','auto');
-                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
-            }).resize();
-        });
+//        $(document).ready(function($) {
+//            $(window).resize(function() {
+//                var winH = $(window).height();
+//                var fooH = $('#footer').height();
+//                var phH = $('.ph').height();
+//                var pnH = $('.panel-heading').height();
+//
+//                var tblNH = winH-fooH-(phH*2.5)-pnH;
+//                console.log('min height : '+tblNH);
+//                var tblNHH = winH-fooH-(phH*3.5);
+//                $('.page-wrapper').height(tblNH).css('!important','overflow-y','auto');
+////                $('.tbl_ori').height(tblNH).css('overflow-y','auto');
+////                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
+//            }).resize();
+//        });
 
         $(window).on("load", function () {
             getPoStattus();
@@ -431,8 +431,6 @@
 
     </script>
 
-    <script src="{{ asset('assets/scripts/frontend.js') }}"
-            type="text/javascript"></script>
-
+    <script src="{{ asset('assets/scripts/frontend.js') }}" type="text/javascript"></script>
     <script type="text/javascript" src="{{ elixir('js/app.js') }}"></script>
 @stop
