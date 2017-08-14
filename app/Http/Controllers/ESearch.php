@@ -77,7 +77,8 @@ class ESearch extends Controller
     {
         $produce = '';
         $header = '<table class="table"><thead><tr><td><h5>Name</h5></td><td><h5>Email</h5></td><td><h5>Telephone</h5></td><td class="col-md-3"></td></tr></thead><tbody>';
-        $results = Client::search($index)->get();
+        $results = Client::where('name','LIKE','%'.$index.'%')->get();
+//        $results = Client::search($index)->get();
 
         foreach ($results as $key => $value) {
             $approval = (!$value->approval) ? '<a href="/admin/manage-clients/approved/' . $value->id . '" class="btn btn-primary btn-outline">Approve</a>' : '<a href="/admin/manage-clients/unapproved/' . $value->id . '" class="btn btn-danger btn-outline">Unapprove</a>';
