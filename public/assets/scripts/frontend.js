@@ -15144,7 +15144,8 @@ $(function () {
             height = height - topOffset - f_height;
             if (height < 1) height = 1;
             if (height > topOffset) {
-                $("#page-wrapper").css("min-height", (height-2) + "px");
+                $("#page-wrapper").css("height", (height-10) + "px");
+                $("#page-wrapper").css("min-height", (height-3) + "px");
                 $("#page-wrapper").css("overflow-y", "auto");
                 $("#page-wrapper").css("overflow-x", "hidden");
 

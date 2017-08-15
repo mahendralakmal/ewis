@@ -4,8 +4,7 @@
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product))
-
-        <div class="col-md-7">
+        <div class="col-xs-12 col-sm12 col-md-8 col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Products</h3>
@@ -70,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 right-pnl">
+        <div class="col-xs-12 col-sm12 col-md-4 col-lg-4 right-pnl">
             <h4>Add new Product</h4>
             <hr>
             <div class="col-md-12 side_pannel">
@@ -173,15 +172,15 @@
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Vat apply</label></div>
+                        <div class="col-md-4"><label>VAT apply</label></div>
                         <div class="col-md-8">
                             <label><input type="checkbox" id="vat_apply" name="vat_apply"
                                           @if(!$id == null && $id->vat_apply == true ) checked @endif></label>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <div class="col-md-4"><label>Vat</label></div>
-                        <div class="col-xs-10 col-sm-11 col-md-7">
+                        <div class="col-md-4"><label>VAT %</label></div>
+                        <div class="col-xs-10 col-sm-11 col-md-8">
                             <input type="number" name="vat" id="vat" class="form-control"
                                    @if((App\User::find(\Illuminate\Support\Facades\Session::get('User'))->designation->id != 1) )
                                    @if((App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->product_cost == 0))
@@ -190,15 +189,20 @@
                                    @endif
                                    @if(!$id == null) value="{{ $id->vat }}" @endif>
                         </div>
-                        <div class="col-xs-1 col-sm-1 col-md-1">%</div>
+                        {{--<div class="col-xs-1 col-sm-1 col-md-1">%</div>--}}
                     </div>
-                    <div class="col-md-12 text-center form-group">
-                        <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
-                                Add @endif</button>
+                    <div class="form-group">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-primary" name="submit" id="submit">@if(!$id == null) Update @else
+                                    Add @endif</button>
+                        </div>
                     </div>
-                    <div class="col-md-12 text-center form-group"><a class="btn btn-danger" name="complete"
-                                                                     id="complete" href="{{ url ('/admin') }}">Finished
-                            Adding Products</a></div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 text-center"><a class="btn btn-danger" name="complete"
+                                                                         id="complete" href="{{ url ('/admin') }}">Finished
+                                Adding Products</a></div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -210,21 +214,21 @@
 @stop
 @section('scripts')
     <script>
-//        $(document).ready(function($) {
-//            $(window).resize(function() {
-//                var winH = $(window).height();
-//                var fooH = $('#footer').height();
-//                var phH = $('.ph').height();
-//                var pnH = $('.panel-heading').height();
-//                var pnRH = $('.right-pnl').height();
-//
-//                var tblNH = winH-fooH-(phH*2.5)-pnH;
-//                var tblNHH = winH-fooH-(phH*3.5);
-//                $('.tbl_ori').height(pnRH).css('overflow-y','auto');
-////                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
-////                $('.side_pannel').height(tblNH).css('overflow-y','auto');
-//            }).resize();
-//        });
+        //        $(document).ready(function($) {
+        //            $(window).resize(function() {
+        //                var winH = $(window).height();
+        //                var fooH = $('#footer').height();
+        //                var phH = $('.ph').height();
+        //                var pnH = $('.panel-heading').height();
+        //                var pnRH = $('.right-pnl').height();
+        //
+        //                var tblNH = winH-fooH-(phH*2.5)-pnH;
+        //                var tblNHH = winH-fooH-(phH*3.5);
+        //                $('.tbl_ori').height(pnRH).css('overflow-y','auto');
+        ////                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
+        ////                $('.side_pannel').height(tblNH).css('overflow-y','auto');
+        //            }).resize();
+        //        });
         $("#products").validate({
             rules: {
                 part_no: "required",

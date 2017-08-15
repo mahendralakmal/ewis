@@ -341,7 +341,7 @@ class BucketController extends Controller
 
         if (Session::has('User')) {
             if (Session::get('User') == 1)
-                $porders = P_Order::orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+                $porders = P_Order::orderBy('id', 'desc')->groupBy()->paginate(config('const.PAGINATE'));
             elseif (User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
                 $porders = P_Order::orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
             elseif (User::find(Session::get('User'))->designation_id == 6)
@@ -807,9 +807,9 @@ class BucketController extends Controller
     public function AgentPurchaseOrder()
     {
         $clients = Client::all();
-        $branch = ClientsBranch::all();
+//        $branch = ClientsBranch::all();
         $agents = User::all();
-
+//
         $po = "";
         $status = "";
         $start = "";

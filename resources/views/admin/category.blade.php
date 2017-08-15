@@ -4,7 +4,7 @@
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege->category))
-        <div class="col-md-6">
+        <div class="col-xs-12 col-sm12 col-md-8 col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Categories</h3>
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-xs-12 col-sm12 col-md-4 col-lg-4">
             <h4>Add new Category</h4>
             <hr>
             <div class="col-md-12">

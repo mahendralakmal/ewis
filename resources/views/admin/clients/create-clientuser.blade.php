@@ -27,7 +27,7 @@
                                                 <td><h5>Branch / Department</h5></td>
                                                 <td><h5>Email</h5></td>
                                                 <td><h5>Name</h5></td>
-                                                <td class="col-md-3"></td>
+                                                <td width="300px"></td>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -39,7 +39,7 @@
                                                             <td>{{$user->c_user->client_branch->name}}</td>
                                                             <td>{{$user->email}}</td>
                                                             <td>{{$user->name}}</td>
-                                                            <td class="col-md-6">
+                                                            <td width="300px">
                                                                 <form method="POST" action="/admin/users/delete"
                                                                       role="form">
                                                                     <a href="/admin/manage-clients/client_user/{{ $user->id }}"
@@ -367,7 +367,7 @@
                     <h2 class="error">You are Not Authorize for access this page</h2>
                 </div>
             @endif
-
+        </div>
             @stop
             @section('scripts')
                 <script>

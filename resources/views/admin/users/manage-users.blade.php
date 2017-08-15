@@ -28,15 +28,15 @@
                             @foreach($users as $user)
                                 @if(!$user->deleted == 1 && $user->designation_id != 2)
                                     <tr>
-                                        <td>@if($user->approval == 1)
+                                        <td width="100px">@if($user->approval == 1)
 
                                                 <i class="fa fa-check green fa-fw"></i>
                                             @endif</td>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$user->name}}</td>
-                                        <td>{{$user->designation->designation}}</td>
-                                        <td>{{$user->nic_pass}}</td>
-                                        <td>
+                                        <td width="100px">{{$user->email}}</td>
+                                        <td width="100px">{{$user->name}}</td>
+                                        <td width="100px">{{$user->designation->designation}}</td>
+                                        <td width="100px">{{$user->nic_pass}}</td>
+                                        <td width="200px">
                                             {{--                                        {{ $user->designation->designation }}--}}
                                             {{--{{ $user->designation_id }}--}}
                                             {{--@if(strtolower($user->designation->designation) != "client")--}}
