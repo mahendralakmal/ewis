@@ -25,4 +25,8 @@ class P_Order extends Model
     {
         return $this->belongsTo(User::class, 'agent_id');
     }
+
+    public function p_o_history(){
+        return $this->hasMany(PorderHistory::class);
+    }
 }
