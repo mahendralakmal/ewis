@@ -14,6 +14,7 @@ use App\Mail\PoToAdministration;
 use App\Mail\PoToSectionHeads;
 use App\Mail\PoToProcument;
 use App\Notifications\PerchaseOrder;
+use App\PorderHistory;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -187,6 +188,12 @@ class BucketController extends Controller
     public function change_status($id, $status)
     {
         $po = P_Order::find($id);
+
+        $poh = new PorderHistory();
+        $poh->po_id = $po->id;
+        $poh->po_datetime = $po->updated_at;
+        $poh->status = $po->status;
+        $poh->save();
 
         $po->update(['status' => $status]);
 
