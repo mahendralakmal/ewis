@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePOrdersHistoryTable extends Migration
+class CreatePorderHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePOrdersHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('p_order_history', function (Blueprint $table) {
+        Schema::create('porder_histories', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('po_id');
@@ -43,6 +43,6 @@ class CreatePOrdersHistoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('p_order_history');
+        Schema::dropIfExists('porder_histories');
     }
 }
