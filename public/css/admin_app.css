@@ -5763,6 +5763,16 @@ body, label, .checkbox label {
 .table {
   margin-bottom: 0px; }
 
+.special-list-group {
+  margin-top: 20px !important; }
+  .special-list-group table {
+    margin-bottom: 30px; }
+  .special-list-group li {
+    margin-bottom: 10px;
+    display: block; }
+    .special-list-group li h4 {
+      margin-top: 20px; }
+
 .list-group-item.disabled, .list-group-item.disabled:hover, .list-group-item.disabled:focus {
   background-color: #eeeeee;
   color: #777777;

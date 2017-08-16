@@ -28,6 +28,21 @@ body, label, .checkbox label {
   margin-bottom: 0px;
 }
 
+.special-list-group{
+  margin-top: 20px !important;
+  table{
+    margin-bottom: 30px;
+  }
+
+  li{
+    margin-bottom: 10px;
+    display: block;
+    h4{
+      margin-top: 20px;
+    }
+  }
+}
+
 .list-group-item {
   // Disabled state
   &.disabled,

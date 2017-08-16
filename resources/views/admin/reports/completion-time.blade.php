@@ -12,8 +12,95 @@
                 </div>
                 <div class="panel-body">
                     <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 tbl_ori">
-                        <ul class="list-group">
-                        </ul>
+                        <div class="special-list-group">
+                            <h4>Summery Report</h4>
+                            <hr>
+                            <div class="col-md-12 col-lg-12">
+                                <table class="table responsiv-table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <td rowspan="2" class="text-center">Total No. Of P.O.'s</td>
+                                        <td colspan="6" class="text-center">Status Change (Avarage - Hours/ Days)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">Pending</td>
+                                        <td class="text-center">Processing</td>
+                                        <td class="text-center">Credit Hold</td>
+                                        <td class="text-center">Partial Complete</td>
+                                        <td class="text-center">Complete</td>
+                                        <td class="text-center">Total Time</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div>
+                            <h4>Detailed Report</h4>
+                            <hr>
+                            <div class="col-md-12 col-lg-12">
+                                <table class="table responsiv-table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <td rowspan="2" class="text-center">P.O. No.</td>
+                                        <td rowspan="2" class="text-center">P.O. Date</td>
+                                        <td rowspan="2" class="text-center">Customer Name</td>
+                                        <td rowspan="2" class="text-center">Branch Department</td>
+                                        <td rowspan="2" class="text-center">Account Manager</td>
+                                        <td colspan="6" class="text-center">Status Change (Avarage - Hours/ Days)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">Pending</td>
+                                        <td class="text-center">Processing</td>
+                                        <td class="text-center">Credit Hold</td>
+                                        <td class="text-center">Partial Complete</td>
+                                        <td class="text-center">Complete</td>
+                                        <td class="text-center">Total Time</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
