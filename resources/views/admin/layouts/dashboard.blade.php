@@ -206,11 +206,11 @@
                                                     List By Account Manger</a>
                                             </li>
                                         @endif
-                                        @if((\App\User::find(Session::get('User'))->privilege->view_reports))
-                                            <li>
-                                                <a href="{{ url ('/admin/reports/completion-time' ) }}">Completion Time</a>
-                                            </li>
-                                        @endif
+                                        {{--@if((\App\User::find(Session::get('User'))->privilege->view_reports))--}}
+                                            {{--<li>--}}
+                                                {{--<a href="{{ url ('/admin/reports/completion-time' ) }}">Completion Time</a>--}}
+                                            {{--</li>--}}
+                                        {{--@endif--}}
                                     </ul>
                                 @endif
                             </li>

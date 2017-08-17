@@ -32,9 +32,9 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
-    public function CompletionTime(){
-        return view('admin.reports.completion-time');
-    }
+//    public function CompletionTime(){
+//        return view('admin.reports.completion-time');
+//    }
 
     public function getPurchaseOrdersBySectorHead(Request $request)
     {

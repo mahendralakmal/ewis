@@ -175,7 +175,7 @@ Route::group(['prefix' => '/admin'], function () {
 
     Route::group(['prefix' => '/reports'], function () {
 
-        Route::get('/completion-time','BucketController@CompletionTime');
+//        Route::get('/completion-time','BucketController@CompletionTime');
 
         Route::get('/client-wise-purchase-orders','BucketController@CompletedPurchaseOrder');
         Route::get('/agent-wise-purchase-orders','BucketController@AgentPurchaseOrder');
