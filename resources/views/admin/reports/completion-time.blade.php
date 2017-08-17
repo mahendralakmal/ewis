@@ -71,12 +71,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($pos as $po)
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$po->po_id}}</td>
+                                        <td>{{\App\P_Order::find($po->po_id)->created_at->format('Y-m-d')}}</td>
+                                        <td>{{\App\ClientsBranch::find(\App\P_Order::find($po->po_id)->clients_branch_id)->client->name}}</td>
+                                        <td>{{\App\ClientsBranch::find(\App\P_Order::find($po->po_id)->clients_branch_id)->name}}</td>
+                                        <td>{{\App\User::find(\App\P_Order::find($po->po_id)->agent_id)->name}}</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -84,19 +85,7 @@
                                         <td></td>
                                         <td></td>
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

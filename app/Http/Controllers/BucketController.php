@@ -32,9 +32,10 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
-//    public function CompletionTime(){
-//        return view('admin.reports.completion-time');
-//    }
+    public function CompletionTime(){
+        $pos = PorderHistory::select('po_id')->orderBy('po_id', 'desc')->distinct('po_id')->get();
+        return view('admin.reports.completion-time', compact('pos'));
+    }
 
     public function getPurchaseOrdersBySectorHead(Request $request)
     {
