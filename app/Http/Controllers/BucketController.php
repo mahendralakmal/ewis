@@ -32,32 +32,82 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
+    protected $id = null;
+    protected $po_id = null;
+    protected $po_datetime = null;
+    protected $status_p = null;
+    protected $status_op = null;
+    protected $status_ch = null;
+    protected $status_pc = null;
+    protected $status_c = null;
+
+    protected function calcDiff($a = array())
+    {
+        dd($a);
+        foreach ($a as $value) {
+//            dd($value);
+            if (!is_null($value['data']['status_p']))
+                var_dump($value['data']['status_p']->po_datetime . '---' . $value['data']['status_p']->status);
+            if (!is_null($value['data']['status_op']))
+                var_dump($value['data']['status_op']->po_datetime . '---' . $value['data']['status_op']->status);
+            if (!is_null($value['data']['status_ch']))
+                var_dump($value['data']['status_ch']->po_datetime . '---' . $value['data']['status_ch']->status);
+            if (!is_null($value['data']['status_pc']))
+                var_dump($value['data']['status_pc']->po_datetime . '---' . $value['data']['status_pc']->status);
+            if (!is_null($value['data']['status_c']))
+                var_dump($value['data']['status_c']->po_datetime . '---' . $value['data']['status_c']->status);
+        }
+        exit();
+    }
+
     public function CompletionTime()
     {
         $pos = PorderHistory::select('po_id')->orderBy('po_id', 'desc')->distinct('po_id')->get();
         $Arrtt = array();
-        $count = 0;
+        $att = array();
+        $Att = array('po_id', 'data');
         foreach ($pos as $po) {
             $tt = PorderHistory::where('po_id', $po->po_id)->orderBy('id', 'asc')->get();
+            $this->po_id = $po->po_id;
             if ($tt->count() > 1) {
                 foreach ($tt as $t) {
-                    if ($t->status === 'P')
-                        array_push($Arrtt, PorderHistory::where([['po_id', $po->po_id], ['status', 'P']])->get());
-                    if ($t->status === 'OP')
-                        array_push($Arrtt, PorderHistory::where([['po_id', $po->po_id], ['status', 'OP']])->get());
-                    if ($t->status === 'CH')
-                        array_push($Arrtt, PorderHistory::where([['po_id', $po->po_id], ['status', 'CH']])->get());
-                    if ($t->status === 'PC')
-                        array_push($Arrtt, PorderHistory::where([['po_id', $po->po_id], ['status', 'PC']])->get());
-                    if ($t->status === 'C')
-                        array_push($Arrtt, PorderHistory::where([['po_id', $po->po_id], ['status', 'C']])->get());
+                    if ($t->status === 'P') {
+                        $this->status_p = PorderHistory::select('po_datetime', 'status')->where([['po_id', $po->po_id], ['status', 'P']])->first();
+                        $att = array_push(,$att['id'=>$this->po_id], 'status_p' , $this->status_p->po_datetime);
+                    } elseif ($t->status === 'OP') {
+                        $this->status_op = PorderHistory::select('po_datetime', 'status')->where([['po_id', $po->po_id], ['status', 'OP']])->first();
+//                        $t = array_combine($Att, [$this->po_id, ['status_op' => $this->status_op->po_datetime]]);
+                        $att = array_add(['id'=>$this->po_id], 'status_op' , $this->status_op->po_datetime);
+                        dd($att);
+                    } elseif ($t->status === 'CH') {
+                        $this->status_ch = PorderHistory::select('po_datetime', 'status')->where([['po_id', $po->po_id], ['status', 'CH']])->first();
+                        $t = array_combine($Att, [$this->po_id, ['status_ch' => $this->status_ch->po_datetime]]);
+                    } elseif ($t->status === 'PC') {
+                        $this->status_pc = PorderHistory::select('po_datetime', 'status')->where([['po_id', $po->po_id], ['status', 'PC']])->first();
+                        $t = array_combine($Att, [$this->po_id, ['status_pc' => $this->status_pc->po_datetime]]);
+                    } elseif ($t->status === 'C') {
+                        $this->status_c = PorderHistory::select('po_datetime', 'status')->where([['po_id', $po->po_id], ['status', 'C']])->first();
+                        $t = array_combine($Att, [$this->po_id, ['status_c' => $this->status_c->po_datetime]]);
+                    } else {
+
+                    }
                 }
-            } else{
-                array_push($Arrtt, $tt);
+                $t = array_combine($Att, [$this->po_id, [
+                    'status_p' => $this->status_p,
+                    'status_op' => $this->status_op,
+                    'status_ch' => $this->status_ch,
+                    'status_pc' => $this->status_pc,
+                    'status_c' => $this->status_c
+                ]]);
+                array_push($Arrtt, $t);
+            } else {
+                $t = array_combine($Att, [$this->po_id, ['status_p' => PorderHistory::select('po_datetime', 'status')->where('po_id', $po->po_id)->first()]]);
+                array_push($Arrtt, $t);
             }
         }
 
-        dd($Arrtt);
+        $this->calcDiff($Arrtt);
+
         return view('admin.reports.completion-time', compact('pos'));
     }
 
