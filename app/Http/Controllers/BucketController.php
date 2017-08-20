@@ -32,16 +32,13 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
-    protected $id = array();
-    protected $po_id = array();
-    protected $po_datetime = array();
-
-
     public function CompletionTime()
     {
-        $pos = PorderHistory::select('po_id')->orderBy('po_id', 'desc')->distinct('po_id')->get();
+        $distinct_pos = PorderHistory::select('po_id')->orderBy('po_id', 'desc')->distinct('po_id')->get();
 
-        return view('admin.reports.completion-time', compact('pos'));
+        $pos = PorderHistory::all();
+
+        return view('admin.reports.completion-time', compact('distinct_pos','pos'));
     }
 
     public
@@ -209,13 +206,13 @@ class BucketController extends Controller
     {
         $po = P_Order::find($id);
 
+        $po->update(['status' => $status]);
+
         $poh = new PorderHistory();
         $poh->po_id = $po->id;
         $poh->po_datetime = $po->updated_at;
         $poh->status = $po->status;
         $poh->save();
-
-        $po->update(['status' => $status]);
 
         $users = $po->client_branch->client_user;
 
@@ -329,6 +326,12 @@ class BucketController extends Controller
 
 
             $order->save();
+
+            $poh = new PorderHistory();
+            $poh->po_id = $order->id;
+            $poh->po_datetime = $order->updated_at;
+            $poh->status = $order->status;
+            $poh->save();
 
             $agent = User::find($order->agent_id);
             $sHead = User::find($agent->section_head_id);
