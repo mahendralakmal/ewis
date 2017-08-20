@@ -69,12 +69,13 @@
                                     @endforeach
                                     <tr>
                                         <td>{{$distinct_pos->count()}}</td>
-                                        <td>Days : {{ $tp/24 }}<br>Hours : {{ $tp }}</td>
-                                        <td>Days : {{ $top/24 }}<br>Hours : {{ $top }}</td>
-                                        <td>Days : {{ $tch/24 }}<br>Hours : {{ $tch }}</td>
-                                        <td>Days : {{ $tpc/24 }}<br>Hours : {{ $tpc }}</td>
-                                        <td>Days : {{ $tc/24 }}<br>Hours : {{ $tc }}</td>
-                                        <td>Days : {{ ($tp+$top+$tch+$tpc+$tc)/24 }}<br>Hours : {{ $tp+$top+$tch+$tpc+$tc }}</td>
+                                        <td>Days : {{ round($tp/24,2) }}<br>Hours : {{ $tp }}</td>
+                                        <td>Days : {{ round($top/24,2) }}<br>Hours : {{ $top }}</td>
+                                        <td>Days : {{ round($tch/24,2) }}<br>Hours : {{ $tch }}</td>
+                                        <td>Days : {{ round($tpc/24,2) }}<br>Hours : {{ $tpc }}</td>
+                                        <td>Days : {{ round($tc/24,2) }}<br>Hours : {{ $tc }}</td>
+                                        <td>Days : {{ round(($tp+$top+$tch+$tpc+$tc)/24,2) }}<br>Hours
+                                            : {{ $tp+$top+$tch+$tpc+$tc }}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -117,13 +118,22 @@
 
                                             <td>
                                                 @if(!empty(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()))
-                                                    Days
-                                                    : {{ round((\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->po_datetime)->diffInHours(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at)))/24, 2) }}
-                                                    <br>
-                                                    Hours
-                                                    : {{ \Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->po_datetime)->diffInHours(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at)) }}
-                                                @else
-                                                    -
+
+
+
+                                                    @if(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->po_datetime)->equalTo(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at)))
+                                                        Days
+                                                        : {{ round(\Carbon\Carbon::now()->diffInHours(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at))/24, 2) }}
+                                                        <br>
+                                                        Hours
+                                                        : {{ \Carbon\Carbon::now()->diffInHours(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at)) }}
+                                                    @else
+                                                        Days
+                                                        : {{ round((\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->po_datetime)->diffInHours(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at)))/24, 2) }}
+                                                        <br>
+                                                        Hours
+                                                        : {{ \Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->po_datetime)->diffInHours(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at)) }}
+                                                    @endif
                                                 @endif
                                             </td>
                                             <td>
