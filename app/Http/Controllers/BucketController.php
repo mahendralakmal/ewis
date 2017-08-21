@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Client_Product;
 use App\ClientsBranch;
+use App\Mail\PoCancelled;
 use App\Mail\PoCompleted;
 use App\Mail\PoOnProcess;
 use App\Mail\PoCreditHold;
@@ -218,6 +219,7 @@ class BucketController extends Controller
 
         $agent = $po->cam;
 
+        $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
         if ($status === "OP") {
             foreach ($users as $usr) {
                 $user = User::find($usr->user_id);
@@ -241,6 +243,15 @@ class BucketController extends Controller
                 $user = User::find($usr->user_id);
                 Mail::to($user)->send(new PoCompleted($user, $po));
                 Mail::to($agent)->send(new PoCompleted($user, $po));
+            }
+        }elseif ($status === "CN") {
+
+            foreach ($users as $usr) {
+                $user = User::find($usr->user_id);
+                Mail::to($user)->send(new PoCancelled($user, $po));
+                Mail::to($agent)->send(new PoCancelled($user, $po));
+                Mail::to($procument)->send(new PoCancelled($user, $po));
+                Mail::to($agent->sector_head)->send(new PoCancelled($user, $po));
             }
         }
         return back();
