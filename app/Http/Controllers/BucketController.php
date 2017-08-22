@@ -33,6 +33,38 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
+    public
+    function CancelledPurchaseOrder()
+    {
+        $from = '';
+        $to = '';
+        if (Session::has('User')) {
+            if (Session::get('User') == 1)
+                $porders = P_Order::where('status', 'CN')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::where('status', 'CN')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            elseif (User::find(Session::get('User'))->designation_id == 6)
+                $porders = P_Order::where('status', 'CN')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            else
+                $porders = P_Order::where('status', 'CN')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+
+            return view('admin/clients/purchase-orders-completed', compact('porders', 'from', 'to'));
+        } else return redirect('/');
+    }
+
+    public
+    function CancelledPurchases($from, $to)
+    {
+        if (Session::has('User')) {
+            if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
+                $porders = P_Order::whereBetween('created_at', [$from, $to])->where('status', 'CN')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
+            else
+                $porders = User::find(Session::get('User'));
+
+            return view('admin/clients/purchase-orders-completed', compact('porders', 'from', 'to'));
+        } else return redirect('/');
+    }
+
     public function CompletionTime()
     {
         $distinct_pos = PorderHistory::select('po_id')->orderBy('po_id', 'desc')->distinct('po_id')->get();
@@ -634,6 +666,48 @@ class BucketController extends Controller
                         foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
                             if (P_Order::where('clients_branch_id', $cbranch->id)->count() > 0) {
                                 $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'CH']])->count();
+                            }
+                        }
+                    }
+                }
+            }
+            return Response::json($porder);
+        } else return redirect('/');
+    }
+
+    public
+    function getCancelledPoCount()
+    {
+        if (Session::has('User')) {
+            $user = User::find(Session::get('User'));
+            if ($user->id == 1 || $user->designation_id == 5 || $user->designation_id == 7) {
+                $porder = P_Order::where('status', 'CN')->count();
+            } else {
+                $porder = 0;
+                if ($user->designation_id == 6) {
+                    foreach (User::where('section_head_id', $user->id)->get() as $cbranch) {
+                        foreach (ClientsBranch::where('agent_id', $cbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'CN']])->count();
+                        }
+                    }
+                    foreach (User::where('section_head_id', $cbranch->id)->get() as $sbranch) {
+                        foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'CN']])->count();
+                        }
+                    }
+                    foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
+                        $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'CN']])->count();
+                    }
+                } else {
+                    foreach (User::where('section_head_id', $user->id)->get() as $sbranch) {
+                        foreach (ClientsBranch::where('agent_id', $sbranch->id)->get() as $tbranch) {
+                            $porder += P_Order::where([['clients_branch_id', $tbranch->id], ['status', 'CN']])->count();
+                        }
+                    }
+                    if (ClientsBranch::where('agent_id', $user->id)->count() > 0) {
+                        foreach (ClientsBranch::where('agent_id', $user->id)->get() as $cbranch) {
+                            if (P_Order::where('clients_branch_id', $cbranch->id)->count() > 0) {
+                                $porder += P_Order::where([['clients_branch_id', $cbranch->id], ['status', 'CN']])->count();
                             }
                         }
                     }

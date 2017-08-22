@@ -5763,6 +5763,9 @@ body, label, .checkbox label {
 .table {
   margin-bottom: 0px; }
 
+.special-td {
+  width: 150px !important; }
+
 .special-list-group {
   margin-top: 20px !important; }
   .special-list-group table {

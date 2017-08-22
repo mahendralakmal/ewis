@@ -26,6 +26,8 @@
                     <li><a style="color: red"
                            href="{{ url('/admin/purchase-orders/purchase-orders-credithold') }}">Credit Hold<span
                                     class="badge creditHold"></span></a></li>
+                    <li><a href="{{ url('/admin/purchase-orders/purchase-orders-cancelled') }}">Cancelled<span
+                                    class="badge cancelled"></span></a></li>
                     <li><a href="{{ url('/signout') }}">Signout</a></li>
                 </ul>
                 <div class="navbar-default sidebar" role="navigation">
@@ -154,11 +156,16 @@
                                                     Complete</a>
                                             </li>
                                         @endif
-                                        @if((\App\User::find(Session::get('User'))->privilege->view_po))
-                                            <li>
-                                                <a href="{{ url ('/admin/purchase-orders/purchase-orders-completed' ) }}">Completed</a>
-                                            </li>
-                                        @endif
+                                            @if((\App\User::find(Session::get('User'))->privilege->view_po))
+                                                <li>
+                                                    <a href="{{ url ('/admin/purchase-orders/purchase-orders-completed' ) }}">Completed</a>
+                                                </li>
+                                            @endif
+                                            @if((\App\User::find(Session::get('User'))->privilege->view_po))
+                                                <li>
+                                                    <a href="{{ url ('/admin/purchase-orders/purchase-orders-cancelled' ) }}">Cancelled</a>
+                                                </li>
+                                            @endif
                                     </ul>
                                 @endif
                             </li>
@@ -292,6 +299,16 @@
                     url: '/admin/getCreditHoldPoCount',
                     success: function (response) {
                         var model = $('.creditHold');
+                        model.text(response);
+                    }
+                }
+            );
+            $.ajax(
+                {
+                    type: 'get',
+                    url: '/admin/getCancelledPoCount',
+                    success: function (response) {
+                        var model = $('.cancelled');
                         model.text(response);
                     }
                 }

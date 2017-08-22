@@ -28,7 +28,7 @@
 <body>
 @if((\Illuminate\Support\Facades\Session::has('LoggedIn')) && (\Illuminate\Support\Facades\Session::get('LoggedIn')) && (strtolower(\Illuminate\Support\Facades\Session::get('Type')) == 'client'))
 <header>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->

@@ -5,6 +5,11 @@ $tablet: "(max-width: 1024px)";
 $desktop: "(min-width: 1024px)";
 $mobile: "(max-width: 768px)";
 
+body{
+  font-size: 12px;
+}
+
+
 .thumbnail {
   margin-bottom: 30px;
 
@@ -76,7 +81,7 @@ $mobile: "(max-width: 768px)";
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
   }
   .white-background {
-    padding-top: 30px;
+    padding-top: 70px;
     margin-top: 5px;
     margin-bottom: 1px;
     min-height: 528px;

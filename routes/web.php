@@ -69,6 +69,7 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/getPCompletePoCount', 'BucketController@getPCompletePoCount');
     Route::get('/getProcessingPoCount', 'BucketController@getProcessingPoCount');
     Route::get('/getCreditHoldPoCount', 'BucketController@getCreditHoldPoCount');
+    Route::get('/getCancelledPoCount', 'BucketController@getCancelledPoCount');
 
     Route::group(['prefix' => '/brands'], function () {
         Route::get('/', 'BrandsController@admin_index');
@@ -127,6 +128,9 @@ Route::group(['prefix' => '/admin'], function () {
 
         Route::get('/purchase-orders-completed', 'BucketController@CompletedPurchaseOrder');
         Route::get('/purchase-orders-completed/{from}/{to}', 'BucketController@CompletedPurchases');
+
+        Route::get('/purchase-orders-cancelled', 'BucketController@CancelledPurchaseOrder');
+        Route::get('/purchase-orders-cancelled/{from}/{to}', 'BucketController@CancelledPurchases');
 
         Route::get('/purchase-orders-credithold', 'BucketController@CreditHoldPurchaseOrder');
         Route::get('/purchase-orders-credithold/{from}/{to}', 'BucketController@CreditHoldPurchaseOrders');
