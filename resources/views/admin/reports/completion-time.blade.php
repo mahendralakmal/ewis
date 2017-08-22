@@ -42,9 +42,15 @@
                                     ?>
                                     @foreach($pos as $po)
                                         @if($po->status === 'P')
-                                            <?php
-                                            $tp += \Carbon\Carbon::parse($po->po_datetime)->diffInHours(\Carbon\Carbon::parse($po->created_at));
-                                            ?>
+                                            @if(\Carbon\Carbon::parse($po->po_datetime)->equalTo(\Carbon\Carbon::parse($po->created_at)))
+                                                <?php
+                                                $tp += \Carbon\Carbon::now()->diffInHours(\Carbon\Carbon::parse($po->created_at));
+                                                ?>
+                                            @else
+                                                <?php
+                                                $tp += \Carbon\Carbon::parse($po->po_datetime)->diffInHours(\Carbon\Carbon::parse($po->created_at));
+                                                ?>
+                                            @endif
                                         @endif
                                         @if($po->status === 'OP')
                                             <?php
@@ -95,7 +101,8 @@
                                         <td rowspan="2" class="text-center special-td">Customer Name</td>
                                         <td rowspan="2" class="text-center special-td">Branch Department</td>
                                         <td rowspan="2" class="text-center special-td">Account Manager</td>
-                                        <td colspan="6" class="text-center special-td">Status Change (Avarage - Hours/ Days)
+                                        <td colspan="6" class="text-center special-td">Status Change (Avarage - Hours/
+                                            Days)
                                         </td>
                                     </tr>
                                     <tr>
@@ -118,9 +125,6 @@
 
                                             <td>
                                                 @if(!empty(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()))
-
-
-
                                                     @if(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->po_datetime)->equalTo(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at)))
                                                         Days
                                                         : {{ round(\Carbon\Carbon::now()->diffInHours(\Carbon\Carbon::parse(\App\PorderHistory::where([['po_id',$po->po_id],['status','P']])->first()->created_at))/24, 2) }}

@@ -35,7 +35,7 @@ class PoCancelled extends Mailable
      */
     public function build()
     {
-        return $this->subject('EWIS Peripherals Order Management System - Your Order has Cancelled (No. '.$this->order->id.')')->view('emails.PoCancelled');
+        return $this->subject('EWIS Peripherals Order Management System - Your Order has been Cancelled (No. '.$this->order->id.')')->view('emails.PoCancelled');
 //        return $this->view('view.name');
     }
 }
