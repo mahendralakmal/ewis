@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Client_Product;
 use App\ClientsBranch;
+use App\Mail\PoCancelled;
 use App\Mail\PoCompleted;
 use App\Mail\PoOnProcess;
 use App\Mail\PoCreditHold;
@@ -32,11 +33,17 @@ use Illuminate\Support\Facades\Storage;
 
 class BucketController extends Controller
 {
-//    public function CompletionTime(){
-//        return view('admin.reports.completion-time');
-//    }
+    public function CompletionTime()
+    {
+        $distinct_pos = PorderHistory::select('po_id')->orderBy('po_id', 'desc')->distinct('po_id')->get();
 
-    public function getPurchaseOrdersBySectorHead(Request $request)
+        $pos = PorderHistory::all();
+
+        return view('admin.reports.completion-time', compact('distinct_pos','pos'));
+    }
+
+    public
+    function getPurchaseOrdersBySectorHead(Request $request)
     {
 //        $this->validate(request(),
 //            [
@@ -73,7 +80,8 @@ class BucketController extends Controller
             compact('po', 'status', 'branch', 'sheads', 'start', 'end', 'p_orders'));
     }
 
-    public function getAllPurchaseOrders(Request $request)
+    public
+    function getAllPurchaseOrders(Request $request)
     {
 //        return $request->all();
         $agents = User::where('designation_id', 4);
@@ -98,7 +106,8 @@ class BucketController extends Controller
         return view('admin.reports.all-purchase-orders', compact('clients', 'p_orders', 'status', 'agents', 'start', 'end'));
     }
 
-    public function getPurchaseOrdersByAccountManager(Request $request)
+    public
+    function getPurchaseOrdersByAccountManager(Request $request)
     {
         $this->validate(request(),
             [
@@ -135,7 +144,8 @@ class BucketController extends Controller
             compact('po', 'status', 'branch', 'agents', 'start', 'end', 'p_orders'));
     }
 
-    public function getPurchaseOrdersByClient(Request $request)
+    public
+    function getPurchaseOrdersByClient(Request $request)
     {
         $clients = Client::all();
         $branch = ClientsBranch::where('client_id')->get();
@@ -160,7 +170,8 @@ class BucketController extends Controller
         return view('admin.reports.client-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'branch', 'p_orders'));
     }
 
-    public function getPriceListByAccMgr()
+    public
+    function getPriceListByAccMgr()
     {
         $users = User::all();
         $branchs = "";
@@ -169,7 +180,8 @@ class BucketController extends Controller
         return view('admin/reports/account-manager-wise-price-list', compact('users', 'branchs', 'clients', 's_user'));
     }
 
-    public function getPLByAccMgr(Request $request)
+    public
+    function getPLByAccMgr(Request $request)
     {
         $users = User::all();
 
@@ -180,7 +192,8 @@ class BucketController extends Controller
         return view('admin/reports/account-manager-wise-price-list', compact('users', 'branchs', 'clients', 's_user'));
     }
 
-    public function getPriceListByClient(Client $client, $start, $end)
+    public
+    function getPriceListByClient(Client $client, $start, $end)
     {
         if ($start != 'n' && $end != 'n') {
             return Client_Product::whereBetween('client__products.created_at', array(new DateTime($start), new DateTime($end)))->get();
@@ -189,9 +202,12 @@ class BucketController extends Controller
         }
     }
 
-    public function change_status($id, $status)
+    public
+    function change_status($id, $status)
     {
         $po = P_Order::find($id);
+
+        $po->update(['status' => $status]);
 
         $poh = new PorderHistory();
         $poh->po_id = $po->id;
@@ -199,12 +215,11 @@ class BucketController extends Controller
         $poh->status = $po->status;
         $poh->save();
 
-        $po->update(['status' => $status]);
-
         $users = $po->client_branch->client_user;
 
         $agent = $po->cam;
 
+        $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
         if ($status === "OP") {
             foreach ($users as $usr) {
                 $user = User::find($usr->user_id);
@@ -229,11 +244,21 @@ class BucketController extends Controller
                 Mail::to($user)->send(new PoCompleted($user, $po));
                 Mail::to($agent)->send(new PoCompleted($user, $po));
             }
+        }elseif ($status === "CN") {
+
+            foreach ($users as $usr) {
+                $user = User::find($usr->user_id);
+                Mail::to($user)->send(new PoCancelled($user, $po));
+                Mail::to($agent)->send(new PoCancelled($user, $po));
+                Mail::to($procument)->send(new PoCancelled($user, $po));
+                Mail::to($agent->sector_head)->send(new PoCancelled($user, $po));
+            }
         }
         return back();
     }
 
-    public function getAddToBucket(Request $request)
+    public
+    function getAddToBucket(Request $request)
     {
         $product = Client_Product::find($request->id);
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
@@ -243,7 +268,8 @@ class BucketController extends Controller
         return back();
     }
 
-    public function getBucket()
+    public
+    function getBucket()
     {
         if (!Session::has('bucket')) {
             return view('user/bucket');
@@ -257,7 +283,8 @@ class BucketController extends Controller
 
     }
 
-    public function remove_item($part_no)
+    public
+    function remove_item($part_no)
     {
         $oldBucket = Session::has('bucket') ? Session::get('bucket') : null;
         $bucket = new Bucket($oldBucket);
@@ -311,6 +338,12 @@ class BucketController extends Controller
 
             $order->save();
 
+            $poh = new PorderHistory();
+            $poh->po_id = $order->id;
+            $poh->po_datetime = $order->updated_at;
+            $poh->status = $order->status;
+            $poh->save();
+
             $agent = User::find($order->agent_id);
             $sHead = User::find($agent->section_head_id);
             $order->bucket = unserialize($order->bucket);
@@ -333,7 +366,7 @@ class BucketController extends Controller
     function getHistory()
     {
         if (Session::has('User')) {
-            $orders = P_Order::where('clients_branch_id', User::find(Session::get('User'))->c_user->client_branch->id)->orderBy('id','desc')->get();
+            $orders = P_Order::where('clients_branch_id', User::find(Session::get('User'))->c_user->client_branch->id)->orderBy('id', 'desc')->get();
             if ($orders != null) {
                 $orders->transform(function ($order, $key) {
                     $order->bucket = unserialize($order->bucket);
@@ -345,7 +378,8 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public function getPurchaseOrder()
+    public
+    function getPurchaseOrder()
     {
         $from = '';
         $to = '';
@@ -366,7 +400,8 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public function getPurchaseOrders($from, $to, $status)
+    public
+    function getPurchaseOrders($from, $to, $status)
     {
         if (Session::has('User')) {
             if (Session::get('User') == 1) {
@@ -382,7 +417,8 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public function ajaxPurchaseOrderStatus($from, $to, $status)
+    public
+    function ajaxPurchaseOrderStatus($from, $to, $status)
     {
         if ($from != '' && $to != '' && $status != '' && $status != 'a')
             $porders = P_Order::whereBetween('p__orders.created_at', [$from, $to])
@@ -446,7 +482,8 @@ class BucketController extends Controller
         return $response;
     }
 
-    public function pendingPurchaseOrder()
+    public
+    function pendingPurchaseOrder()
     {
         $from = '';
         $to = '';
@@ -470,7 +507,8 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public function pendingPurchaseOrders($from, $to)
+    public
+    function pendingPurchaseOrders($from, $to)
     {
 
         if (Session::has('User')) {
@@ -488,7 +526,8 @@ class BucketController extends Controller
     }
 
 //    public function
-    public function processingPurchaseOrder()
+    public
+    function processingPurchaseOrder()
     {
         $from = '';
         $to = '';
@@ -507,7 +546,8 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public function processingPurchaseOrders($from, $to)
+    public
+    function processingPurchaseOrders($from, $to)
     {
         if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
@@ -522,7 +562,8 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public function CreditHoldPurchaseOrder()
+    public
+    function CreditHoldPurchaseOrder()
     {
         $from = '';
         $to = '';
@@ -547,7 +588,8 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public function CreditHoldPurchaseOrders($from, $to)
+    public
+    function CreditHoldPurchaseOrders($from, $to)
     {
         if (Session::has('User')) {
             if (Session::get('User') == 1 || User::find(Session::get('User'))->designation_id == 5 || User::find(Session::get('User'))->designation_id == 7)
@@ -559,7 +601,8 @@ class BucketController extends Controller
             return redirect('/');
     }
 
-    public function getCreditHoldPoCount()
+    public
+    function getCreditHoldPoCount()
     {
         if (Session::has('User')) {
             $user = User::find(Session::get('User'));
@@ -600,7 +643,8 @@ class BucketController extends Controller
         } else return redirect('/');
     }
 
-    public function getProcessingPoCount()
+    public
+    function getProcessingPoCount()
     {
         if (Session::has('User')) {
             $user = User::find(Session::get('User'));
@@ -762,7 +806,8 @@ class BucketController extends Controller
         } else return redirect('/');
     }
 
-    private function getDateDiff($date)
+    private
+    function getDateDiff($date)
     {
         return (Carbon::parse($date)->diff(Carbon::now())->days);
     }
@@ -815,7 +860,8 @@ class BucketController extends Controller
         return view('admin/reports/client-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end'));
     }
 
-    public function AgentPurchaseOrder()
+    public
+    function AgentPurchaseOrder()
     {
         $clients = Client::all();
 //        $branch = ClientsBranch::all();
@@ -828,7 +874,8 @@ class BucketController extends Controller
         return view('admin.reports.agent-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'agents', 'branch'));
     }
 
-    public function SectorHeadPurchaseOrder()
+    public
+    function SectorHeadPurchaseOrder()
     {
         $clients = Client::all();
         $branch = ClientsBranch::all();
@@ -842,7 +889,8 @@ class BucketController extends Controller
         return view('admin.reports.sectorhead-wise-purchase-orders', compact('clients', 'po', 'status', 'start', 'end', 'sheads', 'branch'));
     }
 
-    public function AllPurchaseOrder()
+    public
+    function AllPurchaseOrder()
     {
         $clients = Client::all();
         $branch = ClientsBranch::all();

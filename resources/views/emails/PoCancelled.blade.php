@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
 
 </head>
-
 <body style="width: 894px">
-
-<p>Thank You for your valued order. Your order is currently on Credit Hold..</p>
-<p>Please settle any outstanding dues in order for us to process your order(s).
-    You may contact your Account Manager for further information or for any clarifications with regard to this order. </p>
+{{--<h5>Order Completed</h5>--}}
+<p>Your order has been Cancelled.</p>
+<p>You may contact your Account Manager for further information or for any clarifications with regard to this order.</p>
 <p>Thank You.</p>
 
 <table width="100%" border="0">
@@ -48,7 +46,6 @@
             <p>{{ $order->del_notes }}</p>
         </td>
     </tr>
-
     <tr>
         <td colspan="2"><hr><img src="{{ url('/img/footer.png') }}" width="100%"></td>
     </tr>
