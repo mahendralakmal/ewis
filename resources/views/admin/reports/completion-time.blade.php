@@ -24,12 +24,12 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center special-td">Pending</td>
-                                        <td class="text-center special-td">Processing</td>
-                                        <td class="text-center special-td">Credit Hold</td>
-                                        <td class="text-center special-td">Partial Complete</td>
-                                        <td class="text-center special-td">Complete</td>
-                                        <td class="text-center special-td">Total Time</td>
+                                        <td class="text-center special-td"><strong>Pending</strong></td>
+                                        <td class="text-center special-td"><strong>Processing</strong></td>
+                                        <td class="text-center special-td"><strong>Credit Hold</strong></td>
+                                        <td class="text-center special-td"><strong>Partial Complete</strong></td>
+                                        <td class="text-center special-td"><strong>Complete</strong></td>
+                                        <td class="text-center special-td"><strong>Total Time</strong></td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -96,22 +96,21 @@
                                 <table class="table responsiv-table table-striped">
                                     <thead>
                                     <tr>
-                                        <td rowspan="2" class="text-center special-td">P.O. No.</td>
-                                        <td rowspan="2" class="text-center special-td">P.O. Date</td>
-                                        <td rowspan="2" class="text-center special-td">Customer Name</td>
-                                        <td rowspan="2" class="text-center special-td">Branch Department</td>
-                                        <td rowspan="2" class="text-center special-td">Account Manager</td>
-                                        <td colspan="6" class="text-center special-td">Status Change (Avarage - Hours/
-                                            Days)
-                                        </td>
+                                        <td rowspan="2" class="text-center special-td"><strong>P.O. No.</strong></td>
+                                        <td rowspan="2" class="text-center special-td"><strong>P.O. Date</strong></td>
+                                        <td rowspan="2" class="text-center special-td"><strong>Customer Name</strong></td>
+                                        <td rowspan="2" class="text-center special-td"><strong>Branch Department</strong></td>
+                                        <td rowspan="2" class="text-center special-td"><strong>Account Manager</strong></td>
+                                        <td colspan="6" class="text-center special-td"><strong>Status Change (Avarage - Hours/
+                                            Days)</strong></td>
                                     </tr>
                                     <tr>
-                                        <td class="text-center special-td">Pending</td>
-                                        <td class="text-center special-td">Processing</td>
-                                        <td class="text-center special-td">Credit Hold</td>
-                                        <td class="text-center special-td">Partial Complete</td>
-                                        <td class="text-center special-td">Complete</td>
-                                        <td class="text-center special-td">Total Time</td>
+                                        <td class="text-center special-td"><strong>Pending</strong></td>
+                                        <td class="text-center special-td"><strong>Processing</strong></td>
+                                        <td class="text-center special-td"><strong>Credit Hold</strong></td>
+                                        <td class="text-center special-td"><strong>Partial Complete</strong></td>
+                                        <td class="text-center special-td"><strong>Complete</strong></td>
+                                        <td class="text-center special-td"><strong>Total Time</strong></td>
                                     </tr>
                                     </thead>
                                     <tbody>

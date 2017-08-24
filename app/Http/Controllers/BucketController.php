@@ -277,7 +277,7 @@ class BucketController extends Controller
                 Mail::to($agent)->send(new PoCompleted($user, $po));
             }
         }elseif ($status === "CN") {
-
+            $po->bucket = unserialize($po->bucket);
             foreach ($users as $usr) {
                 $user = User::find($usr->user_id);
                 Mail::to($user)->send(new PoCancelled($user, $po));
