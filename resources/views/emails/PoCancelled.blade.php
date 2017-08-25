@@ -9,41 +9,35 @@
 <p>Your order has been Cancelled.</p>
 <p>You may contact your Account Manager for further information or for any clarifications with regard to this order.</p>
 <p>Thank You.</p>
-
+<div class="col-md-12">
+    <div class="col-md-6">
+        <center><h2>Purchase Order</h2></center>
+    </div>
+</div>
 <table width="100%" border="0">
     <tr>
         <td>
-            <img src="{{ url('/img/ewis-logo.png') }}" style="width: 150px;"><br>
-            <p>Head Office<br>
-                No 142, Yathama Building,<br>
-                Galle Road,<br>
-                Colombo 03.<br>
-                Phone:117 496000<br>
-                Fax: 112 380580</p>
-        </td>
-        <td>
-            <h2>Purchase Order</h2>
-            <p>date: {{ $order->updated_at }}</p>
-            <p>PO#: {{ $order->id }}</p>
+            <p><strong>Date / Time: </strong> {{ $order->created_at }}</p>
+            <p><strong>P.O Reference#: </strong> {{ $order->id }}</p>
+            <br>
+            <p><strong>Customer Name: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->client->name }} </p>
+            <p><strong>Customer Branch: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->name }} </p>
         </td>
     </tr>
     <tr>
         <td>
-            <strong>Contact Person</strong>
-            <p>{{ $client_branch->name }}</p>
-            <strong>Billing Address</strong>
-            <p>{{ $client_branch->address }}</p>
-            <p>tel: {{ $client_branch->contact_no }}</p>
-            <strong>Special Notes</strong>
-            <p>{{ $order->cp_notes }}</p>
+            <strong>Bill To</strong>
+            @if($order->cp_name !== null || $order->cp_name !=='')<p>{{$order->cp_name}}</p>@else<p>{{$user->c_user->cp_name}}</p>@endif
+            @if($order->cp_branch !== null || $order->cp_branch !=='')<p>{{$order->cp_branch}}</p>@else<p>{{$user->c_user->client_branch->name}}</p>@endif
+            <p>@if($order->cp_address !== null || $order->cp_address !=='') {{$order->cp_address}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->address }} @endif</p>
+            <p>@if($order->cp_telephone !== null || $order->cp_telephone !==''){{$order->cp_telephone}} @else {{ App\ClientsBranch::find($order->clients_branch_id)->contact_no }}@endif</p>
         </td>
         <td>
-            <strong>Contact Person</strong>
-            <p>{{ $order->del_cp }}</p>
-            <strong>Delivery Address</strong>
-            <p>{{ $order->del_branch }}</p>
-            <strong>Special Notes for the delivery</strong>
-            <p>{{ $order->del_notes }}</p>
+            <strong>Deliver To</strong>
+            @if($order->del_cp !== null || $order->del_cp !=='')<p>{{$order->del_cp}}</p>@else<p>{{$user->c_user->cp_name}}</p>@endif
+            @if($order->del_branch !== null || $order->del_branch !=='')<p>{{$order->del_branch}}</p>@else<p>{{$user->c_user->client_branch->name}}</p>@endif
+            @if($order->del_address !== null || $order->del_address !=='')<p>{{$order->del_address}}</p>@endif
+            <p>{{ $order->del_tp }}</p>
         </td>
     </tr>
     <tr>
