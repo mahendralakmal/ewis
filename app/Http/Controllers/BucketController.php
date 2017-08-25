@@ -311,6 +311,7 @@ class BucketController extends Controller
         $client_product = Client_Product::all();
         $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
 
+
         return view('user/bucket', ['products' => $bucket->items, 'totalQty' => $bucket->totalQty, 'totalPrice' => $bucket->totalPrice, 'client_product' => $client_product, 'branch' => $branch]);
 
     }
@@ -985,19 +986,19 @@ class BucketController extends Controller
     }
 
     public
-    function getPODetails($id)
+    function getPODetails(P_Order $id)
     {
-        $order = P_Order::find($id);
+        $order = $id;
         $order->bucket = unserialize($order->bucket);
         $branch = ClientsBranch::find($order->clients_branch_id);
         return view('admin/clients/detail-orders', compact('order', 'branch'));
     }
 
     public
-    function historyPODetails($id)
+    function historyPODetails(P_Order $id)
     {
         if (Session::has('User')) {
-            $order = P_Order::find($id);
+            $order = $id;
             $order->bucket = unserialize($order->bucket);
             $branch = Session::has('User') ? User::find(Session::get('User'))->c_user->client_branch : null;
 

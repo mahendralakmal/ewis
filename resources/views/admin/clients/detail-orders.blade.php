@@ -13,8 +13,10 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <p><strong>Customer
-                                Name: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->client->name }} </p>
-                        <p><strong>Customer Branch: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->name }} </p>
+                                Name: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->client->name }}
+                        </p>
+                        <p><strong>Customer
+                                Branch: </strong>{{ App\ClientsBranch::find($order->clients_branch_id)->name }} </p>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <br>
@@ -51,9 +53,8 @@
                         <tr>
                             <td class="text-center">{{ $item['item'] ['part_no'] }}</td>
                             <td class="text-center">{{ $item['item'] ['name'] }}</td>
-                            <td class="text-center">{{ $item['qty'] }}</td>{{----}}
-                            <td style="text-align: right">{{number_format((\App\Client_Product::where([['product_id', $item['item'] ['id']],['clients_branch_id', $branch->id ]])->first()->special_price),'2','.',',')}}</td>
-                            {{--                            <td>{{$branch->id}}</td>--}}
+                            <td class="text-center">{{ $item['qty'] }}</td>
+                            <td class="text-center">{{ number_format($item['unit_price'],'2','.',',') }}</td>
                             <td class="text-center">@if($item['item'] ['vat_apply'])15% @else 0% @endif</td>
                             <td style="text-align: right">{{ number_format($item['price'],2) }}</td>
                             @endforeach
