@@ -26,14 +26,14 @@ class ESearch extends Controller
             $header = '<table class="table"><thead><tr><td><h5>Organization</h5></td><td><h5>Branch / Department</h5></td><td><h5>Email</h5></td><td><h5>Name</h5></td><td class="col-md-3"></td></tr></thead><tbody>';
             foreach ($users as $user) {
                 if ($user->approval == 0)
-                    $approval = '<a href="/admin/manage-clients/client_user/{{ $user->id }}/activate" class="btn btn-primary btn-outline">Approve</a>';
+                    $approval = '<a href="/admin/manage-clients/client_user/' . $user->id . '/activate" class="btn btn-primary btn-outline">Approve</a>';
                 else
-                    $approval = '<a href="/admin/manage-clients/client_user/{{ $user->id }}/deactivate" class="btn btn-danger btn-outline">Unapprove</a>';
+                    $approval = '<a href="/admin/manage-clients/client_user/' . $user->id . '/deactivate" class="btn btn-danger btn-outline">Unapprove</a>';
 
-                $produce .= '<tr><td><h5>' . $user->c_user->client->name . '</h5></td>
-                        <td><h5>' . $user->c_user->client_branch->name . '</h5></td>
-                        <td><h5>' . $user->email . '</h5></td>
-                        <td><h5>' . $user->name . '</h5></td>
+                $produce .= '<tr><td>' . $user->c_user->client->name . '</td>
+                        <td>' . $user->c_user->client_branch->name . '</td>
+                        <td>' . $user->email . '</td>
+                        <td>' . $user->name . '</td>
                         <td>
                         <form method="POST" action="/admin/users/delete"
                                                                       role="form">
