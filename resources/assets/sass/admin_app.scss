@@ -170,6 +170,22 @@ $mobile: "(max-width: 768px)";
   background-color: #ff5459;
   color: #ffffff;
 }
+.error_cn{
+  color: #ff5459;
+
+  a{
+    color: #ff5459;
+    text-decoration: underline;
+  }
+
+  select{
+    color: #ff5459;
+  }
+
+  .btn-outline{
+    border-color: #ff5459;
+  }
+}
 .btn{
   font-size: 11px !important;
 }
