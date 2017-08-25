@@ -60,6 +60,7 @@
                                                 @elseif($porder->status === "CH") <p style="color: red">Credit Hold </p>
                                                 @elseif($porder->status === "PC") Partial Completed
                                                 @elseif($porder->status === "C") Completed
+                                                @elseif($porder->status === "CN") Cancelled
                                                 @endif</center>
                                         </td>
                                         <td><a href="{{ url('/client-profile/po-details/'.$porder->id) }}"
