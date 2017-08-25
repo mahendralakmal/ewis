@@ -48,7 +48,7 @@ class BucketController extends Controller
             else
                 $porders = P_Order::where('status', 'CN')->orderBy('id', 'desc')->paginate(config('const.PAGINATE'));
 
-            return view('admin/clients/purchase-orders-completed', compact('porders', 'from', 'to'));
+            return view('admin/clients/purchase-orders-cancelled', compact('porders', 'from', 'to'));
         } else return redirect('/');
     }
 
@@ -61,7 +61,7 @@ class BucketController extends Controller
             else
                 $porders = User::find(Session::get('User'));
 
-            return view('admin/clients/purchase-orders-completed', compact('porders', 'from', 'to'));
+            return view('admin/clients/purchase-orders-cancelled', compact('porders', 'from', 'to'));
         } else return redirect('/');
     }
 

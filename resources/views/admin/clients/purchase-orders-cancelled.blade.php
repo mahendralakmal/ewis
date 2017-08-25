@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('page_heading','Completed Orders')
+@section('page_heading','Cancelled Orders')
 @section('section')
     @if((\Illuminate\Support\Facades\Session::has('User'))
     && (\App\User::find(\Illuminate\Support\Facades\Session::get('User'))->privilege != null)
@@ -41,7 +41,7 @@
                                 <tbody class="tableCompleted">
                                 {{--@if(Session::get('User') == 1 || \App\User::find(Session::get('User'))->designation_id == 5 || \App\User::find(Session::get('User'))->designation_id == 7)--}}
                                     @foreach($porders as $porder)
-                                        <tr>
+                                        <tr class="error_cn">
                                             <td>{{$porder->id}}</td>
                                             <td>{{$porder->created_at}}</td>
                                             <td>{{$porder->client_branch->client->name}}</td>
