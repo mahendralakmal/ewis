@@ -327,13 +327,13 @@
 
         $('#sandbox-container .input-daterange').datepicker({format: "dd-mm-yyyy"});
 
-        $("#vat_apply").on('change', function () {
-            if (($(this).val() == "on") && ($("#vat").val() == '')) {
-                $("#vat").val('15');
-            } else {
-                $("#vat").val('');
-            }
-        });
+//        $("#vat_apply").on('change', function () {
+//            if (($(this).val() == "on") && ($("#vat").val() == '')) {
+//                $("#vat").val('15');
+//            } else {
+//                $("#vat").val('');
+//            }
+//        });
 
         $("#P_client").on('change', function () {
             $.ajax(

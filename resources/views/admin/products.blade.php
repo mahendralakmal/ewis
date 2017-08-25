@@ -200,7 +200,7 @@
 
                     <div class="form-group">
                         <div class="col-md-12 text-center"><a class="btn btn-danger" name="complete"
-                                                                         id="complete" href="{{ url ('/admin') }}">Finished
+                                                              id="complete" href="{{ url ('/admin') }}">Finished
                                 Adding Products</a></div>
                     </div>
                 </form>
@@ -214,21 +214,7 @@
 @stop
 @section('scripts')
     <script>
-        //        $(document).ready(function($) {
-        //            $(window).resize(function() {
-        //                var winH = $(window).height();
-        //                var fooH = $('#footer').height();
-        //                var phH = $('.ph').height();
-        //                var pnH = $('.panel-heading').height();
-        //                var pnRH = $('.right-pnl').height();
-        //
-        //                var tblNH = winH-fooH-(phH*2.5)-pnH;
-        //                var tblNHH = winH-fooH-(phH*3.5);
-        //                $('.tbl_ori').height(pnRH).css('overflow-y','auto');
-        ////                $('.tbl_ori_inner').height(tblNHH).css('overflow-y','auto');
-        ////                $('.side_pannel').height(tblNH).css('overflow-y','auto');
-        //            }).resize();
-        //        });
+
         $("#products").validate({
             rules: {
                 part_no: "required",
@@ -239,6 +225,14 @@
                 default_price: "required"
             }
         });
+
+        $("#vat_apply").on('click', function () {
+            if ($(this).is(':checked'))
+                $("#vat").val('15');
+            else
+                $("#vat").val('');
+        });
+
         $("#brand_id").on('change', function () {
             $.ajax(
                 {
