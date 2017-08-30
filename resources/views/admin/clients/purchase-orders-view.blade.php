@@ -96,7 +96,7 @@
                                                                             @if($porder->status === "C") selected @endif>
                                                                         Completed
                                                                     </option>
-                                                                    <option value="CN"
+                                                                    <option value="CN" class="red-background"
                                                                             @if($porder->status === "CN") selected @endif>
                                                                         Cancelled
                                                                     </option>
@@ -118,7 +118,7 @@
                                                                             @if($porder->status === "C") selected @endif>
                                                                         Completed
                                                                     </option>
-                                                                    <option value="CN"
+                                                                    <option value="CN" class="red-background"
                                                                             @if($porder->status === "CN") selected @endif>
                                                                         Cancelled
                                                                     </option>
@@ -136,12 +136,12 @@
                                                                             @if($porder->status === "C") selected @endif>
                                                                         Completed
                                                                     </option>
-                                                                    <option value="CN"
+                                                                    <option value="CN" class="red-background"
                                                                             @if($porder->status === "CN") selected @endif>
                                                                         Cancelled
                                                                     </option>
                                                                 @elseif($porder->status === "PC")
-                                                                    <option value="PC"
+                                                                    red-background                                <option value="PC"
                                                                             @if($porder->status === "PC") selected @endif>
                                                                         Partial Complete
                                                                     </option>
@@ -154,12 +154,12 @@
                                                                         Cancelled
                                                                     </option>
                                                                 @elseif($porder->status === "C")
-                                                                    <option value="C"
+                                                                    <option value="C" class=""
                                                                             @if($porder->status === "C") selected @endif>
                                                                         Completed
                                                                     </option>
                                                                 @elseif($porder->status === "CN")
-                                                                    <option value="CN"
+                                                                    <option value="CN" class="red-background"
                                                                             @if($porder->status === "CN") selected @endif>
                                                                         Cancelled
                                                                     </option>

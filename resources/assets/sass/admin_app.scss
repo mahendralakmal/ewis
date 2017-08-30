@@ -28,6 +28,8 @@ body, label, .checkbox label {
   margin-bottom: 0px;
 }
 
+
+
 .special-td{
   width: 150px !important;
 }
@@ -163,27 +165,31 @@ $red: #ee001d;
 $green: #008000;
 $mobile: "(max-width: 768px)";
 
+.red-background{
+  background-color: $red;
+  color: #ffffff;
+}
 .error{
   color: $red;
 }
 .error_tr{
-  background-color: #ff5459;
+  background-color: $red;
   color: #ffffff;
 }
 .error_cn{
-  color: #ff5459;
+  color: $red;
 
   a{
-    color: #ff5459;
+    color: $red;
     text-decoration: underline;
   }
 
   select{
-    color: #ff5459;
+    color: $red;
   }
 
   .btn-outline{
-    border-color: #ff5459;
+    border-color: $red;
   }
 }
 .btn{
