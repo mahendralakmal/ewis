@@ -151,11 +151,13 @@ Route::group(['prefix' => '/admin'], function () {
         Route::post('/cp_update', 'ClientController@cp_update');
         Route::post('/update', 'ClientController@update');
         Route::get('/check-assignments/{id}', 'AgentController@check_assignment');
-
-
-
         Route::get('/purchase-orders/{from}/{to}/{status}', 'BucketController@ajaxPurchaseOrderStatus');
         Route::get('/po-details/{id}', 'BucketController@getPODetails');
+
+
+
+        Route::post('/po-details/change_status', 'BucketController@change_po_status');
+
         Route::get('/po-details/change_status/{id}/{status}', 'BucketController@change_status');
 
         Route::get('/client_branch/{client_id}', 'ClientController@get_client_Branches');

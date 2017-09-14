@@ -67,10 +67,11 @@
                                                     <td>No Attachment</td>
                                                 @endif
                                                 @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                                    <td>
-                                                        <form method="get" id="{{$porder->id}}" action="">
+                                                    <form method="POST" id="{{$porder->id}}" action="/admin/manage-clients/po-details/change_status">
+                                                        <td>
                                                             <input type="hidden" id="id" name="id"
                                                                    value="{{$porder->id}}">
+                                                            {{ csrf_field() }}
                                                             <select id="{{$porder->id}}"
                                                                     name="postatus"
                                                                     class="form-control postatus">
@@ -165,8 +166,9 @@
                                                                     </option>
                                                                 @endif
                                                             </select>
-                                                        </form>
-                                                    </td>
+                                                        </td>
+                                                        <td><button class="btn btn-primary btn-outline" name="submit" id="submit">Submit</button></td>
+                                                    </form>
                                                 @endif
                                                 <td>
                                                     <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
@@ -201,16 +203,42 @@
             window.location.replace('/admin/purchase-orders/purchase-orders-view/' + from + '/' + to + '/' + status);
         });
 
-        $(".postatus").on('change', function () {
+        $(".postatus").on('change', function (e) {
+            e.preventDefault();
             var poid = this.id;
-            $.ajax({
-                type: 'get',
-                url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
-                success: function (response) {
-                    console.log(response);
-                    window.location.replace('/admin/purchase-orders/purchase-orders-view');
-                }
-            });
+            var status = this.value;
+            var token = this._token;
+
+//            $.post(
+//                '/admin/manage-clients/po-details/change_status',
+//                {_token: token, id: poid, status: status},
+//                function (response) {
+//                    console.log();
+//                }
+//            );
+
+//            $.ajax({
+//                method: 'POST',
+//                url: '/admin/manage-clients/po-details/change_po_status',
+//                data: {_token: token, id: poid, status: status},
+//                dataType: 'json',
+//                success: function (response) {
+//                    console.log(response);
+////                    window.location.replace('/admin/purchase-orders/purchase-orders-view');
+//                },
+//                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+//                    console.log(JSON.stringify(jqXHR));
+//                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+//                }
+//            });
+//            $.ajax({
+//                type: 'get',
+//                url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
+//                success: function (response) {
+//                    console.log(response);
+//                    window.location.replace('/admin/purchase-orders/purchase-orders-view');
+//                }
+//            });
 
             getPoStattus();
         });
@@ -236,28 +264,5 @@
 
             return Math.round((to - from) / (1000 * 60 * 60 * 24));
         }
-
-        //        function getPendingPO(from, to) {
-        //            if (from != '' && to != '') {
-        //                if (Date.parse(from) < Date.parse(to)) {
-        //                    $.ajax({
-        //                        type: 'get',
-        //                        url: '/admin/manage-clients/purchase-orders/' + from + '/' + to + '/a',
-        //                        success: function (response) {
-        //                            console.log(response);
-        //                            var model = $('.tablePO');
-        //                            model.empty();
-        //                            model.append(response);
-        //                        }
-        //                    });
-        //                } else {
-        //                    $('#alert').append('<span class="col-md-12 alert alert-danger">check entered dates</span>');
-        //                    setTimeout(function () {
-        //                        $('.alert').hide(3000);
-        //                    }, 5000);
-        //                }
-        //            }
-        //
-        //        }
     </script>
 @stop

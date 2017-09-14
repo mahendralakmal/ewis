@@ -249,7 +249,7 @@
 
 
     <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-    <script type="text/javascript" src="{{ elixir('js/bootstrap-datepicker.min.js') }}"></script>
+    {{--<script type="text/javascript" src="{{ elixir('js/bootstrap-datepicker.min.js') }}"></script>--}}
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
     <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
     @yield('scripts')
@@ -325,7 +325,7 @@
             }
         }, 5000)
 
-        $('#sandbox-container .input-daterange').datepicker({format: "dd-mm-yyyy"});
+//        $('#sandbox-container .input-daterange').datepicker({format: "dd-mm-yyyy"});
 
 //        $("#vat_apply").on('change', function () {
 //            if (($(this).val() == "on") && ($("#vat").val() == '')) {

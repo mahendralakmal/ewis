@@ -234,6 +234,62 @@ class BucketController extends Controller
         }
     }
 
+    public function change_po_status(Request $request){
+        $id = $request->id;
+        $status = $request->postatus;
+
+        $po = P_Order::find($id);
+
+        $po->update(['status' => $status]);
+
+        $poh = new PorderHistory();
+        $poh->po_id = $po->id;
+        $poh->po_datetime = $po->updated_at;
+        $poh->status = $po->status;
+        $poh->save();
+
+        $users = $po->client_branch->client_user;
+
+        $agent = $po->cam;
+
+        $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
+        if ($status === "OP") {
+            foreach ($users as $usr) {
+                $user = User::find($usr->user_id);
+                Mail::to($user)->send(new PoOnProcess($user, $po));
+                Mail::to($agent)->send(new PoOnProcess($user, $po));
+            }
+        } elseif ($status === "CH") {
+            foreach ($users as $usr) {
+                $user = User::find($usr->user_id);
+                Mail::to($user)->send(new PoCreditHold($user, $po));
+                Mail::to($agent)->send(new PoCreditHold($user, $po));
+            }
+        } elseif ($status === "PC") {
+            foreach ($users as $usr) {
+                $user = User::find($usr->user_id);
+                Mail::to($user)->send(new PoPartialComplete($user, $po));
+                Mail::to($agent)->send(new PoPartialComplete($user, $po));
+            }
+        } elseif ($status === "C") {
+            foreach ($users as $usr) {
+                $user = User::find($usr->user_id);
+                Mail::to($user)->send(new PoCompleted($user, $po));
+                Mail::to($agent)->send(new PoCompleted($user, $po));
+            }
+        }elseif ($status === "CN") {
+            $po->bucket = unserialize($po->bucket);
+            foreach ($users as $usr) {
+                $user = User::find($usr->user_id);
+                Mail::to($user)->send(new PoCancelled($user, $po));
+                Mail::to($agent)->send(new PoCancelled($user, $po));
+                Mail::to($procument)->send(new PoCancelled($user, $po));
+                Mail::to($agent->sector_head)->send(new PoCancelled($user, $po));
+            }
+        }
+        return back();
+    }
+
     public
     function change_status($id, $status)
     {

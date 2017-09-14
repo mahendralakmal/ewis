@@ -334,7 +334,11 @@ class UserController extends Controller
     public function welcome()
     {
         if (Session::has('User') && Session::has('LoggedIn') && Session::get('LoggedIn')) { //Check whether if the user already logged in
-                return redirect('/client-profile/' . User::find(Session::get('User'))->c_user->client_branch->id . '/brands');
+            $user = User::find(Session::get('User'));
+            if($user->id != 1)
+                return redirect('/client-profile/' . $user->c_user->client_branch->id . '/brands');
+            else  {}
+//                return back();
         } else {
             if (!(User::all()->count()) == 0) { //Check if there is an user then redirected to signin page
                 $error = '';
