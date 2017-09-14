@@ -235,6 +235,7 @@ class BucketController extends Controller
     }
 
     public function change_po_status(Request $request){
+//        return Session::get("User");
         $id = $request->id;
         $status = $request->postatus;
 
@@ -246,6 +247,7 @@ class BucketController extends Controller
         $poh->po_id = $po->id;
         $poh->po_datetime = $po->updated_at;
         $poh->status = $po->status;
+        $poh->created_user_id = Session::get("User");
         $poh->save();
 
         $users = $po->client_branch->client_user;
