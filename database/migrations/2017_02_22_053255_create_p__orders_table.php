@@ -33,6 +33,7 @@ class CreatePOrdersTable extends Migration
             $table->text('cp_notes')->nullable(true);
             $table->integer('agent_id');
             $table->text('status');
+            $table->date('exd_date');
         });
     }
 

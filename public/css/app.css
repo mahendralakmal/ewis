@@ -241,6 +241,20 @@ th {
   src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
   src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
 
+.error_tr {
+  background-color: #ee001d;
+  color: #ffffff;
+}
+
+.tab-contents .white-background {
+  padding-top: 30px !important;
+}
+
+.table-bordered tr th{
+  background-color: #707070;
+  color: #ffffff;
+}
+
 .glyphicon {
   position: relative;
   top: 1px;
@@ -3560,15 +3574,29 @@ tbody.collapse.in {
       border-bottom-color: transparent;
       cursor: default; }
 
+.nav-pills{
+  margin-top: 10px;
+}
+
 .nav-pills > li {
+  background-color: #337ab7;
+  border-radius: 4px;
   float: left; }
-  .nav-pills > li > a {
-    border-radius: 4px; }
+.nav-pills > li > a {
+  color: #ffffff;
+  border-radius: 4px; }
+.nav-pills > li > a:hover {
+  color: #337ab7 !important; }
   .nav-pills > li + li {
     margin-left: 2px; }
   .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color: #fff;
     background-color: #337ab7; }
+
+.nav-pills-right{
+  float: right !important;
+}
+
 
 .nav-stacked > li {
   float: none; }

@@ -40,143 +40,156 @@
                                         <td><h5>Attachment</h5></td>
                                         @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
                                             <td><h5>Status</h5></td>
+                                            <td><h5>Estimated Delivery Date</h5></td>
                                         @endif
                                         <td></td>
                                     </tr>
                                     </thead>
                                     <tbody class="tablePO">
-                                        @foreach($porders as $porder)
-                                            <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
+                                    @foreach($porders as $porder)
+                                        <tr @if(((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "P") ||
                                 ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "OP") ||
                                 ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "CH") ||
                                 ((integer)(Carbon\Carbon::parse($porder->created_at)->diff(\Carbon\Carbon::now())->days) > (int)(config('const.P_Order_Pending_Timeout')) && $porder->status === "PC"))
-                                                    class="error_tr"
-                                                @elseif($porder->status === 'CN')
-                                                    class="error_cn"
+                                            class="error_tr"
+                                            @elseif($porder->status === 'CN')
+                                            class="error_cn"
                                                 @endif
-                                                >
-                                                <td>{{$porder->id}}</td>
-                                                <td>{{$porder->created_at}}</td>
-                                                <td>{{$porder->client_branch->client->name}}</td>
-                                                <td>{{$porder->del_branch}}</td>
-                                                <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
-                                                @if($porder->file !== null)
-                                                    <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
-                                                    </td>
-                                                @else
-                                                    <td>No Attachment</td>
-                                                @endif
-                                                @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
-                                                    <form method="POST" id="{{$porder->id}}" action="/admin/manage-clients/po-details/change_status">
-                                                        <td>
-                                                            <input type="hidden" id="id" name="id"
-                                                                   value="{{$porder->id}}">
-                                                            {{ csrf_field() }}
-                                                            <select id="{{$porder->id}}"
-                                                                    name="postatus"
-                                                                    class="form-control postatus">
-                                                                @if($porder->status === "P")
-                                                                    <option value="P"
-                                                                            @if($porder->status === "P") selected @endif>
-                                                                        Pending
-                                                                    </option>
-                                                                    <option value="OP"
-                                                                            @if($porder->status === "OP") selected @endif>
-                                                                        Processing
-                                                                    </option>
-                                                                    <option value="CH" style="color:red"
-                                                                            @if($porder->status === "CH") selected @endif>
-                                                                        Credit Hold
-                                                                    </option>
-                                                                    <option value="PC"
-                                                                            @if($porder->status === "PC") selected @endif>
-                                                                        Partial
-                                                                        Completed
-                                                                    </option>
-                                                                    <option value="C"
-                                                                            @if($porder->status === "C") selected @endif>
-                                                                        Completed
-                                                                    </option>
-                                                                    <option value="CN" class="red-background"
-                                                                            @if($porder->status === "CN") selected @endif>
-                                                                        Cancelled
-                                                                    </option>
-                                                                @elseif($porder->status === "OP")
-                                                                    <option value="OP"
-                                                                            @if($porder->status === "OP") selected @endif>
-                                                                        Processing
-                                                                    </option>
-                                                                    <option value="CH" style="color:red"
-                                                                            @if($porder->status === "CH") selected @endif>
-                                                                        Credit Hold
-                                                                    </option>
-                                                                    <option value="PC"
-                                                                            @if($porder->status === "PC") selected @endif>
-                                                                        Partial
-                                                                        Completed
-                                                                    </option>
-                                                                    <option value="C"
-                                                                            @if($porder->status === "C") selected @endif>
-                                                                        Completed
-                                                                    </option>
-                                                                    <option value="CN" class="red-background"
-                                                                            @if($porder->status === "CN") selected @endif>
-                                                                        Cancelled
-                                                                    </option>
-                                                                @elseif($porder->status === "CH")
-                                                                    <option value="CH" style="color:red"
-                                                                            @if($porder->status === "CH") selected @endif>
-                                                                        Credit Hold
-                                                                    </option>
-                                                                    <option value="PC"
-                                                                            @if($porder->status === "PC") selected @endif>
-                                                                        Partial
-                                                                        Completed
-                                                                    </option>
-                                                                    <option value="C"
-                                                                            @if($porder->status === "C") selected @endif>
-                                                                        Completed
-                                                                    </option>
-                                                                    <option value="CN" class="red-background"
-                                                                            @if($porder->status === "CN") selected @endif>
-                                                                        Cancelled
-                                                                    </option>
-                                                                @elseif($porder->status === "PC")
-                                                                    red-background                                <option value="PC"
-                                                                            @if($porder->status === "PC") selected @endif>
-                                                                        Partial Complete
-                                                                    </option>
-                                                                    <option value="C"
-                                                                            @if($porder->status === "C") selected @endif>
-                                                                        Completed
-                                                                    </option>
-                                                                    <option value="CN"
-                                                                            @if($porder->status === "CN") selected @endif>
-                                                                        Cancelled
-                                                                    </option>
-                                                                @elseif($porder->status === "C")
-                                                                    <option value="C" class=""
-                                                                            @if($porder->status === "C") selected @endif>
-                                                                        Completed
-                                                                    </option>
-                                                                @elseif($porder->status === "CN")
-                                                                    <option value="CN" class="red-background"
-                                                                            @if($porder->status === "CN") selected @endif>
-                                                                        Cancelled
-                                                                    </option>
-                                                                @endif
-                                                            </select>
-                                                        </td>
-                                                        <td><button class="btn btn-primary btn-outline" name="submit" id="submit">Submit</button></td>
-                                                    </form>
-                                                @endif
-                                                <td>
-                                                    <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
-                                                       class="btn btn-success btn-outline">Update Status / View
-                                                        Order</a>
+                                        >
+                                            <td>{{$porder->id}}</td>
+                                            <td>{{$porder->created_at}}</td>
+                                            <td>{{$porder->client_branch->client->name}}</td>
+                                            <td>{{$porder->del_branch}}</td>
+                                            <td>{{ \App\User::find(\App\ClientsBranch::find($porder->clients_branch_id)->agent_id)->name }}</td>
+                                            @if($porder->file !== null)
+                                                <td><a href="{{url('/'.$porder->file)}}">Download Attachment</a>
                                                 </td>
-                                            </tr>
-                                        @endforeach
+                                            @else
+                                                <td>No Attachment</td>
+                                            @endif
+                                            @if(\App\User::find(Session::get('User'))->privilege->change_po_status)
+                                                <form method="POST" id="{{$porder->id}}"
+                                                      action="/admin/manage-clients/po-details/change_status">
+                                                    <td>
+                                                        <input type="hidden" id="id" name="id"
+                                                               value="{{$porder->id}}">
+                                                        {{ csrf_field() }}
+                                                        <select id="{{$porder->id}}"
+                                                                name="postatus"
+                                                                class="form-control postatus">
+                                                            @if($porder->status === "P")
+                                                                <option value="P"
+                                                                        @if($porder->status === "P") selected @endif>
+                                                                    Pending
+                                                                </option>
+                                                                <option value="OP"
+                                                                        @if($porder->status === "OP") selected @endif>
+                                                                    Processing
+                                                                </option>
+                                                                <option value="CH" style="color:red"
+                                                                        @if($porder->status === "CH") selected @endif>
+                                                                    Credit Hold
+                                                                </option>
+                                                                <option value="PC"
+                                                                        @if($porder->status === "PC") selected @endif>
+                                                                    Partial
+                                                                    Completed
+                                                                </option>
+                                                                <option value="C"
+                                                                        @if($porder->status === "C") selected @endif>
+                                                                    Completed
+                                                                </option>
+                                                                <option value="CN" class="red-background"
+                                                                        @if($porder->status === "CN") selected @endif>
+                                                                    Cancelled
+                                                                </option>
+                                                            @elseif($porder->status === "OP")
+                                                                <option value="OP"
+                                                                        @if($porder->status === "OP") selected @endif>
+                                                                    Processing
+                                                                </option>
+                                                                <option value="CH" style="color:red"
+                                                                        @if($porder->status === "CH") selected @endif>
+                                                                    Credit Hold
+                                                                </option>
+                                                                <option value="PC"
+                                                                        @if($porder->status === "PC") selected @endif>
+                                                                    Partial
+                                                                    Completed
+                                                                </option>
+                                                                <option value="C"
+                                                                        @if($porder->status === "C") selected @endif>
+                                                                    Completed
+                                                                </option>
+                                                                <option value="CN" class="red-background"
+                                                                        @if($porder->status === "CN") selected @endif>
+                                                                    Cancelled
+                                                                </option>
+                                                            @elseif($porder->status === "CH")
+                                                                <option value="CH" style="color:red"
+                                                                        @if($porder->status === "CH") selected @endif>
+                                                                    Credit Hold
+                                                                </option>
+                                                                <option value="PC"
+                                                                        @if($porder->status === "PC") selected @endif>
+                                                                    Partial
+                                                                    Completed
+                                                                </option>
+                                                                <option value="C"
+                                                                        @if($porder->status === "C") selected @endif>
+                                                                    Completed
+                                                                </option>
+                                                                <option value="CN" class="red-background"
+                                                                        @if($porder->status === "CN") selected @endif>
+                                                                    Cancelled
+                                                                </option>
+                                                            @elseif($porder->status === "PC")
+                                                                red-background
+                                                                <option value="PC"
+                                                                        @if($porder->status === "PC") selected @endif>
+                                                                    Partial Complete
+                                                                </option>
+                                                                <option value="C"
+                                                                        @if($porder->status === "C") selected @endif>
+                                                                    Completed
+                                                                </option>
+                                                                <option value="CN"
+                                                                        @if($porder->status === "CN") selected @endif>
+                                                                    Cancelled
+                                                                </option>
+                                                            @elseif($porder->status === "C")
+                                                                <option value="C" class=""
+                                                                        @if($porder->status === "C") selected @endif>
+                                                                    Completed
+                                                                </option>
+                                                            @elseif($porder->status === "CN")
+                                                                <option value="CN" class="red-background"
+                                                                        @if($porder->status === "CN") selected @endif>
+                                                                    Cancelled
+                                                                </option>
+                                                            @endif
+                                                        </select>
+                                                    </td>
+                                                    <td>
+
+                                                        <input type="date" id="exd_date" name="exd_date"
+                                                               @if($porder->status != "P") disabled value="{{$porder->exd_date}}"
+                                                               @else value="<?php $date = new DateTime($porder->created_at); $date->modify('+5 day'); echo $date->format('Y-m-d'); ?>"
+                                                               @endif class="form-control"></td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-outline" name="submit"
+                                                                id="submit">Submit
+                                                        </button>
+                                                    </td>
+                                                </form>
+                                            @endif
+                                            <td>
+                                                <a href="{{ url('/admin/manage-clients/po-details/'.$porder->id) }}"
+                                                   class="btn btn-success btn-outline">Update Status / View
+                                                    Order</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -208,38 +221,6 @@
             var poid = this.id;
             var status = this.value;
             var token = this._token;
-
-//            $.post(
-//                '/admin/manage-clients/po-details/change_status',
-//                {_token: token, id: poid, status: status},
-//                function (response) {
-//                    console.log();
-//                }
-//            );
-
-//            $.ajax({
-//                method: 'POST',
-//                url: '/admin/manage-clients/po-details/change_po_status',
-//                data: {_token: token, id: poid, status: status},
-//                dataType: 'json',
-//                success: function (response) {
-//                    console.log(response);
-////                    window.location.replace('/admin/purchase-orders/purchase-orders-view');
-//                },
-//                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-//                    console.log(JSON.stringify(jqXHR));
-//                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-//                }
-//            });
-//            $.ajax({
-//                type: 'get',
-//                url: '/admin/manage-clients/po-details/change_status/' + poid + '/' + this.value,
-//                success: function (response) {
-//                    console.log(response);
-//                    window.location.replace('/admin/purchase-orders/purchase-orders-view');
-//                }
-//            });
-
             getPoStattus();
         });
 

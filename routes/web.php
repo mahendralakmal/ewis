@@ -18,12 +18,22 @@ Route::get('/password/reset/{token}','UserController@password_reset_view');
 Route::post('/reset-password', 'UserController@pass_reset');
 
 
+
+
+
+
 Route::get('/remove_item/{part_no}', 'BucketController@remove_item');
 
-Route::group(['prefix' => ' /client-profile'], function () {
+Route::group(['prefix' => '/client-profile'], function () {
+
     Route::get('/{id}', 'ClientController@show');
     Route::get('/{id}/bucket', 'BucketController@getBucket');
     Route::get('/{id}/bucket/history', 'BucketController@getHistory');
+    Route::get('/{id}/bucket/history/{status}', 'BucketController@getHistoryByStstus');
+    Route::get('/{id}/bucket/history', 'BucketController@getHistory');
+    Route::post('/bucket/history/filterbydate', 'BucketController@getHistoryByExdDate');
+
+
     Route::get('/po-details/{id}', 'BucketController@historyPODetails');
 
     Route::get('/{id}/edit', 'ClientController@editClientProfile');

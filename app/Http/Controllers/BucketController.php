@@ -71,7 +71,7 @@ class BucketController extends Controller
 
         $pos = PorderHistory::all();
 
-        return view('admin.reports.completion-time', compact('distinct_pos','pos'));
+        return view('admin.reports.completion-time', compact('distinct_pos', 'pos'));
     }
 
     public
@@ -234,14 +234,20 @@ class BucketController extends Controller
         }
     }
 
-    public function change_po_status(Request $request){
-//        return Session::get("User");
+    public function change_po_status(Request $request)
+    {
+         //return $request->all();//Session::get("User");
+        $this->validate($request, [
+            "postatus"=>'required',
+            "exd_date"=>'required'
+        ]);
         $id = $request->id;
         $status = $request->postatus;
+        $exdDate = $request->exd_date;
 
         $po = P_Order::find($id);
 
-        $po->update(['status' => $status]);
+        $po->update(['status' => $status, 'exd_date' => $exdDate]);
 
         $poh = new PorderHistory();
         $poh->po_id = $po->id;
@@ -279,7 +285,7 @@ class BucketController extends Controller
                 Mail::to($user)->send(new PoCompleted($user, $po));
                 Mail::to($agent)->send(new PoCompleted($user, $po));
             }
-        }elseif ($status === "CN") {
+        } elseif ($status === "CN") {
             $po->bucket = unserialize($po->bucket);
             foreach ($users as $usr) {
                 $user = User::find($usr->user_id);
@@ -334,7 +340,7 @@ class BucketController extends Controller
                 Mail::to($user)->send(new PoCompleted($user, $po));
                 Mail::to($agent)->send(new PoCompleted($user, $po));
             }
-        }elseif ($status === "CN") {
+        } elseif ($status === "CN") {
             $po->bucket = unserialize($po->bucket);
             foreach ($users as $usr) {
                 $user = User::find($usr->user_id);
@@ -470,6 +476,47 @@ class BucketController extends Controller
     }
 
     public
+    function getHistoryByStstus($id, $status){
+        if($status == "pending")
+            $state = "P";
+        else if($status == "processing")
+            $state = "OP";
+        else if($status == "credit-hold")
+            $state = "CH";
+        else if($status == "partial-completed")
+            $state = "PC";
+        else if($status == "completed")
+            $state = "C";
+
+        if (Session::has('User')) {
+            $orders = P_Order::where([['clients_branch_id', User::find(Session::get('User'))->c_user->client_branch->id],['status', $state]])->orderBy('id', 'desc')->get();
+            if ($orders != null) {
+                $orders->transform(function ($order, $key) {
+                    $order->bucket = unserialize($order->bucket);
+                    return $order;
+                });
+            }
+            return view('user/history', compact('orders'));
+        } else
+            return redirect('/');
+    }
+
+    public function getHistoryByExdDate(Request $request){
+        $exd_date = $request->exd_date;
+        if (Session::has('User')) {
+            $orders = P_Order::where([['exd_date',$exd_date],['clients_branch_id', User::find(Session::get('User'))->c_user->client_branch->id]])->orderBy('id', 'desc')->get();
+            if ($orders != null) {
+                $orders->transform(function ($order, $key) {
+                    $order->bucket = unserialize($order->bucket);
+                    return $order;
+                });
+            }
+            return view('user/history', compact('orders'));
+        } else
+            return redirect('/');
+    }
+
+    public
     function getPurchaseOrder()
     {
         $from = '';
@@ -490,6 +537,7 @@ class BucketController extends Controller
         } else
             return redirect('/');
     }
+
 
     public
     function getPurchaseOrders($from, $to, $status)

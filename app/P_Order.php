@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class P_Order extends Model
 {
-    protected $fillable = ['status'];
+    protected $fillable = ['status', 'exd_date'];
     public function User() {
         return $this->belongsTo('App\User');
     }
