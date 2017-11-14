@@ -27,7 +27,7 @@
                                 <div class="col-md-1 text-center td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff">Part Number</div>
                                 <div class="col-md-1 text-center td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff">Product Image</div>
                                 <div class="col-md-5 text-center td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff">Product Name</div>
-                                <div class="col-md-1 text-center td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff">Vat Applicalbe</div>
+                                <div class="col-md-1 text-center td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff">Vat Applicable</div>
                                 <div class="col-md-1 text-center td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff">Unit Price(Rs.)</div>
                                 <div class="col-md-1 text-center td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff">Quantity</div>
                                 <div class="col-md-2 td-h" style="height:55px; padding:5px; border: 1px solid #dddddd; background-color: #f0f8ff"></div>
@@ -38,7 +38,7 @@
                                         {!! csrf_field() !!}
                                         <div class="row">
                                             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><input type="hidden" id="id" name="id" value="{{ $product->id }}"><a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}"> {{$product->product->part_no}}</a></div>
-                                            <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><img src="{{ asset('/' . $product->product->image) }}" alt="product" class="img-responsive" height="25" width="30"></div>
+                                            <div class="col-md-1 img-responsive" style="margin: 0 auto !important; border: 1px solid #dddddd; padding:10px; height:45px;"><img src="{{ asset('/' . $product->product->image) }}" alt="product" class="img-responsive" height="25" width="30" style="margin:0 auto;"></div>
                                             <div class="col-md-5 " style="border: 1px solid #dddddd; padding:5px; height:45px;"><a href="{{ url('client-profile/'.$product->ccategory->c_brand->client->client->id, [$product->product->part_no]) }}">{{ $product->product->name }}</a></div>
                                             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;">@if($product->product->vat_apply) Yes @else No @endif</div>
                                             <div class="col-md-1 text-center td-b" style="border: 1px solid #dddddd; padding:5px; height:45px;"><p>{{ number_format($product->special_price,2,'.',',') }} </p></div>

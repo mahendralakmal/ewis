@@ -4,7 +4,7 @@
             <div class="col-md-12 col-sm-12 col-sx-12 col-lg-12">
                 <ul class="nav nav-tabs nav-menu" role="tablist">
                     <li class="active">
-                        <a href="#agent" role="tab" data-toggle="tab"> Add Items </a>
+                        <a href="#agent" role="tab" data-toggle="tab"> Item Details </a>
                     </li>
 
                 </ul>
@@ -19,7 +19,7 @@
 <br>
                         <br>
                         <table class="table table-bordered">
-                                <td>Item No </td>
+                                <td>Part Number </td>
                                 <td>{{ $items->part_no }}</td></tr>
                             <tr><td>Item Name </td>
                                 <td>{{ $items->name }}</td></tr>

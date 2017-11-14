@@ -27,6 +27,10 @@ body{
   margin-bottom: 0px !important;
 }
 
+.form-control{
+  font-size:11px !important;
+}
+
 .table-bordered {
   border: 1px solid $table-border-color;
   > thead,
@@ -81,8 +85,8 @@ body{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=0 );
   }
   .white-background {
-    //padding-top: 80px;
-    margin-top: 5px;
+    padding-top: 80px;
+    //margin-top: 5px;
     margin-bottom: 1px;
     min-height: 528px;
   }
@@ -109,6 +113,10 @@ body{
       ul{
         li{
           list-style-type: none;
+
+          a{
+            color:#000000;
+          }
         }
       }
     }
@@ -239,4 +247,32 @@ footer {
 
 .welcome{
   min-height: 100vh;
+}
+
+
+$red: #ee001d;
+$green: #008000;
+
+.error_tr{
+  background-color: $red;
+  color: #ffffff;
+}
+
+.nav-pills li {
+    background-color: #337ab7;
+    border-color: #122b40;
+    border-radius: 4px;
+}
+
+.credit-hold {
+    background-color: #b40006 !important;
+    border-color: #6b0508 !important;
+}
+
+.nav-pills li a {
+    color:#ffffff;
+}
+
+tr th{
+  background-color: #bfbfbf;
 }

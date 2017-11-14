@@ -236,11 +236,6 @@ class BucketController extends Controller
 
     public function change_po_status(Request $request)
     {
-         //return $request->all();//Session::get("User");
-        $this->validate($request, [
-            "postatus"=>'required',
-            "exd_date"=>'required'
-        ]);
         $id = $request->id;
         $status = $request->postatus;
         $exdDate = $request->exd_date;

@@ -21,7 +21,7 @@
                 <li role="presentation"><a
                             href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/bucket/history/processing'):''}}">Processing</a>
                 </li>
-                <li role="presentation" style="background-color: #b40006"><a
+                <li role="presentation" class="credit-hold"><a
                             href="{{ (\Illuminate\Support\Facades\Session::has('User')) ? url('client-profile/'.App\User::find(\Illuminate\Support\Facades\Session::get('User'))->c_user->client_branch->client->id.'/bucket/history/credit-hold'):''}}">Credit
                         Hold</a></li>
                 <li role="presentation"><a
@@ -47,7 +47,7 @@
                             <table class="table-bordered ">
                                 <tr>
                                     <th class="col-md-1">
-                                        <center><h5><strong>Po. No.</strong></h5></center>
+                                        <center><h5><strong>P.O. No.</strong></h5></center>
                                     </th>
                                     <th class="col-md-3">
                                         <center><h5><strong>Created Date & Time</strong></h5></center>
