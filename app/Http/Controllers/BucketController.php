@@ -255,7 +255,7 @@ class BucketController extends Controller
 
         $agent = $po->cam;
 
-        $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
+        $procument = ['shehanm@ewisl.net', 'roseanne@ewisl.net', 'lakshika@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
         if ($status === "OP") {
             foreach ($users as $usr) {
                 $user = User::find($usr->user_id);
@@ -310,7 +310,7 @@ class BucketController extends Controller
 
         $agent = $po->cam;
 
-        $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
+        $procument = ['shehanm@ewisl.net', 'roseanne@ewisl.net', 'lakshika@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
         if ($status === "OP") {
             foreach ($users as $usr) {
                 $user = User::find($usr->user_id);
@@ -439,7 +439,7 @@ class BucketController extends Controller
             $agent = User::find($order->agent_id);
             $sHead = User::find($agent->section_head_id);
             $order->bucket = unserialize($order->bucket);
-            $procument = ['shehanm@ewisl.net', 'bimalka@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
+            $procument = ['shehanm@ewisl.net', 'roseanne@ewisl.net', 'lakshika@ewisl.net', 'harsha@ewisl.net', 'hashanp@ewisl.net', 'damayanthik@ewisl.net', 'chanakah@ewisl.net'];
 
             //send the notification to client
             Mail::to($user)->send(new PoSentSuccessfully($user, $order));

@@ -258,9 +258,9 @@
             getPoStattus();
         });
 
-        $.validator.methods.email = function (value, element) {
-            return this.optional(element) || /[a-z]+@[a-z]+\.[a-z]+/.test(value);
-        }
+        // $.validator.methods.email = function (value, element) {
+        //     return this.optional(element) || /[a-z]+@[a-z]+\.[a-z]+/.test(value);
+        // }
 
         function getPoStattus() {
             $.ajax(
