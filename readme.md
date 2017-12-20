@@ -38,3 +38,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+## elasticsearch
+Run following nodes to make them searchable.
+
+php artisan scout:import "App\ClientAssignProductView"
+php artisan scout:import "App\Product"
+php artisan scout:import "App\Client"
+php artisan scout:import "App\User"
+
+
